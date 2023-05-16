@@ -1,9 +1,10 @@
+package com.teamx.hatlyUser
+
 import com.google.firebase.BuildConfig
 import com.teamx.hatlyUser.localization.LocaleManager
 import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
-import android.os.Build
 import com.google.firebase.FirebaseApp
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber

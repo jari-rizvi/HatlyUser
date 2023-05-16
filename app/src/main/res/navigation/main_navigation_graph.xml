@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation_graph"
-    app:startDestination="@id/tempFragment2">
+    app:startDestination="@id/tempFragment">
 
 
     <fragment
-        android:id="@+id/tempFragment2"
+        android:id="@+id/tempFragment"
+        tools:layout="@layout/fragment_temp"
         android:name="com.teamx.hatlyUser.ui.fragments.temp.TempFragment"
-        android:label="TempFragment" />
+        android:label="TempFragment">
+
+        <action
+            android:id="@+id/action_tempFragment_to_onBoard"
+            app:destination="@id/onboardViewPagerFragment"
+            app:popUpTo="@id/tempFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/enter_from_right"/>
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/onboardViewPagerFragment"
+        tools:layout="@layout/fragment_onboard_viewpager"
+        android:name="com.teamx.hatlyUser.ui.fragments.onboard.BoardViewPagerFragment"
+        android:label="OnBoardViewPagerFragment" />
+
+
 </navigation>

@@ -13,91 +13,36 @@
 
     </data>
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/mainDrawer"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        tools:context=".ui.activity.mainActivity.MainActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <fragment
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            tools:context=".ui.activity.mainActivity.MainActivity">
+            app:defaultNavHost="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:navGraph="@navigation/main_navigation_graph" />
 
-            <RelativeLayout
-                android:id="@+id/toolbarMainAct"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_16sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/sideDrawerMenu"
-                    android:layout_width="@dimen/_21sdp"
-                    android:layout_height="@dimen/_21sdp"
-                    android:layout_centerVertical="true"
-                    android:padding="2dp" />
-
-                <ImageView
-                    android:id="@+id/btnBack"
-                    android:layout_width="@dimen/_21sdp"
-                    android:layout_height="@dimen/_21sdp"
-                    android:layout_centerVertical="true"
-                    android:padding="2dp"
-                    android:visibility="gone" />
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-                <TextView
-                    android:id="@+id/tittleToolbar"
-                    style="@style/title_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="main" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/btnProfile"
-                    android:layout_width="@dimen/_32sdp"
-                    android:layout_height="@dimen/_32sdp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"/>
-
-            </RelativeLayout>
-
-
-            <fragment
-                android:id="@+id/nav_host_fragment"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:defaultNavHost="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbarMainAct"
-
-                app:navGraph="@navigation/main_navigation_graph" />
-
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.drawerlayout.widget.DrawerLayout>
 
 </layout>
