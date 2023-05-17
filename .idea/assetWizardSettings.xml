@@ -33,9 +33,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="1ed860" />
-                            <entry key="outputName" value="baseline_arrow_forward_ios" />
-                            <entry key="sourceFile" value="C:\Users\TeamX Pakistan\Desktop\hatlyIcons\hatly_logo_svg.svg" />
+                            <entry key="outputName" value="vector_onboarding_02" />
+                            <entry key="sourceFile" value="C:\Users\TeamX Pakistan\Desktop\hatlyIcons\vector_onboarding_02.svg" />
                           </map>
                         </option>
                       </PersistentState>
