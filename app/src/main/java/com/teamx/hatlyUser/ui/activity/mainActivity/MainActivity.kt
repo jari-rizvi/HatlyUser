@@ -50,6 +50,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
 
 
+
     }
 
 
@@ -62,11 +63,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     open fun hideProgressBar() {
         progressBar.visibility = View.GONE
     }
-
-
-
-
-
 
 
 

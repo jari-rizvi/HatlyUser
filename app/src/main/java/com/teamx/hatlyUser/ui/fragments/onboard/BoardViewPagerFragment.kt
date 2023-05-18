@@ -1,9 +1,9 @@
 package com.teamx.hatlyUser.ui.fragments.onboard
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -41,6 +41,17 @@ class BoardViewPagerFragment :
                 popEnter = R.anim.nav_default_pop_enter_anim
                 popExit = R.anim.nav_default_pop_exit_anim
             }
+        }
+
+        mViewDataBinding.txtSkip.setOnClickListener {
+//            findNavController().navigate(R.id.tempFragment)
+//            navController.navigate(R.id.action_onBoard_to_login)
+            findNavController().navigate(R.id.action_onBoard_to_login)
+
+        }
+
+        mViewDataBinding.txtGetStarted.setOnClickListener {
+            findNavController().navigate(R.id.action_onBoard_to_login)
         }
 
         featureProductArrayList = ArrayList()

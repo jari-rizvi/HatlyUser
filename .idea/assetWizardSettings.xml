@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../../TeamX%20Pakistan/AppData/Local/Android/Sdk/icons/material/materialicons/arrow_forward_ios/baseline_arrow_forward_ios_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../../TeamX%20Pakistan/AppData/Local/Android/Sdk/icons/material/materialiconsround/arrow_back/round_arrow_back_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,10 +33,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="1ed860" />
-                            <entry key="outputName" value="vector_onboarding_02" />
-                            <entry key="sourceFile" value="C:\Users\TeamX Pakistan\Desktop\hatlyIcons\vector_onboarding_02.svg" />
+                            <entry key="outputName" value="round_arrow_back_24" />
+                            <entry key="sourceFile" value="C:\Users\TeamX Pakistan\Desktop\hatlyIcons\fb_icon.svg" />
                           </map>
                         </option>
                       </PersistentState>

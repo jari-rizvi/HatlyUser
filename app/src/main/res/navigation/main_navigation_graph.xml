@@ -29,7 +29,45 @@
         android:id="@+id/onboardViewPagerFragment"
         tools:layout="@layout/fragment_onboard_viewpager"
         android:name="com.teamx.hatlyUser.ui.fragments.onboard.BoardViewPagerFragment"
-        android:label="OnBoardViewPagerFragment" />
+        android:label="OnBoardViewPagerFragment">
+
+        <action
+            android:id="@+id/action_onBoard_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/onboardViewPagerFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/enter_from_right"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        tools:layout="@layout/fragment_login"
+        android:name="com.teamx.hatlyUser.ui.fragments.login.LoginFragment"
+        android:label="LoginFragment">
+
+        <action
+            android:id="@+id/action_login_to_forgotPassword"
+            app:destination="@id/forgotPasswordFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="false"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/enter_from_right"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        tools:layout="@layout/fragment_login"
+        android:name="com.teamx.hatlyUser.ui.fragments.forgotpassword.ForgotPasswordFragment"
+        android:label="ForgotPasswordFragment"/>
+
+
 
 
 </navigation>

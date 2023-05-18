@@ -8,14 +8,47 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="fFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="loginFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="onboardViewPagerFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="61" />
-                            <option name="y" value="-152" />
+                            <option name="x" value="-14" />
+                            <option name="y" value="-1640" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_onBoard_to_login">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -25,13 +58,13 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-164" />
-                            <option name="y" value="-160" />
+                            <option name="x" value="-238" />
+                            <option name="y" value="-1646" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_tempFragment_to_discoverFragment">
+                            <entry key="action_tempFragment_to_onBoard">
                               <value>
                                 <LayoutPositions />
                               </value>
