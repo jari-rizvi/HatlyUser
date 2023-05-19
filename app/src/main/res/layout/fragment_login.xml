@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.fragments.temp.TempFragment">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/hatlyIcon"
@@ -30,12 +28,12 @@
             android:textColor="#EA1B25"
             android:textSize="@dimen/_15ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@+id/userEmail"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.25" />
+            app:layout_constraintTop_toBottomOf="@+id/hatlyIcon"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/textView2"
@@ -45,8 +43,16 @@
             android:text="Lorem Ipsum is simply dummy text of the\nprinting and typesetting industry."
             android:textColor="#909090"
             android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.30" />
 
         <EditText
             android:id="@+id/userEmail"
@@ -54,8 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:background="@drawable/input_auth_field"
-            android:drawableStart="@drawable/email_or_number"
             android:backgroundTint="#33909090"
+            android:drawableStart="@drawable/email_or_number"
             android:drawablePadding="@dimen/_10sdp"
             android:hint="Email address or Mobile number"
             android:imeOptions="actionNext"
@@ -66,20 +72,19 @@
             android:textColorHint="#787878"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_13ssp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/userPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:layout_constraintVertical_bias="0.1" />
+            app:layout_constraintTop_toBottomOf="@+id/guideline" />
 
         <EditText
             android:id="@+id/userPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/input_auth_field"
+            android:backgroundTint="#33909090"
             android:drawableStart="@drawable/password"
             android:drawablePadding="@dimen/_10sdp"
-            android:backgroundTint="#33909090"
             android:hint="Email address or Mobile number"
             android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
@@ -89,11 +94,10 @@
             android:textColorHint="#787878"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_13ssp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/checkBox"
             app:layout_constraintEnd_toEndOf="@+id/userEmail"
             app:layout_constraintStart_toStartOf="@+id/userEmail"
-            app:layout_constraintTop_toBottomOf="@+id/userEmail"
-            app:layout_constraintVertical_bias="0.05" />
+            app:layout_constraintTop_toBottomOf="@+id/userEmail" />
 
 
         <CheckBox
@@ -101,10 +105,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:buttonTint="@color/remember_me_selector_color"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/txtLogin"
             app:layout_constraintStart_toStartOf="@+id/userPassword"
-            app:layout_constraintTop_toBottomOf="@+id/userPassword"
-            app:layout_constraintVertical_bias="0.05" />
+            app:layout_constraintTop_toBottomOf="@+id/userPassword" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -141,11 +144,18 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/textView4"
-            app:layout_constraintStart_toStartOf="@+id/checkBox"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox"
-            app:layout_constraintVertical_bias="0.05" />
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintEnd_toEndOf="@+id/userPassword"
+            app:layout_constraintStart_toStartOf="@+id/userPassword"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.70" />
+
 
         <TextView
             android:id="@+id/textView3"
@@ -155,31 +165,32 @@
             android:text="or Login with"
             android:textColor="#999696"
             android:textSize="@dimen/_12ssp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtLogin"
-            app:layout_constraintVertical_bias="0.1" />
+            app:layout_constraintBottom_toTopOf="@+id/txtLoginFacebook"
+            app:layout_constraintEnd_toStartOf="@+id/view2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@+id/txtLogin" />
 
 
         <View
             android:id="@+id/view"
-            android:layout_width="0dp"
+            android:layout_width="119dp"
             android:layout_height="0.5dp"
-            android:layout_marginRight="@dimen/_10sdp"
             android:background="#999696"
             app:layout_constraintBottom_toBottomOf="@+id/textView3"
             app:layout_constraintEnd_toStartOf="@+id/textView3"
-            app:layout_constraintStart_toStartOf="@+id/checkBox"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/txtLogin"
             app:layout_constraintTop_toTopOf="@+id/textView3" />
 
         <View
-            android:layout_width="0dp"
+            android:id="@+id/view2"
+            android:layout_width="120dp"
             android:layout_height="0.5dp"
-            android:layout_marginLeft="@dimen/_10sdp"
             android:background="#999696"
             app:layout_constraintBottom_toBottomOf="@+id/textView3"
-            app:layout_constraintEnd_toEndOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="@+id/txtLogin"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView3"
             app:layout_constraintTop_toTopOf="@+id/textView3" />
 
@@ -190,22 +201,21 @@
             android:background="@drawable/button_radius_green"
             android:backgroundTint="#1877F2"
             android:paddingVertical="@dimen/_10sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/textView4"
-            app:layout_constraintStart_toStartOf="@+id/checkBox"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
-            app:layout_constraintVertical_bias="0.1">
+            app:layout_constraintBottom_toTopOf="@+id/txtLoginGoogle"
+            app:layout_constraintEnd_toEndOf="@+id/view2"
+            app:layout_constraintStart_toStartOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@+id/textView3">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableStart="@drawable/fb_icon"
+                android:drawablePadding="@dimen/_10sdp"
                 android:fontFamily="@font/open_sans_regular"
                 android:text="Login with Facebook"
                 android:textAlignment="center"
-                android:drawablePadding="@dimen/_10sdp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp"
-                android:drawableStart="@drawable/fb_icon"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -220,11 +230,10 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_radius_corner"
             android:paddingVertical="@dimen/_10sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/textView4"
-            app:layout_constraintStart_toStartOf="@+id/checkBox"
-            app:layout_constraintTop_toBottomOf="@+id/txtLoginFacebook"
-            app:layout_constraintVertical_bias="0.1">
+            app:layout_constraintBottom_toTopOf="@+id/textView5"
+            app:layout_constraintEnd_toEndOf="@+id/txtLoginFacebook"
+            app:layout_constraintStart_toStartOf="@+id/txtLoginFacebook"
+            app:layout_constraintTop_toBottomOf="@+id/txtLoginFacebook">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -244,25 +253,8 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <!--        <com.google.android.material.button.MaterialButton-->
-        <!--            android:id="@+id/txtLoginGoogle"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:gravity="center"-->
-        <!--            android:textAllCaps="true"-->
-        <!--            android:background="@drawable/button_radius_corner"-->
-        <!--            app:icon="@drawable/google_48"-->
-        <!--            app:iconGravity="textStart"-->
-        <!--            app:iconPadding="10dp"-->
-        <!--            tools:text="Login with Google"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="@+id/textView4"-->
-        <!--            app:layout_constraintStart_toStartOf="@+id/checkBox"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/txtLoginFacebook"-->
-        <!--            app:layout_constraintVertical_bias="0.1" />-->
-
         <TextView
+            android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
@@ -272,8 +264,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/txtLoginGoogle"
             app:layout_constraintStart_toStartOf="@+id/txtLoginGoogle"
-            app:layout_constraintTop_toBottomOf="@+id/txtLoginGoogle"
-            app:layout_constraintVertical_bias="0.3" />
+            app:layout_constraintTop_toBottomOf="@+id/txtLoginGoogle" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,6 +38,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             findNavController().navigate(R.id.action_login_to_forgotPassword)
         }
 
+        mViewDataBinding.textView5.setOnClickListener {
+            findNavController().navigate(R.id.action_login_to_singup)
+        }
+
 
     }
 

@@ -59,6 +59,24 @@
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/enter_from_right"/>
 
+        <action
+            android:id="@+id/action_login_to_singup"
+            app:destination="@id/signUpFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="false"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/enter_from_right"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpFragment"
+        tools:layout="@layout/fragment_login"
+        android:name="com.teamx.hatlyUser.ui.fragments.signup.SignUpFragment"
+        android:label="SignUpFragment">
+
     </fragment>
 
     <fragment
