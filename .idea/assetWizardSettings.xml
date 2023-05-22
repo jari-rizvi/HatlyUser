@@ -33,9 +33,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="1ed860" />
-                            <entry key="outputName" value="round_arrow_back_24" />
-                            <entry key="sourceFile" value="C:\Users\TeamX Pakistan\Desktop\hatlyIcons\fb_icon.svg" />
+                            <entry key="outputName" value="mobile_number" />
+                            <entry key="sourceFile" value="C:\Users\TeamX Pakistan\Desktop\hatlyIcons\mobile_number.svg" />
                           </map>
                         </option>
                       </PersistentState>

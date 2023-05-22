@@ -50,7 +50,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="@+id/pinView"
+            app:layout_constraintStart_toStartOf="@+id/txtVerify"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.25" />
 
@@ -65,33 +65,40 @@
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.35" />
+
         <com.chaos.view.PinView
             android:id="@+id/pinView"
             style="@style/PinWidget.PinView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/_22sdp"
             android:cursorVisible="true"
             android:inputType="number"
-            android:itemBackground="@drawable/pinview_bg"
             app:cursorColor="@color/black"
-            android:layout_marginHorizontal="@dimen/_20sdp"
             app:hideLineWhenFilled="false"
             app:itemCount="6"
             app:itemHeight="50dp"
-            app:layout_constraintVertical_bias="0.1"
-            app:itemRadius="8dp"
-            app:itemWidth="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/txtVerify"
+            app:layout_constraintStart_toStartOf="@+id/txtVerify"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:lineColor="#00000000"
-            app:lineWidth="1dp" />
+            app:layout_constraintVertical_bias="0.05"
+            app:lineWidth="2dp"
+            app:lineColor="#4D262626"
+            app:viewType="line" />
 
         <TextView
-            android:id="@+id/txtLogin"
+            android:id="@+id/txtVerify"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
             android:background="@drawable/button_radius_green"
             android:fontFamily="@font/open_sans_regular"
             android:paddingVertical="@dimen/_10sdp"
@@ -101,8 +108,8 @@
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/pinView"
-            app:layout_constraintStart_toStartOf="@+id/pinView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pinView"
             app:layout_constraintVertical_bias="0.1" />
 
@@ -113,12 +120,12 @@
             android:fontFamily="@font/montserrat_regular"
             android:text="Resend OTP in 59 sec"
             android:textColor="#424242"
-            app:layout_constraintVertical_bias="0.1"
             android:textSize="@dimen/_10ssp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/txtLogin"
+            app:layout_constraintEnd_toEndOf="@+id/txtVerify"
             app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/txtLogin" />
+            app:layout_constraintTop_toBottomOf="@+id/txtVerify"
+            app:layout_constraintVertical_bias="0.1" />
 
         <TextView
             android:id="@+id/textView24"
@@ -128,11 +135,11 @@
             android:text="Resend Again?"
             android:textColor="#EA1B25"
             android:textSize="@dimen/_10ssp"
-            app:layout_constraintVertical_bias="0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/textView23"
             app:layout_constraintStart_toStartOf="@+id/textView23"
-            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+            app:layout_constraintTop_toBottomOf="@+id/textView23"
+            app:layout_constraintVertical_bias="0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

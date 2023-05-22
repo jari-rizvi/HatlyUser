@@ -38,6 +38,10 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding, Forgo
             findNavController().popBackStack()
         }
 
+        mViewDataBinding.txtLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_forgot_to_otp)
+        }
+
 
     }
 
