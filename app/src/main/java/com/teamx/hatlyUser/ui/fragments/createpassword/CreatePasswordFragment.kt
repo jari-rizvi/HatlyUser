@@ -39,6 +39,11 @@ class CreatePasswordFragment : BaseFragment<FragmentCreatePasswordBinding, Creat
         }
 
 
+        mViewDataBinding.txtLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_createPasswordFragment_to_locationFragment2)
+        }
+
+
     }
 
 

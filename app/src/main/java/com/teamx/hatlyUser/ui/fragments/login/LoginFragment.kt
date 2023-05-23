@@ -2,6 +2,7 @@ package com.teamx.hatlyUser.ui.fragments.login
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.teamx.hatlyUser.BR
@@ -41,6 +42,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         mViewDataBinding.textView5.setOnClickListener {
             findNavController().navigate(R.id.action_login_to_singup)
         }
+        activity?.onBackPressedDispatcher?.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Back is pressed... Finishing the activity
+                activity?.finish()
+            }
+        })
 
 
     }
