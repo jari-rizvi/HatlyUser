@@ -2,6 +2,7 @@ package com.teamx.hatlyUser.ui.fragments.createpassword
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.teamx.hatlyUser.BR
@@ -35,12 +36,12 @@ class CreatePasswordFragment : BaseFragment<FragmentCreatePasswordBinding, Creat
         }
 
         mViewDataBinding.imgBack.setOnClickListener {
-            findNavController().popBackStack()
+            it.findNavController().popBackStack()
         }
 
 
         mViewDataBinding.txtLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_createPasswordFragment_to_locationFragment2)
+            it.findNavController().navigate(R.id.action_createPasswordFragment_to_locationFragment)
         }
 
 

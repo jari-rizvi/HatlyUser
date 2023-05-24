@@ -47,7 +47,7 @@ class TempFragment : BaseFragment<FragmentTempBinding, TempViewModel>(), SlideTo
 
     override fun onSlideToUnlockDone() {
         Log.d("slider", "onSlideToUnlockDone: ")
-        findNavController().navigate(R.id.action_tempFragment_to_onBoard)
+        findNavController().navigate(R.id.action_tempFragment_to_onboardViewPagerFragment)
     }
 
 }

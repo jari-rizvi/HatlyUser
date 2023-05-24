@@ -2,6 +2,7 @@ package com.teamx.hatlyUser.ui.fragments.forgotpassword
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.teamx.hatlyUser.BR
@@ -35,11 +36,11 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding, Forgo
         }
 
         mViewDataBinding.imgBack.setOnClickListener {
-            findNavController().popBackStack()
+            it.findNavController().popBackStack()
         }
 
         mViewDataBinding.txtLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_forgot_to_otp)
+            it.findNavController().navigate(R.id.action_forgotPasswordFragment_to_otpFragment)
         }
 
 

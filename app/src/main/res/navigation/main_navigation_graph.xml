@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation_graph"
-
     app:startDestination="@id/tempFragment">
 
     <fragment
@@ -12,16 +11,22 @@
         android:label="TempFragment"
         tools:layout="@layout/fragment_temp">
 
+<!--        <action-->
+<!--            android:id="@+id/action_tempFragment_to_onBoard"-->
+<!--            app:destination="@id/onboardViewPagerFragment"-->
+<!--            app:enterAnim="@anim/enter_from_left"-->
+<!--            app:exitAnim="@anim/exit_to_left"-->
+<!--            app:popEnterAnim="@anim/enter_from_left"-->
+<!--            app:popExitAnim="@anim/exit_to_left"-->
+<!--            app:popUpTo="@id/tempFragment"-->
+<!--            app:popUpToInclusive="true" />-->
+
         <action
-            android:id="@+id/action_tempFragment_to_onBoard"
+            android:id="@+id/action_tempFragment_to_onboardViewPagerFragment"
             app:destination="@id/onboardViewPagerFragment"
-            app:enterAnim="@anim/enter_from_left"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_left"
+            app:launchSingleTop="true"
             app:popUpTo="@id/tempFragment"
             app:popUpToInclusive="true" />
-
     </fragment>
 
     <fragment
@@ -30,16 +35,22 @@
         android:label="OnBoardViewPagerFragment"
         tools:layout="@layout/fragment_onboard_viewpager">
 
+<!--        <action-->
+<!--            android:id="@+id/action_onBoard_to_login"-->
+<!--            app:destination="@id/loginFragment"-->
+<!--            app:enterAnim="@anim/enter_from_left"-->
+<!--            app:exitAnim="@anim/exit_to_left"-->
+<!--            app:popEnterAnim="@anim/enter_from_left"-->
+<!--            app:popExitAnim="@anim/exit_to_left"-->
+<!--            app:popUpTo="@id/onboardViewPagerFragment"-->
+<!--            app:popUpToInclusive="true" />-->
+
         <action
-            android:id="@+id/action_onBoard_to_login"
+            android:id="@+id/action_onboardViewPagerFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:enterAnim="@anim/enter_from_left"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_left"
+            app:launchSingleTop="true"
             app:popUpTo="@id/onboardViewPagerFragment"
             app:popUpToInclusive="true" />
-
     </fragment>
 
     <fragment
@@ -48,35 +59,39 @@
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
 
-        <action
-            android:id="@+id/action_login_to_forgotPassword"
-            app:destination="@id/forgotPasswordFragment"
-            app:enterAnim="@anim/enter_from_left"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_left"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="false" />
+<!--        <action-->
+<!--            android:id="@+id/action_login_to_forgotPassword"-->
+<!--            app:destination="@id/forgotPasswordFragment"-->
+<!--            app:enterAnim="@anim/enter_from_left"-->
+<!--            app:exitAnim="@anim/exit_to_left"-->
+<!--            app:popEnterAnim="@anim/enter_from_left"-->
+<!--            app:popExitAnim="@anim/exit_to_left"-->
+<!--            app:popUpTo="@id/loginFragment"-->
+<!--            app:popUpToInclusive="true" />-->
+
+<!--        <action-->
+<!--            android:id="@+id/action_login_to_singup"-->
+<!--            app:destination="@id/signUpFragment"-->
+<!--            app:enterAnim="@anim/enter_from_left"-->
+<!--            app:exitAnim="@anim/exit_to_left"-->
+<!--            app:popEnterAnim="@anim/enter_from_left"-->
+<!--            app:popExitAnim="@anim/exit_to_left"-->
+<!--            app:popUpTo="@id/loginFragment"-->
+<!--            app:popUpToInclusive="false" />-->
 
         <action
-            android:id="@+id/action_login_to_singup"
-            app:destination="@id/signUpFragment"
-            app:enterAnim="@anim/enter_from_left"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_left"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="false" />
-
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.signup.SignUpFragment"
         android:label="SignUpFragment"
-        tools:layout="@layout/fragment_login">
-
-    </fragment>
+        tools:layout="@layout/fragment_login" />
 
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -84,14 +99,17 @@
         android:label="ForgotPasswordFragment"
         tools:layout="@layout/fragment_login">
 
-        <action
-            android:id="@+id/action_forgot_to_otp"
-            app:destination="@id/otpFragment"
-            app:enterAnim="@anim/enter_from_left"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_left" />
+<!--        <action-->
+<!--            android:id="@+id/action_forgot_to_otp"-->
+<!--            app:destination="@id/otpFragment"-->
+<!--            app:enterAnim="@anim/enter_from_left"-->
+<!--            app:exitAnim="@anim/exit_to_left"-->
+<!--            app:popEnterAnim="@anim/enter_from_left"-->
+<!--            app:popExitAnim="@anim/exit_to_left" />-->
 
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_otpFragment"
+            app:destination="@id/otpFragment" />
     </fragment>
 
     <fragment
@@ -100,14 +118,17 @@
         android:label="OtpFragment"
         tools:layout="@layout/fragment_otp">
 
-        <action
-            android:id="@+id/action_otp_to_create_password"
-            app:destination="@id/createPasswordFragment"
-            app:enterAnim="@anim/enter_from_left"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_left" />
+<!--        <action-->
+<!--            android:id="@+id/action_otp_to_create_password"-->
+<!--            app:destination="@id/createPasswordFragment"-->
+<!--            app:enterAnim="@anim/enter_from_left"-->
+<!--            app:exitAnim="@anim/exit_to_left"-->
+<!--            app:popEnterAnim="@anim/enter_from_left"-->
+<!--            app:popExitAnim="@anim/exit_to_left" />-->
 
+        <action
+            android:id="@+id/action_otpFragment_to_createPasswordFragment"
+            app:destination="@id/createPasswordFragment" />
     </fragment>
 
     <fragment
@@ -115,33 +136,42 @@
         android:name="com.teamx.hatlyUser.ui.fragments.createpassword.CreatePasswordFragment"
         android:label="CreatePasswordFragment"
         tools:layout="@layout/fragment_create_password">
-        <action
-            android:id="@+id/action_createPasswordFragment_to_locationFragment2"
-            app:destination="@+id/locationFragment"
-            app:enterAnim="@anim/enter_from_left"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_left"
-            app:popUpTo="@+id/forgotPasswordFragment"
-            app:popUpToInclusive="true"/>
-    </fragment>
-
 <!--        <action-->
-<!--            android:id="@+id/action_create_password_to_location"-->
-<!--            app:destination="@id/locationFragment"-->
+<!--            android:id="@+id/action_createPasswordFragment_to_locationFragment2"-->
+<!--            app:destination="@+id/locationFragment"-->
 <!--            app:enterAnim="@anim/enter_from_left"-->
 <!--            app:exitAnim="@anim/exit_to_left"-->
 <!--            app:popEnterAnim="@anim/enter_from_left"-->
 <!--            app:popExitAnim="@anim/exit_to_left"-->
+<!--            app:launchSingleTop="true"-->
 <!--            app:popUpTo="@id/loginFragment"-->
 <!--            app:popUpToInclusive="true" />-->
+        <action
+            android:id="@+id/action_createPasswordFragment_to_locationFragment"
+            app:destination="@id/locationFragment"
+            app:popUpTo="@id/main_navigation_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
 
-<!--    </fragment>-->
+    <!--        <action-->
+    <!--            android:id="@+id/action_create_password_to_location"-->
+    <!--            app:destination="@id/locationFragment"-->
+    <!--            app:enterAnim="@anim/enter_from_left"-->
+    <!--            app:exitAnim="@anim/exit_to_left"-->
+    <!--            app:popEnterAnim="@anim/enter_from_left"-->
+    <!--            app:popExitAnim="@anim/exit_to_left"-->
+    <!--            app:popUpTo="@id/loginFragment"-->
+    <!--            app:popUpToInclusive="true" />-->
+
+    <!--    </fragment>-->
 
     <fragment
         android:id="@+id/locationFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.location.LocationFragment"
         android:label="LocationFragment"
-        tools:layout="@layout/fragment_location" />
+        tools:layout="@layout/fragment_location">
+
+
+    </fragment>
 
 </navigation>

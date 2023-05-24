@@ -2,6 +2,7 @@ package com.teamx.hatlyUser.ui.fragments.otp
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.teamx.hatlyUser.BR
@@ -34,11 +35,11 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
         }
 
         mViewDataBinding.imgBack.setOnClickListener {
-            findNavController().popBackStack()
+            it.findNavController().popBackStack()
         }
 
         mViewDataBinding.txtVerify.setOnClickListener {
-            findNavController().navigate(R.id.action_otp_to_create_password)
+            it.findNavController().navigate(R.id.action_otpFragment_to_createPasswordFragment)
         }
 
     }

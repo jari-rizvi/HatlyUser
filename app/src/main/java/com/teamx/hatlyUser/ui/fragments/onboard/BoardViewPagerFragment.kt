@@ -46,12 +46,12 @@ class BoardViewPagerFragment :
         mViewDataBinding.txtSkip.setOnClickListener {
 //            findNavController().navigate(R.id.tempFragment)
 //            navController.navigate(R.id.action_onBoard_to_login)
-            findNavController().navigate(R.id.action_onBoard_to_login)
+            findNavController().navigate(R.id.action_onboardViewPagerFragment_to_loginFragment)
 
         }
 
         mViewDataBinding.txtGetStarted.setOnClickListener {
-            findNavController().navigate(R.id.action_onBoard_to_login)
+            findNavController().navigate(R.id.action_onboardViewPagerFragment_to_loginFragment)
         }
 
         featureProductArrayList = ArrayList()
