@@ -51,6 +51,7 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/onboardViewPagerFragment"
             app:popUpToInclusive="true" />
+
     </fragment>
 
     <fragment
@@ -170,6 +171,18 @@
         android:name="com.teamx.hatlyUser.ui.fragments.location.LocationFragment"
         android:label="LocationFragment"
         tools:layout="@layout/fragment_location">
+
+        <action
+            android:id="@+id/action_locationFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.enterlocation.hello.MapsFragment"
+        android:label="MapFragment"
+        tools:layout="@layout/fragment_maps">
 
 
     </fragment>
