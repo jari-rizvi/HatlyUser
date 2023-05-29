@@ -8,9 +8,14 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="360dp"
-            android:layout_height="51dp"
-            android:background="#1ED860">
+            android:id="@+id/constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#1ED860"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imgMenu"
@@ -91,7 +96,8 @@
             android:id="@+id/textView9"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginVertical="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_5sdp"
             android:background="@drawable/button_radius_green"
@@ -100,7 +106,7 @@
             app:layout_constraintEnd_toStartOf="@+id/textView8"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/guideline1">
+            app:layout_constraintTop_toTopOf="@+id/guideline1">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -118,94 +124,217 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!--        <ImageView-->
-        <!--            android:id="@+id/textView9"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:scaleType="fitXY"-->
-        <!--            android:layout_marginVertical="@dimen/_10sdp"-->
-        <!--            android:layout_marginStart="@dimen/_10sdp"-->
-        <!--            android:layout_marginEnd="@dimen/_5sdp"-->
-        <!--            app:layout_constraintBottom_toTopOf="@+id/guideline2"-->
-        <!--            app:layout_constraintEnd_toStartOf="@+id/textView8"-->
-        <!--            app:layout_constraintHorizontal_bias="0.5"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/guideline1"/>-->
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
             android:id="@+id/textView8"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
-            android:background="@drawable/button_radius_corner"
+            android:background="@drawable/button_radius_green"
             android:backgroundTint="#211ED860"
+            android:clipToOutline="true"
+            android:paddingTop="@dimen/_50sdp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/food"
             app:layout_constraintBottom_toTopOf="@+id/textView10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView9"
-            app:layout_constraintTop_toTopOf="@+id/textView9">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#211ED860"
-                android:fontFamily="@font/bumbu_sushi"
-                android:text="FOOD"
-                android:textColor="#EA1B25"
-                android:textSize="@dimen/_20ssp"
-                app:layout_constraintHorizontal_bias="0.1"
-                app:layout_constraintVertical_bias="1"
-                app:layout_constraintBottom_toTopOf="@+id/guideline11"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.40" />
-
-            <ImageView
-                android:layout_width="@dimen/_160sdp"
-                android:layout_height="@dimen/_80sdp"
-                android:background="@drawable/button_radius_green"
-                android:backgroundTint="@android:color/transparent"
-                android:clipToOutline="true"
-                android:src="@drawable/food"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/guideline11" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="@+id/textView9" />
 
         <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#211ED860"
+            android:fontFamily="@font/bumbu_sushi"
+            android:text="FOOD"
+            android:textColor="#EA1B25"
+            android:textSize="@dimen/_20ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView8"
+            app:layout_constraintEnd_toEndOf="@+id/textView8"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toTopOf="@+id/textView8"
+            app:layout_constraintVertical_bias="0.2" />
+
+
+        <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+        <!--            android:id="@+id/textView8"-->
+        <!--            android:layout_width="206dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_marginStart="@dimen/_5sdp"-->
+        <!--            android:layout_marginEnd="@dimen/_10sdp"-->
+        <!--            android:layout_marginBottom="@dimen/_5sdp"-->
+        <!--            android:background="@drawable/button_radius_corner"-->
+        <!--            android:backgroundTint="#211ED860"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/textView10"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.5"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/textView9"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/textView9">-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:backgroundTint="#211ED860"-->
+        <!--                android:fontFamily="@font/bumbu_sushi"-->
+        <!--                android:text="FOOD"-->
+        <!--                android:textColor="#EA1B25"-->
+        <!--                android:textSize="@dimen/_20ssp"-->
+        <!--                app:layout_constraintBottom_toTopOf="@+id/guideline11"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintHorizontal_bias="0.1"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toTopOf="parent"-->
+        <!--                app:layout_constraintVertical_bias="1" />-->
+
+        <!--            <androidx.constraintlayout.widget.Guideline-->
+        <!--                android:id="@+id/guideline11"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:orientation="horizontal"-->
+        <!--                app:layout_constraintGuide_percent="0.30" />-->
+
+        <!--            <ImageView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:background="@drawable/button_radius_green"-->
+        <!--                android:backgroundTint="@android:color/transparent"-->
+        <!--                android:clipToOutline="true"-->
+        <!--                android:src="@drawable/food"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toBottomOf="@+id/guideline11" />-->
+
+        <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+        <ImageView
             android:id="@+id/textView10"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/button_radius_corner"
+            android:background="@drawable/button_radius_green"
             android:backgroundTint="#211ED860"
-            android:fontFamily="@font/bumbu_sushi"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="H\na\nt\nl\ny"
-            android:textColor="#EA1B25"
-            android:textSize="@dimen/_25ssp"
+            android:clipToOutline="true"
+            android:paddingTop="@dimen/_50sdp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/grocery"
             app:layout_constraintBottom_toBottomOf="@+id/textView9"
             app:layout_constraintEnd_toEndOf="@+id/textView8"
             app:layout_constraintStart_toStartOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#211ED860"
+            android:fontFamily="@font/bumbu_sushi"
+            android:text="GROCERY"
+            android:textColor="#EA1B25"
+            android:textSize="@dimen/_20ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView10"
+            app:layout_constraintEnd_toEndOf="@+id/textView10"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintTop_toTopOf="@+id/textView10"
+            app:layout_constraintVertical_bias="0.2" />
+
+        <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+        <!--            android:id="@+id/textView10"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_marginTop="@dimen/_5sdp"-->
+        <!--            android:background="@drawable/button_radius_corner"-->
+        <!--            -->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/textView9"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/textView8"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/textView8"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/textView8">-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:backgroundTint="#211ED860"-->
+        <!--                android:fontFamily="@font/bumbu_sushi"-->
+        <!--                android:text="GROCERY"-->
+        <!--                android:textColor="#EA1B25"-->
+        <!--                android:textSize="@dimen/_20ssp"-->
+        <!--                app:layout_constraintBottom_toTopOf="@+id/guideline12"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintHorizontal_bias="0.1"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toTopOf="parent"-->
+        <!--                app:layout_constraintVertical_bias="1"/>-->
+
+        <!--            <androidx.constraintlayout.widget.Guideline-->
+        <!--                android:id="@+id/guideline12"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:orientation="horizontal"-->
+        <!--                app:layout_constraintGuide_percent="0.30" />-->
+
+        <!--            <ImageView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="0dp"-->
+        <!--                android:background="@drawable/button_radius_green"-->
+        <!--                android:clipToOutline="true"-->
+        <!--                android:paddingTop="@dimen/_20sdp"-->
+        <!--                android:scaleType="centerCrop"-->
+        <!--                android:backgroundTint="#211ED860"-->
+        <!--                android:src="@drawable/grocery"-->
+        <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toBottomOf="@+id/guideline12" />-->
+
+        <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.60" />
+            app:layout_constraintGuide_percent="0.65" />
+
+        <ImageView
+            android:id="@+id/textView11"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/button_radius_green"
+            android:backgroundTint="#211ED860"
+            android:clipToOutline="true"
+            android:paddingTop="@dimen/_50sdp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/health_and_beauty"
+            app:layout_constraintBottom_toTopOf="@+id/guideline3"
+            app:layout_constraintEnd_toEndOf="@+id/textView10"
+            app:layout_constraintStart_toStartOf="@+id/textView9"
+            app:layout_constraintTop_toBottomOf="@+id/guideline2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#211ED860"
+            android:fontFamily="@font/bumbu_sushi"
+            android:text="HEALTH &amp;\nBEAUTY"
+            android:textColor="#EA1B25"
+            android:textSize="@dimen/_20ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView11"
+            app:layout_constraintEnd_toEndOf="@+id/textView11"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="@+id/textView11"
+            app:layout_constraintTop_toTopOf="@+id/textView11"
+            app:layout_constraintVertical_bias="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.90" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -15,34 +15,101 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        tools:context=".ui.activity.mainActivity.MainActivity">
-
+        android:layout_height="match_parent">
 
         <fragment
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_nav_instructor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/main_navigation_graph" />
 
-        <ProgressBar
-            android:id="@+id/progress_bar"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav_instructor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/white"
+            android:elevation="15dp"
+            app:defaultNavHost="true"
+            app:itemIconSize="@dimen/_18sdp"
+            app:itemIconTint="@color/selector_one_bottom"
+            app:itemTextColor="@color/selector_one_bottom"
+            app:labelVisibilityMode="labeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/bottom_navigation_menu">
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            android:layout_marginBottom="25dp"
+            android:backgroundTint="#1ED860"
+            android:src="@drawable/mobile_number"
+            app:borderWidth="2dp"
+            app:elevation="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bottom_nav_instructor"
+            app:layout_constraintEnd_toEndOf="@+id/bottom_nav_instructor"
+            app:layout_constraintStart_toStartOf="@+id/bottom_nav_instructor"
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:visibility="gone"-->
+    <!--        android:background="@color/colorPrimary"-->
+    <!--        tools:context=".ui.activity.mainActivity.MainActivity">-->
+
+    <!--        <fragment-->
+    <!--            android:id="@+id/nav_host_fragment"-->
+    <!--            android:name="androidx.navigation.fragment.NavHostFragment"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            app:defaultNavHost="true"-->
+    <!--            android:visibility="gone"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:navGraph="@navigation/main_navigation_graph" />-->
+
+
+    <!--            &lt;!&ndash; Bottom Navigation View &ndash;&gt;-->
+    <!--       -->
+
+
+    <!--        &lt;!&ndash;        <com.google.android.material.bottomnavigation.BottomNavigationView&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:id="@+id/bottom_navigatin_view"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_alignParentBottom="true"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            app:backgroundTint="@color/white"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            app:labelVisibilityMode="labeled"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            app:layout_constraintLeft_toLeftOf="parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            app:layout_constraintRight_toRightOf="parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            app:menu="@menu/bottom_navigation_menu" />&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;        <ProgressBar&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:id="@+id/progress_bar"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_centerInParent="true"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:visibility="gone"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            app:layout_constraintTop_toTopOf="parent" />&ndash;&gt;-->
+
+
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
 </layout>

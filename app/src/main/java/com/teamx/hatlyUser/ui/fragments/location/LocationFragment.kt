@@ -41,7 +41,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LoginViewModel>()
         }
 
         mViewDataBinding.txtEnterLocaion.setOnClickListener {
-            it.findNavController().navigate(R.id.action_locationFragment_to_mapFragment)
+            it.findNavController().navigate(R.id.action_locationFragment_to_homeFragment)
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
