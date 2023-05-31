@@ -28,14 +28,14 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:defaultNavHost="true"
-                app:layout_constraintBottom_toTopOf="@+id/bottom_nav_instructor"
+                app:layout_constraintBottom_toTopOf="@+id/bottomNav"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:navGraph="@navigation/main_navigation_graph" />
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_nav_instructor"
+                android:id="@+id/bottomNav"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -60,9 +60,9 @@
                 android:src="@drawable/mobile_number"
                 app:borderWidth="2dp"
                 app:elevation="10dp"
-                app:layout_constraintBottom_toBottomOf="@+id/bottom_nav_instructor"
-                app:layout_constraintEnd_toEndOf="@+id/bottom_nav_instructor"
-                app:layout_constraintStart_toStartOf="@+id/bottom_nav_instructor"
+                app:layout_constraintBottom_toBottomOf="@+id/bottomNav"
+                app:layout_constraintEnd_toEndOf="@+id/bottomNav"
+                app:layout_constraintStart_toStartOf="@+id/bottomNav"
                 app:tint="@color/white" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -24,7 +26,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
-
     override val viewModel: Class<MainViewModel>
         get() = MainViewModel::class.java
 
@@ -34,56 +35,60 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    lateinit var dataStoreProvider: DataStoreProvider
+    private lateinit var dataStoreProvider: DataStoreProvider
     lateinit var sharedViewModel: SharedViewModel
 
     private var navController: NavController? = null
 
 
-    lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: ProgressBar
 
-    var bottomNav: BottomNavigationView? = null
-    private var floatingActionButton: FloatingActionButton? = null
+//    var bottomNav: BottomNavigationView? = null
+//    private var floatingActionButton: FloatingActionButton? = null
+//    private var drawerLayout: DrawerLayout? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
         dataStoreProvider = DataStoreProvider(this)
 
-        bottomNav = findViewById(R.id.bottom_nav_instructor)
-
-        floatingActionButton = findViewById(R.id.fab)
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
         setupBottomNavMenu(navController!!)
 
-        floatingActionButton?.setOnClickListener {
-            bottomNav?.selectedItemId = R.id.homeBottom
+        mViewDataBinding.fab.setOnClickListener {
+            mViewDataBinding.bottomNav.selectedItemId = R.id.homeBottom
         }
 
+        mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
         navController!!.addOnDestinationChangedListener { _, destination, _ ->
-            Log.d("navController", "onCreate: ${destination.id}")
             when (destination.id) {
 
                 R.id.homeFragment -> {
-                    bottomNav?.visibility = View.VISIBLE
-                    floatingActionButton?.visibility = View.VISIBLE
+                    mViewDataBinding.bottomNav.visibility = View.VISIBLE
+                    mViewDataBinding.fab.visibility = View.VISIBLE
+
+                    mViewDataBinding.bottomNav.menu?.getItem(2)?.isChecked = true
+
+                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 }
                 else -> {
-                    bottomNav?.visibility = View.GONE
-                    floatingActionButton?.visibility = View.GONE
+                    mViewDataBinding.bottomNav.visibility = View.GONE
+                    mViewDataBinding.fab.visibility = View.GONE
+                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
             }
         }
 
-        bottomNav?.selectedItemId = R.id.homeBottom
     }
 
     private fun setupBottomNavMenu(navController: NavController) {
-        bottomNav?.setupWithNavController(navController)
+        mViewDataBinding.bottomNav.setupWithNavController(navController)
 
-        bottomNav?.setOnItemSelectedListener { menuItem ->
+        mViewDataBinding.bottomNav.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menuBottom -> {
                     // Handle home action
@@ -112,7 +117,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     Log.d("navController", "onCreate: profileBottom")
                     true
                 }
-                else -> false
+                else -> {
+                    false
+                }
             }
         }
 
@@ -128,5 +135,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         progressBar.visibility = View.GONE
     }
 
+    fun openDrawer() {
+        if (mViewDataBinding.drawerLayout.isOpen) {
+            mViewDataBinding.drawerLayout.openDrawer(GravityCompat.END)
+        } else {
+            mViewDataBinding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+    }
 
 }

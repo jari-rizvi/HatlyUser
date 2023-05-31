@@ -186,7 +186,19 @@
         android:id="@+id/homeFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"></fragment>
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_homeFragment_to_hatlyMartFragment"
+            app:destination="@id/hatlyMartFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/hatlyMartFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.hatlymart.HatlyMartFragment"
+        android:label="HatlyMartFragment"
+        tools:layout="@layout/fragment_hatly_mart"/>
 
     <fragment
         android:id="@+id/mapFragment"
