@@ -1,7 +1,9 @@
 package com.teamx.hatlyUser.ui.fragments.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.teamx.hatlyUser.BR
@@ -45,6 +47,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
             findNavController().navigate(R.id.action_homeFragment_to_hatlyMartFragment)
         }
 
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.d("handleOnBackPressed", "handleOnBackPressed: back")
+                requireActivity().finish()
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
 
 
     }

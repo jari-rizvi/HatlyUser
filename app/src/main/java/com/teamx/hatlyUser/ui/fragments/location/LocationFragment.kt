@@ -1,9 +1,11 @@
 package com.teamx.hatlyUser.ui.fragments.location
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
@@ -41,16 +43,21 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LoginViewModel>()
         }
 
         mViewDataBinding.txtEnterLocaion.setOnClickListener {
-            it.findNavController().navigate(R.id.action_locationFragment_to_homeFragment)
+            findNavController().navigate(R.id.action_locationFragment_to_homeFragment)
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // Back is pressed... Finishing the activity
-//                activity?.finish()
-                requireActivity().finish()
-            }
-        })
+
+
+//        requireActivity().onBackPressedDispatcher.addCallback(
+//            requireActivity(),
+//            object : OnBackPressedCallback(true) {
+//                override fun handleOnBackPressed() {
+//                    // Back is pressed... Finishing the activity
+////                activity?.finish()
+//                    Log.d("handleOnBackPressed", "handleOnBackPressed: back")
+////                    requireActivity().finish()
+//                }
+//            })
     }
 
 }

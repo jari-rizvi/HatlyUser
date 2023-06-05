@@ -198,7 +198,33 @@
         android:id="@+id/hatlyMartFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.hatlymart.HatlyMartFragment"
         android:label="HatlyMartFragment"
-        tools:layout="@layout/fragment_hatly_mart"/>
+        tools:layout="@layout/fragment_hatly_mart">
+
+        <action
+            android:id="@+id/action_hatlyMartFragment_to_HatlyCategoriesFragment"
+            app:destination="@id/HatlyCategoriesFragment" />
+        <action
+            android:id="@+id/action_hatlyMartFragment_to_ShopHomeFragment"
+            app:destination="@id/ShopHomeFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/HatlyCategoriesFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.hatlycategories.HatlyCategoriesFragment"
+        android:label="HatlyCategories"
+        tools:layout="@layout/fragment_hatly_categories" >
+        <action
+            android:id="@+id/action_HatlyCategoriesFragment_to_ShopHomeFragment"
+            app:destination="@id/ShopHomeFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/ShopHomeFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.products.ShopHomeFragment"
+        android:label="ShopHome"
+        tools:layout="@layout/fragment_shop_home" />
 
     <fragment
         android:id="@+id/mapFragment"
