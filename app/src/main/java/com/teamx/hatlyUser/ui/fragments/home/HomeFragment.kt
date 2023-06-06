@@ -47,6 +47,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
             findNavController().navigate(R.id.action_homeFragment_to_hatlyMartFragment)
         }
 
+        mViewDataBinding.textView10.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_storesFragment)
+        }
+
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Log.d("handleOnBackPressed", "handleOnBackPressed: back")

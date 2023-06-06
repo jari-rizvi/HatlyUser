@@ -191,6 +191,9 @@
         <action
             android:id="@+id/action_homeFragment_to_hatlyMartFragment"
             app:destination="@id/hatlyMartFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_storesFragment"
+            app:destination="@id/storesFragment" />
 
     </fragment>
 
@@ -202,29 +205,45 @@
 
         <action
             android:id="@+id/action_hatlyMartFragment_to_HatlyCategoriesFragment"
-            app:destination="@id/HatlyCategoriesFragment" />
+            app:destination="@id/hatlyCategoriesFragment" />
         <action
             android:id="@+id/action_hatlyMartFragment_to_ShopHomeFragment"
-            app:destination="@id/ShopHomeFragment" />
+            app:destination="@id/shopHomeFragment" />
 
     </fragment>
 
     <fragment
-        android:id="@+id/HatlyCategoriesFragment"
+        android:id="@+id/hatlyCategoriesFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.hatlycategories.HatlyCategoriesFragment"
         android:label="HatlyCategories"
         tools:layout="@layout/fragment_hatly_categories" >
         <action
             android:id="@+id/action_HatlyCategoriesFragment_to_ShopHomeFragment"
-            app:destination="@id/ShopHomeFragment" />
+            app:destination="@id/shopHomeFragment" />
     </fragment>
 
 
     <fragment
-        android:id="@+id/ShopHomeFragment"
-        android:name="com.teamx.hatlyUser.ui.fragments.products.ShopHomeFragment"
+        android:id="@+id/shopHomeFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.shophome.ShopHomeFragment"
         android:label="ShopHome"
-        tools:layout="@layout/fragment_shop_home" />
+        tools:layout="@layout/fragment_shop_home" >
+        <action
+            android:id="@+id/action_shopHomeFragment_to_productPreviewFragment"
+            app:destination="@id/productPreviewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productPreviewFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.products.ProductPreviewFragment"
+        android:label="ProductPreview"
+        tools:layout="@layout/fragment_product_preview" />
+
+    <fragment
+        android:id="@+id/storesFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.stores.StoresFragment"
+        android:label="Stores"
+        tools:layout="@layout/fragment_stores" />
 
     <fragment
         android:id="@+id/mapFragment"

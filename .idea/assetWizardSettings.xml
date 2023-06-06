@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../../TeamX%20Pakistan/AppData/Local/Android/Sdk/icons/material/materialiconsround/add/round_add_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../../TeamX%20Pakistan/AppData/Local/Android/Sdk/icons/material/materialiconsoutlined/access_time/outline_access_time_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,8 +33,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="1ed860" />
-                            <entry key="outputName" value="round_add_24" />
+                            <entry key="color" value="ea1b25" />
+                            <entry key="outputName" value="outline_access_time_24" />
                             <entry key="sourceFile" value="C:\Users\TeamX Pakistan\Desktop\hatlyIcons\send_parcel_vector.svg" />
                           </map>
                         </option>

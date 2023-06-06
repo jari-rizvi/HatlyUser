@@ -80,7 +80,7 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
         itemClasses.add("More\ncategories")
 
         val adapter = HatlyShopCatAdapter(itemClasses, this)
-        val hatlyPopularAdapter = HatlyPopularAdapter(itemClasses)
+        val hatlyPopularAdapter = HatlyPopularAdapter(itemClasses,this)
 
         // set the adapter
 

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/imgShop"
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_75sdp"
+            android:background="@drawable/button_radius_corner"
+            android:clipToOutline="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/splash_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="Hydri Super Market"
+            android:textAlignment="center"
+            android:textColor="#EA1B25"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/txtAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toEndOf="@+id/imgShop"
+            app:layout_constraintTop_toTopOf="@+id/imgShop" />
+
+        <TextView
+            android:id="@+id/txtAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="Shop No. 118/F-1 Milleninium Mall"
+            android:textAlignment="center"
+            android:textColor="#363636"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/imgReview"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+        <ImageView
+            android:id="@+id/imgReview"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:src="@drawable/mrb_star_icon_black_36dp"
+            app:layout_constraintBottom_toTopOf="@+id/imgDuration"
+            app:layout_constraintStart_toStartOf="@+id/txtAddress"
+            app:layout_constraintTop_toBottomOf="@+id/txtAddress"
+            app:tint="#FEBD19" />
+
+        <TextView
+            android:id="@+id/txtReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="4.8 (35 reviews)"
+            android:textAlignment="center"
+            android:textColor="#363636"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imgReview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toEndOf="@+id/imgReview"
+            app:layout_constraintTop_toTopOf="@+id/imgReview" />
+
+        <ImageView
+            android:id="@+id/imgDuration"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:src="@drawable/outline_access_time_24"
+            app:layout_constraintBottom_toBottomOf="@+id/imgShop"
+            app:layout_constraintEnd_toEndOf="@+id/imgReview"
+            app:layout_constraintStart_toStartOf="@+id/imgReview"
+            app:layout_constraintTop_toBottomOf="@+id/imgReview"
+            app:tint="#1ED860" />
+
+        <TextView
+            android:id="@+id/txtDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="Delivery 30 min"
+            android:textAlignment="center"
+            android:textColor="#363636"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imgDuration"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/txtReview"
+            app:layout_constraintTop_toBottomOf="@+id/imgReview" />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

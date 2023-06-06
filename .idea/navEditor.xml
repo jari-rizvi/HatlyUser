@@ -8,46 +8,13 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="HatlyCategoriesFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="2208" />
-                            <option name="y" value="12" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_HatlyCategoriesFragment_to_ShopHomeFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="ShopHomeFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="2452" />
-                            <option name="y" value="12" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="createPasswordFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="1232" />
-                            <option name="y" value="54" />
+                            <option name="y" value="368" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -68,12 +35,33 @@
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="744" />
-                            <option name="y" value="54" />
+                            <option name="y" value="368" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_forgotPasswordFragment_to_otpFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="hatlyCategoriesFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="2208" />
+                            <option name="y" value="318" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_HatlyCategoriesFragment_to_ShopHomeFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -89,12 +77,17 @@
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="1964" />
-                            <option name="y" value="12" />
+                            <option name="y" value="453" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_hatlyMartFragment_to_HatlyCategoriesFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_hatlyMartFragment_to_ShopHomeFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -110,12 +103,17 @@
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="1720" />
-                            <option name="y" value="12" />
+                            <option name="y" value="410" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_homeFragment_to_hatlyMartFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_homeFragment_to_storesFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -131,7 +129,7 @@
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="1476" />
-                            <option name="y" value="54" />
+                            <option name="y" value="368" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -157,7 +155,7 @@
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="500" />
-                            <option name="y" value="97" />
+                            <option name="y" value="325" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -183,7 +181,7 @@
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="1720" />
-                            <option name="y" value="368" />
+                            <option name="y" value="54" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -195,7 +193,7 @@
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="256" />
-                            <option name="y" value="97" />
+                            <option name="y" value="325" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -216,12 +214,45 @@
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="988" />
-                            <option name="y" value="54" />
+                            <option name="y" value="368" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_otpFragment_to_createPasswordFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="productPreviewFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="2696" />
+                            <option name="y" value="453" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="shopHomeFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="2452" />
+                            <option name="y" value="453" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_shopHomeFragment_to_productPreviewFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -237,7 +268,19 @@
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="744" />
-                            <option name="y" value="410" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="storesFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1964" />
+                            <option name="y" value="97" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -249,7 +292,7 @@
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="12" />
-                            <option name="y" value="97" />
+                            <option name="y" value="325" />
                           </Point>
                         </option>
                         <option name="myPositions">
