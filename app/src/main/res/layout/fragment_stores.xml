@@ -87,20 +87,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@+id/inpSearch"
-            app:layout_constraintTop_toBottomOf="@+id/inpSearch"/>
+            app:layout_constraintTop_toBottomOf="@+id/inpSearch" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recStores"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtShopCatTitle"
             tools:listitem="@layout/item_stores" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

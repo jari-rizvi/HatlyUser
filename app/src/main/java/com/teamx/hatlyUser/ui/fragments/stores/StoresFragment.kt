@@ -41,7 +41,8 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
             findNavController().popBackStack()
         }
 
-        val layoutManager1 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        val layoutManager1 =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         mViewDataBinding.recStores.layoutManager = layoutManager1
 
         val itemClasses: ArrayList<String> = ArrayList()
@@ -76,18 +77,17 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
         itemClasses.add("")
         itemClasses.add("")
 
-        val hatlyPopularAdapter = StoresAdapter(itemClasses)
+        val hatlyPopularAdapter = StoresAdapter(itemClasses, this)
         mViewDataBinding.recStores.adapter = hatlyPopularAdapter
 
     }
 
     override fun clickshopItem(position: Int) {
-
+        findNavController().navigate(R.id.action_storesFragment_to_shopHomeFragment)
     }
 
     override fun clickMoreItem(position: Int) {
 
     }
-
 
 }

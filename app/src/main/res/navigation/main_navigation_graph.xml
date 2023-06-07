@@ -86,19 +86,26 @@
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_locationFragment"
+            app:destination="@id/locationFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.signup.SignUpFragment"
         android:label="SignUpFragment"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_signUpFragment_to_locationFragment"
+            app:destination="@id/locationFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.forgotpassword.ForgotPasswordFragment"
         android:label="ForgotPasswordFragment"
-        tools:layout="@layout/fragment_login">
+        tools:layout="@layout/fragment_forgot_password">
 
         <!--        <action-->
         <!--            android:id="@+id/action_forgot_to_otp"-->
@@ -194,6 +201,9 @@
         <action
             android:id="@+id/action_homeFragment_to_storesFragment"
             app:destination="@id/storesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
 
     </fragment>
 
@@ -243,7 +253,17 @@
         android:id="@+id/storesFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.stores.StoresFragment"
         android:label="Stores"
-        tools:layout="@layout/fragment_stores" />
+        tools:layout="@layout/fragment_stores" >
+        <action
+            android:id="@+id/action_storesFragment_to_shopHomeFragment"
+            app:destination="@id/shopHomeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.notification.NotificationFragment"
+        android:label="NotificationFragment"
+        tools:layout="@layout/fragment_notification"/>
 
     <fragment
         android:id="@+id/mapFragment"

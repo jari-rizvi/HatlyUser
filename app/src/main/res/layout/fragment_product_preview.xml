@@ -90,7 +90,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.45" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -110,11 +110,12 @@
                     android:textColor="#EA1B25"
                     android:textSize="@dimen/_15ssp"
                     android:textStyle="bold"
+                    android:layout_marginTop="@dimen/_10sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/guideline"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.05" />
+                    app:layout_constraintVertical_bias="0" />
 
                 <TextView
                     android:id="@+id/textView23"
@@ -125,12 +126,26 @@
                     android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
                     android:textColor="#808080"
                     android:textSize="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView22"
                     app:layout_constraintTop_toBottomOf="@+id/textView22"
-                    app:layout_constraintVertical_bias="0.03" />
+                    app:layout_constraintVertical_bias="0" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recVariation1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@+id/textView23"
+                    app:layout_constraintStart_toStartOf="@+id/textView23"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23"
+                    tools:itemCount="6"
+                    app:layout_constraintVertical_bias="0"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    tools:listitem="@layout/item_product_variation_required" />
 
                 <TextView
                     android:id="@+id/textView24"
@@ -146,7 +161,7 @@
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="@+id/textView23"
-                    app:layout_constraintTop_toBottomOf="@+id/textView23"
+                    app:layout_constraintTop_toBottomOf="@+id/recVariation1"
                     app:layout_constraintVertical_bias="0.05" />
 
                 <TextView
@@ -269,7 +284,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

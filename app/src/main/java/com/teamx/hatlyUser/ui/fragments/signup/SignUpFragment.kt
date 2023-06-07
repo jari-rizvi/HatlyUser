@@ -2,6 +2,7 @@ package com.teamx.hatlyUser.ui.fragments.signup
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.teamx.hatlyUser.BR
@@ -36,6 +37,10 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding, SignUpViewModel>() {
 
         mViewDataBinding.textView5.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        mViewDataBinding.txtLogin.setOnClickListener {
+            it.findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
         }
 
     }

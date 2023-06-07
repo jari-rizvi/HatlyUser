@@ -88,7 +88,7 @@
             app:layout_constraintStart_toStartOf="@+id/inpSearch"
             app:layout_constraintTop_toBottomOf="@+id/inpSearch"
             app:spanCount="4"
-            tools:listitem="@layout/item_shop_cat" />
+            tools:listitem="@layout/item_shop_home_title" />
 
         <TextView
             android:id="@+id/txtShopCatTitle"

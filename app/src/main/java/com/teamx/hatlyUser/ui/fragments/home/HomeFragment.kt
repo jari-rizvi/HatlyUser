@@ -51,6 +51,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
             findNavController().navigate(R.id.action_homeFragment_to_storesFragment)
         }
 
+        mViewDataBinding.textView8.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
+        }
+
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Log.d("handleOnBackPressed", "handleOnBackPressed: back")

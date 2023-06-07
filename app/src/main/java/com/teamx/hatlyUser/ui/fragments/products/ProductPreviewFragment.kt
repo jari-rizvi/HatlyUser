@@ -8,16 +8,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
-import com.teamx.hatlyUser.databinding.FragmentProductPreviewBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.adapter.HatlyPopularAdapter
-import com.teamx.hatlyUser.ui.fragments.hatlymart.adapter.HatlyShopCatAdapter
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatly.ItemClass
 import com.teamx.hatlyUser.ui.fragments.hatlymart.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.shophome.adapter.ShopHomeTitleAdapter
+import com.teamx.hatlyUser.ui.fragments.products.adapter.MultiViewVariationRadioAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class ProductPreviewFragment : BaseFragment<FragmentProductPreviewBinding, ProductPreviewViewModel>(),
+class ProductPreviewFragment : BaseFragment<com.teamx.hatlyUser.databinding.FragmentProductPreviewBinding, ProductPreviewViewModel>(),
     HatlyShopInterface {
 
     override val layoutId: Int
@@ -42,14 +41,14 @@ class ProductPreviewFragment : BaseFragment<FragmentProductPreviewBinding, Produ
         mViewDataBinding.textView25.paintFlags = mViewDataBinding.textView25.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
         val layoutManager1 = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        val layoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         mViewDataBinding.recCategories.layoutManager = layoutManager1
+        mViewDataBinding.recVariation1.layoutManager = layoutManager2
 
         val itemClasses: ArrayList<String> = ArrayList()
 
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
+        val itemClasses1: ArrayList<ItemClass> = ArrayList()
+
         itemClasses.add("")
         itemClasses.add("")
         itemClasses.add("")
@@ -76,8 +75,16 @@ class ProductPreviewFragment : BaseFragment<FragmentProductPreviewBinding, Produ
         itemClasses.add("")
         itemClasses.add("")
 
+        itemClasses1.add(ItemClass(0,"Required 1"))
+        itemClasses1.add(ItemClass(0,"Required 3"))
+        itemClasses1.add(ItemClass(1,54,"Optional",""))
+        itemClasses1.add(ItemClass(1,54,"Optional",""))
+
         val hatlyPopularAdapter = HatlyPopularAdapter(itemClasses,this)
+//        val prodVariationRadio = ProductVariationRadioAdapter(itemClasses1)
+        val prodVariationRadio = MultiViewVariationRadioAdapter(itemClasses1)
         mViewDataBinding.recCategories.adapter = hatlyPopularAdapter
+        mViewDataBinding.recVariation1.adapter = prodVariationRadio
 
 
     }

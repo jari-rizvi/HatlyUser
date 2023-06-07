@@ -44,6 +44,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             it.findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
 
+        mViewDataBinding.txtLogin.setOnClickListener {
+            it.findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
+        }
+
 //        requireActivity().onBackPressedDispatcher?.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
 //            override fun handleOnBackPressed() {
 //                // Back is pressed... Finishing the activity

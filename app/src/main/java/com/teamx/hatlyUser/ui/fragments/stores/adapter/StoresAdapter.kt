@@ -4,8 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.databinding.ItemStoresBinding
+import com.teamx.hatlyUser.ui.fragments.hatlymart.interfaces.HatlyShopInterface
 
-class StoresAdapter(private val addressArrayList: ArrayList<String>) : RecyclerView.Adapter<HatlyPopularViewHolder>() {
+class StoresAdapter(private val addressArrayList: ArrayList<String>, val hatlyShopInterface: HatlyShopInterface) : RecyclerView.Adapter<HatlyPopularViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HatlyPopularViewHolder {
         return HatlyPopularViewHolder(
@@ -17,6 +18,10 @@ class StoresAdapter(private val addressArrayList: ArrayList<String>) : RecyclerV
     override fun onBindViewHolder(holder: HatlyPopularViewHolder, position: Int) {
 
         val arrayData = addressArrayList[position]
+
+        holder.itemView.setOnClickListener {
+            hatlyShopInterface.clickshopItem(position)
+        }
 
     }
 
