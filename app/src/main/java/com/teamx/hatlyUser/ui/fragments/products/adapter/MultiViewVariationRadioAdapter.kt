@@ -7,9 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.MainApplication.Companion.context
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatly.ItemClass
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatly.ItemClass.Companion.LayoutOne
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatly.ItemClass.Companion.LayoutTwo
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.hatly.ItemClass
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.hatly.ItemClass.Companion.LayoutOne
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.hatly.ItemClass.Companion.LayoutTwo
 
 
 class MultiViewVariationRadioAdapter(private val dataSet: ArrayList<ItemClass>) :

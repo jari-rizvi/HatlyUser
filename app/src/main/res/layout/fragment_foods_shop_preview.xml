@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgShop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/input_auth_field"
+            android:scaleType="fitXY"
+            android:src="@drawable/splash_bg"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0" />
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/input_auth_field"
+            android:backgroundTint="@color/white"
+            android:elevation="1dp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/round_arrow_back_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05"
+            app:tint="#363636" />
+
+        <ImageView
+            android:id="@+id/imgShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/input_auth_field"
+            android:backgroundTint="@color/white"
+            android:elevation="1dp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/search_24"
+            app:layout_constraintBottom_toBottomOf="@+id/imgSearch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgSearch"
+            app:layout_constraintVertical_bias="0.05"
+            app:tint="#363636" />
+
+        <ImageView
+            android:id="@+id/imgSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/input_auth_field"
+            android:backgroundTint="@color/white"
+            android:elevation="1dp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/search_24"
+            app:layout_constraintBottom_toBottomOf="@+id/imgBack"
+            app:layout_constraintEnd_toStartOf="@+id/imgShare"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgBack"
+            app:layout_constraintVertical_bias="0.05"
+            app:tint="#363636" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:background="@drawable/input_auth_field"
+            android:backgroundTint="@color/white"
+            android:elevation="@dimen/_2sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/imgShop"
+            app:layout_constraintEnd_toEndOf="@+id/imgShare"
+            app:layout_constraintStart_toStartOf="@+id/imgBack"
+            app:layout_constraintTop_toBottomOf="@+id/imgShop">
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Papa John’s"
+                android:textColor="#262626"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout1"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView19">
+
+                <RatingBar
+                    android:id="@+id/shopRate"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:progressTint="#FEBD19"
+                    android:rating="4"
+                    tools:layout_editor_absoluteX="15dp"
+                    tools:layout_editor_absoluteY="56dp" />
+
+                <TextView
+                    android:id="@+id/txtRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:text="4.8"
+                    android:textColor="#262626"
+                    android:textSize="@dimen/_10ssp"
+                    tools:layout_editor_absoluteX="110dp"
+                    tools:layout_editor_absoluteY="56dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout">
+
+
+                <ImageView
+                    android:id="@+id/imgDuration"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/outline_access_time_24"
+                    app:tint="#1ED860"
+                    tools:layout_editor_absoluteX="147dp"
+                    tools:layout_editor_absoluteY="78dp" />
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:text="2.5m away"
+                    android:textColor="#363636"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold"
+                    tools:layout_editor_absoluteX="176dp"
+                    tools:layout_editor_absoluteY="80dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/outline_access_time_24"
+                    app:tint="#1ED860"
+                    tools:layout_editor_absoluteX="147dp"
+                    tools:layout_editor_absoluteY="78dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:text="open now"
+                    android:textColor="#363636"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold"
+                    tools:layout_editor_absoluteX="176dp"
+                    tools:layout_editor_absoluteY="80dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout1"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout2">
+
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/outline_access_time_24"
+                    app:tint="#1ED860"
+                    tools:layout_editor_absoluteX="147dp"
+                    tools:layout_editor_absoluteY="78dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:text="Delivery 30 min"
+                    android:textColor="#363636"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold"
+                    tools:layout_editor_absoluteX="176dp"
+                    tools:layout_editor_absoluteY="80dp" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recCategories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/recShopProducts"
+            app:layout_constraintStart_toStartOf="@+id/recShopProducts"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+            app:layout_constraintVertical_bias="0.05"
+            tools:listitem="@layout/item_shop_home_title" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recShopProducts"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recCategories"
+            app:layout_constraintVertical_bias="0"
+            app:spanCount="2"
+            tools:listitem="@layout/item_foods_shop" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:visibility="gone"-->
+    <!--        android:layout_height="match_parent">-->
+
+    <!--        <ImageView-->
+    <!--            android:id="@+id/imgBack"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginStart="@dimen/_10sdp"-->
+    <!--            android:background="@drawable/input_auth_field"-->
+    <!--            android:backgroundTint="@color/white"-->
+    <!--            android:elevation="1dp"-->
+    <!--            android:padding="@dimen/_5sdp"-->
+    <!--            android:src="@drawable/round_arrow_back_24"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintHorizontal_bias="0"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            app:layout_constraintVertical_bias="0.05"-->
+    <!--            app:tint="#363636" />-->
+
+    <!--        <ImageView-->
+    <!--            android:id="@+id/imgBack1"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:layout_marginEnd="@dimen/_10sdp"-->
+    <!--            app:layout_constraintBottom_toBottomOf="@+id/imgBack"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintHorizontal_bias="1"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="@+id/imgBack"-->
+    <!--            app:layout_constraintVertical_bias="0.05" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/textView2"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:fontFamily="@font/montserrat_regular"-->
+    <!--            android:text="All Restaurants"-->
+    <!--            android:textColor="#262626"-->
+    <!--            android:textSize="@dimen/_13ssp"-->
+    <!--            android:textStyle="bold"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="@+id/imgBack"-->
+    <!--            app:layout_constraintVertical_bias="0.03" />-->
+
+    <!--        <EditText-->
+    <!--            android:id="@+id/inpSearch"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="@dimen/_15sdp"-->
+    <!--            android:background="@drawable/button_radius_corner"-->
+    <!--            android:drawableStart="@drawable/search_24"-->
+    <!--            android:drawablePadding="@dimen/_10sdp"-->
+    <!--            android:drawableTint="#66363636"-->
+    <!--            android:hint="Search"-->
+    <!--            android:imeOptions="actionNext"-->
+    <!--            android:inputType="textEmailAddress"-->
+    <!--            android:maxLines="1"-->
+    <!--            android:paddingVertical="@dimen/_8sdp"-->
+    <!--            android:paddingStart="@dimen/_10sdp"-->
+    <!--            android:textColorHint="#66363636"-->
+    <!--            android:textCursorDrawable="@color/black"-->
+    <!--            android:textSize="@dimen/_13ssp"-->
+    <!--            app:layout_constraintEnd_toEndOf="@+id/imgBack1"-->
+    <!--            app:layout_constraintStart_toStartOf="@+id/imgBack"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/textView2"-->
+    <!--            app:layout_constraintVertical_bias="0" />-->
+
+    <!--        <androidx.recyclerview.widget.RecyclerView-->
+    <!--            android:id="@+id/recFoodTitle"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="@dimen/_10sdp"-->
+    <!--            android:orientation="horizontal"-->
+    <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+    <!--            app:layout_constraintEnd_toEndOf="@+id/inpSearch"-->
+    <!--            app:layout_constraintHorizontal_bias="0"-->
+    <!--            app:layout_constraintStart_toStartOf="@+id/inpSearch"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/inpSearch"-->
+    <!--            app:spanCount="4"-->
+    <!--            tools:listitem="@layout/item_shop_cat" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/txtShopCatTitle"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="@dimen/_10sdp"-->
+    <!--            android:text="Pizza Restaurants:"-->
+    <!--            android:textColor="#363636"-->
+    <!--            android:textStyle="bold"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintHorizontal_bias="0"-->
+    <!--            app:layout_constraintStart_toStartOf="@+id/inpSearch"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/recFoodTitle" />-->
+
+    <!--        <androidx.recyclerview.widget.RecyclerView-->
+    <!--            android:id="@+id/recFoodHomeProducts"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:layout_marginTop="@dimen/_10sdp"-->
+    <!--            android:paddingEnd="@dimen/_10sdp"-->
+    <!--            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/txtShopCatTitle"-->
+    <!--            app:layout_constraintVertical_bias="0"-->
+    <!--            app:spanCount="2"-->
+    <!--            tools:listitem="@layout/item_foods_home" />-->
+
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+</layout>

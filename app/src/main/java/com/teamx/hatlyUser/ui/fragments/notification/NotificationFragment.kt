@@ -9,8 +9,7 @@ import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.databinding.FragmentNotificationBinding
-import com.teamx.hatlyUser.ui.fragments.hatlymart.adapter.HatlyPopularAdapter
-import com.teamx.hatlyUser.ui.fragments.hatlymart.interfaces.HatlyShopInterface
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.notification.adapter.NotificationAdapter
 import dagger.hilt.android.AndroidEntryPoint
 

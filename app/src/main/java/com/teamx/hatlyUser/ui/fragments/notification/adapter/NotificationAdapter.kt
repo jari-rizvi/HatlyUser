@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.databinding.ItemNotificationsBinding
-import com.teamx.hatlyUser.ui.fragments.hatlymart.interfaces.HatlyShopInterface
 
 class NotificationAdapter(
     private val addressArrayList: ArrayList<String>

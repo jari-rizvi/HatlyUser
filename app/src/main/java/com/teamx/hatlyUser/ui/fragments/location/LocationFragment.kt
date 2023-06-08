@@ -11,7 +11,7 @@ import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.databinding.FragmentLocationBinding
-import com.teamx.hatlyUser.ui.fragments.login.LoginViewModel
+import com.teamx.hatlyUser.ui.fragments.auth.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 

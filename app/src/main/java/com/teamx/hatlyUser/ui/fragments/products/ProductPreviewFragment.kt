@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
-import com.teamx.hatlyUser.ui.fragments.hatlymart.adapter.HatlyPopularAdapter
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatly.ItemClass
-import com.teamx.hatlyUser.ui.fragments.hatlymart.interfaces.HatlyShopInterface
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter.HatlyPopularAdapter
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.hatly.ItemClass
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.products.adapter.MultiViewVariationRadioAdapter
 import dagger.hilt.android.AndroidEntryPoint
 

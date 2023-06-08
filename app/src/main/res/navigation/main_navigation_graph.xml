@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/tempFragment"
-        android:name="com.teamx.hatlyUser.ui.fragments.temp.TempFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.auth.temp.TempFragment"
         android:label="TempFragment"
         tools:layout="@layout/fragment_temp">
 
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/onboardViewPagerFragment"
-        android:name="com.teamx.hatlyUser.ui.fragments.onboard.BoardViewPagerFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.auth.onboard.BoardViewPagerFragment"
         android:label="OnBoardViewPagerFragment"
         tools:layout="@layout/fragment_onboard_viewpager">
 
@@ -56,7 +56,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.teamx.hatlyUser.ui.fragments.login.LoginFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.auth.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
 
@@ -93,9 +93,9 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.teamx.hatlyUser.ui.fragments.signup.SignUpFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.auth.signup.SignUpFragment"
         android:label="SignUpFragment"
-        tools:layout="@layout/fragment_signup" >
+        tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signUpFragment_to_locationFragment"
             app:destination="@id/locationFragment" />
@@ -103,7 +103,7 @@
 
     <fragment
         android:id="@+id/forgotPasswordFragment"
-        android:name="com.teamx.hatlyUser.ui.fragments.forgotpassword.ForgotPasswordFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.auth.forgotpassword.ForgotPasswordFragment"
         android:label="ForgotPasswordFragment"
         tools:layout="@layout/fragment_forgot_password">
 
@@ -122,7 +122,7 @@
 
     <fragment
         android:id="@+id/otpFragment"
-        android:name="com.teamx.hatlyUser.ui.fragments.otp.OtpFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.auth.otp.OtpFragment"
         android:label="OtpFragment"
         tools:layout="@layout/fragment_otp">
 
@@ -141,7 +141,7 @@
 
     <fragment
         android:id="@+id/createPasswordFragment"
-        android:name="com.teamx.hatlyUser.ui.fragments.createpassword.CreatePasswordFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.auth.createpassword.CreatePasswordFragment"
         android:label="CreatePasswordFragment"
         tools:layout="@layout/fragment_create_password">
         <!--        <action-->
@@ -198,18 +198,21 @@
         <action
             android:id="@+id/action_homeFragment_to_hatlyMartFragment"
             app:destination="@id/hatlyMartFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_storesFragment"
-            app:destination="@id/storesFragment" />
+        <!--        <action-->
+        <!--            android:id="@+id/action_homeFragment_to_storesFragment"-->
+        <!--            app:destination="@id/storesFragment" />-->
         <action
             android:id="@+id/action_homeFragment_to_notificationFragment"
             app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_foodsHomeFragment"
+            app:destination="@id/foodsHomeFragment" />
 
     </fragment>
 
     <fragment
         android:id="@+id/hatlyMartFragment"
-        android:name="com.teamx.hatlyUser.ui.fragments.hatlymart.HatlyMartFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.HatlyMartFragment"
         android:label="HatlyMartFragment"
         tools:layout="@layout/fragment_hatly_mart">
 
@@ -224,9 +227,9 @@
 
     <fragment
         android:id="@+id/hatlyCategoriesFragment"
-        android:name="com.teamx.hatlyUser.ui.fragments.hatlycategories.HatlyCategoriesFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.hatlymart.hatlycategories.HatlyCategoriesFragment"
         android:label="HatlyCategories"
-        tools:layout="@layout/fragment_hatly_categories" >
+        tools:layout="@layout/fragment_hatly_categories">
         <action
             android:id="@+id/action_HatlyCategoriesFragment_to_ShopHomeFragment"
             app:destination="@id/shopHomeFragment" />
@@ -237,7 +240,7 @@
         android:id="@+id/shopHomeFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.shophome.ShopHomeFragment"
         android:label="ShopHome"
-        tools:layout="@layout/fragment_shop_home" >
+        tools:layout="@layout/fragment_shop_home">
         <action
             android:id="@+id/action_shopHomeFragment_to_productPreviewFragment"
             app:destination="@id/productPreviewFragment" />
@@ -251,9 +254,9 @@
 
     <fragment
         android:id="@+id/storesFragment"
-        android:name="com.teamx.hatlyUser.ui.fragments.stores.StoresFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.hatlymart.stores.StoresFragment"
         android:label="Stores"
-        tools:layout="@layout/fragment_stores" >
+        tools:layout="@layout/fragment_stores">
         <action
             android:id="@+id/action_storesFragment_to_shopHomeFragment"
             app:destination="@id/shopHomeFragment" />
@@ -263,7 +266,44 @@
         android:id="@+id/notificationFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.notification.NotificationFragment"
         android:label="NotificationFragment"
-        tools:layout="@layout/fragment_notification"/>
+        tools:layout="@layout/fragment_notification" />
+
+    <fragment
+        android:id="@+id/foodsHomeFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.FoodsHomeFragment"
+        android:label="FoodsHomeFragment"
+        tools:layout="@layout/fragment_foods_home">
+        <action
+            android:id="@+id/action_foodsHomeFragment_to_foodsShopHomeFragment"
+            app:destination="@id/foodsShopHomeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/foodsShopHomeFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.FoodsShopPreviewFragment"
+        android:label="FoodsShopHomeFragment"
+        tools:layout="@layout/fragment_foods_shop_preview">
+        <action
+            android:id="@+id/action_foodsShopHomeFragment_to_productPreviewFragment"
+            app:destination="@id/productPreviewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileManagementFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.profile.userprofile.ProfileManagementFragment"
+        android:label="ProfileManagement"
+        tools:layout="@layout/fragment_profile_management" >
+        <action
+            android:id="@+id/action_profileManagementFragment_to_personalInfoFragment"
+            app:destination="@id/personalInfoFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/personalInfoFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.profile.personalInfo.PersonalInformationFragment"
+        android:label="PersonalInfo"
+        tools:layout="@layout/fragment_personal_information" />
+
 
     <fragment
         android:id="@+id/mapFragment"

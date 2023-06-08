@@ -11,7 +11,7 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.databinding.FragmentHomeBinding
 import com.teamx.hatlyUser.ui.activity.mainActivity.MainActivity
-import com.teamx.hatlyUser.ui.fragments.login.LoginViewModel
+import com.teamx.hatlyUser.ui.fragments.auth.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -44,14 +44,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
         }
 
         mViewDataBinding.textView9.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_hatlyMartFragment)
-        }
-
-        mViewDataBinding.textView10.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_storesFragment)
+            val bundle = Bundle()
+            bundle.putBoolean("parcel", true)
+            findNavController().navigate(R.id.action_homeFragment_to_hatlyMartFragment, bundle)
         }
 
         mViewDataBinding.textView8.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_foodsHomeFragment)
+        }
+
+        mViewDataBinding.textView10.setOnClickListener {
+//            findNavController().navigate(R.id.action_homeFragment_to_storesFragment)
+            val bundle = Bundle()
+            bundle.putBoolean("parcel", false)
+            findNavController().navigate(R.id.action_homeFragment_to_hatlyMartFragment, bundle)
+        }
+
+        mViewDataBinding.imgNotification.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
         }
 
@@ -62,7 +71,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
             }
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            onBackPressedCallback
+        )
 
 
     }

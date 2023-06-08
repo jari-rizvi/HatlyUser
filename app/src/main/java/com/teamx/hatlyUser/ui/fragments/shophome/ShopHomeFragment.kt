@@ -10,14 +10,15 @@ import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.databinding.FragmentShopHomeBinding
-import com.teamx.hatlyUser.ui.fragments.hatlymart.adapter.HatlyPopularAdapter
-import com.teamx.hatlyUser.ui.fragments.hatlymart.interfaces.HatlyShopInterface
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter.HatlyPopularAdapter
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.shophome.adapter.ShopHomeTitleAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel>(), HatlyShopInterface {
+class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel>(),
+    HatlyShopInterface {
 
     override val layoutId: Int
         get() = R.layout.fragment_shop_home

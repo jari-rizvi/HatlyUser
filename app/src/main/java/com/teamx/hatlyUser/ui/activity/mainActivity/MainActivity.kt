@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -55,6 +56,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+
+        mViewDataBinding.drawerLayoutMain.myProfile.setOnClickListener {
+            navController!!.navigate(R.id.profileManagementFragment)
+        }
 
         setupBottomNavMenu(navController!!)
 
