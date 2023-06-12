@@ -2,8 +2,8 @@
   <library name="Gradle: androidx.lifecycle:lifecycle-livedata:2.5.1@aar">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/048217f4b99a9b0bbde39f37eb1ded8f/transformed/lifecycle-livedata-2.5.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/048217f4b99a9b0bbde39f37eb1ded8f/transformed/lifecycle-livedata-2.5.1/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/048217f4b99a9b0bbde39f37eb1ded8f/transformed/lifecycle-livedata-2.5.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/048217f4b99a9b0bbde39f37eb1ded8f/transformed/lifecycle-livedata-2.5.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -88,7 +88,7 @@
             app:destination="@id/signUpFragment" />
         <action
             android:id="@+id/action_loginFragment_to_locationFragment"
-            app:destination="@id/locationFragment" />
+            app:destination="@id/allowLocationFragment" />
     </fragment>
 
     <fragment
@@ -98,7 +98,7 @@
         tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signUpFragment_to_locationFragment"
-            app:destination="@id/locationFragment" />
+            app:destination="@id/allowLocationFragment" />
     </fragment>
 
     <fragment
@@ -156,7 +156,7 @@
         <!--            app:popUpToInclusive="true" />-->
         <action
             android:id="@+id/action_createPasswordFragment_to_locationFragment"
-            app:destination="@id/locationFragment"
+            app:destination="@id/allowLocationFragment"
             app:popUpTo="@id/main_navigation_graph"
             app:popUpToInclusive="true" />
     </fragment>
@@ -174,17 +174,17 @@
     <!--    </fragment>-->
 
     <fragment
-        android:id="@+id/locationFragment"
-        android:name="com.teamx.hatlyUser.ui.fragments.location.LocationFragment"
-        android:label="LocationFragment"
-        tools:layout="@layout/fragment_location">
+        android:id="@+id/allowLocationFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.location.AllowLocationFragment"
+        android:label="AllowLocationFragment"
+        tools:layout="@layout/fragment_allow_location">
 
         <action
-            android:id="@+id/action_locationFragment_to_mapFragment"
+            android:id="@+id/action_allowLocationFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
 
         <action
-            android:id="@+id/action_locationFragment_to_homeFragment"
+            android:id="@+id/action_allowLocationocationFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
 
     </fragment>
@@ -296,6 +296,12 @@
         <action
             android:id="@+id/action_profileManagementFragment_to_personalInfoFragment"
             app:destination="@id/personalInfoFragment" />
+        <action
+            android:id="@+id/action_profileManagementFragment_to_locationFragment"
+            app:destination="@id/locationFragment" />
+        <action
+            android:id="@+id/action_profileManagementFragment_to_orderHistoryFragment"
+            app:destination="@id/orderHistoryFragment" />
     </fragment>
 
     <fragment
@@ -303,6 +309,18 @@
         android:name="com.teamx.hatlyUser.ui.fragments.profile.personalInfo.PersonalInformationFragment"
         android:label="PersonalInfo"
         tools:layout="@layout/fragment_personal_information" />
+
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.profile.Locations.LocationFragment"
+        android:label="LocationFragment"
+        tools:layout="@layout/fragment_location" />
+
+    <fragment
+        android:id="@+id/orderHistoryFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.profile.orderhistory.OrderHistoryFragment"
+        android:label="OrderHistoryFragment"
+        tools:layout="@layout/fragment_order_history" />
 
 
     <fragment

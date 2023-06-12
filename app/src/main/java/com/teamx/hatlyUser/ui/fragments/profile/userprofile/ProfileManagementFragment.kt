@@ -40,7 +40,15 @@ class ProfileManagementFragment :
         }
 
         mViewDataBinding.userPersonal.setOnClickListener {
-            findNavController().navigate(R.id.personalInfoFragment)
+            findNavController().navigate(R.id.action_profileManagementFragment_to_personalInfoFragment)
+        }
+
+        mViewDataBinding.userLocation.setOnClickListener {
+            findNavController().navigate(R.id.action_profileManagementFragment_to_locationFragment)
+        }
+
+        mViewDataBinding.userOtherHistory.setOnClickListener {
+            findNavController().navigate(R.id.action_profileManagementFragment_to_orderHistoryFragment)
         }
 
     }
