@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgShop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/splash_bg"
+            app:layout_constraintBottom_toTopOf="@+id/guideline11"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/input_auth_field"
+            android:backgroundTint="@color/white"
+            android:elevation="1dp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/round_arrow_back_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05"
+            app:tint="#363636" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#B5000000"
+            app:layout_constraintBottom_toBottomOf="@+id/imgShop"
+            app:layout_constraintEnd_toEndOf="@+id/imgShop"
+            app:layout_constraintStart_toStartOf="@+id/imgShop"
+            app:layout_constraintTop_toTopOf="@+id/imgShop" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="P.F. Chang's"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imgShop"
+            app:layout_constraintEnd_toEndOf="@+id/imgShop"
+            app:layout_constraintStart_toStartOf="@+id/imgShop"
+            app:layout_constraintTop_toTopOf="@+id/imgShop" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <TextView
+            android:id="@+id/txtTitle11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="Order Details"
+            android:textAlignment="center"
+            android:textColor="#262626"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/imgBack"
+            app:layout_constraintTop_toTopOf="@+id/guideline11" />
+
+        <TextView
+            android:id="@+id/txtTitle111"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="Order number:"
+            android:textAlignment="center"
+            android:textColor="#262626"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle11"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle11" />
+
+        <TextView
+            android:id="@+id/txtTitle1141"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/button_radius_green"
+            android:backgroundTint="#1AEA1B25"
+            android:fontFamily="@font/open_sans_regular"
+            android:paddingHorizontal="@dimen/_7sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            android:text="#8543fasd"
+            android:textAlignment="center"
+            android:textColor="#EA1B25"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtTitle111"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtTitle111" />
+
+        <TextView
+            android:id="@+id/txtTitle1121"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="Delivery address:"
+            android:textAlignment="center"
+            android:textColor="#262626"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle111"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle111" />
+
+        <TextView
+            android:id="@+id/txtAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="UAE, Dubai Silicon Oasis,\nDubai 341444, AE"
+            android:textAlignment="viewEnd"
+            android:textColor="#262626"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintEnd_toEndOf="@+id/txtTitle1141"
+            app:layout_constraintTop_toTopOf="@+id/txtTitle1121" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="#999696"
+            app:layout_constraintEnd_toEndOf="@+id/txtAddress"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle1121"
+            app:layout_constraintTop_toBottomOf="@+id/txtAddress" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recLocations"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline111"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            tools:listitem="@layout/item_order_detail" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline111"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.70" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:background="#999696"
+            app:layout_constraintEnd_toEndOf="@+id/txtAddress"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle1121"
+            app:layout_constraintTop_toBottomOf="@+id/guideline111" />
+
+        <TextView
+            android:id="@+id/txtTitle1112"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="Subtotal"
+            android:textAlignment="center"
+            android:textColor="#262626"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle11"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+        <TextView
+            android:id="@+id/txtTitle11123"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="168.90 Aed"
+            android:textAlignment="center"
+            android:textColor="#262626"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtTitle1112"
+            app:layout_constraintEnd_toEndOf="@+id/txtAddress"
+            app:layout_constraintTop_toTopOf="@+id/txtTitle1112" />
+
+        <TextView
+            android:id="@+id/txtTitle11212"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="Delivery charges"
+            android:textAlignment="center"
+            android:textColor="#262626"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle11"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle1112" />
+
+        <TextView
+            android:id="@+id/txtTitle111323"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="15.00 Aed"
+            android:textAlignment="center"
+            android:textColor="#262626"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtTitle11212"
+            app:layout_constraintEnd_toEndOf="@+id/txtTitle11123"
+            app:layout_constraintTop_toTopOf="@+id/txtTitle11212" />
+
+        <TextView
+            android:id="@+id/txtTitle121212"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="Total"
+            android:textAlignment="center"
+            android:textColor="#1ED860"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle11"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle11212" />
+
+        <TextView
+            android:id="@+id/txtTitle1113233"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="183.90 Aed"
+            android:textAlignment="center"
+            android:textColor="#1ED860"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/txtTitle121212"
+            app:layout_constraintEnd_toEndOf="@+id/txtTitle111323"
+            app:layout_constraintTop_toTopOf="@+id/txtTitle121212" />
+
+        <TextView
+            android:id="@+id/txtLogin"
+            android:layout_width="336dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_radius_green"
+            android:backgroundTint="#EA1B25"
+            android:fontFamily="@font/open_sans_regular"
+            android:paddingVertical="@dimen/_8sdp"
+            android:text="Re-Order"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/txtLogin1"
+            app:layout_constraintEnd_toEndOf="@+id/txtTitle1113233"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle121212"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle121212" />
+
+        <TextView
+            android:id="@+id/txtLogin1"
+            android:layout_width="336dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_radius_corner"
+            android:fontFamily="@font/open_sans_regular"
+            android:paddingVertical="@dimen/_8sdp"
+            android:text="Write a review"
+            android:textAlignment="center"
+            android:textColor="#EA1B25"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/txtLogin"
+            app:layout_constraintStart_toStartOf="@+id/txtLogin"
+            app:layout_constraintTop_toBottomOf="@+id/txtLogin" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

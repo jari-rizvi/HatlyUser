@@ -240,8 +240,12 @@
     <output-test url="file://$MODULE_DIR$/../../../app/build/intermediates/javac/localDebugUnitTest/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/localDebugUnitTest/out" />
-    <content url="file://$MODULE_DIR$/../../../app/build/generated/source/kapt/localDebugUnitTest" />
-    <content url="file://$MODULE_DIR$/../../../app/build/generated/source/kaptKotlin/localDebugUnitTest" />
+    <content url="file://$MODULE_DIR$/../../../app/build/generated/source/kapt/localDebugUnitTest">
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/kapt/localDebugUnitTest" isTestSource="true" generated="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../app/build/generated/source/kaptKotlin/localDebugUnitTest">
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/kaptKotlin/localDebugUnitTest" isTestSource="true" generated="true" />
+    </content>
     <content url="file://$MODULE_DIR$/../../../app/build/generated/source/proto/localDebugUnitTest/java" />
     <content url="file://$MODULE_DIR$/../../../app/src/test">
       <sourceFolder url="file://$MODULE_DIR$/../../../app/src/test/java" isTestSource="true" />
