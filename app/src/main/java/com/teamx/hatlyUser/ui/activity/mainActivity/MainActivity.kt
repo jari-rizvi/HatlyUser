@@ -61,6 +61,18 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             navController!!.navigate(R.id.profileManagementFragment)
         }
 
+        mViewDataBinding.drawerLayoutMain.language.setOnClickListener {
+            navController!!.navigate(R.id.languageFragment)
+        }
+
+        mViewDataBinding.drawerLayoutMain.settings.setOnClickListener {
+            navController!!.navigate(R.id.settingFragment)
+        }
+
+        mViewDataBinding.drawerLayoutMain.myWallet.setOnClickListener {
+            navController!!.navigate(R.id.walletFragment)
+        }
+
         setupBottomNavMenu(navController!!)
 
         mViewDataBinding.fab.setOnClickListener {

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/hatlyIcon"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_120sdp"
+            android:background="@drawable/bg_circle"
+            android:backgroundTint="#1ED860"
+            android:clipToOutline="true"
+            android:padding="@dimen/_10sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/round_check_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/txtTitle11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="Review submitted"
+            android:textAlignment="center"
+            android:textColor="#262626"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/hatlyIcon"
+            app:layout_constraintStart_toStartOf="@+id/hatlyIcon"
+            app:layout_constraintTop_toBottomOf="@+id/hatlyIcon"
+            app:layout_constraintVertical_bias="0.1" />
+
+        <TextView
+            android:id="@+id/txtLogin1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:background="@drawable/button_radius_corner_red"
+            android:fontFamily="@font/open_sans_regular"
+            android:paddingVertical="@dimen/_10sdp"
+            android:text="Back to home"
+            android:textAlignment="center"
+            android:textColor="#EA1B25"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle11" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

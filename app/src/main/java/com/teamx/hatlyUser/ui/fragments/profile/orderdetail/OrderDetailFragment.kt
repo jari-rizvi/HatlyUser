@@ -1,7 +1,9 @@
 package com.teamx.hatlyUser.ui.fragments.profile.orderdetail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.teamx.hatlyUser.BR
@@ -11,14 +13,16 @@ import com.teamx.hatlyUser.databinding.FragmentOrderDetailBinding
 import com.teamx.hatlyUser.databinding.FragmentOrderHistoryBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.profile.Locations.adapter.LocationsListAdapter
+import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.adapter.OrderDetailAdapter
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.OrderHistoryViewModel
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.adapter.OrderHistoryAdapter
+import com.teamx.hatlyUser.utils.DialogHelperClass
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetailViewModel>(),
-    HatlyShopInterface {
+    HatlyShopInterface,DialogHelperClass.Companion.ReviewProduct {
 
     override val layoutId: Int
         get() = R.layout.fragment_order_detail
@@ -75,9 +79,16 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
         itemClasses.add("")
         itemClasses.add("")
 
-        val adapter = OrderHistoryAdapter(itemClasses, this)
+        val adapter = OrderDetailAdapter(itemClasses, this)
         mViewDataBinding.recLocations.adapter = adapter
 
+        mViewDataBinding.txtLogin1.setOnClickListener {
+            DialogHelperClass.reviewDialog(requireActivity(),this)
+        }
+
+        mViewDataBinding.txtLogin.setOnClickListener {
+
+        }
 
 
     }
@@ -88,6 +99,15 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
     override fun clickMoreItem(position: Int) {
 
+    }
+
+    override fun onSubmit() {
+        Log.d("reviewDialog", "onSubmit: onSubmit")
+        findNavController().navigate(R.id.action_orderDetailFragment_to_reviewSubmitedFragment)
+    }
+
+    override fun onCancel() {
+        Log.d("reviewDialog", "onSubmit: onCancel")
     }
 
 

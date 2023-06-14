@@ -2,6 +2,7 @@ package com.teamx.hatlyUser.ui.fragments.profile.orderhistory
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.teamx.hatlyUser.BR
@@ -81,7 +82,7 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding, OrderHist
     }
 
     override fun clickshopItem(position: Int) {
-
+        findNavController().navigate(R.id.action_orderHistoryFragment_to_orderDetailFragment)
     }
 
     override fun clickMoreItem(position: Int) {
