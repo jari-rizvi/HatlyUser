@@ -13,6 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -22,6 +24,7 @@ import com.teamx.hatlyUser.SharedViewModel
 import com.teamx.hatlyUser.baseclasses.BaseActivity
 import com.teamx.hatlyUser.data.local.datastore.DataStoreProvider
 import com.teamx.hatlyUser.databinding.ActivityMainBinding
+import com.teamx.hatlyUser.ui.fragments.profile.userprofile.ProfileManagementFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -73,6 +76,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             navController!!.navigate(R.id.walletFragment)
         }
 
+        mViewDataBinding.drawerLayoutMain.wishlist.setOnClickListener {
+            navController!!.navigate(R.id.wishListFragment)
+        }
+
         setupBottomNavMenu(navController!!)
 
         mViewDataBinding.fab.setOnClickListener {
@@ -88,9 +95,31 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     mViewDataBinding.bottomNav.visibility = View.VISIBLE
                     mViewDataBinding.fab.visibility = View.VISIBLE
 
-                    mViewDataBinding.bottomNav.menu?.getItem(2)?.isChecked = true
+                    mViewDataBinding.bottomNav.menu.getItem(2)?.isChecked = true
 
-                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                }
+                R.id.cartFragment -> {
+                    mViewDataBinding.bottomNav.visibility = View.VISIBLE
+                    mViewDataBinding.fab.visibility = View.VISIBLE
+
+                    mViewDataBinding.bottomNav.menu.getItem(3)?.isChecked = true
+                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                }
+                R.id.wishListFragment -> {
+                    mViewDataBinding.bottomNav.visibility = View.VISIBLE
+                    mViewDataBinding.fab.visibility = View.VISIBLE
+
+                    mViewDataBinding.bottomNav.menu.getItem(1)?.isChecked = true
+                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                }
+
+                R.id.profileManagementFragment -> {
+                    mViewDataBinding.bottomNav.visibility = View.VISIBLE
+                    mViewDataBinding.fab.visibility = View.VISIBLE
+
+                    mViewDataBinding.bottomNav.menu.getItem(4)?.isChecked = true
+                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
                 else -> {
                     mViewDataBinding.bottomNav.visibility = View.GONE
@@ -113,25 +142,33 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     true
                 }
                 R.id.wishlistBottom -> {
-                    // Handle search action
-                    Log.d("navController", "onCreate: wishlistBottom")
+                    if (!alreadyFragmentAdded(R.id.wishListFragment)) {
+                        navController.navigate(R.id.wishListFragment, null)
+                    }
                     true
                 }
                 R.id.homeBottom -> {
-                    // Handle notifications action
-                    Log.d("navController", "onCreate: homeBottom")
-                    navController.navigate(R.id.homeFragment, null)
+                    if (!alreadyFragmentAdded(R.id.homeFragment)) {
+                        navController.navigate(R.id.homeFragment, null)
+                    }
                     true
                 }
                 R.id.cartBottom -> {
-                    // Handle profile action
-                    Log.d("navController", "onCreate: cartBottom")
+
+                    if (!alreadyFragmentAdded(R.id.cartFragment)) {
+                        navController.navigate(R.id.cartFragment, null)
+                    }
                     true
                 }
 
                 R.id.profileBottom -> {
                     // Handle profile action
                     Log.d("navController", "onCreate: profileBottom")
+
+                    if (!alreadyFragmentAdded(R.id.profileManagementFragment)) {
+                        navController.navigate(R.id.profileManagementFragment, null)
+                    }
+
                     true
                 }
                 else -> {
@@ -140,6 +177,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
         }
 
+    }
+
+    private fun alreadyFragmentAdded(fragment: Int): Boolean {
+        val fragmentAlreadyAdded = navController?.currentDestination?.id == fragment
+        if (fragmentAlreadyAdded) {
+            // Fragment not found, navigate to it
+            return true
+        }
+        return false
     }
 
 

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp">
+
+        <ImageView
+            android:id="@+id/hatlyIcon"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:background="@drawable/bg_circle"
+            android:backgroundTint="@color/white"
+            android:clipToOutline="true"
+            android:scaleType="fitXY"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@drawable/splash_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1" />
+
+        <TextView
+            android:id="@+id/textView38"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bg_circle"
+            android:backgroundTint="@android:color/transparent"
+            android:fontFamily="@font/ubuntu_regular"
+            app:layout_constraintHorizontal_bias="0.1"
+            android:gravity="center"
+            android:text="Anna Rose"
+            android:textColor="#262626"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toTopOf="@+id/textView37"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/hatlyIcon"
+            app:layout_constraintTop_toTopOf="@+id/hatlyIcon" />
+
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bg_circle"
+            android:backgroundTint="@android:color/transparent"
+            android:fontFamily="@font/ubuntu_regular"
+            android:gravity="center"
+            android:text="2 hours ago"
+            android:textColor="#808080"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/hatlyIcon"
+            app:layout_constraintStart_toStartOf="@+id/textView38"
+            app:layout_constraintTop_toBottomOf="@+id/textView38" />
+
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
+            android:id="@+id/materialRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_15sdp"
+            android:numStars="5"
+            android:progressBackgroundTint="#D9D9D9"
+            app:layout_constraintHorizontal_bias="0.95"
+            android:progressTint="#FEBD19"
+            android:rating="4"
+            android:secondaryProgressTint="#D9D9D9"
+            app:layout_constraintBottom_toBottomOf="@+id/textView37"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView38"
+            app:mrb_fillBackgroundStars="true"
+            app:mrb_indeterminateTint="#D9D9D9" />
+
+        <TextView
+            android:id="@+id/textView374"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bg_circle"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:backgroundTint="@android:color/transparent"
+            android:fontFamily="@font/ubuntu_regular"
+            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+            android:textColor="#808080"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toEndOf="@+id/materialRatingBar"
+            app:layout_constraintStart_toStartOf="@+id/textView37"
+            app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recFoodTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/textView374"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="@+id/textView374"
+            app:layout_constraintTop_toBottomOf="@+id/textView374"
+            app:spanCount="4"
+            tools:listitem="@layout/item_review_product" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

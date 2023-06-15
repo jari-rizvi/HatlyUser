@@ -21,7 +21,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class FoodsShopPreviewFragment : BaseFragment<FragmentFoodsShopPreviewBinding, FoodsShopPreviewViewModel>(),
+class FoodsShopPreviewFragment :
+    BaseFragment<FragmentFoodsShopPreviewBinding, FoodsShopPreviewViewModel>(),
     HatlyShopInterface {
 
     override val layoutId: Int
@@ -44,10 +45,16 @@ class FoodsShopPreviewFragment : BaseFragment<FragmentFoodsShopPreviewBinding, F
             }
         }
 
-        val layoutManager1 = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        mViewDataBinding.linearLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_foodsShopHomeFragment_to_reviewFragment)
+        }
+
+        val layoutManager1 =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         mViewDataBinding.recCategories.layoutManager = layoutManager1
 
-        val layoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        val layoutManager2 =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         mViewDataBinding.recShopProducts.layoutManager = layoutManager2
 
         val itemClasses: ArrayList<String> = ArrayList()

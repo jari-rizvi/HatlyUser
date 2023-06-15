@@ -1,6 +1,7 @@
 package com.teamx.hatlyUser.ui.fragments.profile.userprofile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.findNavController
@@ -38,6 +39,18 @@ class ProfileManagementFragment :
                 popExit = R.anim.nav_default_pop_exit_anim
             }
         }
+
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.d("handleOnBackPressed", "handleOnBackPressed: back")
+                findNavController().popBackStack(R.id.homeFragment,false)
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            onBackPressedCallback
+        )
 
         mViewDataBinding.userPersonal.setOnClickListener {
             findNavController().navigate(R.id.action_profileManagementFragment_to_personalInfoFragment)
