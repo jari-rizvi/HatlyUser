@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../../TeamX%20Pakistan/AppData/Local/Android/Sdk/icons/material/materialiconsround/check/round_check_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../../TeamX%20Pakistan/AppData/Local/Android/Sdk/icons/material/materialicons/location_on/baseline_location_on_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -34,7 +34,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="ea1b25" />
-                            <entry key="outputName" value="round_check_24" />
+                            <entry key="outputName" value="baseline_location_on_24" />
                             <entry key="sourceFile" value="C:\Users\TeamX Pakistan\Desktop\hatlyIcons\upload_image.svg" />
                           </map>
                         </option>

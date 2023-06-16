@@ -11,7 +11,7 @@ import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.databinding.FragmentReviewBinding
-import com.teamx.hatlyUser.ui.fragments.cart.adapter.CartAdapter
+import com.teamx.hatlyUser.ui.fragments.payments.cart.adapter.CartAdapter
 import com.teamx.hatlyUser.ui.fragments.foods.review.adapter.ReviewAdapter
 import dagger.hilt.android.AndroidEntryPoint
 

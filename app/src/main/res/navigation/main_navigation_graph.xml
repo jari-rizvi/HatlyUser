@@ -386,15 +386,25 @@
 
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.teamx.hatlyUser.ui.fragments.cart.CartFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.payments.cart.CartFragment"
         android:label="CartFragment"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_checkOutFragment"
+            app:destination="@id/checkOutFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/reviewFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.foods.review.ReviewFragment"
         android:label="ReviewFragment"
         tools:layout="@layout/fragment_review" />
+
+    <fragment
+        android:id="@+id/checkOutFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.payments.checkout.CheckOutFragment"
+        android:label="CheckOutFragment"
+        tools:layout="@layout/fragment_check_out" />
 
     <fragment
         android:id="@+id/mapFragment"
