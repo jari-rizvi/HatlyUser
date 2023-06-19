@@ -264,7 +264,7 @@
                         android:drawableStart="@drawable/mobile_number"
                         android:drawablePadding="@dimen/_10sdp"
                         android:paddingStart="@dimen/_10sdp"
-                        android:text="Master card 85**"
+                        android:text="Master card"
                         app:layout_constraintBottom_toTopOf="@+id/textView121653"
                         app:layout_constraintEnd_toEndOf="@+id/view13"
                         app:layout_constraintStart_toStartOf="@+id/textView12153"

@@ -8,6 +8,26 @@
 
     </style> <!-- Base application theme. -->
 
+<!--    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+<!--        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>-->
+<!--    </style>-->
+
+<!--    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">-->
+<!--        <item name="bottomSheetStyle">@style/AppModalStyle</item>-->
+<!--    </style>-->
+
+<!--    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">-->
+<!--        <item name="android:background">@drawable/radius_top_corner</item>-->
+<!--        <item name="behavior_peekHeight">1000dp</item>-->
+<!--    </style>-->
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/radius_top_corner</item>
+    </style>
 
     <declare-styleable name="SlideToUnlock">
         <attr name="sliderColor" format="color"/>

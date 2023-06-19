@@ -54,6 +54,14 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
             }
         }
 
+        mViewDataBinding.textView121653.setOnClickListener {
+            findNavController().navigate(R.id.action_checkOutFragment_to_paymentMethodFragment)
+        }
+
+        mViewDataBinding.txtLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_checkOutFragment_to_orderPlacedFragment)
+        }
+
 //        val onBackPressedCallback = object : OnBackPressedCallback(true) {
 //            override fun handleOnBackPressed() {
 //                Log.d("handleOnBackPressed", "handleOnBackPressed: back")

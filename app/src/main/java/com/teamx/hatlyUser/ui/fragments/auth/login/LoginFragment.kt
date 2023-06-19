@@ -2,15 +2,20 @@ package com.teamx.hatlyUser.ui.fragments.auth.login
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.OnBackPressedCallback
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
+import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentLoginBinding
+import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONException
+import kotlin.random.Random
 
 
 @AndroidEntryPoint
@@ -23,6 +28,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    private var userEmail: String? = null
+    private var userPass: String? = null
+    private var randNum: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,6 +44,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             }
         }
 
+        randNum = generateRandom().toString()
+
         mViewDataBinding.textView4.setOnClickListener {
             it.findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
         }
@@ -45,18 +55,70 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         }
 
         mViewDataBinding.txtLogin.setOnClickListener {
-            it.findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
+            if (isValidate()) {
+                initialization()
+                mViewModel.login(createParams())
+            }
         }
 
-//        requireActivity().onBackPressedDispatcher?.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                // Back is pressed... Finishing the activity
-//                popUpStack()
-//            }
-//        })
-
-
+        if (!mViewModel.loginResponse.hasActiveObservers()) {
+            mViewModel.loginResponse.observe(requireActivity(), Observer {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            if (data.verified) {
+                                findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
+                            }
+                        }
+                    }
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                    }
+                }
+            })
+        }
     }
 
+    private fun initialization() {
+        userEmail = mViewDataBinding.userEmail.text.toString().trim()
+        userPass = mViewDataBinding.userPassword.text.toString().trim()
+    }
+
+    private fun createParams() : JsonObject {
+        val params = JsonObject()
+        try {
+            params.addProperty("contact", userEmail.toString())
+            params.addProperty("password", userPass.toString())
+            params.addProperty("deviceData", randNum)
+
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+        return params
+    }
+    private fun isValidate(): Boolean {
+
+        if (mViewDataBinding.userEmail.text.toString().trim().isEmpty()) {
+            mViewDataBinding.root.snackbar("Enter email or phone")
+            return false
+        }
+        if (mViewDataBinding.userPassword.text.toString().trim().isEmpty()) {
+            mViewDataBinding.root.snackbar("Enter password")
+            return false
+        }
+        return true
+    }
+
+    fun generateRandom(): Long {
+        val rangeStart = 4310L
+        val rangeEnd = 3572000L
+
+        return Random.nextLong(rangeStart, rangeEnd)
+    }
 
 }

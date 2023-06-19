@@ -99,6 +99,9 @@
         <action
             android:id="@+id/action_signUpFragment_to_locationFragment"
             app:destination="@id/allowLocationFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_otpFragment"
+            app:destination="@id/otpFragment" />
     </fragment>
 
     <fragment
@@ -137,6 +140,9 @@
         <action
             android:id="@+id/action_otpFragment_to_createPasswordFragment"
             app:destination="@id/createPasswordFragment" />
+        <action
+            android:id="@+id/action_otpFragment_to_allowLocationFragment"
+            app:destination="@id/allowLocationFragment" />
     </fragment>
 
     <fragment
@@ -388,7 +394,7 @@
         android:id="@+id/cartFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.payments.cart.CartFragment"
         android:label="CartFragment"
-        tools:layout="@layout/fragment_cart" >
+        tools:layout="@layout/fragment_cart">
         <action
             android:id="@+id/action_cartFragment_to_checkOutFragment"
             app:destination="@id/checkOutFragment" />
@@ -404,7 +410,42 @@
         android:id="@+id/checkOutFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.payments.checkout.CheckOutFragment"
         android:label="CheckOutFragment"
-        tools:layout="@layout/fragment_check_out" />
+        tools:layout="@layout/fragment_check_out">
+        <action
+            android:id="@+id/action_checkOutFragment_to_paymentMethodFragment"
+            app:destination="@id/paymentMethodFragment" />
+        <action
+            android:id="@+id/action_checkOutFragment_to_orderPlacedFragment"
+            app:destination="@id/orderPlacedFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/paymentMethodFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.payments.paymentmethod.PaymentMethodFragment"
+        android:label="PaymentMehtodFragment"
+        tools:layout="@layout/fragment_payment_method" />
+
+    <fragment
+        android:id="@+id/orderPlacedFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.payments.orderplaced.OrderPlacedFragment"
+        android:label="OrderPlacedFragment"
+        tools:layout="@layout/fragment_order_placed" >
+        <action
+            android:id="@+id/action_orderPlacedFragment_to_trackFragment"
+            app:destination="@id/trackFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/trackFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.track.TrackFragment"
+        android:label="TrackFragment"
+        tools:layout="@layout/fragment_track" />
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.chat.ChatFragment"
+        android:label="ChatFragment"
+        tools:layout="@layout/fragment_chat" />
 
     <fragment
         android:id="@+id/mapFragment"
