@@ -1,12 +1,16 @@
 package com.teamx.hatlyUser.ui.fragments.auth.otp
 
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
+import bolts.Task
 import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
@@ -15,6 +19,7 @@ import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentOtpBinding
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.*
 import org.json.JSONException
 
 @AndroidEntryPoint
@@ -71,8 +76,40 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
                                 if (fromSignup) {
                                     findNavController().navigate(R.id.action_otpFragment_to_allowLocationFragment)
                                 } else {
-                                    findNavController().navigate(R.id.action_otpFragment_to_createPasswordFragment)
+                                    val bundle1 = Bundle()
+                                    bundle1.putString("phone", phone)
+                                    findNavController().navigate(
+                                        R.id.action_otpFragment_to_createPasswordFragment,
+                                        bundle1
+                                    )
                                 }
+                            }
+                        }
+                    }
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                    }
+                }
+            })
+        }
+
+        mViewDataBinding.textView24.isEnabled = false
+        timerStart()
+        mViewDataBinding.textView24.setOnClickListener {
+            mViewModel.resendOtp(createResendParams())
+        }
+
+        if (!mViewModel.resendOtpResponse.hasActiveObservers()) {
+            mViewModel.resendOtpResponse.observe(requireActivity(), Observer {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            if (data.success) {
+                                mViewDataBinding.root.snackbar("Otp resend")
                             }
                         }
                     }
@@ -100,12 +137,48 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
         return params
     }
 
+    private fun createResendParams(): JsonObject {
+        val params = JsonObject()
+        try {
+            params.addProperty("contact", phone)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        return params
+    }
+
     private fun isValidate(): Boolean {
         if (mViewDataBinding.pinView.text.toString().trim().isEmpty()) {
             mViewDataBinding.root.snackbar("Enter Otp")
             return false
         }
         return true
+    }
+
+    fun timerStart() {
+        val durationSeconds = 30
+        var remainingSeconds = durationSeconds
+
+        lifecycleScope.launch{
+            while (remainingSeconds > 0) {
+                println("Remaining time: $remainingSeconds seconds")
+                Log.d("timerStart", "working $remainingSeconds")
+                mViewDataBinding.textView23.text = "Resend OTP in $remainingSeconds sec"
+                delay(1000) // Delay for 1 second
+                remainingSeconds--
+            }
+
+            println("Time's up!")
+            Log.d("timerStart", "Time's up!")
+            mViewDataBinding.textView24.isEnabled = true
+        }
+
+//        val timerJob = launch {
+//
+//        }
+
+        // Wait for the timer to complete
+//        timerJob.join()
     }
 
 }

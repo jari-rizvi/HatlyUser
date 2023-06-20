@@ -10,6 +10,8 @@ class PrefHelper private constructor() {
         private val sharePref = PrefHelper()
         private lateinit var sharedPreferences: SharedPreferences
 
+        private val IS_FIRST_TIME = "isFirstTime"
+
         private const val shippingConst = "_shippingAddress"
 
         fun getInstance(context: Context): PrefHelper {
@@ -23,6 +25,13 @@ class PrefHelper private constructor() {
             }
             return sharePref
         }
+    }
+
+    val isNotFirstTime: Boolean get() = sharedPreferences.getBoolean(IS_FIRST_TIME, false)
+
+    fun setNotFirstTime(order_id: Boolean) {
+        sharedPreferences.edit().putBoolean(IS_FIRST_TIME, order_id).apply()
+
     }
 
 

@@ -2,6 +2,7 @@ package com.teamx.hatlyUser.data.remote
 
 import com.google.gson.JsonObject
 import com.teamx.hatlyUser.constants.NetworkCallPoints
+import com.teamx.hatlyUser.ui.fragments.auth.createpassword.model.ModelCreatePass
 import com.teamx.hatlyUser.ui.fragments.auth.forgotpassword.model.ModelForgot
 import com.teamx.hatlyUser.ui.fragments.auth.login.Model.ModelLogin
 import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelVerifyOtp
@@ -23,4 +24,10 @@ interface ApiService {
 
     @POST(NetworkCallPoints.FORGOT)
     suspend fun forgot(@Body params: JsonObject?): Response<ModelForgot>
+
+    @POST(NetworkCallPoints.CREATE_PASS)
+    suspend fun createPass(@Body params: JsonObject?): Response<ModelCreatePass>
+
+    @POST(NetworkCallPoints.RESEND_OTP)
+    suspend fun resendOtp(@Body params: JsonObject?): Response<ModelForgot>
 }

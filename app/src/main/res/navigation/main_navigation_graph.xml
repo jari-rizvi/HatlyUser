@@ -27,6 +27,15 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/tempFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_tempFragment_to_allowLocationFragment"
+            app:destination="@id/allowLocationFragment" />
+        <action
+            android:id="@+id/action_tempFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_tempFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment

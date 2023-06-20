@@ -1,7 +1,9 @@
 package com.teamx.hatlyUser.ui.fragments.auth.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -12,8 +14,12 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentLoginBinding
+import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONException
 import kotlin.random.Random
 
@@ -44,6 +50,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             }
         }
 
+        PrefHelper.getInstance(requireActivity()).setNotFirstTime(true)
+
         randNum = generateRandom().toString()
 
         mViewDataBinding.textView4.setOnClickListener {
@@ -71,6 +79,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             if (data.verified) {
+                                CoroutineScope(Dispatchers.Main).launch {
+                                    dataStoreProvider.saveUserToken(data.token)
+                                }
                                 findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
                             }
                         }
@@ -81,6 +92,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                 }
             })
         }
+
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.d("handleOnBackPressed", "handleOnBackPressed: back")
+                requireActivity().finish()
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            onBackPressedCallback
+        )
     }
 
     private fun initialization() {
@@ -88,7 +111,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         userPass = mViewDataBinding.userPassword.text.toString().trim()
     }
 
-    private fun createParams() : JsonObject {
+    private fun createParams(): JsonObject {
         val params = JsonObject()
         try {
             params.addProperty("contact", userEmail.toString())
@@ -101,6 +124,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
         return params
     }
+
     private fun isValidate(): Boolean {
 
         if (mViewDataBinding.userEmail.text.toString().trim().isEmpty()) {

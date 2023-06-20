@@ -8,6 +8,7 @@ import com.google.gson.JsonObject
 import com.teamx.hatlyUser.baseclasses.BaseViewModel
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
+import com.teamx.hatlyUser.ui.fragments.auth.forgotpassword.model.ModelForgot
 import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelVerifyOtp
 import com.teamx.hatlyUser.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -46,6 +47,33 @@ class OtpViewModel @Inject constructor(
                     _verify_otp.postValue(Resource.error("${e.message}", null))
                 }
             } else _verify_otp.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+
+    private val _resend_otp = MutableLiveData<Resource<ModelForgot>>()
+    val resendOtpResponse: LiveData<Resource<ModelForgot>>
+        get() = _resend_otp
+
+    fun resendOtp(param: JsonObject) {
+        viewModelScope.launch {
+            _resend_otp.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.resendOtp(param).let {
+                        if (it.isSuccessful) {
+                            _resend_otp.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _resend_otp.postValue(Resource.error(jsonObj.getString("message")))
+                        } else {
+                            _resend_otp.postValue(Resource.error("Some thing went wrong", null))
+                        }
+                    }
+                } catch (e: Exception) {
+                    _resend_otp.postValue(Resource.error("${e.message}", null))
+                }
+            } else _resend_otp.postValue(Resource.error("No internet connection", null))
         }
     }
 
