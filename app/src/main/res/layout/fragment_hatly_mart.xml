@@ -83,6 +83,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/input_auth_field"
             android:backgroundTint="#1ED65F"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/inpSearch"
             app:layout_constraintStart_toStartOf="@+id/inpSearch"
@@ -106,6 +107,7 @@
                 app:layout_constraintVertical_bias="0.15" />
 
             <TextView
+                android:id="@+id/txtParcel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_radius_corner"

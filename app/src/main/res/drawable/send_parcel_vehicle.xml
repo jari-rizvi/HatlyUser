@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<selector xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--    <item android:state_checked="true" android:drawable="@drawable/button_radius_corner"/>-->
+<!--    <item android:drawable="@drawable/button_radius_corner_red"/>-->
+<!--</selector>-->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:state_activated="true"
+    android:drawable="@drawable/button_radius_corner_stroke_green" /> <!-- pressed -->
+
+<item
+    android:state_activated="false"
+    android:drawable="@drawable/button_radius_corner" /> <!-- default -->
+</selector>

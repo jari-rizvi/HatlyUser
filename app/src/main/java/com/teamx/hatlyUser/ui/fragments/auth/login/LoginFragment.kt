@@ -88,6 +88,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                     }
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
+                        mViewDataBinding.root.snackbar(it.message!!)
                     }
                 }
             })

@@ -83,7 +83,7 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
     }
 
     override fun clickshopItem(position: Int) {
-        findNavController().navigate(R.id.action_storesFragment_to_shopHomeFragment)
+        findNavController().navigate(R.id.action_storesFragment_to_hatlyMartFragment)
     }
 
     override fun clickMoreItem(position: Int) {

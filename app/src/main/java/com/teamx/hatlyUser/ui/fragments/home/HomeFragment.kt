@@ -57,7 +57,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
 //            findNavController().navigate(R.id.action_homeFragment_to_storesFragment)
             val bundle = Bundle()
             bundle.putBoolean("parcel", false)
-            findNavController().navigate(R.id.action_homeFragment_to_hatlyMartFragment, bundle)
+            findNavController().navigate(R.id.action_homeFragment_to_storesFragment, bundle)
+        }
+
+        mViewDataBinding.textView11.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putBoolean("parcel", false)
+            findNavController().navigate(R.id.action_homeFragment_to_storesFragment, bundle)
         }
 
         mViewDataBinding.imgNotification.setOnClickListener {

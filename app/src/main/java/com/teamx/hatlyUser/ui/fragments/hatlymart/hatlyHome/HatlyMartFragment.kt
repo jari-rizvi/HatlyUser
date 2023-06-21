@@ -44,7 +44,7 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 
         val bundle = arguments
         if (bundle != null) {
-            val parcel = bundle.getBoolean("parcel")
+            val parcel = bundle.getBoolean("parcel",false)
             when {
                 parcel -> {
                     mViewDataBinding.constraintLayout2.visibility = View.VISIBLE
@@ -53,6 +53,10 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                     mViewDataBinding.constraintLayout2.visibility = View.GONE
                 }
             }
+        }
+
+        mViewDataBinding.txtParcel.setOnClickListener {
+            findNavController().navigate(R.id.action_hatlyMartFragment_to_specialOrderFragment)
         }
 
         // Create and set the layout manager

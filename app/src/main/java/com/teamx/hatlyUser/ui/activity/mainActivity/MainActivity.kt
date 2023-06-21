@@ -80,6 +80,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             navController!!.navigate(R.id.wishListFragment)
         }
 
+        mViewDataBinding.drawerLayoutMain.logout.setOnClickListener {
+            navController!!.navigate(R.id.wishListFragment)
+        }
+
         setupBottomNavMenu(navController!!)
 
         mViewDataBinding.fab.setOnClickListener {

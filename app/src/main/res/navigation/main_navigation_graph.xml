@@ -222,6 +222,9 @@
         <action
             android:id="@+id/action_homeFragment_to_foodsHomeFragment"
             app:destination="@id/foodsHomeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_storesFragment"
+            app:destination="@id/storesFragment" />
     </fragment>
 
     <fragment
@@ -236,6 +239,9 @@
         <action
             android:id="@+id/action_hatlyMartFragment_to_ShopHomeFragment"
             app:destination="@id/shopHomeFragment" />
+        <action
+            android:id="@+id/action_hatlyMartFragment_to_specialOrderFragment"
+            app:destination="@id/specialOrderFragment" />
 
     </fragment>
 
@@ -271,9 +277,12 @@
         android:name="com.teamx.hatlyUser.ui.fragments.hatlymart.stores.StoresFragment"
         android:label="Stores"
         tools:layout="@layout/fragment_stores">
+<!--        <action-->
+<!--            android:id="@+id/action_storesFragment_to_shopHomeFragment"-->
+<!--            app:destination="@id/shopHomeFragment" />-->
         <action
-            android:id="@+id/action_storesFragment_to_shopHomeFragment"
-            app:destination="@id/shopHomeFragment" />
+            android:id="@+id/action_storesFragment_to_hatlyMartFragment"
+            app:destination="@id/hatlyMartFragment" />
     </fragment>
 
     <fragment
@@ -455,6 +464,32 @@
         android:name="com.teamx.hatlyUser.ui.fragments.chat.ChatFragment"
         android:label="ChatFragment"
         tools:layout="@layout/fragment_chat" />
+
+    <fragment
+        android:id="@+id/specialOrderFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.special.specialorder.SpecialOrderFragment"
+        android:label="SpecialOrderFragment"
+        tools:layout="@layout/fragment_special_order" >
+        <action
+            android:id="@+id/action_specialOrderFragment_to_sendParcelFragment"
+            app:destination="@id/sendParcelFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sendParcelFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.special.sendparcel.SendParcelFragment"
+        android:label="SendParcelFragment"
+        tools:layout="@layout/fragment_send_parcel" >
+        <action
+            android:id="@+id/action_sendParcelFragment_to_parcelDetailFragment"
+            app:destination="@id/parcelDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/parcelDetailFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.special.parceldetail.ParcelDetailFragment"
+        android:label="ParcelDetailFragment"
+        tools:layout="@layout/fragment_parcel_detail" />
 
     <fragment
         android:id="@+id/mapFragment"
