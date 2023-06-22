@@ -15,6 +15,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.Guideline
@@ -91,7 +93,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="fitXY"
-                    android:src="@drawable/mobile_number"
+                    android:src="@drawable/profile"
+                    app:tint="#1ED860"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.1"
@@ -128,7 +131,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="fitXY"
-                    android:src="@drawable/mobile_number"
+                    android:src="@drawable/wallet"
+                    app:tint="#1ED860"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.1"
@@ -165,7 +169,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="fitXY"
-                    android:src="@drawable/mobile_number"
+                    android:src="@drawable/notifications"
+                    app:tint="#1ED860"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.1"
@@ -202,7 +207,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="fitXY"
-                    android:src="@drawable/mobile_number"
+                    android:src="@drawable/wishlist"
+                    app:tint="#1ED860"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.1"
@@ -239,7 +245,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="fitXY"
-                    android:src="@drawable/mobile_number"
+                    android:src="@drawable/language"
+                    app:tint="#1ED860"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.1"
@@ -276,7 +283,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="fitXY"
-                    android:src="@drawable/mobile_number"
+                    android:src="@drawable/track_order"
+                    app:tint="#1ED860"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.1"
@@ -313,7 +321,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="fitXY"
-                    android:src="@drawable/mobile_number"
+                    app:tint="#1ED860"
+                    android:src="@drawable/settings"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.1"
@@ -341,7 +350,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.80" />
+                app:layout_constraintGuide_percent="0.70" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/logout"
@@ -351,14 +360,15 @@
                 app:layout_constraintEnd_toEndOf="@+id/settings"
                 app:layout_constraintStart_toStartOf="@+id/settings"
                 app:layout_constraintTop_toBottomOf="@+id/guideline1"
-                app:layout_constraintVertical_bias="0.2">
+                app:layout_constraintVertical_bias="0.1">
 
                 <ImageView
                     android:id="@+id/imageView17"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="fitXY"
-                    android:src="@drawable/mobile_number"
+                    android:src="@drawable/logout"
+                    app:tint="#1ED860"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.1"

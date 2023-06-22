@@ -22,4 +22,6 @@ class MainRepository @Inject constructor(
     suspend fun createPass(@Body param: JsonObject) = apiService.createPass(param)
     suspend fun resendOtp(@Body param: JsonObject) = apiService.resendOtp(param)
 
+    suspend fun allStores(page: Int, limit: Int) = apiService.allStores(page,limit)
+
 }

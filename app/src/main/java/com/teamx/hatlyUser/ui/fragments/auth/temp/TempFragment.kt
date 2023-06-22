@@ -10,6 +10,7 @@ import androidx.navigation.navOptions
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.DEVICE_TOKEN
 import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.TOKENER
 import com.teamx.hatlyUser.databinding.FragmentTempBinding
 import com.teamx.hatlyUser.utils.LocationPermission
@@ -73,24 +74,32 @@ class TempFragment : BaseFragment<FragmentTempBinding, TempViewModel>(),
         if (isAdded) {
             var token: String? = null
             CoroutineScope(Dispatchers.Main).launch {
+                Log.d("allStoresResponse", "Dispatchers")
                 dataStoreProvider.token.collect {
+                    Log.d("allStoresResponse", "Dispatchers token $it")
                     token = it
                     /*NetworkCallPointsNest.*/
                     TOKENER = token.toString()
-                    if (isAdded) {
-                        if (token.isNullOrBlank()) {
-                            if (isNotFirstTime) {
-                                findNavController().navigate(R.id.action_tempFragment_to_loginFragment)
+
+                    dataStoreProvider.deviceDATA.collect {
+                        Log.d("allStoresResponse", "Dispatchers deviceDATA $it")
+                        DEVICE_TOKEN = it
+                        if (isAdded) {
+                            if (token.isNullOrBlank()) {
+                                if (isNotFirstTime) {
+                                    findNavController().navigate(R.id.action_tempFragment_to_loginFragment)
+                                } else {
+                                    findNavController().navigate(R.id.action_tempFragment_to_onboardViewPagerFragment)
+                                }
                             } else {
-                                findNavController().navigate(R.id.action_tempFragment_to_onboardViewPagerFragment)
-                            }
-                        } else {
-                            if (LocationPermission.requestPermission(requireContext())) {
-                                findNavController().navigate(R.id.action_tempFragment_to_homeFragment)
-                            } else {
-                                findNavController().navigate(R.id.action_tempFragment_to_allowLocationFragment)
+                                if (LocationPermission.requestPermission(requireContext())) {
+                                    findNavController().navigate(R.id.action_tempFragment_to_homeFragment)
+                                } else {
+                                    findNavController().navigate(R.id.action_tempFragment_to_allowLocationFragment)
+                                }
                             }
                         }
+
                     }
                 }
             }

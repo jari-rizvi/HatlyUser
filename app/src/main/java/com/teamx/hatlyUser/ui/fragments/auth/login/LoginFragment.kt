@@ -81,6 +81,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                             if (data.verified) {
                                 CoroutineScope(Dispatchers.Main).launch {
                                     dataStoreProvider.saveUserToken(data.token)
+                                    dataStoreProvider.saveDeviceData(data.deviceData)
                                 }
                                 findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
                             }
@@ -140,8 +141,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     }
 
     fun generateRandom(): Long {
-        val rangeStart = 4310L
-        val rangeEnd = 3572000L
+        val rangeStart = 1000000000000000000L
+        val rangeEnd = 9000000000000000000L
 
         return Random.nextLong(rangeStart, rangeEnd)
     }

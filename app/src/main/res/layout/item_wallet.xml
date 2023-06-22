@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/_10sdp"
         android:background="@drawable/button_radius_corner"
+        android:elevation="1dp"
         android:layout_marginHorizontal="@dimen/_10sdp"
         android:layout_marginVertical="@dimen/_5sdp">
 
@@ -20,7 +21,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
             android:textStyle="bold"
-            android:drawableStart="@drawable/mobile_number"
+            android:drawableStart="@drawable/order_summary"
             android:drawablePadding="@dimen/_10sdp"
             android:drawableTint="#EA1B25"
             android:text="Order  Summery"

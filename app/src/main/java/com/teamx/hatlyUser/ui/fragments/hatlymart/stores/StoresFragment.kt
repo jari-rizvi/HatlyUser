@@ -1,17 +1,24 @@
 package com.teamx.hatlyUser.ui.fragments.hatlymart.stores
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentStoresBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.adapter.StoresAdapter
+import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -39,6 +46,28 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
 
         mViewDataBinding.imgBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        mViewModel.allStores(1,5)
+
+        if (!mViewModel.allStoresResponse.hasActiveObservers()) {
+            mViewModel.allStoresResponse.observe(requireActivity(), Observer {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            Log.d("allStoresResponse", "onViewCreated: ${data}")
+                        }
+                    }
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        mViewDataBinding.root.snackbar(it.message!!)
+                    }
+                }
+            })
         }
 
         val layoutManager1 =

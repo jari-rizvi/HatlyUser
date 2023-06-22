@@ -127,17 +127,14 @@
                 android:layout_width="@dimen/_45sdp"
                 android:layout_height="@dimen/_45sdp"
                 android:background="@drawable/bg_circle"
-                android:backgroundTint="#1ED860"
                 android:clipToOutline="true"
-                android:padding="@dimen/_10sdp"
                 android:scaleType="fitXY"
-                android:src="@drawable/round_check_24"
+                android:src="@drawable/splash_bg"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.05"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/white" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView2224"
@@ -170,32 +167,23 @@
                 android:id="@+id/hatlyIcon1"
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
-                android:background="@drawable/button_radius_corner_red"
-                android:clipToOutline="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/round_check_24"
+                android:src="@drawable/chat"
                 app:layout_constraintBottom_toBottomOf="@+id/hatlyIcon"
                 app:layout_constraintEnd_toStartOf="@+id/hatlyIcon12"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView22254"
-                app:layout_constraintTop_toTopOf="@+id/hatlyIcon"
-                app:tint="#EA1B25" />
+                app:layout_constraintTop_toTopOf="@+id/hatlyIcon" />
 
             <ImageView
                 android:id="@+id/hatlyIcon12"
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
-                android:background="@drawable/bg_circle"
-                android:backgroundTint="#EA1B25"
-                android:clipToOutline="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/round_check_24"
+                android:src="@drawable/call"
                 app:layout_constraintBottom_toBottomOf="@+id/hatlyIcon1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/hatlyIcon1"
-                app:layout_constraintTop_toTopOf="@+id/hatlyIcon1"
-                app:tint="@color/white" />
+                app:layout_constraintTop_toTopOf="@+id/hatlyIcon1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -222,8 +210,10 @@
                 android:id="@+id/textView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/baseline_location_on_24"
+                android:drawableStart="@drawable/locations"
                 android:fontFamily="@font/open_sans_regular"
+                android:drawableTint="#EA1B25"
+                android:drawablePadding="@dimen/_10sdp"
                 android:gravity="center_vertical"
                 android:text="Delivery Location"
                 android:textColor="#EA1B25"
@@ -234,7 +224,7 @@
                 app:layout_constraintHorizontal_bias="0.05"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.1" />
+                app:layout_constraintVertical_bias="0.15" />
 
             <TextView
                 android:id="@+id/textView222954"

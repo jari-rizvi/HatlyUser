@@ -3,12 +3,12 @@
 
     <item
         android:id="@+id/menuBottom"
-        android:icon="@drawable/mobile_number"
+        android:icon="@drawable/menu"
         android:title="Menu" />
 
     <item
         android:id="@+id/wishlistBottom"
-        android:icon="@drawable/mobile_number"
+        android:icon="@drawable/outline_favorite_border_24"
         android:title="Wishlist" />
 
     <item
@@ -18,12 +18,12 @@
 
     <item
         android:id="@+id/cartBottom"
-        android:icon="@drawable/mobile_number"
+        android:icon="@drawable/cart"
         android:title="Cart" />
 
     <item
         android:id="@+id/profileBottom"
-        android:icon="@drawable/mobile_number"
+        android:icon="@drawable/profile"
         android:title="Profile" />
 
 </menu>

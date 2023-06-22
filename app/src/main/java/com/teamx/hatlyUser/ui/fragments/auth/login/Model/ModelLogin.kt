@@ -10,5 +10,6 @@ data class ModelLogin(
     val role: String,
     val token: String,
     val verificationToken: String,
+    val deviceData: String,
     val verified: Boolean
 )

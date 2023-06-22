@@ -22,6 +22,7 @@ class DataStoreProvider(var context: Context) {
             booleanPreferencesKey(AppConstants.DataStore.LOCALIZATION_KEY_NAME)
         val USER_NAME_KEY = stringPreferencesKey(AppConstants.DataStore.USER_NAME_KEY)
         val TOKEN = stringPreferencesKey(AppConstants.DataStore.TOKEN)
+        val DEVICE_DATA = stringPreferencesKey(AppConstants.DataStore.DEVICE_DATA)
         val SAVE_ID = stringPreferencesKey(AppConstants.DataStore.SAVE_ID)
         val DETAILS = stringPreferencesKey(AppConstants.DataStore.DETAILS)
         val AVATAR = stringPreferencesKey(AppConstants.DataStore.AVATAR)
@@ -51,6 +52,10 @@ class DataStoreProvider(var context: Context) {
     //get Token by using this
     val token: Flow<String?> = context.dataStore.data.map {
         it[TOKEN]
+    }
+
+    val deviceDATA: Flow<String?> = context.dataStore.data.map {
+        it[DEVICE_DATA]
     }
     val billId1: Flow<String?> = context.dataStore.data.map {
         it[billId]
@@ -83,6 +88,12 @@ class DataStoreProvider(var context: Context) {
         }
     }
 
+    suspend fun saveDeviceData(deviceData: String) {
+        context.dataStore.edit {
+            it[DEVICE_DATA] = deviceData
+        }
+    }
+
     //save id by using this functionn
     suspend fun saveUserID(SAVE_ID1: String) {
         context.dataStore.edit {
@@ -94,6 +105,7 @@ class DataStoreProvider(var context: Context) {
     suspend fun removeAll() {
         context.dataStore.edit {
             it.remove(TOKEN)
+            it.remove(DEVICE_DATA)
             it.remove(DETAILS)
             it.remove(SAVE_ID)
             it.remove(AVATAR)

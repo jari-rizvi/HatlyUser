@@ -26,6 +26,7 @@ object AppConstants {
         DataStore.LOCALIZATION_KEY_NAME,
         DataStore.USER_NAME_KEY,
         DataStore.TOKEN,
+        DataStore.DEVICE_DATA,
         DataStore.SAVE_ID,
         DataStore.DETAILS,
         DataStore.AVATAR,
@@ -40,6 +41,7 @@ object AppConstants {
             const val LOCALIZATION_KEY_NAME = "lang"
             const val USER_NAME_KEY = "user_name_key"
             const val TOKEN = "token"
+            const val DEVICE_DATA = "deviceDATA"
             const val SAVE_ID = "save_id"
             const val DETAILS = "details"
             const val AVATAR = "avatar"

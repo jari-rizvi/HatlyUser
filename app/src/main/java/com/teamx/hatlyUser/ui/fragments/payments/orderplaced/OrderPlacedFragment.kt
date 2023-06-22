@@ -40,6 +40,21 @@ class OrderPlacedFragment : BaseFragment<FragmentOrderPlacedBinding, OrderPlaced
            findNavController().navigate(R.id.action_orderPlacedFragment_to_trackFragment)
         }
 
+        mViewDataBinding.txtLogin1.setOnClickListener {
+            findNavController().popBackStack(R.id.homeFragment, false)
+        }
+
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.d("handleOnBackPressed", "handleOnBackPressed: back")
+                findNavController().popBackStack(R.id.homeFragment, false)
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            onBackPressedCallback
+        )
 
 
     }
