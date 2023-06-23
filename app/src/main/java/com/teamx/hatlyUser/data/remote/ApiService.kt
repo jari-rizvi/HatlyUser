@@ -1,5 +1,6 @@
 package com.teamx.hatlyUser.data.remote
 
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.teamx.hatlyUser.constants.NetworkCallPoints
 import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.DEVICE_TOKEN
@@ -41,5 +42,5 @@ interface ApiService {
         @Query("limit") limit: Int,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
-    ): Response<ModelAllStores>
+    ): Response<JsonArray>
 }

@@ -32,9 +32,9 @@ class ApplicationModule {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         OkHttpClient.Builder()
-            .readTimeout(10, TimeUnit.MINUTES)
-            .writeTimeout(10, TimeUnit.MINUTES)
-            .callTimeout(10, TimeUnit.MINUTES)
+            .readTimeout(100, TimeUnit.MINUTES)
+            .writeTimeout(100, TimeUnit.MINUTES)
+            .callTimeout(100, TimeUnit.MINUTES)
             .addInterceptor(loggingInterceptor)
             .build()
     } else OkHttpClient

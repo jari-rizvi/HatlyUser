@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.databinding.ItemStoresBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
+import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
+import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStoresItem
 
-class StoresAdapter(private val addressArrayList: ArrayList<String>, val hatlyShopInterface: HatlyShopInterface) : RecyclerView.Adapter<HatlyPopularViewHolder>() {
+class StoresAdapter(private val addressArrayList: ArrayList<ModelAllStoresItem>, val hatlyShopInterface: HatlyShopInterface) : RecyclerView.Adapter<HatlyPopularViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HatlyPopularViewHolder {
         return HatlyPopularViewHolder(
@@ -18,6 +20,13 @@ class StoresAdapter(private val addressArrayList: ArrayList<String>, val hatlySh
     override fun onBindViewHolder(holder: HatlyPopularViewHolder, position: Int) {
 
         val arrayData = addressArrayList[position]
+
+        holder.bind.txtTitle.text = try {
+            arrayData.name
+        }catch (e : java.lang.Exception){
+            ""
+        }
+
 
         holder.itemView.setOnClickListener {
             hatlyShopInterface.clickshopItem(position)

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.teamx.hatlyUser.baseclasses.BaseViewModel
 import com.teamx.hatlyUser.data.remote.Resource
@@ -25,8 +26,8 @@ class StoresViewModel @Inject constructor(
     private val networkHelper: NetworkHelper
 ) : BaseViewModel() {
 
-    private val _allStores = MutableLiveData<Resource<ModelAllStores>>()
-    val allStoresResponse: LiveData<Resource<ModelAllStores>>
+    private val _allStores = MutableLiveData<Resource<JsonArray>>()
+    val allStoresResponse: LiveData<Resource<JsonArray>>
         get() = _allStores
 
     fun allStores(page: Int, limit: Int) {

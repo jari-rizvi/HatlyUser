@@ -81,7 +81,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                             if (data.verified) {
                                 CoroutineScope(Dispatchers.Main).launch {
                                     dataStoreProvider.saveUserToken(data.token)
-                                    dataStoreProvider.saveDeviceData(data.deviceData)
+                                    dataStoreProvider.saveDeviceData(randNum!!)
+                                    Log.d("allStoresResponse", "login: ${data.deviceData}")
+                                    Log.d("allStoresResponse", "randNum: ${randNum}")
                                 }
                                 findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
                             }
