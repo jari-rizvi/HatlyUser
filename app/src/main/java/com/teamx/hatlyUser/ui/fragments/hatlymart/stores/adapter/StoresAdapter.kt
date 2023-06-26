@@ -3,6 +3,7 @@ package com.teamx.hatlyUser.ui.fragments.hatlymart.stores.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.databinding.ItemStoresBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
@@ -27,6 +28,30 @@ class StoresAdapter(private val addressArrayList: ArrayList<ModelAllStoresItem>,
             ""
         }
 
+        holder.bind.txtAddress.text = try {
+            arrayData.shopAddress?.googleMapAddress
+        }
+        catch (e : java.lang.Exception){
+            ""
+        }
+
+        holder.bind.txtReview.text = try {
+            "${arrayData.ratting} (${arrayData.totalReviews} reviews)"
+
+        }
+        catch (e : java.lang.Exception){
+            ""
+        }
+
+        holder.bind.txtDuration.text = try {
+            "Delivery ${arrayData.delivery?.value} ${arrayData.delivery?.unit}"
+
+        }
+        catch (e : java.lang.Exception){
+            ""
+        }
+
+        Picasso.get().load(arrayData.image?.secure_url).into(holder.bind.imgShop)
 
         holder.itemView.setOnClickListener {
             hatlyShopInterface.clickshopItem(position)

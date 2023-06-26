@@ -39,6 +39,10 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding, OrderHist
             }
         }
 
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         val layoutManager1 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         mViewDataBinding.recLocations.layoutManager = layoutManager1
 

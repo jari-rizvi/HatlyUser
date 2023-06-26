@@ -38,43 +38,47 @@ class HatlyCategoriesFragment :
             }
         }
 
-        val layoutManager = GridLayoutManager(requireActivity(), 4)
-        mViewDataBinding.recShopCatMart.layoutManager = layoutManager
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
-        val itemClasses: ArrayList<String> = ArrayList()
-
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-
-        val adapter = HatlyShopCatAdapter(itemClasses, this)
-        mViewDataBinding.recShopCatMart.adapter = adapter
+//        val layoutManager = GridLayoutManager(requireActivity(), 4)
+//        mViewDataBinding.recShopCatMart.layoutManager = layoutManager
+//
+//        val itemClasses: ArrayList<String> = ArrayList()
+//
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//
+//        val adapter = HatlyShopCatAdapter(itemClasses, this)
+//        mViewDataBinding.recShopCatMart.adapter = adapter
 
 
     }

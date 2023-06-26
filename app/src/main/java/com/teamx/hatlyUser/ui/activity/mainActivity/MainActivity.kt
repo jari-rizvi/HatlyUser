@@ -72,6 +72,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             navController!!.navigate(R.id.settingFragment)
         }
 
+        mViewDataBinding.drawerLayoutMain.trackOrder.setOnClickListener {
+            navController!!.navigate(R.id.trackFragment)
+        }
+
         mViewDataBinding.drawerLayoutMain.myWallet.setOnClickListener {
             navController!!.navigate(R.id.walletFragment)
         }
@@ -82,6 +86,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         mViewDataBinding.drawerLayoutMain.logout.setOnClickListener {
             navController!!.navigate(R.id.wishListFragment)
+        }
+
+        mViewDataBinding.drawerLayoutMain.notification.setOnClickListener {
+            navController!!.navigate(R.id.notificationFragment)
         }
 
         setupBottomNavMenu(navController!!)

@@ -45,6 +45,10 @@ class FoodsShopPreviewFragment :
             }
         }
 
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         mViewDataBinding.linearLayout.setOnClickListener {
             findNavController().navigate(R.id.action_foodsShopHomeFragment_to_reviewFragment)
         }

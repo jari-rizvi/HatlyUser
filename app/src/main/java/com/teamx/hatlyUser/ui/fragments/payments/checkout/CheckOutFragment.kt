@@ -54,6 +54,10 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
             }
         }
 
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         mViewDataBinding.textView121653.setOnClickListener {
             findNavController().navigate(R.id.action_checkOutFragment_to_paymentMethodFragment)
         }

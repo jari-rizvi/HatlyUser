@@ -151,13 +151,13 @@
             android:fontFamily="@font/bumbu_sushi"
             android:text="FOOD"
             android:textColor="#EA1B25"
-            android:textSize="@dimen/_20ssp"
+            android:textSize="@dimen/_16ssp"
             app:layout_constraintBottom_toBottomOf="@+id/textView8"
             app:layout_constraintEnd_toEndOf="@+id/textView8"
             app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="@+id/textView8"
             app:layout_constraintTop_toTopOf="@+id/textView8"
-            app:layout_constraintVertical_bias="0.2" />
+            app:layout_constraintVertical_bias="0.15" />
 
 
         <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
@@ -227,19 +227,20 @@
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <TextView
+            android:id="@+id/textView39"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#211ED860"
             android:fontFamily="@font/bumbu_sushi"
             android:text="GROCERY"
             android:textColor="#EA1B25"
-            android:textSize="@dimen/_20ssp"
+            android:textSize="@dimen/_16ssp"
             app:layout_constraintBottom_toBottomOf="@+id/textView10"
             app:layout_constraintEnd_toEndOf="@+id/textView10"
-            app:layout_constraintHorizontal_bias="0.1"
-            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/textView12"
             app:layout_constraintTop_toTopOf="@+id/textView10"
-            app:layout_constraintVertical_bias="0.2" />
+            app:layout_constraintVertical_bias="0.15" />
 
         <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
         <!--            android:id="@+id/textView10"-->
@@ -310,24 +311,56 @@
             android:scaleType="centerCrop"
             android:src="@drawable/health_and_beauty"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
-            app:layout_constraintEnd_toEndOf="@+id/textView10"
+            app:layout_constraintEnd_toEndOf="@+id/textView9"
             app:layout_constraintStart_toStartOf="@+id/textView9"
             app:layout_constraintTop_toBottomOf="@+id/guideline2" />
 
         <TextView
+            android:id="@+id/textView40"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#211ED860"
             android:fontFamily="@font/bumbu_sushi"
             android:text="HEALTH &amp;\nBEAUTY"
             android:textColor="#EA1B25"
-            android:textSize="@dimen/_20ssp"
+            android:textSize="@dimen/_16ssp"
             app:layout_constraintBottom_toBottomOf="@+id/textView11"
             app:layout_constraintEnd_toEndOf="@+id/textView11"
-            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="@+id/textView11"
             app:layout_constraintTop_toTopOf="@+id/textView11"
-            app:layout_constraintVertical_bias="0.1" />
+            app:layout_constraintVertical_bias="0.15" />
+
+        <ImageView
+            android:id="@+id/textView112"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/button_radius_green"
+            android:backgroundTint="#211ED860"
+            android:clipToOutline="true"
+            android:paddingTop="@dimen/_50sdp"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="@+id/textView10"
+            android:src="@drawable/health_and_beauty"
+            app:layout_constraintTop_toTopOf="@+id/textView11"
+            app:layout_constraintBottom_toBottomOf="@+id/textView11"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#211ED860"
+            android:fontFamily="@font/bumbu_sushi"
+            android:text="HOME BUSINESS"
+            android:textColor="#EA1B25"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView112"
+            app:layout_constraintEnd_toEndOf="@+id/textView112"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/textView39"
+            app:layout_constraintTop_toTopOf="@+id/textView40"
+            app:layout_constraintVertical_bias="0" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"

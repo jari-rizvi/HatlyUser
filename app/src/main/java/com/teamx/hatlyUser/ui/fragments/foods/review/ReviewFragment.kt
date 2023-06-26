@@ -39,6 +39,9 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding, ReviewViewModel>() {
             }
         }
 
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         val layoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
 

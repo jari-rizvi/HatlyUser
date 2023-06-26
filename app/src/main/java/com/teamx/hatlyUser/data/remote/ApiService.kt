@@ -1,6 +1,5 @@
 package com.teamx.hatlyUser.data.remote
 
-import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.teamx.hatlyUser.constants.NetworkCallPoints
 import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.DEVICE_TOKEN
@@ -10,8 +9,8 @@ import com.teamx.hatlyUser.ui.fragments.auth.forgotpassword.model.ModelForgot
 import com.teamx.hatlyUser.ui.fragments.auth.login.Model.ModelLogin
 import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelVerifyOtp
 import com.teamx.hatlyUser.ui.fragments.auth.signup.model.ModelSignUp
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.ModelHealthDetail
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
-import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStoresItem
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -36,11 +35,19 @@ interface ApiService {
     suspend fun resendOtp(@Body params: JsonObject?): Response<ModelForgot>
 
 
-    @GET(NetworkCallPoints.ALL_STORES)
+    @GET(NetworkCallPoints.ALL_HEALTH_LIST)
     suspend fun allStores(
         @Query("page") page: Int,
         @Query("limit") limit: Int,
+        @Query("search") search: String,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
-    ): Response<JsonArray>
+    ): Response<ModelAllStores>
+
+    @GET(NetworkCallPoints.HEALTH_DETAILS)
+    suspend fun healthDetail(
+        @Path("id") id: String,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelHealthDetail>
 }

@@ -32,19 +32,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imgMore"
-                android:layout_width="@dimen/_60sdp"
-                android:layout_height="@dimen/_60sdp"
-                android:background="@drawable/button_radius_corner"
-                android:backgroundTint="#ACE4C0"
-                android:clipToOutline="true"
-                android:padding="@dimen/_15sdp"
-                android:src="@drawable/mobile_number"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+<!--            <ImageView-->
+<!--                android:id="@+id/imgMore"-->
+<!--                android:layout_width="@dimen/_60sdp"-->
+<!--                android:layout_height="@dimen/_60sdp"-->
+<!--                android:background="@drawable/button_radius_corner"-->
+<!--                android:backgroundTint="#ACE4C0"-->
+<!--                android:clipToOutline="true"-->
+<!--                android:padding="@dimen/_15sdp"-->
+<!--                android:src="@drawable/mobile_number"-->
+<!--                android:visibility="gone"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

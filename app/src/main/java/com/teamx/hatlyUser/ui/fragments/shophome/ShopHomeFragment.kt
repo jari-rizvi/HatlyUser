@@ -40,50 +40,50 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
             }
         }
 
-        val layoutManager = GridLayoutManager(requireActivity(),2)
-
-        val layoutManager1 = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-        mViewDataBinding.recCategories.layoutManager = layoutManager1
-
-        mViewDataBinding.recShopProducts.layoutManager = layoutManager
-
-        val itemClasses: ArrayList<String> = ArrayList()
-
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-
-        val adapter = HatlyPopularAdapter(itemClasses, this)
-        mViewDataBinding.recShopProducts.adapter = adapter
-
-        val shopHomeAdapter = ShopHomeTitleAdapter(itemClasses)
-        mViewDataBinding.recCategories.adapter = shopHomeAdapter
+//        val layoutManager = GridLayoutManager(requireActivity(),2)
+//
+//        val layoutManager1 = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+//        mViewDataBinding.recCategories.layoutManager = layoutManager1
+//
+//        mViewDataBinding.recShopProducts.layoutManager = layoutManager
+//
+//        val itemClasses: ArrayList<String> = ArrayList()
+//
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//        itemClasses.add("")
+//
+//        val adapter = HatlyPopularAdapter(itemClasses, this)
+//        mViewDataBinding.recShopProducts.adapter = adapter
+//
+//        val shopHomeAdapter = ShopHomeTitleAdapter(itemClasses)
+//        mViewDataBinding.recCategories.adapter = shopHomeAdapter
 
 
     }

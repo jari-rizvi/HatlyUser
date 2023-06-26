@@ -35,6 +35,10 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             }
         }
 
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         mViewDataBinding.textView22.setOnClickListener {
             findNavController().navigate(R.id.action_settingFragment_to_contactUsFragment)
         }

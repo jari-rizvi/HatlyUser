@@ -2,6 +2,7 @@ package com.teamx.hatlyUser.ui.fragments.track
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +38,10 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>() {
                 popEnter = R.anim.nav_default_pop_enter_anim
                 popExit = R.anim.nav_default_pop_exit_anim
             }
+        }
+
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
         }
 
         mViewDataBinding.hatlyIcon1.setOnClickListener {

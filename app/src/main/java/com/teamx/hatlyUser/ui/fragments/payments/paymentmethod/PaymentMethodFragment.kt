@@ -56,6 +56,10 @@ class PaymentMethodFragment : BaseFragment<FragmentPaymentMethodBinding, Payment
             }
         }
 
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
 
 
     }

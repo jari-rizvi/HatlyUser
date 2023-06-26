@@ -81,7 +81,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                             if (data.verified) {
                                 CoroutineScope(Dispatchers.Main).launch {
                                     dataStoreProvider.saveUserToken(data.token)
-                                    dataStoreProvider.saveDeviceData(randNum!!)
+//                                    dataStoreProvider.saveDeviceData(randNum!!)
+                                    dataStoreProvider.saveDeviceData("88765275963748185512")
                                     Log.d("allStoresResponse", "login: ${data.deviceData}")
                                     Log.d("allStoresResponse", "randNum: ${randNum}")
                                 }
@@ -120,7 +121,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         try {
             params.addProperty("contact", userEmail.toString())
             params.addProperty("password", userPass.toString())
-            params.addProperty("deviceData", randNum)
+//            params.addProperty("deviceData", randNum)
+            params.addProperty("deviceData", "88765275963748185512")
 
         } catch (e: JSONException) {
             e.printStackTrace()

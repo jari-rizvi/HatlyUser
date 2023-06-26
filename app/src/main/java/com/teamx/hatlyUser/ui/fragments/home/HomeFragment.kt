@@ -9,9 +9,11 @@ import androidx.navigation.navOptions
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.MART
 import com.teamx.hatlyUser.databinding.FragmentHomeBinding
 import com.teamx.hatlyUser.ui.activity.mainActivity.MainActivity
 import com.teamx.hatlyUser.ui.fragments.auth.login.LoginViewModel
+import com.teamx.hatlyUser.utils.enum_.Marts
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -44,16 +46,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
         }
 
         mViewDataBinding.textView9.setOnClickListener {
+            MART = Marts.HATLY_MART
             val bundle = Bundle()
             bundle.putBoolean("parcel", true)
             findNavController().navigate(R.id.action_homeFragment_to_hatlyMartFragment, bundle)
         }
 
         mViewDataBinding.textView8.setOnClickListener {
+            MART = Marts.FOOD
             findNavController().navigate(R.id.action_homeFragment_to_foodsHomeFragment)
         }
 
         mViewDataBinding.textView10.setOnClickListener {
+            MART = Marts.GROCERY
 //            findNavController().navigate(R.id.action_homeFragment_to_storesFragment)
             val bundle = Bundle()
             bundle.putBoolean("parcel", false)
@@ -61,6 +66,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
         }
 
         mViewDataBinding.textView11.setOnClickListener {
+            MART = Marts.HEALTH_BEAUTY
             val bundle = Bundle()
             bundle.putBoolean("parcel", false)
             findNavController().navigate(R.id.action_homeFragment_to_storesFragment, bundle)
@@ -68,6 +74,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
 
         mViewDataBinding.imgNotification.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
+        }
+
+        mViewDataBinding.textView112.setOnClickListener {
+            MART = Marts.HOME_BUSINESS
         }
 
         val onBackPressedCallback = object : OnBackPressedCallback(true) {

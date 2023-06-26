@@ -39,6 +39,10 @@ class ContactUsFragment : BaseFragment<FragmentContactusBinding, ContactUsViewMo
             }
         }
 
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         mViewDataBinding.txtLogin.setOnClickListener {
             DialogHelperClass.ContactDialog(requireActivity(), this)
         }

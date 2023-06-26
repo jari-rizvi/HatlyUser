@@ -8,9 +8,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.hatly.ItemClass
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.hatly.ItemClass.Companion.LayoutOne
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.hatly.ItemClass.Companion.LayoutTwo
+import com.teamx.hatlyUser.ui.fragments.products.hatly.ItemClass
+import com.teamx.hatlyUser.ui.fragments.products.hatly.ItemClass.Companion.LayoutOne
+import com.teamx.hatlyUser.ui.fragments.products.hatly.ItemClass.Companion.LayoutTwo
 
 
 class HatlyMartAdapter(private val dataSet: List<ItemClass>) :

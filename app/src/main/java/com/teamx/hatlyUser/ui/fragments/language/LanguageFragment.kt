@@ -37,7 +37,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding, LanguageViewModel
         }
 
         mViewDataBinding.imgBack.setOnClickListener {
-
+            findNavController().popBackStack()
         }
 
     }

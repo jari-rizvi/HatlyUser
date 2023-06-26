@@ -43,6 +43,9 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>() {
             }
         }
 
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         val layoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
 

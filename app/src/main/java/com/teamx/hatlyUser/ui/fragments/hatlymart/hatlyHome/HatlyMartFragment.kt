@@ -3,6 +3,7 @@ package com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,10 +12,16 @@ import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.MainApplication
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentHatlyMartBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter.HatlyPopularAdapter
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter.HatlyShopCatAdapter
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.Categore
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.ModelHealthDetail
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.PopularProduct
+import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.adapter.StoresAdapter
+import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -23,28 +30,39 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
     HatlyShopInterface {
 
     override val layoutId: Int
-        get() = com.teamx.hatlyUser.R.layout.fragment_hatly_mart
+        get() = R.layout.fragment_hatly_mart
     override val viewModel: Class<HatlyMartViewModel>
         get() = HatlyMartViewModel::class.java
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    private lateinit var healthDetailCatArraylist: ArrayList<Categore>
+    private lateinit var healthDetailPopularArraylist: ArrayList<PopularProduct>
+
+    private lateinit var hatlyShopCatAdapter: HatlyShopCatAdapter
+    private lateinit var hatlyPopularAdapter: HatlyPopularAdapter
+
+    var storeId = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         options = navOptions {
             anim {
-                enter = com.teamx.hatlyUser.R.anim.enter_from_left
-                exit = com.teamx.hatlyUser.R.anim.exit_to_left
-                popEnter = com.teamx.hatlyUser.R.anim.nav_default_pop_enter_anim
-                popExit = com.teamx.hatlyUser.R.anim.nav_default_pop_exit_anim
+                enter = R.anim.enter_from_left
+                exit = R.anim.exit_to_left
+                popEnter = R.anim.nav_default_pop_enter_anim
+                popExit = R.anim.nav_default_pop_exit_anim
             }
         }
 
+        healthDetailCatArraylist = ArrayList()
+        healthDetailPopularArraylist = ArrayList()
+
         val bundle = arguments
         if (bundle != null) {
-            val parcel = bundle.getBoolean("parcel",false)
+            val parcel = bundle.getBoolean("parcel", false)
+            storeId = bundle.getString("_id", "")
             when {
                 parcel -> {
                     mViewDataBinding.constraintLayout2.visibility = View.VISIBLE
@@ -73,36 +91,46 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
         mViewDataBinding.recBasedMart.layoutManager = layoutManager1
         mViewDataBinding.recPopular.layoutManager = layoutManager2
 
-        val itemClasses: ArrayList<String> = ArrayList()
+        if (storeId.isNotEmpty()) {
+            mViewModel.healthDeatil(storeId)
+        }
 
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("More\ncategories")
+        if (!mViewModel.healthDetailResponse.hasActiveObservers()) {
+            mViewModel.healthDetailResponse.observe(requireActivity(), Observer {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
 
-        val adapter = HatlyShopCatAdapter(itemClasses, this)
-        val hatlyPopularAdapter = HatlyPopularAdapter(itemClasses, this)
+                            healthDetailCatArraylist.clear()
+                            healthDetailPopularArraylist.clear()
+
+                            healthDetailCatArraylist.addAll(data.categores)
+                            healthDetailPopularArraylist.addAll(data.popularProduct)
+
+                            hatlyShopCatAdapter.notifyDataSetChanged()
+                            hatlyPopularAdapter.notifyDataSetChanged()
+                        }
+                    }
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        mViewDataBinding.root.snackbar(it.message!!)
+                    }
+                }
+            })
+        }
+
+        hatlyShopCatAdapter = HatlyShopCatAdapter(healthDetailCatArraylist, this)
+        hatlyPopularAdapter = HatlyPopularAdapter(healthDetailPopularArraylist, this)
 
         // set the adapter
 
         // set the adapter
-        mViewDataBinding.recShopCatMart.adapter = adapter
-        mViewDataBinding.recBasedMart.adapter = adapter
+        mViewDataBinding.recShopCatMart.adapter = hatlyShopCatAdapter
+        mViewDataBinding.recBasedMart.adapter = hatlyShopCatAdapter
         mViewDataBinding.recPopular.adapter = hatlyPopularAdapter
 
     }

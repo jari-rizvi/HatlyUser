@@ -26,16 +26,16 @@ class StoresViewModel @Inject constructor(
     private val networkHelper: NetworkHelper
 ) : BaseViewModel() {
 
-    private val _allStores = MutableLiveData<Resource<JsonArray>>()
-    val allStoresResponse: LiveData<Resource<JsonArray>>
+    private val _allStores = MutableLiveData<Resource<ModelAllStores>>()
+    val allStoresResponse: LiveData<Resource<ModelAllStores>>
         get() = _allStores
 
-    fun allStores(page: Int, limit: Int) {
+    fun allStores(page: Int, limit: Int, search: String) {
         viewModelScope.launch {
             _allStores.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.allStores(page,limit).let {
+                    mainRepository.allStores(page, limit, search).let {
                         if (it.isSuccessful) {
                             _allStores.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
@@ -44,7 +44,10 @@ class StoresViewModel @Inject constructor(
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _allStores.postValue(Resource.error(jsonObj.getString("message")))
-                            Log.d("allStoresResponse", "onViewCreated: ${jsonObj.getString("message")}")
+                            Log.d(
+                                "allStoresResponse",
+                                "onViewCreated: ${jsonObj.getString("message")}"
+                            )
 //                            _allStores.postValue(Resource.error(it.errorBody()!!.charStream().readText()))
 //                            _allStores.postValue(Resource.error("Some thing went wrong", null))
                         }

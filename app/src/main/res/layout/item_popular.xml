@@ -35,6 +35,7 @@
             android:backgroundTint="@color/white"
             android:clipToOutline="true"
             android:padding="@dimen/_5sdp"
+            android:elevation="@dimen/_5sdp"
             android:scaleType="fitXY"
             android:src="@drawable/round_add_24"
             app:layout_constraintVertical_bias="0.9"
@@ -63,6 +64,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/open_sans_regular"
             android:text="Carte D’or Strawberry Classic 800 ml"
+            app:layout_constraintHorizontal_bias="0"
             android:textColor="#363636"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
@@ -71,6 +73,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imgShop" />
 
         <TextView
+            android:id="@+id/txtPrize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"

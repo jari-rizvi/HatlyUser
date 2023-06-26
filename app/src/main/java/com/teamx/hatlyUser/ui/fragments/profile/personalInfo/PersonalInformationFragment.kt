@@ -40,6 +40,9 @@ class PersonalInformationFragment : BaseFragment<FragmentPersonalInformationBind
             }
         }
 
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
 
 
