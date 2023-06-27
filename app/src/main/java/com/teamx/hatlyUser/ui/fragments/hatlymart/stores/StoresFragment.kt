@@ -55,7 +55,7 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
             findNavController().popBackStack()
         }
 
-        when (MART){
+        when (MART) {
             Marts.HATLY_MART -> {
                 Log.d("StoreFragment", "HATLY_MART: back")
             }
@@ -92,38 +92,41 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
             false
         })
 
-        mViewModel.allStores(1, 5, "")
-
         if (!mViewModel.allStoresResponse.hasActiveObservers()) {
-            mViewModel.allStoresResponse.observe(requireActivity(), Observer {
-                when (it.status) {
-                    Resource.Status.LOADING -> {
-                        loadingDialog.show()
-                    }
-                    Resource.Status.SUCCESS -> {
-                        loadingDialog.dismiss()
-                        it.data?.let { data ->
-                            modelAllStoresArraylist.clear()
-                            Log.d("allStoresResponse", "onViewCreated: $data")
-                            modelAllStoresArraylist.addAll(data)
+            mViewModel.allStores(1, 5, "")
+            Log.d("allStoresResponse", "allStores: ")
+        }
 
-                            hatlyPopularAdapter.notifyDataSetChanged()
-                        }
-                    }
-                    Resource.Status.ERROR -> {
-                        loadingDialog.dismiss()
-                        mViewDataBinding.root.snackbar(it.message!!)
+//        if (!mViewModel.allStoresResponse.hasActiveObservers()) {
+        mViewModel.allStoresResponse.observe(requireActivity(), Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    it.data?.let { data ->
+                        modelAllStoresArraylist.clear()
+                        Log.d("allStoresResponse", "onViewCreated: $data")
+                        modelAllStoresArraylist.addAll(data)
+
+                        hatlyPopularAdapter.notifyDataSetChanged()
                     }
                 }
-            })
-        }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    mViewDataBinding.root.snackbar(it.message!!)
+                }
+            }
+        })
+//        }
     }
 
     override fun clickshopItem(position: Int) {
         val hatlyStore = modelAllStoresArraylist[position]
         val bundle = Bundle()
         bundle.putString("_id", hatlyStore._id)
-        findNavController().navigate(R.id.action_storesFragment_to_hatlyMartFragment,bundle)
+        findNavController().navigate(R.id.action_storesFragment_to_hatlyMartFragment, bundle)
     }
 
     override fun clickMoreItem(position: Int) {

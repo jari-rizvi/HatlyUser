@@ -1,6 +1,7 @@
 package com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -56,6 +57,10 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
             }
         }
 
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         healthDetailCatArraylist = ArrayList()
         healthDetailPopularArraylist = ArrayList()
 
@@ -92,36 +97,39 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
         mViewDataBinding.recPopular.layoutManager = layoutManager2
 
         if (storeId.isNotEmpty()) {
-            mViewModel.healthDeatil(storeId)
+            if (!mViewModel.healthDetailResponse.hasActiveObservers()) {
+                Log.d("allStoresResponse", "HatlyMartFragment: ")
+                mViewModel.healthDeatil(storeId)
+            }
         }
 
-        if (!mViewModel.healthDetailResponse.hasActiveObservers()) {
-            mViewModel.healthDetailResponse.observe(requireActivity(), Observer {
-                when (it.status) {
-                    Resource.Status.LOADING -> {
-                        loadingDialog.show()
-                    }
-                    Resource.Status.SUCCESS -> {
-                        loadingDialog.dismiss()
-                        it.data?.let { data ->
+//        if (!mViewModel.healthDetailResponse.hasActiveObservers()) {
+        mViewModel.healthDetailResponse.observe(requireActivity(), Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    it.data?.let { data ->
 
-                            healthDetailCatArraylist.clear()
-                            healthDetailPopularArraylist.clear()
+                        healthDetailCatArraylist.clear()
+                        healthDetailPopularArraylist.clear()
 
-                            healthDetailCatArraylist.addAll(data.categores)
-                            healthDetailPopularArraylist.addAll(data.popularProduct)
+                        healthDetailCatArraylist.addAll(data.categores)
+                        healthDetailPopularArraylist.addAll(data.popularProduct)
 
-                            hatlyShopCatAdapter.notifyDataSetChanged()
-                            hatlyPopularAdapter.notifyDataSetChanged()
-                        }
-                    }
-                    Resource.Status.ERROR -> {
-                        loadingDialog.dismiss()
-                        mViewDataBinding.root.snackbar(it.message!!)
+                        hatlyShopCatAdapter.notifyDataSetChanged()
+                        hatlyPopularAdapter.notifyDataSetChanged()
                     }
                 }
-            })
-        }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    mViewDataBinding.root.snackbar(it.message!!)
+                }
+            }
+        })
+//        }
 
         hatlyShopCatAdapter = HatlyShopCatAdapter(healthDetailCatArraylist, this)
         hatlyPopularAdapter = HatlyPopularAdapter(healthDetailPopularArraylist, this)
