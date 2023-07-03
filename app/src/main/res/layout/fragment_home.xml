@@ -343,7 +343,7 @@
             app:layout_constraintStart_toStartOf="@+id/textView10"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="@+id/textView10"
-            android:src="@drawable/health_and_beauty"
+            android:src="@drawable/home_business"
             app:layout_constraintTop_toTopOf="@+id/textView11"
             app:layout_constraintBottom_toBottomOf="@+id/textView11"/>
 

@@ -13,6 +13,7 @@ import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.MainApplication
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.constants.NetworkCallPointsNest
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentHatlyMartBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter.HatlyPopularAdapter
@@ -22,6 +23,7 @@ import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.Categore
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.ModelHealthDetail
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.PopularProduct
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.adapter.StoresAdapter
+import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -82,11 +84,30 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
             findNavController().navigate(R.id.action_hatlyMartFragment_to_specialOrderFragment)
         }
 
-        // Create and set the layout manager
-        // For the RecyclerView.
+        when (NetworkCallPointsNest.MART) {
+            Marts.HATLY_MART -> {
+                Log.d("StoreFragment", "HATLY_MART: back")
+                mViewDataBinding.txtShopCatTitle.text = "Shop by categories:"
+                mViewDataBinding.txtPopular.text = "Popular Items:"
+            }
+            Marts.FOOD -> {
+                Log.d("StoreFragment", "FOOD: back")
+            }
+            Marts.GROCERY -> {
+                Log.d("StoreFragment", "GROCERY: back")
+                mViewDataBinding.txtShopCatTitle.text = "Shop by categories:"
+                mViewDataBinding.txtPopular.text = "Popular Items:"
+            }
+            Marts.HEALTH_BEAUTY -> {
+                Log.d("StoreFragment", "HEALTH_BEAUTY: back")
+                mViewDataBinding.txtShopCatTitle.text = "Shop by categories:"
+                mViewDataBinding.txtPopular.text = "Trending Now"
+            }
+            Marts.HOME_BUSINESS -> {
+                Log.d("StoreFragment", "HOME_BUSINESS: back")
+            }
+        }
 
-        // Create and set the layout manager
-        // For the RecyclerView.
         val layoutManager = GridLayoutManager(requireActivity(), 4)
         mViewDataBinding.recShopCatMart.layoutManager = layoutManager
         val layoutManager1 =
