@@ -1,11 +1,15 @@
 package com.teamx.hatlyUser.ui.fragments.wallet
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
+import android.widget.AbsListView
 import android.widget.CompoundButton
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
@@ -16,6 +20,7 @@ import com.teamx.hatlyUser.ui.fragments.notification.adapter.NotificationAdapter
 import com.teamx.hatlyUser.ui.fragments.setting.contactus.ContactUsViewModel
 import com.teamx.hatlyUser.ui.fragments.setting.settings.SettingViewModel
 import com.teamx.hatlyUser.ui.fragments.wallet.adapter.WalletAdapter
+import com.teamx.hatlyUser.ui.fragments.wishlist.adapter.WishListAdapter
 import com.teamx.hatlyUser.utils.DialogHelperClass
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,6 +34,14 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>() {
         get() = WalletViewModel::class.java
     override val bindingVariable: Int
         get() = BR.viewModel
+
+    lateinit var itemClasses: ArrayList<String>
+    lateinit var hatlyPopularAdapter: WalletAdapter
+
+    var isScrolling = false
+    var currentItems = 0
+    var totalItems = 0
+    var scrollOutItems = 0
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,7 +64,7 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>() {
 
         mViewDataBinding.recWallet.layoutManager = layoutManager2
 
-        val itemClasses: ArrayList<String> = ArrayList()
+        itemClasses = ArrayList()
 
         itemClasses.add("")
         itemClasses.add("")
@@ -80,14 +93,57 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>() {
         itemClasses.add("")
 
 
-        val hatlyPopularAdapter = WalletAdapter(itemClasses)
+        hatlyPopularAdapter = WalletAdapter(itemClasses)
         mViewDataBinding.recWallet.adapter = hatlyPopularAdapter
+        mViewDataBinding.recWallet.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
+                {
+                    isScrolling = true
+                }
+            }
 
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
 
+                currentItems = layoutManager2!!.childCount
+                totalItems = layoutManager2!!.itemCount
+                scrollOutItems = layoutManager2!!.findFirstVisibleItemPosition()
+
+                if(isScrolling && (currentItems + scrollOutItems == totalItems))
+                {
+                    isScrolling = false;
+                    fetchData()
+                }
+            }
+        })
 
 
     }
 
+    private fun fetchData(){
+        mViewDataBinding.spinKit.visibility = View.VISIBLE
+        Handler(Looper.getMainLooper()).postDelayed({
+            for (i in 1..5) {
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+            }
+            mViewDataBinding.spinKit.visibility = View.GONE
+            hatlyPopularAdapter.notifyDataSetChanged()
+        }, 5000)
+
+
+    }
 
 
 }

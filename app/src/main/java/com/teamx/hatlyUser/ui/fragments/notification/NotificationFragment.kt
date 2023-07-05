@@ -1,10 +1,16 @@
 package com.teamx.hatlyUser.ui.fragments.notification
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.Menu
 import android.view.View
+import android.widget.AbsListView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
@@ -25,6 +31,15 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    var layoutManager2 : LinearLayoutManager? = null
+
+    var isScrolling = false
+    var currentItems = 0
+    var totalItems = 0
+    var scrollOutItems = 0
+
+    lateinit var itemClasses: ArrayList<String>
+    lateinit var hatlyPopularAdapter: NotificationAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,11 +58,11 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
         }
 
 
-        val layoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        layoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
 
         mViewDataBinding.recNotification.layoutManager = layoutManager2
 
-        val itemClasses: ArrayList<String> = ArrayList()
+        itemClasses = ArrayList()
 
         itemClasses.add("")
         itemClasses.add("")
@@ -76,8 +91,55 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
         itemClasses.add("")
 
 
-        val hatlyPopularAdapter = NotificationAdapter(itemClasses)
+        hatlyPopularAdapter = NotificationAdapter(itemClasses)
         mViewDataBinding.recNotification.adapter = hatlyPopularAdapter
+
+        mViewDataBinding.recNotification.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
+                {
+                    isScrolling = true
+                }
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                currentItems = layoutManager2!!.childCount
+                totalItems = layoutManager2!!.itemCount
+                scrollOutItems = layoutManager2!!.findFirstVisibleItemPosition()
+
+                if(isScrolling && (currentItems + scrollOutItems == totalItems))
+                {
+                    isScrolling = false
+                    fetchData()
+                }
+            }
+        })
+
+
+    }
+
+    private fun fetchData(){
+        mViewDataBinding.spinKit.visibility = View.VISIBLE
+        Handler(Looper.getMainLooper()).postDelayed({
+            for (i in 1..5) {
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+            }
+            mViewDataBinding.spinKit.visibility = View.GONE
+            hatlyPopularAdapter.notifyDataSetChanged()
+        }, 5000)
 
 
     }
