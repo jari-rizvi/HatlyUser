@@ -60,7 +60,8 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>() {
             findNavController().popBackStack()
         }
 
-        val layoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        val layoutManager2 =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
 
         mViewDataBinding.recWallet.layoutManager = layoutManager2
 
@@ -95,11 +96,10 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>() {
 
         hatlyPopularAdapter = WalletAdapter(itemClasses)
         mViewDataBinding.recWallet.adapter = hatlyPopularAdapter
-        mViewDataBinding.recWallet.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+        mViewDataBinding.recWallet.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
-                {
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
                     isScrolling = true
                 }
             }
@@ -107,12 +107,11 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                currentItems = layoutManager2!!.childCount
-                totalItems = layoutManager2!!.itemCount
-                scrollOutItems = layoutManager2!!.findFirstVisibleItemPosition()
+                currentItems = layoutManager2.childCount
+                totalItems = layoutManager2.itemCount
+                scrollOutItems = layoutManager2.findFirstVisibleItemPosition()
 
-                if(isScrolling && (currentItems + scrollOutItems == totalItems))
-                {
+                if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
                     isScrolling = false;
                     fetchData()
                 }
@@ -122,7 +121,7 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>() {
 
     }
 
-    private fun fetchData(){
+    private fun fetchData() {
         mViewDataBinding.spinKit.visibility = View.VISIBLE
         Handler(Looper.getMainLooper()).postDelayed({
             for (i in 1..5) {
@@ -141,9 +140,5 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>() {
             mViewDataBinding.spinKit.visibility = View.GONE
             hatlyPopularAdapter.notifyDataSetChanged()
         }, 5000)
-
-
     }
-
-
 }

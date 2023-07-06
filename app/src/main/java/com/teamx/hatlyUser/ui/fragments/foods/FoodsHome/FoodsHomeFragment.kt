@@ -1,12 +1,16 @@
 package com.teamx.hatlyUser.ui.fragments.foods.FoodsHome
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.widget.AbsListView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
@@ -30,6 +34,16 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    lateinit var itemClasses: ArrayList<String>
+    lateinit var foodHomeAdapter: FoodHomeAdapter
+
+    var layoutManager2 : LinearLayoutManager? = null
+    var layoutManager : GridLayoutManager? = null
+
+    var isScrolling = false
+    var currentItems = 0
+    var totalItems = 0
+    var scrollOutItems = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,14 +79,14 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
             }
         }
 
-        val layoutManager = GridLayoutManager(requireActivity(),2)
+        layoutManager = GridLayoutManager(requireActivity(),2)
 
-        val layoutManager1 = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-        mViewDataBinding.recFoodTitle.layoutManager = layoutManager1
+        layoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        mViewDataBinding.recFoodTitle.layoutManager = layoutManager2
 
         mViewDataBinding.recFoodHomeProducts.layoutManager = layoutManager
 
-        val itemClasses: ArrayList<String> = ArrayList()
+        itemClasses = ArrayList()
 
         itemClasses.add("")
         itemClasses.add("")
@@ -104,11 +118,57 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
         itemClasses.add("")
         itemClasses.add("")
 
-        val adapter = FoodHomeAdapter(itemClasses, this)
-        mViewDataBinding.recFoodHomeProducts.adapter = adapter
+        foodHomeAdapter = FoodHomeAdapter(itemClasses, this)
+        mViewDataBinding.recFoodHomeProducts.adapter = foodHomeAdapter
 
         val foodHomeTitleAdapterAdapter = FoodHomeTitleAdapter(itemClasses)
         mViewDataBinding.recFoodTitle.adapter = foodHomeTitleAdapterAdapter
+
+        mViewDataBinding.recFoodHomeProducts.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
+                {
+                    isScrolling = true
+                }
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                currentItems = layoutManager!!.childCount
+                totalItems = layoutManager!!.itemCount
+                scrollOutItems = layoutManager!!.findFirstVisibleItemPosition()
+
+                if(isScrolling && (currentItems + scrollOutItems == totalItems))
+                {
+                    isScrolling = false
+                    fetchData()
+                }
+            }
+        })
+
+    }
+
+    private fun fetchData(){
+        mViewDataBinding.spinKit.visibility = View.VISIBLE
+        Handler(Looper.getMainLooper()).postDelayed({
+            for (i in 1..5) {
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+                itemClasses.add("")
+            }
+            mViewDataBinding.spinKit.visibility = View.GONE
+            foodHomeAdapter.notifyDataSetChanged()
+        }, 5000)
 
 
     }

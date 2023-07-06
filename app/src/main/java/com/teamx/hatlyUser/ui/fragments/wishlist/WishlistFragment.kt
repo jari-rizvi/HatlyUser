@@ -123,9 +123,9 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                currentItems = layoutManager2!!.childCount
-                totalItems = layoutManager2!!.itemCount
-                scrollOutItems = layoutManager2!!.findFirstVisibleItemPosition()
+                currentItems = layoutManager2.childCount
+                totalItems = layoutManager2.itemCount
+                scrollOutItems = layoutManager2.findFirstVisibleItemPosition()
 
                 if(isScrolling && (currentItems + scrollOutItems == totalItems))
                 {
