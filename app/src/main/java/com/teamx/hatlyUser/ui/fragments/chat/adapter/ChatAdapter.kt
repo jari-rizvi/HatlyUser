@@ -15,12 +15,6 @@ class ChatAdapter(
     private val VIEW_TYPE_USER = 1
     private val VIEW_TYPE_Rider = 2
 
-    init {
-
-
-    }
-
-    var previousStringTime = ""
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
