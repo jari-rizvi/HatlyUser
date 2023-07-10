@@ -36,7 +36,7 @@ interface ApiService {
 
 
     @GET(NetworkCallPoints.ALL_HEALTH_LIST)
-    suspend fun allStores(
+    suspend fun allHealthAndBeautyStores(
         @Query("page") page: Int,
         @Query("limit") limit: Int,
         @Query("search") search: String,

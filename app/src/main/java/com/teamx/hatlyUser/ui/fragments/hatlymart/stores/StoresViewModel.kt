@@ -5,14 +5,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
 import com.teamx.hatlyUser.baseclasses.BaseViewModel
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
-import com.teamx.hatlyUser.ui.fragments.auth.login.Model.ModelLogin
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
-import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStoresItem
 import com.teamx.hatlyUser.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -26,24 +22,24 @@ class StoresViewModel @Inject constructor(
     private val networkHelper: NetworkHelper
 ) : BaseViewModel() {
 
-    private val _allStores = MutableLiveData<Resource<ModelAllStores>>()
-    val allStoresResponse: LiveData<Resource<ModelAllStores>>
-        get() = _allStores
+    private val _allHealthAndBeautyStores = MutableLiveData<Resource<ModelAllStores>>()
+    val allHealthAndBeautyStoresResponse: LiveData<Resource<ModelAllStores>>
+        get() = _allHealthAndBeautyStores
 
-    fun allStores(page: Int, limit: Int, search: String) {
+    fun allHealthAndBeautyStores(page: Int, limit: Int, search: String) {
         viewModelScope.launch {
-            _allStores.postValue(Resource.loading(null))
+            _allHealthAndBeautyStores.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.allStores(page, limit, search).let {
+                    mainRepository.allHealthAndBeautyStores(page, limit, search).let {
                         if (it.isSuccessful) {
-                            _allStores.postValue(Resource.success(it.body()!!))
+                            _allHealthAndBeautyStores.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
-                            _allStores.postValue(Resource.error(jsonObj.getString("message")))
+                            _allHealthAndBeautyStores.postValue(Resource.error(jsonObj.getString("message")))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
-                            _allStores.postValue(Resource.error(jsonObj.getString("message")))
+                            _allHealthAndBeautyStores.postValue(Resource.error(jsonObj.getString("message")))
                             Log.d(
                                 "allStoresResponse",
                                 "onViewCreated: ${jsonObj.getString("message")}"
@@ -53,9 +49,9 @@ class StoresViewModel @Inject constructor(
                         }
                     }
                 } catch (e: Exception) {
-                    _allStores.postValue(Resource.error("${e.message}", null))
+                    _allHealthAndBeautyStores.postValue(Resource.error("${e.message}", null))
                 }
-            } else _allStores.postValue(Resource.error("No internet connection", null))
+            } else _allHealthAndBeautyStores.postValue(Resource.error("No internet connection", null))
         }
     }
 

@@ -75,7 +75,9 @@ class AllowLocationFragment : BaseFragment<FragmentAllowLocationBinding, LoginVi
         )
     }
 
+
     @RequiresApi(Build.VERSION_CODES.N)
+
     val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->

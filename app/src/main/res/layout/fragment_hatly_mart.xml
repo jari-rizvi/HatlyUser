@@ -64,7 +64,7 @@
             android:drawableTint="#66363636"
             android:hint="Search"
             android:imeOptions="actionNext"
-            android:inputType="textEmailAddress"
+            android:digits="@string/search_pattern"
             android:maxLines="1"
             android:paddingVertical="@dimen/_8sdp"
             android:paddingStart="@dimen/_10sdp"

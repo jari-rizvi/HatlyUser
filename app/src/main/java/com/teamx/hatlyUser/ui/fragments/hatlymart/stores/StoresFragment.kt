@@ -67,6 +67,10 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
             }
             Marts.HEALTH_BEAUTY -> {
                 Log.d("StoreFragment", "HEALTH_BEAUTY: back")
+                if (!mViewModel.allHealthAndBeautyStoresResponse.hasActiveObservers()) {
+                    mViewModel.allHealthAndBeautyStores(1, 10, "")
+                    Log.d("allStoresResponse", "allStores: ")
+                }
             }
             Marts.HOME_BUSINESS -> {
                 Log.d("StoreFragment", "HOME_BUSINESS: back")
@@ -84,21 +88,32 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
 
         mViewDataBinding.inpSearch.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                if (mViewDataBinding.inpSearch.text.toString().isNotEmpty()) {
-                mViewModel.allStores(1, 5, mViewDataBinding.inpSearch.text.toString().trim())
-//                }
+                when (MART) {
+                    Marts.HATLY_MART -> {
+
+                    }
+                    Marts.FOOD -> {
+
+                    }
+                    Marts.GROCERY -> {
+
+                    }
+                    Marts.HEALTH_BEAUTY -> {
+                        mViewModel.allHealthAndBeautyStores(1, 10, mViewDataBinding.inpSearch.text.toString().trim())
+                    }
+                    Marts.HOME_BUSINESS -> {
+
+                    }
+                }
                 return@OnEditorActionListener true
             }
             false
         })
 
-        if (!mViewModel.allStoresResponse.hasActiveObservers()) {
-            mViewModel.allStores(1, 5, "")
-            Log.d("allStoresResponse", "allStores: ")
-        }
+
 
 //        if (!mViewModel.allStoresResponse.hasActiveObservers()) {
-        mViewModel.allStoresResponse.observe(requireActivity(), Observer {
+        mViewModel.allHealthAndBeautyStoresResponse.observe(requireActivity(), Observer {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     loadingDialog.show()

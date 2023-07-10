@@ -25,7 +25,6 @@ class HatlyCategoriesFragment :
     override val bindingVariable: Int
         get() = BR.viewModel
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

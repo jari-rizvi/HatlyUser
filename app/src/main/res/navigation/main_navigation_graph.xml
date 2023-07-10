@@ -98,6 +98,9 @@
         <action
             android:id="@+id/action_loginFragment_to_locationFragment"
             app:destination="@id/allowLocationFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment

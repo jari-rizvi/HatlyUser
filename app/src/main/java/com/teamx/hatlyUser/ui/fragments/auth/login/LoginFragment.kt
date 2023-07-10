@@ -14,6 +14,7 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentLoginBinding
+import com.teamx.hatlyUser.utils.LocationPermission
 import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -86,7 +87,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                                     Log.d("allStoresResponse", "login: ${data.deviceData}")
                                     Log.d("allStoresResponse", "randNum: ${randNum}")
                                 }
-                                findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
+                                if (LocationPermission.requestPermission(requireContext())) {
+                                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                                } else {
+                                    findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
+                                }
                             }
                         }
                     }
