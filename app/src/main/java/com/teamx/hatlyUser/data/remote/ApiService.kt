@@ -4,10 +4,11 @@ import com.google.gson.JsonObject
 import com.teamx.hatlyUser.constants.NetworkCallPoints
 import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.DEVICE_TOKEN
 import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.TOKENER
-import com.teamx.hatlyUser.ui.fragments.auth.createpassword.model.ModelCreatePass
-import com.teamx.hatlyUser.ui.fragments.auth.forgotpassword.model.ModelForgot
+import com.teamx.hatlyUser.ui.fragments.auth.createpassword.model.ModelUpdatePass
+import com.teamx.hatlyUser.ui.fragments.auth.forgotpassword.model.ModelForgotPass
 import com.teamx.hatlyUser.ui.fragments.auth.login.Model.ModelLogin
-import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelVerifyOtp
+import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelSignUpOtpVerify
+import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelVerifyPassOtp
 import com.teamx.hatlyUser.ui.fragments.auth.signup.model.ModelSignUp
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.ModelHealthDetail
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
@@ -19,20 +20,23 @@ interface ApiService {
     @POST(NetworkCallPoints.SIGN_UP)
     suspend fun signup(@Body params: JsonObject?): Response<ModelSignUp>
 
-    @POST(NetworkCallPoints.VERIFY_OTP)
-    suspend fun verify_otp(@Body params: JsonObject?): Response<ModelVerifyOtp>
+    @POST(NetworkCallPoints.VERIFY_SIGNUP_OTP)
+    suspend fun verifySignupOtp(@Body params: JsonObject?): Response<ModelSignUpOtpVerify>
+
+    @POST(NetworkCallPoints.VERIFY_FORGOT_PASS)
+    suspend fun forgotPassVerifyOtp(@Body params: JsonObject?): Response<ModelVerifyPassOtp>
 
     @POST(NetworkCallPoints.LOGIN)
     suspend fun login(@Body params: JsonObject?): Response<ModelLogin>
 
-    @POST(NetworkCallPoints.FORGOT)
-    suspend fun forgot(@Body params: JsonObject?): Response<ModelForgot>
+    @POST(NetworkCallPoints.FORGOT_PASS)
+    suspend fun forgotPass(@Body params: JsonObject?): Response<ModelForgotPass>
 
-    @POST(NetworkCallPoints.CREATE_PASS)
-    suspend fun createPass(@Body params: JsonObject?): Response<ModelCreatePass>
+    @POST(NetworkCallPoints.UPDATE_PASS)
+    suspend fun updatePass(@Body params: JsonObject?): Response<ModelUpdatePass>
 
     @POST(NetworkCallPoints.RESEND_OTP)
-    suspend fun resendOtp(@Body params: JsonObject?): Response<ModelForgot>
+    suspend fun resendOtp(@Body params: JsonObject?): Response<ModelForgotPass>
 
 
     @GET(NetworkCallPoints.ALL_HEALTH_LIST)

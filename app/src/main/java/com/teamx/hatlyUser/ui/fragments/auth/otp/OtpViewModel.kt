@@ -8,8 +8,9 @@ import com.google.gson.JsonObject
 import com.teamx.hatlyUser.baseclasses.BaseViewModel
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
-import com.teamx.hatlyUser.ui.fragments.auth.forgotpassword.model.ModelForgot
-import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelVerifyOtp
+import com.teamx.hatlyUser.ui.fragments.auth.forgotpassword.model.ModelForgotPass
+import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelSignUpOtpVerify
+import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelVerifyPassOtp
 import com.teamx.hatlyUser.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -24,35 +25,65 @@ class OtpViewModel @Inject constructor(
 ) : BaseViewModel() {
 
 
-    private val _verify_otp = MutableLiveData<Resource<ModelVerifyOtp>>()
-    val verifyOtpResponse: LiveData<Resource<ModelVerifyOtp>>
-        get() = _verify_otp
+    private val _verifySignupOtp = MutableLiveData<Resource<ModelSignUpOtpVerify>>()
+    val verifySignupOtpResponse: LiveData<Resource<ModelSignUpOtpVerify>>
+        get() = _verifySignupOtp
 
-    fun verifyOtp(param: JsonObject) {
+    fun verifySignupOtp(param: JsonObject) {
         viewModelScope.launch {
-            _verify_otp.postValue(Resource.loading(null))
+            _verifySignupOtp.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.verify_otp(param).let {
+                    mainRepository.verifySignupOtp(param).let {
                         if (it.isSuccessful) {
-                            _verify_otp.postValue(Resource.success(it.body()!!))
+                            _verifySignupOtp.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
-                            _verify_otp.postValue(Resource.error(jsonObj.getString("message")))
+                            _verifySignupOtp.postValue(Resource.error(jsonObj.getString("message")))
                         } else {
-                            _verify_otp.postValue(Resource.error("Some thing went wrong", null))
+                            _verifySignupOtp.postValue(Resource.error("Some thing went wrong", null))
                         }
                     }
                 } catch (e: Exception) {
-                    _verify_otp.postValue(Resource.error("${e.message}", null))
+                    _verifySignupOtp.postValue(Resource.error("${e.message}", null))
                 }
-            } else _verify_otp.postValue(Resource.error("No internet connection", null))
+            } else _verifySignupOtp.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+    private val _forgotPassVerifyOtp = MutableLiveData<Resource<ModelVerifyPassOtp>>()
+    val forgotPassVerifyOtpResponse: LiveData<Resource<ModelVerifyPassOtp>>
+        get() = _forgotPassVerifyOtp
+
+    fun forgotPassVerifyOtp(param: JsonObject) {
+        viewModelScope.launch {
+            _forgotPassVerifyOtp.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.forgotPassVerifyOtp(param).let {
+                        if (it.isSuccessful) {
+                            _forgotPassVerifyOtp.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _forgotPassVerifyOtp.postValue(Resource.error(jsonObj.getString("message")))
+                        } else {
+                            _forgotPassVerifyOtp.postValue(Resource.error("Some thing went wrong", null))
+                        }
+                    }
+                } catch (e: Exception) {
+                    _forgotPassVerifyOtp.postValue(Resource.error("${e.message}", null))
+                }
+            } else _forgotPassVerifyOtp.postValue(Resource.error("No internet connection", null))
         }
     }
 
 
-    private val _resend_otp = MutableLiveData<Resource<ModelForgot>>()
-    val resendOtpResponse: LiveData<Resource<ModelForgot>>
+
+
+
+
+    private val _resend_otp = MutableLiveData<Resource<ModelForgotPass>>()
+    val resendOtpResponse: LiveData<Resource<ModelForgotPass>>
         get() = _resend_otp
 
     fun resendOtp(param: JsonObject) {

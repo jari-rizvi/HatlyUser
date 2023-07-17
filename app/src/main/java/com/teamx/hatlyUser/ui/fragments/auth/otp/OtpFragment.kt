@@ -2,21 +2,19 @@ package com.teamx.hatlyUser.ui.fragments.auth.otp
 
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
-import bolts.Task
 import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentOtpBinding
+import com.teamx.hatlyUser.utils.LocationPermission
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -54,17 +52,21 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
 
         val bundle = arguments
         phone = bundle?.getString("phone")
-        fromSignup = bundle?.getBoolean("fromSignup")!!
+        fromSignup = bundle?.getBoolean("fromSignup", false)!!
 
         mViewDataBinding.txtVerify.setOnClickListener {
             if (isValidate()) {
                 initialization()
-                mViewModel.verifyOtp(createParams())
+                if (fromSignup) {
+                    mViewModel.verifySignupOtp(createSignUpVerifyParams())
+                } else {
+                    mViewModel.forgotPassVerifyOtp(createSignUpVerifyParams())
+                }
             }
         }
 
-        if (!mViewModel.verifyOtpResponse.hasActiveObservers()) {
-            mViewModel.verifyOtpResponse.observe(requireActivity(), Observer {
+        if (!mViewModel.verifySignupOtpResponse.hasActiveObservers()) {
+            mViewModel.verifySignupOtpResponse.observe(requireActivity(), Observer {
                 when (it.status) {
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
@@ -72,18 +74,68 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            if (data.verified) {
-                                if (fromSignup) {
-                                    findNavController().navigate(R.id.action_otpFragment_to_allowLocationFragment)
+//                            if (data.verified) {
+                            if (data.verified){
+                                CoroutineScope(Dispatchers.Main).launch {
+                                    dataStoreProvider.saveUserToken(data.token)
+
+//                                    dataStoreProvider.saveDeviceData(randNum!!)
+//                                    dataStoreProvider.saveDeviceData("88765275963748185512")
+                                }
+                                if (LocationPermission.requestPermission(requireContext())) {
+                                    findNavController().navigate(R.id.action_otpFragment_to_homeFragment)
                                 } else {
-                                    val bundle1 = Bundle()
-                                    bundle1.putString("phone", phone)
-                                    findNavController().navigate(
-                                        R.id.action_otpFragment_to_createPasswordFragment,
-                                        bundle1
-                                    )
+                                    findNavController().navigate(R.id.action_otpFragment_to_allowLocationFragment)
                                 }
                             }
+
+//                                if (fromSignup) {
+//                                } else {
+//                                    val bundle1 = Bundle()
+//                                    bundle1.putString("phone", phone)
+//                                    findNavController().navigate(
+//                                        R.id.action_otpFragment_to_createPasswordFragment,
+//                                        bundle1
+//                                    )
+//                                }
+//                            }
+                        }
+                    }
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                    }
+                }
+            })
+        }
+
+        if (!mViewModel.forgotPassVerifyOtpResponse.hasActiveObservers()) {
+            mViewModel.forgotPassVerifyOtpResponse.observe(requireActivity(), Observer {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+
+                            val bundle = Bundle()
+                            bundle.putString("uniqueId", data.uniqueId)
+                            bundle.putString("phone", phone)
+//                            if (data.verified) {
+                            findNavController().navigate(
+                                R.id.action_otpFragment_to_createPasswordFragment,
+                                bundle
+                            )
+//                                if (fromSignup) {
+//                                } else {
+//                                    val bundle1 = Bundle()
+//                                    bundle1.putString("phone", phone)
+//                                    findNavController().navigate(
+//                                        R.id.action_otpFragment_to_createPasswordFragment,
+//                                        bundle1
+//                                    )
+//                                }
+//                            }
                         }
                     }
                     Resource.Status.ERROR -> {
@@ -96,7 +148,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
         mViewDataBinding.textView24.isEnabled = false
         timerStart()
         mViewDataBinding.textView24.setOnClickListener {
-            mViewModel.resendOtp(createResendParams())
+            mViewModel.resendOtp(createVerifyForgotPassParams())
         }
 
         if (!mViewModel.resendOtpResponse.hasActiveObservers()) {
@@ -126,7 +178,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
         pinView = mViewDataBinding.pinView.text.toString()
     }
 
-    private fun createParams(): JsonObject {
+    private fun createSignUpVerifyParams(): JsonObject {
         val params = JsonObject()
         try {
             params.addProperty("contact", phone)
@@ -137,10 +189,11 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
         return params
     }
 
-    private fun createResendParams(): JsonObject {
+    private fun createVerifyForgotPassParams(): JsonObject {
         val params = JsonObject()
         try {
             params.addProperty("contact", phone)
+            params.addProperty("verificationCode", pinView)
         } catch (e: JSONException) {
             e.printStackTrace()
         }
@@ -159,7 +212,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
         val durationSeconds = 30
         var remainingSeconds = durationSeconds
 
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             while (remainingSeconds > 0) {
                 println("Remaining time: $remainingSeconds seconds")
                 Log.d("timerStart", "working $remainingSeconds")

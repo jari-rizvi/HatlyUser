@@ -2,14 +2,11 @@ package com.teamx.hatlyUser.ui.fragments.auth.forgotpassword
 
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
-import bolts.Task.delay
 import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
@@ -18,9 +15,7 @@ import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentForgotPasswordBinding
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import org.json.JSONException
-import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class ForgotPasswordFragment :
@@ -56,12 +51,12 @@ class ForgotPasswordFragment :
             if (isValidate()) {
                 initialization()
                 Log.d("createParams", "onViewCreated: ${createParams()}")
-                mViewModel.forgot(createParams())
+                mViewModel.forgotPass(createParams())
             }
         }
 
-        if (!mViewModel.forgotResponse.hasActiveObservers()) {
-            mViewModel.forgotResponse.observe(requireActivity(), Observer {
+        if (!mViewModel.forgotPassResponse.hasActiveObservers()) {
+            mViewModel.forgotPassResponse.observe(requireActivity(), Observer {
                 when (it.status) {
                     Resource.Status.LOADING -> {
                         loadingDialog.show()

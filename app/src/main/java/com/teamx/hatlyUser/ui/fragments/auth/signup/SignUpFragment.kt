@@ -16,6 +16,7 @@ import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentSignupBinding
 import com.teamx.hatlyUser.utils.DialogHelperClass
+import com.teamx.hatlyUser.utils.LocationPermission
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONException
@@ -73,12 +74,12 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding, SignUpViewModel>() {
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            if (data.role == "user"){
+//                            if (data.role == "user"){
                                 val bundle = Bundle()
                                 bundle.putString("phone",data.contact)
                                 bundle.putBoolean("fromSignup",true)
                                 findNavController().navigate(R.id.action_signUpFragment_to_otpFragment,bundle)
-                            }
+//                            }
                         }
                     }
                     Resource.Status.ERROR -> {

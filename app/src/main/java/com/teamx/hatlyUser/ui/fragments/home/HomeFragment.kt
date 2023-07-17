@@ -21,12 +21,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
 
     override val layoutId: Int
-        get() = R.layout.fragment_home
+        get() = com.teamx.hatlyUser.R.layout.fragment_home
     override val viewModel: Class<LoginViewModel>
         get() = LoginViewModel::class.java
     override val bindingVariable: Int
         get() = BR.viewModel
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

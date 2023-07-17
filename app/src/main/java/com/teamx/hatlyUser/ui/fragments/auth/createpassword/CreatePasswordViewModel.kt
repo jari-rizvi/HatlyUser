@@ -8,7 +8,7 @@ import com.google.gson.JsonObject
 import com.teamx.hatlyUser.baseclasses.BaseViewModel
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
-import com.teamx.hatlyUser.ui.fragments.auth.createpassword.model.ModelCreatePass
+import com.teamx.hatlyUser.ui.fragments.auth.createpassword.model.ModelUpdatePass
 import com.teamx.hatlyUser.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -23,29 +23,29 @@ class CreatePasswordViewModel @Inject constructor(
 ) : BaseViewModel() {
 
 
-    private val _createPassResponse = MutableLiveData<Resource<ModelCreatePass>>()
-    val createResponse: LiveData<Resource<ModelCreatePass>>
-        get() = _createPassResponse
+    private val _updatePassResponse = MutableLiveData<Resource<ModelUpdatePass>>()
+    val updateResponse: LiveData<Resource<ModelUpdatePass>>
+        get() = _updatePassResponse
 
-    fun createPass(param: JsonObject) {
+    fun updatePass(param: JsonObject) {
         viewModelScope.launch {
-            _createPassResponse.postValue(Resource.loading(null))
+            _updatePassResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.createPass(param).let {
+                    mainRepository.updatePass(param).let {
                         if (it.isSuccessful) {
-                            _createPassResponse.postValue(Resource.success(it.body()!!))
+                            _updatePassResponse.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
-                            _createPassResponse.postValue(Resource.error(jsonObj.getString("message")))
+                            _updatePassResponse.postValue(Resource.error(jsonObj.getString("message")))
                         } else {
-                            _createPassResponse.postValue(Resource.error("Some thing went wrong", null))
+                            _updatePassResponse.postValue(Resource.error("Some thing went wrong", null))
                         }
                     }
                 } catch (e: Exception) {
-                    _createPassResponse.postValue(Resource.error("${e.message}", null))
+                    _updatePassResponse.postValue(Resource.error("${e.message}", null))
                 }
-            } else _createPassResponse.postValue(Resource.error("No internet connection", null))
+            } else _updatePassResponse.postValue(Resource.error("No internet connection", null))
         }
     }
 

@@ -13,8 +13,12 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentCreatePasswordBinding
+import com.teamx.hatlyUser.utils.LocationPermission
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONException
 
 
@@ -33,6 +37,7 @@ class CreatePasswordFragment :
     private var userConfirmPass: String? = null
 
     private var phone: String? = ""
+    private var uniqueId: String? = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,16 +59,17 @@ class CreatePasswordFragment :
         mViewDataBinding.txtLogin.setOnClickListener {
             if (isValidate()) {
                 initialization()
-                mViewModel.createPass(createParams())
+                mViewModel.updatePass(createParams())
             }
         }
 
         val bundle = arguments
         phone = bundle?.getString("phone")
+        uniqueId = bundle?.getString("uniqueId")
         Log.d("createParams", "onViewCreated phone: $phone")
 
-        if (!mViewModel.createResponse.hasActiveObservers()) {
-            mViewModel.createResponse.observe(requireActivity(), Observer {
+        if (!mViewModel.updateResponse.hasActiveObservers()) {
+            mViewModel.updateResponse.observe(requireActivity(), Observer {
                 when (it.status) {
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
@@ -71,7 +77,15 @@ class CreatePasswordFragment :
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            if (data.verified) {
+                            CoroutineScope(Dispatchers.Main).launch {
+                                dataStoreProvider.saveUserToken(data.token)
+
+//                                    dataStoreProvider.saveDeviceData(randNum!!)
+//                                    dataStoreProvider.saveDeviceData("88765275963748185512")
+                            }
+                            if (LocationPermission.requestPermission(requireContext())) {
+                                findNavController().navigate(R.id.action_createPasswordFragment_to_homeFragment)
+                            } else {
                                 findNavController().navigate(R.id.action_createPasswordFragment_to_locationFragment)
                             }
                         }
@@ -97,6 +111,7 @@ class CreatePasswordFragment :
         try {
             params.addProperty("contact", phone)
             params.addProperty("password", userConfirmPass.toString())
+            params.addProperty("uniqueId", uniqueId)
         } catch (e: JSONException) {
             e.printStackTrace()
         }
@@ -112,7 +127,9 @@ class CreatePasswordFragment :
             mViewDataBinding.root.snackbar("Enter confirm password")
             return false
         }
-        if (mViewDataBinding.userNew.text.toString().trim() != mViewDataBinding.userConfirmPass.text.toString().trim()) {
+        if (mViewDataBinding.userNew.text.toString()
+                .trim() != mViewDataBinding.userConfirmPass.text.toString().trim()
+        ) {
             mViewDataBinding.root.snackbar("Password not matched")
             return false
         }
