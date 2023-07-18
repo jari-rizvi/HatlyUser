@@ -26,6 +26,9 @@ import com.teamx.hatlyUser.data.local.datastore.DataStoreProvider
 import com.teamx.hatlyUser.databinding.ActivityMainBinding
 import com.teamx.hatlyUser.ui.fragments.profile.userprofile.ProfileManagementFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
@@ -85,7 +88,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
 
         mViewDataBinding.drawerLayoutMain.logout.setOnClickListener {
-            navController!!.navigate(R.id.wishListFragment)
+//            navController!!.navigate(R.id.wishListFragment)
+            CoroutineScope(Dispatchers.Main).launch {
+                dataStoreProvider.removeAll()
+            }
+            navController!!.navigate(R.id.action_homeFragment_to_loginFragment)
         }
 
         mViewDataBinding.drawerLayoutMain.notification.setOnClickListener {

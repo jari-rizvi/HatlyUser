@@ -38,7 +38,9 @@ class LoginViewModel @Inject constructor(
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _login.postValue(Resource.error(jsonObj.getString("message")))
                         } else {
-                            _login.postValue(Resource.error("Some thing went wrong", null))
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _login.postValue(Resource.error(jsonObj.getString("message")))
+//                            _login.postValue(Resource.error(it.message(), null))
                         }
                     }
                 } catch (e: Exception) {
