@@ -43,8 +43,8 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/957e73abd268a6434e28e8ba0383770e/transformed/jetified-firebase-common-ktx-20.3.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/1bba28632e35f239942a1af4b40ac518/transformed/jetified-firebase-messaging-23.2.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/8e716bc1e972ac920c80ab7d01b3b6ed/transformed/jetified-firebase-auth-interop-20.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/7f02711be306e5feac554d9afa0f3fe4/transformed/jetified-firebase-datatransport-18.1.7-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/5f3a34f27760bf1abf584a534d6751f9/transformed/jetified-firebase-installations-17.1.3-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/7f02711be306e5feac554d9afa0f3fe4/transformed/jetified-firebase-datatransport-18.1.7-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/eaee2b55234c6083e7db9cf13c2047b9/transformed/jetified-firebase-common-20.3.2-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/646c601d7b6819811547cf2ecfd4d015/transformed/jetified-play-services-auth-api-phone-18.0.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/5d8b92e021e4d94a028dae0a8acc7aac/transformed/jetified-recaptcha-18.1.2-api.jar</arg>
@@ -146,10 +146,10 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/94d1e11f7a66e423894787d12a03ee08/transformed/jetified-concurrent-futures-1.1.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/845d400dfaea2eb0c9c0c2bea9e5d19f/transformed/jetified-transport-backend-cct-3.1.8-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/dd4425e4931d41484eb018002024b14b/transformed/jetified-transport-runtime-3.1.8-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/34a53057f4945d2bd0632ce483aa5135/transformed/jetified-transport-api-3.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/b45e9ffc5b87b7ebfa5051481dacbe80/transformed/jetified-firebase-encoders-json-18.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/96a90584dc85fb369c515320bf428e07/transformed/jetified-firebase-encoders-proto-16.0.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/460bcdaca403e392d94b2ae0fac4af3a/transformed/jetified-firebase-encoders-17.0.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/34a53057f4945d2bd0632ce483aa5135/transformed/jetified-transport-api-3.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation/1.5.0/857678d6b4ca7b28571ef7935c668bdb57e15027/annotation-1.5.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/80e7dec4ec210b4d65dec04c5d4440ba/transformed/jetified-okio-jvm-2.8.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/b5f6734f03fb2afcab0f7eec5cb096eb/transformed/jetified-kotlin-stdlib-1.7.10.jar</arg>

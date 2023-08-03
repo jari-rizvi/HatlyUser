@@ -4,6 +4,7 @@ class NetworkCallPoints {
     companion object {
 
         const val LOGIN = "auth/login/app"
+        const val LOGIN_WITH_GOOGLE = "auth/login/google/android"
         const val SIGN_UP = "auth/signup/app"
         const val VERIFY_SIGNUP_OTP = "auth/verify/signup/otp"
         const val FORGOT_PASS = "auth/forgot/password/app"

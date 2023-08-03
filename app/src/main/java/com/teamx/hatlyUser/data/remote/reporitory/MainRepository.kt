@@ -13,6 +13,7 @@ class MainRepository @Inject constructor(
     var localDataSource: ProductDao,
 ) {
     suspend fun login(@Body param: JsonObject) = apiService.login(param)
+    suspend fun loginWithGoogle(@Body param: JsonObject) = apiService.loginWithGoogle(param)
     suspend fun signup(@Body param: JsonObject) = apiService.signup(param)
     suspend fun verifySignupOtp(@Body param: JsonObject) = apiService.verifySignupOtp(param)
     suspend fun forgotPass(@Body param: JsonObject) = apiService.forgotPass(param)

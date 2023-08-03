@@ -16,6 +16,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.teamx.hatlyUser.BR
@@ -54,12 +58,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 //    private var floatingActionButton: FloatingActionButton? = null
 //    private var drawerLayout: DrawerLayout? = null
 
+    private lateinit var googleSignInClient: GoogleSignInClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
         dataStoreProvider = DataStoreProvider(this)
 
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.your_web_client_id)).requestEmail().build()
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
@@ -90,7 +99,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         mViewDataBinding.drawerLayoutMain.logout.setOnClickListener {
 //            navController!!.navigate(R.id.wishListFragment)
             CoroutineScope(Dispatchers.Main).launch {
+                googleSignInClient.signOut().addOnCompleteListener(){
+
+                }
                 dataStoreProvider.removeAll()
+
             }
             navController!!.navigate(R.id.action_homeFragment_to_loginFragment)
         }
