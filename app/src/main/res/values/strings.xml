@@ -4,6 +4,9 @@
     <string name="don_t_have_an_account_sign_up"><font fgcolor='#262626'>Don’t have an account? </font><font fgcolor='#EA1B25'>Sign Up</font></string>
     <string name="already_have_an_account_login"><font fgcolor='#262626'>Already have an account? </font><font fgcolor='#EA1B25'>Login</font></string>
     <string name="search_pattern">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 123456789</string>
+
+<!--    <string name="your_web_client_id">42990662374-qh1053updcjvriuemsv4kktmdbbgm5ed.apps.googleusercontent.com</string>-->
+    <string name="your_web_client_id">42990662374-rh38rb24cfth35psqrrgcbqp67dnpctv.apps.googleusercontent.com</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>
