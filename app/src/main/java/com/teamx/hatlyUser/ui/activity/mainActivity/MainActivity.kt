@@ -3,39 +3,35 @@ package com.teamx.hatlyUser.ui.activity.mainActivity
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.SharedViewModel
 import com.teamx.hatlyUser.baseclasses.BaseActivity
 import com.teamx.hatlyUser.data.local.datastore.DataStoreProvider
 import com.teamx.hatlyUser.databinding.ActivityMainBinding
-import com.teamx.hatlyUser.ui.fragments.profile.userprofile.ProfileManagementFragment
+import com.teamx.hatlyUser.dataclasses.Product
+import com.teamx.hatlyUser.ui.fragments.auth.login.Interface.ProfileInterFace
+import com.teamx.hatlyUser.ui.fragments.auth.login.ModelGoogle.ModelWithGoogle
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), ProfileInterFace {
 
     override val viewModel: Class<MainViewModel>
         get() = MainViewModel::class.java
@@ -98,11 +94,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         mViewDataBinding.drawerLayoutMain.logout.setOnClickListener {
 //            navController!!.navigate(R.id.wishListFragment)
-            CoroutineScope(Dispatchers.Main).launch {
-                googleSignInClient.signOut().addOnCompleteListener(){
-
+            googleSignInClient.signOut().addOnCompleteListener() {
+                if (it.isSuccessful) {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        dataStoreProvider.removeAll()
+                    }
                 }
-                dataStoreProvider.removeAll()
 
             }
             navController!!.navigate(R.id.action_homeFragment_to_loginFragment)
@@ -131,6 +128,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
                     mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                 }
+
                 R.id.cartFragment -> {
                     mViewDataBinding.bottomNav.visibility = View.VISIBLE
                     mViewDataBinding.fab.visibility = View.VISIBLE
@@ -138,6 +136,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     mViewDataBinding.bottomNav.menu.getItem(3)?.isChecked = true
                     mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
+
                 R.id.wishListFragment -> {
                     mViewDataBinding.bottomNav.visibility = View.VISIBLE
                     mViewDataBinding.fab.visibility = View.VISIBLE
@@ -153,6 +152,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     mViewDataBinding.bottomNav.menu.getItem(4)?.isChecked = true
                     mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
+
                 else -> {
                     mViewDataBinding.bottomNav.visibility = View.GONE
                     mViewDataBinding.fab.visibility = View.GONE
@@ -173,18 +173,21 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     Log.d("navController", "onCreate: menuBottom")
                     true
                 }
+
                 R.id.wishlistBottom -> {
                     if (!alreadyFragmentAdded(R.id.wishListFragment)) {
                         navController.navigate(R.id.wishListFragment, null)
                     }
                     true
                 }
+
                 R.id.homeBottom -> {
                     if (!alreadyFragmentAdded(R.id.homeFragment)) {
                         navController.navigate(R.id.homeFragment, null)
                     }
                     true
                 }
+
                 R.id.cartBottom -> {
 
                     if (!alreadyFragmentAdded(R.id.cartFragment)) {
@@ -203,6 +206,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
                     true
                 }
+
                 else -> {
                     false
                 }
@@ -236,6 +240,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         } else {
             mViewDataBinding.drawerLayout.openDrawer(GravityCompat.START)
         }
+    }
+
+    override fun profileData(modelLogin: ModelWithGoogle) {
+    
     }
 
 }

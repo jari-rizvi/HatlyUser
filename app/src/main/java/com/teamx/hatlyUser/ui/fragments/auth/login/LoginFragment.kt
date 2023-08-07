@@ -22,6 +22,7 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentLoginBinding
+import com.teamx.hatlyUser.ui.fragments.auth.login.Interface.ProfileInterFace
 import com.teamx.hatlyUser.utils.LocationPermission
 import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.snackbar
@@ -100,6 +101,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                                 CoroutineScope(Dispatchers.Main).launch {
                                     dataStoreProvider.saveUserToken(data.token)
 
+//                                    (requireActivity() as ProfileInterFace).profileData(data)
 //                                    dataStoreProvider.saveDeviceData(randNum!!)
 //                                    dataStoreProvider.saveDeviceData("88765275963748185512")
                                 }
@@ -131,6 +133,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                             if (data.verified) {
                                 CoroutineScope(Dispatchers.Main).launch {
                                     dataStoreProvider.saveUserToken(data.token)
+
+
+//                                    (requireActivity() as ProfileInterFace).profileData(data)
 
 //                                    dataStoreProvider.saveDeviceData(randNum!!)
 //                                    dataStoreProvider.saveDeviceData("88765275963748185512")
