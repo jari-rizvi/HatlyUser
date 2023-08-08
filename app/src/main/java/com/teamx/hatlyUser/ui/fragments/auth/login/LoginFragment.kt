@@ -22,7 +22,6 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentLoginBinding
-import com.teamx.hatlyUser.ui.fragments.auth.login.Interface.ProfileInterFace
 import com.teamx.hatlyUser.utils.LocationPermission
 import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.snackbar
@@ -32,7 +31,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONException
 import kotlin.random.Random
-
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
@@ -97,14 +95,19 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            if (data.verified) {
+                            if (data.verified == true) {
                                 CoroutineScope(Dispatchers.Main).launch {
-                                    dataStoreProvider.saveUserToken(data.token)
+                                    data.token?.let { it1 -> dataStoreProvider.saveUserToken(it1) }
+
+
+
+//                                    sharedViewModel.setUserData(data)
 
 //                                    (requireActivity() as ProfileInterFace).profileData(data)
 //                                    dataStoreProvider.saveDeviceData(randNum!!)
 //                                    dataStoreProvider.saveDeviceData("88765275963748185512")
                                 }
+                                PrefHelper.getInstance(requireActivity()).setUserData(data)
                                 if (LocationPermission.requestPermission(requireContext())) {
                                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                                 } else {
@@ -130,16 +133,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            if (data.verified) {
+                            if (data.verified == true) {
                                 CoroutineScope(Dispatchers.Main).launch {
-                                    dataStoreProvider.saveUserToken(data.token)
+                                    data.token?.let { it1 -> dataStoreProvider.saveUserToken(it1) }
 
-
+//                                    sharedViewModel.setUserData(data)
 //                                    (requireActivity() as ProfileInterFace).profileData(data)
 
 //                                    dataStoreProvider.saveDeviceData(randNum!!)
 //                                    dataStoreProvider.saveDeviceData("88765275963748185512")
                                 }
+                                PrefHelper.getInstance(requireActivity()).setUserData(data)
                                 if (LocationPermission.requestPermission(requireContext())) {
                                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                                 } else {

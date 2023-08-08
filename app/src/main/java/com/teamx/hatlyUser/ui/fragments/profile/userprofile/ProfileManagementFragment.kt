@@ -40,6 +40,10 @@ class ProfileManagementFragment :
             }
         }
 
+        sharedViewModel.userData.observe(requireActivity()){
+            mViewDataBinding.textView.text = it.name
+        }
+
         mViewDataBinding.imgBack.setOnClickListener {
             findNavController().popBackStack()
         }

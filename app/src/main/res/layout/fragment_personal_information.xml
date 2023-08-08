@@ -69,14 +69,14 @@
             android:background="@drawable/input_auth_field"
             android:backgroundTint="@color/white"
             android:elevation="1dp"
-            android:text="James Bond"
+            android:hint="James Bond"
             android:textColor="#66262626"
             android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
-            android:textColorHint="#787878"
+            android:textColorHint="#BFBFBF"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_13ssp"
             app:layout_constraintBottom_toTopOf="@+id/textView32"
@@ -97,7 +97,7 @@
             app:layout_constraintStart_toStartOf="@+id/editText"
             app:layout_constraintTop_toBottomOf="@+id/editText" />
 
-        <EditText
+        <TextView
             android:id="@+id/editText2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -106,12 +106,12 @@
             android:elevation="1dp"
             android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
-            android:text="+971 6367378488"
+            android:hint="+971 6367378488"
             android:textColor="#66262626"
             android:maxLines="1"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
-            android:textColorHint="#787878"
+            android:textColorHint="#BFBFBF"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_13ssp"
             app:layout_constraintBottom_toTopOf="@+id/textView33"
@@ -132,7 +132,7 @@
             app:layout_constraintStart_toStartOf="@+id/editText3"
             app:layout_constraintTop_toBottomOf="@+id/editText3" />
 
-        <EditText
+        <TextView
             android:id="@+id/editText3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
             android:maxLines="1"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
-            android:textColorHint="#787878"
+            android:textColorHint="#BFBFBF"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_13ssp"
             app:layout_constraintBottom_toTopOf="@+id/textView34"
@@ -168,7 +168,7 @@
             app:layout_constraintStart_toStartOf="@+id/editText2"
             app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
-        <EditText
+        <TextView
             android:id="@+id/editText4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
             android:textColor="#66262626"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
-            android:textColorHint="#787878"
+            android:textColorHint="#BFBFBF"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_13ssp"
             app:layout_constraintBottom_toTopOf="@+id/textView35"
@@ -210,7 +210,7 @@
             android:background="@drawable/button_radius_green"
             android:fontFamily="@font/open_sans_regular"
             android:paddingVertical="@dimen/_10sdp"
-            android:text="Sign Up"
+            android:text="Save"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"

@@ -3,6 +3,9 @@ package com.teamx.hatlyUser.utils
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.gson.Gson
+import com.teamx.hatlyUser.dataclasses.ShippingAddress
+import com.teamx.hatlyUser.ui.fragments.auth.login.Model.ModelLogin
 
 class PrefHelper private constructor() {
 
@@ -13,6 +16,7 @@ class PrefHelper private constructor() {
         private val IS_FIRST_TIME = "isFirstTime"
 
         private const val shippingConst = "_shippingAddress"
+        private const val USER_DATA = "USERDATA"
 
         fun getInstance(context: Context): PrefHelper {
             if (!::sharedPreferences.isInitialized) {
@@ -41,6 +45,19 @@ class PrefHelper private constructor() {
 
     fun clearAll() {
         sharedPreferences.edit().clear().apply()
+    }
+
+    fun getUserData(): ModelLogin? {
+        val gson = Gson()
+        return gson.fromJson(
+            sharedPreferences.getString(USER_DATA, ""), ModelLogin::class.java
+        )
+    }
+
+    fun setUserData(shippingAddress: ModelLogin?) {
+        val gson = Gson()
+        val str = gson.toJson(shippingAddress)
+        sharedPreferences.edit().putString(USER_DATA, str).apply()
     }
 
 }

@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.*
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -21,9 +20,7 @@ import com.teamx.hatlyUser.SharedViewModel
 import com.teamx.hatlyUser.baseclasses.BaseActivity
 import com.teamx.hatlyUser.data.local.datastore.DataStoreProvider
 import com.teamx.hatlyUser.databinding.ActivityMainBinding
-import com.teamx.hatlyUser.dataclasses.Product
-import com.teamx.hatlyUser.ui.fragments.auth.login.Interface.ProfileInterFace
-import com.teamx.hatlyUser.ui.fragments.auth.login.ModelGoogle.ModelWithGoogle
+import com.teamx.hatlyUser.utils.PrefHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +28,7 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), ProfileInterFace {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override val viewModel: Class<MainViewModel>
         get() = MainViewModel::class.java
@@ -161,6 +158,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), Profile
             }
         }
 
+        sharedViewModel.userData.observe(this){
+            mViewDataBinding.drawerLayoutMain.textView14.text = it.name
+            Log.d("userData", "it._id: ${it._id}")
+            Log.d("userData", "it.name: ${it.name}")
+            Log.d("userData", "it.contact: ${it.contact}")
+            Log.d("userData", "it.email: ${it.email}")
+            Log.d("userData", "it.token: ${it.token}")
+            Log.d("userData", "it.verified: ${it.verified}")
+        }
+
     }
 
     private fun setupBottomNavMenu(navController: NavController) {
@@ -235,15 +242,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), Profile
     }
 
     fun openDrawer() {
+
         if (mViewDataBinding.drawerLayout.isOpen) {
             mViewDataBinding.drawerLayout.openDrawer(GravityCompat.END)
         } else {
             mViewDataBinding.drawerLayout.openDrawer(GravityCompat.START)
         }
-    }
-
-    override fun profileData(modelLogin: ModelWithGoogle) {
-    
     }
 
 }

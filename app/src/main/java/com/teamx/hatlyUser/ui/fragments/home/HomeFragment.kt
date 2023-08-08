@@ -13,6 +13,7 @@ import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.MART
 import com.teamx.hatlyUser.databinding.FragmentHomeBinding
 import com.teamx.hatlyUser.ui.activity.mainActivity.MainActivity
 import com.teamx.hatlyUser.ui.fragments.auth.login.LoginViewModel
+import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.enum_.Marts
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,6 +39,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
                 popExit = R.anim.nav_default_pop_exit_anim
             }
         }
+
+        val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+
+        userData?.let { sharedViewModel.setUserData(it) }
 
         mViewDataBinding.imgMenu.setOnClickListener {
             val activity = requireActivity() as MainActivity

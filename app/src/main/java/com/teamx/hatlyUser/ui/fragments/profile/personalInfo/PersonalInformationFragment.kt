@@ -40,6 +40,12 @@ class PersonalInformationFragment : BaseFragment<FragmentPersonalInformationBind
             }
         }
 
+        sharedViewModel.userData.observe(requireActivity()){
+            mViewDataBinding.editText.setText(it.name)
+            mViewDataBinding.editText3.text = it.email
+            mViewDataBinding.editText2.text = it.contact ?: "Not Register"
+        }
+
         mViewDataBinding.imgBack.setOnClickListener {
             findNavController().popBackStack()
         }

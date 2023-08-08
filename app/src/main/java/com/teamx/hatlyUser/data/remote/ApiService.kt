@@ -7,7 +7,6 @@ import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.TOKENER
 import com.teamx.hatlyUser.ui.fragments.auth.createpassword.model.ModelUpdatePass
 import com.teamx.hatlyUser.ui.fragments.auth.forgotpassword.model.ModelForgotPass
 import com.teamx.hatlyUser.ui.fragments.auth.login.Model.ModelLogin
-import com.teamx.hatlyUser.ui.fragments.auth.login.ModelGoogle.ModelWithGoogle
 import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelSignUpOtpVerify
 import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelVerifyPassOtp
 import com.teamx.hatlyUser.ui.fragments.auth.signup.model.ModelSignUp
@@ -31,7 +30,7 @@ interface ApiService {
     suspend fun login(@Body params: JsonObject?): Response<ModelLogin>
 
     @POST(NetworkCallPoints.LOGIN_WITH_GOOGLE)
-    suspend fun loginWithGoogle(@Body params: JsonObject?): Response<ModelWithGoogle>
+    suspend fun loginWithGoogle(@Body params: JsonObject?): Response<ModelLogin>
 
     @POST(NetworkCallPoints.FORGOT_PASS)
     suspend fun forgotPass(@Body params: JsonObject?): Response<ModelForgotPass>

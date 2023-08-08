@@ -9,7 +9,6 @@ import com.teamx.hatlyUser.baseclasses.BaseViewModel
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
 import com.teamx.hatlyUser.ui.fragments.auth.login.Model.ModelLogin
-import com.teamx.hatlyUser.ui.fragments.auth.login.ModelGoogle.ModelWithGoogle
 import com.teamx.hatlyUser.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -51,12 +50,8 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-
-
-
-
-    private val _loginWithGoogle = MutableLiveData<Resource<ModelWithGoogle>>()
-    val loginWithGoogleResponse: LiveData<Resource<ModelWithGoogle>>
+    private val _loginWithGoogle = MutableLiveData<Resource<ModelLogin>>()
+    val loginWithGoogleResponse: LiveData<Resource<ModelLogin>>
         get() = _loginWithGoogle
     fun loginWithGoogle(param: JsonObject) {
         viewModelScope.launch {
