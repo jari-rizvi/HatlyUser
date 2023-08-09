@@ -21,7 +21,7 @@ interface ApiService {
     suspend fun signup(@Body params: JsonObject?): Response<ModelSignUp>
 
     @POST(NetworkCallPoints.VERIFY_SIGNUP_OTP)
-    suspend fun verifySignupOtp(@Body params: JsonObject?): Response<ModelSignUpOtpVerify>
+    suspend fun verifySignupOtp(@Body params: JsonObject?): Response<ModelLogin>
 
     @POST(NetworkCallPoints.VERIFY_FORGOT_PASS)
     suspend fun forgotPassVerifyOtp(@Body params: JsonObject?): Response<ModelVerifyPassOtp>

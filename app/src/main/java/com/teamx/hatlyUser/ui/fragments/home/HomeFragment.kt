@@ -42,7 +42,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
 
         val userData = PrefHelper.getInstance(requireActivity()).getUserData()
 
-        userData?.let { sharedViewModel.setUserData(it) }
+        userData?.let {
+            Log.d("setUserData", "onViewCreated: ${it._id}")
+            sharedViewModel.setUserData(it)
+        }
 
         mViewDataBinding.imgMenu.setOnClickListener {
             val activity = requireActivity() as MainActivity

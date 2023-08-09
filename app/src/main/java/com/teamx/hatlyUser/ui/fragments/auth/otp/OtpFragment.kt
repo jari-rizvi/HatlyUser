@@ -15,6 +15,7 @@ import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentOtpBinding
 import com.teamx.hatlyUser.utils.LocationPermission
+import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -75,13 +76,14 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
 //                            if (data.verified) {
-                            if (data.verified){
+                            if (data.verified == true){
                                 CoroutineScope(Dispatchers.Main).launch {
-                                    dataStoreProvider.saveUserToken(data.token)
+                                    data.token?.let { it1 -> dataStoreProvider.saveUserToken(it1) }
 
 //                                    dataStoreProvider.saveDeviceData(randNum!!)
 //                                    dataStoreProvider.saveDeviceData("88765275963748185512")
                                 }
+                                PrefHelper.getInstance(requireActivity()).setUserData(data)
                                 if (LocationPermission.requestPermission(requireContext())) {
                                     findNavController().navigate(R.id.action_otpFragment_to_homeFragment)
                                 } else {

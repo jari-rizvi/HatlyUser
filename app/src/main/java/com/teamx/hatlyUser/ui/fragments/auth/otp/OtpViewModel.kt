@@ -1,6 +1,5 @@
 package com.teamx.hatlyUser.ui.fragments.auth.otp
 
-
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,7 +8,7 @@ import com.teamx.hatlyUser.baseclasses.BaseViewModel
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
 import com.teamx.hatlyUser.ui.fragments.auth.forgotpassword.model.ModelForgotPass
-import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelSignUpOtpVerify
+import com.teamx.hatlyUser.ui.fragments.auth.login.Model.ModelLogin
 import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelVerifyPassOtp
 import com.teamx.hatlyUser.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,8 +24,8 @@ class OtpViewModel @Inject constructor(
 ) : BaseViewModel() {
 
 
-    private val _verifySignupOtp = MutableLiveData<Resource<ModelSignUpOtpVerify>>()
-    val verifySignupOtpResponse: LiveData<Resource<ModelSignUpOtpVerify>>
+    private val _verifySignupOtp = MutableLiveData<Resource<ModelLogin>>()
+    val verifySignupOtpResponse: LiveData<Resource<ModelLogin>>
         get() = _verifySignupOtp
 
     fun verifySignupOtp(param: JsonObject) {
