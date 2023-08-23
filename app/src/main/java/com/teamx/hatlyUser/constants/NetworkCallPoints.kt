@@ -15,5 +15,9 @@ class NetworkCallPoints {
 
         const val ALL_HEALTH_LIST = "health/list"
         const val HEALTH_DETAILS = "health/detail/{id}"
+
+        const val ALL_FOODS_CATEGORIES = "shop/category/list"
+
+        const val ALL_FOODS_SHOPS = "resturant/all"
     }
 }

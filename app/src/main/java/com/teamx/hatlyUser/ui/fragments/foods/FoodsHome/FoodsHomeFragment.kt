@@ -15,11 +15,14 @@ import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.constants.NetworkCallPointsNest
+import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentFoodsHomeBinding
 import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.adapter.FoodHomeAdapter
-import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.adapter.FoodHomeTitleAdapter
+import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.adapter.FoodHomeCategoryAdapter
+import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.models.modelCategory.Doc
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.utils.enum_.Marts
+import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -34,10 +37,12 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    lateinit var itemClasses: ArrayList<String>
+    lateinit var foodsCategoryArrayList: ArrayList<Doc>
+    lateinit var foodHomeCategoryAdapter : FoodHomeCategoryAdapter
+    lateinit var foodsAllShopsArrayList: ArrayList<com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.models.modelShops.Doc>
     lateinit var foodHomeAdapter: FoodHomeAdapter
 
-    var layoutManager2 : LinearLayoutManager? = null
+    var categoryLayoutManager : LinearLayoutManager? = null
     var layoutManager : GridLayoutManager? = null
 
     var isScrolling = false
@@ -57,6 +62,15 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
             }
         }
 
+        foodsAllShopsArrayList = ArrayList()
+        foodsCategoryArrayList = ArrayList()
+
+        categoryLayoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        mViewDataBinding.recFoodTitle.layoutManager = categoryLayoutManager
+
+        foodHomeCategoryAdapter = FoodHomeCategoryAdapter(foodsCategoryArrayList)
+        mViewDataBinding.recFoodTitle.adapter = foodHomeCategoryAdapter
+
         mViewDataBinding.imgBack.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -67,6 +81,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
             }
             Marts.FOOD -> {
                 Log.d("StoreFragment", "FOOD: back")
+                mViewModel.allFoodsCategories(1, 10, 0)
             }
             Marts.GROCERY -> {
                 Log.d("StoreFragment", "GROCERY: back")
@@ -79,52 +94,74 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
             }
         }
 
+
+        mViewModel.allFoodsCategoriesResponse.observe(requireActivity()) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    it.data?.let { data ->
+                        foodsCategoryArrayList.clear()
+                        Log.d("allStoresResponse", "onViewCreated: $data")
+                        foodsCategoryArrayList.addAll(data.docs)
+                        foodHomeCategoryAdapter.notifyDataSetChanged()
+                        mViewModel.allFoodsShops(1,10,0,"",data.docs[0].title)
+                    }
+                }
+
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    mViewDataBinding.root.snackbar(it.message!!)
+                }
+            }
+        }
+
+        mViewModel.allFoodsShopsResponse.observe(requireActivity()) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    it.data?.let { data ->
+                        foodsAllShopsArrayList.clear()
+                        Log.d("allStoresResponse", "onViewCreated: $data")
+                        foodsAllShopsArrayList.addAll(data.docs)
+
+                        foodHomeAdapter.notifyDataSetChanged()
+                    }
+                }
+
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    mViewDataBinding.root.snackbar(it.message!!)
+                }
+            }
+        }
+
+
+
         layoutManager = GridLayoutManager(requireActivity(),2)
-
-        layoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-        mViewDataBinding.recFoodTitle.layoutManager = layoutManager2
-
         mViewDataBinding.recFoodHomeProducts.layoutManager = layoutManager
 
-        itemClasses = ArrayList()
 
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
+//        foodScrooling()
 
-        foodHomeAdapter = FoodHomeAdapter(itemClasses, this)
+        foodHomeAdapter = FoodHomeAdapter(foodsAllShopsArrayList, this)
         mViewDataBinding.recFoodHomeProducts.adapter = foodHomeAdapter
 
-        val foodHomeTitleAdapterAdapter = FoodHomeTitleAdapter(itemClasses)
-        mViewDataBinding.recFoodTitle.adapter = foodHomeTitleAdapterAdapter
 
-        mViewDataBinding.recFoodHomeProducts.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+
+
+
+    }
+
+    private fun foodScrooling (){
+        mViewDataBinding.recFoodTitle.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
@@ -143,35 +180,34 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
                 if(isScrolling && (currentItems + scrollOutItems == totalItems))
                 {
                     isScrolling = false
-                    fetchData()
+//                    fetchData()
                 }
             }
         })
-
     }
 
-    private fun fetchData(){
-        mViewDataBinding.spinKit.visibility = View.VISIBLE
-        Handler(Looper.getMainLooper()).postDelayed({
-            for (i in 1..5) {
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-            }
-            mViewDataBinding.spinKit.visibility = View.GONE
-            foodHomeAdapter.notifyDataSetChanged()
-        }, 5000)
-
-
-    }
+//    private fun fetchData(){
+//        mViewDataBinding.spinKit.visibility = View.VISIBLE
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            for (i in 1..5) {
+//                foodsCategoryArrayList.add("")
+//                foodsCategoryArrayList.add("")
+//                foodsCategoryArrayList.add("")
+//                foodsCategoryArrayList.add("")
+//                foodsCategoryArrayList.add("")
+//                foodsCategoryArrayList.add("")
+//                foodsCategoryArrayList.add("")
+//                foodsCategoryArrayList.add("")
+//                foodsCategoryArrayList.add("")
+//                foodsCategoryArrayList.add("")
+//                foodsCategoryArrayList.add("")
+//            }
+//            mViewDataBinding.spinKit.visibility = View.GONE
+//            foodHomeAdapter.notifyDataSetChanged()
+//        }, 5000)
+//
+//
+//    }
 
     override fun clickshopItem(position: Int) {
         findNavController().navigate(R.id.action_foodsHomeFragment_to_foodsShopHomeFragment)

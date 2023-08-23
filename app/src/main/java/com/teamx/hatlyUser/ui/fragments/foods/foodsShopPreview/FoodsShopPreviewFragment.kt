@@ -14,10 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
-import com.teamx.hatlyUser.databinding.FragmentFoodsHomeBinding
 import com.teamx.hatlyUser.databinding.FragmentFoodsShopPreviewBinding
-import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.adapter.FoodHomeAdapter
-import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.adapter.FoodHomeTitleAdapter
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.adapter.FoodsShopProductAdapter
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.shophome.adapter.ShopHomeTitleAdapter

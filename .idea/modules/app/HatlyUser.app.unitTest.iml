@@ -16,6 +16,7 @@
             <stringArg name="classpath">
               <args>
                 <arg>$MODULE_DIR$/../../../app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/localDebug/R.jar</arg>
+                <arg>$MODULE_DIR$/../../../app/build/intermediates/compile_app_classes_jar/localDebug/classes.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/1c33ae3d97435ba827dadbf4acbe89ae/transformed/databinding-runtime-7.2.2-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/02ba16c38a1c67f7b8e0f9ec078439e2/transformed/databinding-adapters-7.2.2-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.databinding/databinding-common/7.2.2/cb53bd625b7a99cf218f46634d07d1886441288/databinding-common-7.2.2.jar</arg>
@@ -92,7 +93,7 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/3334fbc9150ff26a5ec688fe21065569/transformed/jetified-kotlin-stdlib-jdk7-1.7.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/9d4e95662db56cf3a7d67c876a802a06/transformed/jetified-converter-gson-2.9.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/25e3115293ff0271ce5c2507d3b68871/transformed/jetified-retrofit-2.9.0.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/14f7e1a414e49299fc6f5fa7b2ea1b03/transformed/jetified-picasso-2.71828-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/9154dc60b91625c39c4e46865a12391c/transformed/jetified-picasso-2.71828-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/fcfe4dc4d66711acabe4c054e4f4ebfd/transformed/jetified-okhttp-4.9.1.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/695c3607371a6ed0fc4ed7089d73fbc1/transformed/legacy-support-core-ui-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/0424515d72c82bd51ab1092498e988c8/transformed/dynamicanimation-1.0.0-api.jar</arg>
@@ -100,7 +101,7 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/d5efe1438c2931b43b46a690371ef22c/transformed/loader-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/8196a2fe2fa9513635bdce81de1a96e0/transformed/lifecycle-viewmodel-2.5.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common-java8/2.5.1/5b8f86fea035328fc9e8c660773037a3401ce25f/lifecycle-common-java8-2.5.1.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/47321fc58d791276f4afafabcb8a6b89/transformed/jetified-stetho-1.5.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/064e7f6de911c884c4ad934457dc96f8/transformed/jetified-stetho-1.5.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/d831685731d4cf1ca8ba441b21fadbad/transformed/swiperefreshlayout-1.1.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/12e0fdcc179ce2f29c054e66cae884d2/transformed/jetified-viewbinding-7.2.2-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/e277fa958d724bc6a23be5402a46b128/transformed/jetified-lifecycle-process-2.4.1-api.jar</arg>
@@ -180,7 +181,7 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/a3e4b699bf9adfb278573ee52923ff02/transformed/jetified-jsr305-3.0.1.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/3470eacbbba285d29d2bddad6cdd017c/transformed/jetified-hilt-common-1.0.0-alpha03.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/4cbf4f8ca26f61869570aab4ffdf7f0a/transformed/jetified-commons-cli-1.2.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/38b8427a35f47936e0ebc00cbabb98f3/transformed/jetified-installreferrer-1.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/0d44d17e5341ebf6e3661cc4f88d6d67/transformed/jetified-installreferrer-1.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/f3f16fea74f0bb48ab39ddee2ba9109a/transformed/jetified-core-3.3.3.jar</arg>
                 <arg>$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-33/android.jar</arg>
                 <arg>$USER_HOME$/AppData/Local/Android/Sdk/build-tools/30.0.3/core-lambda-stubs.jar</arg>

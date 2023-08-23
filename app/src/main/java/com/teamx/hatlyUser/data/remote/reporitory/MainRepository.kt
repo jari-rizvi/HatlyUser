@@ -22,6 +22,9 @@ class MainRepository @Inject constructor(
     suspend fun resendOtp(@Body param: JsonObject) = apiService.resendOtp(param)
 
     suspend fun allHealthAndBeautyStores(page: Int, limit: Int, search : String) = apiService.allHealthAndBeautyStores(page,limit, search)
+
     suspend fun healthDetail(id : String) = apiService.healthDetail(id)
+    suspend fun allFoodsCategories(page: Int, limit: Int, offset : Int) = apiService.allFoodsCategories(page,limit, offset)
+    suspend fun allFoodsShops(page: Int, limit: Int, offset : Int, search : String, category : String) = apiService.allFoodsShops(page,limit, offset, search, category)
 
 }
