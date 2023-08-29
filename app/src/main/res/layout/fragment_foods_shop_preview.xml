@@ -197,6 +197,7 @@
                     tools:layout_editor_absoluteY="78dp" />
 
                 <TextView
+                    android:id="@+id/txtIsOpen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_2sdp"
@@ -229,6 +230,7 @@
                     tools:layout_editor_absoluteY="78dp" />
 
                 <TextView
+                    android:id="@+id/txtDelivery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_2sdp"

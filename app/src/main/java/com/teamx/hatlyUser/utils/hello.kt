@@ -2,8 +2,11 @@ package com.teamx.hatlyUser.utils
 
 
 import com.google.gson.Gson
+import androidx.annotation.Keep
 
+@Keep
 data class VariationOption(val title: String, val price: Int)
+@Keep
 data class Variations(val color: String, val size: String)
 
 fun main() {

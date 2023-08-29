@@ -38,12 +38,12 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
         get() = BR.viewModel
 
     lateinit var foodsCategoryArrayList: ArrayList<Doc>
-    lateinit var foodHomeCategoryAdapter : FoodHomeCategoryAdapter
+    lateinit var foodHomeCategoryAdapter: FoodHomeCategoryAdapter
     lateinit var foodsAllShopsArrayList: ArrayList<com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.models.modelShops.Doc>
     lateinit var foodHomeAdapter: FoodHomeAdapter
 
-    var categoryLayoutManager : LinearLayoutManager? = null
-    var layoutManager : GridLayoutManager? = null
+    var categoryLayoutManager: LinearLayoutManager? = null
+    var layoutManager: GridLayoutManager? = null
 
     var isScrolling = false
     var currentItems = 0
@@ -65,7 +65,8 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
         foodsAllShopsArrayList = ArrayList()
         foodsCategoryArrayList = ArrayList()
 
-        categoryLayoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        categoryLayoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         mViewDataBinding.recFoodTitle.layoutManager = categoryLayoutManager
 
         foodHomeCategoryAdapter = FoodHomeCategoryAdapter(foodsCategoryArrayList)
@@ -75,20 +76,24 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
             findNavController().popBackStack()
         }
 
-        when (NetworkCallPointsNest.MART){
+        when (NetworkCallPointsNest.MART) {
             Marts.HATLY_MART -> {
                 Log.d("StoreFragment", "HATLY_MART: back")
             }
             Marts.FOOD -> {
                 Log.d("StoreFragment", "FOOD: back")
-                mViewModel.allFoodsCategories(1, 10, 0)
+                if (!mViewModel.allFoodsCategoriesResponse.hasActiveObservers()) {
+                    mViewModel.allFoodsCategories(1, 10, 0)
+                }
             }
             Marts.GROCERY -> {
                 Log.d("StoreFragment", "GROCERY: back")
             }
+
             Marts.HEALTH_BEAUTY -> {
                 Log.d("StoreFragment", "HEALTH_BEAUTY: back")
             }
+
             Marts.HOME_BUSINESS -> {
                 Log.d("StoreFragment", "HOME_BUSINESS: back")
             }
@@ -108,7 +113,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
                         Log.d("allStoresResponse", "onViewCreated: $data")
                         foodsCategoryArrayList.addAll(data.docs)
                         foodHomeCategoryAdapter.notifyDataSetChanged()
-                        mViewModel.allFoodsShops(1,10,0,"",data.docs[0].title)
+                        mViewModel.allFoodsShops(1, 10, 0, "", data.docs[0].title)
                     }
                 }
 
@@ -145,7 +150,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
 
 
 
-        layoutManager = GridLayoutManager(requireActivity(),2)
+        layoutManager = GridLayoutManager(requireActivity(), 2)
         mViewDataBinding.recFoodHomeProducts.layoutManager = layoutManager
 
 
@@ -155,17 +160,13 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
         mViewDataBinding.recFoodHomeProducts.adapter = foodHomeAdapter
 
 
-
-
-
     }
 
-    private fun foodScrooling (){
-        mViewDataBinding.recFoodTitle.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+    private fun foodScrooling() {
+        mViewDataBinding.recFoodTitle.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
-                {
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
                     isScrolling = true
                 }
             }
@@ -177,8 +178,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
                 totalItems = layoutManager!!.itemCount
                 scrollOutItems = layoutManager!!.findFirstVisibleItemPosition()
 
-                if(isScrolling && (currentItems + scrollOutItems == totalItems))
-                {
+                if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
                     isScrolling = false
 //                    fetchData()
                 }

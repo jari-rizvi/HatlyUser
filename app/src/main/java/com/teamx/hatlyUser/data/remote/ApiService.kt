@@ -12,6 +12,7 @@ import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelVerifyPassOtp
 import com.teamx.hatlyUser.ui.fragments.auth.signup.model.ModelSignUp
 import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.models.modelCategory.ModelFoodsCategory
 import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.models.modelShops.ModelFoodShops
+import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.FoodShopModel
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.ModelHealthDetail
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
 import retrofit2.Response
@@ -80,4 +81,11 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<ModelFoodShops>
+
+    @GET(NetworkCallPoints.SHOP_FOODS)
+    suspend fun foodsShopHome(
+        @Path("id") id: String,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<FoodShopModel>
 }

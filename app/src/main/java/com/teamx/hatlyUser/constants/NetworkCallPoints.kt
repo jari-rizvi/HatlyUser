@@ -17,7 +17,8 @@ class NetworkCallPoints {
         const val HEALTH_DETAILS = "health/detail/{id}"
 
         const val ALL_FOODS_CATEGORIES = "shop/category/list"
-
         const val ALL_FOODS_SHOPS = "resturant/all"
+
+        const val SHOP_FOODS = "food/{id}"
     }
 }
