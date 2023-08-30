@@ -335,7 +335,6 @@
             android:id="@+id/textView112"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/button_radius_green"
             android:backgroundTint="#211ED860"
             android:clipToOutline="true"
