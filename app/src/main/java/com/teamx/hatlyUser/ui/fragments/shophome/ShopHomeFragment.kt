@@ -92,6 +92,10 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
         findNavController().navigate(R.id.action_shopHomeFragment_to_productPreviewFragment)
     }
 
+    override fun clickCategoryItem(position: Int) {
+
+    }
+
     override fun clickMoreItem(position: Int) {
 
     }

@@ -87,6 +87,10 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
 
     }
 
+    override fun clickCategoryItem(position: Int) {
+
+    }
+
     override fun clickMoreItem(position: Int) {
 
     }

@@ -169,6 +169,10 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
         Toast.makeText(MainApplication.context, "Shop", Toast.LENGTH_SHORT).show()
     }
 
+    override fun clickCategoryItem(position: Int) {
+
+    }
+
     override fun clickMoreItem(position: Int) {
         findNavController().navigate(R.id.action_hatlyMartFragment_to_HatlyCategoriesFragment)
         Toast.makeText(MainApplication.context, "More", Toast.LENGTH_SHORT).show()

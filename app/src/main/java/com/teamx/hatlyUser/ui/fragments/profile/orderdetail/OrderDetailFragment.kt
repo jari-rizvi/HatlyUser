@@ -151,6 +151,10 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
     }
 
+    override fun clickCategoryItem(position: Int) {
+
+    }
+
     override fun clickMoreItem(position: Int) {
 
     }

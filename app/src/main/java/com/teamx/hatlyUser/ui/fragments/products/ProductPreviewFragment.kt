@@ -93,6 +93,10 @@ class ProductPreviewFragment : BaseFragment<com.teamx.hatlyUser.databinding.Frag
 
     }
 
+    override fun clickCategoryItem(position: Int) {
+
+    }
+
     override fun clickMoreItem(position: Int) {
 
     }

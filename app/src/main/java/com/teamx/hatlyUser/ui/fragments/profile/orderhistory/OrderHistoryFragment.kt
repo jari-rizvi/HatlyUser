@@ -140,6 +140,10 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding, OrderHist
         findNavController().navigate(R.id.action_orderHistoryFragment_to_orderDetailFragment)
     }
 
+    override fun clickCategoryItem(position: Int) {
+
+    }
+
     override fun clickMoreItem(position: Int) {
 
     }

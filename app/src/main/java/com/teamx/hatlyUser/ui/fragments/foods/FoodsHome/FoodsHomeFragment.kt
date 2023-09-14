@@ -50,6 +50,8 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
     var totalItems = 0
     var scrollOutItems = 0
 
+    var categoryTitle = ""
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -69,7 +71,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         mViewDataBinding.recFoodTitle.layoutManager = categoryLayoutManager
 
-        foodHomeCategoryAdapter = FoodHomeCategoryAdapter(foodsCategoryArrayList)
+        foodHomeCategoryAdapter = FoodHomeCategoryAdapter(foodsCategoryArrayList, this)
         mViewDataBinding.recFoodTitle.adapter = foodHomeCategoryAdapter
 
         mViewDataBinding.imgBack.setOnClickListener {
@@ -113,7 +115,8 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
                         Log.d("allStoresResponse", "onViewCreated: $data")
                         foodsCategoryArrayList.addAll(data.docs)
                         foodHomeCategoryAdapter.notifyDataSetChanged()
-                        mViewModel.allFoodsShops(1, 10, 0, "", data.docs[0].title)
+
+//                        mViewModel.allFoodsShops(1, 10, 0, "", data.docs[0].title)
                     }
                 }
 
@@ -123,6 +126,8 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
                 }
             }
         }
+
+        mViewModel.allFoodsShops(1, 10, 0, "", categoryTitle)
 
         mViewModel.allFoodsShopsResponse.observe(requireActivity()) {
             when (it.status) {
@@ -211,6 +216,12 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
 
     override fun clickshopItem(position: Int) {
         findNavController().navigate(R.id.action_foodsHomeFragment_to_foodsShopHomeFragment)
+    }
+
+    override fun clickCategoryItem(position: Int) {
+        val categoryIte = foodsCategoryArrayList[position]
+        categoryTitle = categoryIte.title
+        mViewModel.allFoodsShops(1, 10, 0, "", categoryTitle)
     }
 
     override fun clickMoreItem(position: Int) {

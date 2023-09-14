@@ -24,7 +24,7 @@ class FoodHomeAdapter(
 
         val modelShops = foodsAllShopsArrayList[position]
 
-        holder.bind.shopRate.rating = modelShops.rattingCount.`$numberDecimal`.toFloat()
+        holder.bind.shopRate.rating = modelShops.ratting.toFloat()
 
         holder.bind.txtTitle.text = try {
             modelShops.name
@@ -32,7 +32,25 @@ class FoodHomeAdapter(
             ""
         }
 
-        Picasso.get().load(modelShops.image.secure_url).into(holder.bind.imgShop)
+        holder.bind.txtRating.text = try {
+            "${modelShops.ratting}"
+        }catch (e : Exception){
+            ""
+        }
+
+        holder.bind.txtReview.text = try {
+            "(${modelShops.totalReviews} reviews)"
+        }catch (e : Exception){
+            ""
+        }
+
+        holder.bind.txtDeliveryTime.text = try {
+            "Delivery ${modelShops.delivery.value} ${modelShops.delivery.unit}"
+        }catch (e : Exception){
+            ""
+        }
+
+        Picasso.get().load(modelShops.image).into(holder.bind.imgShop)
 
         holder.itemView.setOnClickListener {
             hatlyShopInterface.clickshopItem(position)

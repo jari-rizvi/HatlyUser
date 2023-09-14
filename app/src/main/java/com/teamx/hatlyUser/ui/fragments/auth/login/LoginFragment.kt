@@ -20,6 +20,8 @@ import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.constants.NetworkCallPointsNest
+import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.TOKENER
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentLoginBinding
 import com.teamx.hatlyUser.utils.LocationPermission
@@ -92,13 +94,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
+
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             if (data.verified == true) {
                                 CoroutineScope(Dispatchers.Main).launch {
-                                    data.token?.let { it1 -> dataStoreProvider.saveUserToken(it1) }
-
+                                    data.token?.let { it1 ->
+                                        dataStoreProvider.saveUserToken(it1)
+                                        TOKENER = it1
+                                    }
 
 
 //                                    sharedViewModel.setUserData(data)
@@ -116,6 +121,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                             }
                         }
                     }
+
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
                         mViewDataBinding.root.snackbar(it.message!!)
@@ -130,12 +136,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
+
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             if (data.verified == true) {
                                 CoroutineScope(Dispatchers.Main).launch {
-                                    data.token?.let { it1 -> dataStoreProvider.saveUserToken(it1) }
+                                    data.token?.let { it1 ->
+                                        dataStoreProvider.saveUserToken(it1)
+                                        TOKENER = it1
+                                    }
 
 //                                    sharedViewModel.setUserData(data)
 //                                    (requireActivity() as ProfileInterFace).profileData(data)
@@ -152,6 +162,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                             }
                         }
                     }
+
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
                         mViewDataBinding.root.snackbar(it.message!!)
@@ -254,7 +265,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         }
         if (params.has("token")) {
             mViewModel.loginWithGoogle(params)
-        }else{
+        } else {
             mViewDataBinding.root.snackbar("Login Failed")
         }
     }

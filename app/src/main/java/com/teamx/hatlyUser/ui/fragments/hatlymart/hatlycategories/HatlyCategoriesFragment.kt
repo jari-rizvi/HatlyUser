@@ -86,6 +86,10 @@ class HatlyCategoriesFragment :
         findNavController().navigate(R.id.action_HatlyCategoriesFragment_to_ShopHomeFragment)
     }
 
+    override fun clickCategoryItem(position: Int) {
+
+    }
+
     override fun clickMoreItem(position: Int) {
 
     }

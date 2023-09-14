@@ -148,6 +148,10 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
 
     }
 
+    override fun clickCategoryItem(position: Int) {
+
+    }
+
     override fun clickMoreItem(position: Int) {
 
     }

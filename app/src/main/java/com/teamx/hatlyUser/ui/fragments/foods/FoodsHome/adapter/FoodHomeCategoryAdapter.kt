@@ -6,10 +6,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.databinding.ItemShopCatBinding
 import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.models.modelCategory.Doc
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
+import java.util.ArrayList
 
-class FoodHomeCategoryAdapter(private val foodsCategoryArrayList: ArrayList<Doc>) : RecyclerView.Adapter<FoodHomeTitleAdapterViewHolder>() {
+class FoodHomeCategoryAdapter(
+    private val foodsCategoryArrayList: ArrayList<Doc>,
+    val hatlyShopInterface: HatlyShopInterface
+) : RecyclerView.Adapter<FoodHomeTitleAdapterViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodHomeTitleAdapterViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): FoodHomeTitleAdapterViewHolder {
         return FoodHomeTitleAdapterViewHolder(
             ItemShopCatBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
@@ -22,11 +30,15 @@ class FoodHomeCategoryAdapter(private val foodsCategoryArrayList: ArrayList<Doc>
 
         holder.bind.txtTitle.text = try {
             foodsCategory.title
-        }catch (e : Exception){
+        } catch (e: Exception) {
             ""
         }
 
-        Picasso.get().load(foodsCategory.image.secure_url).into(holder.bind.imgShop)
+        Picasso.get().load(foodsCategory.image).into(holder.bind.imgShop)
+
+        holder.itemView.setOnClickListener {
+            hatlyShopInterface.clickCategoryItem(position)
+        }
 
     }
 

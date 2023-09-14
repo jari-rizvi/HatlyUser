@@ -229,6 +229,10 @@ class FoodsShopPreviewFragment :
 //        findNavController().navigate(R.id.action_foodsShopHomeFragment_to_productPreviewFragment)
     }
 
+    override fun clickCategoryItem(position: Int) {
+
+    }
+
     override fun clickMoreItem(position: Int) {
 
     }
