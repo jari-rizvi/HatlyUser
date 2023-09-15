@@ -1,15 +1,13 @@
 package com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome
 
-
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.teamx.hatlyUser.baseclasses.BaseViewModel
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.ModelHealthDetail
-import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.categoryModel.ModelCategory
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproductmodel.ModelPopularProducts
 import com.teamx.hatlyUser.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -23,36 +21,58 @@ class HatlyMartViewModel @Inject constructor(
     private val networkHelper: NetworkHelper
 ) : BaseViewModel() {
 
-    private val _healthDetail = MutableLiveData<Resource<ModelHealthDetail>>()
-    val healthDetailResponse: LiveData<Resource<ModelHealthDetail>>
-        get() = _healthDetail
+    private val _categoryShopResponse = MutableLiveData<Resource<ModelCategory>>()
+    val categoryShopResponse: LiveData<Resource<ModelCategory>>
+        get() = _categoryShopResponse
 
-    fun healthDeatil(id: String) {
+    fun categoryShop(shopId: String, page: Int, limit: Int, offset: Int) {
         viewModelScope.launch {
-            _healthDetail.postValue(Resource.loading(null))
+            _categoryShopResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.healthDetail(id).let {
+                    mainRepository.categoryShop(shopId,page,limit,offset).let {
                         if (it.isSuccessful) {
-                            _healthDetail.postValue(Resource.success(it.body()!!))
+                            _categoryShopResponse.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
-                            _healthDetail.postValue(Resource.error(jsonObj.getString("message")))
+                            _categoryShopResponse.postValue(Resource.error(jsonObj.getString("message")))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
-                            _healthDetail.postValue(Resource.error(jsonObj.getString("message")))
-                            Log.d(
-                                "allStoresResponse",
-                                "onViewCreated: ${jsonObj.getString("message")}"
-                            )
-//                            _allStores.postValue(Resource.error(it.errorBody()!!.charStream().readText()))
-//                            _allStores.postValue(Resource.error("Some thing went wrong", null))
+                            _categoryShopResponse.postValue(Resource.error(jsonObj.getString("message")))
                         }
                     }
                 } catch (e: Exception) {
-                    _healthDetail.postValue(Resource.error("${e.message}", null))
+                    _categoryShopResponse.postValue(Resource.error("${e.message}", null))
                 }
-            } else _healthDetail.postValue(Resource.error("No internet connection", null))
+            } else _categoryShopResponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+
+    private val _popularProductsResponse = MutableLiveData<Resource<ModelPopularProducts>>()
+    val popularProductsResponse: LiveData<Resource<ModelPopularProducts>>
+        get() = _popularProductsResponse
+
+    fun popularProductsShop(shopId: String) {
+        viewModelScope.launch {
+            _popularProductsResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.popularProducts(shopId).let {
+                        if (it.isSuccessful) {
+                            _popularProductsResponse.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _popularProductsResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        } else {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _popularProductsResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }
+                    }
+                } catch (e: Exception) {
+                    _popularProductsResponse.postValue(Resource.error("${e.message}", null))
+                }
+            } else _popularProductsResponse.postValue(Resource.error("No internet connection", null))
         }
     }
 

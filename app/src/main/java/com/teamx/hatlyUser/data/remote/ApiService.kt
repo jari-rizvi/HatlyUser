@@ -7,13 +7,13 @@ import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.TOKENER
 import com.teamx.hatlyUser.ui.fragments.auth.createpassword.model.ModelUpdatePass
 import com.teamx.hatlyUser.ui.fragments.auth.forgotpassword.model.ModelForgotPass
 import com.teamx.hatlyUser.ui.fragments.auth.login.Model.ModelLogin
-import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelSignUpOtpVerify
 import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelVerifyPassOtp
 import com.teamx.hatlyUser.ui.fragments.auth.signup.model.ModelSignUp
 import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.models.modelCategory.ModelFoodsCategory
 import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.models.modelShops.ModelFoodShops
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.FoodShopModel
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.ModelHealthDetail
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.categoryModel.ModelCategory
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproductmodel.ModelPopularProducts
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
 import retrofit2.Response
 import retrofit2.http.*
@@ -45,21 +45,32 @@ interface ApiService {
     suspend fun resendOtp(@Body params: JsonObject?): Response<ModelForgotPass>
 
 
-    @GET(NetworkCallPoints.ALL_HEALTH_LIST)
+    @GET(NetworkCallPoints.ALL_SHOPS)
     suspend fun allHealthAndBeautyStores(
         @Query("page") page: Int,
         @Query("limit") limit: Int,
         @Query("search") search: String,
-        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
-        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+        @Query("offset") offset: Int,
+        @Query("type") type: String,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
     ): Response<ModelAllStores>
 
-    @GET(NetworkCallPoints.HEALTH_DETAILS)
-    suspend fun healthDetail(
-        @Path("id") id: String,
+    @GET(NetworkCallPoints.SHOP_CATEGOIES)
+    suspend fun categoryShop(
+        @Query("shopId") shopId: String,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
-    ): Response<ModelHealthDetail>
+    ): Response<ModelCategory>
+
+    @GET(NetworkCallPoints.POPULAR_PRODUCTS)
+    suspend fun popularProducts(
+        @Query("shopId") shopId: String,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelPopularProducts>
 
 
     @GET(NetworkCallPoints.ALL_FOODS_CATEGORIES)
@@ -67,8 +78,7 @@ interface ApiService {
         @Query("page") page: Int,
         @Query("limit") limit: Int,
         @Query("offset") offset: Int,
-        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
-        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
     ): Response<ModelFoodsCategory>
 
     @GET(NetworkCallPoints.ALL_FOODS_SHOPS)

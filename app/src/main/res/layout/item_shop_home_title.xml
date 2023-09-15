@@ -23,7 +23,7 @@
             android:paddingVertical="@dimen/_2sdp"
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
-            android:backgroundTint="#EA1B25"
+            android:backgroundTint="#1ED860"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -7,10 +7,12 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/categoryMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginHorizontal="@dimen/_5sdp">
+        android:background="@drawable/button_radius"
+        android:padding="@dimen/_5sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/imgLayout"
@@ -32,19 +34,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <ImageView-->
-<!--                android:id="@+id/imgMore"-->
-<!--                android:layout_width="@dimen/_60sdp"-->
-<!--                android:layout_height="@dimen/_60sdp"-->
-<!--                android:background="@drawable/button_radius_corner"-->
-<!--                android:backgroundTint="#ACE4C0"-->
-<!--                android:clipToOutline="true"-->
-<!--                android:padding="@dimen/_15sdp"-->
-<!--                android:src="@drawable/mobile_number"-->
-<!--                android:visibility="gone"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
+            <ImageView
+                android:id="@+id/imgMore"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:background="@drawable/button_radius_corner"
+                android:backgroundTint="#ACE4C0"
+                android:clipToOutline="true"
+                android:padding="@dimen/_18sdp"
+                android:src="@drawable/menu"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#1ED860" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -53,12 +56,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
-            android:text="More"
-            android:textColor="#363636"
-            android:textSize="@dimen/_12ssp"
             android:fontFamily="@font/open_sans_regular"
-            android:textStyle="bold"
+            android:text="More"
             android:textAlignment="center"
+            android:textColor="#363636"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/imgLayout"
             app:layout_constraintStart_toStartOf="@+id/imgLayout"
             app:layout_constraintTop_toBottomOf="@+id/imgLayout" />

@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.databinding.ItemFoodsShopBinding
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Document
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 
 class FoodsShopProductAdapter(
     private val addressArrayList: ArrayList<Document>
@@ -35,21 +34,13 @@ class FoodsShopProductAdapter(
             "null"
         }
 
-        var price = ""
-
-        price = if (arrayData.productType == "variation") {
-            arrayData.minPrize?.`$numberDecimal` ?: "null"
-        } else {
-            arrayData.prize?.`$numberDecimal`?: "null"
-        }
-
         holder.bind.textView26.text = try {
-            price
+            arrayData.prize
         } catch (e: Exception) {
             "null"
         }
 
-        Picasso.get().load(arrayData.images?.secure_url).into(holder.bind.imgShop)
+        Picasso.get().load(arrayData.images[0]).into(holder.bind.imgShop)
 
         holder.itemView.setOnClickListener {
 

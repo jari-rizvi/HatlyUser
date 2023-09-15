@@ -17,7 +17,8 @@ import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentStoresBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.adapter.StoresAdapter
-import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStoresItem
+import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.Doc
+import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
 import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,7 +36,7 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
 
 //    val itemClasses: ArrayList<String> = ArrayList()
 
-    private lateinit var modelAllStoresArraylist: ArrayList<ModelAllStoresItem>
+    private lateinit var modelAllStoresArraylist: ArrayList<Doc>
 
     private lateinit var hatlyPopularAdapter: StoresAdapter
 
@@ -64,13 +65,13 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
             }
             Marts.GROCERY -> {
                 Log.d("StoreFragment", "GROCERY: back")
+                if (!mViewModel.allHealthAndBeautyStoresResponse.hasActiveObservers()) {
+                    mViewModel.allHealthAndBeautyStores(1, 10, "",0,"grocery")
+                    Log.d("allStoresResponse", "allStores: ")
+                }
             }
             Marts.HEALTH_BEAUTY -> {
                 Log.d("StoreFragment", "HEALTH_BEAUTY: back")
-                if (!mViewModel.allHealthAndBeautyStoresResponse.hasActiveObservers()) {
-                    mViewModel.allHealthAndBeautyStores(1, 10, "")
-                    Log.d("allStoresResponse", "allStores: ")
-                }
             }
             Marts.HOME_BUSINESS -> {
                 Log.d("StoreFragment", "HOME_BUSINESS: back")
@@ -86,7 +87,8 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
         hatlyPopularAdapter = StoresAdapter(modelAllStoresArraylist, this)
         mViewDataBinding.recStores.adapter = hatlyPopularAdapter
 
-        mViewDataBinding.inpSearch.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+
+        mViewDataBinding.inpSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 when (MART) {
                     Marts.HATLY_MART -> {
@@ -96,21 +98,17 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
 
                     }
                     Marts.GROCERY -> {
-
+                        mViewModel.allHealthAndBeautyStores(1, 10, mViewDataBinding.inpSearch.text.toString().trim(),0,"grocery")
                     }
                     Marts.HEALTH_BEAUTY -> {
-                        mViewModel.allHealthAndBeautyStores(1, 10, mViewDataBinding.inpSearch.text.toString().trim())
                     }
                     Marts.HOME_BUSINESS -> {
 
                     }
                 }
-                return@OnEditorActionListener true
             }
-            false
-        })
-
-
+            true
+        }
 
 //        if (!mViewModel.allStoresResponse.hasActiveObservers()) {
         mViewModel.allHealthAndBeautyStoresResponse.observe(requireActivity(), Observer {
@@ -123,13 +121,14 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
                     it.data?.let { data ->
                         modelAllStoresArraylist.clear()
                         Log.d("allStoresResponse", "onViewCreated: $data")
-                        modelAllStoresArraylist.addAll(data)
+                        modelAllStoresArraylist.addAll(data.docs)
 
                         hatlyPopularAdapter.notifyDataSetChanged()
                     }
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
+                    Log.d("allStoresResponse", "ERROR: $it.message!!")
                     mViewDataBinding.root.snackbar(it.message!!)
                 }
             }

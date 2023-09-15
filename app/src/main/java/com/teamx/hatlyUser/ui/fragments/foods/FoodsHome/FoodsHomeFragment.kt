@@ -1,10 +1,9 @@
 package com.teamx.hatlyUser.ui.fragments.foods.FoodsHome
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.AbsListView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
@@ -82,12 +81,14 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
             Marts.HATLY_MART -> {
                 Log.d("StoreFragment", "HATLY_MART: back")
             }
+
             Marts.FOOD -> {
                 Log.d("StoreFragment", "FOOD: back")
                 if (!mViewModel.allFoodsCategoriesResponse.hasActiveObservers()) {
                     mViewModel.allFoodsCategories(1, 10, 0)
                 }
             }
+
             Marts.GROCERY -> {
                 Log.d("StoreFragment", "GROCERY: back")
             }
@@ -165,6 +166,21 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
         mViewDataBinding.recFoodHomeProducts.adapter = foodHomeAdapter
 
 
+        mViewDataBinding.inpSearch.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
+                mViewModel.allFoodsShops(
+                    1,
+                    10,
+                    0,
+                    mViewDataBinding.inpSearch.text.toString().trim(),
+                    ""
+                )
+            }
+            true
+        }
+
+
     }
 
     private fun foodScrooling() {
@@ -214,14 +230,21 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
 //
 //    }
 
-    override fun clickshopItem(position: Int) {
-        findNavController().navigate(R.id.action_foodsHomeFragment_to_foodsShopHomeFragment)
+    override fun clickCategoryItem(position: Int) {
+        foodsCategoryArrayList.forEach { it.itemSelected = false }
+        val categoryModel = foodsCategoryArrayList[position]
+        categoryTitle = categoryModel.title
+        mViewDataBinding.txtShopCatTitle.text = "$categoryTitle Restaurants"
+        foodsCategoryArrayList[position].itemSelected = true
+        foodHomeCategoryAdapter.notifyDataSetChanged()
+        mViewModel.allFoodsShops(1, 10, 0, "", categoryTitle)
     }
 
-    override fun clickCategoryItem(position: Int) {
-        val categoryIte = foodsCategoryArrayList[position]
-        categoryTitle = categoryIte.title
-        mViewModel.allFoodsShops(1, 10, 0, "", categoryTitle)
+    override fun clickshopItem(position: Int) {
+        val foodShopModel = foodsAllShopsArrayList[position]
+        val bundle = Bundle()
+        bundle.putString("itemId", foodShopModel._id)
+        findNavController().navigate(R.id.action_foodsHomeFragment_to_foodsShopHomeFragment,bundle)
     }
 
     override fun clickMoreItem(position: Int) {

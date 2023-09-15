@@ -65,16 +65,24 @@ class FoodsShopPreviewFragment :
             Marts.HATLY_MART -> {
                 Log.d("StoreFragment", "HATLY_MART: back")
             }
+
             Marts.FOOD -> {
                 Log.d("StoreFragment", "FOOD: back")
-                mViewModel.foodsShopHome("64db9adcc487c683bbda5c54")
+                val bundle = arguments
+                if (bundle != null) {
+                    val foodShopId = bundle.getString("itemId").toString()
+                    mViewModel.foodsShopHome(foodShopId)
+                }
             }
+
             Marts.GROCERY -> {
                 Log.d("StoreFragment", "GROCERY: back")
             }
+
             Marts.HEALTH_BEAUTY -> {
                 Log.d("StoreFragment", "HEALTH_BEAUTY: back")
             }
+
             Marts.HOME_BUSINESS -> {
                 Log.d("StoreFragment", "HOME_BUSINESS: back")
             }
@@ -106,40 +114,39 @@ class FoodsShopPreviewFragment :
                     loadingDialog.dismiss()
                     it.data?.let { data ->
 
-                        Picasso.get().load(data.shop.image.secure_url).into(mViewDataBinding.imgShop)
+                        Picasso.get().load(data.shop.image).into(mViewDataBinding.imgShop)
 
                         mViewDataBinding.textView19.text = try {
                             data.shop.name
-                        }catch (e : Exception){
+                        } catch (e: Exception) {
                             "null"
                         }
 
                         mViewDataBinding.txtDelivery.text = try {
                             "Delivery ${data.shop.delivery.value} ${data.shop.delivery.unit}"
-                        }catch (e : Exception){
+                        } catch (e: Exception) {
                             "null"
                         }
 
-                        val rattingSum = data.shop.rattingSum?.`$numberDecimal`?.toFloat()
-                        val rattingCount = data.shop.rattingCount?.`$numberDecimal`?.toFloat()!!
-
-                        val rating = rattingSum?.div(rattingCount)
-
+                        val rattingSum = data.shop.ratting
+                        mViewDataBinding.shopRate.rating = rattingSum
                         mViewDataBinding.txtRating.text = try {
-                            rating.toString()
-                        }catch (e : Exception){
+                            rattingSum.toString()
+                        } catch (e: Exception) {
                             "null"
                         }
 
-                        if (data.shop.isOpen == true){
+                        if (data.shop.isOpen) {
                             mViewDataBinding.txtIsOpen.text = "Open now"
-                        }else{
+                        } else {
                             mViewDataBinding.txtIsOpen.text = "Closed"
                         }
 
                         shopCategoryArrayList.addAll(data.products)
                         shopHomeAdapter.notifyDataSetChanged()
-                        clickshopItem(0)
+                        if (data.products.isNotEmpty()) {
+                            clickshopItem(0)
+                        }
                     }
                 }
 
@@ -226,7 +233,7 @@ class FoodsShopPreviewFragment :
         productArrayList.addAll(shopCategoryArrayList[position].documents)
         foodsShopProductAdapter.notifyDataSetChanged()
 
-//        findNavController().navigate(R.id.action_foodsShopHomeFragment_to_productPreviewFragment)
+        findNavController().navigate(R.id.action_foodsShopHomeFragment_to_productPreviewFragment)
     }
 
     override fun clickCategoryItem(position: Int) {

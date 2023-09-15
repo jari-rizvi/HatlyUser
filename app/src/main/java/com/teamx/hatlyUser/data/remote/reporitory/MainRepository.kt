@@ -5,6 +5,7 @@ import com.google.gson.JsonObject
 import com.teamx.hatlyUser.data.local.db.ProductDao
 import com.teamx.hatlyUser.data.remote.ApiService
 import retrofit2.http.Body
+import retrofit2.http.Query
 import javax.inject.Inject
 
 
@@ -21,11 +22,35 @@ class MainRepository @Inject constructor(
     suspend fun updatePass(@Body param: JsonObject) = apiService.updatePass(param)
     suspend fun resendOtp(@Body param: JsonObject) = apiService.resendOtp(param)
 
-    suspend fun allHealthAndBeautyStores(page: Int, limit: Int, search : String) = apiService.allHealthAndBeautyStores(page,limit, search)
+    suspend fun allHealthAndBeautyStores(
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
+        @Query("search") search: String,
+        @Query("offset") offset: Int,
+        @Query("type") type: String
+    ) = apiService.allHealthAndBeautyStores(page, limit, search, offset, type)
 
-    suspend fun healthDetail(id : String) = apiService.healthDetail(id)
-    suspend fun allFoodsCategories(page: Int, limit: Int, offset : Int) = apiService.allFoodsCategories(page,limit, offset)
-    suspend fun allFoodsShops(page: Int, limit: Int, offset : Int, search : String, category : String) = apiService.allFoodsShops(page,limit, offset, search, category)
+    suspend fun categoryShop(
+        @Query("shopId") shopId: String,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int
+    ) = apiService.categoryShop(shopId, page, limit, offset)
 
-    suspend fun foodsShopHome(id:String) = apiService.foodsShopHome(id)
+    suspend fun popularProducts(
+        @Query("shopId") shopId: String
+    ) = apiService.popularProducts(shopId)
+
+    suspend fun allFoodsCategories(page: Int, limit: Int, offset: Int) =
+        apiService.allFoodsCategories(page, limit, offset)
+
+    suspend fun allFoodsShops(
+        page: Int,
+        limit: Int,
+        offset: Int,
+        search: String,
+        category: String
+    ) = apiService.allFoodsShops(page, limit, offset, search, category)
+
+    suspend fun foodsShopHome(id: String) = apiService.foodsShopHome(id)
 }

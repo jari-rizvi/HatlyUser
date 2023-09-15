@@ -19,14 +19,10 @@ import com.teamx.hatlyUser.databinding.FragmentHatlyMartBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter.HatlyPopularAdapter
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter.HatlyShopCatAdapter
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.Categore
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.ModelHealthDetail
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.PopularProduct
-import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.adapter.StoresAdapter
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.categoryModel.Doc
 import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewModel>(),
@@ -39,8 +35,8 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    private lateinit var healthDetailCatArraylist: ArrayList<Categore>
-    private lateinit var healthDetailPopularArraylist: ArrayList<PopularProduct>
+    private lateinit var healthDetailCatArraylist: ArrayList<Doc>
+    private lateinit var healthDetailPopularArraylist: ArrayList<com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproductmodel.Doc>
 
     private lateinit var hatlyShopCatAdapter: HatlyShopCatAdapter
     private lateinit var hatlyPopularAdapter: HatlyPopularAdapter
@@ -74,6 +70,7 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                 parcel -> {
                     mViewDataBinding.constraintLayout2.visibility = View.VISIBLE
                 }
+
                 else -> {
                     mViewDataBinding.constraintLayout2.visibility = View.GONE
                 }
@@ -90,42 +87,85 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                 mViewDataBinding.txtShopCatTitle.text = "Shop by categories:"
                 mViewDataBinding.txtPopular.text = "Popular Items:"
             }
+
             Marts.FOOD -> {
                 Log.d("StoreFragment", "FOOD: back")
             }
+
             Marts.GROCERY -> {
                 Log.d("StoreFragment", "GROCERY: back")
                 mViewDataBinding.txtShopCatTitle.text = "Shop by categories:"
                 mViewDataBinding.txtPopular.text = "Popular Items:"
             }
+
             Marts.HEALTH_BEAUTY -> {
                 Log.d("StoreFragment", "HEALTH_BEAUTY: back")
                 mViewDataBinding.txtShopCatTitle.text = "Shop by categories:"
                 mViewDataBinding.txtPopular.text = "Trending Now"
             }
+
             Marts.HOME_BUSINESS -> {
                 Log.d("StoreFragment", "HOME_BUSINESS: back")
             }
         }
 
-        val layoutManager = GridLayoutManager(requireActivity(), 4)
-        mViewDataBinding.recShopCatMart.layoutManager = layoutManager
-        val layoutManager1 =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-        val layoutManager2 =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-        mViewDataBinding.recBasedMart.layoutManager = layoutManager1
-        mViewDataBinding.recPopular.layoutManager = layoutManager2
+
+//        val layoutManager1 = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+//        mViewDataBinding.recBasedMart.layoutManager = layoutManager1
+
+
 
         if (storeId.isNotEmpty()) {
-            if (!mViewModel.healthDetailResponse.hasActiveObservers()) {
+            if (!mViewModel.categoryShopResponse.hasActiveObservers()) {
                 Log.d("allStoresResponse", "HatlyMartFragment: ")
-                mViewModel.healthDeatil(storeId)
+//                mViewModel.healthDeatil(storeId,1,10,0)
+                mViewModel.categoryShop("64db9adcc487c683bbda5c54", 1, 10, 0)
             }
         }
 
 //        if (!mViewModel.healthDetailResponse.hasActiveObservers()) {
-        mViewModel.healthDetailResponse.observe(requireActivity(), Observer {
+        mViewModel.categoryShopResponse.observe(requireActivity()) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    it.data?.let { data ->
+
+                        Log.d("healthDetailCatArra", "onViewCreated: $data")
+
+                        healthDetailCatArraylist.clear()
+                        healthDetailCatArraylist.addAll(data.docs)
+                        healthDetailCatArraylist.add(
+                            Doc(
+                                0,
+                                "",
+                                "",
+                                "More categories",
+                                "",
+                                null,
+                                true
+                            )
+                        )
+                        hatlyShopCatAdapter.notifyDataSetChanged()
+                    }
+                }
+
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    mViewDataBinding.root.snackbar(it.message!!)
+                    Log.d("hatlyShopCatAdapter", "ERROR: ${it.message!!}")
+                }
+            }
+        }
+//        }
+
+//        mViewModel.popularProductsShop(storeId)
+        mViewModel.popularProductsShop("64db9adcc487c683bbda5c54")
+
+        mViewModel.popularProductsResponse.observe(requireActivity(), Observer {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
@@ -133,34 +173,35 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
                     it.data?.let { data ->
-
-                        healthDetailCatArraylist.clear()
                         healthDetailPopularArraylist.clear()
-
-                        healthDetailCatArraylist.addAll(data.categores)
-                        healthDetailPopularArraylist.addAll(data.popularProduct)
-
-                        hatlyShopCatAdapter.notifyDataSetChanged()
+                        healthDetailPopularArraylist.addAll(data.docs)
                         hatlyPopularAdapter.notifyDataSetChanged()
                     }
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
                     mViewDataBinding.root.snackbar(it.message!!)
+                    Log.d("hatlyShopCatAdapter", "ERROR: ${it.message!!}")
                 }
             }
         })
-//        }
 
+
+        // set the adapter
+
+        // set the adapter
+        val layoutManager = GridLayoutManager(requireActivity(), 4)
         hatlyShopCatAdapter = HatlyShopCatAdapter(healthDetailCatArraylist, this)
-        hatlyPopularAdapter = HatlyPopularAdapter(healthDetailPopularArraylist, this)
-
-        // set the adapter
-
-        // set the adapter
+        mViewDataBinding.recShopCatMart.layoutManager = layoutManager
         mViewDataBinding.recShopCatMart.adapter = hatlyShopCatAdapter
-        mViewDataBinding.recBasedMart.adapter = hatlyShopCatAdapter
+//        mViewDataBinding.recBasedMart.adapter = hatlyShopCatAdapter
+
+
+        val productLayoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        hatlyPopularAdapter = HatlyPopularAdapter(healthDetailPopularArraylist, this)
+        mViewDataBinding.recPopular.layoutManager = productLayoutManager
         mViewDataBinding.recPopular.adapter = hatlyPopularAdapter
+
 
     }
 
@@ -174,7 +215,10 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
     }
 
     override fun clickMoreItem(position: Int) {
-        findNavController().navigate(R.id.action_hatlyMartFragment_to_HatlyCategoriesFragment)
+
+        val bundle = Bundle()
+        bundle.putString("_id", storeId)
+        findNavController().navigate(R.id.action_hatlyMartFragment_to_HatlyCategoriesFragment,bundle)
         Toast.makeText(MainApplication.context, "More", Toast.LENGTH_SHORT).show()
     }
 

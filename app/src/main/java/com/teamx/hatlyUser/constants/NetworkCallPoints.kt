@@ -13,8 +13,9 @@ class NetworkCallPoints {
         const val RESEND_OTP = "auth/resend/otp"
 
 
-        const val ALL_HEALTH_LIST = "health/list"
-        const val HEALTH_DETAILS = "health/detail/{id}"
+        const val ALL_SHOPS = "shop/all"
+        const val SHOP_CATEGOIES = "custom/category/all"
+        const val POPULAR_PRODUCTS = "product/all"
 
         const val ALL_FOODS_CATEGORIES = "shop/category/list"
         const val ALL_FOODS_SHOPS = "resturant/all"

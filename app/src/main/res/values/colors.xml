@@ -6,4 +6,6 @@
     <color name="colorPrimary">#f6f6f6</color>
     <color name="colorPrimaryDark">#515c6f</color>
     <color name="colorAccent">#F1F1F1</color>
+
+    <color name="categorySelectedColor">#261ED860</color>
 </resources>

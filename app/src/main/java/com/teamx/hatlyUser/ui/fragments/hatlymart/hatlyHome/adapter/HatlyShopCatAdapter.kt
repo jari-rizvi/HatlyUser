@@ -7,11 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.databinding.ItemShopCatBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.Categore
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.ModelHealthDetail
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.categoryModel.Doc
 
 class HatlyShopCatAdapter(
-    private val addressArrayList: ArrayList<Categore>,
+    private val addressArrayList: ArrayList<Doc>,
     val hatlyShopInterface: HatlyShopInterface
 ) :
     RecyclerView.Adapter<AddressViewHolder>() {
@@ -27,32 +26,32 @@ class HatlyShopCatAdapter(
 
         val arrayData = addressArrayList[position]
 
-//        if (arrayData.isNotEmpty()) {
-//            holder.bind.imgMore.visibility = View.VISIBLE
-//            holder.bind.imgShop.visibility = View.GONE
-//            holder.bind.txtTitle.text = arrayData
-//        } else {
-//            holder.bind.imgMore.visibility = View.GONE
-//            holder.bind.imgShop.visibility = View.VISIBLE
-//        }
+        if (arrayData.isShowMore) {
+            holder.bind.imgMore.visibility = View.VISIBLE
+            holder.bind.imgShop.visibility = View.GONE
+            holder.bind.txtTitle.text = arrayData.name
+        } else {
+            holder.bind.imgMore.visibility = View.GONE
+            holder.bind.imgShop.visibility = View.VISIBLE
 
-        holder.bind.txtTitle.text = try{
-            arrayData.name
-        }catch (e : java.lang.Exception){
-            ""
+
+            holder.bind.txtTitle.text = try {
+                arrayData.name
+            } catch (e: java.lang.Exception) {
+                ""
+            }
+
+        Picasso.get().load(arrayData.image).into(holder.bind.imgShop)
+
+
+            holder.itemView.setOnClickListener {
+                hatlyShopInterface.clickshopItem(position)
+            }
         }
 
-        Picasso.get().load(arrayData.secure_url).into(holder.bind.imgShop)
-
-
-        holder.itemView.setOnClickListener {
-            hatlyShopInterface.clickshopItem(position)
+        holder.bind.imgMore.setOnClickListener {
+            hatlyShopInterface.clickMoreItem(position)
         }
-
-//        holder.bind.imgMore.setOnClickListener {
-//            hatlyShopInterface.clickMoreItem(position)
-//        }
-
 
     }
 

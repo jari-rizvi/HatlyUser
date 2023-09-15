@@ -6,5 +6,6 @@ import androidx.annotation.Keep
 data class Doc(
     val _id: String,
     val image: String,
-    val title: String
+    val title: String,
+    var itemSelected : Boolean = false
 )
