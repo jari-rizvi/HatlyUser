@@ -32,6 +32,8 @@ class HatlyCategoriesFragment :
     private lateinit var healthDetailCatArraylist: ArrayList<Doc>
     private lateinit var hatlyShopCatAdapter: HatlyShopCatAdapter
     var storeId = ""
+    var storeName = ""
+    var storeAddress = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,8 +49,11 @@ class HatlyCategoriesFragment :
 
         val bundle = arguments
         if (bundle != null) {
-
             storeId = bundle.getString("_id", "")
+            storeName = bundle.getString("name", "")
+            storeAddress = bundle.getString("address", "")
+            mViewDataBinding.textView2.text = storeName
+            mViewDataBinding.textViewAddress.text = storeAddress
         }
 
         mViewDataBinding.imgBack.setOnClickListener {

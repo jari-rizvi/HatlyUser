@@ -254,6 +254,9 @@
         <action
             android:id="@+id/action_hatlyMartFragment_to_specialOrderFragment"
             app:destination="@id/specialOrderFragment" />
+        <action
+            android:id="@+id/action_hatlyMartFragment_to_productPreviewFragment"
+            app:destination="@id/productPreviewFragment" />
 
     </fragment>
 

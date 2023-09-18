@@ -45,7 +45,8 @@ class HatlyShopCatAdapter(
 
 
             holder.itemView.setOnClickListener {
-                hatlyShopInterface.clickshopItem(position)
+//                hatlyShopInterface.clickshopItem(position)
+                hatlyShopInterface.clickCategoryItem(position)
             }
         }
 

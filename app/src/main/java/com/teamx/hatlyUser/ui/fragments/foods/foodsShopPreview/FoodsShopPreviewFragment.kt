@@ -14,6 +14,7 @@ import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.constants.NetworkCallPointsNest
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentFoodsShopPreviewBinding
+import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.adapter.FoodHomeTitleAdapter
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.adapter.FoodsShopProductAdapter
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Document
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Product
@@ -39,7 +40,7 @@ class FoodsShopPreviewFragment :
     lateinit var shopCategoryArrayList: ArrayList<Product>
     lateinit var productArrayList: ArrayList<Document>
     lateinit var foodsShopProductAdapter: FoodsShopProductAdapter
-    lateinit var shopHomeAdapter: ShopHomeTitleAdapter
+    lateinit var shopHomeAdapter: FoodHomeTitleAdapter
 
     var productLayoutManager2: LinearLayoutManager? = null
     var categoryLayoutManager: GridLayoutManager? = null
@@ -166,7 +167,7 @@ class FoodsShopPreviewFragment :
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         mViewDataBinding.recCategories.layoutManager = layoutManager1
 
-        shopHomeAdapter = ShopHomeTitleAdapter(shopCategoryArrayList, this)
+        shopHomeAdapter = FoodHomeTitleAdapter(shopCategoryArrayList, this)
         mViewDataBinding.recCategories.adapter = shopHomeAdapter
     }
 
@@ -233,7 +234,7 @@ class FoodsShopPreviewFragment :
         productArrayList.addAll(shopCategoryArrayList[position].documents)
         foodsShopProductAdapter.notifyDataSetChanged()
 
-        findNavController().navigate(R.id.action_foodsShopHomeFragment_to_productPreviewFragment)
+//        findNavController().navigate(R.id.action_foodsShopHomeFragment_to_productPreviewFragment)
     }
 
     override fun clickCategoryItem(position: Int) {

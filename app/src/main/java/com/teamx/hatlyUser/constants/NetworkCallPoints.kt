@@ -16,6 +16,7 @@ class NetworkCallPoints {
         const val ALL_SHOPS = "shop/all"
         const val SHOP_CATEGOIES = "custom/category/all"
         const val POPULAR_PRODUCTS = "product/all"
+        const val SHOP_SUB_CATEGOIES = "product/list"
 
         const val ALL_FOODS_CATEGORIES = "shop/category/list"
         const val ALL_FOODS_SHOPS = "resturant/all"

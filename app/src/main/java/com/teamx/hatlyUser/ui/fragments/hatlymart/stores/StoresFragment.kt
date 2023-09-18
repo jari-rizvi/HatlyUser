@@ -140,6 +140,8 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
         val hatlyStore = modelAllStoresArraylist[position]
         val bundle = Bundle()
         bundle.putString("_id", hatlyStore._id)
+        bundle.putString("name", hatlyStore.name)
+        bundle.putString("address", hatlyStore.address.googleMapAddress)
         findNavController().navigate(R.id.action_storesFragment_to_hatlyMartFragment, bundle)
     }
 

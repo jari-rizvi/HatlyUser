@@ -42,6 +42,8 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
     private lateinit var hatlyPopularAdapter: HatlyPopularAdapter
 
     var storeId = ""
+    var storeName = ""
+    var storeAddress = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,6 +68,18 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
         if (bundle != null) {
             val parcel = bundle.getBoolean("parcel", false)
             storeId = bundle.getString("_id", "")
+            storeName = bundle.getString("name", "")
+            storeAddress = bundle.getString("address", "")
+            mViewDataBinding.textView2.text = try {
+                storeName
+            }catch (e : Exception){
+                ""
+            }
+            mViewDataBinding.textViewAddress.text = try {
+                storeAddress
+            }catch (e : Exception){
+                ""
+            }
             when {
                 parcel -> {
                     mViewDataBinding.constraintLayout2.visibility = View.VISIBLE
@@ -206,18 +220,27 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
     }
 
     override fun clickshopItem(position: Int) {
-        findNavController().navigate(R.id.action_hatlyMartFragment_to_ShopHomeFragment)
+        findNavController().navigate(R.id.action_hatlyMartFragment_to_productPreviewFragment)
         Toast.makeText(MainApplication.context, "Shop", Toast.LENGTH_SHORT).show()
     }
 
     override fun clickCategoryItem(position: Int) {
-
+        val categoryModel = healthDetailCatArraylist[position]
+        val bundle = Bundle()
+        bundle.putString("_id", storeId)
+        bundle.putString("categoryId", categoryModel._id)
+        bundle.putString("name", storeName)
+        bundle.putString("address", storeAddress)
+        findNavController().navigate(R.id.action_hatlyMartFragment_to_ShopHomeFragment,bundle)
+        Toast.makeText(MainApplication.context, "Category", Toast.LENGTH_SHORT).show()
     }
 
     override fun clickMoreItem(position: Int) {
 
         val bundle = Bundle()
         bundle.putString("_id", storeId)
+        bundle.putString("name", storeName)
+        bundle.putString("address", storeAddress)
         findNavController().navigate(R.id.action_hatlyMartFragment_to_HatlyCategoriesFragment,bundle)
         Toast.makeText(MainApplication.context, "More", Toast.LENGTH_SHORT).show()
     }

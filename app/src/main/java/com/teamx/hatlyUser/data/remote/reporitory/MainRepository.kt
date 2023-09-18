@@ -37,6 +37,16 @@ class MainRepository @Inject constructor(
         @Query("offset") offset: Int
     ) = apiService.categoryShop(shopId, page, limit, offset)
 
+
+    suspend fun storeSubCategory(
+        @Query("shopId") shopId: String,
+        @Query("category") category: String,
+        @Query("search") search: String,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int
+    ) = apiService.storeSubCategory(shopId, category, search,page, limit, offset)
+
     suspend fun popularProducts(
         @Query("shopId") shopId: String
     ) = apiService.popularProducts(shopId)

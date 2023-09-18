@@ -15,6 +15,7 @@ import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Foo
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.categoryModel.ModelCategory
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproductmodel.ModelPopularProducts
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
+import com.teamx.hatlyUser.ui.fragments.shophome.model.ModelSubCategoryStore
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -71,6 +72,19 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<ModelPopularProducts>
+
+
+    @GET(NetworkCallPoints.SHOP_SUB_CATEGOIES)
+    suspend fun storeSubCategory(
+        @Query("shopId") shopId: String,
+        @Query("category") category: String,
+        @Query("search") search: String,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelSubCategoryStore>
 
 
     @GET(NetworkCallPoints.ALL_FOODS_CATEGORIES)
