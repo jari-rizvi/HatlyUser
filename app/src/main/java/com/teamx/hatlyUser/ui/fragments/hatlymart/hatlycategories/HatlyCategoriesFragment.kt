@@ -108,11 +108,17 @@ class HatlyCategoriesFragment :
     }
 
     override fun clickshopItem(position: Int) {
-        findNavController().navigate(R.id.action_HatlyCategoriesFragment_to_ShopHomeFragment)
+//        findNavController().navigate(R.id.action_HatlyCategoriesFragment_to_ShopHomeFragment)
     }
 
     override fun clickCategoryItem(position: Int) {
-
+        val categoryModel = healthDetailCatArraylist[position]
+        val bundle = Bundle()
+        bundle.putString("_id", storeId)
+        bundle.putString("categoryId", categoryModel._id)
+        bundle.putString("name", storeName)
+        bundle.putString("address", storeAddress)
+        findNavController().navigate(R.id.action_HatlyCategoriesFragment_to_ShopHomeFragment,bundle)
     }
 
     override fun clickMoreItem(position: Int) {

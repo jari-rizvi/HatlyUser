@@ -135,8 +135,9 @@
                     app:layout_constraintVertical_bias="0" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recVariation1"
+                    android:id="@+id/recVarRequired"
                     android:layout_width="0dp"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="@+id/textView23"
                     app:layout_constraintStart_toStartOf="@+id/textView23"
@@ -146,6 +147,19 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginTop="@dimen/_10sdp"
                     tools:listitem="@layout/item_product_variation_required" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recVarOptional"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="@+id/recVarRequired"
+                    app:layout_constraintStart_toStartOf="@+id/recVarRequired"
+                    app:layout_constraintTop_toBottomOf="@+id/recVarRequired"
+                    tools:listitem="@layout/item_product_variation_optional" />
+
 
                 <TextView
                     android:id="@+id/textView24"
@@ -161,7 +175,7 @@
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="@+id/textView23"
-                    app:layout_constraintTop_toBottomOf="@+id/recVariation1"
+                    app:layout_constraintTop_toBottomOf="@+id/recVarOptional"
                     app:layout_constraintVertical_bias="0.05" />
 
                 <TextView
@@ -242,6 +256,7 @@
                     android:gravity="center"
                     android:paddingVertical="@dimen/_10sdp"
                     android:text="Add to cart"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_15ssp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -258,22 +273,25 @@
                     android:text="Frequently Bought Together"
                     android:textColor="#363636"
                     android:textSize="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_20sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView30"
                     app:layout_constraintTop_toBottomOf="@+id/textView30"
                     app:layout_constraintVertical_bias="0.1" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recCategories"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView31"
-                    tools:listitem="@layout/item_popular" />
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/recVarRequired"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/_10sdp"-->
+<!--                    android:visibility="gone"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/textView31"-->
+<!--                    tools:listitem="@layout/item_product_variation_required" />-->
+
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline"

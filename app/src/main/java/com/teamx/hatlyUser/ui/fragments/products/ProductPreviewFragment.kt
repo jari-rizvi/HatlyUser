@@ -4,14 +4,16 @@ import android.graphics.Paint
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.navOptions
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter.HatlyPopularAdapter
+import com.teamx.hatlyUser.data.remote.Resource
+import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Product
 import com.teamx.hatlyUser.ui.fragments.products.hatly.ItemClass
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.products.adapter.MultiViewVariationRadioAdapter
+import com.teamx.hatlyUser.ui.fragments.products.model.ShopVeriation
+import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -26,6 +28,7 @@ class ProductPreviewFragment : BaseFragment<com.teamx.hatlyUser.databinding.Frag
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    lateinit var requiredArrayList: ArrayList<ShopVeriation>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,15 +43,56 @@ class ProductPreviewFragment : BaseFragment<com.teamx.hatlyUser.databinding.Frag
         }
         mViewDataBinding.textView25.paintFlags = mViewDataBinding.textView25.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
+        requiredArrayList = ArrayList()
+
+        mViewModel.prodPreview("64db9e0afb30bc9e9b456001")
+
+        mViewModel.prodPreviewResponse.observe(requireActivity()) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    it.data?.let { data ->
+
+                        Picasso.get().load(data.product.images[0]).into(mViewDataBinding.imgShop)
+                        mViewDataBinding.textView22.text=try {
+                            data.product.name
+                        }catch (e : Exception){
+                            ""
+                        }
+                        mViewDataBinding.textView23.text=try {
+                            data.product.description
+                        }catch (e : Exception){
+                            ""
+                        }
+                        mViewDataBinding.textView24.text=try {
+                            data.product.minPrize.toString()
+                        }catch (e : Exception){
+                            ""
+                        }
+
+                    }
+                }
+
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    mViewDataBinding.root.snackbar(it.message!!)
+                }
+            }
+        }
+
 //        val layoutManager1 = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-//        val layoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+
 //        mViewDataBinding.recCategories.layoutManager = layoutManager1
-//        mViewDataBinding.recVariation1.layoutManager = layoutManager2
-//
+
+
 //        val itemClasses: ArrayList<String> = ArrayList()
-//
-//        val itemClasses1: ArrayList<ItemClass> = ArrayList()
-//
+
+        val itemClasses1: ArrayList<ItemClass> = ArrayList()
+
 //        itemClasses.add("")
 //        itemClasses.add("")
 //        itemClasses.add("")
@@ -74,16 +118,20 @@ class ProductPreviewFragment : BaseFragment<com.teamx.hatlyUser.databinding.Frag
 //        itemClasses.add("")
 //        itemClasses.add("")
 //        itemClasses.add("")
-//
+
 //        itemClasses1.add(ItemClass(0,"Required 1"))
-//        itemClasses1.add(ItemClass(0,"Required 3"))
+//        itemClasses1.add(ItemClass(0,"Required 2"))
 //        itemClasses1.add(ItemClass(1,54,"Optional",""))
 //        itemClasses1.add(ItemClass(1,54,"Optional",""))
-//
+
 //        val hatlyPopularAdapter = HatlyPopularAdapter(itemClasses,this)
-////        val prodVariationRadio = ProductVariationRadioAdapter(itemClasses1)
-//        val prodVariationRadio = MultiViewVariationRadioAdapter(itemClasses1)
+//        val prodVariationRadio = ProductVariationRadioAdapter(itemClasses1)
 //        mViewDataBinding.recCategories.adapter = hatlyPopularAdapter
+
+
+//        val prodVariationRadio = MultiViewVariationRadioAdapter(itemClasses1)
+//        val layoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+//        mViewDataBinding.recVariation1.layoutManager = layoutManager2
 //        mViewDataBinding.recVariation1.adapter = prodVariationRadio
 
 

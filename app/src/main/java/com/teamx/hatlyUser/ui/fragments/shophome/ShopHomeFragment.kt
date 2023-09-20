@@ -12,7 +12,6 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentShopHomeBinding
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter.HatlyShopCatAdapter
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.shophome.adapter.ShopHomeTitleAdapter
 import com.teamx.hatlyUser.ui.fragments.shophome.adapter.SubCategoryProductsAdapter
@@ -76,22 +75,23 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
         subCategoryProductsArray = ArrayList()
         val layoutManager = GridLayoutManager(requireActivity(), 2)
         mViewDataBinding.recShopProducts.layoutManager = layoutManager
-        subCategoryProductsAdapter = SubCategoryProductsAdapter(subCategoryProductsArray,this)
+        subCategoryProductsAdapter = SubCategoryProductsAdapter(subCategoryProductsArray, this)
         mViewDataBinding.recShopProducts.adapter = subCategoryProductsAdapter
 
 
 
         itemCategoryTitle = ArrayList()
-        val layoutManager1 = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        val layoutManager1 =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         mViewDataBinding.recCategories.layoutManager = layoutManager1
-        shopHomeAdapter = ShopHomeTitleAdapter(itemCategoryTitle,this)
+        shopHomeAdapter = ShopHomeTitleAdapter(itemCategoryTitle, this)
         mViewDataBinding.recCategories.adapter = shopHomeAdapter
 
 
 
         if (!mViewModel.storeSubCategoryResponse.hasActiveObservers()) {
-//            mViewModel.storeSubCategory(storeId, categoryId, "", 1, 10, 0)
-            mViewModel.storeSubCategory("64fb15aec7dd05bb52f7f01c", "64d2437ceccb23edb42b4805", "", 1, 10, 0)
+            mViewModel.storeSubCategory(storeId, categoryId, "", 1, 10, 0)
+//            mViewModel.storeSubCategory("64fb15aec7dd05bb52f7f01c", "64d2437ceccb23edb42b4805", "", 1, 10, 0)
         }
 
         mViewModel.storeSubCategoryResponse.observe(requireActivity()) {
@@ -108,7 +108,9 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
                             itemCategoryTitle.add(it)
                         }
 
-                        subCategoryProductsArray.addAll(data.docs[0].documents)
+                        if (data.docs.isNotEmpty()){
+                            subCategoryProductsArray.addAll(data.docs[0].documents)
+                        }
 
                         shopHomeAdapter.notifyDataSetChanged()
                         subCategoryProductsAdapter.notifyDataSetChanged()

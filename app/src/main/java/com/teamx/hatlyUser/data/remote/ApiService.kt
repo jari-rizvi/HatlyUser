@@ -15,6 +15,7 @@ import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Foo
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.categoryModel.ModelCategory
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproductmodel.ModelPopularProducts
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
+import com.teamx.hatlyUser.ui.fragments.products.model.ModelProductPreview
 import com.teamx.hatlyUser.ui.fragments.shophome.model.ModelSubCategoryStore
 import retrofit2.Response
 import retrofit2.http.*
@@ -112,4 +113,11 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<FoodShopModel>
+
+    @GET(NetworkCallPoints.PROD_PREVIEW)
+    suspend fun prodPreview(
+        @Path("id") id: String,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelProductPreview>
 }

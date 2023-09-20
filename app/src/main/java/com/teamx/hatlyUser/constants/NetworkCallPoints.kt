@@ -22,5 +22,7 @@ class NetworkCallPoints {
         const val ALL_FOODS_SHOPS = "resturant/all"
 
         const val SHOP_FOODS = "food/{id}"
+
+        const val PROD_PREVIEW = "product/{id}"
     }
 }

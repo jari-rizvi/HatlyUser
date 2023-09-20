@@ -84,7 +84,7 @@ class MultiViewVariationRadioAdapter(private val dataSet: ArrayList<ItemClass>) 
     }
 
     override fun getItemCount(): Int {
-        return 4/*dataSet.size*/
+        return dataSet.size
     }
 
     override fun getItemViewType(position: Int): Int {
