@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView.OnEditorActionListener
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
@@ -16,9 +15,9 @@ import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.MART
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentStoresBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.adapter.StoresAdapter
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.Doc
-import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
 import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -72,9 +71,17 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
             }
             Marts.HEALTH_BEAUTY -> {
                 Log.d("StoreFragment", "HEALTH_BEAUTY: back")
+                if (!mViewModel.allHealthAndBeautyStoresResponse.hasActiveObservers()) {
+                    mViewModel.allHealthAndBeautyStores(1, 10, "",0,"health")
+                    Log.d("allStoresResponse", "allStores: ")
+                }
             }
             Marts.HOME_BUSINESS -> {
                 Log.d("StoreFragment", "HOME_BUSINESS: back")
+                if (!mViewModel.allHealthAndBeautyStoresResponse.hasActiveObservers()) {
+                    mViewModel.allHealthAndBeautyStores(1, 10, "",0,"home based")
+                    Log.d("allStoresResponse", "allStores: ")
+                }
             }
         }
 
@@ -101,9 +108,10 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
                         mViewModel.allHealthAndBeautyStores(1, 10, mViewDataBinding.inpSearch.text.toString().trim(),0,"grocery")
                     }
                     Marts.HEALTH_BEAUTY -> {
+                        mViewModel.allHealthAndBeautyStores(1, 10, mViewDataBinding.inpSearch.text.toString().trim(),0,"health")
                     }
                     Marts.HOME_BUSINESS -> {
-
+                        mViewModel.allHealthAndBeautyStores(1, 10, mViewDataBinding.inpSearch.text.toString().trim(),0,"home based")
                     }
                 }
             }

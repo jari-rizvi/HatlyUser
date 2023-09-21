@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.MainApplication.Companion.context
+import com.teamx.hatlyUser.ui.fragments.products.adapter.optional.ProductVariationOptionalAdapter
 import com.teamx.hatlyUser.ui.fragments.products.hatly.ItemClass
 import com.teamx.hatlyUser.ui.fragments.products.hatly.ItemClass.Companion.LayoutOne
 import com.teamx.hatlyUser.ui.fragments.products.hatly.ItemClass.Companion.LayoutTwo
@@ -54,8 +55,8 @@ class MultiViewVariationRadioAdapter(private val dataSet: ArrayList<ItemClass>) 
                 itemClasses.add("")
                 itemClasses.add("")
 
-                val productVariationRequiredAdapter = ProductVariationRequiredAdapter(itemClasses)
-                holderClass1.recRequired.adapter = productVariationRequiredAdapter
+//                val productVariationRequiredAdapter = ProductVariationRequiredAdapter(itemClasses)
+//                holderClass1.recRequired.adapter = productVariationRequiredAdapter
 
             }
             LayoutTwo -> {
@@ -75,8 +76,8 @@ class MultiViewVariationRadioAdapter(private val dataSet: ArrayList<ItemClass>) 
                 itemClasses.add("")
                 itemClasses.add("")
 
-                val productVariationOptionalAdapter = ProductVariationOptionalAdapter(itemClasses)
-                holderClass2.recOpt.adapter = productVariationOptionalAdapter
+//                val productVariationOptionalAdapter = ProductVariationOptionalAdapter(itemClasses)
+//                holderClass2.recOpt.adapter = productVariationOptionalAdapter
 
             }
             else -> return

@@ -7,5 +7,6 @@ data class ShopVeriation(
     val _id: String,
     val name: String,
     val options: List<String>,
-    val shopId: String
+    val shopId: String,
+    var selectedIndex: Int = -1
 )

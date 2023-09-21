@@ -19,6 +19,7 @@ import com.teamx.hatlyUser.databinding.FragmentHatlyMartBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter.HatlyPopularAdapter
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter.HatlyShopCatAdapter
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.categoryModel.Doc
 import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
@@ -169,7 +170,7 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
-                    mViewDataBinding.root.snackbar(it.message!!)
+                    mViewDataBinding.mainLayout.snackbar(it.message!!)
                     Log.d("hatlyShopCatAdapter", "ERROR: ${it.message!!}")
                 }
             }
@@ -194,7 +195,7 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
-                    mViewDataBinding.root.snackbar(it.message!!)
+                    mViewDataBinding.mainLayout.snackbar(it.message!!)
                     Log.d("hatlyShopCatAdapter", "ERROR: ${it.message!!}")
                 }
             }
@@ -220,7 +221,12 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
     }
 
     override fun clickshopItem(position: Int) {
-        findNavController().navigate(R.id.action_hatlyMartFragment_to_productPreviewFragment)
+        val modelPopular = healthDetailPopularArraylist[position]
+        val bundle = Bundle()
+        bundle.putString("_id", modelPopular._id)
+        bundle.putString("name", storeName)
+        bundle.putString("address", storeAddress)
+        findNavController().navigate(R.id.action_hatlyMartFragment_to_productPreviewFragment,bundle)
         Toast.makeText(MainApplication.context, "Shop", Toast.LENGTH_SHORT).show()
     }
 

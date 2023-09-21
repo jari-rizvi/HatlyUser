@@ -20,6 +20,7 @@ import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.adapter.FoodHomeAdapter
 import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.adapter.FoodHomeCategoryAdapter
 import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.models.modelCategory.Doc
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint

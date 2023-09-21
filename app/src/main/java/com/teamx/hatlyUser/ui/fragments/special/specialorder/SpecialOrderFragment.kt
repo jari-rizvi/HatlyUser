@@ -9,8 +9,9 @@ import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.databinding.FragmentSpecialOrderBinding
-import com.teamx.hatlyUser.ui.fragments.special.specialorder.adapter.SpecialOrderAdapter
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
+import com.teamx.hatlyUser.ui.fragments.special.specialorder.adapter.SpecialOrderAdapter
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
 import dagger.hilt.android.AndroidEntryPoint
 
 

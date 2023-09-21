@@ -1,6 +1,5 @@
 package com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.adapter
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -11,6 +10,7 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemShopCatBinding
 import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.models.modelCategory.Doc
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
 import java.util.ArrayList
 
 class FoodHomeCategoryAdapter(

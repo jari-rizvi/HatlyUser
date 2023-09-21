@@ -1,10 +1,8 @@
 package com.teamx.hatlyUser.ui.fragments.notification
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.Menu
 import android.view.View
 import android.widget.AbsListView
 import androidx.navigation.fragment.findNavController
@@ -16,6 +14,7 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.databinding.FragmentNotificationBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.ui.fragments.notification.adapter.NotificationAdapter
 import dagger.hilt.android.AndroidEntryPoint
 

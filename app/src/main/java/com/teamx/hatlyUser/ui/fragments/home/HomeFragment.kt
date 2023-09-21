@@ -79,12 +79,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
             findNavController().navigate(R.id.action_homeFragment_to_storesFragment, bundle)
         }
 
-        mViewDataBinding.imgNotification.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
-        }
-
         mViewDataBinding.textView112.setOnClickListener {
             MART = Marts.HOME_BUSINESS
+            val bundle = Bundle()
+            bundle.putBoolean("parcel", false)
+            findNavController().navigate(R.id.action_homeFragment_to_storesFragment, bundle)
+        }
+
+        mViewDataBinding.imgNotification.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
         }
 
         val onBackPressedCallback = object : OnBackPressedCallback(true) {

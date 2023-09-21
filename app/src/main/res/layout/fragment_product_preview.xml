@@ -105,12 +105,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="Mordern Bakery Sesame Sandwich Bread Rolls, 4x65g"
                     android:textColor="#EA1B25"
                     android:textSize="@dimen/_15ssp"
                     android:textStyle="bold"
-                    android:layout_marginTop="@dimen/_10sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/guideline"
                     app:layout_constraintStart_toStartOf="parent"
@@ -121,12 +120,11 @@
                     android:id="@+id/textView23"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
                     android:textColor="#808080"
                     android:textSize="@dimen/_12ssp"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -137,28 +135,39 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recVarRequired"
                     android:layout_width="0dp"
-                    android:visibility="gone"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/textView23"
                     app:layout_constraintStart_toStartOf="@+id/textView23"
                     app:layout_constraintTop_toBottomOf="@+id/textView23"
-                    tools:itemCount="6"
                     app:layout_constraintVertical_bias="0"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    tools:itemCount="6"
                     tools:listitem="@layout/item_product_variation_required" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recVarOptional"
+                <include
+                    android:id="@+id/layoutOptional"
+                    layout="@layout/item_product_variation_optional"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintEnd_toEndOf="@+id/recVarRequired"
-                    app:layout_constraintStart_toStartOf="@+id/recVarRequired"
-                    app:layout_constraintTop_toBottomOf="@+id/recVarRequired"
-                    tools:listitem="@layout/item_product_variation_optional" />
+                    app:layout_constraintEnd_toEndOf="@+id/textView23"
+                    app:layout_constraintStart_toStartOf="@+id/textView23"
+                    app:layout_constraintTop_toBottomOf="@+id/recVarRequired" />
+
+                <!--                <androidx.recyclerview.widget.RecyclerView-->
+                <!--                    android:id="@+id/recVarOptional"-->
+                <!--                    android:layout_width="0dp"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/_10sdp"-->
+                <!--                    android:orientation="horizontal"-->
+                <!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+                <!--                    app:layout_constraintEnd_toEndOf="@+id/recVarRequired"-->
+                <!--                    app:layout_constraintStart_toStartOf="@+id/recVarRequired"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/recVarRequired"-->
+                <!--                    tools:listitem="@layout/item_product_variation_optional" />-->
 
 
                 <TextView
@@ -167,7 +176,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/ubuntu_bold"
-                    android:text="135.00 Aed"
                     android:textColor="#363636"
                     android:textSize="@dimen/_15ssp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -175,7 +183,7 @@
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="@+id/textView23"
-                    app:layout_constraintTop_toBottomOf="@+id/recVarOptional"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutOptional"
                     app:layout_constraintVertical_bias="0.05" />
 
                 <TextView
@@ -184,7 +192,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:fontFamily="@font/ubuntu_bold"
-                    android:text="200 Aed"
                     android:textColor="#EA1B25"
                     android:textSize="@dimen/_12ssp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView24"
@@ -250,13 +257,13 @@
                     android:id="@+id/textView30"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:background="@drawable/bg_circle"
                     android:backgroundTint="#1ED860"
                     android:fontFamily="@font/ubuntu_bold"
                     android:gravity="center"
                     android:paddingVertical="@dimen/_10sdp"
                     android:text="Add to cart"
-                    android:layout_marginTop="@dimen/_20sdp"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_15ssp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -269,28 +276,28 @@
                     android:id="@+id/textView31"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:fontFamily="@font/ubuntu_bold"
                     android:text="Frequently Bought Together"
                     android:textColor="#363636"
                     android:textSize="@dimen/_12ssp"
-                    android:layout_marginTop="@dimen/_20sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView30"
                     app:layout_constraintTop_toBottomOf="@+id/textView30"
                     app:layout_constraintVertical_bias="0.1" />
 
-<!--                <androidx.recyclerview.widget.RecyclerView-->
-<!--                    android:id="@+id/recVarRequired"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/_10sdp"-->
-<!--                    android:visibility="gone"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/textView31"-->
-<!--                    tools:listitem="@layout/item_product_variation_required" />-->
+                <!--                <androidx.recyclerview.widget.RecyclerView-->
+                <!--                    android:id="@+id/recVarRequired"-->
+                <!--                    android:layout_width="0dp"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/_10sdp"-->
+                <!--                    android:visibility="gone"-->
+                <!--                    android:orientation="horizontal"-->
+                <!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/textView31"-->
+                <!--                    tools:listitem="@layout/item_product_variation_required" />-->
 
 
                 <androidx.constraintlayout.widget.Guideline
