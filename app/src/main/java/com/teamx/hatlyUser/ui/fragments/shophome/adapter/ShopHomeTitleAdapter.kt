@@ -20,6 +20,8 @@ class ShopHomeTitleAdapter(private val addressArrayList: ArrayList<com.teamx.hat
 
         val arrayData = addressArrayList[position]
 
+        holder.bind.txtTitle.isChecked = arrayData.isSelected
+
         holder.bind.txtTitle.text = try {
             arrayData._id
         }catch (e : Exception){

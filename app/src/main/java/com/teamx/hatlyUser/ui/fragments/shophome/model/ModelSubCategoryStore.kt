@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 data class ModelSubCategoryStore(
-    val docs: List<Doc>
+    val docs: List<Doc>?
 )

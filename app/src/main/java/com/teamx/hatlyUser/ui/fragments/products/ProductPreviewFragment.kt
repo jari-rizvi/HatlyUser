@@ -4,21 +4,26 @@ import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.JsonObject
 import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
+import com.teamx.hatlyUser.ui.fragments.products.adapter.frequentlyBought.FrequentlyBoughtAdapter
 import com.teamx.hatlyUser.ui.fragments.products.adapter.optional.ProductVariationOptionalAdapter
 import com.teamx.hatlyUser.ui.fragments.products.adapter.required.ProductVariationRequiredAdapter
+import com.teamx.hatlyUser.ui.fragments.products.model.FrequentlyBought
 import com.teamx.hatlyUser.ui.fragments.products.model.OptionalVeriaton
 import com.teamx.hatlyUser.ui.fragments.products.model.ShopVeriation
 import com.teamx.hatlyUser.ui.fragments.products.model.Veriation
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONException
 import kotlin.random.Random
 
 
@@ -38,13 +43,16 @@ class ProductPreviewFragment :
     lateinit var requiredArrayList: ArrayList<ShopVeriation>
     lateinit var requiredveriationArrayList: ArrayList<Veriation>
     lateinit var optionalArrayList: ArrayList<OptionalVeriaton>
+    lateinit var freBoughtArrayList: ArrayList<FrequentlyBought>
 
     lateinit var prodVariationRadio: ProductVariationRequiredAdapter
     lateinit var prodOptionalVarAdapter: ProductVariationOptionalAdapter
+    lateinit var frequentlyBoughtAdapter: FrequentlyBoughtAdapter
 
     var storeId = ""
     var storeName = ""
     var storeAddress = ""
+    var quantityActualValue = 1
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -64,7 +72,7 @@ class ProductPreviewFragment :
             storeName = bundle.getString("name", "")
             mViewDataBinding.textView2.text = try {
                 storeName
-            }catch (e : Exception){
+            } catch (e: Exception) {
                 ""
             }
         }
@@ -76,6 +84,7 @@ class ProductPreviewFragment :
         requiredArrayList = ArrayList()
         requiredveriationArrayList = ArrayList()
         optionalArrayList = ArrayList()
+        freBoughtArrayList = ArrayList()
 
         prodVariationRadio = ProductVariationRequiredAdapter(requiredArrayList, this)
         val requiredLayoutManager =
@@ -89,8 +98,17 @@ class ProductPreviewFragment :
         mViewDataBinding.layoutOptional.recOpt.layoutManager = optionalLayoutManager
         mViewDataBinding.layoutOptional.recOpt.adapter = prodOptionalVarAdapter
 
-        mViewModel.prodPreview("64db9e0afb30bc9e9b456001")
-//        mViewModel.prodPreview("64d243cfeccb23edb42b480a")
+
+        frequentlyBoughtAdapter = FrequentlyBoughtAdapter(freBoughtArrayList, this)
+        val productLayoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        mViewDataBinding.recFreBought.layoutManager = productLayoutManager
+        mViewDataBinding.recFreBought.adapter = frequentlyBoughtAdapter
+
+
+        mViewModel.prodPreview(storeId)
+//        mViewModel.prodPreview("64db9e0afb30bc9e9b456001") // veriation
+//        mViewModel.prodPreview("64d243cfeccb23edb42b480a") // simple
 
         mViewModel.prodPreviewResponse.observe(requireActivity()) {
             when (it.status) {
@@ -114,7 +132,16 @@ class ProductPreviewFragment :
                             ""
                         }
 
-                        if (data.product.productType == "simple"){
+                        Log.d("frequentlyBought21", "onViewCreated: ${data.frequentlyBought}")
+
+                        if (data.frequentlyBought?.isNotEmpty()   == true) {
+                            freBoughtArrayList.addAll(data.frequentlyBought)
+                            mViewDataBinding.textView31.visibility = View.VISIBLE
+                            mViewDataBinding.recFreBought.visibility = View.VISIBLE
+                            frequentlyBoughtAdapter.notifyDataSetChanged()
+                        }
+
+                        if (data.product.productType == "simple") {
                             Log.d("productType", "onViewCreated: Simple")
                             mViewDataBinding.textView24.text = try {
                                 "${data.product.prize} Aed"
@@ -135,7 +162,7 @@ class ProductPreviewFragment :
 
                         mViewDataBinding.textView25.text = try {
                             "${data.product.maxPrize} Aed"
-                        }catch (e : Exception){
+                        } catch (e: Exception) {
                             ""
                         }
 
@@ -143,8 +170,11 @@ class ProductPreviewFragment :
                             mViewDataBinding.recVarRequired.visibility = View.VISIBLE
                             requiredArrayList.addAll(data.product.shopVeriations)
 
+                            Log.d("requiredArrayList", "onViewCreated: ${requiredArrayList.size}")
+
                             requiredArrayList.forEachIndexed { index, shopVeriation ->
                                 requiredArrayList[index].selectedIndex = -1
+                                variationArray.add("")
 //                                clickRadioItem(index, 0)
                             }
                         }
@@ -171,6 +201,8 @@ class ProductPreviewFragment :
                         }
 
 
+
+
                     }
                 }
 
@@ -181,13 +213,65 @@ class ProductPreviewFragment :
             }
         }
 
+        mViewModel.addToCartResponse.observe(requireActivity()) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    it.data?.let { data ->
+                        if (data.success){
+                            mViewDataBinding.root.snackbar("Added")
+                        }
+                    }
+                }
+
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    mViewDataBinding.root.snackbar(it.message!!)
+                }
+            }
+        }
+
+        mViewDataBinding.imgIncreament.setOnClickListener {
+            quantityValue(quantityActualValue + 1)
+        }
+
+        mViewDataBinding.imgDereament.setOnClickListener {
+            quantityValue(quantityActualValue - 1)
+        }
+
+        mViewDataBinding.txtInstructionClick.setOnClickListener {
+            if (mViewDataBinding.inpSpecialInstr.isVisible){
+                mViewDataBinding.inpSpecialInstr.visibility = View.GONE
+            }else{
+                mViewDataBinding.inpSpecialInstr.visibility = View.VISIBLE
+            }
+        }
+
+        mViewDataBinding.textView30.setOnClickListener {
+            val spInst = mViewDataBinding.inpSpecialInstr.text.toString()
+            val params = JsonObject()
+            try {
+                params.addProperty("id", storeId)
+                params.addProperty("quantity", quantityActualValue)
+                if (spInst.isNotEmpty()){
+                    params.addProperty("specialInstruction", spInst)
+                }
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+            mViewModel.addToCart(params)
+        }
+
     }
 
     fun numGenerate(): Int {
         return Random.nextInt(3)
     }
 
-    var resultTitle = ""
 
     override fun clickRadioItem(requiredVarBox: Int, radioProperties: Int) {
         requiredArrayList[requiredVarBox].selectedIndex = radioProperties
@@ -203,29 +287,33 @@ class ProductPreviewFragment :
 
         val word = requiredArrayList[requiredVarBox].options[radioProperties]
 
-        if (variationArray.isNotEmpty()){
-            if (requiredVarBox >= variationArray.size || requiredVarBox < 0) {
-                //index does not exists
-                variationArray.add(requiredVarBox, word)
-            } else {
-                // index exists
-                variationArray[requiredVarBox] = word
-            }
+        variationArray[requiredVarBox] = word
 
-            resultTitle = variationArray.joinToString("/")
-        }else{
-            variationArray.add(requiredVarBox, word)
-        }
+        val resultTitle = variationArray.joinToString("/")
 
+//        if (variationArray.isNotEmpty()){
+//            if (requiredVarBox >= variationArray.size || requiredVarBox < 0) {
+//                //index does not exists
+//                variationArray.add(requiredVarBox, word)
+//            } else {
+//                // index exists
+//                variationArray[requiredVarBox] = word
+//            }
+//
+//            resultTitle = variationArray.joinToString("/")
+//        }else{
+//            variationArray.add(requiredVarBox, word)
+//        }
 
 
         Log.d("clickCategoryItem", "variationArray: $resultTitle")
 
         mViewDataBinding.textView24.text = try {
-            actualPrize(requiredveriationArrayList).toString()
+            actualPrize(requiredveriationArrayList, resultTitle).toString()
         } catch (e: Exception) {
             "0.0"
         }
+        mViewDataBinding.textView25.visibility = View.GONE
     }
 
     override fun clickCheckBoxItem(optionalVeriation: Int) {
@@ -239,7 +327,9 @@ class ProductPreviewFragment :
 //        prodOptionalVarAdapter.notifyItemRangeChanged(optionalVeriation, optionalArrayList.size)
     }
 
-    private fun actualPrize(variation: List<Veriation>): Double {
+    override fun clickFreBoughtItem(position: Int) {
+    }
+    private fun actualPrize(variation: List<Veriation>, resultTitle: String): Double {
         variation.forEach {
             if (resultTitle.isNotEmpty()) {
                 if (resultTitle == it.title) {
@@ -251,6 +341,14 @@ class ProductPreviewFragment :
             }
         }
         return 0.0
+    }
+
+    private fun quantityValue(quantity : Int){
+        if (quantity < 1){
+            return
+        }
+        quantityActualValue = quantity
+        mViewDataBinding.textView29.text = quantityActualValue.toString()
     }
 
 }

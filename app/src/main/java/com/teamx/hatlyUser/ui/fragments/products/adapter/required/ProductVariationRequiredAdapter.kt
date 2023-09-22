@@ -52,6 +52,10 @@ class ProductVariationRequiredAdapter(
             override fun clickCheckBoxItem(optionalVeriation: Int) {
 
             }
+
+            override fun clickFreBoughtItem(position: Int) {
+
+            }
         })
         holder.bind.recRequired.adapter = productVariationRequiredAdapter
 

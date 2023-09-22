@@ -3,6 +3,6 @@ import androidx.annotation.Keep
 
 @Keep
 data class ModelProductPreview(
-    val frequentlyBought: List<Any>,
+    val frequentlyBought: List<FrequentlyBought>?,
     val product: Product
 )

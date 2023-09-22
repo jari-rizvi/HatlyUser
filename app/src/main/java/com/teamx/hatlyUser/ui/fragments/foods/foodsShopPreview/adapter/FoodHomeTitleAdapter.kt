@@ -1,8 +1,12 @@
 package com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.adapter
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.teamx.hatlyUser.MainApplication
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemShopHomeTitleBinding
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Product
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
@@ -21,6 +25,13 @@ class FoodHomeTitleAdapter(private val addressArrayList: ArrayList<Product>, val
 
         val arrayData = addressArrayList[position]
 
+
+        val resources: Resources = MainApplication.context.resources
+
+        holder.bind.txtTitle.background = ResourcesCompat.getDrawable(resources, R.drawable.txt_food_category,null)
+
+        holder.bind.txtTitle.isChecked = arrayData.isSelected
+
         holder.bind.txtTitle.text = try {
             arrayData._id
         }catch (e : Exception){
@@ -28,7 +39,7 @@ class FoodHomeTitleAdapter(private val addressArrayList: ArrayList<Product>, val
         }
 
         holder.itemView.setOnClickListener {
-            hatlyShopInterface.clickshopItem(position)
+            hatlyShopInterface.clickCategoryItem(position)
         }
 
     }

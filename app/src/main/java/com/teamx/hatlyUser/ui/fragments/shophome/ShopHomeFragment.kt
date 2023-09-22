@@ -88,8 +88,6 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
         shopHomeAdapter = ShopHomeTitleAdapter(itemCategoryTitle, this)
         mViewDataBinding.recCategories.adapter = shopHomeAdapter
 
-
-
         if (!mViewModel.storeSubCategoryResponse.hasActiveObservers()) {
             mViewModel.storeSubCategory(storeId, categoryId, "", 1, 10, 0)
 //            mViewModel.storeSubCategory("64fb15aec7dd05bb52f7f01c", "64d2437ceccb23edb42b4805", "", 1, 10, 0)
@@ -105,11 +103,11 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
                     loadingDialog.dismiss()
                     it.data?.let { data ->
 
-                        data.docs.forEach {
+                        data.docs?.forEach {
                             itemCategoryTitle.add(it)
                         }
-
-                        if (data.docs.isNotEmpty()){
+                        if (data.docs?.isNotEmpty() == true) {
+                            itemCategoryTitle[0].isSelected = true
                             subCategoryProductsArray.addAll(data.docs[0].documents)
                         }
 
@@ -134,9 +132,14 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
     }
 
     override fun clickCategoryItem(position: Int) {
+        itemCategoryTitle.forEach {
+            it.isSelected = false
+        }
         val categoryitem = itemCategoryTitle[position]
         subCategoryProductsArray.clear()
         subCategoryProductsArray.addAll(categoryitem.documents)
+        itemCategoryTitle[position].isSelected = true
+        shopHomeAdapter.notifyDataSetChanged()
         subCategoryProductsAdapter.notifyDataSetChanged()
     }
 

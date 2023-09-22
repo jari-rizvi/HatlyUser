@@ -3,6 +3,7 @@ package com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.databinding.ItemPopularBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
@@ -37,7 +38,7 @@ class HatlyPopularAdapter(
         }
 
 
-//        Picasso.get().load(arrayData.images!![0]).into(holder.bind.imgShop)
+        Picasso.get().load(arrayData.images!![0]).into(holder.bind.imgShop)
 
 
         holder.itemView.setOnClickListener {

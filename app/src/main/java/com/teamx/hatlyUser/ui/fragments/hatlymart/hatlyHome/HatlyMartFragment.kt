@@ -73,12 +73,12 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
             storeAddress = bundle.getString("address", "")
             mViewDataBinding.textView2.text = try {
                 storeName
-            }catch (e : Exception){
+            } catch (e: Exception) {
                 ""
             }
             mViewDataBinding.textViewAddress.text = try {
                 storeAddress
-            }catch (e : Exception){
+            } catch (e: Exception) {
                 ""
             }
             when {
@@ -98,29 +98,51 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 
         when (NetworkCallPointsNest.MART) {
             Marts.HATLY_MART -> {
-                Log.d("StoreFragment", "HATLY_MART: back")
                 mViewDataBinding.txtShopCatTitle.text = "Shop by categories:"
                 mViewDataBinding.txtPopular.text = "Popular Items:"
+
+
+                if (storeId.isNotEmpty()) {
+                    if (!mViewModel.categoryShopResponse.hasActiveObservers()) {
+                        Log.d("allStoresResponse", "HatlyMartFragment: ")
+                        mViewModel.categoryShop("64fb1654a74b3bfd72afce03", 1, 10, 0)
+                    }
+                }
             }
 
             Marts.FOOD -> {
-                Log.d("StoreFragment", "FOOD: back")
             }
 
             Marts.GROCERY -> {
-                Log.d("StoreFragment", "GROCERY: back")
                 mViewDataBinding.txtShopCatTitle.text = "Shop by categories:"
                 mViewDataBinding.txtPopular.text = "Popular Items:"
+
+                if (storeId.isNotEmpty()) {
+                    if (!mViewModel.categoryShopResponse.hasActiveObservers()) {
+                        mViewModel.categoryShop(storeId, 1, 10, 0)
+                    }
+                }
             }
 
             Marts.HEALTH_BEAUTY -> {
-                Log.d("StoreFragment", "HEALTH_BEAUTY: back")
                 mViewDataBinding.txtShopCatTitle.text = "Shop by categories:"
                 mViewDataBinding.txtPopular.text = "Trending Now"
+
+
+                if (storeId.isNotEmpty()) {
+                    if (!mViewModel.categoryShopResponse.hasActiveObservers()) {
+                        mViewModel.categoryShop(storeId, 1, 10, 0)
+                    }
+                }
             }
 
             Marts.HOME_BUSINESS -> {
-                Log.d("StoreFragment", "HOME_BUSINESS: back")
+
+                if (storeId.isNotEmpty()) {
+                    if (!mViewModel.categoryShopResponse.hasActiveObservers()) {
+                        mViewModel.categoryShop(storeId, 1, 10, 0)
+                    }
+                }
             }
         }
 
@@ -129,14 +151,14 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 //        mViewDataBinding.recBasedMart.layoutManager = layoutManager1
 
 
-
-        if (storeId.isNotEmpty()) {
-            if (!mViewModel.categoryShopResponse.hasActiveObservers()) {
-                Log.d("allStoresResponse", "HatlyMartFragment: ")
-//                mViewModel.healthDeatil(storeId,1,10,0)
-                mViewModel.categoryShop("64db9adcc487c683bbda5c54", 1, 10, 0)
-            }
-        }
+//        if (storeId.isNotEmpty()) {
+//            if (!mViewModel.categoryShopResponse.hasActiveObservers()) {
+//                Log.d("allStoresResponse", "HatlyMartFragment: ")
+////                mViewModel.healthDeatil(storeId,1,10,0)
+////                mViewModel.categoryShop("64db9adcc487c683bbda5c54", 1, 10, 0)
+//                mViewModel.categoryShop(storeId, 1, 10, 0)
+//            }
+//        }
 
 //        if (!mViewModel.healthDetailResponse.hasActiveObservers()) {
         mViewModel.categoryShopResponse.observe(requireActivity()) {
@@ -178,13 +200,17 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 //        }
 
 //        mViewModel.popularProductsShop(storeId)
-        mViewModel.popularProductsShop("64db9adcc487c683bbda5c54")
+        if (!mViewModel.popularProductsResponse.hasActiveObservers()) {
+//            mViewModel.popularProductsShop("64db9adcc487c683bbda5c54")
+            mViewModel.popularProductsShop(storeId)
+        }
 
         mViewModel.popularProductsResponse.observe(requireActivity(), Observer {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
+
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
                     it.data?.let { data ->
@@ -193,6 +219,7 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                         hatlyPopularAdapter.notifyDataSetChanged()
                     }
                 }
+
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
                     mViewDataBinding.mainLayout.snackbar(it.message!!)
@@ -212,7 +239,8 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 //        mViewDataBinding.recBasedMart.adapter = hatlyShopCatAdapter
 
 
-        val productLayoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        val productLayoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         hatlyPopularAdapter = HatlyPopularAdapter(healthDetailPopularArraylist, this)
         mViewDataBinding.recPopular.layoutManager = productLayoutManager
         mViewDataBinding.recPopular.adapter = hatlyPopularAdapter
@@ -226,7 +254,10 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
         bundle.putString("_id", modelPopular._id)
         bundle.putString("name", storeName)
         bundle.putString("address", storeAddress)
-        findNavController().navigate(R.id.action_hatlyMartFragment_to_productPreviewFragment,bundle)
+        findNavController().navigate(
+            R.id.action_hatlyMartFragment_to_productPreviewFragment,
+            bundle
+        )
         Toast.makeText(MainApplication.context, "Shop", Toast.LENGTH_SHORT).show()
     }
 
@@ -237,7 +268,7 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
         bundle.putString("categoryId", categoryModel._id)
         bundle.putString("name", storeName)
         bundle.putString("address", storeAddress)
-        findNavController().navigate(R.id.action_hatlyMartFragment_to_ShopHomeFragment,bundle)
+        findNavController().navigate(R.id.action_hatlyMartFragment_to_ShopHomeFragment, bundle)
         Toast.makeText(MainApplication.context, "Category", Toast.LENGTH_SHORT).show()
     }
 
@@ -247,7 +278,10 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
         bundle.putString("_id", storeId)
         bundle.putString("name", storeName)
         bundle.putString("address", storeAddress)
-        findNavController().navigate(R.id.action_hatlyMartFragment_to_HatlyCategoriesFragment,bundle)
+        findNavController().navigate(
+            R.id.action_hatlyMartFragment_to_HatlyCategoriesFragment,
+            bundle
+        )
         Toast.makeText(MainApplication.context, "More", Toast.LENGTH_SHORT).show()
     }
 

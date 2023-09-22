@@ -5,5 +5,6 @@ import androidx.annotation.Keep
 data class Doc(
     val _id: String,
     val count: Int,
-    val documents: List<Document>
+    val documents: List<Document>,
+    var isSelected : Boolean = false
 )

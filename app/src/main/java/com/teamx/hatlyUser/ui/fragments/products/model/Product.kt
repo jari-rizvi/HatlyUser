@@ -15,6 +15,5 @@ data class Product(
     val productType: String,
     val shopId: String,
     val shopVeriations: List<ShopVeriation>?,
-    val veriations: List<Veriation>?,
-    val frequentlyBought: List<FrequentlyBought>
+    val veriations: List<Veriation>?
 )

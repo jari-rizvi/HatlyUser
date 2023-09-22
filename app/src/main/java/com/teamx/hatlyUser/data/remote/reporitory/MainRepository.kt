@@ -65,4 +65,5 @@ class MainRepository @Inject constructor(
     suspend fun foodsShopHome(id: String) = apiService.foodsShopHome(id)
 
     suspend fun prodPreview(id: String) = apiService.prodPreview(id)
+    suspend fun addToCart(@Body params: JsonObject) = apiService.addToCart(params)
 }

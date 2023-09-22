@@ -1,8 +1,11 @@
 package com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.adapter
 
+import android.content.res.Resources
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.MainApplication.Companion.context
@@ -10,8 +13,7 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemShopCatBinding
 import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.models.modelCategory.Doc
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
-import java.util.ArrayList
+
 
 class FoodHomeCategoryAdapter(
     private val foodsCategoryArrayList: ArrayList<Doc>,
@@ -40,8 +42,10 @@ class FoodHomeCategoryAdapter(
 
         if (foodsCategory.itemSelected) {
             holder.bind.categoryMain.background = ContextCompat.getDrawable(context, R.drawable.button_radius_corner_selected)
+            holder.bind.txtTitle.setTextColor(Color.parseColor("#EA1B25"))
         }else{
             holder.bind.categoryMain.background = ContextCompat.getDrawable(context, R.drawable.button_radius)
+            holder.bind.txtTitle.setTextColor(Color.parseColor("#363636"))
         }
 
         Picasso.get().load(foodsCategory.image).into(holder.bind.imgShop)

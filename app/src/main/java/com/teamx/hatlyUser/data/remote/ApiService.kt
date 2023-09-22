@@ -16,6 +16,7 @@ import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.categoryModel.
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproductmodel.ModelPopularProducts
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
 import com.teamx.hatlyUser.ui.fragments.products.model.ModelProductPreview
+import com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.AddToCart
 import com.teamx.hatlyUser.ui.fragments.shophome.model.ModelSubCategoryStore
 import retrofit2.Response
 import retrofit2.http.*
@@ -120,4 +121,11 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<ModelProductPreview>
+
+    @POST(NetworkCallPoints.ADD_TO_CART)
+    suspend fun addToCart(
+        @Body params: JsonObject,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<AddToCart>
 }
