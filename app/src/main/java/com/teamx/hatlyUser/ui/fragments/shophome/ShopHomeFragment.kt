@@ -102,13 +102,15 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
                     it.data?.let { data ->
-
+                        itemCategoryTitle.clear()
+                        subCategoryProductsArray.clear()
                         data.docs?.forEach {
                             itemCategoryTitle.add(it)
                         }
                         if (data.docs?.isNotEmpty() == true) {
-                            itemCategoryTitle[0].isSelected = true
-                            subCategoryProductsArray.addAll(data.docs[0].documents)
+                            clickCategoryItem(0)
+//                            itemCategoryTitle[0].isSelected = true
+//                            subCategoryProductsArray.addAll(itemCategoryTitle[0].documents)
                         }
 
                         shopHomeAdapter.notifyDataSetChanged()
@@ -128,7 +130,11 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
     }
 
     override fun clickshopItem(position: Int) {
-        findNavController().navigate(R.id.action_shopHomeFragment_to_productPreviewFragment)
+        val modelProduct = subCategoryProductsArray[position]
+        val bundle = Bundle()
+        bundle.putString("_id", modelProduct._id)
+        bundle.putString("name", storeName)
+        findNavController().navigate(R.id.action_shopHomeFragment_to_productPreviewFragment,bundle)
     }
 
     override fun clickCategoryItem(position: Int) {

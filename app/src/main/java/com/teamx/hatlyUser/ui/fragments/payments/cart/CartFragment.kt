@@ -1,8 +1,6 @@
 package com.teamx.hatlyUser.ui.fragments.payments.cart
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.AbsListView
@@ -11,16 +9,23 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentCartBinding
 import com.teamx.hatlyUser.ui.fragments.payments.cart.adapter.CartAdapter
+import com.teamx.hatlyUser.ui.fragments.payments.cart.interfaces.CartInterface
+import com.teamx.hatlyUser.ui.fragments.payments.cart.model.ModelCart
+import com.teamx.hatlyUser.ui.fragments.payments.cart.model.Product
+import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONException
 
 
 @AndroidEntryPoint
-class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
+class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInterface {
 
     override val layoutId: Int
         get() = R.layout.fragment_cart
@@ -29,9 +34,9 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    lateinit var itemClasses : ArrayList<String>
-    lateinit var layoutManager2 : LinearLayoutManager
-    lateinit var cartAdapter : CartAdapter
+    lateinit var cartProductArrayList: ArrayList<Product>
+    lateinit var layoutManager2: LinearLayoutManager
+    lateinit var cartAdapter: CartAdapter
 
     var isScrolling = false
     var currentItems = 0
@@ -50,6 +55,8 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
             }
         }
 
+        cartProductArrayList = ArrayList()
+
         mViewDataBinding.imgBack.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -61,7 +68,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Log.d("handleOnBackPressed", "handleOnBackPressed: back")
-                findNavController().popBackStack(R.id.homeFragment,false)
+                findNavController().popBackStack(R.id.homeFragment, false)
             }
         }
 
@@ -75,37 +82,55 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
 
         mViewDataBinding.recCart.layoutManager = layoutManager2
 
-        itemClasses = ArrayList()
+        mViewModel.getCart()
 
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
+        mViewModel.getCartResponse.observe(requireActivity()) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
 
-        cartAdapter = CartAdapter(itemClasses)
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    it.data?.let { data ->
+
+//                        mViewDataBinding.textView212.text = try {
+//                            "${data.subTotal} Aed"
+//                        } catch (e: Exception) {
+//                            "0.0 Aed"
+//                        }
+//
+//                        mViewDataBinding.textView2123.text = try {
+//                            "${data.tax} Aed"
+//                        } catch (e: Exception) {
+//                            "0.0 Aed"
+//                        }
+//
+//                        mViewDataBinding.textView2144.text = try {
+//                            "${data.total} Aed"
+//                        } catch (e: Exception) {
+//                            "0.0 Aed"
+//                        }
+//
+//                        cartProductArrayList.clear()
+//                        data.products?.let { it1 -> cartProductArrayList.addAll(it1) }
+//                        cartAdapter.notifyDataSetChanged()
+                        layoutUpdate(data)
+
+                    }
+                }
+
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    mViewDataBinding.root.snackbar(it.message!!)
+                }
+            }
+        }
+
+
+
+        cartAdapter = CartAdapter(cartProductArrayList, this)
         mViewDataBinding.recCart.adapter = cartAdapter
-
         mViewDataBinding.recCart.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -123,34 +148,135 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
 
                 if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
                     isScrolling = false
-                    fetchData()
+//                    fetchData()
                 }
             }
         })
 
     }
 
-    private fun fetchData() {
-        mViewDataBinding.spinKit.visibility = View.VISIBLE
-        Handler(Looper.getMainLooper()).postDelayed({
-            for (i in 1..5) {
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-            }
-            mViewDataBinding.spinKit.visibility = View.GONE
-            cartAdapter.notifyDataSetChanged()
-        }, 5000)
+    override fun updateQuantity(position: Int, quantity: Int) {
+        if (quantity > 0) {
+            val cartModel = cartProductArrayList[position]
+            cartProductArrayList[position].quantity = quantity
+            cartAdapter.notifyItemChanged(position)
+            Log.d("updateQuantity", "updateQuantity: $quantity")
+            updateQtyResponse(quantity, cartModel.id)
+        }
     }
 
+    private fun updateQtyResponse(qty: Int, _id: String) {
+        val params = JsonObject()
+        try {
+            params.addProperty("id", _id)
+            params.addProperty("quantity", qty)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+        mViewModel.updateCartItem(params)
+        mViewModel.updateCartItemResponse.observe(requireActivity()) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    it.data?.let { data ->
+                        layoutUpdate(data)
+                    }
+                }
+
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    mViewDataBinding.root.snackbar(it.message!!)
+                }
+            }
+        }
+    }
+
+    fun layoutUpdate(data: ModelCart) {
+        mViewDataBinding.textView212.text = try {
+            "${data.subTotal} Aed"
+        } catch (e: Exception) {
+            "0.0 Aed"
+        }
+
+        mViewDataBinding.textView2123.text = try {
+            "${data.tax} Aed"
+        } catch (e: Exception) {
+            "0.0 Aed"
+        }
+
+        mViewDataBinding.textView2144.text = try {
+            "${data.total} Aed"
+        } catch (e: Exception) {
+            "0.0 Aed"
+        }
+
+        cartProductArrayList.clear()
+        data.products?.let { it1 -> cartProductArrayList.addAll(it1) }
+        cartAdapter.notifyDataSetChanged()
+    }
+
+    override fun removeCartItem(position: Int) {
+        val cartModel = cartProductArrayList[position]
+        removeCartResponse(cartModel.id, position)
+    }
+
+    private fun removeCartResponse(_id: String, position: Int) {
+        mViewModel.removeCartItem(_id)
+
+        mViewModel.removeCartItemResponse.observe(requireActivity()) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    it.data?.let { data ->
+
+                        if (data.success) {
+                            if (cartProductArrayList.isNotEmpty()) {
+                                cartProductArrayList.removeAt(position)
+                                cartAdapter.notifyItemRemoved(position)
+                                cartAdapter.notifyItemRangeRemoved(position, cartProductArrayList.size)
+                            }
+                        }
+
+                    }
+                }
+
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    mViewDataBinding.root.snackbar(it.message!!)
+                }
+            }
+        }
+    }
+
+//    private fun fetchData() {
+//        mViewDataBinding.spinKit.visibility = View.VISIBLE
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            for (i in 1..5) {
+//                itemClasses.add("")
+//                itemClasses.add("")
+//                itemClasses.add("")
+//                itemClasses.add("")
+//                itemClasses.add("")
+//                itemClasses.add("")
+//                itemClasses.add("")
+//                itemClasses.add("")
+//                itemClasses.add("")
+//                itemClasses.add("")
+//                itemClasses.add("")
+//            }
+//            mViewDataBinding.spinKit.visibility = View.GONE
+//            cartAdapter.notifyDataSetChanged()
+//        }, 5000)
+//    }
 
 
 }

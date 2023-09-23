@@ -128,8 +128,7 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
                     loadingDialog.dismiss()
                     it.data?.let { data ->
                         modelAllStoresArraylist.clear()
-                        Log.d("allStoresResponse", "hatly id: ${data.docs[0]._id}")
-                        modelAllStoresArraylist.addAll(data.docs)
+                        data.docs?.let { it1 -> modelAllStoresArraylist.addAll(it1) }
 
                         hatlyPopularAdapter.notifyDataSetChanged()
                     }

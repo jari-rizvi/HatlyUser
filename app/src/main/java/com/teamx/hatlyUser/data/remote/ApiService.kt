@@ -15,6 +15,7 @@ import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Foo
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.categoryModel.ModelCategory
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproductmodel.ModelPopularProducts
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
+import com.teamx.hatlyUser.ui.fragments.payments.cart.model.ModelCart
 import com.teamx.hatlyUser.ui.fragments.products.model.ModelProductPreview
 import com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.AddToCart
 import com.teamx.hatlyUser.ui.fragments.shophome.model.ModelSubCategoryStore
@@ -128,4 +129,24 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<AddToCart>
+
+    @GET(NetworkCallPoints.GET_ALL_CARTS)
+    suspend fun getCart(
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelCart>
+
+    @GET(NetworkCallPoints.REMOVE_CART_ITEM)
+    suspend fun removeCartItem(
+        @Path("id") id: String,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<AddToCart>
+
+    @POST(NetworkCallPoints.UPDATE_CART_ITEM)
+    suspend fun updateCartItem(
+        @Body params: JsonObject,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelCart>
 }

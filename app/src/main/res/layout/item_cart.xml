@@ -9,34 +9,34 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_100sdp"
-        android:layout_marginVertical="@dimen/_5sdp"
+        android:layout_height="@dimen/_90sdp"
         android:layout_marginHorizontal="@dimen/_10sdp"
-        android:elevation="@dimen/_3sdp"
+        android:layout_marginVertical="@dimen/_5sdp"
+        android:background="@drawable/button_radius_corner"
         android:backgroundTint="@color/white"
-        android:background="@drawable/button_radius_corner">
+        android:elevation="@dimen/_3sdp">
 
         <ImageView
             android:id="@+id/imgShop"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/_10sdp"
+            android:layout_margin="@dimen/_7sdp"
             android:background="@drawable/button_radius_corner"
             android:clipToOutline="true"
             android:scaleType="fitXY"
             android:src="@drawable/splash_bg"
-            app:layout_constraintBottom_toTopOf="@+id/guideline1"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline11"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.9" />
+        <!--        <androidx.constraintlayout.widget.Guideline-->
+        <!--            android:id="@+id/guideline1"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            app:layout_constraintGuide_percent="1" />-->
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline11"
@@ -47,32 +47,39 @@
 
         <TextView
             android:id="@+id/textView21"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:fontFamily="@font/open_sans_regular"
-            android:text="P.F. Chang's"
-            android:textColor="#808080"
-            android:textSize="@dimen/_11ssp"
+            android:maxLines="2"
+            android:text="P.F. CnstruructionsCnstruructionsCnstruructions"
+            android:textColor="#262626"
+            android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView212"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.05"
-            app:layout_constraintStart_toEndOf="@+id/imgShop"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintBottom_toBottomOf="@+id/imgShop"
+            app:layout_constraintEnd_toStartOf="@+id/textView2122"
+            app:layout_constraintStart_toEndOf="@+id/guideline11"
+            app:layout_constraintTop_toTopOf="@+id/imgShop"
+            app:layout_constraintVertical_bias="0" />
 
         <TextView
             android:id="@+id/textView212"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:ellipsize="end"
             android:fontFamily="@font/open_sans_regular"
-            android:text="Biryani"
-            android:textColor="#262626"
-            android:textSize="@dimen/_13ssp"
+            android:maxLines="2"
+            android:text="SpecialSpeciacial InstructionsSpecialSpecial InstructionsSpecialSpecial Instructions"
+            android:textColor="#808080"
+            android:textSize="@dimen/_10ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imgShop"
-            app:layout_constraintStart_toStartOf="@+id/textView21"
-            app:layout_constraintTop_toBottomOf="@+id/textView21" />
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/guideline11"
+            app:layout_constraintTop_toBottomOf="@+id/textView21"
+            app:layout_constraintVertical_bias="0.1" />
 
         <TextView
             android:id="@+id/textView2122"
@@ -84,32 +91,31 @@
             android:textColor="#1ED860"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView21"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView21" />
 
 
         <ImageView
             android:id="@+id/imgDereament"
-            android:layout_width="@dimen/_17sdp"
-            android:layout_height="@dimen/_17sdp"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_5sdp"
             android:background="@drawable/bg_circle"
             android:backgroundTint="#F2F2F2"
             android:elevation="1dp"
             android:padding="@dimen/_1sdp"
-            android:src="@drawable/round_add_24"
-            app:layout_constraintBottom_toBottomOf="@+id/imgShop"
+            android:src="@drawable/round_remove_24"
             app:layout_constraintEnd_toStartOf="@+id/textView29"
             app:layout_constraintTop_toBottomOf="@+id/textView2122"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
             app:tint="#363636" />
 
         <TextView
             android:id="@+id/textView29"
-            android:layout_width="@dimen/_17sdp"
-            android:layout_height="@dimen/_17sdp"
-            android:background="@drawable/bg_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/bg_circle"
             android:backgroundTint="@android:color/transparent"
             android:fontFamily="@font/ubuntu_regular"
             android:gravity="center"
@@ -122,8 +128,8 @@
 
         <ImageView
             android:id="@+id/imgIncreament"
-            android:layout_width="@dimen/_17sdp"
-            android:layout_height="@dimen/_17sdp"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
             android:background="@drawable/bg_circle"
             android:backgroundTint="#F2F2F2"
             android:elevation="1dp"
@@ -139,9 +145,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout5"
-            app:layout_constraintEnd_toEndOf="@+id/imgIncreament"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout5">
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/imgShop"
+            app:layout_constraintEnd_toEndOf="@+id/imgIncreament">
 
             <ImageView
                 android:layout_width="@dimen/_17sdp"
@@ -164,36 +171,36 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
-            app:layout_constraintTop_toBottomOf="@+id/imgDereament">
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/linearLayout5"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginEnd="@dimen/_10sdp"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/linearLayout4"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/imgDereament">-->
 
-            <ImageView
-                android:layout_width="@dimen/_17sdp"
-                android:layout_height="@dimen/_17sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:src="@drawable/outline_favorite_24"
-                app:tint="#EA1B25" />
+        <!--            <ImageView-->
+        <!--                android:layout_width="@dimen/_17sdp"-->
+        <!--                android:layout_height="@dimen/_17sdp"-->
+        <!--                android:layout_marginEnd="@dimen/_5sdp"-->
+        <!--                android:src="@drawable/outline_favorite_24"-->
+        <!--                app:tint="#EA1B25" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/bg_circle"
-                android:backgroundTint="@android:color/transparent"
-                android:fontFamily="@font/ubuntu_regular"
-                android:gravity="center"
-                android:text="Move to favorites"
-                android:textColor="#808080"
-                android:textSize="@dimen/_12ssp" />
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_vertical"-->
+        <!--                android:background="@drawable/bg_circle"-->
+        <!--                android:backgroundTint="@android:color/transparent"-->
+        <!--                android:fontFamily="@font/ubuntu_regular"-->
+        <!--                android:gravity="center"-->
+        <!--                android:text="Move to favorites"-->
+        <!--                android:textColor="#808080"-->
+        <!--                android:textSize="@dimen/_12ssp" />-->
 
-        </LinearLayout>
+        <!--        </LinearLayout>-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

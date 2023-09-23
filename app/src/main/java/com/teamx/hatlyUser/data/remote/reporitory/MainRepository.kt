@@ -5,6 +5,7 @@ import com.google.gson.JsonObject
 import com.teamx.hatlyUser.data.local.db.ProductDao
 import com.teamx.hatlyUser.data.remote.ApiService
 import retrofit2.http.Body
+import retrofit2.http.Path
 import retrofit2.http.Query
 import javax.inject.Inject
 
@@ -66,4 +67,7 @@ class MainRepository @Inject constructor(
 
     suspend fun prodPreview(id: String) = apiService.prodPreview(id)
     suspend fun addToCart(@Body params: JsonObject) = apiService.addToCart(params)
+    suspend fun getCart() = apiService.getCart()
+    suspend fun removeCartItem(@Path("id") id: String) = apiService.removeCartItem(id)
+    suspend fun updateCartItem(@Body params: JsonObject) = apiService.updateCartItem(params)
 }

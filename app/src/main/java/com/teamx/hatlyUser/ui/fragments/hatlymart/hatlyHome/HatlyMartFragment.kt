@@ -102,12 +102,14 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                 mViewDataBinding.txtPopular.text = "Popular Items:"
 
 
-                if (storeId.isNotEmpty()) {
+
                     if (!mViewModel.categoryShopResponse.hasActiveObservers()) {
-                        Log.d("allStoresResponse", "HatlyMartFragment: ")
                         mViewModel.categoryShop("64fb1654a74b3bfd72afce03", 1, 10, 0)
                     }
-                }
+                    if (!mViewModel.popularProductsResponse.hasActiveObservers()) {
+                        mViewModel.popularProductsShop("64fb1654a74b3bfd72afce03")
+                    }
+
             }
 
             Marts.FOOD -> {
@@ -121,6 +123,9 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                     if (!mViewModel.categoryShopResponse.hasActiveObservers()) {
                         mViewModel.categoryShop(storeId, 1, 10, 0)
                     }
+                    if (!mViewModel.popularProductsResponse.hasActiveObservers()) {
+                        mViewModel.popularProductsShop(storeId)
+                    }
                 }
             }
 
@@ -133,6 +138,9 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                     if (!mViewModel.categoryShopResponse.hasActiveObservers()) {
                         mViewModel.categoryShop(storeId, 1, 10, 0)
                     }
+                    if (!mViewModel.popularProductsResponse.hasActiveObservers()) {
+                        mViewModel.popularProductsShop(storeId)
+                    }
                 }
             }
 
@@ -141,6 +149,9 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                 if (storeId.isNotEmpty()) {
                     if (!mViewModel.categoryShopResponse.hasActiveObservers()) {
                         mViewModel.categoryShop(storeId, 1, 10, 0)
+                    }
+                    if (!mViewModel.popularProductsResponse.hasActiveObservers()) {
+                        mViewModel.popularProductsShop(storeId)
                     }
                 }
             }
@@ -175,17 +186,19 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 
                         healthDetailCatArraylist.clear()
                         healthDetailCatArraylist.addAll(data.docs)
-                        healthDetailCatArraylist.add(
-                            Doc(
-                                0,
-                                "",
-                                "",
-                                "More categories",
-                                "",
-                                null,
-                                true
+                        if (data.hasNextPage){
+                            healthDetailCatArraylist.add(
+                                Doc(
+                                    0,
+                                    "",
+                                    "",
+                                    "More categories",
+                                    "",
+                                    null,
+                                    true
+                                )
                             )
-                        )
+                        }
                         hatlyShopCatAdapter.notifyDataSetChanged()
                     }
                 }
@@ -200,10 +213,10 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 //        }
 
 //        mViewModel.popularProductsShop(storeId)
-        if (!mViewModel.popularProductsResponse.hasActiveObservers()) {
-//            mViewModel.popularProductsShop("64db9adcc487c683bbda5c54")
-            mViewModel.popularProductsShop(storeId)
-        }
+//        if (!mViewModel.popularProductsResponse.hasActiveObservers()) {
+////            mViewModel.popularProductsShop("64db9adcc487c683bbda5c54")
+//            mViewModel.popularProductsShop(storeId)
+//        }
 
         mViewModel.popularProductsResponse.observe(requireActivity(), Observer {
             when (it.status) {

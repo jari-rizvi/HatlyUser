@@ -3,7 +3,7 @@ import androidx.annotation.Keep
 
 @Keep
 data class ModelAllStores(
-    val docs: List<Doc>,
+    val docs: List<Doc>?,
     val hasNextPage: Boolean,
     val hasPrevPage: Boolean,
     val limit: Int,
