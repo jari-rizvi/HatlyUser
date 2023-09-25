@@ -4,9 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.databinding.ItemCheckoutBinding
+import com.teamx.hatlyUser.ui.fragments.payments.checkout.model.Product
 
 class CheckOutAdapter(
-    private val addressArrayList: ArrayList<String>
+    private val addressArrayList: ArrayList<Product>
 ) : RecyclerView.Adapter<HatlyPopularViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HatlyPopularViewHolder {
@@ -19,6 +20,24 @@ class CheckOutAdapter(
     override fun onBindViewHolder(holder: HatlyPopularViewHolder, position: Int) {
 
         val arrayData = addressArrayList[position]
+
+        holder.bind.textView16.text = try {
+            arrayData.productName
+        }catch (e : Exception){
+            ""
+        }
+
+        holder.bind.textView18.text = try {
+            arrayData.specialInstruction
+        }catch (e : Exception){
+            ""
+        }
+
+        holder.bind.textView166.text = try {
+            "${arrayData.prize} Aed"
+        }catch (e : Exception){
+            ""
+        }
 
     }
 

@@ -1,6 +1,8 @@
 package com.teamx.hatlyUser.ui.fragments.payments.cart
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.AbsListView
@@ -9,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
@@ -22,6 +25,7 @@ import com.teamx.hatlyUser.ui.fragments.payments.cart.model.Product
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONException
+import java.util.Stack
 
 
 @AndroidEntryPoint
@@ -156,44 +160,90 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
     }
 
     override fun updateQuantity(position: Int, quantity: Int) {
+        handler.removeCallbacksAndMessages(null)
         if (quantity > 0) {
             val cartModel = cartProductArrayList[position]
             cartProductArrayList[position].quantity = quantity
             cartAdapter.notifyItemChanged(position)
-            Log.d("updateQuantity", "updateQuantity: $quantity")
+
+
+
             updateQtyResponse(quantity, cartModel.id)
+
         }
     }
 
+    private val debounceDelayMillis = 1000 // Set your desired debounce delay in milliseconds
+    private val handler = Handler(Looper.getMainLooper())
+    private val actionStack = Stack<UpdateQuantity>()
+
+    private data class UpdateQuantity(val _id: String, val qty: Int)
+
     private fun updateQtyResponse(qty: Int, _id: String) {
+
         val params = JsonObject()
-        try {
-            params.addProperty("id", _id)
-            params.addProperty("quantity", qty)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
+//        try {
+//            params.addProperty("id", _id)
+//            params.addProperty("quantity", qty)
+//        } catch (e: JSONException) {
+//            e.printStackTrace()
+//        }
 
-        mViewModel.updateCartItem(params)
-        mViewModel.updateCartItemResponse.observe(requireActivity()) {
-            when (it.status) {
-                Resource.Status.LOADING -> {
-                    loadingDialog.show()
-                }
-
-                Resource.Status.SUCCESS -> {
-                    loadingDialog.dismiss()
-                    it.data?.let { data ->
-                        layoutUpdate(data)
-                    }
-                }
-
-                Resource.Status.ERROR -> {
-                    loadingDialog.dismiss()
-                    mViewDataBinding.root.snackbar(it.message!!)
-                }
+        actionStack.forEach {
+            if (it._id == _id) {
+                actionStack.remove(it)
+                return@forEach
             }
         }
+        actionStack.add(UpdateQuantity(_id, qty))
+
+
+
+        Log.d("actionStack", "updateQtyResponse: $actionStack")
+
+        handler.postDelayed({
+            if (actionStack.isNotEmpty()) {
+                val newParam = actionStack.pop()
+                params.addProperty("id", newParam._id)
+                params.addProperty("quantity", newParam.qty)
+
+                mViewModel.updateCartItem(params)
+
+                mViewModel.updateCartItemResponse.observe(requireActivity()) {
+                    when (it.status) {
+                        Resource.Status.LOADING -> {
+                            loadingDialog.show()
+                        }
+
+                        Resource.Status.SUCCESS -> {
+                            loadingDialog.dismiss()
+                            it.data?.let { data ->
+
+                                if (actionStack.isNotEmpty()) {
+                                    val newParam = actionStack.pop()
+                                    params.addProperty("id", newParam._id)
+                                    params.addProperty("quantity", newParam.qty)
+                                    mViewModel.updateCartItem(params)
+                                } else {
+                                    layoutUpdate(data)
+                                }
+                            }
+                            mViewModel.updateCartItemResponse.removeObservers(viewLifecycleOwner)
+                        }
+
+                        Resource.Status.ERROR -> {
+                            loadingDialog.dismiss()
+                            mViewDataBinding.root.snackbar(it.message!!)
+                        }
+                    }
+                }
+            }
+
+        }, debounceDelayMillis.toLong())
+
+//        mViewModel.updateCartItem(params)
+
+
     }
 
     fun layoutUpdate(data: ModelCart) {
@@ -242,7 +292,10 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
                             if (cartProductArrayList.isNotEmpty()) {
                                 cartProductArrayList.removeAt(position)
                                 cartAdapter.notifyItemRemoved(position)
-                                cartAdapter.notifyItemRangeRemoved(position, cartProductArrayList.size)
+                                cartAdapter.notifyItemRangeRemoved(
+                                    position,
+                                    cartProductArrayList.size
+                                )
                             }
                         }
 

@@ -92,7 +92,7 @@
                 android:backgroundTint="#33909090"
                 android:drawableStart="@drawable/password"
                 android:drawablePadding="@dimen/_10sdp"
-                android:hint="Email address or Mobile number"
+                android:hint="Password"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"

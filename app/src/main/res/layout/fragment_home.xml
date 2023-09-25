@@ -114,7 +114,7 @@
                 android:backgroundTint="#211ED860"
                 android:fontFamily="@font/bumbu_sushi"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="H\na\nt\nl\ny"
+                android:text="H\nA\nT\nL\nY"
                 android:textColor="#EA1B25"
                 android:textSize="@dimen/_30ssp"
                 app:layout_constraintBottom_toBottomOf="parent"

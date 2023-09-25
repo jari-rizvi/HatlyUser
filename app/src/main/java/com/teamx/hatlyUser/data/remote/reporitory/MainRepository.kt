@@ -70,4 +70,6 @@ class MainRepository @Inject constructor(
     suspend fun getCart() = apiService.getCart()
     suspend fun removeCartItem(@Path("id") id: String) = apiService.removeCartItem(id)
     suspend fun updateCartItem(@Body params: JsonObject) = apiService.updateCartItem(params)
+    suspend fun checkout(@Body params: JsonObject) = apiService.checkout(params)
+    suspend fun orderSummary(@Body params: JsonObject) = apiService.orderSummary(params)
 }

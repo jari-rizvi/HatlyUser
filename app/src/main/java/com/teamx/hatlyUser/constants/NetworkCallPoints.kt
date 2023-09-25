@@ -32,5 +32,9 @@ class NetworkCallPoints {
         const val REMOVE_CART_ITEM = "cart/remove/{id}"
 
         const val UPDATE_CART_ITEM = "cart/update/quanity"
+
+        const val CHECKOUT = "order/checkout"
+
+        const val ORDER_SUMMARY = "order/ordersummery"
     }
 }

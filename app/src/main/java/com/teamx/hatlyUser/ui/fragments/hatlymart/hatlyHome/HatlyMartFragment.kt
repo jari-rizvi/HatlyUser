@@ -101,14 +101,14 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                 mViewDataBinding.txtShopCatTitle.text = "Shop by categories:"
                 mViewDataBinding.txtPopular.text = "Popular Items:"
 
+                storeId = "64fb1654a74b3bfd72afce03"
 
-
-                    if (!mViewModel.categoryShopResponse.hasActiveObservers()) {
-                        mViewModel.categoryShop("64fb1654a74b3bfd72afce03", 1, 10, 0)
-                    }
-                    if (!mViewModel.popularProductsResponse.hasActiveObservers()) {
-                        mViewModel.popularProductsShop("64fb1654a74b3bfd72afce03")
-                    }
+                if (!mViewModel.categoryShopResponse.hasActiveObservers()) {
+                    mViewModel.categoryShop(storeId, 1, 10, 0)
+                }
+                if (!mViewModel.popularProductsResponse.hasActiveObservers()) {
+                    mViewModel.popularProductsShop(storeId)
+                }
 
             }
 
@@ -186,7 +186,7 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 
                         healthDetailCatArraylist.clear()
                         healthDetailCatArraylist.addAll(data.docs)
-                        if (data.hasNextPage){
+                        if (data.hasNextPage) {
                             healthDetailCatArraylist.add(
                                 Doc(
                                     0,
