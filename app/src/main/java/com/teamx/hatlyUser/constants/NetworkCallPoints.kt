@@ -36,5 +36,7 @@ class NetworkCallPoints {
         const val CHECKOUT = "order/checkout"
 
         const val ORDER_SUMMARY = "order/ordersummery"
+
+        const val PLACE_ORDER = "order/create"
     }
 }

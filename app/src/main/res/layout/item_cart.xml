@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_90sdp"
+        android:layout_height="@dimen/_80sdp"
         android:layout_marginHorizontal="@dimen/_10sdp"
         android:layout_marginVertical="@dimen/_5sdp"
         android:background="@drawable/button_radius_corner"
@@ -52,6 +52,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/open_sans_regular"
             android:maxLines="2"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:text="P.F. CnstruructionsCnstruructionsCnstruructions"
             android:textColor="#262626"
             android:textSize="@dimen/_14ssp"

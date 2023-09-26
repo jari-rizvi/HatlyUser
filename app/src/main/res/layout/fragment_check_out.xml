@@ -111,10 +111,39 @@
                         android:clipToOutline="true"
                         android:scaleType="fitXY"
                         android:src="@drawable/splash_bg"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/view"
                         app:layout_constraintStart_toStartOf="@+id/textView21"
                         app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+                    <fragment
+                        android:id="@+id/mapFragment"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginVertical="@dimen/_10sdp"
+                        android:clipToOutline="true"
+                        android:backgroundTint="@color/white"
+                        android:elevation="@dimen/_1sdp"
+                        android:background="@drawable/input_auth_field"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/view"
+                        app:layout_constraintStart_toStartOf="@+id/textView21"
+                        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+<!--                    <com.google.android.gms.maps.MapView-->
+<!--                        android:id="@+id/mapView"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_marginVertical="@dimen/_10sdp"-->
+<!--                        android:background="@drawable/input_auth_field"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/view"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/textView21"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/textView21" />-->
+
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -328,7 +357,8 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recCheckout"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/_100sdp"
+                        android:layout_height="wrap_content"
+                        android:maxHeight="@dimen/_100sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         app:layout_constraintEnd_toEndOf="@+id/view12"
                         app:layout_constraintStart_toStartOf="@+id/textView1213"
@@ -336,21 +366,14 @@
                         app:spanCount="4"
                         tools:listitem="@layout/item_checkout" />
 
-                    <!--                    <androidx.constraintlayout.widget.Guideline-->
-                    <!--                        android:id="@+id/guideline12"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:orientation="horizontal"-->
-                    <!--                        app:layout_constraintGuide_percent="0.65" />-->
-
                     <View
                         android:id="@+id/view123"
                         android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:background="#9EA7AD"
-                        app:layout_constraintStart_toStartOf="@+id/recCheckout"
                         app:layout_constraintEnd_toEndOf="@+id/recCheckout"
+                        app:layout_constraintStart_toStartOf="@+id/recCheckout"
                         app:layout_constraintTop_toBottomOf="@+id/recCheckout" />
 
                     <TextView

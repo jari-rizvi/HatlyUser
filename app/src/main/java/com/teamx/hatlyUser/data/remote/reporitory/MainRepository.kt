@@ -72,4 +72,5 @@ class MainRepository @Inject constructor(
     suspend fun updateCartItem(@Body params: JsonObject) = apiService.updateCartItem(params)
     suspend fun checkout(@Body params: JsonObject) = apiService.checkout(params)
     suspend fun orderSummary(@Body params: JsonObject) = apiService.orderSummary(params)
+    suspend fun placeOrder(@Body params: JsonObject) = apiService.placeOrder(params)
 }

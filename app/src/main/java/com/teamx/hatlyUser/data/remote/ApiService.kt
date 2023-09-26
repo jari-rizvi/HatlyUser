@@ -17,6 +17,7 @@ import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproduct
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
 import com.teamx.hatlyUser.ui.fragments.payments.cart.model.ModelCart
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.model.ModelOrderSummary
+import com.teamx.hatlyUser.ui.fragments.payments.checkout.modelPlaceOrder.ModelPlaceOrder
 import com.teamx.hatlyUser.ui.fragments.products.model.ModelProductPreview
 import com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.AddToCart
 import com.teamx.hatlyUser.ui.fragments.shophome.model.ModelSubCategoryStore
@@ -164,4 +165,11 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<ModelOrderSummary>
+
+    @POST(NetworkCallPoints.PLACE_ORDER)
+    suspend fun placeOrder(
+        @Body params: JsonObject,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelPlaceOrder>
 }

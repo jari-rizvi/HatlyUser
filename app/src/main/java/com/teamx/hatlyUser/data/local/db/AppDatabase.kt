@@ -8,11 +8,10 @@ import androidx.room.TypeConverters
 import com.teamx.hatlyUser.constants.AppConstants
 import com.teamx.hatlyUser.data.local.TypeConverterMV
 import com.teamx.hatlyUser.data.local.dbmodel.*
-import com.teamx.hatlyUser.data.models.MusicModel
 
 
 @Database(
-    entities = [MusicModel::class, ProductTable::class],
+    entities = [ProductTable::class],
     version = 10,
     exportSchema = false
 )

@@ -10,6 +10,7 @@ import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
 import com.teamx.hatlyUser.ui.fragments.payments.cart.model.ModelCart
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.model.ModelOrderSummary
+import com.teamx.hatlyUser.ui.fragments.payments.checkout.modelPlaceOrder.ModelPlaceOrder
 import com.teamx.hatlyUser.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -74,6 +75,34 @@ class CheckOutViewModel @Inject constructor(
                     _orderSummaryResponse.postValue(Resource.error("${e.message}", null))
                 }
             } else _orderSummaryResponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+
+    private val _placeOrderResponse = MutableLiveData<Resource<ModelPlaceOrder>>()
+    val placeOrderResponse: LiveData<Resource<ModelPlaceOrder>>
+        get() = _placeOrderResponse
+
+    fun placeOrder(params: JsonObject) {
+        viewModelScope.launch {
+            _placeOrderResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.placeOrder(params).let {
+                        if (it.isSuccessful) {
+                            _placeOrderResponse.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _placeOrderResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        } else {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _placeOrderResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }
+                    }
+                } catch (e: Exception) {
+                    _placeOrderResponse.postValue(Resource.error("${e.message}", null))
+                }
+            } else _placeOrderResponse.postValue(Resource.error("No internet connection", null))
         }
     }
 
