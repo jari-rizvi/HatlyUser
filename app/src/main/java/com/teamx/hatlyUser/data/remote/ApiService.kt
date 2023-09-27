@@ -20,6 +20,7 @@ import com.teamx.hatlyUser.ui.fragments.payments.checkout.model.ModelOrderSummar
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.modelPlaceOrder.ModelPlaceOrder
 import com.teamx.hatlyUser.ui.fragments.products.model.ModelProductPreview
 import com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.AddToCart
+import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.OrderHistoryModel
 import com.teamx.hatlyUser.ui.fragments.shophome.model.ModelSubCategoryStore
 import retrofit2.Response
 import retrofit2.http.*
@@ -172,4 +173,12 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<ModelPlaceOrder>
+
+    @GET(NetworkCallPoints.ORDER_HISTORY)
+    suspend fun orderHistory(
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<OrderHistoryModel>
 }

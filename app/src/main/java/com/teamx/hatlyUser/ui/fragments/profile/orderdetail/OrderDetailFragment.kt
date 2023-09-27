@@ -10,20 +10,21 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.databinding.FragmentOrderDetailBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.adapter.OrderDetailAdapter
+import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Product
 import com.teamx.hatlyUser.utils.DialogHelperClass
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetailViewModel>(),
-    HatlyShopInterface,DialogHelperClass.Companion.ReviewProduct {
+    DialogHelperClass.Companion.ReviewProduct {
 
     override val layoutId: Int
         get() = R.layout.fragment_order_detail
@@ -34,7 +35,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
     lateinit var layoutManager1 : LinearLayoutManager
     lateinit var orderDetailAdapter : OrderDetailAdapter
-    lateinit var itemClasses : ArrayList<String>
+    lateinit var productOrderHistoryList : ArrayList<Product>
 
     var isScrolling = false
     var currentItems = 0
@@ -65,100 +66,108 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
             findNavController().popBackStack()
         }
 
+        productOrderHistoryList = ArrayList()
+
+
+        orderDetailAdapter = OrderDetailAdapter(productOrderHistoryList)
+        mViewDataBinding.recLocations.adapter = orderDetailAdapter
         layoutManager1 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         mViewDataBinding.recLocations.layoutManager = layoutManager1
 
-        itemClasses = ArrayList()
 
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
+        sharedViewModel.orderHistory.observe(requireActivity()){data ->
+            Log.d("sharedViewModel", "onViewCreated: ${data.shop.name}")
 
-        orderDetailAdapter = OrderDetailAdapter(itemClasses, this)
-        mViewDataBinding.recLocations.adapter = orderDetailAdapter
-
-        mViewDataBinding.recLocations.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                    isScrolling = true
-                }
+            mViewDataBinding.txtTitle.text = try {
+                data.shop.name
+            }catch (e : Exception){
+                ""
             }
 
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                currentItems = layoutManager1.childCount
-                totalItems = layoutManager1.itemCount
-                scrollOutItems = layoutManager1.findFirstVisibleItemPosition()
-
-                if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
-                    isScrolling = false
-                    fetchData()
-                }
+            mViewDataBinding.txtTitle1141.text = try {
+                "#${data._id.substring(0, 6)}"
+            }catch (e : Exception){
+                ""
             }
-        })
 
-    }
-
-    private fun fetchData() {
-        mViewDataBinding.spinKit.visibility = View.VISIBLE
-        Handler(Looper.getMainLooper()).postDelayed({
-            for (i in 1..5) {
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
+            mViewDataBinding.txtAddress.text = try {
+//                "${data.shop.address.googleMapAddress}"
+                "${data.shippingAddress.floor} ${data.shippingAddress.building} ${data.shippingAddress.area} ${data.shippingAddress.streat}"
+            }catch (e : Exception){
+                ""
             }
-            mViewDataBinding.spinKit.visibility = View.GONE
+
+            mViewDataBinding.txtTitle11123.text = try {
+                "${data.subTotal}"
+            }catch (e : Exception){
+                ""
+            }
+
+            mViewDataBinding.txtTitle111323.text = try {
+                "${data.deliveryCharges}"
+            }catch (e : Exception){
+                ""
+            }
+
+            mViewDataBinding.txtTitle1113233.text = try {
+                "${data.total}"
+            }catch (e : Exception){
+                ""
+            }
+
+
+
+            Picasso.get().load(data.shop.image).into(mViewDataBinding.imgShop)
+
+            productOrderHistoryList.addAll(data.products)
             orderDetailAdapter.notifyDataSetChanged()
-        }, 5000)
+        }
+
+//        mViewDataBinding.recLocations.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                super.onScrollStateChanged(recyclerView, newState)
+//                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+//                    isScrolling = true
+//                }
+//            }
+//
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                super.onScrolled(recyclerView, dx, dy)
+//
+//                currentItems = layoutManager1.childCount
+//                totalItems = layoutManager1.itemCount
+//                scrollOutItems = layoutManager1.findFirstVisibleItemPosition()
+//
+//                if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
+//                    isScrolling = false
+////                    fetchData()
+//                }
+//            }
+//        })
+
     }
 
-    override fun clickshopItem(position: Int) {
+//    private fun fetchData() {
+//        mViewDataBinding.spinKit.visibility = View.VISIBLE
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            for (i in 1..5) {
+//                productOrderHistoryList.add("")
+//                productOrderHistoryList.add("")
+//                productOrderHistoryList.add("")
+//                productOrderHistoryList.add("")
+//                productOrderHistoryList.add("")
+//                productOrderHistoryList.add("")
+//                productOrderHistoryList.add("")
+//                productOrderHistoryList.add("")
+//                productOrderHistoryList.add("")
+//                productOrderHistoryList.add("")
+//                productOrderHistoryList.add("")
+//            }
+//            mViewDataBinding.spinKit.visibility = View.GONE
+//            orderDetailAdapter.notifyDataSetChanged()
+//        }, 5000)
+//    }
 
-    }
-
-    override fun clickCategoryItem(position: Int) {
-
-    }
-
-    override fun clickMoreItem(position: Int) {
-
-    }
 
     override fun onSubmit() {
         Log.d("reviewDialog", "onSubmit: onSubmit")

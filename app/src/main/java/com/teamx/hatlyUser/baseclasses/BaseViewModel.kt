@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.teamx.hatlyUser.ui.fragments.auth.login.Model.ModelLogin
+import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Doc
 
 
 open class BaseViewModel : ViewModel() {
@@ -17,6 +18,14 @@ open class BaseViewModel : ViewModel() {
         this._userShared.value = _userId
     }
 
+
+    private val _orderhistory = MutableLiveData<Doc>()
+    val orderHistory: LiveData<Doc>
+        get() = _orderhistory
+
+    fun setOrderHistory(doc: Doc) {
+        this._orderhistory.value = doc
+    }
 
 
 

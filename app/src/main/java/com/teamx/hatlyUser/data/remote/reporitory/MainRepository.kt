@@ -46,7 +46,7 @@ class MainRepository @Inject constructor(
         @Query("page") page: Int,
         @Query("limit") limit: Int,
         @Query("offset") offset: Int
-    ) = apiService.storeSubCategory(shopId, category, search,page, limit, offset)
+    ) = apiService.storeSubCategory(shopId, category, search, page, limit, offset)
 
     suspend fun popularProducts(
         @Query("shopId") shopId: String
@@ -73,4 +73,8 @@ class MainRepository @Inject constructor(
     suspend fun checkout(@Body params: JsonObject) = apiService.checkout(params)
     suspend fun orderSummary(@Body params: JsonObject) = apiService.orderSummary(params)
     suspend fun placeOrder(@Body params: JsonObject) = apiService.placeOrder(params)
+    suspend fun orderHistory(
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
+    ) = apiService.orderHistory(page, limit)
 }

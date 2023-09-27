@@ -112,14 +112,17 @@
 
         <TextView
             android:id="@+id/txtAddress"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
-            android:text="UAE, Dubai Silicon Oasis,\nDubai 341444, AE"
+            android:text="UAE, Dubai Silicon Oasis,Dubai 341444, AE"
+            android:layout_marginStart="@dimen/_20sdp"
             android:textAlignment="viewEnd"
             android:textColor="#262626"
             android:textSize="@dimen/_11ssp"
+            app:layout_constraintHorizontal_bias="1"
             app:layout_constraintEnd_toEndOf="@+id/txtTitle1141"
+            app:layout_constraintStart_toEndOf="@+id/txtTitle1121"
             app:layout_constraintTop_toTopOf="@+id/txtTitle1121" />
 
         <View

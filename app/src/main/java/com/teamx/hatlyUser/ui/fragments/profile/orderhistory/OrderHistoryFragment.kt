@@ -12,10 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentOrderHistoryBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.adapter.OrderHistoryAdapter
+import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Doc
+import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Shop
+import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -30,11 +33,12 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding, OrderHist
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    lateinit var itemClasses : ArrayList<String>
-    lateinit var orderHistoryAdapter : OrderHistoryAdapter
-    lateinit var layoutManager1 : LinearLayoutManager
+    lateinit var orderHistoryArrayList: ArrayList<Doc>
+    lateinit var orderHistoryAdapter: OrderHistoryAdapter
 
     var isScrolling = false
+    var hasNextPage = false
+    var nextPage = 1
     var currentItems = 0
     var totalItems = 0
     var scrollOutItems = 0
@@ -55,43 +59,48 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding, OrderHist
             findNavController().popBackStack()
         }
 
-        layoutManager1 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        orderHistoryArrayList = ArrayList()
+
+        val layoutManager1 =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         mViewDataBinding.recLocations.layoutManager = layoutManager1
-
-        itemClasses = ArrayList()
-
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-
-        orderHistoryAdapter = OrderHistoryAdapter(itemClasses, this)
+        orderHistoryAdapter = OrderHistoryAdapter(orderHistoryArrayList, this)
         mViewDataBinding.recLocations.adapter = orderHistoryAdapter
+
+
+        if (!mViewModel.orderHistoryResponse.hasActiveObservers()) {
+            mViewModel.orderHistory(nextPage, 10)
+        }
+
+        mViewModel.orderHistoryResponse.observe(requireActivity()) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    it.data?.let { data ->
+
+                        if (!hasNextPage) {
+                            orderHistoryArrayList.clear()
+                        }
+                        data.docs?.let { it1 -> orderHistoryArrayList.addAll(it1) }
+                        orderHistoryAdapter.notifyDataSetChanged()
+
+                        nextPage = data.nextPage ?: 1
+                        hasNextPage = data.hasNextPage
+                    }
+                }
+
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    mViewDataBinding.root.snackbar(it.message!!)
+                }
+            }
+        }
+
+
 
         mViewDataBinding.recLocations.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -110,34 +119,39 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding, OrderHist
 
                 if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
                     isScrolling = false
-                    fetchData()
+                    if (hasNextPage) {
+                        mViewModel.orderHistory(nextPage, 10)
+                    }
+//                    fetchData()
                 }
             }
         })
     }
 
-    private fun fetchData() {
-        mViewDataBinding.spinKit.visibility = View.VISIBLE
-        Handler(Looper.getMainLooper()).postDelayed({
-            for (i in 1..5) {
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-            }
-            mViewDataBinding.spinKit.visibility = View.GONE
-            orderHistoryAdapter.notifyDataSetChanged()
-        }, 5000)
-    }
+//    private fun fetchData() {
+//        mViewDataBinding.spinKit.visibility = View.VISIBLE
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            for (i in 1..5) {
+//                orderHistoryArrayList.add("")
+//                orderHistoryArrayList.add("")
+//                orderHistoryArrayList.add("")
+//                orderHistoryArrayList.add("")
+//                orderHistoryArrayList.add("")
+//                orderHistoryArrayList.add("")
+//                orderHistoryArrayList.add("")
+//                orderHistoryArrayList.add("")
+//                orderHistoryArrayList.add("")
+//                orderHistoryArrayList.add("")
+//                orderHistoryArrayList.add("")
+//            }
+//            mViewDataBinding.spinKit.visibility = View.GONE
+//            orderHistoryAdapter.notifyDataSetChanged()
+//        }, 5000)
+//    }
 
     override fun clickshopItem(position: Int) {
+        val orderHistoryModel = orderHistoryArrayList[position]
+        sharedViewModel.setOrderHistory(orderHistoryModel)
         findNavController().navigate(R.id.action_orderHistoryFragment_to_orderDetailFragment)
     }
 

@@ -8,6 +8,7 @@ import com.teamx.hatlyUser.baseclasses.BaseViewModel
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
 import com.teamx.hatlyUser.ui.fragments.payments.cart.model.ModelCart
+import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.OrderHistoryModel
 import com.teamx.hatlyUser.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -21,16 +22,16 @@ class OrderHistoryViewModel @Inject constructor(
     private val networkHelper: NetworkHelper
 ) : BaseViewModel() {
 
-   /* private val _orderHistoryResponse = MutableLiveData<Resource<ModelCart>>()
-    val orderHistoryResponse: LiveData<Resource<ModelCart>>
+    private val _orderHistoryResponse = MutableLiveData<Resource<OrderHistoryModel>>()
+    val orderHistoryResponse: LiveData<Resource<OrderHistoryModel>>
         get() = _orderHistoryResponse
 
-    fun orderHistory() {
+    fun orderHistory(page: Int, limit: Int) {
         viewModelScope.launch {
             _orderHistoryResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.orderHistory().let {
+                    mainRepository.orderHistory(page, limit).let {
                         if (it.isSuccessful) {
                             _orderHistoryResponse.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
@@ -46,6 +47,6 @@ class OrderHistoryViewModel @Inject constructor(
                 }
             } else _orderHistoryResponse.postValue(Resource.error("No internet connection", null))
         }
-    }*/
+    }
 
 }

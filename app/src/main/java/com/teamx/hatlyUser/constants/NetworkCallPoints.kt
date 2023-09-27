@@ -38,5 +38,7 @@ class NetworkCallPoints {
         const val ORDER_SUMMARY = "order/ordersummery"
 
         const val PLACE_ORDER = "order/create"
+
+        const val ORDER_HISTORY = "order/all"
     }
 }
