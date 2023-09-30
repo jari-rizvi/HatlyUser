@@ -1,13 +1,30 @@
 package com.teamx.hatlyUser.utils
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.provider.MediaStore
+import android.util.Log
 import android.view.WindowManager
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.squareup.picasso.Picasso
+import com.teamx.hatlyUser.MainApplication.Companion.context
 import com.teamx.hatlyUser.R
+import com.teamx.hatlyUser.SharedViewModel
+import java.io.File
+import java.io.FileOutputStream
+
 
 class DialogHelperClass {
     interface DialogCallBack {
@@ -26,18 +43,26 @@ class DialogHelperClass {
         }
 
         interface ReviewProduct {
-            fun onSubmit()
+            fun onSubmit(description: String, rating: Double)
             fun onCancel()
         }
 
-        fun reviewDialog(context: Context, reviewProduct: ReviewProduct): Dialog {
+        fun reviewDialog(context: Context,
+                         startForResult : ActivityResultLauncher<String>, reviewProduct: ReviewProduct): Dialog {
             val dialog = Dialog(context)
             dialog.setContentView(R.layout.permission_review_dialog)
 
-            dialog.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT);
+            dialog.window?.setLayout(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT
+            )
 
             val imageView23 = dialog.findViewById<ImageView>(R.id.imageView23)
+
+            val userDescription = dialog.findViewById<EditText>(R.id.userDescription)
+
+            val materialRatingBar = dialog.findViewById<RatingBar>(R.id.materialRatingBar)
+            val constraintLayout4 = dialog.findViewById<ConstraintLayout>(R.id.constraintLayout4)
 
             val txtLogin = dialog.findViewById<TextView>(R.id.txtLogin)
 
@@ -46,9 +71,14 @@ class DialogHelperClass {
                 dialog.dismiss()
             }
 
+
+            constraintLayout4.setOnClickListener {
+                startForResult.launch("image/*")
+            }
+
             txtLogin.setOnClickListener {
                 dialog.dismiss()
-                reviewProduct.onSubmit()
+                reviewProduct.onSubmit(userDescription.text.toString(), materialRatingBar.rating.toDouble())
             }
 
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -65,8 +95,10 @@ class DialogHelperClass {
             val dialog = Dialog(context)
             dialog.setContentView(R.layout.contactus_dialog)
 
-            dialog.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT);
+            dialog.window?.setLayout(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT
+            );
 
             val txtLogin = dialog.findViewById<TextView>(R.id.txtLogin)
 
@@ -82,7 +114,6 @@ class DialogHelperClass {
             dialog.show()
             return dialog
         }
-
 
 
     }

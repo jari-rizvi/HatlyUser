@@ -57,8 +57,8 @@
                 android:layout_height="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:numStars="5"
-                android:progressTint="#FEBD19"
                 android:progressBackgroundTint="#D9D9D9"
+                android:progressTint="#FEBD19"
                 android:rating="4"
                 android:secondaryProgressTint="#D9D9D9"
                 app:layout_constraintEnd_toEndOf="@+id/txtTitle"
@@ -68,48 +68,70 @@
                 app:mrb_indeterminateTint="#D9D9D9" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout4"
-                android:layout_width="match_parent"
+                android:id="@+id/mainLayout"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/_80sdp"
-                android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/button_radius_corner"
-                android:backgroundTint="#F5F5F5"
-                app:layout_constraintEnd_toEndOf="@+id/materialRatingBar"
-                app:layout_constraintStart_toStartOf="@+id/materialRatingBar"
+                app:layout_constraintEnd_toEndOf="@+id/userDescription"
+                app:layout_constraintStart_toStartOf="@+id/userDescription"
                 app:layout_constraintTop_toBottomOf="@+id/materialRatingBar">
 
-                <ImageView
-                    android:id="@+id/imageView234"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:elevation="@dimen/_1sdp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.2"
-                    app:srcCompat="@drawable/upload_image" />
 
-                <TextView
-                    android:id="@+id/txtTitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tap here to upload images"
-                    android:textColor="#808080"
-                    android:textSize="@dimen/_10ssp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout4"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/button_radius_corner"
+                    android:backgroundTint="#F5F5F5"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView234" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <ImageView
+                        android:id="@+id/imageView234"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:elevation="@dimen/_1sdp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.2"
+                        app:srcCompat="@drawable/upload_image" />
+
+                    <TextView
+                        android:id="@+id/txtTitle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tap here to upload images"
+                        android:textColor="#808080"
+                        android:textSize="@dimen/_10ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView234" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recDialogBox"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <EditText
-                android:id="@+id/userEmail"
+                android:id="@+id/userDescription"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_80sdp"
+                android:layout_marginHorizontal="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/button_radius_corner"
                 android:backgroundTint="#F5F5F5"
@@ -123,9 +145,9 @@
                 android:textColorHint="#787878"
                 android:textCursorDrawable="@color/black"
                 android:textSize="@dimen/_13ssp"
-                app:layout_constraintEnd_toEndOf="@+id/constraintLayout4"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout4"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mainLayout" />
 
             <TextView
                 android:id="@+id/txtLogin"
@@ -140,9 +162,9 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/userEmail"
-                app:layout_constraintStart_toStartOf="@+id/userEmail"
-                app:layout_constraintTop_toBottomOf="@+id/userEmail" />
+                app:layout_constraintEnd_toEndOf="@+id/userDescription"
+                app:layout_constraintStart_toStartOf="@+id/userDescription"
+                app:layout_constraintTop_toBottomOf="@+id/userDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -57,7 +57,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/open_sans_regular"
-            android:text="More"
             android:textAlignment="center"
             android:textColor="#363636"
             android:textSize="@dimen/_10ssp"

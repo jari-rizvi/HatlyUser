@@ -8,8 +8,8 @@ object AppConstants {
     @StringDef(ApiConfiguration.BASE_URL)
     annotation class ApiConfiguration {
         companion object {
-            const val BASE_URL = "http://192.168.100.33:8000/api/v1/" /*sohail local*/
-//            const val BASE_URL = "http://31.220.17.28:8000/api/v1/" /*development*/
+//            const val BASE_URL = "http://192.168.100.33:8000/api/v1/" /*sohail local*/
+            const val BASE_URL = "http://31.220.17.28:8000/api/v1/" /*development*/
 //            const val BASE_URL = "http://192.168.100.45:8000/api/v1/" /*farooq*/
 
 
@@ -21,6 +21,7 @@ object AppConstants {
     @StringDef(DbConfiguration.DB_NAME)
     annotation class DbConfiguration {
         companion object {
+
             const val DB_NAME = "BaseProject"
         }
     }
