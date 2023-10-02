@@ -2,17 +2,15 @@ package com.teamx.hatlyUser.ui.fragments.products.adapter.optional
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CompoundButton
-import android.widget.RadioGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.databinding.ItemProductVariationCheckBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
-import com.teamx.hatlyUser.ui.fragments.products.model.OptionalVeriaton
+import com.teamx.hatlyUser.ui.fragments.products.model.Option
 
 
 class ProductVariationOptionalAdapter(
-    private val addressArrayList: ArrayList<OptionalVeriaton>,
-    val productPreviewInterface: ProductPreviewInterface
+    private val addressArrayList: List<Option>,
+    private val productPreviewInterface: ProductPreviewInterface
 ) : RecyclerView.Adapter<OptionalViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OptionalViewHolder {
@@ -38,8 +36,11 @@ class ProductVariationOptionalAdapter(
         } catch (e: Exception) {
             ""
         }
+
+        val prizeAmount = if (arrayData.prize.toInt() == 0) "Free" else "${arrayData.prize} Aed"
+
         holder.bind.textView16.text = try {
-            "${arrayData.prize} Aed"
+            prizeAmount
         } catch (e: Exception) {
             ""
         }
@@ -52,7 +53,7 @@ class ProductVariationOptionalAdapter(
 
         holder.bind.radioButton.setOnClickListener {
             holder.bind.radioButton.isChecked = !arrayData.isSelected
-            productPreviewInterface.clickCheckBoxItem(position)
+            productPreviewInterface.clickRadioItem(-1,position)
         }
 
         holder.bind.radioButton.setOnCheckedChangeListener { btnView, isChecked ->

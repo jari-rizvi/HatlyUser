@@ -19,51 +19,71 @@
             android:id="@+id/txtOptTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/ubuntu_regular"
             android:text="Variations 1"
             android:textColor="#2C2D30"
             android:textSize="@dimen/_14ssp"
-            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.05" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatCheckedTextView
             android:id="@+id/txtOptional"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/required_optional_selector"
+            android:checked="false"
             android:fontFamily="@font/ubuntu_regular"
+            android:padding="@dimen/_5sdp"
             android:text="Optional"
-            android:textColor="#1ED860"
-            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="@+id/txtOptTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.95"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/txtOptTitle" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/txtSelect"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="@dimen/_5sdp"-->
-<!--            android:fontFamily="@font/ubuntu_bold"-->
-<!--            android:text="Select one"-->
-<!--            android:textColor="#1ED860"-->
-<!--            android:textSize="@dimen/_11ssp"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/txtOptTitle"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/txtOptTitle" />-->
+        <!--        <TextView-->
+        <!--            android:id="@+id/txtOptional"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:fontFamily="@font/ubuntu_regular"-->
+        <!--            android:text="Optional"-->
+        <!--            android:background="@drawable/txt_radius_corner_red"-->
+        <!--            android:padding="@dimen/_5sdp"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:textSize="@dimen/_14ssp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/txtOptTitle"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.95"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/txtOptTitle" />-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/txtSelect"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="@dimen/_5sdp"-->
+        <!--            android:fontFamily="@font/ubuntu_bold"-->
+        <!--            android:text="Select one"-->
+        <!--            android:textColor="#1ED860"-->
+        <!--            android:textSize="@dimen/_11ssp"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/txtOptTitle"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/txtOptTitle" />-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recOpt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:itemCount="5"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="@+id/txtOptional"
             app:layout_constraintStart_toStartOf="@+id/txtOptTitle"
             app:layout_constraintTop_toBottomOf="@+id/txtOptional"
+            tools:itemCount="5"
             tools:listitem="@layout/item_product_variation_check" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

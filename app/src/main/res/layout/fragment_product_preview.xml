@@ -139,7 +139,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/textView23"
                     app:layout_constraintStart_toStartOf="@+id/textView23"
@@ -148,16 +147,16 @@
                     tools:itemCount="6"
                     tools:listitem="@layout/item_product_variation_required" />
 
-                <include
-                    android:id="@+id/layoutOptional"
-                    layout="@layout/item_product_variation_optional"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="@+id/textView23"
-                    app:layout_constraintStart_toStartOf="@+id/textView23"
-                    app:layout_constraintTop_toBottomOf="@+id/recVarRequired" />
+<!--                <include-->
+<!--                    android:id="@+id/layoutOptional"-->
+<!--                    layout="@layout/item_product_variation_optional"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/_10sdp"-->
+<!--                    android:visibility="gone"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/textView23"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/textView23"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/recVarRequired" />-->
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/mainInstr"
@@ -169,7 +168,7 @@
                     android:backgroundTint="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/textView23"
                     app:layout_constraintStart_toStartOf="@+id/textView23"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutOptional">
+                    app:layout_constraintTop_toBottomOf="@+id/recVarRequired">
 
                     <TextView
                         android:id="@+id/txtInstructionClick"

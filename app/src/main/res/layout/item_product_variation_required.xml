@@ -18,10 +18,10 @@
             android:id="@+id/txtReqTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/ubuntu_regular"
             android:text="Variations 1"
             android:textColor="#2C2D30"
-            android:layout_marginTop="@dimen/_10sdp"
             android:textSize="@dimen/_14ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.05"
@@ -29,19 +29,38 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.05" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatCheckedTextView
             android:id="@+id/txtRequired"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/required_optional_selector"
+            android:checked="true"
             android:fontFamily="@font/ubuntu_regular"
+            android:padding="@dimen/_5sdp"
             android:text="Required"
-            android:textColor="#EA1B25"
-            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp"
             app:layout_constraintBottom_toBottomOf="@+id/txtReqTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.95"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/txtReqTitle" />
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/txtRequired"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:fontFamily="@font/ubuntu_regular"-->
+        <!--            android:text="Required"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:background="@drawable/txt_radius_corner_red"-->
+        <!--            android:padding="@dimen/_5sdp"-->
+        <!--            android:textSize="@dimen/_12ssp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/txtReqTitle"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.95"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/txtReqTitle" />-->
 
         <TextView
             android:id="@+id/txtSelect"
@@ -59,10 +78,10 @@
             android:id="@+id/recRequired"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:itemCount="5"
             app:layout_constraintEnd_toEndOf="@+id/txtRequired"
             app:layout_constraintStart_toStartOf="@+id/txtReqTitle"
             app:layout_constraintTop_toBottomOf="@+id/txtSelect"
+            tools:itemCount="5"
             tools:listitem="@layout/item_product_variation_radio" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
