@@ -1,4 +1,4 @@
-package com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces
+package com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces
 
 interface ProductPreviewInterface {
     fun clickRadioItem(requiredVarBox: Int, radioProperties: Int)

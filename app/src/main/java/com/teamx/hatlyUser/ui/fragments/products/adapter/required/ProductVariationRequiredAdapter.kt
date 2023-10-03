@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.databinding.ItemProductVariationRadioBinding
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
+import com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.ui.fragments.products.model.Option
 
 
@@ -48,6 +48,22 @@ class ProductVariationRequiredAdapter(
 
         holder.bind.radioButton.setOnClickListener {
             productPreviewInterface.clickRadioItem(-1,position)
+        }
+
+
+        holder.bind.radioButton.isChecked = position == selectedIndex
+
+
+
+//        holder.itemView.setOnClickListener {
+////            hatlyShopInterface.clickCategoryItem(position)
+//            hatlyShopInterface.clickRadioItem(-1, position)
+//        }
+
+        holder.bind.radioButton.setOnCheckedChangeListener { btnView, isChecked ->
+            // do exiting stuff
+//            productPreviewInterface.clickCheckBoxItem(position)
+//            notifyItemChanged(position)
         }
 
 

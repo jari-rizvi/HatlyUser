@@ -13,7 +13,6 @@ import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentShopHomeBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.ui.fragments.shophome.adapter.ShopHomeTitleAdapter
 import com.teamx.hatlyUser.ui.fragments.shophome.adapter.SubCategoryProductsAdapter
 import com.teamx.hatlyUser.ui.fragments.shophome.model.Document

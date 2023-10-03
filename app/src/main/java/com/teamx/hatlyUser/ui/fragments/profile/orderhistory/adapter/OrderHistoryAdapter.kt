@@ -8,16 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.databinding.ItemOrderHistoryBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Doc
-import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Shop
-import com.teamx.hatlyUser.utils.TimeFormatter
 import com.teamx.hatlyUser.utils.TimeFormatter.Companion.formatTimeDifference
-import java.time.Duration
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 
 class OrderHistoryAdapter(
     private val addressArrayList: ArrayList<Doc>,

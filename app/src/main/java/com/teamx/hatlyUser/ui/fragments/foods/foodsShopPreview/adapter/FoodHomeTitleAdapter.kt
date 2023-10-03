@@ -10,7 +10,6 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemShopHomeTitleBinding
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Product
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
 
 class FoodHomeTitleAdapter(private val addressArrayList: ArrayList<Product>, val hatlyShopInterface: HatlyShopInterface) : RecyclerView.Adapter<FoodHomeTitleViewHolder>() {
 

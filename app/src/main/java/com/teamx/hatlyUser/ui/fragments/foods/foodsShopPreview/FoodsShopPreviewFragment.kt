@@ -19,7 +19,6 @@ import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.adapter.FoodsShop
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Document
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Product
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint

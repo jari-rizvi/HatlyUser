@@ -10,14 +10,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.MainApplication.Companion.context
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
-import com.teamx.hatlyUser.ui.fragments.products.adapter.optional.OptionalViewHolder
+import com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.ui.fragments.products.adapter.optional.ProductVariationOptionalAdapter
 import com.teamx.hatlyUser.ui.fragments.products.adapter.required.ProductVariationRequiredAdapter
-import com.teamx.hatlyUser.ui.fragments.products.adapter.required.RequiredViewHolder
 import com.teamx.hatlyUser.ui.fragments.products.model.Veriation
 
-class MultiViewVariationRadioAdapter(private val dataSet: ArrayList<Veriation>) :
+class MultiViewVariationRadioAdapter(
+    private val dataSet: ArrayList<Veriation>,
+    private val productPreviewInterface: ProductPreviewInterface
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -50,7 +51,10 @@ class MultiViewVariationRadioAdapter(private val dataSet: ArrayList<Veriation>) 
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, @SuppressLint("RecyclerView") position: Int) {
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        @SuppressLint("RecyclerView") position: Int
+    ) {
         when (dataSet[position].isMultiple) {
             true -> {
                 val holderClass2 = holder as OptionalViewHolder
@@ -74,13 +78,15 @@ class MultiViewVariationRadioAdapter(private val dataSet: ArrayList<Veriation>) 
 
                 holderClass2.recOpt.layoutManager = layoutManager2
 
-                val productVariationOptionalAdapter = ProductVariationOptionalAdapter(dataSet[position].options, object : ProductPreviewInterface {
-                    override fun clickRadioItem(requiredVarBox: Int, radioProperties: Int) {
+                val productVariationOptionalAdapter =
+                    ProductVariationOptionalAdapter(dataSet[position].options, object :
+                        ProductPreviewInterface {
+                        override fun clickRadioItem(requiredVarBox: Int, radioProperties: Int) {
 
-                        Log.d(
-                            "clickCategoryItem",
-                            "clickCategoryItem: requiredVarBox: ${dataSet[position].title} / radioProperties: ${dataSet[position].options[radioProperties].name}"
-                        )
+                            Log.d(
+                                "clickCategoryItem",
+                                "clickCategoryItem: requiredVarBox: ${dataSet[position].title} / radioProperties: ${dataSet[position].options[radioProperties].name}"
+                            )
 
 
 //                        Log.d(
@@ -88,17 +94,17 @@ class MultiViewVariationRadioAdapter(private val dataSet: ArrayList<Veriation>) 
 //                            "clickCategoryItem: requiredVarBox: ${position} / radioProperties: ${radioProperties}"
 //                        )
 
-//                productPreviewInterface.clickRadioItem(position,radioProperties)
-                    }
+                            productPreviewInterface.clickRadioItem(position, radioProperties)
+                        }
 
-                    override fun clickCheckBoxItem(optionalVeriation: Int) {
+                        override fun clickCheckBoxItem(optionalVeriation: Int) {
 
-                    }
+                        }
 
-                    override fun clickFreBoughtItem(position: Int) {
+                        override fun clickFreBoughtItem(position: Int) {
 
-                    }
-                })
+                        }
+                    })
                 holderClass2.recOpt.adapter = productVariationOptionalAdapter
 
             }
@@ -141,7 +147,7 @@ class MultiViewVariationRadioAdapter(private val dataSet: ArrayList<Veriation>) 
 //                                "clickCategoryItem: requiredVarBox: ${position} / radioProperties: ${radioProperties}"
 //                            )
 
-//                productPreviewInterface.clickRadioItem(position,radioProperties)
+                            productPreviewInterface.clickRadioItem(position, radioProperties)
                         }
 
                         override fun clickCheckBoxItem(optionalVeriation: Int) {

@@ -13,9 +13,8 @@ import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
+import com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.ui.fragments.products.adapter.frequentlyBought.FrequentlyBoughtAdapter
-import com.teamx.hatlyUser.ui.fragments.products.adapter.optional.ProductVariationOptionalAdapter
 import com.teamx.hatlyUser.ui.fragments.products.adapter.required.multiAdapter.MultiViewVariationRadioAdapter
 import com.teamx.hatlyUser.ui.fragments.products.model.FrequentlyBought
 import com.teamx.hatlyUser.ui.fragments.products.model.Veriation
@@ -37,13 +36,15 @@ class ProductPreviewFragment :
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    lateinit var variationArray: ArrayList<String>
+    //    lateinit var variationArray: ArrayList<String>
+    lateinit var variationArray: ArrayList<com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.Veriation>
     lateinit var veriationArraylist: ArrayList<Veriation>
-//    lateinit var requiredveriationArrayList: ArrayList<Veriation>
+
+    //    lateinit var requiredveriationArrayList: ArrayList<Veriation>
 //    lateinit var optionalArrayList: ArrayList<OptionalVeriaton>
     lateinit var freBoughtArrayList: ArrayList<FrequentlyBought>
 
-//    lateinit var prodVariationRadio: ProductVariationRequiredAdapter
+    //    lateinit var prodVariationRadio: ProductVariationRequiredAdapter
 //    lateinit var prodOptionalVarAdapter: ProductVariationOptionalAdapter
     lateinit var multiViewVariationRadioAdapter: MultiViewVariationRadioAdapter
     lateinit var frequentlyBoughtAdapter: FrequentlyBoughtAdapter
@@ -98,8 +99,9 @@ class ProductPreviewFragment :
 //        mViewDataBinding.layoutOptional.recOpt.adapter = prodOptionalVarAdapter
 
 
-        multiViewVariationRadioAdapter = MultiViewVariationRadioAdapter(veriationArraylist)
-        val optionalLayoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        multiViewVariationRadioAdapter = MultiViewVariationRadioAdapter(veriationArraylist, this)
+        val optionalLayoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         mViewDataBinding.recVarRequired.layoutManager = optionalLayoutManager
         mViewDataBinding.recVarRequired.adapter = multiViewVariationRadioAdapter
 
@@ -139,7 +141,7 @@ class ProductPreviewFragment :
 
                         Log.d("frequentlyBought21", "onViewCreated: ${data.frequentlyBought}")
 
-                        if (data.frequentlyBought?.isNotEmpty()   == true) {
+                        if (data.frequentlyBought?.isNotEmpty() == true) {
                             freBoughtArrayList.addAll(data.frequentlyBought)
                             mViewDataBinding.textView31.visibility = View.VISIBLE
                             mViewDataBinding.recFreBought.visibility = View.VISIBLE
@@ -179,7 +181,19 @@ class ProductPreviewFragment :
 
                             veriationArraylist.forEachIndexed { index, shopVeriation ->
                                 veriationArraylist[index].selectedIndex = -1
-                                variationArray.add("")
+
+                                val options: ArrayList<String> = ArrayList()
+
+                                veriationArraylist[index].options.forEach {
+                                    options.add("")
+                                }
+
+                                variationArray.add(
+                                    com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.Veriation(
+                                        "",
+                                        options
+                                    )
+                                )
 //                                clickRadioItem(index, 0)
                             }
                             multiViewVariationRadioAdapter.notifyDataSetChanged()
@@ -207,8 +221,6 @@ class ProductPreviewFragment :
 //                        }
 
 
-
-
                     }
                 }
 
@@ -228,7 +240,7 @@ class ProductPreviewFragment :
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
                     it.data?.let { data ->
-                        if (data.success){
+                        if (data.success) {
                             mViewDataBinding.root.snackbar("Added")
                         }
                     }
@@ -250,9 +262,9 @@ class ProductPreviewFragment :
         }
 
         mViewDataBinding.txtInstructionClick.setOnClickListener {
-            if (mViewDataBinding.inpSpecialInstr.isVisible){
+            if (mViewDataBinding.inpSpecialInstr.isVisible) {
                 mViewDataBinding.inpSpecialInstr.visibility = View.GONE
-            }else{
+            } else {
                 mViewDataBinding.inpSpecialInstr.visibility = View.VISIBLE
             }
         }
@@ -263,7 +275,7 @@ class ProductPreviewFragment :
             try {
                 params.addProperty("id", storeId)
                 params.addProperty("quantity", quantityActualValue)
-                if (spInst.isNotEmpty()){
+                if (spInst.isNotEmpty()) {
                     params.addProperty("specialInstruction", spInst)
                 }
             } catch (e: JSONException) {
@@ -280,23 +292,38 @@ class ProductPreviewFragment :
 
 
     override fun clickRadioItem(requiredVarBox: Int, radioProperties: Int) {
-        veriationArraylist[requiredVarBox].selectedIndex = radioProperties
+        if (!veriationArraylist[requiredVarBox].isMultiple) {
+            veriationArraylist[requiredVarBox].selectedIndex = radioProperties
+            multiViewVariationRadioAdapter.notifyItemChanged(requiredVarBox)
+            multiViewVariationRadioAdapter.notifyItemRangeChanged(requiredVarBox, veriationArraylist.size)
 
-//        prodVariationRadio.notifyItemChanged(requiredVarBox)
-//        prodVariationRadio.notifyItemRangeChanged(requiredVarBox, veriationArraylist.size)
+            variationArray[requiredVarBox]._id = veriationArraylist[0]._id
+
+            variationArray[requiredVarBox].options[radioProperties] = veriationArraylist[requiredVarBox].options[radioProperties]._id
+        }else{
+            variationArray[requiredVarBox]._id = veriationArraylist[requiredVarBox]._id
+
+            variationArray[requiredVarBox].options[radioProperties] = veriationArraylist[requiredVarBox].options[radioProperties]._id
+        }
+
+//        variationArray[requiredVarBox]._id = veriationArraylist[requiredVarBox]._id
+//
+//        variationArray[requiredVarBox].options[radioProperties] = veriationArraylist[requiredVarBox].options[radioProperties]._id
 
 
-
-        val word = veriationArraylist[requiredVarBox].options[radioProperties]
-
-//        variationArray[requiredVarBox] = word
-
-        val resultTitle = variationArray.joinToString("/")
-
-
+        val filteredVariations = variationArray.map { variation ->
+            com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.Veriation(
+                _id = variation._id,
+                options = variation.options.filter { it.isNotBlank() } as ArrayList<String>
+            )
+        }.filter { it.options.isNotEmpty() }
 
 
-        Log.d("clickCategoryItem", "variationArray: $resultTitle")
+//        val resultTitle = variationArray.joinToString("/")
+
+
+        Log.d("clickCategoryItem", "variationArray: $variationArray")
+        Log.d("clickCategoryItem", "filteredVariations: $filteredVariations")
 
 //        mViewDataBinding.textView24.text = try {
 //            actualPrize(requiredveriationArrayList, resultTitle).toString()
@@ -330,8 +357,8 @@ class ProductPreviewFragment :
 //        return 0.0
 //    }
 
-    private fun quantityValue(quantity : Int){
-        if (quantity < 1){
+    private fun quantityValue(quantity: Int) {
+        if (quantity < 1) {
             return
         }
         quantityActualValue = quantity

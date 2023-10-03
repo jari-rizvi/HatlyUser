@@ -7,7 +7,6 @@ import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.databinding.ItemFoodsHomeBinding
 import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.models.modelShops.Doc
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
 
 class FoodHomeAdapter(
     private val foodsAllShopsArrayList: ArrayList<Doc>,

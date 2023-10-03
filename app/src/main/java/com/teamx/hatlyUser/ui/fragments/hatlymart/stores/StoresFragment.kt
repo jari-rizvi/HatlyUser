@@ -15,7 +15,6 @@ import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.MART
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentStoresBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.adapter.StoresAdapter
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.Doc
 import com.teamx.hatlyUser.utils.enum_.Marts
