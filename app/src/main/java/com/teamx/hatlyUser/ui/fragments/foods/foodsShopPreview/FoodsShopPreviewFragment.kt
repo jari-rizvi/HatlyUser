@@ -71,7 +71,9 @@ class FoodsShopPreviewFragment :
                 val bundle = arguments
                 if (bundle != null) {
                     val foodShopId = bundle.getString("itemId").toString()
-                    mViewModel.foodsShopHome(foodShopId)
+                    if (!mViewModel.foodsShopHomeResponse.hasActiveObservers()) {
+                        mViewModel.foodsShopHome(foodShopId)
+                    }
                 }
             }
 
@@ -232,7 +234,10 @@ class FoodsShopPreviewFragment :
         val bundle = Bundle()
         bundle.putString("_id", modelProduct._id)
         bundle.putString("name", modelProduct.name)
-        findNavController().navigate(R.id.action_foodsShopHomeFragment_to_productPreviewFragment, bundle)
+        findNavController().navigate(
+            R.id.action_foodsShopHomeFragment_to_productPreviewFragment,
+            bundle
+        )
     }
 
     override fun clickCategoryItem(position: Int) {

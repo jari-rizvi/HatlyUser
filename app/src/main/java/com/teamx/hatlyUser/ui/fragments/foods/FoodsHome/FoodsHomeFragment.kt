@@ -128,7 +128,9 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
             }
         }
 
-        mViewModel.allFoodsShops(1, 10, 0, "", categoryTitle)
+        if (!mViewModel.allFoodsShopsResponse.hasActiveObservers()) {
+            mViewModel.allFoodsShops(1, 10, 0, "", categoryTitle)
+        }
 
         mViewModel.allFoodsShopsResponse.observe(requireActivity()) {
             when (it.status) {
@@ -244,7 +246,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
         val foodShopModel = foodsAllShopsArrayList[position]
         val bundle = Bundle()
         bundle.putString("itemId", foodShopModel._id)
-        findNavController().navigate(R.id.action_foodsHomeFragment_to_foodsShopHomeFragment,bundle)
+        findNavController().navigate(R.id.action_foodsHomeFragment_to_foodsShopHomeFragment, bundle)
     }
 
     override fun clickMoreItem(position: Int) {

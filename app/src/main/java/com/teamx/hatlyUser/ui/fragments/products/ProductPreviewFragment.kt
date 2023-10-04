@@ -2,26 +2,30 @@ package com.teamx.hatlyUser.ui.fragments.products
 
 import android.graphics.Paint
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.ui.fragments.products.adapter.frequentlyBought.FrequentlyBoughtAdapter
+import com.teamx.hatlyUser.ui.fragments.products.adapter.imageSlider.ImageSliderAdapter
 import com.teamx.hatlyUser.ui.fragments.products.adapter.required.multiAdapter.MultiViewVariationRadioAdapter
 import com.teamx.hatlyUser.ui.fragments.products.model.FrequentlyBought
 import com.teamx.hatlyUser.ui.fragments.products.model.Veriation
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONException
+import java.util.Timer
+import java.util.TimerTask
 import kotlin.random.Random
 
 
@@ -44,11 +48,13 @@ class ProductPreviewFragment :
     //    lateinit var requiredveriationArrayList: ArrayList<Veriation>
 //    lateinit var optionalArrayList: ArrayList<OptionalVeriaton>
     lateinit var freBoughtArrayList: ArrayList<FrequentlyBought>
+    lateinit var imageSliderArray: ArrayList<String>
 
     //    lateinit var prodVariationRadio: ProductVariationRequiredAdapter
 //    lateinit var prodOptionalVarAdapter: ProductVariationOptionalAdapter
     lateinit var multiViewVariationRadioAdapter: MultiViewVariationRadioAdapter
     lateinit var frequentlyBoughtAdapter: FrequentlyBoughtAdapter
+    lateinit var imageSliderAdapter : ImageSliderAdapter
 
     var storeId = ""
     var storeName = ""
@@ -86,6 +92,7 @@ class ProductPreviewFragment :
 //        requiredveriationArrayList = ArrayList()
 //        optionalArrayList = ArrayList()
         freBoughtArrayList = ArrayList()
+        imageSliderArray = ArrayList()
 
 //        prodVariationRadio = ProductVariationRequiredAdapter(veriationArraylist, this)
 //        val requiredLayoutManager =
@@ -128,7 +135,13 @@ class ProductPreviewFragment :
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
                     it.data?.let { data ->
-                        Picasso.get().load(data.product.images[0]).into(mViewDataBinding.imgShop)
+
+                        imageSliderArray.addAll(data.product.images)
+                        imageSliderArray.add("http://31.220.17.28:8000/a7d941e85050bd8b4ed415dd553ce890.png")
+                        imageSliderArray.add("http://31.220.17.28:8000/c151469af1659b3427f56e7a216800b0.png")
+                        imageSliderArray.add("http://31.220.17.28:8000/a7d941e85050bd8b4ed415dd553ce890.png")
+                        imageSliderAdapter.notifyDataSetChanged()
+//                        Picasso.get().load(data.product.images[0]).into(mViewDataBinding.imgShop)
 
                         mViewDataBinding.textView22.text = try {
                             data.product.name
@@ -297,6 +310,18 @@ class ProductPreviewFragment :
             mViewModel.addToCart(params)
         }
 
+
+//        viewPager = findViewById(R.id.viewPager)
+
+        // Replace imageResIds with your actual image resources
+
+        imageSliderAdapter = ImageSliderAdapter(imageSliderArray)
+//        imageSliderAdapter = ImageSliderAdapter(imageResIds)
+        mViewDataBinding.viewPager.adapter = imageSliderAdapter
+
+        timer = Timer()
+        timer.scheduleAtFixedRate(AutoSlideTask(), 2000, 3000)
+
     }
 
     fun numGenerate(): Int {
@@ -379,6 +404,29 @@ class ProductPreviewFragment :
         }
         quantityActualValue = quantity
         mViewDataBinding.textView29.text = quantityActualValue.toString()
+    }
+
+    private lateinit var viewPager: ViewPager2
+    private var currentPage = 0
+    private lateinit var timer: Timer
+    private val handler = Handler()
+
+    private inner class AutoSlideTask : TimerTask() {
+        override fun run() {
+            handler.post {
+                if (currentPage == mViewDataBinding.viewPager.adapter?.itemCount?.minus(1)) {
+                    currentPage = 0
+                } else {
+                    currentPage++
+                }
+                mViewDataBinding.viewPager.setCurrentItem(currentPage, true)
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        timer.cancel()
     }
 
 }

@@ -53,20 +53,33 @@
             app:layout_constraintTop_toTopOf="@+id/imgBack"
             app:layout_constraintVertical_bias="0.03" />
 
-        <ImageView
-            android:id="@+id/imgShop"
+<!--        <ImageView-->
+<!--            android:id="@+id/imgShop"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginTop="@dimen/_10sdp"-->
+<!--            android:background="@drawable/button_radius_corner"-->
+<!--            android:clipToOutline="true"-->
+<!--            android:scaleType="fitXY"-->
+<!--            android:src="@drawable/splash_bg"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/guideline1"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/imgBack1"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/imgBack"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textView2" />-->
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/button_radius_corner"
             android:clipToOutline="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/splash_bg"
             app:layout_constraintBottom_toTopOf="@+id/guideline1"
             app:layout_constraintEnd_toEndOf="@+id/imgBack1"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/imgBack"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2"/>
 
         <ImageView
             android:id="@+id/imgFavourite"
@@ -76,11 +89,11 @@
             android:backgroundTint="@color/white"
             android:padding="@dimen/_3sdp"
             android:src="@drawable/outline_favorite_24"
-            app:layout_constraintBottom_toBottomOf="@+id/imgShop"
-            app:layout_constraintEnd_toEndOf="@+id/imgShop"
+            app:layout_constraintBottom_toBottomOf="@+id/viewPager"
+            app:layout_constraintEnd_toEndOf="@+id/viewPager"
             app:layout_constraintHorizontal_bias="0.95"
-            app:layout_constraintStart_toStartOf="@+id/imgShop"
-            app:layout_constraintTop_toTopOf="@+id/imgShop"
+            app:layout_constraintStart_toStartOf="@+id/viewPager"
+            app:layout_constraintTop_toTopOf="@+id/viewPager"
             app:layout_constraintVertical_bias="0.1" />
 
         <androidx.constraintlayout.widget.Guideline
