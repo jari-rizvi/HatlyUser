@@ -7,6 +7,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.BR
@@ -114,8 +115,9 @@ class ProductPreviewFragment :
         mViewDataBinding.recFreBought.adapter = frequentlyBoughtAdapter
 
 
-//        mViewModel.prodPreview(storeId)
-        mViewModel.prodPreview("651a9a40f6fbdb97eebe34df")
+        Log.d("storeId", "storeId: ${storeId}")
+        mViewModel.prodPreview(storeId)
+//        mViewModel.prodPreview("651a9a40f6fbdb97eebe34df")
 
         mViewModel.prodPreviewResponse.observe(requireActivity()) {
             when (it.status) {
@@ -148,16 +150,16 @@ class ProductPreviewFragment :
                             frequentlyBoughtAdapter.notifyDataSetChanged()
                         }
 
-//                        if (data.product.productType == "simple") {
-//                            Log.d("productType", "onViewCreated: Simple")
-//                            mViewDataBinding.textView24.text = try {
-//                                "${data.product.minPrize} Aed"
-//                            } catch (e: Exception) {
-//                                ""
-//                            }
-//                            mViewDataBinding.textView25.visibility = View.GONE
-//                            return@observe
-//                        }
+                        if (data.product.productType == "simple") {
+                            Log.d("productType", "onViewCreated: Simple")
+                            mViewDataBinding.textView24.text = try {
+                                "${data.product.prize} Aed"
+                            } catch (e: Exception) {
+                                ""
+                            }
+                            mViewDataBinding.textView25.visibility = View.GONE
+                            return@observe
+                        }
 
                         Log.d("productType", "onViewCreated: working")
 
@@ -270,11 +272,22 @@ class ProductPreviewFragment :
         }
 
         mViewDataBinding.textView30.setOnClickListener {
+
+            val filteredVariations = variationArray.map { variation ->
+                com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.Veriation(
+                    _id = variation._id,
+                    options = variation.options.filter { it.isNotBlank() } as ArrayList<String>
+                )
+            }.filter { it.options.isNotEmpty() }
+
             val spInst = mViewDataBinding.inpSpecialInstr.text.toString()
             val params = JsonObject()
             try {
                 params.addProperty("id", storeId)
                 params.addProperty("quantity", quantityActualValue)
+                if (filteredVariations.isNotEmpty()) {
+                    params.add("veriations", Gson().toJsonTree(filteredVariations))
+                }
                 if (spInst.isNotEmpty()) {
                     params.addProperty("specialInstruction", spInst)
                 }
@@ -292,45 +305,48 @@ class ProductPreviewFragment :
 
 
     override fun clickRadioItem(requiredVarBox: Int, radioProperties: Int) {
+
+        val veriationId = veriationArraylist[requiredVarBox]._id
+        val optionId = veriationArraylist[requiredVarBox].options[radioProperties]._id
+
+        variationArray[requiredVarBox]._id = veriationId
+
         if (!veriationArraylist[requiredVarBox].isMultiple) {
             veriationArraylist[requiredVarBox].selectedIndex = radioProperties
             multiViewVariationRadioAdapter.notifyItemChanged(requiredVarBox)
-            multiViewVariationRadioAdapter.notifyItemRangeChanged(requiredVarBox, veriationArraylist.size)
+            multiViewVariationRadioAdapter.notifyItemRangeChanged(
+                requiredVarBox,
+                veriationArraylist.size
+            )
 
-            variationArray[requiredVarBox]._id = veriationArraylist[0]._id
+            variationArray[requiredVarBox].options[0] = optionId
 
-            variationArray[requiredVarBox].options[radioProperties] = veriationArraylist[requiredVarBox].options[radioProperties]._id
-        }else{
-            variationArray[requiredVarBox]._id = veriationArraylist[requiredVarBox]._id
-
-            variationArray[requiredVarBox].options[radioProperties] = veriationArraylist[requiredVarBox].options[radioProperties]._id
+        } else {
+            variationArray[requiredVarBox].options[radioProperties] =
+                if (variationArray[requiredVarBox].options.contains(optionId)) "" else optionId
         }
 
-//        variationArray[requiredVarBox]._id = veriationArraylist[requiredVarBox]._id
-//
-//        variationArray[requiredVarBox].options[radioProperties] = veriationArraylist[requiredVarBox].options[radioProperties]._id
 
-
-        val filteredVariations = variationArray.map { variation ->
-            com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.Veriation(
-                _id = variation._id,
-                options = variation.options.filter { it.isNotBlank() } as ArrayList<String>
-            )
-        }.filter { it.options.isNotEmpty() }
+//        val filteredVariations = variationArray.map { variation ->
+//            com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.Veriation(
+//                _id = variation._id,
+//                options = variation.options.filter { it.isNotBlank() } as ArrayList<String>
+//            )
+//        }.filter { it.options.isNotEmpty() }
 
 
 //        val resultTitle = variationArray.joinToString("/")
 
 
-        Log.d("clickCategoryItem", "variationArray: $variationArray")
-        Log.d("clickCategoryItem", "filteredVariations: $filteredVariations")
+//        Log.d("clickCategoryItem", "variationArray: $variationArray")
+//        Log.d("clickCategoryItem", "filteredVariations: $filteredVariations")
 
 //        mViewDataBinding.textView24.text = try {
 //            actualPrize(requiredveriationArrayList, resultTitle).toString()
 //        } catch (e: Exception) {
 //            "0.0"
 //        }
-        mViewDataBinding.textView25.visibility = View.GONE
+//        mViewDataBinding.textView25.visibility = View.GONE
     }
 
     override fun clickCheckBoxItem(optionalVeriation: Int) {

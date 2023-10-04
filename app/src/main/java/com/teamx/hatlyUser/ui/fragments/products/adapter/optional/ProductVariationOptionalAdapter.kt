@@ -52,7 +52,7 @@ class ProductVariationOptionalAdapter(
 //        }
 
         holder.bind.radioButton.setOnClickListener {
-            holder.bind.radioButton.isChecked = !arrayData.isSelected
+//            holder.bind.radioButton.isChecked = !arrayData.isSelected
             productPreviewInterface.clickRadioItem(-1,position)
         }
 
