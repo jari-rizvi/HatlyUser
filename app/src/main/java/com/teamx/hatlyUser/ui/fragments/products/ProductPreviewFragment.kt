@@ -16,10 +16,10 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces.ProductPreviewInterface
-import com.teamx.hatlyUser.ui.fragments.products.adapter.frequentlyBought.FrequentlyBoughtAdapter
+import com.teamx.hatlyUser.ui.fragments.products.adapter.frequentlyBought.RecommendedItemAdapter
 import com.teamx.hatlyUser.ui.fragments.products.adapter.imageSlider.ImageSliderAdapter
 import com.teamx.hatlyUser.ui.fragments.products.adapter.required.multiAdapter.MultiViewVariationRadioAdapter
-import com.teamx.hatlyUser.ui.fragments.products.model.FrequentlyBought
+import com.teamx.hatlyUser.ui.fragments.products.model.Recommended
 import com.teamx.hatlyUser.ui.fragments.products.model.Veriation
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,13 +47,13 @@ class ProductPreviewFragment :
 
     //    lateinit var requiredveriationArrayList: ArrayList<Veriation>
 //    lateinit var optionalArrayList: ArrayList<OptionalVeriaton>
-    lateinit var freBoughtArrayList: ArrayList<FrequentlyBought>
+    lateinit var freBoughtArrayList: ArrayList<Recommended>
     lateinit var imageSliderArray: ArrayList<String>
 
     //    lateinit var prodVariationRadio: ProductVariationRequiredAdapter
 //    lateinit var prodOptionalVarAdapter: ProductVariationOptionalAdapter
     lateinit var multiViewVariationRadioAdapter: MultiViewVariationRadioAdapter
-    lateinit var frequentlyBoughtAdapter: FrequentlyBoughtAdapter
+    lateinit var recommendedItemAdapter: RecommendedItemAdapter
     lateinit var imageSliderAdapter : ImageSliderAdapter
 
     var storeId = ""
@@ -115,17 +115,20 @@ class ProductPreviewFragment :
 
 
 
-        frequentlyBoughtAdapter = FrequentlyBoughtAdapter(freBoughtArrayList, this)
+        recommendedItemAdapter = RecommendedItemAdapter(freBoughtArrayList, this)
         val productLayoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         mViewDataBinding.recFreBought.layoutManager = productLayoutManager
-        mViewDataBinding.recFreBought.adapter = frequentlyBoughtAdapter
+        mViewDataBinding.recFreBought.adapter = recommendedItemAdapter
 
 
         Log.d("storeId", "storeId: ${storeId}")
-        mViewModel.prodPreview(storeId)
-//        mViewModel.prodPreview("651a9a40f6fbdb97eebe34df")
+//        mViewModel.prodPreview(storeId)
 
+        storeId = "65007af747acc3f2a42d1581" //simple
+//        storeId = "651a9a40f6fbdb97eebe34df" //veriable
+
+        mViewModel.prodPreview(storeId)
         mViewModel.prodPreviewResponse.observe(requireActivity()) {
             when (it.status) {
                 Resource.Status.LOADING -> {
@@ -154,13 +157,13 @@ class ProductPreviewFragment :
                             ""
                         }
 
-                        Log.d("frequentlyBought21", "onViewCreated: ${data.frequentlyBought}")
+                        Log.d("frequentlyBought21", "onViewCreated: ${data.recommended}")
 
-                        if (data.frequentlyBought?.isNotEmpty() == true) {
-                            freBoughtArrayList.addAll(data.frequentlyBought)
+                        if (data.recommended?.isNotEmpty() == true) {
+                            freBoughtArrayList.addAll(data.recommended)
                             mViewDataBinding.textView31.visibility = View.VISIBLE
                             mViewDataBinding.recFreBought.visibility = View.VISIBLE
-                            frequentlyBoughtAdapter.notifyDataSetChanged()
+                            recommendedItemAdapter.notifyDataSetChanged()
                         }
 
                         if (data.product.productType == "simple") {
@@ -199,7 +202,7 @@ class ProductPreviewFragment :
 
                                 val options: ArrayList<String> = ArrayList()
 
-                                veriationArraylist[index].options.forEach {
+                                veriationArraylist[index].options.forEach { _ ->
                                     options.add("")
                                 }
 
@@ -292,6 +295,8 @@ class ProductPreviewFragment :
                     options = variation.options.filter { it.isNotBlank() } as ArrayList<String>
                 )
             }.filter { it.options.isNotEmpty() }
+
+            Log.d("filteredVariations", "onViewCreated: $filteredVariations")
 
             val spInst = mViewDataBinding.inpSpecialInstr.text.toString()
             val params = JsonObject()

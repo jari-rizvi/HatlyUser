@@ -190,7 +190,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
         handler.postDelayed({
             if (actionStack.isNotEmpty()) {
                 val cartmodel = cartProductArrayList[actionStack.pop()]
-                params.addProperty("id", cartmodel.id)
+                params.addProperty("id", cartmodel._id)
                 params.addProperty("quantity", cartmodel.quantity)
                 mViewModel.updateCartItem(params)
 
@@ -206,7 +206,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
 
                                 if (actionStack.isNotEmpty()) {
                                     val cartmodel1 = cartProductArrayList[actionStack.pop()]
-                                    params.addProperty("id", cartmodel1.id)
+                                    params.addProperty("id", cartmodel1._id)
                                     params.addProperty("quantity", cartmodel1.quantity)
                                     mViewModel.updateCartItem(params)
                                 } else {
@@ -227,7 +227,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
         }, debounceDelayMillis.toLong())
     }
 
-    fun layoutUpdate(data: ModelCart) {
+    private fun layoutUpdate(data: ModelCart) {
         mViewDataBinding.textView212.text = try {
             "${data.subTotal} Aed"
         } catch (e: Exception) {
@@ -253,7 +253,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
 
     override fun removeCartItem(position: Int) {
         val cartModel = cartProductArrayList[position]
-        removeCartResponse(cartModel.id, position)
+        removeCartResponse(cartModel._id, position)
     }
 
     private fun removeCartResponse(_id: String, position: Int) {

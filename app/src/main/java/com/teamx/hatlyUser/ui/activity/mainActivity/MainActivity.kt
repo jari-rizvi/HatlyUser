@@ -1,11 +1,21 @@
 package com.teamx.hatlyUser.ui.activity.mainActivity
 
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -53,8 +63,81 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     private lateinit var googleSignInClient: GoogleSignInClient
 
+
+    private var modeChangeReceiver: BroadcastReceiver? = null
+
+    override fun onResume() {
+        super.onResume()
+
+        // Register the BroadcastReceiver to listen for system mode changes
+        val filter = IntentFilter()
+        filter.addAction(Intent.ACTION_CONFIGURATION_CHANGED)
+        registerReceiver(modeChangeReceiver, filter)
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        // Unregister the BroadcastReceiver when the activity is paused
+        unregisterReceiver(modeChangeReceiver)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        modeChangeReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                if (intent?.action == Intent.ACTION_CONFIGURATION_CHANGED) {
+                    val currentNightMode =
+                        resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+                    if (currentNightMode == Configuration.UI_MODE_NIGHT_YES) {
+                        // Dark mode is enabled
+//                        finish()
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//                        startActivity(getIntent())
+//                        Toast.makeText(context, "Dark Mode Enabled", Toast.LENGTH_SHORT).show()
+                    } else {
+                        // Light mode is enabled
+//                        finish()
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//                        startActivity(getIntent())
+//                        Toast.makeText(context, "Light Mode Enabled", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
+
+
+//        checkDarkMode()
+//
+//        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { _, insets ->
+//            checkDarkMode()
+//            insets
+//        }
+
+
+//        if (resources.configuration.isNightModeActive) {
+//            // Dark mode is active3
+//
+////            this.startActivity(intent)
+//            Log.d("UI_MODE_NIGHT_YES", "UI_MODE_NIGHT_YES: true")
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+////            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//
+//        } else {
+////            finish()
+////            this.startActivity(intent)
+//            // Light mode is active
+//            Log.d("UI_MODE_NIGHT_YES", "UI_MODE_NIGHT_YES: false")
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+////            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//
+//        }
+
+
 
         sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
         dataStoreProvider = DataStoreProvider(this)

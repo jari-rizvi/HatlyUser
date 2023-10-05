@@ -1,6 +1,9 @@
 package com.teamx.hatlyUser.ui.fragments.products.model
 
+import androidx.annotation.Keep
+
+@Keep
 data class ModelProductPreview(
-    val frequentlyBought: List<FrequentlyBought>?,
-    val product: Product
+    val product: Product,
+    val recommended: List<Recommended>
 )

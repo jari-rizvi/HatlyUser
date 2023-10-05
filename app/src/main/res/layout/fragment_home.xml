@@ -115,7 +115,7 @@
                 android:fontFamily="@font/bumbu_sushi"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="H\nA\nT\nL\nY"
-                android:textColor="#EA1B25"
+                style="@style/AppTheme"
                 android:textSize="@dimen/_30ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

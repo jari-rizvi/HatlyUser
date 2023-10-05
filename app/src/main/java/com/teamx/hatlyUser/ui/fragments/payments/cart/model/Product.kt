@@ -3,14 +3,13 @@ import androidx.annotation.Keep
 
 @Keep
 data class Product(
-    val afterCheckOut: Int,
-    val id: String,
-    val image: String?,
-    val inStock: Boolean,
-    val prize: Double,
+    val _id: String,
+    val image: String,
+    val prize: String,
     val productId: String,
     val productName: String,
     var quantity: Int,
-    val quantityInStock: Int,
-    val specialInstruction: String
+    val shopId: String,
+    val specialInstruction: String,
+    val veriations: List<Veriation>
 )

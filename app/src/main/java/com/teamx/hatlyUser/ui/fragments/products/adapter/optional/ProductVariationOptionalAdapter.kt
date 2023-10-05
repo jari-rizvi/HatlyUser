@@ -29,7 +29,8 @@ class ProductVariationOptionalAdapter(
 
         val arrayData = addressArrayList[position]
 
-        holder.bind.radioButton.isChecked = arrayData.isSelected
+//        holder.bind.radioButton.isChecked = arrayData.isSelected
+        holder.bind.radioButton.isChecked = false
 
         holder.bind.radioButton.text = try {
             arrayData.name

@@ -1,5 +1,6 @@
 package com.teamx.hatlyUser.ui.fragments.home
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -39,6 +40,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
                 popExit = R.anim.nav_default_pop_exit_anim
             }
         }
+
+
 
         val userData = PrefHelper.getInstance(requireActivity()).getUserData()
 
