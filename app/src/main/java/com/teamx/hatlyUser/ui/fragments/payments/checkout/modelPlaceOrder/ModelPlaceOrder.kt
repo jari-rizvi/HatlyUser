@@ -12,6 +12,7 @@ data class ModelPlaceOrder(
     val shop: String,
     val specialNote: String,
     val status: String,
+    val clientSecret: String?,
     val subTotal: Double,
     val tax: Double,
     val total: Double,

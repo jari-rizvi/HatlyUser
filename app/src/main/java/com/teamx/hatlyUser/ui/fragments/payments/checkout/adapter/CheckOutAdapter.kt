@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.databinding.ItemCheckoutBinding
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.model.Product
+import java.util.ArrayList
 
 class CheckOutAdapter(
     private val addressArrayList: ArrayList<Product>

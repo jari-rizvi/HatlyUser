@@ -5,5 +5,5 @@ import androidx.annotation.Keep
 data class Option(
     val _id: String,
     val name: String,
-    val prize: Int
+    val prize: Double
 )

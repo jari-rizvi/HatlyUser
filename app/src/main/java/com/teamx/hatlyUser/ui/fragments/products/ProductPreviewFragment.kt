@@ -125,8 +125,8 @@ class ProductPreviewFragment :
         Log.d("storeId", "storeId: ${storeId}")
 //        mViewModel.prodPreview(storeId)
 
-        storeId = "65007af747acc3f2a42d1581" //simple
-//        storeId = "651a9a40f6fbdb97eebe34df" //veriable
+//        storeId = "65007af747acc3f2a42d1581" //simple
+        storeId = "651a9a40f6fbdb97eebe34df" //veriable
 
         mViewModel.prodPreview(storeId)
         mViewModel.prodPreviewResponse.observe(requireActivity()) {

@@ -24,6 +24,16 @@ allprojects {
         maven { url 'https://jitpack.io' }
         maven { url "https://maven.google.com" }
 
+        maven {
+            url  "https://cardinalcommerceprod.jfrog.io/artifactory/android"
+//            url  "https://sandbox.paypal.com/"
+//            credentials {
+//                // Be sure to add these non-sensitive credentials in order to retrieve dependencies from
+//                // the private repository.
+//                username mavenUsername
+//                password mavenPassword
+//            }
+        }
     }
 }
 

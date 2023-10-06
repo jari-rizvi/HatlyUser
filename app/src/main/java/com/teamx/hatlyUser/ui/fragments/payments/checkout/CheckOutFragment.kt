@@ -14,7 +14,26 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.paypal.checkout.PayPalCheckout
+import com.paypal.checkout.approve.OnApprove
+import com.paypal.checkout.cancel.OnCancel
+import com.paypal.checkout.config.CheckoutConfig
+import com.paypal.checkout.config.Environment
+import com.paypal.checkout.config.SettingsConfig
+import com.paypal.checkout.createorder.CreateOrder
+import com.paypal.checkout.createorder.CurrencyCode
+import com.paypal.checkout.createorder.OrderIntent
+import com.paypal.checkout.createorder.UserAction
+import com.paypal.checkout.order.Amount
+import com.paypal.checkout.order.AppContext
+import com.paypal.checkout.order.OrderRequest
+import com.paypal.checkout.order.PurchaseUnit
+import com.paypal.checkout.paymentbutton.PaymentButtonContainer
+import com.stripe.android.PaymentConfiguration
+import com.stripe.android.paymentsheet.PaymentSheet
+import com.stripe.android.paymentsheet.PaymentSheetResult
 import com.teamx.hatlyUser.BR
+import com.teamx.hatlyUser.BuildConfig
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
@@ -47,6 +66,8 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
     var mapFragment: SupportMapFragment? = null
 
+    lateinit var paymentSheet: PaymentSheet
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -57,6 +78,10 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 popEnter = R.anim.nav_default_pop_enter_anim
                 popExit = R.anim.nav_default_pop_exit_anim
             }
+        }
+
+        if (isAdded) {
+            paymentSheet = PaymentSheet(this, ::onPaymentSheetResult)
         }
 
         mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment?
@@ -240,7 +265,17 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
                     it.data?.let { data ->
+                        if (data.clientSecret != null) {
+                            Log.d(
+                                "placeOrderResponse",
+                                "onViewCreated: stripe payment ${data.clientSecret}"
+                            )
+                            showPaypal()
+//                            showStripeSheet(data.clientSecret)
+                            return@observe
+                        }
                         if (data.status == "placed") {
+                            Log.d("placeOrderResponse", "onViewCreated: without stripe payment")
                             findNavController().navigate(R.id.action_checkOutFragment_to_orderPlacedFragment)
                         }
                     }
@@ -252,6 +287,159 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 }
             }
         }
+
+        val YOUR_CLIENT_ID = "AZX5jqRs5Xi5XZacM1LBdmAqSzCRWslUa7Ic-vPu2bvHnzbePURxcYBSTl60fd6b5ga8djAajpRSYfVs"
+        val config = CheckoutConfig(
+            application = requireActivity().application,
+            clientId = YOUR_CLIENT_ID,
+            environment = Environment.SANDBOX,
+            returnUrl = "${BuildConfig.APPLICATION_ID}://paypalpay",
+//            currencyCode = CurrencyCode.USD,
+            userAction = UserAction.PAY_NOW,
+            settingsConfig = SettingsConfig(
+                loggingEnabled = false,
+                showWebCheckout = true
+            )
+        )
+        PayPalCheckout.setConfig(config)
+    }
+
+    //    var paymentButtonContainer: PaymentButtonContainer? = null
+    private fun showPaypal() {
+
+        PayPalCheckout.start(CreateOrder { createOrderActions ->
+            val order =
+                OrderRequest(
+                    intent = OrderIntent.CAPTURE,
+                    appContext = AppContext(userAction = UserAction.PAY_NOW),
+                    purchaseUnitList =
+                    listOf(
+                        PurchaseUnit(
+                            amount =
+                            Amount(currencyCode = CurrencyCode.USD, value = "10.00")
+                        )
+                    )
+                )
+            createOrderActions.create(order) {res ->
+                Log.d("createOrderActions", "OrderId: approve ${res}")
+            }
+        }, onApprove = OnApprove { approval ->
+            Log.d("createOrderActions", "OrderId: approve ${approval.data.orderId}")
+        }, onCancel = OnCancel.invoke {
+            Log.d("createOrderActions", "OrderId: cancel")
+        })
+
+//        PayPalCheckout.registerCallbacks(onApprove = OnApprove{
+//
+//        }, on)
+
+//        PayPalCheckout.startCheckout(CreateOrder { createOrderActions ->
+//            val order =
+//                OrderRequest(
+//                    intent = OrderIntent.CAPTURE,
+//                    appContext = AppContext(userAction = UserAction.PAY_NOW),
+//                    purchaseUnitList =
+//                    listOf(
+//                        PurchaseUnit(
+//                            amount =
+//                            Amount(currencyCode = CurrencyCode.USD, value = "10.00")
+//                        )
+//                    )
+//                )
+//            createOrderActions.create(order) {res ->
+//                Log.d("createOrderActions", "OrderId: approve ${res}")
+//            }
+//        })
+
+//        PayPalCheckout.startCheckout(CreateOrder { createOrderActions ->
+//            val order =
+//                OrderRequest(
+//                    intent = OrderIntent.CAPTURE,
+//                    appContext = AppContext(userAction = UserAction.PAY_NOW),
+//                    purchaseUnitList =
+//                    listOf(
+//                        PurchaseUnit(
+//                            amount =
+//                            Amount(currencyCode = CurrencyCode.USD, value = "10.00")
+//                        )
+//                    )
+//                )
+//            createOrderActions.create(order)
+//        })
+
+//        paymentButtonContainer?.setup(
+//            createOrder =
+//            CreateOrder { createOrderActions ->
+//                val order =
+//                    OrderRequest(
+//                        intent = OrderIntent.CAPTURE,
+//                        appContext = AppContext(userAction = UserAction.PAY_NOW),
+//                        purchaseUnitList =
+//                        listOf(
+//                            PurchaseUnit(
+//                                amount =
+//                                Amount(currencyCode = CurrencyCode.USD, value = "10.00")
+//                            )
+//                        )
+//                    )
+//                createOrderActions.create(order)
+//            },
+//            onApprove =
+//            OnApprove { approval ->
+//                Log.i(TAG, "OrderId: ${approval.data.orderId}")
+//            }
+//        )
+    }
+
+    fun showStripeSheet(clientSecret: String) {
+        PaymentConfiguration.init(
+            requireActivity().applicationContext,
+//            stripPublicKey
+            "pk_test_51LMwtTIXOwead2Sp6mZEM5tGaiZT363HLHm58hq7Wrip8KOH2Jj1U303ONw2DMd6oTGHP0uLiDw197LA0jauVeMG00HtE9n9nM"
+        )
+
+        paymentSheet.presentWithPaymentIntent(
+            clientSecret, PaymentSheet.Configuration(
+                merchantDisplayName = "Raseef",
+//                customer = customerConfig,
+                // Set `allowsDelayedPaymentMethods` to true if your business
+                // can handle payment methods that complete payment after a delay, like SEPA Debit and Sofort.
+                allowsDelayedPaymentMethods = false
+            )
+        )
+    }
+
+    private fun onPaymentSheetResult(paymentSheetResult: PaymentSheetResult) {
+
+
+        when (paymentSheetResult) {
+            is PaymentSheetResult.Canceled -> {
+                Log.d("PaymentSheetResult", "onPaymentSheetResult: Canceled")
+
+            }
+
+            is PaymentSheetResult.Failed -> {
+
+                Log.d("PaymentSheetResult", "onPaymentSheetResult: Failed")
+
+            }
+
+            is PaymentSheetResult.Completed -> {
+                // Display for example, an order confirmation screen
+
+                Log.d("PaymentSheetResult", "onPaymentSheetResult: Completed")
+                findNavController().navigate(R.id.action_checkOutFragment_to_orderPlacedFragment)
+//                val params = JsonObject()
+//
+//                params.addProperty("shopId", shopId)
+//                params.addProperty("payment_intent_id", payment_intent_id)
+//
+//                Log.d("PaymentSheetResult", "onPaymentSheetResult: Completed ${params}")
+//
+//                stripeVerifyPay(params)
+
+            }
+        }
     }
 
 
@@ -260,8 +448,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         try {
 
             params.add(
-                "coordinates",
-                Gson().toJsonTree(Coordinates(24.90147393769095, 24.90147393769095))
+                "coordinates", Gson().toJsonTree(Coordinates(24.90147393769095, 24.90147393769095))
             )
             params.add(
                 "shippingAddress", Gson().toJsonTree(
@@ -281,7 +468,9 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 params.addProperty("specialNote", addNote)
             }
             params.addProperty("useWallet", mViewDataBinding.swOnOff.isChecked)
-            params.addProperty("orderType", "CASH_ON_DELIVERY")
+//            params.addProperty("orderType", "CASH_ON_DELIVERY")
+            params.addProperty("orderType", "ONLINE_PAYMENTS")
+            params.addProperty("payBy", "STRIPE")
 
 //            params.addProperty("lat", 24.90147393769095)
 //            params.addProperty("lng", 7.11531056779101)
@@ -293,7 +482,8 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
     override fun onMapReady(p0: GoogleMap) {
         Log.d("onMapReady", "onMapReady: if")
-        val location = LatLng(24.902204583353058, 67.11535962960994) // Example location (San Francisco)
+        val location =
+            LatLng(24.902204583353058, 67.11535962960994) // Example location (San Francisco)
 
         p0.uiSettings.isZoomControlsEnabled = false
         p0.uiSettings.isScrollGesturesEnabled = false
@@ -302,10 +492,9 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         p0.uiSettings.isZoomGesturesEnabled = false
         p0.uiSettings.isMapToolbarEnabled = false
 
-        p0.addMarker(MarkerOptions()
-            .position(location)
-            .title("Marker Title")
-            .snippet("Marker Description"))
+        p0.addMarker(
+            MarkerOptions().position(location).title("Marker Title").snippet("Marker Description")
+        )
 
         p0.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
     }

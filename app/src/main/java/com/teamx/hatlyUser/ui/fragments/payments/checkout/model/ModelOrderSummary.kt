@@ -6,7 +6,7 @@ import androidx.annotation.Keep
 data class ModelOrderSummary(
     val balance: Double,
     val deliveryCharges: Double,
-    val products: List<Product>,
+    val products: List<Product>?,
     val subTotal: Double,
     val tax: Double,
     val total: Double

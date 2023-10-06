@@ -1,7 +1,7 @@
 plugins {
     id "com.google.protobuf" version "0.8.12"
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
-
+    id("com.google.dagger.hilt.android")
 }
 
 apply plugin: 'com.android.application'
@@ -100,9 +100,12 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
 
     //Hilt for dependency
-    implementation 'com.google.dagger:hilt-android:2.31.2-alpha'
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
-    kapt 'com.google.dagger:hilt-compiler:2.31.2-alpha'
+//    implementation 'com.google.dagger:hilt-android:2.31.2-alpha'
+//    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+//    kapt 'com.google.dagger:hilt-compiler:2.31.2-alpha'
+
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -178,6 +181,13 @@ dependencies {
 
     // For Preferences
     implementation 'com.pixplicity.easyprefs:EasyPrefs:1.10.0'
+
+    // Stripe Android SDK
+    implementation 'com.stripe:stripe-android:20.25.5'
+
+    // Paypal Android Sdk
+//    implementation('com.paypal.checkout:android-sdk:X.X.X')
+    implementation 'com.paypal.checkout:android-sdk:1.1.0'
 }
 
 protobuf {
