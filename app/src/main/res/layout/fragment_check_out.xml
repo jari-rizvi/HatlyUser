@@ -123,26 +123,25 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginVertical="@dimen/_10sdp"
-                        android:clipToOutline="true"
-                        android:backgroundTint="@color/white"
-                        android:elevation="@dimen/_1sdp"
                         android:background="@drawable/input_auth_field"
+                        android:backgroundTint="@color/white"
+                        android:clipToOutline="true"
+                        android:elevation="@dimen/_1sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/view"
                         app:layout_constraintStart_toStartOf="@+id/textView21"
                         app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
-<!--                    <com.google.android.gms.maps.MapView-->
-<!--                        android:id="@+id/mapView"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="0dp"-->
-<!--                        android:layout_marginVertical="@dimen/_10sdp"-->
-<!--                        android:background="@drawable/input_auth_field"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintEnd_toEndOf="@+id/view"-->
-<!--                        app:layout_constraintStart_toStartOf="@+id/textView21"-->
-<!--                        app:layout_constraintTop_toBottomOf="@+id/textView21" />-->
-
+                    <!--                    <com.google.android.gms.maps.MapView-->
+                    <!--                        android:id="@+id/mapView"-->
+                    <!--                        android:layout_width="0dp"-->
+                    <!--                        android:layout_height="0dp"-->
+                    <!--                        android:layout_marginVertical="@dimen/_10sdp"-->
+                    <!--                        android:background="@drawable/input_auth_field"-->
+                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--                        app:layout_constraintEnd_toEndOf="@+id/view"-->
+                    <!--                        app:layout_constraintStart_toStartOf="@+id/textView21"-->
+                    <!--                        app:layout_constraintTop_toBottomOf="@+id/textView21" />-->
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -156,23 +155,33 @@
                     android:background="@drawable/input_auth_field"
                     android:backgroundTint="@color/white">
 
-                    <TextView
-                        android:id="@+id/textView213"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/baseline_location_on_24"
-                        android:fontFamily="@font/open_sans_regular"
-                        android:gravity="center_vertical"
-                        android:text="Wallet"
-                        android:textColor="#EA1B25"
-                        android:textSize="@dimen/_12ssp"
-                        android:textStyle="bold"
+
+                    <ImageView
+                        android:id="@+id/imgWallet"
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:src="@drawable/wallet"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.05"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.05" />
+
+                    <TextView
+                        android:id="@+id/textView213"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_regular"
+                        android:text="Wallet"
+                        android:textColor="#EA1B25"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgWallet"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.05"
+                        app:layout_constraintStart_toEndOf="@+id/imgWallet"
+                        app:layout_constraintTop_toTopOf="@+id/imgWallet" />
 
                     <View
                         android:id="@+id/view1"
@@ -196,7 +205,7 @@
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/textView21343"
-                        app:layout_constraintStart_toStartOf="@+id/textView213"
+                        app:layout_constraintStart_toStartOf="@+id/imgWallet"
                         app:layout_constraintTop_toBottomOf="@+id/textView213"
                         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -250,28 +259,38 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout5"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/input_auth_field"
                     android:backgroundTint="@color/white">
 
+                    <ImageView
+                        android:id="@+id/imgPaymentMethod"
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:src="@drawable/payment_method"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.05"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
                         android:id="@+id/textView12153"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/baseline_location_on_24"
                         android:fontFamily="@font/open_sans_regular"
                         android:gravity="center_vertical"
                         android:text="Payment Method"
                         android:textColor="#EA1B25"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@+id/radioOnline"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgPaymentMethod"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.05"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintStart_toEndOf="@+id/imgPaymentMethod"
+                        app:layout_constraintTop_toTopOf="@+id/imgPaymentMethod" />
 
                     <View
                         android:id="@+id/view13"
@@ -284,36 +303,71 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.05" />
 
-                    <RadioButton
-                        android:id="@+id/radioOnline"
-                        android:layout_width="309dp"
+
+                    <RadioGroup
+                        android:id="@+id/radioGroup"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:buttonTint="#1ED860"
-                        android:checked="true"
-                        android:drawableStart="@drawable/mobile_number"
-                        android:drawablePadding="@dimen/_10sdp"
-                        android:paddingStart="@dimen/_10sdp"
-                        android:text="Master card"
-                        app:layout_constraintBottom_toTopOf="@+id/textView121653"
+                        android:layout_marginTop="@dimen/_10sdp"
                         app:layout_constraintEnd_toEndOf="@+id/view13"
-                        app:layout_constraintStart_toStartOf="@+id/textView12153"
-                        app:layout_constraintTop_toBottomOf="@+id/textView12153" />
+                        app:layout_constraintStart_toStartOf="@+id/imgPaymentMethod"
+                        app:layout_constraintTop_toBottomOf="@+id/textView12153">
+
+                        <RadioButton
+                            android:id="@+id/radioCash"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="#1ED860"
+                            android:checked="true"
+                            android:textSize="@dimen/_12ssp"
+                            android:drawableStart="@drawable/cash"
+                            android:drawablePadding="@dimen/_10sdp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:text="Cash" />
+
+                        <RadioButton
+                            android:id="@+id/radioPayPal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textSize="@dimen/_12ssp"
+                            android:buttonTint="#1ED860"
+                            android:drawableStart="@drawable/paypal"
+                            android:drawablePadding="@dimen/_10sdp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:text="PayPal" />
+
+                        <RadioButton
+                            android:id="@+id/radioOnline"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:buttonTint="#1ED860"
+                            android:textSize="@dimen/_12ssp"
+                            android:drawableStart="@drawable/stripe"
+                            android:drawablePadding="@dimen/_10sdp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:text="Stripe Payment" />
+                    </RadioGroup>
 
                     <TextView
                         android:id="@+id/textView121653"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/_12ssp"
                         android:drawableStart="@drawable/round_add_24"
                         android:drawablePadding="@dimen/_10sdp"
                         android:fontFamily="@font/open_sans_regular"
                         android:gravity="center_vertical"
-                        android:text="Add a payment method"
-                        android:textColor="#010101"
-                        android:textSize="@dimen/_12ssp"
+                        android:paddingVertical="@dimen/_2sdp"
+                        android:text="Select Card"
+                        android:textColor="#1ED860"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/radioOnline"
-                        app:layout_constraintTop_toBottomOf="@+id/radioOnline" />
+                        app:layout_constraintEnd_toEndOf="@+id/radioGroup" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -327,21 +381,30 @@
                     android:backgroundTint="@color/white"
                     android:paddingVertical="@dimen/_10sdp">
 
-                    <TextView
-                        android:id="@+id/textView1213"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/baseline_location_on_24"
-                        android:fontFamily="@font/open_sans_regular"
-                        android:gravity="center_vertical"
-                        android:text="Order Summary"
-                        android:textColor="#EA1B25"
-                        android:textSize="@dimen/_12ssp"
-                        android:textStyle="bold"
+                    <ImageView
+                        android:id="@+id/imgOrderSummary"
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:src="@drawable/order_summary"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.05"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView1213"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_regular"
+                        android:text="Order Summary"
+                        android:textColor="#EA1B25"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgOrderSummary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.05"
+                        app:layout_constraintStart_toEndOf="@+id/imgOrderSummary"
+                        app:layout_constraintTop_toTopOf="@+id/imgOrderSummary" />
 
                     <View
                         android:id="@+id/view12"
@@ -358,10 +421,10 @@
                         android:id="@+id/recCheckout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:maxHeight="@dimen/_100sdp"
                         android:layout_marginTop="@dimen/_5sdp"
+                        android:maxHeight="@dimen/_100sdp"
                         app:layout_constraintEnd_toEndOf="@+id/view12"
-                        app:layout_constraintStart_toStartOf="@+id/textView1213"
+                        app:layout_constraintStart_toStartOf="@+id/imgOrderSummary"
                         app:layout_constraintTop_toBottomOf="@+id/textView1213"
                         app:spanCount="4"
                         tools:listitem="@layout/item_checkout" />
@@ -388,7 +451,7 @@
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/textView2164433"
-                        app:layout_constraintStart_toStartOf="@+id/textView1213"
+                        app:layout_constraintStart_toStartOf="@+id/recCheckout"
                         app:layout_constraintTop_toBottomOf="@+id/view123" />
 
                     <TextView

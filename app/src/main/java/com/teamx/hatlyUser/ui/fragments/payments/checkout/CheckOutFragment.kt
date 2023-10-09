@@ -3,6 +3,7 @@ package com.teamx.hatlyUser.ui.fragments.payments.checkout
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.RadioButton
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.paypal.checkout.PayPalCheckout
+import com.paypal.checkout.approve.Approval
 import com.paypal.checkout.approve.OnApprove
 import com.paypal.checkout.cancel.OnCancel
 import com.paypal.checkout.config.CheckoutConfig
@@ -24,17 +26,19 @@ import com.paypal.checkout.createorder.CreateOrder
 import com.paypal.checkout.createorder.CurrencyCode
 import com.paypal.checkout.createorder.OrderIntent
 import com.paypal.checkout.createorder.UserAction
+import com.paypal.checkout.error.ErrorInfo
+import com.paypal.checkout.error.OnError
 import com.paypal.checkout.order.Amount
 import com.paypal.checkout.order.AppContext
 import com.paypal.checkout.order.OrderRequest
 import com.paypal.checkout.order.PurchaseUnit
-import com.paypal.checkout.paymentbutton.PaymentButtonContainer
+import com.paypal.checkout.shipping.OnShippingChange
+import com.paypal.checkout.shipping.ShippingChangeActions
+import com.paypal.checkout.shipping.ShippingChangeData
 import com.stripe.android.PaymentConfiguration
 import com.stripe.android.paymentsheet.PaymentSheet
 import com.stripe.android.paymentsheet.PaymentSheetResult
 import com.teamx.hatlyUser.BR
-import com.teamx.hatlyUser.BuildConfig
-import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentCheckOutBinding
@@ -49,10 +53,10 @@ import org.json.JSONException
 
 @AndroidEntryPoint
 class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel>(),
-    OnMapReadyCallback {
+    OnMapReadyCallback, OnApprove, OnShippingChange, OnCancel, OnError {
 
     override val layoutId: Int
-        get() = R.layout.fragment_check_out
+        get() = com.teamx.hatlyUser.R.layout.fragment_check_out
     override val viewModel: Class<CheckOutViewModel>
         get() = CheckOutViewModel::class.java
     override val bindingVariable: Int
@@ -64,19 +68,21 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
     private var addNote = ""
 
-    var mapFragment: SupportMapFragment? = null
+    private var mapFragment: SupportMapFragment? = null
 
-    lateinit var paymentSheet: PaymentSheet
+    private lateinit var paymentSheet: PaymentSheet
+
+    private var selectedPaymentMethod = PaymentMethod.CASH_ON_DELIVERY
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         options = navOptions {
             anim {
-                enter = R.anim.enter_from_left
-                exit = R.anim.exit_to_left
-                popEnter = R.anim.nav_default_pop_enter_anim
-                popExit = R.anim.nav_default_pop_exit_anim
+                enter = com.teamx.hatlyUser.R.anim.enter_from_left
+                exit = com.teamx.hatlyUser.R.anim.exit_to_left
+                popEnter = com.teamx.hatlyUser.R.anim.nav_default_pop_enter_anim
+                popExit = com.teamx.hatlyUser.R.anim.nav_default_pop_exit_anim
             }
         }
 
@@ -84,7 +90,8 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
             paymentSheet = PaymentSheet(this, ::onPaymentSheetResult)
         }
 
-        mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment?
+        mapFragment =
+            childFragmentManager.findFragmentById(com.teamx.hatlyUser.R.id.mapFragment) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
         val bundle = arguments
@@ -99,13 +106,35 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         }
 
         mViewDataBinding.textView121653.setOnClickListener {
-            findNavController().navigate(R.id.action_checkOutFragment_to_paymentMethodFragment)
+            findNavController().navigate(com.teamx.hatlyUser.R.id.action_checkOutFragment_to_paymentMethodFragment)
         }
 
         mViewDataBinding.txtLogin.setOnClickListener {
-
+//            showPaypal()
             mViewModel.placeOrder(createOrderJsonObject())
         }
+
+        mViewDataBinding.radioCash.setOnClickListener {
+            if (mViewDataBinding.radioCash.isChecked) {
+                Log.d("onRadioButtonClicked", "onRadioButtonClicked: radioCash")
+                selectedPaymentMethod = PaymentMethod.CASH_ON_DELIVERY
+            }
+        }
+
+        mViewDataBinding.radioPayPal.setOnClickListener {
+            if (mViewDataBinding.radioPayPal.isChecked) {
+                Log.d("onRadioButtonClicked", "onRadioButtonClicked: radioPayPal")
+                selectedPaymentMethod = PaymentMethod.PAYPAL
+            }
+        }
+
+        mViewDataBinding.radioOnline.setOnClickListener {
+            if (mViewDataBinding.radioOnline.isChecked) {
+                Log.d("onRadioButtonClicked", "onRadioButtonClicked: radioOnline")
+                selectedPaymentMethod = PaymentMethod.ONLINE_PAYMENT
+            }
+        }
+
 
 //        val onBackPressedCallback = object : OnBackPressedCallback(true) {
 //            override fun handleOnBackPressed() {
@@ -256,6 +285,8 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
             }
         }
 
+
+
         mViewModel.placeOrderResponse.observe(requireActivity()) {
             when (it.status) {
                 Resource.Status.LOADING -> {
@@ -265,18 +296,36 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
                     it.data?.let { data ->
-                        if (data.clientSecret != null) {
-                            Log.d(
-                                "placeOrderResponse",
-                                "onViewCreated: stripe payment ${data.clientSecret}"
-                            )
-                            showPaypal()
-//                            showStripeSheet(data.clientSecret)
-                            return@observe
-                        }
-                        if (data.status == "placed") {
-                            Log.d("placeOrderResponse", "onViewCreated: without stripe payment")
-                            findNavController().navigate(R.id.action_checkOutFragment_to_orderPlacedFragment)
+                        when (selectedPaymentMethod) {
+                            PaymentMethod.CASH_ON_DELIVERY -> {
+                                // Process payment for Cash on Delivery
+                                if (data.status == "placed") {
+                                    Log.d(
+                                        "placeOrderResponse",
+                                        "onViewCreated: CASH_ON_DELIVERY"
+                                    )
+                                    findNavController().navigate(com.teamx.hatlyUser.R.id.action_checkOutFragment_to_orderPlacedFragment)
+                                }
+                            }
+
+                            PaymentMethod.ONLINE_PAYMENT -> {
+                                // Process payment for Online Payment
+                                if (data.clientSecret != null) {
+                                    Log.d(
+                                        "placeOrderResponse",
+                                        "onViewCreated: ONLINE_PAYMENT"
+                                    )
+                                    showStripeSheet(data.clientSecret)
+                                }
+                            }
+
+                            PaymentMethod.PAYPAL -> {
+                                Log.d(
+                                    "placeOrderResponse",
+                                    "onViewCreated: PAYPAL"
+                                )
+                                showPaypal()
+                            }
                         }
                     }
                 }
@@ -288,26 +337,29 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
             }
         }
 
-        val YOUR_CLIENT_ID = "AZX5jqRs5Xi5XZacM1LBdmAqSzCRWslUa7Ic-vPu2bvHnzbePURxcYBSTl60fd6b5ga8djAajpRSYfVs"
+
+//        val YOUR_CLIENT_ID = "AZX5jqRs5Xi5XZacM1LBdmAqSzCRWslUa7Ic-vPu2bvHnzbePURxcYBSTl60fd6b5ga8djAajpRSYfVs"
+        val YOUR_CLIENT_ID =
+            "AaTjrhT6DHDR5rRJLipZxrsxexzrMN9R8HP4VxloYCclYAruKo8lq6gHKit1F0z3y1MbHWqSdgApdwRk"
         val config = CheckoutConfig(
             application = requireActivity().application,
             clientId = YOUR_CLIENT_ID,
             environment = Environment.SANDBOX,
-            returnUrl = "${BuildConfig.APPLICATION_ID}://paypalpay",
+            returnUrl = "nativexo://paypalpay",
 //            currencyCode = CurrencyCode.USD,
             userAction = UserAction.PAY_NOW,
             settingsConfig = SettingsConfig(
-                loggingEnabled = false,
+                loggingEnabled = true,
                 showWebCheckout = true
             )
         )
         PayPalCheckout.setConfig(config)
+        PayPalCheckout.registerCallbacks(this, this, this, this)
     }
 
     //    var paymentButtonContainer: PaymentButtonContainer? = null
     private fun showPaypal() {
-
-        PayPalCheckout.start(CreateOrder { createOrderActions ->
+        PayPalCheckout.startCheckout(CreateOrder { createOrderActions ->
             val order =
                 OrderRequest(
                     intent = OrderIntent.CAPTURE,
@@ -320,20 +372,12 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                         )
                     )
                 )
-            createOrderActions.create(order) {res ->
+            createOrderActions.create(order) { res ->
                 Log.d("createOrderActions", "OrderId: approve ${res}")
             }
-        }, onApprove = OnApprove { approval ->
-            Log.d("createOrderActions", "OrderId: approve ${approval.data.orderId}")
-        }, onCancel = OnCancel.invoke {
-            Log.d("createOrderActions", "OrderId: cancel")
         })
 
-//        PayPalCheckout.registerCallbacks(onApprove = OnApprove{
-//
-//        }, on)
-
-//        PayPalCheckout.startCheckout(CreateOrder { createOrderActions ->
+//        PayPalCheckout.start(CreateOrder { createOrderActions ->
 //            val order =
 //                OrderRequest(
 //                    intent = OrderIntent.CAPTURE,
@@ -349,7 +393,16 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 //            createOrderActions.create(order) {res ->
 //                Log.d("createOrderActions", "OrderId: approve ${res}")
 //            }
+//        }, onApprove = OnApprove { approval ->
+//            Log.d("createOrderActions", "OrderId: approve ${approval.data.orderId}")
+//        }, onCancel = OnCancel.invoke {
+//            Log.d("createOrderActions", "OrderId: cancel")
 //        })
+
+//        PayPalCheckout.registerCallbacks(onApprove = OnApprove{
+//
+//        }, on)
+
 
 //        PayPalCheckout.startCheckout(CreateOrder { createOrderActions ->
 //            val order =
@@ -391,7 +444,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 //        )
     }
 
-    fun showStripeSheet(clientSecret: String) {
+    private fun showStripeSheet(clientSecret: String) {
         PaymentConfiguration.init(
             requireActivity().applicationContext,
 //            stripPublicKey
@@ -400,7 +453,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
         paymentSheet.presentWithPaymentIntent(
             clientSecret, PaymentSheet.Configuration(
-                merchantDisplayName = "Raseef",
+                merchantDisplayName = "Hatly",
 //                customer = customerConfig,
                 // Set `allowsDelayedPaymentMethods` to true if your business
                 // can handle payment methods that complete payment after a delay, like SEPA Debit and Sofort.
@@ -414,21 +467,21 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
         when (paymentSheetResult) {
             is PaymentSheetResult.Canceled -> {
-                Log.d("PaymentSheetResult", "onPaymentSheetResult: Canceled")
+                Log.d("placeOrderResponse", "onPaymentSheetResult: Canceled")
 
             }
 
             is PaymentSheetResult.Failed -> {
 
-                Log.d("PaymentSheetResult", "onPaymentSheetResult: Failed")
+                Log.d("placeOrderResponse", "onPaymentSheetResult: Failed")
 
             }
 
             is PaymentSheetResult.Completed -> {
                 // Display for example, an order confirmation screen
 
-                Log.d("PaymentSheetResult", "onPaymentSheetResult: Completed")
-                findNavController().navigate(R.id.action_checkOutFragment_to_orderPlacedFragment)
+                Log.d("placeOrderResponse", "onPaymentSheetResult: Completed")
+                findNavController().navigate(com.teamx.hatlyUser.R.id.action_checkOutFragment_to_orderPlacedFragment)
 //                val params = JsonObject()
 //
 //                params.addProperty("shopId", shopId)
@@ -468,9 +521,25 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 params.addProperty("specialNote", addNote)
             }
             params.addProperty("useWallet", mViewDataBinding.swOnOff.isChecked)
-//            params.addProperty("orderType", "CASH_ON_DELIVERY")
-            params.addProperty("orderType", "ONLINE_PAYMENTS")
-            params.addProperty("payBy", "STRIPE")
+//
+            when (selectedPaymentMethod) {
+                PaymentMethod.CASH_ON_DELIVERY -> {
+                    // Process payment for Cash on Delivery
+                    params.addProperty("orderType", "CASH_ON_DELIVERY")
+                }
+
+                PaymentMethod.ONLINE_PAYMENT -> {
+                    // Process payment for Online Payment
+                    params.addProperty("orderType", "ONLINE_PAYMENTS")
+                    params.addProperty("payBy", "STRIPE")
+                }
+
+                PaymentMethod.PAYPAL -> {
+                    params.addProperty("orderType", "ONLINE_PAYMENTS")
+                    params.addProperty("payBy", "PAYPAL")
+                }
+            }
+
 
 //            params.addProperty("lat", 24.90147393769095)
 //            params.addProperty("lng", 7.11531056779101)
@@ -500,4 +569,31 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
     }
 
 
+    override fun onApprove(approval: Approval) {
+        Log.d("createOrderActions", "OrderId: approve ${approval.data.orderId}")
+    }
+
+    override fun onCancel() {
+        Log.d("createOrderActions", "OrderId: onCancel ")
+    }
+
+    override fun onError(errorInfo: ErrorInfo) {
+        Log.d("createOrderActions", "OrderId: onError")
+    }
+
+    override fun onShippingChanged(
+        shippingChangeData: ShippingChangeData,
+        shippingChangeActions: ShippingChangeActions
+    ) {
+        Log.d("createOrderActions", "OrderId: onShippingChanged")
+    }
+
+
+}
+
+
+enum class PaymentMethod {
+    CASH_ON_DELIVERY,
+    ONLINE_PAYMENT,
+    PAYPAL
 }

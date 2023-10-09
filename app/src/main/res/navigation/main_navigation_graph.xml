@@ -199,7 +199,7 @@
 
     <fragment
         android:id="@+id/allowLocationFragment"
-        android:name="com.teamx.hatlyUser.ui.fragments.location.AllowLocationFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.location.allowLocation.AllowLocationFragment"
         android:label="AllowLocationFragment"
         tools:layout="@layout/fragment_allow_location">
 
@@ -211,6 +211,16 @@
             android:id="@+id/action_allowLocationocationFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.location.map.MapFragment"
+        android:label="MapFragment"
+        tools:layout="@layout/fragment_map">
+        <action
+            android:id="@+id/action_mapFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment
@@ -505,14 +515,5 @@
         android:name="com.teamx.hatlyUser.ui.fragments.special.parceldetail.ParcelDetailFragment"
         android:label="ParcelDetailFragment"
         tools:layout="@layout/fragment_parcel_detail" />
-
-    <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.teamx.hatlyUser.ui.fragments.enterlocation.hello.MapsFragment"
-        android:label="MapFragment"
-        tools:layout="@layout/fragment_maps">
-
-
-    </fragment>
 
 </navigation>

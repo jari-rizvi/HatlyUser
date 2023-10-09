@@ -1,11 +1,8 @@
-package com.teamx.hatlyUser.ui.fragments.location
+package com.teamx.hatlyUser.ui.fragments.location.allowLocation
 
 import android.Manifest
-import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
@@ -77,16 +74,17 @@ class AllowLocationFragment : BaseFragment<FragmentAllowLocationBinding, LoginVi
 
 
     @RequiresApi(Build.VERSION_CODES.N)
-
     val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
         when {
             permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
+                findNavController().navigate(R.id.action_allowLocationFragment_to_mapFragment)
+//                findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
             }
             permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
+                findNavController().navigate(R.id.action_allowLocationFragment_to_mapFragment)
+//                findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
             }
             else -> {
                 Log.d("allowLocation", "locationPermissionRequest: not working")

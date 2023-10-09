@@ -1,4 +1,4 @@
-package com.teamx.hatlyUser.ui.fragments.location
+package com.teamx.hatlyUser.ui.fragments.location.allowLocation
 
 
 import com.teamx.hatlyUser.baseclasses.BaseViewModel

@@ -55,14 +55,14 @@
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
-                android:backgroundTint="#1ED860"
-                android:src="@drawable/home"
+                app:backgroundTint="#1ED860"
                 app:borderWidth="2dp"
+                android:src="@drawable/home"
                 app:elevation="10dp"
-                app:layout_constraintBottom_toBottomOf="@+id/bottomNav"
+                app:layout_constraintBottom_toTopOf="@+id/bottomNav"
                 app:layout_constraintEnd_toEndOf="@+id/bottomNav"
                 app:layout_constraintStart_toStartOf="@+id/bottomNav"
+                app:layout_constraintTop_toTopOf="@+id/bottomNav"
                 app:tint="@color/white" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
