@@ -1,6 +1,5 @@
 package com.teamx.hatlyUser.ui.fragments.location.map
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.location.Geocoder
 import android.location.Location
@@ -8,24 +7,20 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.Marker
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
-import com.teamx.hatlyUser.databinding.FragmentAllowLocationBinding
 import com.teamx.hatlyUser.databinding.FragmentMapBinding
 import com.teamx.hatlyUser.ui.fragments.auth.login.LoginViewModel
 import com.teamx.hatlyUser.ui.fragments.location.map.bottomSheet.BottomSheetAddressFragment
@@ -48,6 +43,8 @@ class MapFragment : BaseFragment<FragmentMapBinding, LoginViewModel>(), OnMapRea
     private var mapFragment: SupportMapFragment? = null
 
     lateinit var googleMap: GoogleMap
+    private var isMapBeingDragged = true
+    private lateinit var bottomSheetFragment: BottomSheetAddressFragment
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,10 +71,12 @@ class MapFragment : BaseFragment<FragmentMapBinding, LoginViewModel>(), OnMapRea
             findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
         }
 
+        bottomSheetFragment = BottomSheetAddressFragment()
+        bottomSheetFragment.setBottomSheetListener(this)
+
 
         mViewDataBinding.imgEditAddress.setOnClickListener {
-            val bottomSheetFragment = BottomSheetAddressFragment()
-            bottomSheetFragment.setBottomSheetListener(this)
+
             if (!bottomSheetFragment.isAdded) {
                 bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
             }
@@ -93,35 +92,35 @@ class MapFragment : BaseFragment<FragmentMapBinding, LoginViewModel>(), OnMapRea
     private fun requestLocation() {
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location: Location? ->
-                // Handle the location result
-                if (location != null) {
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+            // Handle the location result
+            if (location != null) {
 
-                    val latLng = LatLng(location.latitude, location.longitude)
+                val latLng = LatLng(location.latitude, location.longitude)
 
-                    Log.e("requestLocation", "latitude, ${latLng.latitude}")
-                    Log.e("requestLocation", "longitude, ${latLng.longitude}")
+                Log.e("requestLocation", "latitude, ${latLng.latitude}")
+                Log.e("requestLocation", "longitude, ${latLng.longitude}")
 
-                    updateMap(latLng)
-                    // Do something with latitude and longitude
-                } else {
-                    // Location is null, handle accordingly
-                }
+                updateMap(latLng)
+                // Do something with latitude and longitude
+            } else {
+                // Location is null, handle accordingly
             }
-            .addOnFailureListener { exception: Exception ->
-                // Handle exceptions
-                Log.e("requestLocation", "Error getting location, ${exception.message}")
-            }
+        }.addOnFailureListener { exception: Exception ->
+            // Handle exceptions
+            Log.e("requestLocation", "Error getting location, ${exception.message}")
+        }
     }
 
+    @SuppressLint("MissingPermission")
     private fun updateMap(latLng: LatLng) {
 
-//        googleMap.uiSettings.isZoomControlsEnabled = false
+        googleMap.uiSettings.isZoomControlsEnabled = true
 //        googleMap.uiSettings.isScrollGesturesEnabled = false
-//        googleMap.uiSettings.isRotateGesturesEnabled = false
+        googleMap.uiSettings.isRotateGesturesEnabled = true
+        googleMap.isMyLocationEnabled = true
 //        googleMap.uiSettings.isTiltGesturesEnabled = false
-//        googleMap.uiSettings.isZoomGesturesEnabled = false
+        googleMap.uiSettings.isZoomGesturesEnabled = true
 //        googleMap.uiSettings.isMapToolbarEnabled = false
 
 
@@ -166,19 +165,39 @@ class MapFragment : BaseFragment<FragmentMapBinding, LoginViewModel>(), OnMapRea
             // Handle IOException
             Log.e("requestLocation", "Error getting address", e)
         }
+
     }
 
 
     override fun onMapReady(p0: GoogleMap) {
         googleMap = p0
         requestLocation()
+//        googleMap.setOnMapClickListener { latLng ->
+//            // Handle map click
+//            // Set the flag to indicate that this movement is user-initiated
+//            isMapBeingDragged = true
+//            // Perform other actions as needed
+//        }
+
         googleMap.setOnCameraIdleListener {
-            val currentLatLng = googleMap.cameraPosition.target
-            getAddressFromLocation(currentLatLng)
+            if (isMapBeingDragged) {
+                val currentLatLng = googleMap.cameraPosition.target
+                getAddressFromLocation(currentLatLng)
+            }
+            isMapBeingDragged = true
         }
     }
 
-    override fun onBottomSheetDataReceived(data: String) {
+    override fun onBottomSheetDataReceived(data: String, latLng: LatLng) {
+        isMapBeingDragged = false
+        mViewDataBinding.txtShowAddress.text = data
+        bottomSheetFragment.dismiss()
+
+        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng), 1000, null)
+
+//        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17f))
+
         Log.e("requestLocation", "data, $data")
+        Log.e("requestLocation", "latLng, $latLng")
     }
 }

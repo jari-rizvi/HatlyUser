@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.TranslateAnimation
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
@@ -19,6 +20,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -30,6 +34,9 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AutocompletePrediction
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
+import com.google.android.libraries.places.api.net.FetchPlaceResponse
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -39,17 +46,22 @@ import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.databinding.FragmentAllowLocationBinding
 import com.teamx.hatlyUser.databinding.FragmentMapBinding
 import com.teamx.hatlyUser.ui.fragments.auth.login.LoginViewModel
+import com.teamx.hatlyUser.ui.fragments.location.map.adapter.AddressListAdapter
+import com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces.ProductPreviewInterface
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class BottomSheetAddressFragment : BottomSheetDialogFragment() {
+class BottomSheetAddressFragment : BottomSheetDialogFragment(), ProductPreviewInterface {
 
 
     private lateinit var placesClient: PlacesClient
     private lateinit var addressEditText: EditText
-    private lateinit var addressResultTextView: TextView
+    private lateinit var recAddress: RecyclerView
+    private lateinit var addressListAdapter: AddressListAdapter
+    private lateinit var addressArrayList: ArrayList<AutocompletePrediction>
 
     private var bottomSheetListener: BottomSheetListener? = null
 
@@ -64,11 +76,20 @@ class BottomSheetAddressFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Places.initialize(requireActivity(), "AIzaSyC73ppwAuW9cSty_PCi8t0zdbLJ3p3hBBY")
+        Places.initialize(requireActivity(), "AIzaSyAnLo0ejCEMH_cPgZaokWej4UdgyIIy5HI")
         placesClient = Places.createClient(requireActivity())
 
         addressEditText = view.findViewById(R.id.inpSearch)
-        addressResultTextView = view.findViewById(R.id.addressResultTextView)
+        recAddress = view.findViewById(R.id.recAddress)
+
+        addressArrayList = ArrayList()
+
+        addressListAdapter = AddressListAdapter(addressArrayList, this)
+        recAddress.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        recAddress.adapter = addressListAdapter
+
+//        bottomSheetBehavior.peekHeight = 300
 
         addressEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -85,15 +106,7 @@ class BottomSheetAddressFragment : BottomSheetDialogFragment() {
             }
         })
 
-        addressResultTextView.setOnClickListener {
-            val text = addressResultTextView.text.toString().trim()
-            bottomSheetListener?.onBottomSheetDataReceived(text)
-        }
-
-
     }
-
-
 
 
     private fun fetchAutocompletePredictions(query: String) {
@@ -109,31 +122,53 @@ class BottomSheetAddressFragment : BottomSheetDialogFragment() {
                 handleAutocompletePredictions(response.autocompletePredictions)
             }
             .addOnFailureListener { exception ->
-                addressResultTextView.text = "Error: ${exception.message}"
+
             }
     }
 
     private fun handleAutocompletePredictions(predictions: List<AutocompletePrediction>) {
-        val suggestions = predictions.map { prediction ->
-            prediction.getFullText(null).toString()
+
+        addressArrayList.clear()
+        if (predictions.isNotEmpty()) {
+            addressArrayList.addAll(predictions)
         }
+        addressListAdapter.notifyDataSetChanged()
 
-        Log.e("requestLocation", "getFullText, ${predictions[0].getFullText(null)}")
-        Log.e("requestLocation", "getPrimaryText, ${predictions[0].getPrimaryText(null)}")
-        Log.e("requestLocation", "getSecondaryText, ${predictions[0].getSecondaryText(null)}")
+    }
 
+    private fun getLatLngFromPrediction(prediction: AutocompletePrediction) {
+        val placeId = prediction.placeId
+        val request = FetchPlaceRequest.builder(placeId, listOf(Place.Field.LAT_LNG)).build()
 
-
-        // Display suggestions in your UI or use them as needed
-//        addressResultTextView.text = suggestions.joinToString("\n")
+        placesClient.fetchPlace(request)
+            .addOnSuccessListener { response ->
+                val place = response.place
+                bottomSheetListener?.onBottomSheetDataReceived(prediction.getFullText(null).toString(),place.latLng)
+            }
+            .addOnFailureListener { exception ->
+                Log.e("requestLocation", "\nFailed to get LatLng: ${exception.message}")
+            }
     }
 
     fun setBottomSheetListener(listener: BottomSheetListener) {
         bottomSheetListener = listener
     }
 
+    override fun clickRadioItem(requiredVarBox: Int, radioProperties: Int) {
+
+    }
+
+    override fun clickCheckBoxItem(optionalVeriation: Int) {
+
+    }
+
+    override fun clickFreBoughtItem(position: Int) {
+        val itemAddsress = addressArrayList[position]
+        getLatLngFromPrediction(itemAddsress)
+    }
+
 }
 
 interface BottomSheetListener {
-    fun onBottomSheetDataReceived(data: String)
+    fun onBottomSheetDataReceived(data: String, latLng: LatLng)
 }

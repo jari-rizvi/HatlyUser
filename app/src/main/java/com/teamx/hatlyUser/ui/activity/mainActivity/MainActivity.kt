@@ -204,7 +204,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     mViewDataBinding.bottomNav.visibility = View.VISIBLE
                     mViewDataBinding.fab.visibility = View.VISIBLE
 
-                    mViewDataBinding.bottomNav.menu.getItem(2)?.isChecked = true
+                    mViewDataBinding.bottomNav.menu.getItem(1)?.isChecked = true
 
                     mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                 }
@@ -213,23 +213,23 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     mViewDataBinding.bottomNav.visibility = View.VISIBLE
                     mViewDataBinding.fab.visibility = View.VISIBLE
 
-                    mViewDataBinding.bottomNav.menu.getItem(3)?.isChecked = true
+                    mViewDataBinding.bottomNav.menu.getItem(0)?.isChecked = true
                     mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
 
-                R.id.wishListFragment -> {
-                    mViewDataBinding.bottomNav.visibility = View.VISIBLE
-                    mViewDataBinding.fab.visibility = View.VISIBLE
-
-                    mViewDataBinding.bottomNav.menu.getItem(1)?.isChecked = true
-                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-                }
+//                R.id.wishListFragment -> {
+//                    mViewDataBinding.bottomNav.visibility = View.VISIBLE
+//                    mViewDataBinding.fab.visibility = View.VISIBLE
+//
+//                    mViewDataBinding.bottomNav.menu.getItem(1)?.isChecked = true
+//                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+//                }
 
                 R.id.profileManagementFragment -> {
                     mViewDataBinding.bottomNav.visibility = View.VISIBLE
                     mViewDataBinding.fab.visibility = View.VISIBLE
 
-                    mViewDataBinding.bottomNav.menu.getItem(4)?.isChecked = true
+                    mViewDataBinding.bottomNav.menu.getItem(2)?.isChecked = true
                     mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
 
@@ -258,18 +258,18 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         mViewDataBinding.bottomNav.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.menuBottom -> {
-                    // Handle home action
-                    Log.d("navController", "onCreate: menuBottom")
-                    true
-                }
-
-                R.id.wishlistBottom -> {
-                    if (!alreadyFragmentAdded(R.id.wishListFragment)) {
-                        navController.navigate(R.id.wishListFragment, null)
-                    }
-                    true
-                }
+//                R.id.menuBottom -> {
+//                    // Handle home action
+//                    Log.d("navController", "onCreate: menuBottom")
+//                    true
+//                }
+//
+//                R.id.wishlistBottom -> {
+//                    if (!alreadyFragmentAdded(R.id.wishListFragment)) {
+//                        navController.navigate(R.id.wishListFragment, null)
+//                    }
+//                    true
+//                }
 
                 R.id.homeBottom -> {
                     if (!alreadyFragmentAdded(R.id.homeFragment)) {

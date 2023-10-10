@@ -30,15 +30,16 @@
                 app:layout_constraintVertical_bias="0.6" />
 
             <ImageView
-                android:id="@+id/imgMapMarker"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:src="@drawable/pin_location"
+                android:id="@+id/imgWishList"
+                android:layout_width="@dimen/_21sdp"
+                android:layout_height="@dimen/_21sdp"
+                android:src="@drawable/outline_favorite_border_24"
                 app:layout_constraintBottom_toBottomOf="@+id/imgMenu"
                 app:layout_constraintEnd_toStartOf="@+id/imgNotification"
                 app:layout_constraintHorizontal_bias="0.95"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imgMenu"
+                app:tint="@color/white"
                 app:layout_constraintVertical_bias="0.6" />
 
             <ImageView
