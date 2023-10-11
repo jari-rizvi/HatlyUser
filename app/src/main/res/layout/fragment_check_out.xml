@@ -319,23 +319,23 @@
                             android:layout_height="wrap_content"
                             android:buttonTint="#1ED860"
                             android:checked="true"
-                            android:textSize="@dimen/_12ssp"
                             android:drawableStart="@drawable/cash"
-                            android:drawablePadding="@dimen/_10sdp"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:text="Cash" />
+                            android:drawablePadding="@dimen/_7sdp"
+                            android:paddingStart="@dimen/_3sdp"
+                            android:text="Cash"
+                            android:textSize="@dimen/_12ssp" />
 
                         <RadioButton
                             android:id="@+id/radioPayPal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:textSize="@dimen/_12ssp"
                             android:buttonTint="#1ED860"
                             android:drawableStart="@drawable/paypal"
-                            android:drawablePadding="@dimen/_10sdp"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:text="PayPal" />
+                            android:drawablePadding="@dimen/_7sdp"
+                            android:paddingStart="@dimen/_3sdp"
+                            android:text="PayPal"
+                            android:textSize="@dimen/_12ssp" />
 
                         <RadioButton
                             android:id="@+id/radioOnline"
@@ -344,11 +344,11 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:buttonTint="#1ED860"
-                            android:textSize="@dimen/_12ssp"
                             android:drawableStart="@drawable/stripe"
-                            android:drawablePadding="@dimen/_10sdp"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:text="Stripe Payment" />
+                            android:drawablePadding="@dimen/_7sdp"
+                            android:paddingStart="@dimen/_3sdp"
+                            android:text="Stripe Payment"
+                            android:textSize="@dimen/_12ssp" />
                     </RadioGroup>
 
                     <TextView
@@ -356,7 +356,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:textSize="@dimen/_12ssp"
                         android:drawableStart="@drawable/round_add_24"
                         android:drawablePadding="@dimen/_10sdp"
                         android:fontFamily="@font/open_sans_regular"
@@ -364,9 +363,97 @@
                         android:paddingVertical="@dimen/_2sdp"
                         android:text="Select Card"
                         android:textColor="#1ED860"
+                        android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
                         app:layout_constraintEnd_toEndOf="@+id/radioGroup" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/radioGroupStripe"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:paddingVertical="@dimen/_5sdp"
+                        android:visibility="gone"
+                        android:background="@drawable/button_radius_corner"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/radioGroup"
+                        app:layout_constraintStart_toStartOf="@+id/radioGroup"
+                        app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/radioSelectedCard"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <RadioButton
+                                android:id="@+id/radio1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="#1ED860"
+                                android:checked="true"
+                                android:clickable="false"
+                                android:drawableEnd="@drawable/visa_blue_box"
+                                android:drawablePadding="@dimen/_3sdp"
+                                android:textSize="@dimen/_12ssp"
+                                app:layout_constraintBottom_toBottomOf="@+id/textView12155453"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/textView1215543" />
+
+                            <TextView
+                                android:id="@+id/textView1215543"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/_5sdp"
+                                android:layout_marginStart="@dimen/_7sdp"
+                                android:fontFamily="@font/open_sans_regular"
+                                android:gravity="center_vertical"
+                                android:text="VISA"
+                                android:textColor="#EA1B25"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0"
+                                app:layout_constraintStart_toEndOf="@+id/radio1"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/textView12155453"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/open_sans_regular"
+                                android:text="1234 **** **** 9870 | 04/2026"
+                                android:textColor="#838588"
+                                android:textSize="@dimen/_9ssp"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toStartOf="@+id/textView1215543"
+                                app:layout_constraintTop_toBottomOf="@+id/textView1215543" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <RadioButton
+                            android:id="@+id/radioAddNewCard"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:buttonTint="#1ED860"
+                            android:drawablePadding="@dimen/_10sdp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:text="Add New Card"
+                            android:textColor="#010101"
+                            android:textSize="@dimen/_12ssp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/radioSelectedCard"
+                            app:layout_constraintTop_toBottomOf="@+id/radioSelectedCard" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -375,11 +462,13 @@
                     android:id="@+id/layout3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
                     android:background="@drawable/input_auth_field"
                     android:backgroundTint="@color/white"
-                    android:paddingVertical="@dimen/_10sdp">
+                    android:paddingVertical="@dimen/_10sdp"
+                    tools:layout_editor_absoluteX="12dp"
+                    tools:layout_editor_absoluteY="594dp">
 
                     <ImageView
                         android:id="@+id/imgOrderSummary"

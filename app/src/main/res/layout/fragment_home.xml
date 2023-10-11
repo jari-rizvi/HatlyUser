@@ -29,6 +29,46 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.6" />
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/imgMenu"
+                app:layout_constraintEnd_toStartOf="@+id/guideline33"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toEndOf="@+id/imgMenu"
+                app:layout_constraintTop_toTopOf="@+id/imgMenu">
+
+                <TextView
+                    android:id="@+id/textView41"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Current Location:"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10ssp" />
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="Silicon Oasis, Building A5,..."
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp" />
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.6" />
+
+
             <ImageView
                 android:id="@+id/imgWishList"
                 android:layout_width="@dimen/_21sdp"
@@ -39,8 +79,8 @@
                 app:layout_constraintHorizontal_bias="0.95"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imgMenu"
-                app:tint="@color/white"
-                app:layout_constraintVertical_bias="0.6" />
+                app:layout_constraintVertical_bias="0.6"
+                app:tint="@color/white" />
 
             <ImageView
                 android:id="@+id/imgNotification"
@@ -69,12 +109,12 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:background="@drawable/button_radius_corner"
+            android:digits="@string/search_pattern"
             android:drawableStart="@drawable/search_24"
             android:drawablePadding="@dimen/_10sdp"
             android:drawableTint="#66363636"
             android:hint="Search"
             android:imeOptions="actionNext"
-            android:digits="@string/search_pattern"
             android:maxLines="1"
             android:paddingVertical="@dimen/_8sdp"
             android:paddingStart="@dimen/_10sdp"
@@ -97,10 +137,10 @@
             android:id="@+id/textView9"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
             android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:background="@drawable/button_radius_green"
             android:backgroundTint="#211ED860"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -110,13 +150,13 @@
             app:layout_constraintTop_toTopOf="@+id/guideline1">
 
             <TextView
+                style="@style/AppTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#211ED860"
                 android:fontFamily="@font/bumbu_sushi"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="H\nA\nT\nL\nY"
-                style="@style/AppTheme"
                 android:textSize="@dimen/_30ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -340,12 +380,12 @@
             android:backgroundTint="#211ED860"
             android:clipToOutline="true"
             android:paddingTop="@dimen/_50sdp"
-            app:layout_constraintStart_toStartOf="@+id/textView10"
             android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="@+id/textView10"
             android:src="@drawable/home_business"
-            app:layout_constraintTop_toTopOf="@+id/textView11"
-            app:layout_constraintBottom_toBottomOf="@+id/textView11"/>
+            app:layout_constraintBottom_toBottomOf="@+id/textView11"
+            app:layout_constraintEnd_toEndOf="@+id/textView10"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintTop_toTopOf="@+id/textView11" />
 
         <TextView
             android:layout_width="wrap_content"

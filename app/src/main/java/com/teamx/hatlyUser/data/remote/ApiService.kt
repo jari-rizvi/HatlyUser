@@ -18,6 +18,9 @@ import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
 import com.teamx.hatlyUser.ui.fragments.payments.cart.model.ModelCart
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.model.ModelOrderSummary
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.modelPlaceOrder.ModelPlaceOrder
+import com.teamx.hatlyUser.ui.fragments.payments.paymentmethod.defaultmodel.ModelDefaultCredCards
+import com.teamx.hatlyUser.ui.fragments.payments.paymentmethod.modelDetach.ModelDetachCredCards
+import com.teamx.hatlyUser.ui.fragments.payments.paymentmethod.modelGetCards.ModelCredCards
 import com.teamx.hatlyUser.ui.fragments.products.model.ModelProductPreview
 import com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.AddToCart
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.OrderHistoryModel
@@ -181,4 +184,24 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<OrderHistoryModel>
+
+    @GET(NetworkCallPoints.CREDS_CARDS)
+    suspend fun getCredCards(
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelCredCards>
+
+    @POST(NetworkCallPoints.DEFAULT_CREDS_CARDS)
+    suspend fun setDefaultCredCards(
+        @Body params: JsonObject,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelDefaultCredCards>
+
+    @POST(NetworkCallPoints.DETACH_CREDS_CARDS)
+    suspend fun setDetachCredCards(
+        @Body params: JsonObject,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelDetachCredCards>
 }

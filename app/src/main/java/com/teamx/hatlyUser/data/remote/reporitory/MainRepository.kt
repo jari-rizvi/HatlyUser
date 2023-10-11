@@ -77,4 +77,15 @@ class MainRepository @Inject constructor(
         @Query("page") page: Int,
         @Query("limit") limit: Int,
     ) = apiService.orderHistory(page, limit)
+
+    suspend fun getCredCards(
+    ) = apiService.getCredCards()
+
+    suspend fun setDefaultCredCards(
+        @Body params: JsonObject
+    ) = apiService.setDefaultCredCards(params)
+
+    suspend fun setDetachCredCards(
+        @Body params: JsonObject
+    ) = apiService.setDetachCredCards(params)
 }

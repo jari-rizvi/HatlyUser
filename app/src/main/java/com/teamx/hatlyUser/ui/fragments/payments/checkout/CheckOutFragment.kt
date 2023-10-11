@@ -116,6 +116,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
         mViewDataBinding.radioCash.setOnClickListener {
             if (mViewDataBinding.radioCash.isChecked) {
+                mViewDataBinding.radioGroupStripe.visibility = View.GONE
                 Log.d("onRadioButtonClicked", "onRadioButtonClicked: radioCash")
                 selectedPaymentMethod = PaymentMethod.CASH_ON_DELIVERY
             }
@@ -123,6 +124,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
         mViewDataBinding.radioPayPal.setOnClickListener {
             if (mViewDataBinding.radioPayPal.isChecked) {
+                mViewDataBinding.radioGroupStripe.visibility = View.GONE
                 Log.d("onRadioButtonClicked", "onRadioButtonClicked: radioPayPal")
                 selectedPaymentMethod = PaymentMethod.PAYPAL
             }
@@ -131,8 +133,19 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         mViewDataBinding.radioOnline.setOnClickListener {
             if (mViewDataBinding.radioOnline.isChecked) {
                 Log.d("onRadioButtonClicked", "onRadioButtonClicked: radioOnline")
+                mViewDataBinding.radioGroupStripe.visibility = View.VISIBLE
                 selectedPaymentMethod = PaymentMethod.ONLINE_PAYMENT
             }
+        }
+
+        mViewDataBinding.radioSelectedCard.setOnClickListener {
+            mViewDataBinding.radio1.isChecked = true
+            mViewDataBinding.radioAddNewCard.isChecked = false
+        }
+
+        mViewDataBinding.radioAddNewCard.setOnClickListener {
+            mViewDataBinding.radio1.isChecked = false
+            mViewDataBinding.radioAddNewCard.isChecked = true
         }
 
 

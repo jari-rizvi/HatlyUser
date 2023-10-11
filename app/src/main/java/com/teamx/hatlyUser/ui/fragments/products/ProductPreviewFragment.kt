@@ -116,8 +116,7 @@ class ProductPreviewFragment :
 
 
         recommendedItemAdapter = RecommendedItemAdapter(freBoughtArrayList, this)
-        val productLayoutManager =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        val productLayoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         mViewDataBinding.recFreBought.layoutManager = productLayoutManager
         mViewDataBinding.recFreBought.adapter = recommendedItemAdapter
 

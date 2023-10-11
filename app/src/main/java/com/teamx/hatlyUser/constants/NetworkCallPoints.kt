@@ -40,5 +40,11 @@ class NetworkCallPoints {
         const val PLACE_ORDER = "order/create"
 
         const val ORDER_HISTORY = "order/all"
+
+        const val CREDS_CARDS = "stripe/list/paymentMethods"
+
+        const val DEFAULT_CREDS_CARDS = "stripe/set/paymentMethod"
+
+        const val DETACH_CREDS_CARDS = "stripe/detach/paymentMethod"
     }
 }
