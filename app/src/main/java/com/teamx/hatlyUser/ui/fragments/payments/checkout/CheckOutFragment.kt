@@ -53,7 +53,7 @@ import org.json.JSONException
 
 @AndroidEntryPoint
 class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel>(),
-    OnMapReadyCallback, OnApprove, OnShippingChange, OnCancel, OnError {
+    OnMapReadyCallback {
 
     override val layoutId: Int
         get() = com.teamx.hatlyUser.R.layout.fragment_check_out
@@ -350,44 +350,52 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
             }
         }
 
+//        val config = CoreConfig("<CLIENT_ID>", environment = Environment.SANDBOX)
+//
+//        val payPalNativeClient = PayPalNativeCheckoutClient(
+//            application = requireActvitiy().application,
+//            coreConfig = coreConfig,
+//            returnUrl = "<RETURN_URL>"
+//        )
 
-        val YOUR_CLIENT_ID = "AZX5jqRs5Xi5XZacM1LBdmAqSzCRWslUa7Ic-vPu2bvHnzbePURxcYBSTl60fd6b5ga8djAajpRSYfVs"
-//        val YOUR_CLIENT_ID = "AaTjrhT6DHDR5rRJLipZxrsxexzrMN9R8HP4VxloYCclYAruKo8lq6gHKit1F0z3y1MbHWqSdgApdwRk"
-        val config = CheckoutConfig(
-            application = requireActivity().application,
-            clientId = YOUR_CLIENT_ID,
-            environment = Environment.SANDBOX,
-            returnUrl = "nativexo://paypalpay",
-//            currencyCode = CurrencyCode.USD,
-            userAction = UserAction.PAY_NOW,
-            settingsConfig = SettingsConfig(
-                loggingEnabled = true,
-                showWebCheckout = true
-            )
-        )
-        PayPalCheckout.setConfig(config)
-        PayPalCheckout.registerCallbacks(this, this, this, this)
+
+//        val YOUR_CLIENT_ID = "AZX5jqRs5Xi5XZacM1LBdmAqSzCRWslUa7Ic-vPu2bvHnzbePURxcYBSTl60fd6b5ga8djAajpRSYfVs"
+////        val YOUR_CLIENT_ID = "AaTjrhT6DHDR5rRJLipZxrsxexzrMN9R8HP4VxloYCclYAruKo8lq6gHKit1F0z3y1MbHWqSdgApdwRk"
+//        val config = CheckoutConfig(
+//            application = requireActivity().application,
+//            clientId = YOUR_CLIENT_ID,
+//            environment = Environment.SANDBOX,
+//            returnUrl = "nativexo://paypalpay",
+////            currencyCode = CurrencyCode.USD,
+//            userAction = UserAction.PAY_NOW,
+//            settingsConfig = SettingsConfig(
+//                loggingEnabled = true,
+//                showWebCheckout = true
+//            )
+//        )
+//        PayPalCheckout.setConfig(config)
+//        PayPalCheckout.registerCallbacks(this, this, this, this)
     }
 
     //    var paymentButtonContainer: PaymentButtonContainer? = null
     private fun showPaypal() {
-        PayPalCheckout.startCheckout(CreateOrder { createOrderActions ->
-            val order =
-                OrderRequest(
-                    intent = OrderIntent.CAPTURE,
-                    appContext = AppContext(userAction = UserAction.PAY_NOW),
-                    purchaseUnitList =
-                    listOf(
-                        PurchaseUnit(
-                            amount =
-                            Amount(currencyCode = CurrencyCode.USD, value = "10.00")
-                        )
-                    )
-                )
-            createOrderActions.create(order) { res ->
-                Log.d("createOrderActions", "OrderId: approve ${res}")
-            }
-        })
+//        PayPalCheckout.startCheckout(CreateOrder { createOrderActions ->
+//            val order =
+//                OrderRequest(
+//                    intent = OrderIntent.CAPTURE,
+//                    appContext = AppContext(userAction = UserAction.PAY_NOW),
+//                    purchaseUnitList =
+//                    listOf(
+//                        PurchaseUnit(
+//                            amount =
+//                            Amount(currencyCode = CurrencyCode.USD, value = "10.00")
+//                        )
+//                    )
+//                )
+//            createOrderActions.create(order) { res ->
+//                Log.d("createOrderActions", "OrderId: approve ${res}")
+//            }
+//        })
 
 //        PayPalCheckout.start(CreateOrder { createOrderActions ->
 //            val order =
@@ -581,25 +589,25 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
     }
 
 
-    override fun onApprove(approval: Approval) {
-        Log.d("createOrderActions", "OrderId: approve ${approval.data.orderId}")
-    }
-
-    override fun onCancel() {
-        Log.d("createOrderActions", "OrderId: onCancel ")
-    }
-
-    override fun onError(errorInfo: ErrorInfo) {
-        Log.d("createOrderActions", "OrderId: onError")
-    }
-
-    override fun onShippingChanged(
-        shippingChangeData: ShippingChangeData,
-        shippingChangeActions: ShippingChangeActions
-    ) {
-
-        Log.d("createOrderActions", "OrderId: onShippingChanged")
-    }
+//    override fun onApprove(approval: Approval) {
+//        Log.d("createOrderActions", "OrderId: approve ${approval.data.orderId}")
+//    }
+//
+//    override fun onCancel() {
+//        Log.d("createOrderActions", "OrderId: onCancel ")
+//    }
+//
+//    override fun onError(errorInfo: ErrorInfo) {
+//        Log.d("createOrderActions", "OrderId: onError")
+//    }
+//
+//    override fun onShippingChanged(
+//        shippingChangeData: ShippingChangeData,
+//        shippingChangeActions: ShippingChangeActions
+//    ) {
+//
+//        Log.d("createOrderActions", "OrderId: onShippingChanged")
+//    }
 
 
 }

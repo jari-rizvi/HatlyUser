@@ -186,9 +186,20 @@ dependencies {
     // Stripe Android SDK
     implementation 'com.stripe:stripe-android:20.25.5'
 
-    // Paypal Android Sdk
-//    implementation('com.paypal.checkout:android-sdk:X.X.X')
+//    // Paypal Android Sdk
+////    implementation('com.paypal.checkout:android-sdk:X.X.X')
+//    implementation 'com.paypal.checkout:android-sdk:1.1.0'
+////    implementation 'com.paypal.checkout:android-sdk:2.16.0'
+////    implementation "com.paypal.android:paypal-native-payments:<CURRENT-VERSION>"
+
+
+    // PayPal
     implementation 'com.paypal.checkout:android-sdk:1.1.0'
+
+    // Release modules
+//    implementation "com.paypal.android:paypal-native-payments:${modules.sdkVersionName}"
+//    implementation "com.paypal.android:paypal-native-payments:${modules.sdkVersionName}"
+
 
     // places api
     implementation 'com.google.android.libraries.places:places:3.2.0'

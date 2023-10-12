@@ -64,6 +64,7 @@
     <style name="AppBottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet">
         <!-- Customize the BottomSheet style here -->
         <item name="android:background">@drawable/button_radius_corner_top</item>
+        <item name="android:backgroundDimAmount">0</item>
         <item name="behavior_peekHeight">1000dp</item>
         <item name="behavior_hideable">false</item>
     </style>

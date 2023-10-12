@@ -27,10 +27,8 @@ allprojects {
         maven {
             url  "https://cardinalcommerceprod.jfrog.io/artifactory/android"
             credentials {
-                // Be sure to add these non-sensitive credentials in order to retrieve dependencies from
-                // the private repository.
-                username mavenUsername
-                password mavenPassword
+                username cardinalUsername
+                password cardinalPassword
             }
         }
     }

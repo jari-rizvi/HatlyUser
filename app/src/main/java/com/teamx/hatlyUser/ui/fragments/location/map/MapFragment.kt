@@ -7,24 +7,24 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.databinding.FragmentMapBinding
 import com.teamx.hatlyUser.ui.fragments.auth.login.LoginViewModel
-import com.teamx.hatlyUser.ui.fragments.location.map.bottomSheet.BottomSheetAddressFragment
-import com.teamx.hatlyUser.ui.fragments.location.map.bottomSheet.BottomSheetListener
+import com.teamx.hatlyUser.ui.fragments.location.map.bottomSheetAddSearch.BottomSheetAddressFragment
+import com.teamx.hatlyUser.ui.fragments.location.map.bottomSheetAddSearch.BottomSheetListener
+import com.teamx.hatlyUser.ui.fragments.location.map.bottomSheetAddressDetail.BottomSheetAddressDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 import java.util.Locale
@@ -44,7 +44,8 @@ class MapFragment : BaseFragment<FragmentMapBinding, LoginViewModel>(), OnMapRea
 
     lateinit var googleMap: GoogleMap
     private var isMapBeingDragged = true
-    private lateinit var bottomSheetFragment: BottomSheetAddressFragment
+    private lateinit var bottomSheetAddSearchFragment: BottomSheetAddressFragment
+    private lateinit var bottomSheetAddressFragment: BottomSheetAddressDetailFragment
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,19 +72,24 @@ class MapFragment : BaseFragment<FragmentMapBinding, LoginViewModel>(), OnMapRea
             findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
         }
 
-        bottomSheetFragment = BottomSheetAddressFragment()
-        bottomSheetFragment.setBottomSheetListener(this)
+        bottomSheetAddSearchFragment = BottomSheetAddressFragment()
+        bottomSheetAddSearchFragment.setBottomSheetListener(this)
+
+        bottomSheetAddressFragment = BottomSheetAddressDetailFragment()
 
 
         mViewDataBinding.imgEditAddress.setOnClickListener {
 
-            if (!bottomSheetFragment.isAdded) {
-                bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
+            if (!bottomSheetAddSearchFragment.isAdded) {
+                bottomSheetAddSearchFragment.show(parentFragmentManager, bottomSheetAddSearchFragment.tag)
             }
         }
 
         mViewDataBinding.txtConfirmLocation.setOnClickListener {
-            findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
+            if (!bottomSheetAddressFragment.isAdded) {
+                bottomSheetAddressFragment.show(parentFragmentManager, bottomSheetAddressFragment.tag)
+            }
+//            findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
         }
 
     }
@@ -191,7 +197,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, LoginViewModel>(), OnMapRea
     override fun onBottomSheetDataReceived(data: String, latLng: LatLng) {
         isMapBeingDragged = false
         mViewDataBinding.txtShowAddress.text = data
-        bottomSheetFragment.dismiss()
+        bottomSheetAddSearchFragment.dismiss()
 
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng), 1000, null)
 
