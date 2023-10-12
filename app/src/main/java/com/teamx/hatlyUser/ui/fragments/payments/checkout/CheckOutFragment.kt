@@ -351,9 +351,8 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         }
 
 
-//        val YOUR_CLIENT_ID = "AZX5jqRs5Xi5XZacM1LBdmAqSzCRWslUa7Ic-vPu2bvHnzbePURxcYBSTl60fd6b5ga8djAajpRSYfVs"
-        val YOUR_CLIENT_ID =
-            "AaTjrhT6DHDR5rRJLipZxrsxexzrMN9R8HP4VxloYCclYAruKo8lq6gHKit1F0z3y1MbHWqSdgApdwRk"
+        val YOUR_CLIENT_ID = "AZX5jqRs5Xi5XZacM1LBdmAqSzCRWslUa7Ic-vPu2bvHnzbePURxcYBSTl60fd6b5ga8djAajpRSYfVs"
+//        val YOUR_CLIENT_ID = "AaTjrhT6DHDR5rRJLipZxrsxexzrMN9R8HP4VxloYCclYAruKo8lq6gHKit1F0z3y1MbHWqSdgApdwRk"
         val config = CheckoutConfig(
             application = requireActivity().application,
             clientId = YOUR_CLIENT_ID,
@@ -598,6 +597,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         shippingChangeData: ShippingChangeData,
         shippingChangeActions: ShippingChangeActions
     ) {
+
         Log.d("createOrderActions", "OrderId: onShippingChanged")
     }
 
