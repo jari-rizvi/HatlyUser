@@ -33,15 +33,10 @@ class BottomSheetAddressDetailFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        dialog?.window?.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
-        dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-        dialog?.setCanceledOnTouchOutside(true)
-        dialog?.setCancelable(false)
-
-        imgLabelHome  = view.findViewById(R.id.imgLabelHome)
-        imgLabelWork  = view.findViewById(R.id.imgLabelWork)
-        imgLabelOther  = view.findViewById(R.id.imgLabelOther)
-        inpOtherLabel  = view.findViewById(R.id.inpOtherLabel)
+        imgLabelHome = view.findViewById(R.id.imgLabelHome)
+        imgLabelWork = view.findViewById(R.id.imgLabelWork)
+        imgLabelOther = view.findViewById(R.id.imgLabelOther)
+        inpOtherLabel = view.findViewById(R.id.inpOtherLabel)
 
         imgLabelHome.setOnClickListener {
             imgLabelHome.isChecked = true

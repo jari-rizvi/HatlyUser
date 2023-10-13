@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.databinding.ItemLocationBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
+import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModelItem
 
 class LocationsListAdapter(
-    private val addressArrayList: ArrayList<String>,
+    private val addressArrayList: ArrayList<CreateAddressModelItem>,
     private val hatlyShopInterface: HatlyShopInterface
 ) : RecyclerView.Adapter<HatlyPopularViewHolder>() {
 
@@ -21,6 +22,22 @@ class LocationsListAdapter(
     override fun onBindViewHolder(holder: HatlyPopularViewHolder, position: Int) {
 
         val arrayData = addressArrayList[position]
+
+        holder.bind.textView16.text = try {
+            arrayData.label
+        }catch (e : Exception){
+            ""
+        }
+
+        holder.bind.textView18.text = try {
+            arrayData.address
+        }catch (e : Exception){
+            ""
+        }
+
+        holder.bind.img1.setOnClickListener {
+            hatlyShopInterface.clickCategoryItem(position)
+        }
 
         holder.itemView.setOnClickListener {
             hatlyShopInterface.clickshopItem(position)

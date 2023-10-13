@@ -88,4 +88,10 @@ class MainRepository @Inject constructor(
     suspend fun setDetachCredCards(
         @Body params: JsonObject
     ) = apiService.setDetachCredCards(params)
+
+    suspend fun createAddress(
+        @Body params: JsonObject
+    ) = apiService.createAddress(params)
+
+    suspend fun getAddress() = apiService.getAddress()
 }

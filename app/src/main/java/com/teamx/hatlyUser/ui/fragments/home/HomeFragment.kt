@@ -50,6 +50,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
             sharedViewModel.setUserData(it)
         }
 
+        mViewDataBinding.homeAddress.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_mapFragment)
+        }
+
         mViewDataBinding.imgMenu.setOnClickListener {
             val activity = requireActivity() as MainActivity
             activity.openDrawer()

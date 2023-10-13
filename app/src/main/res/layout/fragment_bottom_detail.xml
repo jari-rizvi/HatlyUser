@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/BottomSheetStyle"
+    android:id="@+id/bottomSheet"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
     android:background="@drawable/button_radius_corner_top"
     android:orientation="vertical"
-    android:paddingTop="@dimen/_10sdp">
+    android:paddingTop="@dimen/_10sdp"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <ImageView
         android:id="@+id/imageView3"
@@ -17,11 +19,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txtEnterLocaion"
+        app:layout_constraintTop_toTopOf="@+id/txtBottomLocation"
         app:tint="#1ED860" />
 
     <TextView
-        android:id="@+id/txtEnterLocaion"
+        android:id="@+id/txtBottomLocation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -103,8 +105,8 @@
         android:textCursorDrawable="@color/black"
         android:textSize="@dimen/_10ssp"
         app:layout_constraintBottom_toTopOf="@+id/txtLabelTitle"
-        app:layout_constraintEnd_toEndOf="@+id/txtConfirmLocation"
-        app:layout_constraintStart_toStartOf="@+id/txtConfirmLocation" />
+        app:layout_constraintEnd_toEndOf="@+id/txtConfirmLocation1"
+        app:layout_constraintStart_toStartOf="@+id/txtConfirmLocation1" />
 
 
     <TextView
@@ -137,7 +139,7 @@
         app:layout_constraintEnd_toStartOf="@+id/imgLabelWork"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="@+id/txtConfirmLocation" />
+        app:layout_constraintStart_toStartOf="@+id/txtConfirmLocation1" />
 
 
     <androidx.appcompat.widget.AppCompatCheckedTextView
@@ -147,7 +149,7 @@
         android:background="@drawable/work_bg_svg"
         android:checked="false"
         android:elevation="@dimen/_2sdp"
-        android:padding="@dimen/_5sdp"
+        android:padding="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="@+id/imgLabelHome"
         app:layout_constraintEnd_toStartOf="@+id/imgLabelOther"
         app:layout_constraintHorizontal_bias="0.5"
@@ -240,12 +242,12 @@
         android:textCursorDrawable="@color/black"
         android:textSize="@dimen/_11ssp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/txtConfirmLocation"
-        app:layout_constraintEnd_toEndOf="@+id/txtConfirmLocation"
-        app:layout_constraintStart_toStartOf="@+id/txtConfirmLocation" />
+        app:layout_constraintBottom_toTopOf="@+id/txtConfirmLocation1"
+        app:layout_constraintEnd_toEndOf="@+id/txtConfirmLocation1"
+        app:layout_constraintStart_toStartOf="@+id/txtConfirmLocation1" />
 
     <TextView
-        android:id="@+id/txtConfirmLocation"
+        android:id="@+id/txtConfirmLocation1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_20sdp"

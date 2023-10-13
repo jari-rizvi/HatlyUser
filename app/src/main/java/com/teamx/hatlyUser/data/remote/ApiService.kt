@@ -15,6 +15,8 @@ import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Foo
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.categoryModel.ModelCategory
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproductmodel.ModelPopularProducts
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
+import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModel
+import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModelItem
 import com.teamx.hatlyUser.ui.fragments.payments.cart.model.ModelCart
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.model.ModelOrderSummary
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.modelPlaceOrder.ModelPlaceOrder
@@ -204,4 +206,17 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<ModelDetachCredCards>
+
+    @POST(NetworkCallPoints.CREATE_ADDRESS)
+    suspend fun createAddress(
+        @Body params: JsonObject,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<CreateAddressModelItem>
+
+    @GET(NetworkCallPoints.CREATE_ADDRESS)
+    suspend fun getAddress(
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<CreateAddressModel>
 }

@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation_graph"
-    app:startDestination="@id/mapFragment">
-<!--    app:startDestination="@id/tempFragment">-->
+    app:startDestination="@id/tempFragment">
+<!--    app:startDestination="@id/mapFragment">-->
 
     <fragment
         android:id="@+id/tempFragment"
@@ -248,6 +248,9 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
 
     <fragment
@@ -366,7 +369,11 @@
         android:id="@+id/locationFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.profile.Locations.LocationFragment"
         android:label="LocationFragment"
-        tools:layout="@layout/fragment_location" />
+        tools:layout="@layout/fragment_location" >
+        <action
+            android:id="@+id/action_locationFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/orderHistoryFragment"

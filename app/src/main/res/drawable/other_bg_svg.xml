@@ -27,10 +27,20 @@
 <!--                android:fillColor="@color/location_red_white_selector_neg"-->
 <!--                android:pathData="M18.5216,8.1212C18.9122,7.7306 18.9122,7.0975 18.5216,6.707C18.1311,6.3164 17.498,6.3164 17.1074,6.707L12.8653,10.9491L8.6234,6.7071C8.2328,6.3166 7.5997,6.3166 7.2091,6.7071C6.8186,7.0976 6.8186,7.7308 7.2091,8.1213L11.4511,12.3633L7.2079,16.6065C6.8174,16.997 6.8174,17.6301 7.2079,18.0207C7.5985,18.4112 8.2316,18.4112 8.6222,18.0207L12.8653,13.7775L17.1086,18.0208C17.4992,18.4113 18.1323,18.4113 18.5229,18.0208C18.9134,17.6303 18.9134,16.9971 18.5229,16.6066L14.2795,12.3633L18.5216,8.1212Z" />-->
 <!--        </vector>-->
-        <vector android:height="24dp" android:tint="@color/location_red_white_selector_neg"
-            android:viewportHeight="24" android:viewportWidth="24"
-            android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
-            <path android:fillColor="@android:color/white" android:pathData="M18,13h-5v5c0,0.55 -0.45,1 -1,1s-1,-0.45 -1,-1v-5H6c-0.55,0 -1,-0.45 -1,-1s0.45,-1 1,-1h5V6c0,-0.55 0.45,-1 1,-1s1,0.45 1,1v5h5c0.55,0 1,0.45 1,1s-0.45,1 -1,1z"/>
+<!--        <vector android:height="24dp" android:tint="@color/location_red_white_selector_neg"-->
+<!--            android:viewportHeight="24" android:viewportWidth="24"-->
+<!--            android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--            <path android:fillColor="@android:color/white" android:pathData="M18,13h-5v5c0,0.55 -0.45,1 -1,1s-1,-0.45 -1,-1v-5H6c-0.55,0 -1,-0.45 -1,-1s0.45,-1 1,-1h5V6c0,-0.55 0.45,-1 1,-1s1,0.45 1,1v5h5c0.55,0 1,0.45 1,1s-0.45,1 -1,1z"/>-->
+<!--        </vector>-->
+
+        <vector xmlns:android="http://schemas.android.com/apk/res/android"
+            android:width="24dp"
+            android:height="24dp"
+            android:viewportWidth="24"
+            android:viewportHeight="24">
+            <path
+                android:pathData="M18.3,11H13V5.7c0,-0.6 -0.4,-1 -1,-1s-1,0.4 -1,1V11H5.7c-0.6,0 -1,0.4 -1,1s0.4,1 1,1H11v5.3c0,0.6 0.4,1 1,1s1,-0.4 1,-1V13h5.3c0.6,0 1,-0.4 1,-1S18.9,11 18.3,11z"
+                android:fillColor="@color/location_red_white_selector_neg"/>
         </vector>
     </item>
 </layer-list>

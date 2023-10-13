@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:background="#E7E7E7">-->
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -51,17 +56,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.7"/>
+            app:layout_constraintGuide_percent="0.7" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/detailLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/guideline"
             android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideline">
 
 
             <ImageView
@@ -70,10 +75,12 @@
                 android:layout_height="@dimen/_18sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:src="@drawable/pin_location"
-                app:layout_constraintBottom_toTopOf="@+id/txtShowAddress"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.1"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tint="#1ED860" />
 
 
@@ -93,6 +100,19 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
                 app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
+            <ProgressBar
+                android:id="@+id/locationLoader"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:indeterminate="true"
+                app:layout_constraintHorizontal_bias="0.05"
+                android:visibility="gone"
+                android:progressTint="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/txtEnterLocaion"
+                app:layout_constraintEnd_toStartOf="@+id/imgEditAddress"
+                app:layout_constraintStart_toEndOf="@+id/txtEnterLocaion"
+                app:layout_constraintTop_toTopOf="@+id/txtEnterLocaion" />
+
             <ImageView
                 android:id="@+id/imgEditAddress"
                 android:layout_width="@dimen/_18sdp"
@@ -109,18 +129,19 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginBottom="@dimen/_20sdp"
                 android:drawableTint="#1ED860"
                 android:ellipsize="end"
                 android:fontFamily="@font/montserrat_regular"
                 android:maxLines="4"
+                app:layout_constraintVertical_bias="0.1"
                 android:text="Dubai Silicon Oasis, Building A5,Dubai Silicon Oasis, Building A5Dubai Silicon Oasis, Building A5Dubai Silicon Oasis, Building A5 Office 2014, Dubai, United Arab Emirates."
                 android:textColor="#909090"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/txtConfirmLocation"
                 app:layout_constraintEnd_toStartOf="@+id/imgEditAddress"
-                app:layout_constraintStart_toStartOf="@+id/txtConfirmLocation" />
+                app:layout_constraintStart_toStartOf="@+id/txtConfirmLocation"
+                app:layout_constraintTop_toBottomOf="@+id/txtEnterLocaion" />
 
 
             <TextView
@@ -144,5 +165,20 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <include layout="@layout/fragment_bottom_detail" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
+
+
 </layout>

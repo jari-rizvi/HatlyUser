@@ -65,12 +65,12 @@
             android:layout_height="40dp"
             android:visibility="gone"
             android:layout_gravity="center"
-            app:layout_constraintBottom_toTopOf="@+id/txtLogin"
+            app:layout_constraintBottom_toTopOf="@+id/txtAddLocation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/txtLogin"
+            android:id="@+id/txtAddLocation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
