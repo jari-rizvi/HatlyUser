@@ -5,8 +5,6 @@ import android.location.Geocoder
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -14,7 +12,6 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatCheckedTextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.google.android.gms.location.LocationServices
@@ -28,17 +25,13 @@ import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
-import com.teamx.hatlyUser.constants.NetworkCallPointsNest
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentMapBinding
 import com.teamx.hatlyUser.ui.fragments.location.map.bottomSheetAddSearch.BottomSheetAddressFragment
 import com.teamx.hatlyUser.ui.fragments.location.map.bottomSheetAddSearch.BottomSheetListener
 import com.teamx.hatlyUser.ui.fragments.location.map.bottomSheetAddressDetail.BottomSheetAddressDetailFragment
-import com.teamx.hatlyUser.utils.LocationPermission
-import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -65,12 +58,19 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
     private lateinit var imgLabelOther: AppCompatCheckedTextView
     private lateinit var inpOtherLabel: EditText
 
-    lateinit var googleMap: GoogleMap
+    private lateinit var googleMap: GoogleMap
     private var isMapBeingDragged = true
     private lateinit var bottomSheetAddSearchFragment: BottomSheetAddressFragment
     private lateinit var bottomSheetAddressFragment: BottomSheetAddressDetailFragment
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+
+    private lateinit var imgLabelHome: AppCompatCheckedTextView
+    private lateinit var imgLabelWork: AppCompatCheckedTextView
+    private lateinit var txtConfirmLocation1: TextView
+    private lateinit var inpApartmentNum: EditText
+    private lateinit var inpBuildingNum: EditText
+    private lateinit var inpAddDirectionNum: EditText
 
     private var myJob: Job? = null
 
@@ -80,6 +80,9 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
     private var buildingNumStr = ""
     private var addDirectionStr = ""
     private var addressLabel = "Home"
+
+    private var isForUpdate = false
+    private var locationId = ""
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -94,15 +97,15 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             }
         }
 
-        val txtConfirmLocation1: TextView = view.findViewById(R.id.txtConfirmLocation1)
-        val imgLabelHome: AppCompatCheckedTextView = view.findViewById(R.id.imgLabelHome)
-        val imgLabelWork: AppCompatCheckedTextView = view.findViewById(R.id.imgLabelWork)
+        txtConfirmLocation1 = view.findViewById(R.id.txtConfirmLocation1)
+        imgLabelHome = view.findViewById(R.id.imgLabelHome)
+        imgLabelWork = view.findViewById(R.id.imgLabelWork)
         imgLabelOther = view.findViewById(R.id.imgLabelOther)
         inpOtherLabel = view.findViewById(R.id.inpOtherLabel)
         txtBottomLocation = view.findViewById(R.id.txtBottomLocation)
-        val inpApartmentNum: EditText = view.findViewById(R.id.inpApartmentNum)
-        val inpBuildingNum: EditText = view.findViewById(R.id.inpBuildingNum)
-        val inpAddDirectionNum: EditText = view.findViewById(R.id.inpAddDirectionNum)
+        inpApartmentNum = view.findViewById(R.id.inpApartmentNum)
+        inpBuildingNum = view.findViewById(R.id.inpBuildingNum)
+        inpAddDirectionNum = view.findViewById(R.id.inpAddDirectionNum)
 
         val bottomSheetCons: ConstraintLayout = view.findViewById(R.id.bottomSheet)
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetCons)
@@ -112,55 +115,9 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
 
         latLngFinal = LatLng(0.0, 0.0)
 
-        sharedViewModel.locationmodel.observe(requireActivity()) { locationModel ->
-
-            when (locationModel.isAction) {
-                "update" -> {
-                    isMapBeingDragged = false
-                    when (locationModel.label) {
-                        "Home" -> {
-                            addressLabel = "Home"
-                            imgLabelHome.isChecked = true
-                            imgLabelWork.isChecked = false
-                            imgLabelOther.isChecked = false
-                            inpOtherLabel.visibility = View.GONE
-                        }
-
-                        "Work" -> {
-                            addressLabel = "Work"
-                            imgLabelHome.isChecked = false
-                            imgLabelWork.isChecked = true
-                            imgLabelOther.isChecked = false
-                            inpOtherLabel.visibility = View.GONE
-                        }
-
-                        else -> {
-                            imgLabelHome.isChecked = false
-                            imgLabelWork.isChecked = false
-                            imgLabelOther.isChecked = true
-                            inpOtherLabel.visibility = View.VISIBLE
-                        }
-                    }
-
-                    latLngFinal = LatLng(locationModel.lat, locationModel.lng)
-                    latLngFinal?.let { updateMap(it) }
-                }
-
-                "add" -> {
-
-                }
-                else -> {
-                    requestLocation()
-                }
-            }
-        }
-
-
-
 
         mViewDataBinding.imgBack.setOnClickListener {
             findNavController().popBackStack()
-//            requireActivity().finish()
         }
 
         mViewDataBinding.txtEnterLocaion.setOnClickListener {
@@ -183,13 +140,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         }
 
         mViewDataBinding.txtConfirmLocation.setOnClickListener {
-
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-
-            if (!bottomSheetAddressFragment.isAdded) {
-//                bottomSheetAddressFragment.show(parentFragmentManager, bottomSheetAddressFragment.tag)
-            }
-
         }
 
         txtConfirmLocation1.setOnClickListener {
@@ -199,7 +150,11 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             buildingNumStr = inpBuildingNum.text.toString().trim()
             addDirectionStr = inpAddDirectionNum.text.toString().trim()
 
-            mViewModel.createAddress(createJson())
+            if (isForUpdate) {
+                mViewModel.updateAddress(locationId, createJson())
+            } else {
+                mViewModel.createAddress(createJson())
+            }
         }
 
         imgLabelHome.setOnClickListener {
@@ -249,8 +204,31 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             }
         }
 
-    }
+        if (!mViewModel.updateAddressResponse.hasActiveObservers()) {
+            mViewModel.updateAddressResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
 
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            if (data.address.isNotEmpty()) {
+                                findNavController().popBackStack()
+                            }
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        mViewDataBinding.root.snackbar(it.message!!)
+                    }
+                }
+            }
+        }
+
+    }
 
     @SuppressLint("MissingPermission")
     private fun requestLocation() {
@@ -287,12 +265,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         googleMap.uiSettings.isZoomGesturesEnabled = true
 //        googleMap.uiSettings.isMapToolbarEnabled = false
 
-
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-
-//        handler.post(myRunnable)
-//        getAddressFromLocation(latLng)
-
 
     }
 
@@ -316,18 +289,12 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
 
                 addressStr = "$addressLine, $city\n$state, $country, $postalCode"
 
-//                mViewDataBinding.txtShowAddress.text = try {
-//
-//                } catch (e: Exception) {
-//                    ""
-//                }
-
                 // Do something with the address information
                 Log.d("requestLocation", "addresses: $addresses")
             } else {
                 // No address found
                 Log.d("requestLocation", "No address found for the given location")
-//                mViewDataBinding.txtShowAddress.text = "No address found for the given location"
+
                 addressStr = "No address found for the given location"
             }
         } catch (e: IOException) {
@@ -337,25 +304,14 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         return addressStr
     }
 
-
     override fun onMapReady(p0: GoogleMap) {
         googleMap = p0
 
-//        googleMap.setOnMapClickListener { latLng ->
-//            // Handle map click
-//            // Set the flag to indicate that this movement is user-initiated
-//            isMapBeingDragged = true
-//            // Perform other actions as needed
-//        }
+        getLocationObserver()
 
         googleMap.setOnCameraIdleListener {
-
-            Log.d("setOnCameraIdleListener", "onMapReady: working")
-
             myJob?.cancel()
-
             myJob = GlobalScope.launch(Dispatchers.Main) {
-
                 if (isMapBeingDragged) {
 
                     val currentLatLng = googleMap.cameraPosition.target
@@ -365,34 +321,100 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                     }
                     latLngFinal = currentLatLng
                     mViewDataBinding.locationLoader.visibility = View.GONE
-                    mViewDataBinding.txtShowAddress.text = result
-                    txtBottomLocation.text = result
-//                handler.removeCallbacks(myRunnable)
-//                handler.postDelayed(myRunnable, 200)
+                    updateUi(result, "", "", "", addressLabel)
                 }
                 isMapBeingDragged = true
             }
-
-
         }
     }
 
+    private fun updateUi(
+        result: String,
+        appartment: String,
+        building: String,
+        additionalInfo: String,
+        label: String
+    ) {
+        mViewDataBinding.txtShowAddress.text = result
+        txtBottomLocation.text = result
 
-//    private val handler = Handler(Looper.getMainLooper())
-//
-//    private val myRunnable = Runnable {
-//        if (isMapBeingDragged) {
-//            val currentLatLng = googleMap.cameraPosition.target
-//            getAddressFromLocation(currentLatLng)
-//        }
-//        isMapBeingDragged = true
-//    }
+        inpApartmentNum.setText(appartment)
+        inpBuildingNum.setText(building)
+        inpAddDirectionNum.setText(additionalInfo)
 
+        when (label) {
+            "Home" -> {
+                addressLabel = label
+                imgLabelHome.isChecked = true
+                imgLabelWork.isChecked = false
+                imgLabelOther.isChecked = false
+                inpOtherLabel.visibility = View.GONE
+            }
+
+            "Work" -> {
+                addressLabel = label
+                imgLabelHome.isChecked = false
+                imgLabelWork.isChecked = true
+                imgLabelOther.isChecked = false
+                inpOtherLabel.visibility = View.GONE
+            }
+
+            else -> {
+                imgLabelHome.isChecked = false
+                imgLabelWork.isChecked = false
+                imgLabelOther.isChecked = true
+                inpOtherLabel.visibility = View.VISIBLE
+                inpOtherLabel.setText(label)
+            }
+        }
+    }
+
+    private fun getLocationObserver() {
+        sharedViewModel.locationmodel.observe(requireActivity()) { locationModel ->
+
+            when (locationModel.isAction) {
+                "Update" -> {
+                    isForUpdate = true
+                    locationId = locationModel._id
+                    txtConfirmLocation1.text = "Update Location"
+                    isMapBeingDragged = false
+
+                    apartmentStr = locationModel.apartmentNumber.toString()
+                    buildingNumStr = locationModel.building
+                    addDirectionStr = locationModel.additionalDirection
+
+                    updateUi(
+                        locationModel.address,
+                        apartmentStr,
+                        buildingNumStr,
+                        addDirectionStr,
+                        locationModel.label
+                    )
+                    latLngFinal = LatLng(locationModel.lat, locationModel.lng)
+                    latLngFinal?.let { updateMap(it) }
+                }
+
+                else -> {
+                    if (isAdded) {
+                        isForUpdate = false
+                        txtConfirmLocation1.text = "Confirm Location"
+                        requestLocation()
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        googleMap.clear()
+        sharedViewModel.locationmodel.removeObservers(viewLifecycleOwner)
+    }
 
     override fun onBottomSheetDataReceived(data: String, latLng: LatLng) {
         isMapBeingDragged = false
-        mViewDataBinding.txtShowAddress.text = data
-        txtBottomLocation.text = data
+
+        updateUi(data, "", "", "", addressLabel)
         bottomSheetAddSearchFragment.dismiss()
 
         latLngFinal = latLng

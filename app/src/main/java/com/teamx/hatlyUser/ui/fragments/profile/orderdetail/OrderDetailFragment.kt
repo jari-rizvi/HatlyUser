@@ -1,12 +1,10 @@
 package com.teamx.hatlyUser.ui.fragments.profile.orderdetail
 
 import android.app.Dialog
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -24,14 +22,19 @@ import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentOrderDetailBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.adapter.DialogUplodeImageAdapter
 import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.adapter.OrderDetailAdapter
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Product
 import com.teamx.hatlyUser.utils.DialogHelperClass
+import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.FileOutputStream
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 
 
 @AndroidEntryPoint
@@ -45,9 +48,14 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    lateinit var layoutManager1: LinearLayoutManager
-    lateinit var orderDetailAdapter: OrderDetailAdapter
-    lateinit var productOrderHistoryList: ArrayList<Product>
+    private lateinit var layoutManager1: LinearLayoutManager
+    private lateinit var orderDetailAdapter: OrderDetailAdapter
+    private lateinit var productOrderHistoryList: ArrayList<Product>
+
+    private lateinit var uploadImageArrayList : ArrayList<Uri>
+    private lateinit var dialogUplodeImageAdapter : DialogUplodeImageAdapter
+    private lateinit var recDialogBox  : RecyclerView
+    private lateinit var constraintLayout4  : ConstraintLayout
 
     var isScrolling = false
     var currentItems = 0
@@ -136,6 +144,30 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
             orderDetailAdapter.notifyDataSetChanged()
         }
 
+        if (!mViewModel.uploadReviewImgResponse.hasActiveObservers()){
+            mViewModel.uploadReviewImgResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+
+                            Log.d("uploadImagesRes", "onViewCreated: $data")
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        mViewDataBinding.root.snackbar(it.message!!)
+                    }
+                }
+            }
+        }
+
+
 //        mViewDataBinding.recLocations.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 //            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
 //                super.onScrollStateChanged(recyclerView, newState)
@@ -190,11 +222,6 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
     override fun onCancel() {
         Log.d("reviewDialog", "onSubmit: onCancel")
     }
-
-    lateinit var uploadImageArrayList : ArrayList<Uri>
-    lateinit var dialogUplodeImageAdapter : DialogUplodeImageAdapter
-    lateinit var recDialogBox  : RecyclerView
-    lateinit var constraintLayout4  : ConstraintLayout
 
     private fun reviewDialog(): Dialog {
         val dialog = Dialog(requireActivity())
@@ -276,15 +303,24 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
     private val pickImagesLauncher = registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris: List<Uri>? ->
         // Handle the result here
+
+        val imageFiles: ArrayList<File> = ArrayList()
+
         if (uris != null) {
             uploadImageArrayList.clear()
             for (uri in uris) {
                 // Process each URI (image) as needed
                 // Example: display the URI
 
+                uri.path?.let { File(it) }?.let { imageFiles.add(it) }
+
                 uploadImageArrayList.add(uri)
+
+
+
                 Log.d("Image URI", uri.toString())
             }
+            uploadWithRetrofit(imageFiles)
             dialogUplodeImageAdapter.notifyDataSetChanged()
 
         }
@@ -306,6 +342,31 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
     }
 
     override fun clickMoreItem(position: Int) {
+
+    }
+
+
+    private fun uploadWithRetrofit(imageFiles: List<File>) {
+
+//        val imageFiles: List<File> = listOf(
+//            // Add your File objects representing images
+//            File("/path/to/image1.jpg"),
+//            File("/path/to/image2.jpg"),
+//            // ... Add more images
+//        )
+
+        val imageParts: List<MultipartBody.Part> = imageFiles.mapIndexed { index, file ->
+            MultipartBody.Part.createFormData("image_$index", file.name, file.asRequestBody("image/*".toMediaType()))
+        }
+
+//        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+//
+//        val filePart: MultipartBody.Part = MultipartBody.Part.createFormData(
+//            "attachment", file.name, requestBody
+//        )
+//        Log.d("TAG", "uploadWithRetrofit: $filePart")
+
+        mViewModel.uploadReviewImg(imageParts)
 
     }
 

@@ -25,8 +25,10 @@ import com.teamx.hatlyUser.ui.fragments.payments.paymentmethod.modelDetach.Model
 import com.teamx.hatlyUser.ui.fragments.payments.paymentmethod.modelGetCards.ModelCredCards
 import com.teamx.hatlyUser.ui.fragments.products.model.ModelProductPreview
 import com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.AddToCart
+import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.modelUploadImages.ModelUploadImages
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.OrderHistoryModel
 import com.teamx.hatlyUser.ui.fragments.shophome.model.ModelSubCategoryStore
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -187,6 +189,14 @@ interface ApiService {
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<OrderHistoryModel>
 
+    @Multipart
+    @POST(NetworkCallPoints.UPLOAD_REVIEW_IMGS)
+    suspend fun uploadReviewImg(
+        @Part imageParts: List<MultipartBody.Part>,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelUploadImages>
+
     @GET(NetworkCallPoints.CREDS_CARDS)
     suspend fun getCredCards(
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
@@ -209,6 +219,14 @@ interface ApiService {
 
     @POST(NetworkCallPoints.CREATE_ADDRESS)
     suspend fun createAddress(
+        @Body params: JsonObject,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<CreateAddressModelItem>
+
+    @PUT(NetworkCallPoints.UPDATE_ADDRESS)
+    suspend fun updateAddress(
+        @Path("id") id: String,
         @Body params: JsonObject,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"

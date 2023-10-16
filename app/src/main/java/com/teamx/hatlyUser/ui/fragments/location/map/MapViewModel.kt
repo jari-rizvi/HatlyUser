@@ -51,5 +51,33 @@ class MapViewModel @Inject constructor(
         }
     }
 
+    private val _updateAddressResponse = MutableLiveData<Resource<CreateAddressModelItem>>()
+    val updateAddressResponse: LiveData<Resource<CreateAddressModelItem>>
+        get() = _updateAddressResponse
+
+    fun updateAddress(id:String, param: JsonObject) {
+        viewModelScope.launch {
+            _updateAddressResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.updateAddress(id,param).let {
+                        if (it.isSuccessful) {
+                            _updateAddressResponse.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _updateAddressResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        } else {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _updateAddressResponse.postValue(Resource.error(jsonObj.getString("message")))
+//                            _updateAddressResponse.postValue(Resource.error(it.message(), null))
+                        }
+                    }
+                } catch (e: Exception) {
+                    _updateAddressResponse.postValue(Resource.error("${e.message}", null))
+                }
+            } else _updateAddressResponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
 
 }

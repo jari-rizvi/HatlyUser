@@ -54,6 +54,8 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
         }
 
         mViewDataBinding.txtAddLocation.setOnClickListener {
+            val locationModel = CreateAddressModelItem("","","",0,"","",0.0,0.0,"","Add")
+            sharedViewModel.setlocationmodel(locationModel)
             findNavController().navigate(R.id.action_locationFragment_to_mapFragment)
         }
 
@@ -63,7 +65,9 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
         locationsListAdapter = LocationsListAdapter(getAddressArray, this)
         mViewDataBinding.recLocations.adapter = locationsListAdapter
 
+
         mViewModel.getAlAddress()
+
         if (!mViewModel.getAlAddressResponse.hasActiveObservers()) {
             mViewModel.getAlAddressResponse.observe(requireActivity()) {
                 when (it.status) {

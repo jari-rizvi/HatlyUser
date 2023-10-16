@@ -4,6 +4,7 @@ package com.teamx.hatlyUser.data.remote.reporitory
 import com.google.gson.JsonObject
 import com.teamx.hatlyUser.data.local.db.ProductDao
 import com.teamx.hatlyUser.data.remote.ApiService
+import okhttp3.MultipartBody
 import retrofit2.http.Body
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -78,6 +79,10 @@ class MainRepository @Inject constructor(
         @Query("limit") limit: Int,
     ) = apiService.orderHistory(page, limit)
 
+    suspend fun uploadReviewImg(
+        imageParts: List<MultipartBody.Part>
+    ) = apiService.uploadReviewImg(imageParts)
+
     suspend fun getCredCards(
     ) = apiService.getCredCards()
 
@@ -92,6 +97,11 @@ class MainRepository @Inject constructor(
     suspend fun createAddress(
         @Body params: JsonObject
     ) = apiService.createAddress(params)
+
+    suspend fun updateAddress(
+        @Path("id") id: String,
+        @Body params: JsonObject
+    ) = apiService.updateAddress(id, params)
 
     suspend fun getAddress() = apiService.getAddress()
 }

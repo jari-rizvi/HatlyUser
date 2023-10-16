@@ -41,6 +41,8 @@ class NetworkCallPoints {
 
         const val ORDER_HISTORY = "order/all"
 
+        const val UPLOAD_REVIEW_IMGS = "upload/reviewImages"
+
         const val CREDS_CARDS = "stripe/list/paymentMethods"
 
         const val DEFAULT_CREDS_CARDS = "stripe/set/paymentMethod"
@@ -48,5 +50,7 @@ class NetworkCallPoints {
         const val DETACH_CREDS_CARDS = "stripe/detach/paymentMethod"
 
         const val CREATE_ADDRESS = "locations"
+
+        const val UPDATE_ADDRESS = "locations/{id}"
     }
 }
