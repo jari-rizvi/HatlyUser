@@ -31,8 +31,11 @@ import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Product
 import com.teamx.hatlyUser.utils.DialogHelperClass
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
@@ -52,10 +55,10 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
     private lateinit var orderDetailAdapter: OrderDetailAdapter
     private lateinit var productOrderHistoryList: ArrayList<Product>
 
-    private lateinit var uploadImageArrayList : ArrayList<Uri>
-    private lateinit var dialogUplodeImageAdapter : DialogUplodeImageAdapter
-    private lateinit var recDialogBox  : RecyclerView
-    private lateinit var constraintLayout4  : ConstraintLayout
+    private lateinit var uploadImageArrayList: ArrayList<Uri>
+    private lateinit var dialogUplodeImageAdapter: DialogUplodeImageAdapter
+    private lateinit var recDialogBox: RecyclerView
+    private lateinit var constraintLayout4: ConstraintLayout
 
     var isScrolling = false
     var currentItems = 0
@@ -144,7 +147,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
             orderDetailAdapter.notifyDataSetChanged()
         }
 
-        if (!mViewModel.uploadReviewImgResponse.hasActiveObservers()){
+        if (!mViewModel.uploadReviewImgResponse.hasActiveObservers()) {
             mViewModel.uploadReviewImgResponse.observe(requireActivity()) {
                 when (it.status) {
                     Resource.Status.LOADING -> {
@@ -216,7 +219,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
     override fun onSubmit(description: String, rating: Double) {
         Log.d("reviewDialog", "description: ${description} rating ${rating}")
-        findNavController().navigate(R.id.action_orderDetailFragment_to_reviewSubmitedFragment)
+//        findNavController().navigate(R.id.action_orderDetailFragment_to_reviewSubmitedFragment)
     }
 
     override fun onCancel() {
@@ -242,8 +245,9 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
         recDialogBox = dialog.findViewById(R.id.recDialogBox)
         uploadImageArrayList = ArrayList()
 
-        val categoryLayoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-        dialogUplodeImageAdapter  = DialogUplodeImageAdapter(uploadImageArrayList, this)
+        val categoryLayoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        dialogUplodeImageAdapter = DialogUplodeImageAdapter(uploadImageArrayList, this)
         recDialogBox.layoutManager = categoryLayoutManager
         recDialogBox.adapter = dialogUplodeImageAdapter
 
@@ -254,15 +258,24 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
             dialog.dismiss()
         }
 
+        txtLogin.setOnClickListener {
+
+            if (imageFiles.isNotEmpty() && imageFiles.size < 6) {
+                uploadWithRetrofit(imageFiles)
+            }
+        }
+
         constraintLayout4.setOnClickListener {
 //            startForResult.launch("image/*")
             pickImagesLauncher.launch("image/*")
         }
 
-        txtLogin.setOnClickListener {
-            dialog.dismiss()
-            onSubmit(userDescription.text.toString(), materialRatingBar.rating.toDouble())
-        }
+
+
+//        txtLogin.setOnClickListener {
+//            dialog.dismiss()
+//            onSubmit(userDescription.text.toString(), materialRatingBar.rating.toDouble())
+//        }
 
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCancelable(false)
@@ -301,37 +314,40 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 //
 //        }
 
-    private val pickImagesLauncher = registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris: List<Uri>? ->
-        // Handle the result here
+    lateinit var imageFiles: ArrayList<File>
 
-        val imageFiles: ArrayList<File> = ArrayList()
+    private val pickImagesLauncher =
+        registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris: List<Uri>? ->
+            // Handle the result here
 
-        if (uris != null) {
-            uploadImageArrayList.clear()
-            for (uri in uris) {
-                // Process each URI (image) as needed
-                // Example: display the URI
+            imageFiles = ArrayList()
 
-                uri.path?.let { File(it) }?.let { imageFiles.add(it) }
+            if (uris != null) {
+                uploadImageArrayList.clear()
+                for (uri in uris) {
+                    // Process each URI (image) as needed
+                    // Example: display the URI
 
-                uploadImageArrayList.add(uri)
+                    uri.path?.let { File(it) }?.let { imageFiles.add(it) }
+
+                    uploadImageArrayList.add(uri)
 
 
 
-                Log.d("Image URI", uri.toString())
+                    Log.d("Image URI", uri.toString())
+                }
+
+                dialogUplodeImageAdapter.notifyDataSetChanged()
+
             }
-            uploadWithRetrofit(imageFiles)
-            dialogUplodeImageAdapter.notifyDataSetChanged()
-
+            if (uploadImageArrayList.isNotEmpty()) {
+                constraintLayout4.visibility = View.GONE
+                recDialogBox.visibility = View.VISIBLE
+            } else {
+                constraintLayout4.visibility = View.VISIBLE
+                recDialogBox.visibility = View.GONE
+            }
         }
-        if (uploadImageArrayList.isNotEmpty()){
-            constraintLayout4.visibility = View.GONE
-            recDialogBox.visibility = View.VISIBLE
-        }else{
-            constraintLayout4.visibility = View.VISIBLE
-            recDialogBox.visibility = View.GONE
-        }
-    }
 
     override fun clickshopItem(position: Int) {
 
@@ -355,8 +371,24 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 //            // ... Add more images
 //        )
 
-        val imageParts: List<MultipartBody.Part> = imageFiles.mapIndexed { index, file ->
-            MultipartBody.Part.createFormData("image_$index", file.name, file.asRequestBody("image/*".toMediaType()))
+//        val imageParts: List<MultipartBody.Part> = imageFiles.mapIndexed { index, file ->
+//            MultipartBody.Part.createFormData(
+//                "image_$index",
+//                file.name,
+//                file.asRequestBody("image/*".toMediaType())
+//            )
+//        }
+
+
+        val imageParts = imageFiles.mapNotNull { uri ->
+            try {
+                val file = File(uri.absolutePath)
+                val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+                MultipartBody.Part.createFormData("images", file.name, requestFile)
+            } catch (e: Exception) {
+                Log.e("ImageUploadManager", "Error creating image part: ${e.message}")
+                null
+            }
         }
 
 //        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
@@ -365,6 +397,9 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 //            "attachment", file.name, requestBody
 //        )
 //        Log.d("TAG", "uploadWithRetrofit: $filePart")
+
+
+        Log.d("imageParts", "uploadWithRetrofit: ${imageParts[0].headers}")
 
         mViewModel.uploadReviewImg(imageParts)
 

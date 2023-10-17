@@ -70,11 +70,12 @@ class CreatePasswordFragment :
         Log.d("createParams", "onViewCreated phone: $phone")
 
         if (!mViewModel.updateResponse.hasActiveObservers()) {
-            mViewModel.updateResponse.observe(requireActivity(), Observer {
+            mViewModel.updateResponse.observe(requireActivity()) {
                 when (it.status) {
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
+
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
@@ -91,12 +92,13 @@ class CreatePasswordFragment :
                             }
                         }
                     }
+
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
                         Log.d("createParams", "Resource.Status.ERROR: ${it.message}")
                     }
                 }
-            })
+            }
         }
 
 

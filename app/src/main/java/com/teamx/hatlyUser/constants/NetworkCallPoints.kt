@@ -51,6 +51,8 @@ class NetworkCallPoints {
 
         const val CREATE_ADDRESS = "locations"
 
+        const val SET_DEFAULT_ADDRESS = "locations/user/{id}"
+
         const val UPDATE_ADDRESS = "locations/{id}"
     }
 }

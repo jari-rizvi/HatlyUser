@@ -104,4 +104,6 @@ class MainRepository @Inject constructor(
     ) = apiService.updateAddress(id, params)
 
     suspend fun getAddress() = apiService.getAddress()
+
+    suspend fun setDefaultAddress(@Path("id") id: String,) = apiService.setDefaultAddress(id)
 }

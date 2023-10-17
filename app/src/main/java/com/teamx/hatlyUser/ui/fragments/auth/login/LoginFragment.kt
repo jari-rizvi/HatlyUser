@@ -98,26 +98,24 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            if (data.verified == true) {
-                                CoroutineScope(Dispatchers.Main).launch {
-                                    data.token?.let { it1 ->
-                                        dataStoreProvider.saveUserToken(it1)
-                                        TOKENER = it1
-                                    }
 
+                            CoroutineScope(Dispatchers.Main).launch {
+                                data.token.let { it1 ->
+                                    dataStoreProvider.saveUserToken(it1)
+                                    TOKENER = it1
+                                }
 
 //                                    sharedViewModel.setUserData(data)
 
 //                                    (requireActivity() as ProfileInterFace).profileData(data)
 //                                    dataStoreProvider.saveDeviceData(randNum!!)
 //                                    dataStoreProvider.saveDeviceData("88765275963748185512")
-                                }
-                                PrefHelper.getInstance(requireActivity()).setUserData(data)
-                                if (LocationPermission.requestPermission(requireContext())) {
-                                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                                } else {
-                                    findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
-                                }
+                            }
+                            PrefHelper.getInstance(requireActivity()).setUserData(data)
+                            if (LocationPermission.requestPermission(requireContext())) {
+                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                            } else {
+                                findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
                             }
                         }
                     }
@@ -140,28 +138,28 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            if (data.verified == true) {
-                                CoroutineScope(Dispatchers.Main).launch {
 
-                                    data.token?.let { it1 ->
-                                        Log.d("loginWithGoogleResponse", "onViewCreated: $it1")
-                                        dataStoreProvider.saveUserToken(it1)
-                                        TOKENER = it1
-                                    }
+                            CoroutineScope(Dispatchers.Main).launch {
+
+                                data.token.let { it1 ->
+                                    Log.d("loginWithGoogleResponse", "onViewCreated: $it1")
+                                    dataStoreProvider.saveUserToken(it1)
+                                    TOKENER = it1
+                                }
 
 //                                    sharedViewModel.setUserData(data)
 //                                    (requireActivity() as ProfileInterFace).profileData(data)
 
 //                                    dataStoreProvider.saveDeviceData(randNum!!)
 //                                    dataStoreProvider.saveDeviceData("88765275963748185512")
-                                }
-                                PrefHelper.getInstance(requireActivity()).setUserData(data)
-                                if (LocationPermission.requestPermission(requireContext())) {
-                                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                                } else {
-                                    findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
-                                }
                             }
+                            PrefHelper.getInstance(requireActivity()).setUserData(data)
+                            if (LocationPermission.requestPermission(requireContext())) {
+                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                            } else {
+                                findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
+                            }
+
                         }
                     }
 

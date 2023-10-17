@@ -210,7 +210,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
         return true
     }
 
-    fun timerStart() {
+    private fun timerStart() {
         val durationSeconds = 30
         var remainingSeconds = durationSeconds
 

@@ -1,10 +1,12 @@
 package com.teamx.hatlyUser.ui.fragments.profile.Locations
 
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.AbsListView
+import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,8 +36,8 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
         get() = BR.viewModel
 
 
-    private lateinit var getAddressArray : ArrayList<CreateAddressModelItem>
-    private lateinit var locationsListAdapter : LocationsListAdapter
+    private lateinit var getAddressArray: ArrayList<CreateAddressModelItem>
+    private lateinit var locationsListAdapter: LocationsListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,14 +56,15 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
         }
 
         mViewDataBinding.txtAddLocation.setOnClickListener {
-            val locationModel = CreateAddressModelItem("","","",0,"","",0.0,0.0,"","Add")
+            val locationModel = CreateAddressModelItem("", "", "", 0, "", "", 0.0, 0.0, "", "Add")
             sharedViewModel.setlocationmodel(locationModel)
             findNavController().navigate(R.id.action_locationFragment_to_mapFragment)
         }
 
         getAddressArray = ArrayList()
 
-        mViewDataBinding.recLocations.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        mViewDataBinding.recLocations.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         locationsListAdapter = LocationsListAdapter(getAddressArray, this)
         mViewDataBinding.recLocations.adapter = locationsListAdapter
 
@@ -79,6 +82,8 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                         loadingDialog.dismiss()
                         it.data?.let { data ->
 
+                            data[0].isSelected = true
+
                             getAddressArray.addAll(data)
                             locationsListAdapter.notifyDataSetChanged()
 
@@ -93,53 +98,37 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
             }
         }
 
-//        mViewDataBinding.recLocations.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//                super.onScrollStateChanged(recyclerView, newState)
-//                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-//                    isScrolling = true
-//                }
-//            }
-//
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                super.onScrolled(recyclerView, dx, dy)
-//
-//                currentItems = layoutManager1.childCount
-//                totalItems = layoutManager1.itemCount
-//                scrollOutItems = layoutManager1.findFirstVisibleItemPosition()
-//
-//                if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
-//                    isScrolling = false
-////                    fetchData()
-//                }
-//            }
-//        })
+        if (!mViewModel.setDefaultAddressResponse.hasActiveObservers()) {
+            mViewModel.setDefaultAddressResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
 
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            if (data.success) {
+                                mViewDataBinding.root.snackbar(data.message)
+                            }
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        mViewDataBinding.root.snackbar(it.message!!)
+                    }
+                }
+            }
+        }
     }
 
-//    private fun fetchData() {
-//        mViewDataBinding.spinKit.visibility = View.VISIBLE
-//        Handler(Looper.getMainLooper()).postDelayed({
-//            for (i in 1..5) {
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//            }
-//            mViewDataBinding.spinKit.visibility = View.GONE
-//            locationsListAdapter.notifyDataSetChanged()
-//        }, 5000)
-//    }
 
     override fun clickshopItem(selectPosition: Int) {
-
+        getAddressArray.forEach { it.isSelected = false }
+        getAddressArray[selectPosition].isSelected = true
+        locationsListAdapter.notifyDataSetChanged()
+        mViewModel.setDefaultAddress(getAddressArray[selectPosition]._id)
     }
 
     override fun clickCategoryItem(updatePosition: Int) {

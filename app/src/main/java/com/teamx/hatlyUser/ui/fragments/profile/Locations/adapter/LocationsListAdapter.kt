@@ -1,6 +1,7 @@
 package com.teamx.hatlyUser.ui.fragments.profile.Locations.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.databinding.ItemLocationBinding
@@ -23,15 +24,25 @@ class LocationsListAdapter(
 
         val arrayData = addressArrayList[position]
 
+
+        holder.bind.mainItem.isActivated = arrayData.isSelected
+
+        if (arrayData.isSelected){
+            holder.bind.txtTitle.visibility = View.VISIBLE
+        }else{
+            holder.bind.txtTitle.visibility = View.GONE
+        }
+
+
         holder.bind.textView16.text = try {
             arrayData.label
-        }catch (e : Exception){
+        } catch (e: Exception) {
             ""
         }
 
         holder.bind.textView18.text = try {
             arrayData.address
-        }catch (e : Exception){
+        } catch (e: Exception) {
             ""
         }
 

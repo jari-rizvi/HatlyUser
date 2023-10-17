@@ -15,6 +15,7 @@ import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Foo
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.categoryModel.ModelCategory
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproductmodel.ModelPopularProducts
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
+import com.teamx.hatlyUser.ui.fragments.location.map.modelDefaultAddress.ModelDefaultAddress
 import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModel
 import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModelItem
 import com.teamx.hatlyUser.ui.fragments.payments.cart.model.ModelCart
@@ -192,7 +193,7 @@ interface ApiService {
     @Multipart
     @POST(NetworkCallPoints.UPLOAD_REVIEW_IMGS)
     suspend fun uploadReviewImg(
-        @Part imageParts: List<MultipartBody.Part>,
+        @Part images: List<MultipartBody.Part>,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<ModelUploadImages>
@@ -237,4 +238,12 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<CreateAddressModel>
+
+
+    @PUT(NetworkCallPoints.SET_DEFAULT_ADDRESS)
+    suspend fun setDefaultAddress(
+        @Path("id") id: String,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelDefaultAddress>
 }

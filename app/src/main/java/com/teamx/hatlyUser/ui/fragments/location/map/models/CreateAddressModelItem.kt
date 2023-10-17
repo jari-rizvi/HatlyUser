@@ -13,5 +13,6 @@ data class CreateAddressModelItem(
     val lat: Double,
     val lng: Double,
     val userId: String,
-    var isAction: String
+    var isAction: String,
+    var isSelected: Boolean = false,
 )
