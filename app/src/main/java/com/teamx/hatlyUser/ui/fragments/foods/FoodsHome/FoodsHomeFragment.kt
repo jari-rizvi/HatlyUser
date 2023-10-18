@@ -49,7 +49,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
     var totalItems = 0
     var scrollOutItems = 0
 
-    var categoryTitle = ""
+    private var categoryTitle = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -85,7 +85,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
             Marts.FOOD -> {
                 Log.d("StoreFragment", "FOOD: back")
                 if (!mViewModel.allFoodsCategoriesResponse.hasActiveObservers()) {
-                    mViewModel.allFoodsCategories(1, 10, 0)
+                    mViewModel.allFoodsCategories(1, 10)
                 }
             }
 
@@ -129,7 +129,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
         }
 
         if (!mViewModel.allFoodsShopsResponse.hasActiveObservers()) {
-            mViewModel.allFoodsShops(1, 10, 0, "", categoryTitle)
+            mViewModel.allFoodsShops(1, 10, 0, "",null)
         }
 
         mViewModel.allFoodsShopsResponse.observe(requireActivity()) {
@@ -239,7 +239,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
         mViewDataBinding.txtShopCatTitle.text = "$categoryTitle Restaurants"
         foodsCategoryArrayList[position].itemSelected = true
         foodHomeCategoryAdapter.notifyDataSetChanged()
-        mViewModel.allFoodsShops(1, 10, 0, "", categoryTitle)
+        mViewModel.allFoodsShops(1, 10, 0, "", categoryModel._id)
     }
 
     override fun clickshopItem(position: Int) {

@@ -1,10 +1,12 @@
 package com.teamx.hatlyUser.ui.fragments.profile.orderdetail
 
 import android.app.Dialog
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -38,6 +40,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
+import java.io.FileOutputStream
 
 
 @AndroidEntryPoint
@@ -164,6 +167,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
+                        Log.d("uploadImagesRes", "onViewCreated: ${it}")
                         mViewDataBinding.root.snackbar(it.message!!)
                     }
                 }
@@ -261,6 +265,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
         txtLogin.setOnClickListener {
 
             if (imageFiles.isNotEmpty() && imageFiles.size < 6) {
+                Log.d("imageFiles", "reviewDialog: ${imageFiles[0].absolutePath}")
                 uploadWithRetrofit(imageFiles)
             }
         }
@@ -324,18 +329,63 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
             if (uris != null) {
                 uploadImageArrayList.clear()
-                for (uri in uris) {
-                    // Process each URI (image) as needed
-                    // Example: display the URI
 
-                    uri.path?.let { File(it) }?.let { imageFiles.add(it) }
+                uris.forEachIndexed { index, uri ->
+
+                    uri.path?.let { File(it) }?.let {
+                        val str = "${requireContext().filesDir}/file$index.jpg"
+
+                        val imageUri = uri
+
+                        val bitmap = MediaStore.Images.Media.getBitmap(
+                            requireActivity().contentResolver,
+                            imageUri
+                        )
+
+// Compress the bitmap to a JPEG format with 80% quality and save it to a file
+                        val outputStream = FileOutputStream(str)
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
+                        outputStream.close()
+
+                        imageFiles.add(File(str))
+                    }
 
                     uploadImageArrayList.add(uri)
 
 
 
                     Log.d("Image URI", uri.toString())
+
                 }
+
+//                for (uri in uris) {
+//                    // Process each URI (image) as needed
+//                    // Example: display the URI
+//
+//                    uri.path?.let { File(it) }?.let {
+//                        val str = "${requireContext().filesDir}/file.jpg"
+//
+//                        val imageUri = uri
+//
+//                        val bitmap = MediaStore.Images.Media.getBitmap(
+//                            requireActivity().contentResolver,
+//                            imageUri
+//                        )
+//
+//// Compress the bitmap to a JPEG format with 80% quality and save it to a file
+//                        val outputStream = FileOutputStream(str)
+//                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
+//                        outputStream.close()
+//
+//                        imageFiles.add(File(str))
+//                    }
+//
+//                    uploadImageArrayList.add(uri)
+//
+//
+//
+//                    Log.d("Image URI", uri.toString())
+//                }
 
                 dialogUplodeImageAdapter.notifyDataSetChanged()
 
@@ -380,16 +430,44 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 //        }
 
 
-        val imageParts = imageFiles.mapNotNull { uri ->
-            try {
-                val file = File(uri.absolutePath)
-                val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-                MultipartBody.Part.createFormData("images", file.name, requestFile)
-            } catch (e: Exception) {
-                Log.e("ImageUploadManager", "Error creating image part: ${e.message}")
-                null
-            }
+
+
+        val imageParts = ArrayList<MultipartBody.Part>()
+
+        imageFiles.forEachIndexed { index, file ->
+
+            Log.d("filePart", "uploadWithRetrofit: ${file.name}")
+
+            val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+            val filePart = MultipartBody.Part.createFormData("PropertyImage[]", "${file.name}.jpg", requestBody)
+
+            imageParts.add(filePart)
         }
+
+//        for (file in imageFiles) {
+////            val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+////            val filePart: MultipartBody.Part = MultipartBody.Part.createFormData("attachments[]", file.name, requestBody)
+//
+//
+//            val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+//
+//            val filePart: MultipartBody.Part = MultipartBody.Part.createFormData(
+//                "attachments[]", file.name, requestBody
+//            )
+//            imageParts.add(filePart)
+//        }
+
+
+//        val imageParts = imageFiles.mapNotNull { uri ->
+//            try {
+//                val file = File(uri.absolutePath)
+//                val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+//                MultipartBody.Part.createFormData("images", file.name, requestFile)
+//            } catch (e: Exception) {
+//                Log.e("ImageUploadManager", "Error creating image part: ${e.message}")
+//                null
+//            }
+//        }
 
 //        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
 //

@@ -37,7 +37,7 @@ class FoodsShopProductAdapter(
         }
 
         holder.bind.textView26.text = try {
-            arrayData.prize
+            arrayData.salePrice.toString()
         } catch (e: Exception) {
             "null"
         }

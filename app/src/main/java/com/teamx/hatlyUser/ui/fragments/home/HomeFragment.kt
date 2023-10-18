@@ -1,6 +1,5 @@
 package com.teamx.hatlyUser.ui.fragments.home
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -42,15 +41,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
         }
 
 
-
         val userData = PrefHelper.getInstance(requireActivity()).getUserData()
 
         userData?.let {
-            Log.d("setUserData", "onViewCreated: ${it._id}")
+            Log.d("setUserData", "onViewCreated: ${it}")
+
+            mViewDataBinding.textView20.text = try {
+                it.location.address
+            } catch (e: Exception) {
+                "Select your location"
+            }
+
+            mViewDataBinding.textView41.text = try {
+                it.location.label
+            } catch (e: Exception) {
+                "Current Location:"
+            }
             sharedViewModel.setUserData(it)
         }
 
         mViewDataBinding.homeAddress.setOnClickListener {
+            val locationModel = userData?.location
+            locationModel!!.isAction =  "Update"
+            sharedViewModel.setlocationmodel(locationModel)
             findNavController().navigate(R.id.action_homeFragment_to_mapFragment)
         }
 

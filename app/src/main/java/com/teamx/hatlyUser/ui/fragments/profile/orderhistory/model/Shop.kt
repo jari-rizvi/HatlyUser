@@ -13,7 +13,7 @@ data class Shop(
     val isOpen: Boolean,
     val name: String,
     val owner: String,
-    val ratting: Int,
+    val ratting: Double,
     val totalReviews: Int,
     val type: String
 )

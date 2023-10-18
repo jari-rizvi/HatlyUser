@@ -3,8 +3,8 @@ package com.teamx.hatlyUser.baseclasses
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.teamx.hatlyUser.ui.fragments.auth.login.Model.Location
 import com.teamx.hatlyUser.ui.fragments.auth.login.Model.ModelLogin
-import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModelItem
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Doc
 
 
@@ -29,11 +29,11 @@ open class BaseViewModel : ViewModel() {
     }
 
 
-    private val _locationmodel = MutableLiveData<CreateAddressModelItem>()
-    val locationmodel: LiveData<CreateAddressModelItem>
+    private val _locationmodel = MutableLiveData<Location>()
+    val locationmodel: LiveData<Location>
         get() = _locationmodel
 
-    fun setlocationmodel(createAddressModelItem: CreateAddressModelItem) {
+    fun setlocationmodel(createAddressModelItem: Location?) {
         this._locationmodel.value = createAddressModelItem
     }
 

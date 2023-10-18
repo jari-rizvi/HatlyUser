@@ -28,12 +28,12 @@ class FoodsHomeViewModel @Inject constructor(
     val allFoodsCategoriesResponse: LiveData<Resource<ModelFoodsCategory>>
         get() = _allFoodsCategories
 
-    fun allFoodsCategories(page: Int, limit: Int, offset: Int) {
+    fun allFoodsCategories(page: Int, limit: Int) {
         viewModelScope.launch {
             _allFoodsCategories.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.allFoodsCategories(page, limit, offset).let {
+                    mainRepository.allFoodsCategories(page, limit).let {
                         if (it.isSuccessful) {
                             _allFoodsCategories.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
@@ -55,12 +55,12 @@ class FoodsHomeViewModel @Inject constructor(
     val allFoodsShopsResponse: LiveData<Resource<ModelFoodShops>>
         get() = _allFoodsShops
 
-    fun allFoodsShops(page: Int, limit: Int, offset: Int, search: String, category: String) {
+    fun allFoodsShops(page: Int, limit: Int, offset: Int, search: String, id: String?) {
         viewModelScope.launch {
             _allFoodsShops.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.allFoodsShops(page, limit, offset, search, category).let {
+                    mainRepository.allFoodsShops(page, limit, offset, search, id).let {
                         if (it.isSuccessful) {
                             _allFoodsShops.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {

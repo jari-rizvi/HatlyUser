@@ -30,6 +30,7 @@ import com.teamx.hatlyUser.databinding.FragmentMapBinding
 import com.teamx.hatlyUser.ui.fragments.location.map.bottomSheetAddSearch.BottomSheetAddressFragment
 import com.teamx.hatlyUser.ui.fragments.location.map.bottomSheetAddSearch.BottomSheetListener
 import com.teamx.hatlyUser.ui.fragments.location.map.bottomSheetAddressDetail.BottomSheetAddressDetailFragment
+import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -210,16 +211,21 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
-
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
+                            Log.e("requestLocation", "data, ${data}")
                             if (data.address.isNotEmpty()) {
+                                if (data.isDefault){
+                                    val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+                                    userData!!.location = data
+                                    PrefHelper.getInstance(requireActivity()).setUserData(userData)
+                                    sharedViewModel.setUserData(userData)
+                                }
                                 findNavController().popBackStack()
                             }
                         }
                     }
-
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
                         mViewDataBinding.root.snackbar(it.message!!)
@@ -227,7 +233,6 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                 }
             }
         }
-
     }
 
     @SuppressLint("MissingPermission")
@@ -431,6 +436,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         val params = JsonObject()
         try {
             if (mViewDataBinding.txtShowAddress.text.isNotEmpty()) {
+                Log.d("txtShowAddress", "createJson: ${mViewDataBinding.txtShowAddress.text}")
                 params.addProperty("address", mViewDataBinding.txtShowAddress.text.toString())
             }
 

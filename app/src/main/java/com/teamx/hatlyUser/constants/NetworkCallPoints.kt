@@ -14,11 +14,13 @@ class NetworkCallPoints {
 
 
         const val ALL_SHOPS = "shop/all"
-        const val SHOP_CATEGOIES = "custom/category/all"
+//        const val SHOP_CATEGOIES = "custom/category/all"
+        const val SHOP_CATEGOIES = "shop/category/all"
         const val POPULAR_PRODUCTS = "product/all"
         const val SHOP_SUB_CATEGOIES = "product/list"
 
-        const val ALL_FOODS_CATEGORIES = "shop/category/list"
+//        const val ALL_FOODS_CATEGORIES = "shop/category/list"
+        const val ALL_FOODS_CATEGORIES = "resturant/category/list"
         const val ALL_FOODS_SHOPS = "resturant/all"
 
         const val SHOP_FOODS = "food/{id}"
@@ -41,7 +43,8 @@ class NetworkCallPoints {
 
         const val ORDER_HISTORY = "order/all"
 
-        const val UPLOAD_REVIEW_IMGS = "upload/reviewImages"
+//        const val UPLOAD_REVIEW_IMGS = "upload/reviewImages"
+        const val UPLOAD_REVIEW_IMGS = "upload/uploadMultiple"
 
         const val CREDS_CARDS = "stripe/list/paymentMethods"
 

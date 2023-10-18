@@ -1,25 +1,19 @@
 package com.teamx.hatlyUser.ui.fragments.profile.Locations
 
-import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
-import android.widget.AbsListView
-import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentLocationBinding
+import com.teamx.hatlyUser.ui.fragments.auth.login.Model.Location
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModel
-import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModelItem
 import com.teamx.hatlyUser.ui.fragments.profile.Locations.adapter.LocationsListAdapter
+import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +30,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
         get() = BR.viewModel
 
 
-    private lateinit var getAddressArray: ArrayList<CreateAddressModelItem>
+    private lateinit var getAddressArray: ArrayList<Location>
     private lateinit var locationsListAdapter: LocationsListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,8 +50,10 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
         }
 
         mViewDataBinding.txtAddLocation.setOnClickListener {
-            val locationModel = CreateAddressModelItem("", "", "", 0, "", "", 0.0, 0.0, "", "Add")
-            sharedViewModel.setlocationmodel(locationModel)
+            val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+//            val locationModel = Location("", "", "", 0, "", null, 0, 0, "", "Add")
+            userData?.location!!.isAction =  "Add"
+            sharedViewModel.setlocationmodel(userData.location)
             findNavController().navigate(R.id.action_locationFragment_to_mapFragment)
         }
 
@@ -82,10 +78,12 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                         loadingDialog.dismiss()
                         it.data?.let { data ->
 
-                            data[0].isSelected = true
+                            if (data.isNotEmpty()){
+//                                data[0].isSelected = true
+                                getAddressArray.addAll(data)
+                                locationsListAdapter.notifyDataSetChanged()
+                            }
 
-                            getAddressArray.addAll(data)
-                            locationsListAdapter.notifyDataSetChanged()
 
                         }
                     }
@@ -125,8 +123,8 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
 
 
     override fun clickshopItem(selectPosition: Int) {
-        getAddressArray.forEach { it.isSelected = false }
-        getAddressArray[selectPosition].isSelected = true
+        getAddressArray.forEach { it.isDefault = false }
+        getAddressArray[selectPosition].isDefault = true
         locationsListAdapter.notifyDataSetChanged()
         mViewModel.setDefaultAddress(getAddressArray[selectPosition]._id)
     }

@@ -31,7 +31,7 @@ class HatlyPopularAdapter(
         }
 
         holder.bind.txtPrize.text = try {
-            arrayData.prize
+            arrayData.price.toString()
         } catch (e: Exception) {
             ""
         }

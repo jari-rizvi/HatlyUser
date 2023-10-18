@@ -53,16 +53,16 @@ class MainRepository @Inject constructor(
         @Query("shopId") shopId: String
     ) = apiService.popularProducts(shopId)
 
-    suspend fun allFoodsCategories(page: Int, limit: Int, offset: Int) =
-        apiService.allFoodsCategories(page, limit, offset)
+    suspend fun allFoodsCategories(page: Int, limit: Int) =
+        apiService.allFoodsCategories(page, limit)
 
     suspend fun allFoodsShops(
         page: Int,
         limit: Int,
         offset: Int,
         search: String,
-        category: String
-    ) = apiService.allFoodsShops(page, limit, offset, search, category)
+        id: String?
+    ) = apiService.allFoodsShops(page, limit, offset, search, id)
 
     suspend fun foodsShopHome(id: String) = apiService.foodsShopHome(id)
 

@@ -5,11 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.databinding.ItemLocationBinding
+import com.teamx.hatlyUser.ui.fragments.auth.login.Model.Location
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModelItem
 
 class LocationsListAdapter(
-    private val addressArrayList: ArrayList<CreateAddressModelItem>,
+    private val addressArrayList: ArrayList<Location>,
     private val hatlyShopInterface: HatlyShopInterface
 ) : RecyclerView.Adapter<HatlyPopularViewHolder>() {
 
@@ -25,9 +25,9 @@ class LocationsListAdapter(
         val arrayData = addressArrayList[position]
 
 
-        holder.bind.mainItem.isActivated = arrayData.isSelected
+        holder.bind.mainItem.isActivated = arrayData.isDefault
 
-        if (arrayData.isSelected){
+        if (arrayData.isDefault){
             holder.bind.txtTitle.visibility = View.VISIBLE
         }else{
             holder.bind.txtTitle.visibility = View.GONE

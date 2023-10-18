@@ -58,7 +58,7 @@
                     android:singleLine="true"
                     android:text="Silicon Oasis, Building A5,..."
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="@dimen/_12ssp"/>
 
             </LinearLayout>
 

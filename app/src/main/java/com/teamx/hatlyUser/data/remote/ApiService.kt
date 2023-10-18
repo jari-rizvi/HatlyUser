@@ -6,6 +6,7 @@ import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.DEVICE_TOKE
 import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.TOKENER
 import com.teamx.hatlyUser.ui.fragments.auth.createpassword.model.ModelUpdatePass
 import com.teamx.hatlyUser.ui.fragments.auth.forgotpassword.model.ModelForgotPass
+import com.teamx.hatlyUser.ui.fragments.auth.login.Model.Location
 import com.teamx.hatlyUser.ui.fragments.auth.login.Model.ModelLogin
 import com.teamx.hatlyUser.ui.fragments.auth.otp.model.ModelVerifyPassOtp
 import com.teamx.hatlyUser.ui.fragments.auth.signup.model.ModelSignUp
@@ -17,7 +18,6 @@ import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproduct
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
 import com.teamx.hatlyUser.ui.fragments.location.map.modelDefaultAddress.ModelDefaultAddress
 import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModel
-import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModelItem
 import com.teamx.hatlyUser.ui.fragments.payments.cart.model.ModelCart
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.model.ModelOrderSummary
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.modelPlaceOrder.ModelPlaceOrder
@@ -105,7 +105,6 @@ interface ApiService {
     suspend fun allFoodsCategories(
         @Query("page") page: Int,
         @Query("limit") limit: Int,
-        @Query("offset") offset: Int,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
     ): Response<ModelFoodsCategory>
 
@@ -115,7 +114,7 @@ interface ApiService {
         @Query("limit") limit: Int,
         @Query("offset") offset: Int,
         @Query("search") search: String,
-        @Query("category") category: String,
+        @Query("category") id: String?,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<ModelFoodShops>
@@ -223,7 +222,7 @@ interface ApiService {
         @Body params: JsonObject,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
-    ): Response<CreateAddressModelItem>
+    ): Response<Location>
 
     @PUT(NetworkCallPoints.UPDATE_ADDRESS)
     suspend fun updateAddress(
@@ -231,7 +230,7 @@ interface ApiService {
         @Body params: JsonObject,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
-    ): Response<CreateAddressModelItem>
+    ): Response<Location>
 
     @GET(NetworkCallPoints.CREATE_ADDRESS)
     suspend fun getAddress(

@@ -8,9 +8,7 @@ import com.google.gson.JsonObject
 import com.teamx.hatlyUser.baseclasses.BaseViewModel
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
-import com.teamx.hatlyUser.ui.fragments.auth.login.Model.ModelLogin
-import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModel
-import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModelItem
+import com.teamx.hatlyUser.ui.fragments.auth.login.Model.Location
 import com.teamx.hatlyUser.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -23,8 +21,8 @@ class MapViewModel @Inject constructor(
     private val networkHelper: NetworkHelper
 ) : BaseViewModel() {
 
-    private val _createAddressResponse = MutableLiveData<Resource<CreateAddressModelItem>>()
-    val createAddressResponse: LiveData<Resource<CreateAddressModelItem>>
+    private val _createAddressResponse = MutableLiveData<Resource<Location>>()
+    val createAddressResponse: LiveData<Resource<Location>>
         get() = _createAddressResponse
 
     fun createAddress(param: JsonObject) {
@@ -51,8 +49,8 @@ class MapViewModel @Inject constructor(
         }
     }
 
-    private val _updateAddressResponse = MutableLiveData<Resource<CreateAddressModelItem>>()
-    val updateAddressResponse: LiveData<Resource<CreateAddressModelItem>>
+    private val _updateAddressResponse = MutableLiveData<Resource<Location>>()
+    val updateAddressResponse: LiveData<Resource<Location>>
         get() = _updateAddressResponse
 
     fun updateAddress(id:String, param: JsonObject) {
