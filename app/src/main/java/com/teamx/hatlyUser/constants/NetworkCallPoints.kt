@@ -46,6 +46,8 @@ class NetworkCallPoints {
 //        const val UPLOAD_REVIEW_IMGS = "upload/reviewImages"
         const val UPLOAD_REVIEW_IMGS = "upload/uploadMultiple"
 
+        const val RE_ORDER = "order/reorder/{id}"
+
         const val CREDS_CARDS = "stripe/list/paymentMethods"
 
         const val DEFAULT_CREDS_CARDS = "stripe/set/paymentMethod"

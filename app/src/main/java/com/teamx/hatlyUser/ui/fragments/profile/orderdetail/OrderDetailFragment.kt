@@ -31,8 +31,12 @@ import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.adapter.DialogUplode
 import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.adapter.OrderDetailAdapter
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Product
 import com.teamx.hatlyUser.utils.DialogHelperClass
+import com.teamx.hatlyUser.utils.TestRet
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -58,7 +62,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
     private lateinit var orderDetailAdapter: OrderDetailAdapter
     private lateinit var productOrderHistoryList: ArrayList<Product>
 
-    private lateinit var uploadImageArrayList: ArrayList<Uri>
+//    private lateinit var uploadImageArrayList: ArrayList<File>
     private lateinit var dialogUplodeImageAdapter: DialogUplodeImageAdapter
     private lateinit var recDialogBox: RecyclerView
     private lateinit var constraintLayout4: ConstraintLayout
@@ -174,6 +178,34 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
             }
         }
 
+        mViewDataBinding.txtLogin.setOnClickListener {
+            sharedViewModel.orderHistory.value?.let { it1 -> mViewModel.reOrder(it1._id) }
+        }
+        if (!mViewModel.reOrderResponse.hasActiveObservers()) {
+            mViewModel.reOrderResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+
+                            if (data.success) {
+                                findNavController().navigate(R.id.action_orderDetailFragment_to_cartFragment)
+                            }
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        mViewDataBinding.root.snackbar(it.message!!)
+                    }
+                }
+            }
+        }
+
 
 //        mViewDataBinding.recLocations.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 //            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -247,11 +279,12 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
         constraintLayout4 = dialog.findViewById<ConstraintLayout>(R.id.constraintLayout4)
 
         recDialogBox = dialog.findViewById(R.id.recDialogBox)
-        uploadImageArrayList = ArrayList()
+
+        imageFiles = ArrayList()
 
         val categoryLayoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-        dialogUplodeImageAdapter = DialogUplodeImageAdapter(uploadImageArrayList, this)
+        dialogUplodeImageAdapter = DialogUplodeImageAdapter(imageFiles, this)
         recDialogBox.layoutManager = categoryLayoutManager
         recDialogBox.adapter = dialogUplodeImageAdapter
 
@@ -274,7 +307,6 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 //            startForResult.launch("image/*")
             pickImagesLauncher.launch("image/*")
         }
-
 
 
 //        txtLogin.setOnClickListener {
@@ -319,78 +351,42 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 //
 //        }
 
-    lateinit var imageFiles: ArrayList<File>
+    private lateinit var imageFiles: ArrayList<File>
 
     private val pickImagesLauncher =
         registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris: List<Uri>? ->
             // Handle the result here
 
-            imageFiles = ArrayList()
+
 
             if (uris != null) {
-                uploadImageArrayList.clear()
+                imageFiles.clear()
 
                 uris.forEachIndexed { index, uri ->
 
-                    uri.path?.let { File(it) }?.let {
-                        val str = "${requireContext().filesDir}/file$index.jpg"
+                    val str = "${requireContext().filesDir}/$index.jpg"
 
-                        val imageUri = uri
+                    val bitmap = MediaStore.Images.Media.getBitmap(
+                        requireActivity().contentResolver,
+                        uri
+                    )
 
-                        val bitmap = MediaStore.Images.Media.getBitmap(
-                            requireActivity().contentResolver,
-                            imageUri
-                        )
 
-// Compress the bitmap to a JPEG format with 80% quality and save it to a file
-                        val outputStream = FileOutputStream(str)
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
-                        outputStream.close()
+                    val outputStream = FileOutputStream(str)
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
+                    outputStream.close()
 
-                        imageFiles.add(File(str))
+                    if (File(str).exists()) {
+                        Log.d("uploadImageArrayList", "exist: $str")
                     }
 
-                    uploadImageArrayList.add(uri)
-
-
-
-                    Log.d("Image URI", uri.toString())
+                    imageFiles.add(File(str))
 
                 }
 
-//                for (uri in uris) {
-//                    // Process each URI (image) as needed
-//                    // Example: display the URI
-//
-//                    uri.path?.let { File(it) }?.let {
-//                        val str = "${requireContext().filesDir}/file.jpg"
-//
-//                        val imageUri = uri
-//
-//                        val bitmap = MediaStore.Images.Media.getBitmap(
-//                            requireActivity().contentResolver,
-//                            imageUri
-//                        )
-//
-//// Compress the bitmap to a JPEG format with 80% quality and save it to a file
-//                        val outputStream = FileOutputStream(str)
-//                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
-//                        outputStream.close()
-//
-//                        imageFiles.add(File(str))
-//                    }
-//
-//                    uploadImageArrayList.add(uri)
-//
-//
-//
-//                    Log.d("Image URI", uri.toString())
-//                }
-
                 dialogUplodeImageAdapter.notifyDataSetChanged()
-
             }
-            if (uploadImageArrayList.isNotEmpty()) {
+            if (imageFiles.isNotEmpty()) {
                 constraintLayout4.visibility = View.GONE
                 recDialogBox.visibility = View.VISIBLE
             } else {
@@ -414,74 +410,21 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
     private fun uploadWithRetrofit(imageFiles: List<File>) {
 
-//        val imageFiles: List<File> = listOf(
-//            // Add your File objects representing images
-//            File("/path/to/image1.jpg"),
-//            File("/path/to/image2.jpg"),
-//            // ... Add more images
-//        )
 
-//        val imageParts: List<MultipartBody.Part> = imageFiles.mapIndexed { index, file ->
-//            MultipartBody.Part.createFormData(
-//                "image_$index",
-//                file.name,
-//                file.asRequestBody("image/*".toMediaType())
-//            )
-//        }
+        val imagesList = mutableListOf<MultipartBody.Part>()
 
-
-
-
-        val imageParts = ArrayList<MultipartBody.Part>()
-
-        imageFiles.forEachIndexed { index, file ->
-
-            Log.d("filePart", "uploadWithRetrofit: ${file.name}")
-
-            val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-            val filePart = MultipartBody.Part.createFormData("PropertyImage[]", "${file.name}.jpg", requestBody)
-
-            imageParts.add(filePart)
+        for (imageUri in imageFiles) {
+            imagesList.add(prepareFilePart("images", imageUri))
         }
 
-//        for (file in imageFiles) {
-////            val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-////            val filePart: MultipartBody.Part = MultipartBody.Part.createFormData("attachments[]", file.name, requestBody)
-//
-//
-//            val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-//
-//            val filePart: MultipartBody.Part = MultipartBody.Part.createFormData(
-//                "attachments[]", file.name, requestBody
-//            )
-//            imageParts.add(filePart)
-//        }
 
-
-//        val imageParts = imageFiles.mapNotNull { uri ->
-//            try {
-//                val file = File(uri.absolutePath)
-//                val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-//                MultipartBody.Part.createFormData("images", file.name, requestFile)
-//            } catch (e: Exception) {
-//                Log.e("ImageUploadManager", "Error creating image part: ${e.message}")
-//                null
-//            }
-//        }
-
-//        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-//
-//        val filePart: MultipartBody.Part = MultipartBody.Part.createFormData(
-//            "attachment", file.name, requestBody
-//        )
-//        Log.d("TAG", "uploadWithRetrofit: $filePart")
-
-
-        Log.d("imageParts", "uploadWithRetrofit: ${imageParts[0].headers}")
-
-        mViewModel.uploadReviewImg(imageParts)
+        mViewModel.uploadReviewImg(imagesList)
 
     }
 
+    private fun prepareFilePart(partName: String, fileUri: File): MultipartBody.Part {
+        val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), fileUri)
+        return MultipartBody.Part.createFormData(partName, fileUri.name, requestFile)
+    }
 
 }

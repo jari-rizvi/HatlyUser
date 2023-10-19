@@ -193,9 +193,16 @@ interface ApiService {
     @POST(NetworkCallPoints.UPLOAD_REVIEW_IMGS)
     suspend fun uploadReviewImg(
         @Part images: List<MultipartBody.Part>,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
+    ): Response<ModelUploadImages>
+
+
+    @POST(NetworkCallPoints.RE_ORDER)
+    suspend fun reOrder(
+        @Path("id") id: String,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
-    ): Response<ModelUploadImages>
+    ): Response<ModelForgotPass>
 
     @GET(NetworkCallPoints.CREDS_CARDS)
     suspend fun getCredCards(

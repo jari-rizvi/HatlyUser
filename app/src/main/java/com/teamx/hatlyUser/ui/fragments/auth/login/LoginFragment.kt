@@ -101,6 +101,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
                             CoroutineScope(Dispatchers.Main).launch {
                                 data.token.let { it1 ->
+                                    Log.d("loginWithGoogleResponse", "onViewCreated: $it1")
                                     dataStoreProvider.saveUserToken(it1)
                                     TOKENER = it1
                                 }

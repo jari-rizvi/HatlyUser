@@ -14,10 +14,12 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemShopCatBinding
 import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.models.modelCategory.Doc
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
+import okhttp3.MultipartBody
+import java.io.File
 
 
 class DialogUplodeImageAdapter(
-    private val foodsCategoryArrayList: ArrayList<Uri>,
+    private val foodsCategoryArrayList: ArrayList<File>,
     val hatlyShopInterface: HatlyShopInterface
 ) : RecyclerView.Adapter<DialogUplodeImageViewHolder>() {
 

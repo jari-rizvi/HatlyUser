@@ -6,6 +6,7 @@ import com.teamx.hatlyUser.data.local.db.ProductDao
 import com.teamx.hatlyUser.data.remote.ApiService
 import okhttp3.MultipartBody
 import retrofit2.http.Body
+import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
 import javax.inject.Inject
@@ -80,8 +81,12 @@ class MainRepository @Inject constructor(
     ) = apiService.orderHistory(page, limit)
 
     suspend fun uploadReviewImg(
-        imageParts: List<MultipartBody.Part>
-    ) = apiService.uploadReviewImg(imageParts)
+        @Part images: List<MultipartBody.Part>
+    ) = apiService.uploadReviewImg(images)
+
+    suspend fun reOrder(
+        id: String
+    ) = apiService.reOrder(id)
 
     suspend fun getCredCards(
     ) = apiService.getCredCards()

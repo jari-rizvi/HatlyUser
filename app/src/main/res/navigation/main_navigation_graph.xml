@@ -395,6 +395,9 @@
             app:destination="@id/reviewSubmitedFragment"
             app:popUpTo="@id/profileManagementFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_orderDetailFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
 
     <fragment
