@@ -18,7 +18,7 @@ data class Doc(
     val shippingAddress: ShippingAddress,
     val shop: Shop,
     val specialNote: String,
-    val status: String,
+    var status: String,
     val subTotal: Double,
     val tax: Double,
     val total: Double,

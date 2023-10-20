@@ -363,7 +363,11 @@
         android:id="@+id/personalInfoFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.profile.personalInfo.PersonalInformationFragment"
         android:label="PersonalInfo"
-        tools:layout="@layout/fragment_personal_information" />
+        tools:layout="@layout/fragment_personal_information" >
+        <action
+            android:id="@+id/action_personalInfoFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/locationFragment"
@@ -526,5 +530,11 @@
         android:name="com.teamx.hatlyUser.ui.fragments.special.parceldetail.ParcelDetailFragment"
         android:label="ParcelDetailFragment"
         tools:layout="@layout/fragment_parcel_detail" />
+
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.profile.changepassword.ChangePasswordFragment"
+        android:label="ChangePasswordFragment"
+        tools:layout="@layout/fragment_change_password" />
 
 </navigation>

@@ -46,7 +46,15 @@ class NetworkCallPoints {
 //        const val UPLOAD_REVIEW_IMGS = "upload/reviewImages"
         const val UPLOAD_REVIEW_IMGS = "upload/uploadMultiple"
 
+        const val REViEW_ORDER = "review/create"
+
+        const val REViEW_LIST = "review/list"
+
+        const val Wish_LIST = "wishlist"
+
         const val RE_ORDER = "order/reorder/{id}"
+
+        const val CANCEL_ORDER = "order/cancel/{id}"
 
         const val CREDS_CARDS = "stripe/list/paymentMethods"
 
@@ -55,6 +63,8 @@ class NetworkCallPoints {
         const val DETACH_CREDS_CARDS = "stripe/detach/paymentMethod"
 
         const val CREATE_ADDRESS = "locations"
+
+        const val CHANGE_PASSWORD = "auth/update-profile"
 
         const val SET_DEFAULT_ADDRESS = "locations/user/{id}"
 

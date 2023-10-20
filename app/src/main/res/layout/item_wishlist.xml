@@ -9,7 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/button_radius_corner">
 
@@ -47,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.7" />
+            app:layout_constraintGuide_percent="0.6" />
 
 
         <TextView
@@ -59,50 +60,74 @@
             android:textColor="#EA1B25"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView212"
+            app:layout_constraintBottom_toBottomOf="@+id/textView2122"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgShop"
+            app:layout_constraintTop_toTopOf="@+id/textView2122"
+            app:layout_constraintVertical_bias="0.2"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <TextView
-            android:id="@+id/textView212"
+
+        <RatingBar
+            android:id="@+id/shopRate"
+            style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans_regular"
-            android:text="Dil Pasand"
-            android:textColor="#80EA1B25"
-            android:textSize="@dimen/_11ssp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView21"
-            app:layout_constraintTop_toBottomOf="@+id/textView21" />
-
-        <ImageView
-            android:id="@+id/imgStar"
-            android:layout_width="@dimen/_12sdp"
-            android:layout_height="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_5sdp"
-            android:src="@drawable/mrb_star_icon_black_36dp"
+            android:progressTint="#FEBD19"
+            android:rating="4"
             app:layout_constraintBottom_toBottomOf="@+id/textView2122"
             app:layout_constraintEnd_toStartOf="@+id/textView2122"
-            app:layout_constraintTop_toTopOf="@+id/textView2122"
-            app:tint="#FEBD19" />
+            app:layout_constraintTop_toTopOf="@+id/textView2122" />
 
         <TextView
             android:id="@+id/textView2122"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_10sdp"
             android:fontFamily="@font/open_sans_regular"
             android:text="4.9"
             android:textColor="#B8B7B7"
+            app:layout_constraintHorizontal_bias="0.95"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView21"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView21" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgShop" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textView2122"
+            app:layout_constraintTop_toBottomOf="@+id/textView2122">
+
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:src="@drawable/outline_access_time_24"
+                app:tint="#1ED860"
+                tools:layout_editor_absoluteX="147dp"
+                tools:layout_editor_absoluteY="78dp" />
+
+            <TextView
+                android:id="@+id/txtDelivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:fontFamily="@font/open_sans_regular"
+                android:text="Delivery 30 min"
+                android:textColor="#363636"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="176dp"
+                tools:layout_editor_absoluteY="80dp" />
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

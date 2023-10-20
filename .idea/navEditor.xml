@@ -55,6 +55,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="changePasswordFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="2270" />
+                            <option name="y" value="2778" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="chatFragment">
                     <value>
                       <LayoutPositions>
@@ -436,6 +448,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_orderDetailFragment_to_cartFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_orderDetailFragment_to_reviewSubmitedFragment">
                               <value>
                                 <LayoutPositions />

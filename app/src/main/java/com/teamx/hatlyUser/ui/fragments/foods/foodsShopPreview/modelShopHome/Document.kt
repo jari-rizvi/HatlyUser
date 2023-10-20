@@ -1,7 +1,5 @@
 package com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome
-
 import androidx.annotation.Keep
-
 @Keep
 data class Document(
     val _id: String,
@@ -11,10 +9,10 @@ data class Document(
     val menuCategory: String,
     val minPrice: Double,
     val name: String,
+    val price: Double,
     val productType: String,
     val quantity: Int,
     val salePrice: Double,
-    val price: Double,
     val shopId: String,
     val veriations: List<Veriation>
 )

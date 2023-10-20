@@ -58,6 +58,24 @@
             app:tint="#363636" />
 
         <ImageView
+            android:id="@+id/imgFavourite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/input_auth_field"
+            android:backgroundTint="@color/white"
+            android:elevation="1dp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/outline_favorite_24"
+            app:layout_constraintBottom_toBottomOf="@+id/imgBack"
+            app:layout_constraintEnd_toStartOf="@+id/imgShare"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgBack"
+            app:layout_constraintVertical_bias="0.05"
+            app:tint="#363636" />
+
+        <ImageView
             android:id="@+id/imgSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +86,7 @@
             android:padding="@dimen/_5sdp"
             android:src="@drawable/search_24"
             app:layout_constraintBottom_toBottomOf="@+id/imgBack"
-            app:layout_constraintEnd_toStartOf="@+id/imgShare"
+            app:layout_constraintEnd_toStartOf="@+id/imgFavourite"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imgBack"
@@ -123,6 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:progressTint="#FEBD19"
+                    android:layout_gravity="center_vertical"
                     android:rating="4"
                     tools:layout_editor_absoluteX="15dp"
                     tools:layout_editor_absoluteY="56dp" />

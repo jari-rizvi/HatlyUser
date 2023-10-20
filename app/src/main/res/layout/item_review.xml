@@ -73,6 +73,7 @@
             app:layout_constraintHorizontal_bias="0.95"
             android:progressTint="#FEBD19"
             android:rating="4"
+            app:layout_constraintVertical_bias="0"
             android:secondaryProgressTint="#D9D9D9"
             app:layout_constraintBottom_toBottomOf="@+id/textView37"
             app:layout_constraintEnd_toEndOf="parent"

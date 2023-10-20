@@ -84,9 +84,28 @@ class MainRepository @Inject constructor(
         @Part images: List<MultipartBody.Part>
     ) = apiService.uploadReviewImg(images)
 
+    suspend fun reviewList(
+        @Query("shopId") shopId: String,
+        @Query("limit") limit: Int,
+        @Query("page") page: Int
+    ) = apiService.reviewList(shopId, limit, page)
+
+    suspend fun reviewOrder(
+        @Body params: JsonObject
+    ) = apiService.reviewOrder(params)
+
+    suspend fun wishList(
+        @Query("limit") limit: Int,
+        @Query("page") page: Int
+    ) = apiService.wishList(limit, page)
+
     suspend fun reOrder(
         id: String
     ) = apiService.reOrder(id)
+
+    suspend fun cancelOrder(
+        id: String
+    ) = apiService.cancelOrder(id)
 
     suspend fun getCredCards(
     ) = apiService.getCredCards()
@@ -109,6 +128,7 @@ class MainRepository @Inject constructor(
     ) = apiService.updateAddress(id, params)
 
     suspend fun getAddress() = apiService.getAddress()
+    suspend fun changePassword(@Body params: JsonObject) = apiService.changePassword(params)
 
-    suspend fun setDefaultAddress(@Path("id") id: String,) = apiService.setDefaultAddress(id)
+    suspend fun setDefaultAddress(@Path("id") id: String) = apiService.setDefaultAddress(id)
 }

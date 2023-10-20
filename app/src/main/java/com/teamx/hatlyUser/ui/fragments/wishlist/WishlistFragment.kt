@@ -6,7 +6,6 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.AbsListView
-import android.widget.CompoundButton
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
@@ -15,17 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
-import com.teamx.hatlyUser.databinding.FragmentContactusBinding
-import com.teamx.hatlyUser.databinding.FragmentSettingBinding
-import com.teamx.hatlyUser.databinding.FragmentWalletBinding
+import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentWishlistBinding
-import com.teamx.hatlyUser.ui.fragments.notification.adapter.NotificationAdapter
-import com.teamx.hatlyUser.ui.fragments.setting.contactus.ContactUsViewModel
-import com.teamx.hatlyUser.ui.fragments.setting.settings.SettingViewModel
-import com.teamx.hatlyUser.ui.fragments.wallet.WalletViewModel
-import com.teamx.hatlyUser.ui.fragments.wallet.adapter.WalletAdapter
 import com.teamx.hatlyUser.ui.fragments.wishlist.adapter.WishListAdapter
-import com.teamx.hatlyUser.utils.DialogHelperClass
+import com.teamx.hatlyUser.ui.fragments.wishlist.modelWishList.Doc
+import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -39,7 +32,7 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    lateinit var itemClasses: ArrayList<String>
+    lateinit var wishListArraylist: ArrayList<Doc>
     lateinit var hatlyPopularAdapter: WishListAdapter
 
     var isScrolling = false
@@ -79,37 +72,34 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
         val layoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
 
         mViewDataBinding.recWishlist.layoutManager = layoutManager2
-
-        itemClasses = ArrayList()
-
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-
-        hatlyPopularAdapter = WishListAdapter(itemClasses)
+        wishListArraylist = ArrayList()
+        hatlyPopularAdapter = WishListAdapter(wishListArraylist)
         mViewDataBinding.recWishlist.adapter = hatlyPopularAdapter
+
+        mViewModel.wishList(10,1)
+
+        if (!mViewModel.wishListResponse.hasActiveObservers()) {
+            mViewModel.wishListResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            wishListArraylist.clear()
+                            wishListArraylist.addAll(data.docs)
+                            hatlyPopularAdapter.notifyDataSetChanged()
+                        }
+                    }
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        mViewDataBinding.root.snackbar(it.message!!)
+                    }
+                }
+            }
+        }
+
 
         mViewDataBinding.recWishlist.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -130,35 +120,35 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
                 if(isScrolling && (currentItems + scrollOutItems == totalItems))
                 {
                     isScrolling = false;
-                    fetchData()
+//                    fetchData()
                 }
             }
         })
 
     }
 
-    private fun fetchData(){
-        mViewDataBinding.spinKit.visibility = View.VISIBLE
-        Handler(Looper.getMainLooper()).postDelayed({
-            for (i in 1..5) {
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-                itemClasses.add("")
-            }
-            mViewDataBinding.spinKit.visibility = View.GONE
-            hatlyPopularAdapter.notifyDataSetChanged()
-        }, 5000)
-
-
-    }
+//    private fun fetchData(){
+//        mViewDataBinding.spinKit.visibility = View.VISIBLE
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            for (i in 1..5) {
+//                wishListArraylist.add("")
+//                wishListArraylist.add("")
+//                wishListArraylist.add("")
+//                wishListArraylist.add("")
+//                wishListArraylist.add("")
+//                wishListArraylist.add("")
+//                wishListArraylist.add("")
+//                wishListArraylist.add("")
+//                wishListArraylist.add("")
+//                wishListArraylist.add("")
+//                wishListArraylist.add("")
+//            }
+//            mViewDataBinding.spinKit.visibility = View.GONE
+//            hatlyPopularAdapter.notifyDataSetChanged()
+//        }, 5000)
+//
+//
+//    }
 
 
 

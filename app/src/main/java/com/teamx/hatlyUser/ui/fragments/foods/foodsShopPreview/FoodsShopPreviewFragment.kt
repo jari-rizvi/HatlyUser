@@ -44,6 +44,8 @@ class FoodsShopPreviewFragment :
     var productLayoutManager2: LinearLayoutManager? = null
     var categoryLayoutManager: GridLayoutManager? = null
 
+    var shopId = ""
+
     var isScrolling = false
     var currentItems = 0
     var totalItems = 0
@@ -96,7 +98,14 @@ class FoodsShopPreviewFragment :
         }
 
         mViewDataBinding.linearLayout.setOnClickListener {
-            findNavController().navigate(R.id.action_foodsShopHomeFragment_to_reviewFragment)
+            if (shopId.isNotEmpty()) {
+                val bundle = Bundle()
+                bundle.putString("shopId", shopId)
+                findNavController().navigate(
+                    R.id.action_foodsShopHomeFragment_to_reviewFragment,
+                    bundle
+                )
+            }
         }
 
 
@@ -116,6 +125,8 @@ class FoodsShopPreviewFragment :
                     loadingDialog.dismiss()
                     it.data?.let { data ->
 
+                        shopId = data.shop._id
+
                         Picasso.get().load(data.shop.image).into(mViewDataBinding.imgShop)
 
                         mViewDataBinding.textView19.text = try {
@@ -131,7 +142,7 @@ class FoodsShopPreviewFragment :
                         }
 
                         val rattingSum = data.shop.ratting
-                        mViewDataBinding.shopRate.rating = rattingSum
+                        mViewDataBinding.shopRate.rating = rattingSum.toFloat()
                         mViewDataBinding.txtRating.text = try {
                             rattingSum.toString()
                         } catch (e: Exception) {

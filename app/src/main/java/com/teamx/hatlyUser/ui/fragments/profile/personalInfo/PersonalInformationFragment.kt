@@ -50,6 +50,9 @@ class PersonalInformationFragment : BaseFragment<FragmentPersonalInformationBind
             findNavController().popBackStack()
         }
 
+        mViewDataBinding.textView35.setOnClickListener {
+            findNavController().navigate(R.id.action_personalInfoFragment_to_changePasswordFragment)
+        }
 
 
     }

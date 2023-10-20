@@ -174,8 +174,8 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 //        24.90147393769095, 67.11531056779101
         val params = JsonObject()
         try {
-            params.addProperty("lat", 24.90147393769095)
-            params.addProperty("lng", 7.11531056779101)
+            params.addProperty("lat", 24.901417466891772)
+            params.addProperty("lng", 67.11549957694464)
         } catch (e: JSONException) {
             e.printStackTrace()
         }
@@ -187,7 +187,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 try {
                     params.add(
                         "coordinates",
-                        Gson().toJsonTree(Coordinates(24.90147393769095, 24.90147393769095))
+                        Gson().toJsonTree(Coordinates(24.901417466891772, 67.11549957694464))
                     )
                     params.addProperty("useWallet", isChecked)
                 } catch (e: JSONException) {
@@ -317,10 +317,11 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                                         "placeOrderResponse",
                                         "onViewCreated: CASH_ON_DELIVERY"
                                     )
-                                    findNavController().navigate(com.teamx.hatlyUser.R.id.action_checkOutFragment_to_orderPlacedFragment)
+                                    if (isAdded) {
+                                        findNavController().navigate(com.teamx.hatlyUser.R.id.action_checkOutFragment_to_orderPlacedFragment)
+                                    }
                                 }
                             }
-
                             PaymentMethod.ONLINE_PAYMENT -> {
                                 // Process payment for Online Payment
                                 if (data.clientSecret != null) {
@@ -331,7 +332,6 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                                     showStripeSheet(data.clientSecret)
                                 }
                             }
-
                             PaymentMethod.PAYPAL -> {
                                 Log.d(
                                     "placeOrderResponse",
@@ -342,7 +342,6 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                         }
                     }
                 }
-
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
                     mViewDataBinding.root.snackbar(it.message!!)
@@ -521,7 +520,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         try {
 
             params.add(
-                "coordinates", Gson().toJsonTree(Coordinates(24.90147393769095, 24.90147393769095))
+                "coordinates", Gson().toJsonTree(Coordinates(24.901417466891772, 67.11549957694464))
             )
             params.add(
                 "shippingAddress", Gson().toJsonTree(

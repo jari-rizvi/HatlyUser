@@ -13,6 +13,7 @@ import com.teamx.hatlyUser.ui.fragments.auth.signup.model.ModelSignUp
 import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.models.modelCategory.ModelFoodsCategory
 import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.models.modelShops.ModelFoodShops
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.FoodShopModel
+import com.teamx.hatlyUser.ui.fragments.foods.review.modelReviewList.ModelReviewList
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.categoryModel.ModelCategory
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproductmodel.ModelPopularProducts
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
@@ -26,9 +27,11 @@ import com.teamx.hatlyUser.ui.fragments.payments.paymentmethod.modelDetach.Model
 import com.teamx.hatlyUser.ui.fragments.payments.paymentmethod.modelGetCards.ModelCredCards
 import com.teamx.hatlyUser.ui.fragments.products.model.ModelProductPreview
 import com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.AddToCart
+import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.modelReview.ModelReviewShop
 import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.modelUploadImages.ModelUploadImages
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.OrderHistoryModel
 import com.teamx.hatlyUser.ui.fragments.shophome.model.ModelSubCategoryStore
+import com.teamx.hatlyUser.ui.fragments.wishlist.modelWishList.ModelWishList
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -197,8 +200,37 @@ interface ApiService {
     ): Response<ModelUploadImages>
 
 
+    @POST(NetworkCallPoints.REViEW_ORDER)
+    suspend fun reviewOrder(
+        @Body params: JsonObject,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
+    ): Response<ModelReviewShop>
+
+    @GET(NetworkCallPoints.REViEW_LIST)
+    suspend fun reviewList(
+        @Query("shopId") shopId: String,
+        @Query("limit") limit: Int,
+        @Query("page") page: Int,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
+    ): Response<ModelReviewList>
+
+
+    @GET(NetworkCallPoints.Wish_LIST)
+    suspend fun wishList(
+        @Query("limit") limit: Int,
+        @Query("page") page: Int,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
+    ): Response<ModelWishList>
+
     @POST(NetworkCallPoints.RE_ORDER)
     suspend fun reOrder(
+        @Path("id") id: String,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelForgotPass>
+
+    @PATCH(NetworkCallPoints.CANCEL_ORDER)
+    suspend fun cancelOrder(
         @Path("id") id: String,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
@@ -244,6 +276,14 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<CreateAddressModel>
+
+
+    @PUT(NetworkCallPoints.CHANGE_PASSWORD)
+    suspend fun changePassword(
+        @Body params: JsonObject,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelDefaultAddress>
 
 
     @PUT(NetworkCallPoints.SET_DEFAULT_ADDRESS)

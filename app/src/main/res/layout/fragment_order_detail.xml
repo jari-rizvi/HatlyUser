@@ -251,12 +251,13 @@
             app:layout_constraintEnd_toEndOf="@+id/txtTitle111323"
             app:layout_constraintTop_toTopOf="@+id/txtTitle121212" />
 
-        <TextView
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
             android:id="@+id/txtLogin"
             android:layout_width="336dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_radius_green"
-            android:backgroundTint="#EA1B25"
+            android:backgroundTint="@color/disable_button"
             android:fontFamily="@font/open_sans_regular"
             android:paddingVertical="@dimen/_10sdp"
             android:text="Re-Order"
@@ -269,6 +270,24 @@
             app:layout_constraintStart_toStartOf="@+id/txtTitle121212"
             app:layout_constraintTop_toBottomOf="@+id/txtTitle121212" />
 
+<!--        <TextView-->
+<!--            android:id="@+id/txtLogin"-->
+<!--            android:layout_width="336dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/button_radius_green"-->
+<!--            android:backgroundTint="#EA1B25"-->
+<!--            android:fontFamily="@font/open_sans_regular"-->
+<!--            android:paddingVertical="@dimen/_10sdp"-->
+<!--            android:text="Re-Order"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="@dimen/_13ssp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/txtLogin1"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/txtTitle1113233"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/txtTitle121212"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/txtTitle121212" />-->
+
         <TextView
             android:id="@+id/txtLogin1"
             android:layout_width="336dp"
@@ -277,6 +296,7 @@
             android:fontFamily="@font/open_sans_regular"
             android:paddingVertical="@dimen/_10sdp"
             android:text="Write a review"
+            android:visibility="gone"
             android:textAlignment="center"
             android:textColor="#EA1B25"
             android:textSize="@dimen/_13ssp"

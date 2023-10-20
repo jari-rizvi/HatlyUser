@@ -5,10 +5,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.gson.JsonObject
 import com.teamx.hatlyUser.baseclasses.BaseViewModel
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
 import com.teamx.hatlyUser.ui.fragments.auth.forgotpassword.model.ModelForgotPass
+import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.modelReview.ModelReviewShop
 import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.modelUploadImages.ModelUploadImages
 import com.teamx.hatlyUser.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -57,6 +59,39 @@ class OrderDetailViewModel @Inject constructor(
     }
 
 
+    private val _reviewOrderResponse = MutableLiveData<Resource<ModelReviewShop>>()
+    val reviewOrderResponse: LiveData<Resource<ModelReviewShop>>
+        get() = _reviewOrderResponse
+
+    fun reviewOrder(params: JsonObject) {
+        viewModelScope.launch {
+            _reviewOrderResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.reviewOrder(params).let {
+                        if (it.isSuccessful) {
+                            _reviewOrderResponse.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _reviewOrderResponse.postValue(Resource.error(jsonObj.getString("message")))
+                            Log.d("uploadReviewImg", "jsonObj ${it.code()}: ${jsonObj.getString("message")}")
+                        } else {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _reviewOrderResponse.postValue(Resource.error(jsonObj.getString("message")))
+                            Log.d("uploadReviewImg", "jsonObj: ${jsonObj.getString("message")}")
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.d("uploadReviewImg", "Exception: ${e.message}")
+                    _reviewOrderResponse.postValue(Resource.error("${e.message}", null))
+                }
+            } else{
+                _reviewOrderResponse.postValue(Resource.error("No internet connection", null))
+            }
+        }
+    }
+
+
 
     private val _reOrderResponse = MutableLiveData<Resource<ModelForgotPass>>()
     val reOrderResponse: LiveData<Resource<ModelForgotPass>>
@@ -82,6 +117,34 @@ class OrderDetailViewModel @Inject constructor(
                     _reOrderResponse.postValue(Resource.error("${e.message}", null))
                 }
             } else _reOrderResponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+
+    private val _cancelOrderResponse = MutableLiveData<Resource<ModelForgotPass>>()
+    val cancelOrderResponse: LiveData<Resource<ModelForgotPass>>
+        get() = _cancelOrderResponse
+
+    fun cancelOrder(id: String) {
+        viewModelScope.launch {
+            _cancelOrderResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.cancelOrder(id).let {
+                        if (it.isSuccessful) {
+                            _cancelOrderResponse.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _cancelOrderResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        } else {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _cancelOrderResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }
+                    }
+                } catch (e: Exception) {
+                    _cancelOrderResponse.postValue(Resource.error("${e.message}", null))
+                }
+            } else _cancelOrderResponse.postValue(Resource.error("No internet connection", null))
         }
     }
 
