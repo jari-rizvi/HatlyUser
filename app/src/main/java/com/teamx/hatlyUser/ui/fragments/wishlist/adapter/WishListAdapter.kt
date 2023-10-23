@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.databinding.ItemWishlistBinding
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.wishlist.modelWishList.Doc
 
 class WishListAdapter(
-    private val addressArrayList: ArrayList<Doc>
+    private val addressArrayList: ArrayList<Doc>,
+    private val hatlyShopInterface: HatlyShopInterface
 ) : RecyclerView.Adapter<HatlyPopularViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HatlyPopularViewHolder {
@@ -32,6 +34,10 @@ class WishListAdapter(
            "Delivery ${arrayData.shop.delivery.value} ${arrayData.shop.delivery.unit}"
         }catch (e : Exception){
             ""
+        }
+
+        holder.bind.imgFavourite.setOnClickListener {
+            hatlyShopInterface.clickshopItem(position)
         }
 
         holder.bind.shopRate.rating = arrayData.averageRating.toFloat()

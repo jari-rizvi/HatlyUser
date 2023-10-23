@@ -9,6 +9,7 @@ import com.google.gson.JsonObject
 import com.teamx.hatlyUser.baseclasses.BaseViewModel
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
+import com.teamx.hatlyUser.ui.fragments.location.map.modelDefaultAddress.ModelDefaultAddress
 import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.modelReview.ModelReviewShop
 import com.teamx.hatlyUser.ui.fragments.wishlist.modelWishList.ModelWishList
 import com.teamx.hatlyUser.utils.NetworkHelper
@@ -55,6 +56,34 @@ class WishlistViewModel @Inject constructor(
             } else{
                 _wishListResponse.postValue(Resource.error("No internet connection", null))
             }
+        }
+    }
+
+
+    private val _favRemoveResponse = MutableLiveData<Resource<ModelDefaultAddress>>()
+    val favRemoveResponse: LiveData<Resource<ModelDefaultAddress>>
+        get() = _favRemoveResponse
+
+    fun favRemove(params: JsonObject) {
+        viewModelScope.launch {
+            _favRemoveResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.favRemove(params).let {
+                        if (it.isSuccessful) {
+                            _favRemoveResponse.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _favRemoveResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        } else {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _favRemoveResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }
+                    }
+                } catch (e: Exception) {
+                    _favRemoveResponse.postValue(Resource.error("${e.message}", null))
+                }
+            } else _favRemoveResponse.postValue(Resource.error("No internet connection", null))
         }
     }
 

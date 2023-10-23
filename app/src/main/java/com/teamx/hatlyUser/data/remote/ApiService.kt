@@ -19,6 +19,7 @@ import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproduct
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
 import com.teamx.hatlyUser.ui.fragments.location.map.modelDefaultAddress.ModelDefaultAddress
 import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModel
+import com.teamx.hatlyUser.ui.fragments.notification.modelNotification.ModelNotification
 import com.teamx.hatlyUser.ui.fragments.payments.cart.model.ModelCart
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.model.ModelOrderSummary
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.modelPlaceOrder.ModelPlaceOrder
@@ -128,6 +129,19 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<FoodShopModel>
+
+    @POST(NetworkCallPoints.FAVOURITE_REMOVE)
+    suspend fun favRemove(
+        @Body params: JsonObject,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelDefaultAddress>
+
+    @POST(NetworkCallPoints.NOTIFICATION_LIST)
+    suspend fun notification(
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelNotification>
 
     @GET(NetworkCallPoints.PROD_PREVIEW)
     suspend fun prodPreview(

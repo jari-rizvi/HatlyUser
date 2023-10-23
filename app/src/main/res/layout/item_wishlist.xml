@@ -28,20 +28,48 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imgFavourite"
-            android:layout_width="@dimen/_18sdp"
-            android:layout_height="@dimen/_18sdp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/imgFavouriteLayout"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:background="@drawable/bg_circle"
             android:backgroundTint="@color/white"
-            android:padding="@dimen/_3sdp"
-            android:src="@drawable/outline_favorite_24"
             app:layout_constraintBottom_toBottomOf="@+id/imgShop"
             app:layout_constraintEnd_toEndOf="@+id/imgShop"
             app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="@+id/imgShop"
             app:layout_constraintTop_toTopOf="@+id/imgShop"
-            app:layout_constraintVertical_bias="0.1" />
+            app:layout_constraintVertical_bias="0.1">
+
+            <androidx.appcompat.widget.AppCompatCheckedTextView
+                android:id="@+id/imgFavourite"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/_3sdp"
+                android:background="@drawable/favourite_remove_selector"
+                android:checked="true"
+                android:elevation="@dimen/_2sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--        <ImageView-->
+        <!--            android:id="@+id/imgFavourite"-->
+        <!--            android:layout_width="@dimen/_18sdp"-->
+        <!--            android:layout_height="@dimen/_18sdp"-->
+        <!--            android:background="@drawable/bg_circle"-->
+        <!--            android:backgroundTint="@color/white"-->
+        <!--            android:padding="@dimen/_3sdp"-->
+        <!--            android:src="@drawable/outline_favorite_24"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/imgShop"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/imgShop"-->
+        <!--            app:layout_constraintHorizontal_bias="0.05"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/imgShop"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/imgShop"-->
+        <!--            app:layout_constraintVertical_bias="0.1" />-->
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline1"
@@ -88,11 +116,11 @@
             android:fontFamily="@font/open_sans_regular"
             android:text="4.9"
             android:textColor="#B8B7B7"
-            app:layout_constraintHorizontal_bias="0.95"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.95"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgShop" />
 

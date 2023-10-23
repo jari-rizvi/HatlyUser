@@ -68,7 +68,7 @@
             android:fontFamily="@font/open_sans_regular"
             android:paddingHorizontal="@dimen/_10sdp"
             android:paddingVertical="@dimen/_1sdp"
-            android:text="Default"
+            android:text="Set as Default"
             android:textColor="@color/white"
             android:textSize="@dimen/_9ssp"
             android:textStyle="bold"

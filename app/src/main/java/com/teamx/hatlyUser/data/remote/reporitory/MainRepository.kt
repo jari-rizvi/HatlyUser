@@ -66,6 +66,9 @@ class MainRepository @Inject constructor(
     ) = apiService.allFoodsShops(page, limit, offset, search, id)
 
     suspend fun foodsShopHome(id: String) = apiService.foodsShopHome(id)
+    suspend fun favRemove(params: JsonObject) = apiService.favRemove(params)
+
+    suspend fun notification() = apiService.notification()
 
     suspend fun prodPreview(id: String) = apiService.prodPreview(id)
     suspend fun addToCart(@Body params: JsonObject) = apiService.addToCart(params)

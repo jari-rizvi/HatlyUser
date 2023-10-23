@@ -7,6 +7,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
@@ -22,6 +24,7 @@ import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShop
 import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONException
 
 
 @AndroidEntryPoint
@@ -36,12 +39,12 @@ class FoodsShopPreviewFragment :
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    lateinit var shopCategoryArrayList: ArrayList<Product>
-    lateinit var productArrayList: ArrayList<Document>
-    lateinit var foodsShopProductAdapter: FoodsShopProductAdapter
-    lateinit var shopHomeAdapter: FoodHomeTitleAdapter
+    private lateinit var shopCategoryArrayList: ArrayList<Product>
+    private lateinit var productArrayList: ArrayList<Document>
+    private lateinit var foodsShopProductAdapter: FoodsShopProductAdapter
+    private lateinit var shopHomeAdapter: FoodHomeTitleAdapter
 
-    var productLayoutManager2: LinearLayoutManager? = null
+    private var productLayoutManager2: LinearLayoutManager? = null
     var categoryLayoutManager: GridLayoutManager? = null
 
     var shopId = ""
@@ -108,6 +111,18 @@ class FoodsShopPreviewFragment :
             }
         }
 
+        mViewDataBinding.imgFavourite.setOnClickListener {
+            if (shopId.isNotEmpty()) {
+                val params = JsonObject()
+                try {
+                    params.addProperty("itemId", shopId)
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+                mViewModel.favRemove(params)
+            }
+        }
+
 
 //        Log.d("itemClasses", "onViewCreated: ${shopShopArrayList.binarySearch("hello")}")
 
@@ -115,7 +130,8 @@ class FoodsShopPreviewFragment :
         initializeCategoriesAdapter()
         initializeproductAdapter()
 
-        mViewModel.foodsShopHomeResponse.observe(requireActivity()) {
+        mViewModel.foodsShopHomeResponse.observe(requireActivity())
+        {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
@@ -128,6 +144,8 @@ class FoodsShopPreviewFragment :
                         shopId = data.shop._id
 
                         Picasso.get().load(data.shop.image).into(mViewDataBinding.imgShop)
+
+                        mViewDataBinding.imgFavourite.isChecked = data.shop.hasAddedToWishlist
 
                         mViewDataBinding.textView19.text = try {
                             data.shop.name
@@ -167,6 +185,32 @@ class FoodsShopPreviewFragment :
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
                     mViewDataBinding.root.snackbar(it.message!!)
+                }
+            }
+        }
+
+
+        if (!mViewModel.favRemoveResponse.hasActiveObservers()) {
+            mViewModel.favRemoveResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            if (data.success) {
+                                mViewDataBinding.imgFavourite.isChecked =
+                                    !mViewDataBinding.imgFavourite.isChecked
+                            }
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        mViewDataBinding.root.snackbar(it.message!!)
+                    }
                 }
             }
         }

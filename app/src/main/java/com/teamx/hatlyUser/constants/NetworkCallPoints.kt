@@ -25,6 +25,10 @@ class NetworkCallPoints {
 
         const val SHOP_FOODS = "food/{id}"
 
+        const val FAVOURITE_REMOVE = "wishlist"
+
+        const val NOTIFICATION_LIST = "wishlist"
+
         const val PROD_PREVIEW = "product/{id}"
 
         const val ADD_TO_CART = "cart/add"
