@@ -27,7 +27,7 @@ class NetworkCallPoints {
 
         const val FAVOURITE_REMOVE = "wishlist"
 
-        const val NOTIFICATION_LIST = "wishlist"
+        const val NOTIFICATION_LIST = "notification/all"
 
         const val PROD_PREVIEW = "product/{id}"
 

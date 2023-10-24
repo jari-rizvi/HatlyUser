@@ -137,7 +137,7 @@ interface ApiService {
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<ModelDefaultAddress>
 
-    @POST(NetworkCallPoints.NOTIFICATION_LIST)
+    @GET(NetworkCallPoints.NOTIFICATION_LIST)
     suspend fun notification(
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"

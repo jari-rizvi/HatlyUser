@@ -46,6 +46,7 @@ import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.Coordinates
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.adapter.CheckOutAdapter
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.model.Product
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.modelPlaceOrder.ShippingAddress
+import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONException
@@ -85,6 +86,10 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 popExit = com.teamx.hatlyUser.R.anim.nav_default_pop_exit_anim
             }
         }
+
+        val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+
+        sharedViewModel.setlocationmodel(userData?.location)
 
         if (isAdded) {
             paymentSheet = PaymentSheet(this, ::onPaymentSheetResult)
@@ -349,6 +354,31 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
             }
         }
 
+        mViewModel.credCards()
+        mViewModel.credCardsResponse.observe(requireActivity()) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    it.data?.let { data ->
+                        mViewDataBinding.textView12155453.text = try {
+                            "**** **** **** ${data.default!!.card.last4} | ${data.default.card.exp_month}/${data.default!!.card.exp_year}"
+                        }catch (e : Exception){
+                            ""
+                        }
+                    }
+                }
+
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    mViewDataBinding.root.snackbar(it.message!!)
+                }
+            }
+        }
+
 //        val config = CoreConfig("<CLIENT_ID>", environment = Environment.SANDBOX)
 //
 //        val payPalNativeClient = PayPalNativeCheckoutClient(
@@ -520,8 +550,9 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         try {
 
             params.add(
-                "coordinates", Gson().toJsonTree(Coordinates(24.901417466891772, 67.11549957694464))
+                "coordinates", Gson().toJsonTree(Coordinates(location.latitude, location.longitude))
             )
+
             params.add(
                 "shippingAddress", Gson().toJsonTree(
                     ShippingAddress(
@@ -568,10 +599,22 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         return params
     }
 
+    lateinit var location : LatLng
+
     override fun onMapReady(p0: GoogleMap) {
         Log.d("onMapReady", "onMapReady: if")
-        val location =
-            LatLng(24.902204583353058, 67.11535962960994) // Example location (San Francisco)
+
+        sharedViewModel.locationmodel.observe(requireActivity()) { locationModel ->
+
+            if (locationModel != null) {
+                location = LatLng(locationModel.lat, locationModel.lng) // Example location (San Francisco)
+            } else {
+                if (isAdded){
+                    mViewDataBinding.root.snackbar("Add your location")
+                }
+            }
+        }
+
 
         p0.uiSettings.isZoomControlsEnabled = false
         p0.uiSettings.isScrollGesturesEnabled = false

@@ -32,7 +32,7 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding, SignUpViewModel>() {
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    private var userEmail: String? = null
+//    private var userEmail: String? = null
     private var password: String? = null
     private var name: String? = null
     private var userNumber: String? = null
@@ -94,7 +94,7 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding, SignUpViewModel>() {
 
     private fun initialization() {
         name = mViewDataBinding.userFullName.text.toString().trim()
-        userEmail = mViewDataBinding.userEmail.text.toString().trim()
+//        userEmail = mViewDataBinding.userEmail.text.toString().trim()
         userNumber = mViewDataBinding.userMobile.text.toString().trim()
         password = mViewDataBinding.userPassword.text.toString().trim()
     }
@@ -103,7 +103,7 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding, SignUpViewModel>() {
         val params = JsonObject()
         try {
             params.addProperty("name", name.toString())
-            params.addProperty("email", userEmail.toString())
+//            params.addProperty("email", userEmail.toString())
             params.addProperty("contact", userNumber.toString())
             params.addProperty("password", password.toString())
 
@@ -120,16 +120,16 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding, SignUpViewModel>() {
             mViewDataBinding.root.snackbar("Enter name")
             return false
         }
-        if (mViewDataBinding.userEmail.text.toString().trim().isEmpty()) {
-            mViewDataBinding.root.snackbar("Enter email")
-            return false
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(mViewDataBinding.userEmail.text.toString().trim())
-                .matches()
-        ) {
-            mViewDataBinding.root.snackbar("Invalid email")
-            return false
-        }
+//        if (mViewDataBinding.userEmail.text.toString().trim().isEmpty()) {
+//            mViewDataBinding.root.snackbar("Enter email")
+//            return false
+//        }
+//        if (!Patterns.EMAIL_ADDRESS.matcher(mViewDataBinding.userEmail.text.toString().trim())
+//                .matches()
+//        ) {
+//            mViewDataBinding.root.snackbar("Invalid email")
+//            return false
+//        }
         if (mViewDataBinding.userMobile.text.toString().trim().isEmpty()) {
             mViewDataBinding.root.snackbar("Enter mobile")
             return false

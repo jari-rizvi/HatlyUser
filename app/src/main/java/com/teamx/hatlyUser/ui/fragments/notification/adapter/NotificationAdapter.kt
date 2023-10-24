@@ -4,9 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.databinding.ItemNotificationsBinding
+import com.teamx.hatlyUser.ui.fragments.notification.modelNotification.Doc
 
 class NotificationAdapter(
-    private val addressArrayList: ArrayList<String>
+    private val addressArrayList: ArrayList<Doc>
 ) : RecyclerView.Adapter<HatlyPopularViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HatlyPopularViewHolder {

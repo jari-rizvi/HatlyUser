@@ -8,9 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentNotificationBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.notification.adapter.NotificationAdapter
+import com.teamx.hatlyUser.ui.fragments.notification.modelNotification.Doc
+import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -32,7 +35,7 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
     var totalItems = 0
     var scrollOutItems = 0
 
-    private lateinit var notificationArrayList: ArrayList<String>
+    private lateinit var notificationArrayList: ArrayList<Doc>
     private lateinit var hatlyPopularAdapter: NotificationAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,31 +60,33 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
         hatlyPopularAdapter = NotificationAdapter(notificationArrayList)
         mViewDataBinding.recNotification.adapter = hatlyPopularAdapter
 
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
-        notificationArrayList.add("")
+
+        mViewModel.notification()
+
+        if (!mViewModel.notificationResponse.hasActiveObservers()) {
+            mViewModel.notificationResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            notificationArrayList.clear()
+                            notificationArrayList.addAll(data.docs)
+                            hatlyPopularAdapter.notifyDataSetChanged()
+
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        mViewDataBinding.root.snackbar(it.message!!)
+                    }
+                }
+            }
+        }
 
 
 

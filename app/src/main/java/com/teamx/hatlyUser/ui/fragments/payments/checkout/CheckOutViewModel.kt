@@ -11,6 +11,7 @@ import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
 import com.teamx.hatlyUser.ui.fragments.payments.cart.model.ModelCart
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.model.ModelOrderSummary
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.modelPlaceOrder.ModelPlaceOrder
+import com.teamx.hatlyUser.ui.fragments.payments.paymentmethod.modelGetCards.ModelCredCards
 import com.teamx.hatlyUser.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -103,6 +104,35 @@ class CheckOutViewModel @Inject constructor(
                     _placeOrderResponse.postValue(Resource.error("${e.message}", null))
                 }
             } else _placeOrderResponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+
+
+    private val _credCardsGoogle = MutableLiveData<Resource<ModelCredCards>>()
+    val credCardsResponse: LiveData<Resource<ModelCredCards>>
+        get() = _credCardsGoogle
+    fun credCards() {
+        viewModelScope.launch {
+            _credCardsGoogle.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.getCredCards().let {
+                        if (it.isSuccessful) {
+                            _credCardsGoogle.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _credCardsGoogle.postValue(Resource.error(jsonObj.getString("message")))
+                        } else {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _credCardsGoogle.postValue(Resource.error(jsonObj.getString("message")))
+//                            _credCardsGoogle.postValue(Resource.error(it.message(), null))
+                        }
+                    }
+                } catch (e: Exception) {
+                    _credCardsGoogle.postValue(Resource.error("${e.message}", null))
+                }
+            } else _credCardsGoogle.postValue(Resource.error("No internet connection", null))
         }
     }
 

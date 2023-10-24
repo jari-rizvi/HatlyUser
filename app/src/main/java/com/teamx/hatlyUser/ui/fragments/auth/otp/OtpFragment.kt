@@ -12,6 +12,7 @@ import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.constants.NetworkCallPointsNest
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentOtpBinding
 import com.teamx.hatlyUser.utils.LocationPermission
@@ -59,55 +60,51 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
             if (isValidate()) {
                 initialization()
                 if (fromSignup) {
+                    Log.d("verifySignupO", "fromSignup: true")
                     mViewModel.verifySignupOtp(createSignUpVerifyParams())
                 } else {
+                    Log.d("verifySignupO", "fromSignup: false")
                     mViewModel.forgotPassVerifyOtp(createSignUpVerifyParams())
                 }
             }
         }
 
         if (!mViewModel.verifySignupOtpResponse.hasActiveObservers()) {
-            mViewModel.verifySignupOtpResponse.observe(requireActivity(), Observer {
+            mViewModel.verifySignupOtpResponse.observe(requireActivity()) {
                 when (it.status) {
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
+
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-//                            if (data.verified) {
-                            if (data.verified == true){
-                                CoroutineScope(Dispatchers.Main).launch {
-                                    data.token?.let { it1 -> dataStoreProvider.saveUserToken(it1) }
-
-//                                    dataStoreProvider.saveDeviceData(randNum!!)
-//                                    dataStoreProvider.saveDeviceData("88765275963748185512")
-                                }
-                                PrefHelper.getInstance(requireActivity()).setUserData(data)
-                                if (LocationPermission.requestPermission(requireContext())) {
-                                    findNavController().navigate(R.id.action_otpFragment_to_homeFragment)
-                                } else {
-                                    findNavController().navigate(R.id.action_otpFragment_to_allowLocationFragment)
+                            Log.d("verifySignupO", "onViewCreated: $data")
+                            CoroutineScope(Dispatchers.Main).launch {
+                                data.token.let { it1 ->
+                                    dataStoreProvider.saveUserToken(it1)
+                                    NetworkCallPointsNest.TOKENER = it1
                                 }
                             }
-
-//                                if (fromSignup) {
-//                                } else {
-//                                    val bundle1 = Bundle()
-//                                    bundle1.putString("phone", phone)
-//                                    findNavController().navigate(
-//                                        R.id.action_otpFragment_to_createPasswordFragment,
-//                                        bundle1
-//                                    )
-//                                }
-//                            }
+                            PrefHelper.getInstance(requireActivity()).setUserData(data)
+                            if (LocationPermission.requestPermission(requireContext())) {
+                                val userData =
+                                    PrefHelper.getInstance(requireActivity()).getUserData()
+                                sharedViewModel.setlocationmodel(userData?.location)
+                                findNavController().navigate(R.id.action_otpFragment_to_mapFragment)
+                            } else {
+                                findNavController().navigate(R.id.action_otpFragment_to_allowLocationFragment)
+                            }
                         }
                     }
+
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
+                        mViewDataBinding.root.snackbar(it.message!!)
+                        Log.d("verifySignupO", "onViewCreated: ${it.message!!}")
                     }
                 }
-            })
+            }
         }
 
         if (!mViewModel.forgotPassVerifyOtpResponse.hasActiveObservers()) {
@@ -116,6 +113,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
+
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
@@ -140,6 +138,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
 //                            }
                         }
                     }
+
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
                     }
@@ -159,6 +158,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
+
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
@@ -167,6 +167,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
                             }
                         }
                     }
+
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
                     }
@@ -227,13 +228,6 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
             Log.d("timerStart", "Time's up!")
             mViewDataBinding.textView24.isEnabled = true
         }
-
-//        val timerJob = launch {
-//
-//        }
-
-        // Wait for the timer to complete
-//        timerJob.join()
     }
 
 }

@@ -253,11 +253,11 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
 
     override fun removeCartItem(position: Int) {
         val cartModel = cartProductArrayList[position]
-        removeCartResponse(cartModel._id, position)
+        removeCartResponse(cartModel, position)
     }
 
-    private fun removeCartResponse(_id: String, position: Int) {
-        mViewModel.removeCartItem(_id)
+    private fun removeCartResponse(cartModel: Product, position: Int) {
+        mViewModel.removeCartItem(cartModel._id)
 
         mViewModel.removeCartItemResponse.observe(requireActivity()) {
             when (it.status) {
@@ -269,17 +269,15 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
                     loadingDialog.dismiss()
                     it.data?.let { data ->
 
-                        if (data.success) {
-                            if (cartProductArrayList.isNotEmpty()) {
-                                cartProductArrayList.removeAt(position)
-                                cartAdapter.notifyItemRemoved(position)
-                                cartAdapter.notifyItemRangeRemoved(
-                                    position,
-                                    cartProductArrayList.size
-                                )
-                            }
-                        }
+                        if (cartProductArrayList.isNotEmpty()) {
 
+                            cartProductArrayList.removeAt(position)
+                            cartAdapter.notifyItemRemoved(position)
+                            cartAdapter.notifyItemRangeChanged(
+                                position,
+                                cartProductArrayList.size - position
+                            )
+                        }
                     }
                 }
 

@@ -16,7 +16,7 @@ data class Location(
     val lat: Double,
     val lng: Double,
     val type: String,
-    val updatedAt: String,
     var isAction: String,
+    val updatedAt: String,
     var isDefault: Boolean,
 )

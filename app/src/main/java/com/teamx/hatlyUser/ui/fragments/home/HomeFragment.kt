@@ -62,7 +62,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
 
         mViewDataBinding.homeAddress.setOnClickListener {
             val locationModel = userData?.location
-            locationModel!!.isAction =  "Update"
+//            locationModel!!.isAction =  "Update"
+
+                if (locationModel != null) {
+                    locationModel.isAction = "Update"
+
+                }
+
             sharedViewModel.setlocationmodel(locationModel)
             findNavController().navigate(R.id.action_homeFragment_to_mapFragment)
         }
@@ -76,7 +82,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
             MART = Marts.HATLY_MART
             val bundle = Bundle()
             bundle.putBoolean("parcel", true)
-            findNavController().navigate(R.id.action_homeFragment_to_hatlyMartFragment, bundle)
+            if (isAdded) {
+                findNavController().navigate(R.id.action_homeFragment_to_hatlyMartFragment, bundle)
+            }
         }
 
         mViewDataBinding.textView8.setOnClickListener {

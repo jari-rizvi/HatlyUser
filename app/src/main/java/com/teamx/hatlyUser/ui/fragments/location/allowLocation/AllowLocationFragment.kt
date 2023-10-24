@@ -15,6 +15,7 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.databinding.FragmentAllowLocationBinding
 import com.teamx.hatlyUser.ui.fragments.auth.login.LoginViewModel
+import com.teamx.hatlyUser.utils.PrefHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -50,6 +51,13 @@ class AllowLocationFragment : BaseFragment<FragmentAllowLocationBinding, LoginVi
         }
 
         mViewDataBinding.txtLogin.setOnClickListener {
+            val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+            if (userData != null) {
+                if (userData.location != null) {
+                    userData.location.isAction = "Add"
+                }
+            }
+            sharedViewModel.setlocationmodel(userData?.location)
             locationPermissionRequest.launch(
                 arrayOf(
                     Manifest.permission.ACCESS_FINE_LOCATION,

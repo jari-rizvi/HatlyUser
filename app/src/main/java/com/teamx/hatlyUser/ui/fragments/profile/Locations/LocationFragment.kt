@@ -51,9 +51,15 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
 
         mViewDataBinding.txtAddLocation.setOnClickListener {
             val userData = PrefHelper.getInstance(requireActivity()).getUserData()
-//            val locationModel = Location("", "", "", 0, "", null, 0, 0, "", "Add")
-            userData?.location!!.isAction =  "Add"
-            sharedViewModel.setlocationmodel(userData.location)
+
+            if (userData != null) {
+                if (userData.location != null) {
+                    userData.location.isAction = "Add"
+                }
+            }
+
+            sharedViewModel.setlocationmodel(userData?.location)
+
             findNavController().navigate(R.id.action_locationFragment_to_mapFragment)
         }
 
@@ -78,7 +84,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                         loadingDialog.dismiss()
                         it.data?.let { data ->
 
-                            if (data.isNotEmpty()){
+                            if (data.isNotEmpty()) {
 //                                data[0].isSelected = true
                                 getAddressArray.addAll(data)
                                 locationsListAdapter.notifyDataSetChanged()
@@ -107,7 +113,8 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             if (data.success) {
-                                val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+                                val userData =
+                                    PrefHelper.getInstance(requireActivity()).getUserData()
                                 userData!!.location = data.data!!
                                 PrefHelper.getInstance(requireActivity()).setUserData(userData)
                                 mViewDataBinding.root.snackbar(data.message)

@@ -9,9 +9,11 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatCheckedTextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.google.android.gms.location.LocationServices
@@ -118,8 +120,27 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
 
 
         mViewDataBinding.imgBack.setOnClickListener {
-            findNavController().popBackStack()
+            if (alreadyFragmentAdded(R.id.allowLocationFragment)) {
+                requireActivity().finish()
+            } else {
+                findNavController().popBackStack()
+            }
         }
+
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (alreadyFragmentAdded(R.id.allowLocationFragment)) {
+                    requireActivity().finish()
+                } else {
+                    findNavController().popBackStack()
+                }
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            onBackPressedCallback
+        )
 
         mViewDataBinding.txtEnterLocaion.setOnClickListener {
             findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
@@ -192,6 +213,13 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             if (data.address.isNotEmpty()) {
+                                if (data.isDefault) {
+                                    val userData =
+                                        PrefHelper.getInstance(requireActivity()).getUserData()
+                                    userData!!.location = data
+                                    PrefHelper.getInstance(requireActivity()).setUserData(userData)
+                                    sharedViewModel.setUserData(userData)
+                                }
                                 findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
                             }
                         }
@@ -214,10 +242,10 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            Log.e("requestLocation", "data, ${data}")
                             if (data.address.isNotEmpty()) {
-                                if (data.isDefault){
-                                    val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+                                if (data.isDefault) {
+                                    val userData =
+                                        PrefHelper.getInstance(requireActivity()).getUserData()
                                     userData!!.location = data
                                     PrefHelper.getInstance(requireActivity()).setUserData(userData)
                                     sharedViewModel.setUserData(userData)
@@ -377,34 +405,44 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
     private fun getLocationObserver() {
         sharedViewModel.locationmodel.observe(requireActivity()) { locationModel ->
 
-            when (locationModel.isAction) {
-                "Update" -> {
-                    isForUpdate = true
-                    locationId = locationModel._id
-                    txtConfirmLocation1.text = "Update Location"
-                    isMapBeingDragged = false
+            if (locationModel != null) {
 
-                    apartmentStr = locationModel.apartmentNumber.toString()
-                    buildingNumStr = locationModel.building
-                    addDirectionStr = locationModel.additionalDirection
 
-                    updateUi(
-                        locationModel.address,
-                        apartmentStr,
-                        buildingNumStr,
-                        addDirectionStr,
-                        locationModel.label
-                    )
-                    latLngFinal = LatLng(locationModel.lat, locationModel.lng)
-                    latLngFinal?.let { updateMap(it) }
-                }
+                when (locationModel.isAction) {
+                    "Update" -> {
+                        isForUpdate = true
+                        locationId = locationModel._id
+                        txtConfirmLocation1.text = "Update Location"
+                        isMapBeingDragged = false
 
-                else -> {
-                    if (isAdded) {
-                        isForUpdate = false
-                        txtConfirmLocation1.text = "Confirm Location"
-                        requestLocation()
+                        apartmentStr = locationModel.apartmentNumber.toString()
+                        buildingNumStr = locationModel.building
+                        addDirectionStr = locationModel.additionalDirection
+
+                        updateUi(
+                            locationModel.address,
+                            apartmentStr,
+                            buildingNumStr,
+                            addDirectionStr,
+                            locationModel.label
+                        )
+                        latLngFinal = LatLng(locationModel.lat, locationModel.lng)
+                        latLngFinal?.let { updateMap(it) }
                     }
+
+                    else -> {
+                        if (isAdded) {
+                            isForUpdate = false
+                            txtConfirmLocation1.text = "Confirm Location"
+                            requestLocation()
+                        }
+                    }
+                }
+            } else {
+                if (isAdded) {
+                    isForUpdate = false
+                    txtConfirmLocation1.text = "Confirm Location"
+                    requestLocation()
                 }
             }
         }
@@ -470,6 +508,20 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         } catch (e: JSONException) {
             e.printStackTrace()
         }
+        Log.d("txtShowAddress", "params: ${params}")
         return params
     }
+
+
+    private fun alreadyFragmentAdded(fragment: Int): Boolean {
+        val backStack = findNavController().backQueue.toList()
+        if (backStack.size > 1) {
+            val prevDest = backStack[backStack.size - 2]
+            if (prevDest.destination.id == fragment) {
+                return true
+            }
+        }
+        return false
+    }
+
 }

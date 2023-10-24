@@ -50,6 +50,10 @@ class OtpViewModel @Inject constructor(
         }
     }
 
+
+
+
+
     private val _forgotPassVerifyOtp = MutableLiveData<Resource<ModelVerifyPassOtp>>()
     val forgotPassVerifyOtpResponse: LiveData<Resource<ModelVerifyPassOtp>>
         get() = _forgotPassVerifyOtp

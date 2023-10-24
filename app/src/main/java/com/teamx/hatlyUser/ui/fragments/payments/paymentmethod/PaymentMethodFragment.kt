@@ -69,9 +69,9 @@ class PaymentMethodFragment : BaseFragment<FragmentPaymentMethodBinding, Payment
                         if (data.paymentMethod?.isNotEmpty() == true) {
                             credCardsArrayList.addAll(data.paymentMethod)
                         }
-                        if (data.default != null) {
-                            credCardsArrayList.add(data.default)
-                        }
+//                        if (data.default != null) {
+//                            credCardsArrayList.add(data.default)
+//                        }
                         credCardsAdapter.notifyDataSetChanged()
                     }
                 }
