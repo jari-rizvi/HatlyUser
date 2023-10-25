@@ -1,10 +1,14 @@
 package com.teamx.hatlyUser.ui.fragments.profile.Locations
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
@@ -13,7 +17,9 @@ import com.teamx.hatlyUser.databinding.FragmentLocationBinding
 import com.teamx.hatlyUser.ui.fragments.auth.login.Model.Location
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.profile.Locations.adapter.LocationsListAdapter
+import com.teamx.hatlyUser.utils.ItemDragSwipeCallback
 import com.teamx.hatlyUser.utils.PrefHelper
+import com.teamx.hatlyUser.utils.SwipeHelper
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,7 +29,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
     HatlyShopInterface {
 
     override val layoutId: Int
-        get() = R.layout.fragment_location
+        get() = com.teamx.hatlyUser.R.layout.fragment_location
     override val viewModel: Class<LocationViewModel>
         get() = LocationViewModel::class.java
     override val bindingVariable: Int
@@ -38,10 +44,10 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
 
         options = navOptions {
             anim {
-                enter = R.anim.enter_from_left
-                exit = R.anim.exit_to_left
-                popEnter = R.anim.nav_default_pop_enter_anim
-                popExit = R.anim.nav_default_pop_exit_anim
+                enter = com.teamx.hatlyUser.R.anim.enter_from_left
+                exit = com.teamx.hatlyUser.R.anim.exit_to_left
+                popEnter = com.teamx.hatlyUser.R.anim.nav_default_pop_enter_anim
+                popExit = com.teamx.hatlyUser.R.anim.nav_default_pop_exit_anim
             }
         }
 
@@ -60,7 +66,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
 
             sharedViewModel.setlocationmodel(userData?.location)
 
-            findNavController().navigate(R.id.action_locationFragment_to_mapFragment)
+            findNavController().navigate(com.teamx.hatlyUser.R.id.action_locationFragment_to_mapFragment)
         }
 
         getAddressArray = ArrayList()
@@ -69,6 +75,60 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         locationsListAdapter = LocationsListAdapter(getAddressArray, this)
         mViewDataBinding.recLocations.adapter = locationsListAdapter
+
+        val itemDragSwipeCallback = ItemDragSwipeCallback(
+            requireActivity(),
+            com.teamx.hatlyUser.R.color.white,
+            com.teamx.hatlyUser.R.drawable.notification_,
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT,
+            object : ItemDragSwipeCallback.OnTouchListener {
+                override fun onMove(
+                    recyclerView: RecyclerView?,
+                    viewHolder: RecyclerView.ViewHolder?,
+                    target: RecyclerView.ViewHolder?
+                ): Boolean {
+                    // Implement your logic for item movement
+                    return true // Return true if the item was moved, false otherwise
+                }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
+                    // Implement your logic for item swiping
+                }
+            }
+        )
+
+
+        val swipeHelper: SwipeHelper = object : SwipeHelper(requireActivity(), mViewDataBinding.recLocations) {
+            override fun instantiateUnderlayButton(
+                viewHolder: RecyclerView.ViewHolder,
+                underlayButtons: MutableList<UnderlayButton>
+            ) {
+                underlayButtons.add(UnderlayButton(
+                    requireActivity(),
+                    "",
+                    R.drawable.notification_,
+                    Color.parseColor("#4CAF50")
+                ) {
+                    Toast.makeText(context, "Delete $it", Toast.LENGTH_SHORT).show()
+                })
+            }
+        }
+
+
+        val itemTouchHelper = ItemTouchHelper(swipeHelper)
+        itemTouchHelper.attachToRecyclerView(mViewDataBinding.recLocations)
+
+//        val itemTouchHelper = ItemTouchHelper(itemDragSwipeCallback)
+//        itemTouchHelper.attachToRecyclerView(mViewDataBinding.recLocations)
+
+//        mViewDataBinding.recLocations.addOnItemTouchListener(
+//            RecyclerItemClickListener(this, recyclerView, object : RecyclerItemClickListener.OnItemClickListener {
+//                override fun onItemClick(view: View, position: Int) {
+//                    // Handle item click here
+//                }
+//            })
+//        )
 
 
         mViewModel.getAlAddress()
@@ -143,7 +203,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
         val locationModel = getAddressArray[updatePosition]
         locationModel.isAction = "Update"
         sharedViewModel.setlocationmodel(locationModel)
-        findNavController().navigate(R.id.action_locationFragment_to_mapFragment)
+        findNavController().navigate(com.teamx.hatlyUser.R.id.action_locationFragment_to_mapFragment)
     }
 
     override fun clickMoreItem(position: Int) {

@@ -513,11 +513,11 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
     }
 
 
-    private fun alreadyFragmentAdded(fragment: Int): Boolean {
+    private fun alreadyFragmentAdded(backStackFrag: Int): Boolean {
         val backStack = findNavController().backQueue.toList()
         if (backStack.size > 1) {
             val prevDest = backStack[backStack.size - 2]
-            if (prevDest.destination.id == fragment) {
+            if (prevDest.destination.id == backStackFrag) {
                 return true
             }
         }
