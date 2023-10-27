@@ -9,7 +9,7 @@ import com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces.ProductPrevi
 
 class CredCardsAdapter(
     private val addressArrayList: ArrayList<PaymentMethod>,
-    private val productPreInterface : ProductPreviewInterface
+    private val productPreInterface: ProductPreviewInterface
 ) : RecyclerView.Adapter<CredCardsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CredCardsViewHolder {
@@ -23,20 +23,31 @@ class CredCardsAdapter(
 
         val arrayData = addressArrayList[position]
 
+
+        holder.bind.txtLogin12.isChecked = !arrayData.default
+
+        holder.bind.txtLogin12.isEnabled = !arrayData.default
+
         holder.bind.txtCardName.text = try {
             arrayData.card.brand
-        }catch (e : Exception){
+        } catch (e: Exception) {
             ""
         }
 
         holder.bind.txtCardDetail.text = try {
             "**** **** **** ${arrayData.card.last4} | ${arrayData.card.exp_month}/${arrayData.card.exp_year}"
-        }catch (e : Exception){
+        } catch (e: Exception) {
             ""
         }
 
         holder.bind.txtLogin12.setOnClickListener {
-            productPreInterface.clickFreBoughtItem(position)
+            if (!arrayData.default) {
+                productPreInterface.clickFreBoughtItem(position)
+            }
+        }
+
+        holder.bind.txtLogin123.setOnClickListener {
+            productPreInterface.clickCheckBoxItem(position)
         }
 
     }

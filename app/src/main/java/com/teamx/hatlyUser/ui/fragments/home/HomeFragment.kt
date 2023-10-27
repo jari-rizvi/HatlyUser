@@ -4,27 +4,43 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.FirebaseApp
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.ktx.initialize
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.constants.NetworkCallPointsNest
 import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.MART
+import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentHomeBinding
 import com.teamx.hatlyUser.ui.activity.mainActivity.MainActivity
 import com.teamx.hatlyUser.ui.fragments.auth.login.LoginViewModel
+import com.teamx.hatlyUser.utils.DialogHelperClass
+import com.teamx.hatlyUser.utils.LocationPermission
+import com.teamx.hatlyUser.utils.LocationPermission.Companion.requestPermission
 import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.enum_.Marts
+import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override val layoutId: Int
         get() = R.layout.fragment_home
-    override val viewModel: Class<LoginViewModel>
-        get() = LoginViewModel::class.java
+    override val viewModel: Class<HomeViewModel>
+        get() = HomeViewModel::class.java
     override val bindingVariable: Int
         get() = BR.viewModel
 
@@ -40,6 +56,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
             }
         }
 
+        Firebase.initialize(requireContext())
+        FirebaseApp.initializeApp(requireContext())
+        askNotificationPermission()
 
         val userData = PrefHelper.getInstance(requireActivity()).getUserData()
 
@@ -64,10 +83,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
             val locationModel = userData?.location
 //            locationModel!!.isAction =  "Update"
 
-                if (locationModel != null) {
-                    locationModel.isAction = "Update"
+            if (locationModel != null) {
+                locationModel.isAction = "Update"
 
-                }
+            }
 
             sharedViewModel.setlocationmodel(locationModel)
             findNavController().navigate(R.id.action_homeFragment_to_mapFragment)
@@ -118,6 +137,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
             findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
         }
 
+        if (!mViewModel.fcmResponse.hasActiveObservers()) {
+            mViewModel.fcmResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            mViewDataBinding.root.snackbar(data.message)
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        mViewDataBinding.root.snackbar(it.message!!)
+                    }
+                }
+            }
+        }
+
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Log.d("handleOnBackPressed", "handleOnBackPressed: back")
@@ -131,6 +172,41 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, LoginViewModel>() {
         )
 
 
+    }
+
+
+    private fun askNotificationPermission() {
+        Log.d("fcmToken", "askNotificationPermission")
+        // This is only necessary for API level >= 33 (TIRAMISU)
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("123123", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+//            fcmToken = task.result
+            val params = JsonObject()
+            params.addProperty("fcmToken", task.result)
+
+            if (!mViewModel.fcmResponse.hasActiveObservers()) {
+                mViewModel.fcm(params)
+            }
+
+            Log.d("fcmToken", "${params}")
+
+        })
+        // FCM SDK (and your app) can post notifications.
+//            } else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+//                Log.d("fcmToken", "POST_NOTIFICATIONS")
+//            } else {
+//                Log.d("fcmToken", "else")
+//            }
+//        }
     }
 
 

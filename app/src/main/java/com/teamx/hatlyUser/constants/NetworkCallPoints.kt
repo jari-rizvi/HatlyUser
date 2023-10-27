@@ -4,7 +4,11 @@ class NetworkCallPoints {
     companion object {
 
         const val LOGIN = "auth/login/app"
+
+        const val FCM_TOKEN = "auth/addToken"
+
         const val LOGIN_WITH_GOOGLE = "auth/login/google/android"
+        const val ME = "auth/me"
         const val SIGN_UP = "auth/signup/app"
         const val VERIFY_SIGNUP_OTP = "auth/verify/signup/otp"
         const val FORGOT_PASS = "auth/forgot/password/app"
@@ -61,6 +65,8 @@ class NetworkCallPoints {
         const val CANCEL_ORDER = "order/cancel/{id}"
 
         const val CREDS_CARDS = "stripe/list/paymentMethods"
+
+        const val WALLET_TOPUP = "wallet/topup"
 
         const val DEFAULT_CREDS_CARDS = "stripe/set/paymentMethod"
 

@@ -17,7 +17,9 @@ class MainRepository @Inject constructor(
     var localDataSource: ProductDao,
 ) {
     suspend fun login(@Body param: JsonObject) = apiService.login(param)
+    suspend fun fcm(@Body param: JsonObject) = apiService.fcm(param)
     suspend fun loginWithGoogle(@Body param: JsonObject) = apiService.loginWithGoogle(param)
+    suspend fun me() = apiService.me()
     suspend fun signup(@Body param: JsonObject) = apiService.signup(param)
     suspend fun verifySignupOtp(@Body param: JsonObject) = apiService.verifySignupOtp(param)
     suspend fun forgotPass(@Body param: JsonObject) = apiService.forgotPass(param)
@@ -113,6 +115,10 @@ class MainRepository @Inject constructor(
     suspend fun getCredCards(
     ) = apiService.getCredCards()
 
+    suspend fun topUpSaved(
+        @Body params: JsonObject
+    ) = apiService.topUpSaved(params)
+
     suspend fun setDefaultCredCards(
         @Body params: JsonObject
     ) = apiService.setDefaultCredCards(params)
@@ -134,4 +140,5 @@ class MainRepository @Inject constructor(
     suspend fun changePassword(@Body params: JsonObject) = apiService.changePassword(params)
 
     suspend fun setDefaultAddress(@Path("id") id: String) = apiService.setDefaultAddress(id)
+    suspend fun deleteAddress(@Path("id") id: String) = apiService.deleteAddress(id)
 }

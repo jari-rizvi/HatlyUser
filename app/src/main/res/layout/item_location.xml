@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -12,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_5sdp"
         android:layout_marginVertical="@dimen/_10sdp"
-        android:elevation="@dimen/_1sdp"
         android:background="@drawable/selecter_location"
+        android:elevation="@dimen/_1sdp"
         android:minHeight="@dimen/_50sdp"
         android:padding="@dimen/_5sdp">
 
@@ -34,11 +35,23 @@
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:src="@drawable/edit"
-            app:layout_constraintBottom_toBottomOf="@+id/img"
+            app:layout_constraintBottom_toTopOf="@+id/img2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/img"
-            app:layout_constraintTop_toTopOf="@+id/img" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        <ImageView
+            android:id="@+id/img2"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/baseline_delete_outline_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/img1"
+            app:layout_constraintStart_toStartOf="@+id/img1"
+            app:layout_constraintTop_toBottomOf="@+id/img1"
+            app:tint="#1ED860" />
 
         <TextView
             android:id="@+id/textView16"

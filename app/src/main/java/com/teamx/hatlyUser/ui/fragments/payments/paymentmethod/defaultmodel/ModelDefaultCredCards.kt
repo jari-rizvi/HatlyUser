@@ -1,5 +1,7 @@
 package com.teamx.hatlyUser.ui.fragments.payments.paymentmethod.defaultmodel
+import androidx.annotation.Keep
 
+@Keep
 data class ModelDefaultCredCards(
     val address: Any,
     val balance: Int,

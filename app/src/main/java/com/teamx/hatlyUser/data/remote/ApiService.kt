@@ -17,6 +17,7 @@ import com.teamx.hatlyUser.ui.fragments.foods.review.modelReviewList.ModelReview
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.categoryModel.ModelCategory
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproductmodel.ModelPopularProducts
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
+import com.teamx.hatlyUser.ui.fragments.home.model.FcmModel
 import com.teamx.hatlyUser.ui.fragments.location.map.modelDefaultAddress.ModelDefaultAddress
 import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModel
 import com.teamx.hatlyUser.ui.fragments.notification.modelNotification.ModelNotification
@@ -32,6 +33,8 @@ import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.modelReview.ModelRev
 import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.modelUploadImages.ModelUploadImages
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.OrderHistoryModel
 import com.teamx.hatlyUser.ui.fragments.shophome.model.ModelSubCategoryStore
+import com.teamx.hatlyUser.ui.fragments.topUp.model.savedCard.ModelSavedCard
+import com.teamx.hatlyUser.ui.fragments.wallet.model.me.MeModel
 import com.teamx.hatlyUser.ui.fragments.wishlist.modelWishList.ModelWishList
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -51,8 +54,19 @@ interface ApiService {
     @POST(NetworkCallPoints.LOGIN)
     suspend fun login(@Body params: JsonObject?): Response<ModelLogin>
 
+    @POST(NetworkCallPoints.FCM_TOKEN)
+    suspend fun fcm(
+        @Body params: JsonObject?,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
+    ): Response<FcmModel>
+
     @POST(NetworkCallPoints.LOGIN_WITH_GOOGLE)
     suspend fun loginWithGoogle(@Body params: JsonObject?): Response<ModelLogin>
+
+    @GET(NetworkCallPoints.ME)
+    suspend fun me(
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
+    ): Response<MeModel>
 
     @POST(NetworkCallPoints.FORGOT_PASS)
     suspend fun forgotPass(@Body params: JsonObject?): Response<ModelForgotPass>
@@ -256,6 +270,13 @@ interface ApiService {
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<ModelCredCards>
 
+    @POST(NetworkCallPoints.WALLET_TOPUP)
+    suspend fun topUpSaved(
+        @Body params: JsonObject,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelSavedCard>
+
     @POST(NetworkCallPoints.DEFAULT_CREDS_CARDS)
     suspend fun setDefaultCredCards(
         @Body params: JsonObject,
@@ -302,6 +323,13 @@ interface ApiService {
 
     @PUT(NetworkCallPoints.SET_DEFAULT_ADDRESS)
     suspend fun setDefaultAddress(
+        @Path("id") id: String,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelDefaultAddress>
+
+    @DELETE(NetworkCallPoints.UPDATE_ADDRESS)
+    suspend fun deleteAddress(
         @Path("id") id: String,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"

@@ -30,7 +30,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.3" />
+                app:layout_constraintVertical_bias="0.2" />
 
             <TextView
                 android:id="@+id/txtTitle1"
@@ -41,6 +41,7 @@
                 android:textAlignment="center"
                 android:textColor="#B3FFFFFF"
                 android:textSize="@dimen/_14ssp"
+                app:layout_constraintVertical_bias="0.1"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -55,13 +56,43 @@
                 android:text="100.00 Aed"
                 android:textAlignment="center"
                 android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:textSize="@dimen/_14ssp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/txtTitle1"
                 app:layout_constraintStart_toStartOf="@+id/txtTitle1"
-                app:layout_constraintTop_toBottomOf="@+id/txtTitle1"
-                app:layout_constraintVertical_bias="0.1" />
+                app:layout_constraintTop_toBottomOf="@+id/txtTitle1" />
+
+            <ImageView
+                android:id="@+id/imgTopUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input_auth_field"
+                android:backgroundTint="@color/white"
+                android:elevation="1dp"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/round_arrow_back_24"
+                app:layout_constraintVertical_bias="0.3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/txtTitle12"
+                app:layout_constraintStart_toStartOf="@+id/txtTitle12"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitle12"
+                app:tint="#363636" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_regular"
+                android:text="Top up"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/imgTopUp"
+                app:layout_constraintStart_toStartOf="@+id/imgTopUp"
+                app:layout_constraintTop_toBottomOf="@+id/imgTopUp" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -104,20 +135,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25" />
+            app:layout_constraintGuide_percent="0.40" />
 
         <TextView
             android:id="@+id/txtTitle113"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
-            android:text="Transaction History"
+            android:text="Recent Transaction"
             android:textAlignment="center"
             android:textColor="#262626"
             android:textSize="@dimen/_14ssp"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginStart="@dimen/_15sdp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/imgBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/guideline"
             app:layout_constraintVertical_bias="0.05" />
 

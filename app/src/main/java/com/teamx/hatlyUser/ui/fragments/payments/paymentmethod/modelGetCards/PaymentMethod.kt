@@ -1,5 +1,8 @@
 package com.teamx.hatlyUser.ui.fragments.payments.paymentmethod.modelGetCards
 
+import androidx.annotation.Keep
+
+@Keep
 data class PaymentMethod(
     val billing_details: BillingDetails,
     val card: Card,
@@ -9,5 +12,6 @@ data class PaymentMethod(
     val livemode: Boolean,
     val metadata: Metadata,
     val `object`: String,
-    val type: String
+    val type: String,
+    var default: Boolean,
 )

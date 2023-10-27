@@ -93,7 +93,9 @@ class PaymentMethodFragment : BaseFragment<FragmentPaymentMethodBinding, Payment
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-
+                            credCardsArrayList.forEach { it.default = false }
+                            credCardsArrayList[position].default = true
+                            credCardsAdapter.notifyDataSetChanged()
                         }
                     }
 
@@ -115,7 +117,13 @@ class PaymentMethodFragment : BaseFragment<FragmentPaymentMethodBinding, Payment
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-
+                            credCardsArrayList.removeAt(position)
+                            credCardsAdapter.notifyItemRemoved(position)
+                            credCardsAdapter.notifyItemRangeChanged(
+                                position,
+                                credCardsArrayList.size - position
+                            )
+                            mViewDataBinding.root.snackbar("Card Detach")
                         }
                     }
 
@@ -139,7 +147,7 @@ class PaymentMethodFragment : BaseFragment<FragmentPaymentMethodBinding, Payment
 
     }
 
-    var position : Int = -1
+    var position: Int = -1
 
     override fun clickCheckBoxItem(detechPos: Int) {
         val credCardsModel = credCardsArrayList[detechPos]

@@ -53,12 +53,12 @@
             app:layout_constraintStart_toStartOf="@+id/txtCardName"
             app:layout_constraintTop_toBottomOf="@+id/txtCardName" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatCheckedTextView
             android:id="@+id/txtLogin12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_radius_corner_red"
-            android:backgroundTint="#1ED860"
+            android:backgroundTint="@color/remember_me_selector_color"
             android:fontFamily="@font/open_sans_regular"
             android:paddingHorizontal="@dimen/_10sdp"
             android:paddingVertical="@dimen/_5sdp"

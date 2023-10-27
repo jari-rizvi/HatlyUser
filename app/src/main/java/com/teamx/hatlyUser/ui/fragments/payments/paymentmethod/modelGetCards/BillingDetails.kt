@@ -1,5 +1,7 @@
 package com.teamx.hatlyUser.ui.fragments.payments.paymentmethod.modelGetCards
+import androidx.annotation.Keep
 
+@Keep
 data class BillingDetails(
     val address: Address,
     val email: Any,

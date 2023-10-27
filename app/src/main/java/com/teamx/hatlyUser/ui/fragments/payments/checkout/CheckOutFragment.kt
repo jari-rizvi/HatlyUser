@@ -3,7 +3,6 @@ package com.teamx.hatlyUser.ui.fragments.payments.checkout
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.RadioButton
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,30 +14,11 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.paypal.checkout.PayPalCheckout
-import com.paypal.checkout.approve.Approval
-import com.paypal.checkout.approve.OnApprove
-import com.paypal.checkout.cancel.OnCancel
-import com.paypal.checkout.config.CheckoutConfig
-import com.paypal.checkout.config.Environment
-import com.paypal.checkout.config.SettingsConfig
-import com.paypal.checkout.createorder.CreateOrder
-import com.paypal.checkout.createorder.CurrencyCode
-import com.paypal.checkout.createorder.OrderIntent
-import com.paypal.checkout.createorder.UserAction
-import com.paypal.checkout.error.ErrorInfo
-import com.paypal.checkout.error.OnError
-import com.paypal.checkout.order.Amount
-import com.paypal.checkout.order.AppContext
-import com.paypal.checkout.order.OrderRequest
-import com.paypal.checkout.order.PurchaseUnit
-import com.paypal.checkout.shipping.OnShippingChange
-import com.paypal.checkout.shipping.ShippingChangeActions
-import com.paypal.checkout.shipping.ShippingChangeData
 import com.stripe.android.PaymentConfiguration
 import com.stripe.android.paymentsheet.PaymentSheet
 import com.stripe.android.paymentsheet.PaymentSheetResult
 import com.teamx.hatlyUser.BR
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentCheckOutBinding
@@ -57,7 +37,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
     OnMapReadyCallback {
 
     override val layoutId: Int
-        get() = com.teamx.hatlyUser.R.layout.fragment_check_out
+        get() = R.layout.fragment_check_out
     override val viewModel: Class<CheckOutViewModel>
         get() = CheckOutViewModel::class.java
     override val bindingVariable: Int
@@ -74,6 +54,8 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
     private lateinit var paymentSheet: PaymentSheet
 
     private var selectedPaymentMethod = PaymentMethod.CASH_ON_DELIVERY
+
+    private var paymentMethodid = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -121,36 +103,40 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
         mViewDataBinding.radioCash.setOnClickListener {
             if (mViewDataBinding.radioCash.isChecked) {
+                mViewDataBinding.radio1.isChecked = false
+                mViewDataBinding.radioAddNewCard.isChecked = false
                 mViewDataBinding.radioGroupStripe.visibility = View.GONE
-                Log.d("onRadioButtonClicked", "onRadioButtonClicked: radioCash")
                 selectedPaymentMethod = PaymentMethod.CASH_ON_DELIVERY
             }
         }
 
         mViewDataBinding.radioPayPal.setOnClickListener {
             if (mViewDataBinding.radioPayPal.isChecked) {
+                mViewDataBinding.radio1.isChecked = false
+                mViewDataBinding.radioAddNewCard.isChecked = false
                 mViewDataBinding.radioGroupStripe.visibility = View.GONE
-                Log.d("onRadioButtonClicked", "onRadioButtonClicked: radioPayPal")
                 selectedPaymentMethod = PaymentMethod.PAYPAL
             }
         }
 
         mViewDataBinding.radioOnline.setOnClickListener {
             if (mViewDataBinding.radioOnline.isChecked) {
-                Log.d("onRadioButtonClicked", "onRadioButtonClicked: radioOnline")
+                mViewDataBinding.radio1.isChecked = true
                 mViewDataBinding.radioGroupStripe.visibility = View.VISIBLE
-                selectedPaymentMethod = PaymentMethod.ONLINE_PAYMENT
+                selectedPaymentMethod = PaymentMethod.STRIPE_SAVED_PAYMENT
             }
         }
 
         mViewDataBinding.radioSelectedCard.setOnClickListener {
             mViewDataBinding.radio1.isChecked = true
             mViewDataBinding.radioAddNewCard.isChecked = false
+            selectedPaymentMethod = PaymentMethod.STRIPE_SAVED_PAYMENT
         }
 
         mViewDataBinding.radioAddNewCard.setOnClickListener {
             mViewDataBinding.radio1.isChecked = false
             mViewDataBinding.radioAddNewCard.isChecked = true
+            selectedPaymentMethod = PaymentMethod.STRIPE_PAYMENT
         }
 
 
@@ -318,30 +304,26 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                             PaymentMethod.CASH_ON_DELIVERY -> {
                                 // Process payment for Cash on Delivery
                                 if (data.status == "placed") {
-                                    Log.d(
-                                        "placeOrderResponse",
-                                        "onViewCreated: CASH_ON_DELIVERY"
-                                    )
                                     if (isAdded) {
-                                        findNavController().navigate(com.teamx.hatlyUser.R.id.action_checkOutFragment_to_orderPlacedFragment)
+                                        findNavController().navigate(R.id.action_checkOutFragment_to_orderPlacedFragment)
                                     }
                                 }
                             }
-                            PaymentMethod.ONLINE_PAYMENT -> {
+                            PaymentMethod.STRIPE_PAYMENT -> {
                                 // Process payment for Online Payment
                                 if (data.clientSecret != null) {
-                                    Log.d(
-                                        "placeOrderResponse",
-                                        "onViewCreated: ONLINE_PAYMENT"
-                                    )
                                     showStripeSheet(data.clientSecret)
                                 }
                             }
+                            PaymentMethod.STRIPE_SAVED_PAYMENT -> {
+                                // Process payment for Online Payment
+                                if (data.status == "placed") {
+                                    if (isAdded) {
+                                        findNavController().navigate(R.id.action_checkOutFragment_to_orderPlacedFragment)
+                                    }
+                                }
+                            }
                             PaymentMethod.PAYPAL -> {
-                                Log.d(
-                                    "placeOrderResponse",
-                                    "onViewCreated: PAYPAL"
-                                )
                                 showPaypal()
                             }
                         }
@@ -368,6 +350,11 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                             "**** **** **** ${data.default!!.card.last4} | ${data.default.card.exp_month}/${data.default!!.card.exp_year}"
                         }catch (e : Exception){
                             ""
+                        }
+
+                        if (data.default?.id?.isNotEmpty() == true){
+                            mViewDataBinding.radioSelectedCard.visibility = View.VISIBLE
+                            paymentMethodid = data.default.id
                         }
                     }
                 }
@@ -530,7 +517,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 // Display for example, an order confirmation screen
 
                 Log.d("placeOrderResponse", "onPaymentSheetResult: Completed")
-                findNavController().navigate(com.teamx.hatlyUser.R.id.action_checkOutFragment_to_orderPlacedFragment)
+                findNavController().navigate(R.id.action_checkOutFragment_to_orderPlacedFragment)
 //                val params = JsonObject()
 //
 //                params.addProperty("shopId", shopId)
@@ -578,10 +565,17 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                     params.addProperty("orderType", "CASH_ON_DELIVERY")
                 }
 
-                PaymentMethod.ONLINE_PAYMENT -> {
+                PaymentMethod.STRIPE_PAYMENT -> {
                     // Process payment for Online Payment
                     params.addProperty("orderType", "ONLINE_PAYMENTS")
                     params.addProperty("payBy", "STRIPE")
+                }
+
+                PaymentMethod.STRIPE_SAVED_PAYMENT -> {
+                    // Process payment for Online Payment
+                    params.addProperty("orderType", "ONLINE_PAYMENTS")
+                    params.addProperty("payBy", "STRIPE")
+                    params.addProperty("payment_method", paymentMethodid)
                 }
 
                 PaymentMethod.PAYPAL -> {
@@ -657,6 +651,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
 enum class PaymentMethod {
     CASH_ON_DELIVERY,
-    ONLINE_PAYMENT,
+    STRIPE_PAYMENT,
+    STRIPE_SAVED_PAYMENT,
     PAYPAL
 }

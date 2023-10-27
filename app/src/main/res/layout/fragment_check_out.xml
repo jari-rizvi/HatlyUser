@@ -386,9 +386,9 @@
                             android:id="@+id/radioSelectedCard"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/radioAddNewCard"
+                            app:layout_constraintStart_toStartOf="@+id/radioAddNewCard"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <RadioButton
@@ -448,9 +448,10 @@
                             android:paddingStart="@dimen/_10sdp"
                             android:text="Add New Card"
                             android:textColor="#010101"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:textSize="@dimen/_12ssp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="@+id/radioSelectedCard"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/radioSelectedCard" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

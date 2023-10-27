@@ -50,6 +50,10 @@ class LocationsListAdapter(
             hatlyShopInterface.clickCategoryItem(position)
         }
 
+        holder.bind.img2.setOnClickListener {
+            hatlyShopInterface.clickMoreItem(position)
+        }
+
         holder.itemView.setOnClickListener {
             hatlyShopInterface.clickshopItem(position)
         }

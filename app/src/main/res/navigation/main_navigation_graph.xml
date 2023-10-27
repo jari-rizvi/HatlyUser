@@ -443,7 +443,14 @@
         android:id="@+id/walletFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.wallet.WalletFragment"
         android:label="WalletFragment"
-        tools:layout="@layout/fragment_wallet" />
+        tools:layout="@layout/fragment_wallet" >
+        <action
+            android:id="@+id/action_walletFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+        <action
+            android:id="@+id/action_walletFragment_to_topUpFragment"
+            app:destination="@id/topUpFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/wishListFragment"
@@ -539,5 +546,15 @@
         android:name="com.teamx.hatlyUser.ui.fragments.profile.changepassword.ChangePasswordFragment"
         android:label="ChangePasswordFragment"
         tools:layout="@layout/fragment_change_password" />
+
+    <fragment
+        android:id="@+id/topUpFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.topUp.TopUpFragment"
+        android:label="TopUpFragment"
+        tools:layout="@layout/fragment_top_up" >
+        <action
+            android:id="@+id/action_topUpFragment_to_paymentMethodFragment"
+            app:destination="@id/paymentMethodFragment" />
+    </fragment>
 
 </navigation>

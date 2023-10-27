@@ -83,4 +83,33 @@ class LocationViewModel @Inject constructor(
     }
 
 
+    private val _deleteAddressResponse = MutableLiveData<Resource<ModelDefaultAddress>>()
+    val deleteAddressResponse: LiveData<Resource<ModelDefaultAddress>>
+        get() = _deleteAddressResponse
+
+    fun deleteAddress(id: String,) {
+        viewModelScope.launch {
+            _deleteAddressResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.deleteAddress(id).let {
+                        if (it.isSuccessful) {
+                            _deleteAddressResponse.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _deleteAddressResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        } else {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _deleteAddressResponse.postValue(Resource.error(jsonObj.getString("message")))
+//                            _deleteAddressResponse.postValue(Resource.error(it.message(), null))
+                        }
+                    }
+                } catch (e: Exception) {
+                    _deleteAddressResponse.postValue(Resource.error("${e.message}", null))
+                }
+            } else _deleteAddressResponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+
 }
