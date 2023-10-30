@@ -54,6 +54,8 @@ class NetworkCallPoints {
 //        const val UPLOAD_REVIEW_IMGS = "upload/reviewImages"
         const val UPLOAD_REVIEW_IMGS = "upload/uploadMultiple"
 
+        const val UPDATE_PROFILE = "user/update"
+
         const val REViEW_ORDER = "review/create"
 
         const val REViEW_LIST = "review/list"

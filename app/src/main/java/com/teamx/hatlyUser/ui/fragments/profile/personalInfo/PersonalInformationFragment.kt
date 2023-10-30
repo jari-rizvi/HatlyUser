@@ -1,11 +1,16 @@
 package com.teamx.hatlyUser.ui.fragments.profile.personalInfo
 
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
+import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
@@ -15,6 +20,11 @@ import com.teamx.hatlyUser.databinding.FragmentProfileManagementBinding
 import com.teamx.hatlyUser.ui.fragments.auth.login.LoginViewModel
 import com.teamx.hatlyUser.ui.fragments.profile.userprofile.ProfileManagementViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
+import java.io.FileOutputStream
 
 
 @AndroidEntryPoint

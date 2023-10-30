@@ -160,6 +160,7 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
 
     override fun clickshopItem(position: Int) {
         val orderHistoryModel = orderHistoryArrayList[position]
+        orderHistoryModel.isFromWallet = true
         sharedViewModel.setOrderHistory(orderHistoryModel)
         if (isAdded) {
             findNavController().navigate(R.id.action_walletFragment_to_orderDetailFragment)

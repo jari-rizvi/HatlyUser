@@ -112,8 +112,32 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
         sharedViewModel.orderHistory.observe(requireActivity()) { data ->
 
+            if (data.isFromWallet){
+                mViewDataBinding.btnLayout.visibility = View.GONE
+                mViewDataBinding.paidLayout.visibility = View.VISIBLE
+            }else{
+                mViewDataBinding.btnLayout.visibility = View.VISIBLE
+                mViewDataBinding.paidLayout.visibility = View.GONE
+            }
 
-//            data.status = "confirmed"
+            when (data.orderType) {
+                "CASH_ON_DELIVERY" -> {
+                    mViewDataBinding.txtTitle114455.setCompoundDrawablesWithIntrinsicBounds(R.drawable.paid_with_cash, 0, 0, 0);
+                    mViewDataBinding.txtTitle114455.text = try {
+                        "Cash"
+                    }catch (e: Exception){
+                        ""
+                    }
+                }
+                "ONLINE_PAYMENTS" -> {
+                    mViewDataBinding.txtTitle114455.setCompoundDrawablesWithIntrinsicBounds(R.drawable.paid_with_card, 0, 0, 0)
+                    mViewDataBinding.txtTitle114455.text = try {
+                        "Credit Card"
+                    }catch (e: Exception){
+                        ""
+                    }
+                }
+            }
 
             when (data.status) {
                 "placed" -> {
@@ -176,8 +200,6 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
             } catch (e: Exception) {
                 ""
             }
-
-
 
             Picasso.get().load(data.shop.image).into(mViewDataBinding.imgShop)
 
@@ -329,27 +351,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
         }
 
 
-//        mViewDataBinding.recLocations.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//                super.onScrollStateChanged(recyclerView, newState)
-//                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-//                    isScrolling = true
-//                }
-//            }
-//
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                super.onScrolled(recyclerView, dx, dy)
-//
-//                currentItems = layoutManager1.childCount
-//                totalItems = layoutManager1.itemCount
-//                scrollOutItems = layoutManager1.findFirstVisibleItemPosition()
-//
-//                if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
-//                    isScrolling = false
-////                    fetchData()
-//                }
-//            }
-//        })
+
 
     }
 

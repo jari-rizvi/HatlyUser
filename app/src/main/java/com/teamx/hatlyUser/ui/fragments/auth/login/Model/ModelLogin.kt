@@ -11,9 +11,9 @@ data class ModelLogin(
     val email: String,
     var location: Location,
     val name: String,
-    val profileImage: String,
+    var profileImage: String,
     val role: String,
     val token: String,
     val verified: Boolean,
-    val wallet: Int
+    val wallet: Double
 )

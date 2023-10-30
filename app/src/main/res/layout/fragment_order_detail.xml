@@ -20,7 +20,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -114,14 +113,14 @@
             android:id="@+id/txtAddress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
             android:fontFamily="@font/open_sans_regular"
             android:text="UAE, Dubai Silicon Oasis,Dubai 341444, AE"
-            android:layout_marginStart="@dimen/_20sdp"
             android:textAlignment="viewEnd"
             android:textColor="#262626"
             android:textSize="@dimen/_11ssp"
-            app:layout_constraintHorizontal_bias="1"
             app:layout_constraintEnd_toEndOf="@+id/txtTitle1141"
+            app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toEndOf="@+id/txtTitle1121"
             app:layout_constraintTop_toTopOf="@+id/txtTitle1121" />
 
@@ -149,8 +148,8 @@
             android:id="@+id/spin_kit"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:visibility="gone"
             android:layout_gravity="center"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/guideline111"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -251,60 +250,131 @@
             app:layout_constraintEnd_toEndOf="@+id/txtTitle111323"
             app:layout_constraintTop_toTopOf="@+id/txtTitle121212" />
 
-
-        <androidx.appcompat.widget.AppCompatCheckedTextView
-            android:id="@+id/txtLogin"
-            android:layout_width="336dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_radius_green"
-            android:backgroundTint="@color/disable_button"
-            android:fontFamily="@font/open_sans_regular"
-            android:paddingVertical="@dimen/_10sdp"
-            android:text="Re-Order"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_13ssp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/txtLogin1"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/txtTitle1113233"
             app:layout_constraintStart_toStartOf="@+id/txtTitle121212"
-            app:layout_constraintTop_toBottomOf="@+id/txtTitle121212" />
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle1113233">
 
-<!--        <TextView-->
-<!--            android:id="@+id/txtLogin"-->
-<!--            android:layout_width="336dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@drawable/button_radius_green"-->
-<!--            android:backgroundTint="#EA1B25"-->
-<!--            android:fontFamily="@font/open_sans_regular"-->
-<!--            android:paddingVertical="@dimen/_10sdp"-->
-<!--            android:text="Re-Order"-->
-<!--            android:textAlignment="center"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="@dimen/_13ssp"-->
-<!--            android:textStyle="bold"-->
-<!--            app:layout_constraintBottom_toTopOf="@+id/txtLogin1"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/txtTitle1113233"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/txtTitle121212"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/txtTitle121212" />-->
+            <androidx.appcompat.widget.AppCompatCheckedTextView
+                android:id="@+id/txtLogin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_radius_green"
+                android:backgroundTint="@color/disable_button"
+                android:fontFamily="@font/open_sans_regular"
+                android:paddingVertical="@dimen/_10sdp"
+                android:text="Re-Order"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/txtLogin1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txtLogin1"
-            android:layout_width="336dp"
+            <TextView
+                android:id="@+id/txtLogin1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_radius_corner_red"
+                android:fontFamily="@font/open_sans_regular"
+                android:paddingVertical="@dimen/_10sdp"
+                android:text="Write a review"
+                android:textAlignment="center"
+                android:textColor="#EA1B25"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/txtLogin"
+                app:layout_constraintStart_toStartOf="@+id/txtLogin"
+                app:layout_constraintTop_toBottomOf="@+id/txtLogin" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/paidLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_radius_corner_red"
-            android:fontFamily="@font/open_sans_regular"
-            android:paddingVertical="@dimen/_10sdp"
-            android:text="Write a review"
-            android:visibility="gone"
-            android:textAlignment="center"
-            android:textColor="#EA1B25"
-            android:textSize="@dimen/_13ssp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/txtLogin"
-            app:layout_constraintStart_toStartOf="@+id/txtLogin"
-            app:layout_constraintTop_toBottomOf="@+id/txtLogin" />
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="@+id/txtTitle1113233"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle121212"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle1113233">
+
+            <TextView
+                android:id="@+id/txtTitle1145"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_regular"
+                android:text="Paid With"
+                android:textAlignment="center"
+                android:textColor="#262626"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTitle114455"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:drawableStart="@drawable/paid_with_card"
+                android:drawablePadding="@dimen/_5sdp"
+                android:fontFamily="@font/open_sans_regular"
+                android:gravity="center_vertical"
+                android:text="Cash"
+                android:textColor="#262626"
+                android:textSize="@dimen/_11ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/txtTitle1145"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitle1145" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--        <androidx.appcompat.widget.AppCompatCheckedTextView-->
+        <!--            android:id="@+id/txtLogin"-->
+        <!--            android:layout_width="336dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/button_radius_green"-->
+        <!--            android:backgroundTint="@color/disable_button"-->
+        <!--            android:fontFamily="@font/open_sans_regular"-->
+        <!--            android:paddingVertical="@dimen/_10sdp"-->
+        <!--            android:text="Re-Order"-->
+        <!--            android:textAlignment="center"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:textSize="@dimen/_13ssp"-->
+        <!--            android:textStyle="bold"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/txtLogin1"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/txtTitle1113233"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/txtTitle121212"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/txtTitle121212" />-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/txtLogin1"-->
+        <!--            android:layout_width="336dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/button_radius_corner_red"-->
+        <!--            android:fontFamily="@font/open_sans_regular"-->
+        <!--            android:paddingVertical="@dimen/_10sdp"-->
+        <!--            android:text="Write a review"-->
+        <!--            android:visibility="visible"-->
+        <!--            android:textAlignment="center"-->
+        <!--            android:textColor="#EA1B25"-->
+        <!--            android:textSize="@dimen/_13ssp"-->
+        <!--            android:textStyle="bold"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/txtLogin"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/txtLogin"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/txtLogin" />-->
 
         <ImageView
             android:id="@+id/imgBack"

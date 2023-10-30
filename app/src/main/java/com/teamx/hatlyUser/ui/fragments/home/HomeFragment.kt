@@ -193,10 +193,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             val params = JsonObject()
             params.addProperty("fcmToken", task.result)
 
-            if (!mViewModel.fcmResponse.hasActiveObservers()) {
-                mViewModel.fcm(params)
-            }
 
+            mViewModel.fcm(params)
             Log.d("fcmToken", "${params}")
 
         })

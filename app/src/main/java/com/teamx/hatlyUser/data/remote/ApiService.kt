@@ -228,6 +228,13 @@ interface ApiService {
     ): Response<ModelUploadImages>
 
 
+    @POST(NetworkCallPoints.UPDATE_PROFILE)
+    suspend fun updateProfile(
+        @Body params: JsonObject,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
+    ): Response<ModelLogin>
+
+
     @POST(NetworkCallPoints.REViEW_ORDER)
     suspend fun reviewOrder(
         @Body params: JsonObject,

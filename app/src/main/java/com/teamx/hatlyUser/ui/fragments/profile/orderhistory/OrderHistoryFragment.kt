@@ -151,6 +151,7 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding, OrderHist
 
     override fun clickshopItem(position: Int) {
         val orderHistoryModel = orderHistoryArrayList[position]
+        orderHistoryModel.isFromWallet = false
         sharedViewModel.setOrderHistory(orderHistoryModel)
         findNavController().navigate(R.id.action_orderHistoryFragment_to_orderDetailFragment)
     }

@@ -89,6 +89,10 @@ class MainRepository @Inject constructor(
         @Part images: List<MultipartBody.Part>
     ) = apiService.uploadReviewImg(images)
 
+    suspend fun updateProfile(
+        @Body params: JsonObject,
+    ) = apiService.updateProfile(params)
+
     suspend fun reviewList(
         @Query("shopId") shopId: String,
         @Query("limit") limit: Int,

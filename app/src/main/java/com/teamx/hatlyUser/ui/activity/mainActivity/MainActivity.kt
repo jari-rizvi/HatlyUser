@@ -24,6 +24,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.SharedViewModel
@@ -243,12 +244,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         sharedViewModel.userData.observe(this){
             mViewDataBinding.drawerLayoutMain.textView14.text = it.name
+            Picasso.get().load(it.profileImage).into(mViewDataBinding.drawerLayoutMain.imgProfile)
             Log.d("userData", "it._id: ${it._id}")
             Log.d("userData", "it.name: ${it.name}")
             Log.d("userData", "it.contact: ${it.contact}")
             Log.d("userData", "it.email: ${it.email}")
             Log.d("userData", "it.token: ${it.token}")
             Log.d("userData", "it.verified: ${it.verified}")
+            Log.d("userData", "it.profileImage: ${it.profileImage}")
         }
 
     }

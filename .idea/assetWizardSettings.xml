@@ -317,9 +317,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ea1b25" />
-                            <entry key="outputName" value="baseline_delete_outline_24" />
-                            <entry key="sourceFile" value="C:\Users\TeamX Pakistan\Downloads\home_label.svg" />
+                            <entry key="outputName" value="paid_with_cash" />
+                            <entry key="sourceFile" value="C:\Users\TeamX Pakistan\Downloads\paid-with-cash.svg" />
                           </map>
                         </option>
                       </PersistentState>

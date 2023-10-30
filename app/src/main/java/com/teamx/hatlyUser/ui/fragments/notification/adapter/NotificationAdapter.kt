@@ -21,7 +21,17 @@ class NotificationAdapter(
 
         val arrayData = addressArrayList[position]
 
+        holder.bind.textView16.text = try {
+            arrayData.title
+        }catch (e : Exception){
+            ""
+        }
 
+        holder.bind.textView18.text = try {
+            arrayData.description
+        }catch (e : Exception){
+            ""
+        }
 
 
     }

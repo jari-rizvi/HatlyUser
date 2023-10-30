@@ -4,6 +4,7 @@ import static android.app.Notification.DEFAULT_SOUND;
 import static android.app.Notification.DEFAULT_VIBRATE;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -23,7 +24,7 @@ public class NotificationHelper {
 //
 //        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
 //        notificationManagerCompat.notify(1,builder.build());
-
+        Log.d("displayNotification", "displayNotification: "+title);
 
     }
 

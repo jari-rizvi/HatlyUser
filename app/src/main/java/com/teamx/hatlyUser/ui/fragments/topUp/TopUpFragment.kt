@@ -3,11 +3,8 @@ package com.teamx.hatlyUser.ui.fragments.topUp
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AbsListView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.JsonObject
 import com.stripe.android.PaymentConfiguration
 import com.stripe.android.paymentsheet.PaymentSheet
@@ -17,17 +14,14 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentTopUpBinding
-import com.teamx.hatlyUser.databinding.FragmentWalletBinding
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.PaymentMethod
-import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Doc
-import com.teamx.hatlyUser.ui.fragments.wallet.WalletViewModel
-import com.teamx.hatlyUser.ui.fragments.wallet.adapter.WalletAdapter
+import com.teamx.hatlyUser.utils.DialogHelperClass
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TopUpFragment : BaseFragment<FragmentTopUpBinding, TopUpModel>() {
+class TopUpFragment : BaseFragment<FragmentTopUpBinding, TopUpModel>(),
+    DialogHelperClass.Companion.ContactUs {
 
     override val layoutId: Int
         get() = R.layout.fragment_top_up
@@ -152,13 +146,15 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding, TopUpModel>() {
                             when (selectedPaymentMethod) {
                                 PaymentMethod.CASH_ON_DELIVERY -> {
                                 }
+
                                 PaymentMethod.STRIPE_PAYMENT -> {
-                                    if (data.clientSecret != null) {
-                                        showStripeSheet(data.clientSecret)
-                                    }
+                                    showStripeSheet(data.clientSecret)
                                 }
+
                                 PaymentMethod.STRIPE_SAVED_PAYMENT -> {
+                                    DialogHelperClass.wallettDialog(requireActivity(), amount, this)
                                 }
+
                                 PaymentMethod.PAYPAL -> {
                                 }
                             }
@@ -174,7 +170,6 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding, TopUpModel>() {
         }
 
     }
-
 
     private fun showStripeSheet(clientSecret: String) {
         PaymentConfiguration.init(
@@ -206,11 +201,16 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding, TopUpModel>() {
 
             is PaymentSheetResult.Completed -> {
                 Log.d("placeOrderResponse", "onPaymentSheetResult: Completed")
+                DialogHelperClass.wallettDialog(requireActivity(), amount, this)
 //                if (isAdded) {
 //                    findNavController().navigate(R.id.action_checkOutFragment_to_orderPlacedFragment)
 //                }
             }
         }
+    }
+
+    override fun onBackToHome() {
+        findNavController().popBackStack(R.id.homeFragment, false)
     }
 
 }

@@ -23,7 +23,8 @@ data class Doc(
     val tax: Double,
     val total: Double,
     val useWallet: Boolean,
-    val usedWalletAmount: Double
+    val usedWalletAmount: Double,
+    var isFromWallet: Boolean
 )
 
 

@@ -78,7 +78,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         }
 
         mapFragment =
-            childFragmentManager.findFragmentById(com.teamx.hatlyUser.R.id.mapFragment) as SupportMapFragment?
+            childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
         val bundle = arguments
@@ -93,7 +93,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         }
 
         mViewDataBinding.textView121653.setOnClickListener {
-            findNavController().navigate(com.teamx.hatlyUser.R.id.action_checkOutFragment_to_paymentMethodFragment)
+            findNavController().navigate(R.id.action_checkOutFragment_to_paymentMethodFragment)
         }
 
         mViewDataBinding.txtLogin.setOnClickListener {
@@ -536,23 +536,23 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         val params = JsonObject()
         try {
 
-            params.add(
-                "coordinates", Gson().toJsonTree(Coordinates(location.latitude, location.longitude))
-            )
-
-            params.add(
-                "shippingAddress", Gson().toJsonTree(
-                    ShippingAddress(
-                        "voluptas",
-                        "Appartment",
-                        457,
-                        "Branding",
-                        "Bogisich Points",
-                        135,
-                        "3886 Cummerata Burg"
-                    )
-                )
-            )
+//            params.add(
+//                "coordinates", Gson().toJsonTree(Coordinates(location.latitude, location.longitude))
+//            )
+//
+//            params.add(
+//                "shippingAddress", Gson().toJsonTree(
+//                    ShippingAddress(
+//                        "voluptas",
+//                        "Appartment",
+//                        457,
+//                        "Branding",
+//                        "Bogisich Points",
+//                        135,
+//                        "3886 Cummerata Burg"
+//                    )
+//                )
+//            )
 
             if (addNote.isNotEmpty()) {
                 params.addProperty("specialNote", addNote)
