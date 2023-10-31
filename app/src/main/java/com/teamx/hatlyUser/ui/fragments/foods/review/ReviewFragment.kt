@@ -88,9 +88,8 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding, ReviewViewModel>() {
 
                             data.docs.forEach {
 
-                                val time = TimeFormatter.formatTimeDifference(it.createdAt)
-
-                                it.createdAt = time
+//                                val time =
+                                it.createdAt = TimeFormatter.formatTimeDifference(it.createdAt)
                                 reviewArrayList.add(it)
                             }
 

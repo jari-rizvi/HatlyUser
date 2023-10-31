@@ -56,9 +56,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             }
         }
 
-        Firebase.initialize(requireContext())
-        FirebaseApp.initializeApp(requireContext())
-        askNotificationPermission()
 
         val userData = PrefHelper.getInstance(requireActivity()).getUserData()
 
@@ -137,6 +134,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
         }
 
+        Firebase.initialize(requireContext())
+        FirebaseApp.initializeApp(requireContext())
+        if (!mViewModel.fcmResponse.hasActiveObservers()) {
+            askNotificationPermission()
+        }
+
         if (!mViewModel.fcmResponse.hasActiveObservers()) {
             mViewModel.fcmResponse.observe(requireActivity()) {
                 when (it.status) {
@@ -158,6 +161,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 }
             }
         }
+
+
 
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -195,7 +200,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
 
             mViewModel.fcm(params)
-            Log.d("fcmToken", "${params}")
+            Log.d("fcmToken", "gaya ${params}")
+
 
         })
         // FCM SDK (and your app) can post notifications.

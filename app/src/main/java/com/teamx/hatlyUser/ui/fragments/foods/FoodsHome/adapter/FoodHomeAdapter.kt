@@ -50,7 +50,7 @@ class FoodHomeAdapter(
             ""
         }
 
-        Picasso.get().load(modelShops.image).into(holder.bind.imgShop)
+        Picasso.get().load(modelShops.image).resize(500,500).into(holder.bind.imgShop)
 
         holder.itemView.setOnClickListener {
             hatlyShopInterface.clickshopItem(position)

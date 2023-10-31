@@ -1,15 +1,19 @@
 package com.teamx.hatlyUser.ui.fragments.chat.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.databinding.ItemChatRiderBinding
 import com.teamx.hatlyUser.databinding.ItemChatUserBinding
+import com.teamx.hatlyUser.ui.fragments.products.adapter.required.multiAdapter.MultiViewVariationRadioAdapter
+import com.teamx.hatlyUser.ui.fragments.track.socket.model.allChat.Doc
+import com.teamx.hatlyUser.ui.fragments.track.socket.model.reciecMessage.RecieveMessage
 import kotlin.collections.ArrayList
 
 
 class ChatAdapter(
-    private val messageArrayList: ArrayList<Boolean>
+    var messageArrayList: ArrayList<Doc>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val VIEW_TYPE_USER = 1
@@ -35,37 +39,52 @@ class ChatAdapter(
                 )
             }
 
-            else -> throw IllegalArgumentException("Invalid item type")
+            else -> {
+                Log.d("getItemCount", "throw: IllegalArgumentException")
+                throw IllegalArgumentException("Invalid item type")
+            }
         }
     }
 
 
     override fun getItemCount(): Int {
+        Log.d("getItemCount", "getItemCount: ${messageArrayList.size}")
         return messageArrayList.size
     }
 
 
     override fun getItemViewType(position: Int): Int {
-        return when (messageArrayList[position]) {
+        return when (messageArrayList[position].isUser) {
             true -> VIEW_TYPE_USER
             false -> VIEW_TYPE_Rider
         }
     }
 
 
-
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val messagesUser = messageArrayList[position]
 
 
-        when (messagesUser) {
+        when (messagesUser.isUser) {
             true -> {
+                val holderUser = holder as MessageUserViewHolder
 
+                holderUser.bindUser.txtMessage.text = try {
+                    messagesUser.message
+                } catch (e: Exception) {
+                    ""
+                }
 
             }
+
             false -> {
+                val holderRider = holder as MessageRiderViewHolder
 
-
+                holderRider.bindRider.txtMessage.text = try {
+                    messagesUser.message
+                } catch (e: Exception) {
+                    ""
+                }
             }
 
         }
@@ -78,13 +97,13 @@ class ChatAdapter(
 class MessageRiderViewHolder(binding: ItemChatRiderBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    val bind = binding
+    val bindRider = binding
 
 }
 
 class MessageUserViewHolder(binding: ItemChatUserBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    val bind = binding
+    val bindUser = binding
 
 }

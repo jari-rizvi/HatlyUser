@@ -58,7 +58,7 @@ class ProfileManagementFragment :
 
         sharedViewModel.userData.observe(requireActivity()) {
             mViewDataBinding.textView.text = it.name
-            Picasso.get().load(it.profileImage).into(mViewDataBinding.hatlyIcon)
+            Picasso.get().load(it.profileImage).resize(500,500).into(mViewDataBinding.hatlyIcon)
         }
 
         mViewDataBinding.imgBack.setOnClickListener {
@@ -88,122 +88,122 @@ class ProfileManagementFragment :
             findNavController().navigate(R.id.action_profileManagementFragment_to_orderHistoryFragment)
         }
 
-        mViewDataBinding.imgGallery.setOnClickListener {
-            fetchImageFromGallery()
-        }
+//        mViewDataBinding.imgGallery.setOnClickListener {
+//            fetchImageFromGallery()
+//        }
 
-        if (!mViewModel.uploadReviewImgResponse.hasActiveObservers()) {
-            mViewModel.uploadReviewImgResponse.observe(requireActivity()) {
-                when (it.status) {
-                    Resource.Status.LOADING -> {
-                        loadingDialog.show()
-                    }
+//        if (!mViewModel.uploadReviewImgResponse.hasActiveObservers()) {
+//            mViewModel.uploadReviewImgResponse.observe(requireActivity()) {
+//                when (it.status) {
+//                    Resource.Status.LOADING -> {
+//                        loadingDialog.show()
+//                    }
+//
+//                    Resource.Status.SUCCESS -> {
+//                        loadingDialog.dismiss()
+//                        it.data?.let { data ->
+//                            if (data.isNotEmpty()) {
+//                                Log.d("uploadReviewIm", "onViewCreated: ${data[0]}")
+//                                val params = JsonObject()
+//                                try {
+//                                    params.addProperty(
+//                                        "name",
+//                                        sharedViewModel.userData.value!!.name
+//                                    )
+//                                    params.addProperty("profileImage", data[0])
+//                                } catch (e: JSONException) {
+//                                    e.printStackTrace()
+//                                }
+//
+//                                mViewModel.updateProfile(params)
+//                            }
+//                        }
+//                    }
+//
+//                    Resource.Status.ERROR -> {
+//                        loadingDialog.dismiss()
+//                        Log.d("uploadReviewIm", "onViewCreated: ${it.message}")
+//                        mViewDataBinding.root.snackbar(it.message!!)
+//                    }
+//                }
+//            }
+//        }
 
-                    Resource.Status.SUCCESS -> {
-                        loadingDialog.dismiss()
-                        it.data?.let { data ->
-                            if (data.isNotEmpty()) {
-                                Log.d("uploadReviewIm", "onViewCreated: ${data[0]}")
-                                val params = JsonObject()
-                                try {
-                                    params.addProperty(
-                                        "name",
-                                        sharedViewModel.userData.value!!.name
-                                    )
-                                    params.addProperty("profileImage", data[0])
-                                } catch (e: JSONException) {
-                                    e.printStackTrace()
-                                }
-
-                                mViewModel.updateProfile(params)
-                            }
-                        }
-                    }
-
-                    Resource.Status.ERROR -> {
-                        loadingDialog.dismiss()
-                        Log.d("uploadReviewIm", "onViewCreated: ${it.message}")
-                        mViewDataBinding.root.snackbar(it.message!!)
-                    }
-                }
-            }
-        }
-
-        if (!mViewModel.updateProfileResponse.hasActiveObservers()) {
-            mViewModel.updateProfileResponse.observe(requireActivity()) {
-                when (it.status) {
-                    Resource.Status.LOADING -> {
-                        loadingDialog.show()
-                    }
-
-                    Resource.Status.SUCCESS -> {
-                        loadingDialog.dismiss()
-                        it.data?.let { data ->
-                            Picasso.get().load(data.profileImage).into(mViewDataBinding.hatlyIcon)
-                            val userData = PrefHelper.getInstance(requireActivity()).getUserData()
-                            userData!!.profileImage = data.profileImage
-                            PrefHelper.getInstance(requireActivity()).setUserData(userData)
-                            sharedViewModel.setUserData(userData)
-                        }
-                    }
-
-                    Resource.Status.ERROR -> {
-                        loadingDialog.dismiss()
-                        mViewDataBinding.root.snackbar(it.message!!)
-                    }
-                }
-            }
-        }
-
-    }
-
-
-    private fun fetchImageFromGallery() {
-        startForResult.launch("image/*")
-    }
-
-    private val startForResult =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            uri?.let {
-                val str = "${requireContext().filesDir}/file.jpg"
-
-                Log.d("startForResult", "Profile image: $it")
-
-
-//                uploadWithRetrofit(it)
-
-                val imageUri = uri
-
-                val bitmap = MediaStore.Images.Media.getBitmap(
-                    requireActivity().contentResolver,
-                    imageUri
-                )
-
-// Compress the bitmap to a JPEG format with 80% quality and save it to a file
-                val outputStream = FileOutputStream(str)
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
-                outputStream.close()
-
-//                Picasso.get().load(it).into(mViewDataBinding.hatlyIcon)
-
-                uploadWithRetrofit(File(str))
-            }
-        }
-
-    private fun uploadWithRetrofit(file: File) {
-
-        val imagesList = mutableListOf<MultipartBody.Part>()
-
-        imagesList.add(prepareFilePart("images", file))
-
-        mViewModel.uploadReviewImg(imagesList)
+//        if (!mViewModel.updateProfileResponse.hasActiveObservers()) {
+//            mViewModel.updateProfileResponse.observe(requireActivity()) {
+//                when (it.status) {
+//                    Resource.Status.LOADING -> {
+//                        loadingDialog.show()
+//                    }
+//
+//                    Resource.Status.SUCCESS -> {
+//                        loadingDialog.dismiss()
+//                        it.data?.let { data ->
+//                            Picasso.get().load(data.profileImage).into(mViewDataBinding.hatlyIcon)
+//                            val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+//                            userData!!.profileImage = data.profileImage
+//                            PrefHelper.getInstance(requireActivity()).setUserData(userData)
+//                            sharedViewModel.setUserData(userData)
+//                        }
+//                    }
+//
+//                    Resource.Status.ERROR -> {
+//                        loadingDialog.dismiss()
+//                        mViewDataBinding.root.snackbar(it.message!!)
+//                    }
+//                }
+//            }
+//        }
 
     }
 
-    private fun prepareFilePart(partName: String, fileUri: File): MultipartBody.Part {
-        val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), fileUri)
-        return MultipartBody.Part.createFormData(partName, fileUri.name, requestFile)
-    }
+
+//    private fun fetchImageFromGallery() {
+//        startForResult.launch("image/*")
+//    }
+//
+//    private val startForResult =
+//        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+//            uri?.let {
+//                val str = "${requireContext().filesDir}/file.jpg"
+//
+//                Log.d("startForResult", "Profile image: $it")
+//
+//
+////                uploadWithRetrofit(it)
+//
+//                val imageUri = uri
+//
+//                val bitmap = MediaStore.Images.Media.getBitmap(
+//                    requireActivity().contentResolver,
+//                    imageUri
+//                )
+//
+//// Compress the bitmap to a JPEG format with 80% quality and save it to a file
+//                val outputStream = FileOutputStream(str)
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
+//                outputStream.close()
+//
+////                Picasso.get().load(it).into(mViewDataBinding.hatlyIcon)
+//
+//                uploadWithRetrofit(File(str))
+//            }
+//        }
+//
+//    private fun uploadWithRetrofit(file: File) {
+//
+//        val imagesList = mutableListOf<MultipartBody.Part>()
+//
+//        imagesList.add(prepareFilePart("images", file))
+//
+//        mViewModel.uploadReviewImg(imagesList)
+//
+//    }
+//
+//    private fun prepareFilePart(partName: String, fileUri: File): MultipartBody.Part {
+//        val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), fileUri)
+//        return MultipartBody.Part.createFormData(partName, fileUri.name, requestFile)
+//    }
 
 
 }

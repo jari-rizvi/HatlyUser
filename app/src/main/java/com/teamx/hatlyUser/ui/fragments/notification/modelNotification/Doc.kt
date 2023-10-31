@@ -7,5 +7,6 @@ data class Doc(
     val description: String,
     val isRead: Boolean,
     val title: String,
-    val userId: String
+    val userId: String,
+    var createdAt: String
 )

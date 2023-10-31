@@ -1,8 +1,10 @@
 package com.teamx.hatlyUser.ui.fragments.wallet
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.AbsListView
+import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +17,7 @@ import com.teamx.hatlyUser.databinding.FragmentWalletBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Doc
 import com.teamx.hatlyUser.ui.fragments.wallet.adapter.WalletAdapter
+import com.teamx.hatlyUser.utils.TimeFormatter
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,6 +43,7 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
     var scrollOutItems = 0
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -115,7 +119,11 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
                         if (!hasNextPage) {
                             orderHistoryArrayList.clear()
                         }
-                        data.docs?.let { it1 -> orderHistoryArrayList.addAll(it1) }
+                        data.docs?.forEach {
+                            it.createdAt = TimeFormatter.formatTimeDifference(it.createdAt)
+                            orderHistoryArrayList.add(it)
+                        }
+//                        data.docs?.let { it1 -> orderHistoryArrayList.addAll(it1) }
                         walletAdapter.notifyDataSetChanged()
 
                         nextPage = data.nextPage ?: 1

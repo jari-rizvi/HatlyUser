@@ -43,7 +43,7 @@ class WalletAdapter(
         }
 
         holder.bind.textView1754.text = try {
-            TimeFormatter.formatTimeDifference(arrayData.createdAt)
+            arrayData.createdAt
         }catch (e : Exception){
             ""
         }

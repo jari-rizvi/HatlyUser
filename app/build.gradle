@@ -201,6 +201,11 @@ dependencies {
     // places api
     implementation 'com.google.android.libraries.places:places:3.2.0'
 
+
+    implementation('io.socket:socket.io-client:2.0.0') {
+        exclude group: 'org.json', module: 'json'
+    }
+
     // braintree paypal
 //    implementation 'com.braintreepayments.api:paypal:4.27.2'
 }

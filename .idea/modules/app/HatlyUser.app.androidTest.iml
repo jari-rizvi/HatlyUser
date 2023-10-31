@@ -122,6 +122,8 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/25e3115293ff0271ce5c2507d3b68871/transformed/jetified-retrofit-2.9.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/3ff1abcce95c9b27075d355f936db52d/transformed/jetified-logging-interceptor-4.9.1.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/88f92875d59dab857f74a2d4f7b0216c/transformed/jetified-picasso-2.71828-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/6efb03865ed12836fc6ab6841cd54617/transformed/jetified-socket.io-client-2.0.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/edae23087bd5455a953fac75f8c6549f/transformed/jetified-engine.io-client-2.0.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/fcfe4dc4d66711acabe4c054e4f4ebfd/transformed/jetified-okhttp-4.9.1.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/80e7dec4ec210b4d65dec04c5d4440ba/transformed/jetified-okio-jvm-2.8.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/a2f3c895fbc4a79a24e45e4fb1d865a1/transformed/jetified-stripe-android-20.25.5-api.jar</arg>
@@ -270,6 +272,7 @@
     </content>
     <content url="file://$MODULE_DIR$/../../../app/build/generated/res/rs/androidTest/local/debug" />
     <content url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/local/debug">
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/local/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/local/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/local/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/local/debug" isTestSource="true" generated="true" />
@@ -510,6 +513,8 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.apache.commons:commons-lang3:3.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.zxing:core:3.3.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.auto.value:auto-value-annotations:1.6.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.socket:socket.io-client:2.0.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.socket:engine.io-client:2.0.0" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="HatlyUser.app.main" />
 </module>

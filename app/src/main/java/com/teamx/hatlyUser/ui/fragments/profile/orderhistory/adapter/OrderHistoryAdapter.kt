@@ -9,7 +9,6 @@ import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.databinding.ItemOrderHistoryBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Doc
-import com.teamx.hatlyUser.utils.TimeFormatter.Companion.formatTimeDifference
 
 class OrderHistoryAdapter(
     private val addressArrayList: ArrayList<Doc>,
@@ -42,12 +41,13 @@ class OrderHistoryAdapter(
         }
 
         holder.bind.txtTime.text = try {
-            formatTimeDifference(arrayData.createdAt)
+            arrayData.createdAt
+//            formatTimeDifference(arrayData.createdAt)
         }catch (e : Exception){
             ""
         }
 
-        Picasso.get().load(arrayData.shop.image).into(holder.bind.imgShop)
+        Picasso.get().load(arrayData.shop.image).resize(500,500).into(holder.bind.imgShop)
 
 
         holder.bind.txtDet.setOnClickListener {

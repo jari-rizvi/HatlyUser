@@ -62,7 +62,7 @@ class CartAdapter(
 
 
 
-        Picasso.get().load(arrayData.image).into(holder.bind.imgShop)
+        Picasso.get().load(arrayData.image).resize(500,500).into(holder.bind.imgShop)
 
     }
 

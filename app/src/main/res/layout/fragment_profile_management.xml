@@ -41,18 +41,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.1" />
 
-        <ImageView
-            android:id="@+id/imgGallery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/email_or_number"
-            app:layout_constraintHorizontal_bias="0.9"
-            app:layout_constraintVertical_bias="0.9"
-            app:layout_constraintBottom_toBottomOf="@+id/hatlyIcon"
-            app:layout_constraintEnd_toEndOf="@+id/hatlyIcon"
-            app:layout_constraintStart_toStartOf="@+id/hatlyIcon"
-            app:layout_constraintTop_toTopOf="@+id/hatlyIcon" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imgGallery"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:scaleType="fitXY"-->
+<!--            android:src="@drawable/email_or_number"-->
+<!--            app:layout_constraintHorizontal_bias="0.9"-->
+<!--            app:layout_constraintVertical_bias="0.9"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/hatlyIcon"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/hatlyIcon"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/hatlyIcon"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/hatlyIcon" />-->
 
         <TextView
             android:id="@+id/textView"

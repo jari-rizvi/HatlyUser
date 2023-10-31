@@ -19,7 +19,7 @@ class ImageSliderAdapter(private val imageResIds: List<String>) :
     override fun onBindViewHolder(holder: ImageSliderViewHolder, position: Int) {
 
 //        holder.imageView.set(imageResIds[position])
-        Picasso.get().load(imageResIds[position]).into(holder.imageView)
+        Picasso.get().load(imageResIds[position]).resize(500,500).into(holder.imageView)
     }
 
     override fun getItemCount(): Int {

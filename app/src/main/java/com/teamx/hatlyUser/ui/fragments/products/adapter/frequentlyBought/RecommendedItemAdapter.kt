@@ -37,7 +37,7 @@ class RecommendedItemAdapter(
             ""
         }
 
-        Picasso.get().load(arrayData.images[0]).into(holder.bind.imgShop)
+        Picasso.get().load(arrayData.images[0]).resize(500,500).into(holder.bind.imgShop)
 
 
         holder.itemView.setOnClickListener {

@@ -1,7 +1,9 @@
 package com.teamx.hatlyUser.ui.fragments.notification
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +15,7 @@ import com.teamx.hatlyUser.databinding.FragmentNotificationBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.notification.adapter.NotificationAdapter
 import com.teamx.hatlyUser.ui.fragments.notification.modelNotification.Doc
+import com.teamx.hatlyUser.utils.TimeFormatter
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,6 +41,7 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
     private lateinit var notificationArrayList: ArrayList<Doc>
     private lateinit var hatlyPopularAdapter: NotificationAdapter
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -74,7 +78,11 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             notificationArrayList.clear()
-                            notificationArrayList.addAll(data.docs)
+                            data.docs.forEach {
+                                it.createdAt = TimeFormatter.formatTimeDifference(it.createdAt)
+                                notificationArrayList.add(it)
+                            }
+//                            notificationArrayList.addAll(data.docs)
                             hatlyPopularAdapter.notifyDataSetChanged()
 
                         }

@@ -127,6 +127,8 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/9d4e95662db56cf3a7d67c876a802a06/transformed/jetified-converter-gson-2.9.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/25e3115293ff0271ce5c2507d3b68871/transformed/jetified-retrofit-2.9.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/88f92875d59dab857f74a2d4f7b0216c/transformed/jetified-picasso-2.71828-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/6efb03865ed12836fc6ab6841cd54617/transformed/jetified-socket.io-client-2.0.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/edae23087bd5455a953fac75f8c6549f/transformed/jetified-engine.io-client-2.0.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/fcfe4dc4d66711acabe4c054e4f4ebfd/transformed/jetified-okhttp-4.9.1.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/13f437184f7f2dd01f6c301039497478/transformed/jetified-savedstate-ktx-1.2.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/30e66e0f943111ee093d5ca669d0214e/transformed/jetified-savedstate-1.2.1-api.jar</arg>
@@ -440,6 +442,8 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.apache.commons:commons-lang3:3.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.zxing:core:3.3.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.auto.value:auto-value-annotations:1.6.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.socket:socket.io-client:2.0.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.socket:engine.io-client:2.0.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.13.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
   </component>

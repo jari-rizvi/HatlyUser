@@ -50,7 +50,7 @@ class StoresAdapter(private val addressArrayList: ArrayList<Doc>, val hatlyShopI
             ""
         }
 
-        Picasso.get().load(arrayData.image).into(holder.bind.imgShop)
+        Picasso.get().load(arrayData.image).resize(500,500).into(holder.bind.imgShop)
 
         holder.itemView.setOnClickListener {
             hatlyShopInterface.clickshopItem(position)

@@ -1,10 +1,12 @@
 package com.teamx.hatlyUser.ui.fragments.profile.orderhistory
 
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.AbsListView
+import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +20,7 @@ import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShop
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.adapter.OrderHistoryAdapter
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Doc
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Shop
+import com.teamx.hatlyUser.utils.TimeFormatter
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,6 +46,7 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding, OrderHist
     var totalItems = 0
     var scrollOutItems = 0
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -85,7 +89,13 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding, OrderHist
                         if (!hasNextPage) {
                             orderHistoryArrayList.clear()
                         }
-                        data.docs?.let { it1 -> orderHistoryArrayList.addAll(it1) }
+                        data.docs?.forEach {
+                            it.createdAt = TimeFormatter.formatTimeDifference(it.createdAt)
+                            orderHistoryArrayList.add(it)
+                        }
+//                        data.docs?.let { it1 ->
+//                            orderHistoryArrayList.addAll(it1)
+//                        }
                         orderHistoryAdapter.notifyDataSetChanged()
 
                         nextPage = data.nextPage ?: 1

@@ -23,7 +23,8 @@ class TimeFormatter {
                 duration.toDays() > 2 -> {
                     // If more than 2 days, return the actual date
                     val localDateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
-                    localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+//                    localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                    localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                 }
 
                 duration.toDays() > 1 -> "${duration.toDays()} days ago"

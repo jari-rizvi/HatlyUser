@@ -201,7 +201,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                 ""
             }
 
-            Picasso.get().load(data.shop.image).into(mViewDataBinding.imgShop)
+            Picasso.get().load(data.shop.image).resize(500,500).into(mViewDataBinding.imgShop)
 
             productOrderHistoryList.addAll(data.products)
             orderDetailAdapter.notifyDataSetChanged()

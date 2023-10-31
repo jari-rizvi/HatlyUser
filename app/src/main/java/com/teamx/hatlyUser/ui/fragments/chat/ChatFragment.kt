@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.ProgressBar
+import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -59,36 +60,36 @@ class ChatFragment : BottomSheetDialogFragment() {
 
         recChat.layoutManager = layoutManager2
 
-        var itemClasses : ArrayList<Boolean> = ArrayList()
-
-        itemClasses.add(true)
-        itemClasses.add(false)
-        itemClasses.add(true)
-        itemClasses.add(false)
-        itemClasses.add(true)
-        itemClasses.add(false)
-        itemClasses.add(true)
-        itemClasses.add(false)
-        itemClasses.add(true)
-        itemClasses.add(false)
-        itemClasses.add(false)
-        itemClasses.add(true)
-        itemClasses.add(true)
-        itemClasses.add(true)
-        itemClasses.add(false)
-        itemClasses.add(false)
-        itemClasses.add(false)
-        itemClasses.add(false)
-        itemClasses.add(false)
-        itemClasses.add(true)
-        itemClasses.add(true)
-        itemClasses.add(true)
-        itemClasses.add(false)
-        itemClasses.add(true)
-        itemClasses.add(true)
-
-        var chatAdapter = ChatAdapter(itemClasses)
-        recChat.adapter = chatAdapter
+//        var itemClasses : ArrayList<Boolean> = ArrayList()
+//
+//        itemClasses.add(true)
+//        itemClasses.add(false)
+//        itemClasses.add(true)
+//        itemClasses.add(false)
+//        itemClasses.add(true)
+//        itemClasses.add(false)
+//        itemClasses.add(true)
+//        itemClasses.add(false)
+//        itemClasses.add(true)
+//        itemClasses.add(false)
+//        itemClasses.add(false)
+//        itemClasses.add(true)
+//        itemClasses.add(true)
+//        itemClasses.add(true)
+//        itemClasses.add(false)
+//        itemClasses.add(false)
+//        itemClasses.add(false)
+//        itemClasses.add(false)
+//        itemClasses.add(false)
+//        itemClasses.add(true)
+//        itemClasses.add(true)
+//        itemClasses.add(true)
+//        itemClasses.add(false)
+//        itemClasses.add(true)
+//        itemClasses.add(true)
+//
+//        val chatAdapter = ChatAdapter(itemClasses)
+//        recChat.adapter = chatAdapter
 
 //        recChat.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 //            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

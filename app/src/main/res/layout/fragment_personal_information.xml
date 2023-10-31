@@ -35,18 +35,46 @@
             android:textColor="#363636"
             android:textSize="@dimen/_17ssp"
             android:textStyle="bold"
-            app:layout_constraintVertical_bias="0.1"
-            app:layout_constraintBottom_toTopOf="@+id/guideline11"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgBack" />
+            app:layout_constraintTop_toBottomOf="@+id/imgBack"
+            app:layout_constraintVertical_bias="0.1" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline11"
+        <ImageView
+            android:id="@+id/hatlyIcon"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/bg_circle"
+            android:backgroundTint="@color/white"
+            android:clipToOutline="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/splash_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.01" />
+
+        <ImageView
+            android:id="@+id/imgGallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.20" />
+            android:scaleType="fitXY"
+            android:src="@drawable/email_or_number"
+            app:layout_constraintBottom_toBottomOf="@+id/hatlyIcon"
+            app:layout_constraintEnd_toEndOf="@+id/hatlyIcon"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toStartOf="@+id/hatlyIcon"
+            app:layout_constraintTop_toTopOf="@+id/hatlyIcon"
+            app:layout_constraintVertical_bias="0.9" />
+
+        <!--        <androidx.constraintlayout.widget.Guideline-->
+        <!--            android:id="@+id/guideline11"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            app:layout_constraintGuide_percent="0.40" />-->
 
         <TextView
             android:id="@+id/textView27"
@@ -57,9 +85,8 @@
             android:textColor="#262626"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/editText"
             app:layout_constraintStart_toStartOf="@+id/editText"
-            app:layout_constraintTop_toBottomOf="@+id/guideline11" />
+            app:layout_constraintTop_toBottomOf="@+id/hatlyIcon" />
 
         <EditText
             android:id="@+id/editText"
@@ -70,16 +97,16 @@
             android:backgroundTint="@color/white"
             android:elevation="1dp"
             android:hint="James Bond"
-            android:textColor="#66262626"
+            android:layout_marginTop="@dimen/_5sdp"
             android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
+            android:textColor="#66262626"
             android:textColorHint="#BFBFBF"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_13ssp"
-            app:layout_constraintBottom_toTopOf="@+id/textView32"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView27" />
@@ -92,8 +119,8 @@
             android:text="Mobile Number"
             android:textColor="#262626"
             android:textSize="@dimen/_13ssp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/editText2"
             app:layout_constraintStart_toStartOf="@+id/editText"
             app:layout_constraintTop_toBottomOf="@+id/editText" />
 
@@ -104,17 +131,17 @@
             android:background="@drawable/input_auth_field"
             android:backgroundTint="@color/white"
             android:elevation="1dp"
+            android:hint="+971 6367378488"
             android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
-            android:hint="+971 6367378488"
-            android:textColor="#66262626"
             android:maxLines="1"
+            android:layout_marginTop="@dimen/_5sdp"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
+            android:textColor="#66262626"
             android:textColorHint="#BFBFBF"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_13ssp"
-            app:layout_constraintBottom_toTopOf="@+id/textView33"
             app:layout_constraintEnd_toEndOf="@+id/editText"
             app:layout_constraintStart_toStartOf="@+id/editText"
             app:layout_constraintTop_toBottomOf="@+id/textView32" />
@@ -126,9 +153,9 @@
             android:fontFamily="@font/montserrat_regular"
             android:text="Password"
             android:textColor="#262626"
+            android:layout_marginTop="@dimen/_10sdp"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/editText4"
             app:layout_constraintStart_toStartOf="@+id/editText3"
             app:layout_constraintTop_toBottomOf="@+id/editText3" />
 
@@ -140,19 +167,19 @@
             android:backgroundTint="@color/white"
             android:elevation="1dp"
             android:hint="abc@gmail.com"
-            android:text="abc@gmail.com"
             android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
-            android:textColor="#66262626"
             android:maxLines="1"
+            android:layout_marginTop="@dimen/_5sdp"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
+            android:text="abc@gmail.com"
+            android:textColor="#66262626"
             android:textColorHint="#BFBFBF"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_13ssp"
-            app:layout_constraintBottom_toTopOf="@+id/textView34"
             app:layout_constraintEnd_toEndOf="@+id/editText2"
-            app:layout_constraintStart_toStartOf="@+id/textView33"
+            app:layout_constraintStart_toStartOf="@+id/editText2"
             app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
         <TextView
@@ -162,9 +189,9 @@
             android:fontFamily="@font/montserrat_regular"
             android:text="Email address"
             android:textColor="#262626"
+            android:layout_marginTop="@dimen/_10sdp"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/editText3"
             app:layout_constraintStart_toStartOf="@+id/editText2"
             app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
@@ -175,17 +202,17 @@
             android:background="@drawable/input_auth_field"
             android:backgroundTint="@color/white"
             android:elevation="1dp"
-            android:text="464654"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
             android:maxLines="1"
-            android:textColor="#66262626"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
+            android:text="464654"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textColor="#66262626"
             android:textColorHint="#BFBFBF"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_13ssp"
-            app:layout_constraintBottom_toTopOf="@+id/textView35"
             app:layout_constraintEnd_toEndOf="@+id/editText3"
             app:layout_constraintStart_toStartOf="@+id/editText3"
             app:layout_constraintTop_toBottomOf="@+id/textView34" />
@@ -197,9 +224,9 @@
             android:fontFamily="@font/montserrat_regular"
             android:text="Change password"
             android:textColor="#1ED860"
+            android:layout_marginTop="@dimen/_10sdp"
             android:textSize="@dimen/_11ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/txtLogin"
             app:layout_constraintStart_toStartOf="@+id/editText4"
             app:layout_constraintTop_toBottomOf="@+id/editText4" />
 
@@ -215,17 +242,17 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/guideline1"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/editText4"
             app:layout_constraintStart_toStartOf="@+id/editText4"
             app:layout_constraintTop_toBottomOf="@+id/textView35" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.80" />
+        <!--        <androidx.constraintlayout.widget.Guideline-->
+        <!--            android:id="@+id/guideline1"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            app:layout_constraintGuide_percent="0.9" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

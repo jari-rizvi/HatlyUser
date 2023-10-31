@@ -143,7 +143,7 @@ class FoodsShopPreviewFragment :
 
                         shopId = data.shop._id
 
-                        Picasso.get().load(data.shop.image).into(mViewDataBinding.imgShop)
+                        Picasso.get().load(data.shop.image).resize(500,500).into(mViewDataBinding.imgShop)
 
                         mViewDataBinding.imgFavourite.isChecked = data.shop.hasAddedToWishlist
 

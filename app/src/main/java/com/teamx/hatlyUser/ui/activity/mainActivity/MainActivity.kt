@@ -244,7 +244,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         sharedViewModel.userData.observe(this){
             mViewDataBinding.drawerLayoutMain.textView14.text = it.name
-            Picasso.get().load(it.profileImage).into(mViewDataBinding.drawerLayoutMain.imgProfile)
+            Picasso.get().load(it.profileImage).resize(500,500).into(mViewDataBinding.drawerLayoutMain.imgProfile)
             Log.d("userData", "it._id: ${it._id}")
             Log.d("userData", "it.name: ${it.name}")
             Log.d("userData", "it.contact: ${it.contact}")
