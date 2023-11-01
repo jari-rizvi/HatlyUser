@@ -4,6 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
+import com.teamx.hatlyUser.MainApplication.Companion.context
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemLocationBinding
 import com.teamx.hatlyUser.ui.fragments.auth.login.Model.Location
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
@@ -23,6 +26,22 @@ class LocationsListAdapter(
     override fun onBindViewHolder(holder: HatlyPopularViewHolder, position: Int) {
 
         val arrayData = addressArrayList[position]
+
+
+        when (arrayData.label) {
+            "Home" -> {
+                holder.bind.img.setImageDrawable(context.getDrawable(R.drawable.home_label))
+//                Picasso.get().load(R.drawable.home_label).into(holder.bind.img)
+            }
+            "Work" -> {
+                holder.bind.img.setImageDrawable(context.getDrawable(R.drawable.work_label))
+//                Picasso.get().load(R.drawable.work_label).into(holder.bind.img)
+            }
+            else -> {
+                holder.bind.img.setImageDrawable(context.getDrawable(R.drawable.pin_location))
+//                Picasso.get().load(R.drawable.pin_location).into(holder.bind.img)
+            }
+        }
 
 
         holder.bind.mainItem.isActivated = arrayData.isDefault

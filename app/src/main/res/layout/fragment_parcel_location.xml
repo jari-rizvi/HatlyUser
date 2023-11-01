@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_auth_field"
+            android:backgroundTint="@color/white"
+            android:elevation="1dp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/round_arrow_back_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.07"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05"
+            app:tint="#363636" />
+
+        <ImageView
+            android:id="@+id/imgBack1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_auth_field"
+            android:backgroundTint="@color/white"
+            android:elevation="1dp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/round_arrow_back_24"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.93"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05"
+            app:tint="#363636" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="Send Parcel"
+            android:textColor="#262626"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgBack"
+            app:layout_constraintVertical_bias="0.03" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.78" />
+
+        <TextView
+            android:id="@+id/textView226"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="Sender Information"
+            android:textColor="#262626"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imgBack"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintVertical_bias="0.03" />
+
+        <TextView
+            android:id="@+id/inpPickAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/button_radius_corner"
+            android:text="Pickup Address"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingVertical="@dimen/_10sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:textColor="#B3EA1B25"
+            android:textCursorDrawable="@color/black"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toEndOf="@+id/imgBack1"
+            app:layout_constraintStart_toStartOf="@+id/textView226"
+            app:layout_constraintTop_toBottomOf="@+id/textView226" />
+
+        <EditText
+            android:id="@+id/inpSenderPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/button_radius_corner"
+            android:hint="Phone number"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:paddingVertical="@dimen/_10sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:textColorHint="#B3EA1B25"
+            android:textCursorDrawable="@color/black"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline13"
+            app:layout_constraintStart_toStartOf="@+id/inpPickAddress"
+            app:layout_constraintTop_toBottomOf="@+id/inpPickAddress" />
+
+
+        <ImageView
+            android:id="@+id/userEmail656665"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:background="@drawable/button_radius_corner"
+            android:padding="@dimen/_7sdp"
+            android:src="@drawable/round_add_24"
+            app:layout_constraintBottom_toBottomOf="@+id/inpSenderPhone"
+            app:layout_constraintEnd_toEndOf="@+id/inpPickAddress"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@+id/guideline13"
+            app:layout_constraintTop_toTopOf="@+id/inpSenderPhone" />
+
+
+        <TextView
+            android:id="@+id/textView22546"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="Sender Information"
+            android:textColor="#262626"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/inpSenderPhone"
+            app:layout_constraintTop_toBottomOf="@+id/inpSenderPhone"
+            app:layout_constraintVertical_bias="0.383" />
+
+        <TextView
+            android:id="@+id/inpDeliveryAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/button_radius_corner"
+            android:text="Delivery Address "
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingVertical="@dimen/_10sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:textColorHint="#B3EA1B25"
+            android:textCursorDrawable="@color/black"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toEndOf="@+id/userEmail656665"
+            app:layout_constraintStart_toStartOf="@+id/textView22546"
+            app:layout_constraintTop_toBottomOf="@+id/textView22546" />
+
+        <ImageView
+            android:id="@+id/imgDeliveryPhone"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button_radius_corner"
+            android:padding="@dimen/_7sdp"
+            android:src="@drawable/round_add_24"
+            app:layout_constraintBottom_toBottomOf="@+id/inpDeliveryPhone"
+            app:layout_constraintEnd_toEndOf="@+id/userEmail656665"
+            app:layout_constraintStart_toStartOf="@+id/userEmail656665"
+            app:layout_constraintTop_toTopOf="@+id/inpDeliveryPhone" />
+
+        <EditText
+            android:id="@+id/inpDeliveryPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/button_radius_corner"
+            android:hint="Phone number"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:maxLines="1"
+            android:paddingVertical="@dimen/_10sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:textColorHint="#B3EA1B25"
+            android:textCursorDrawable="@color/black"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline13"
+            app:layout_constraintStart_toStartOf="@+id/inpDeliveryAddress"
+            app:layout_constraintTop_toBottomOf="@+id/inpDeliveryAddress" />
+
+        <TextView
+            android:id="@+id/txtLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_radius_green"
+            android:fontFamily="@font/open_sans_regular"
+            android:paddingVertical="@dimen/_10sdp"
+            android:text="Done"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintVertical_bias="0.2"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imgDeliveryPhone"
+            app:layout_constraintStart_toStartOf="@+id/inpDeliveryPhone"
+            app:layout_constraintTop_toBottomOf="@+id/inpDeliveryPhone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

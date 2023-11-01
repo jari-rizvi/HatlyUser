@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.databinding.ItemChatRiderBinding
 import com.teamx.hatlyUser.databinding.ItemChatUserBinding
-import com.teamx.hatlyUser.ui.fragments.products.adapter.required.multiAdapter.MultiViewVariationRadioAdapter
-import com.teamx.hatlyUser.ui.fragments.track.socket.model.allChat.Doc
-import com.teamx.hatlyUser.ui.fragments.track.socket.model.reciecMessage.RecieveMessage
+import com.teamx.hatlyUser.ui.fragments.track.socket.chat.model.allChat.Doc
 import kotlin.collections.ArrayList
 
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="weight">
+        <item>Unit</item>
+        <item>Kilo Gram</item>
+        <item>Gram</item>
+        <item>Pound</item>
+    </array>
+    <array name="size">
+        <item>Unit</item>
+        <item>Meters</item>
+        <item>Feet</item>
+        <item>Inches</item>
+    </array>
+</resources>

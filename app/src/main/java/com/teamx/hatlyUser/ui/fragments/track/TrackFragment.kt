@@ -17,13 +17,12 @@ import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.constants.NetworkCallPointsNest
 import com.teamx.hatlyUser.databinding.FragmentTrackBinding
 import com.teamx.hatlyUser.ui.fragments.chat.adapter.ChatAdapter
-import com.teamx.hatlyUser.ui.fragments.track.socket.MessageSocketClass
-import com.teamx.hatlyUser.ui.fragments.track.socket.model.allChat.Doc
-import com.teamx.hatlyUser.ui.fragments.track.socket.model.allChat.GetAllMessageData
+import com.teamx.hatlyUser.ui.fragments.track.socket.chat.MessageSocketClass
+import com.teamx.hatlyUser.ui.fragments.track.socket.chat.model.allChat.Doc
+import com.teamx.hatlyUser.ui.fragments.track.socket.chat.model.allChat.GetAllMessageData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -40,6 +39,8 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(),
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
+    private var orderId = ""
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -50,6 +51,12 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(),
                 popEnter = R.anim.nav_default_pop_enter_anim
                 popExit = R.anim.nav_default_pop_exit_anim
             }
+        }
+
+        val bundle = arguments
+
+        if (bundle != null) {
+            orderId = bundle.getString("orderId", "")
         }
 
         val bottomSheetCons: ConstraintLayout = view.findViewById(R.id.bottomSheetChat)
@@ -65,8 +72,8 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(),
             inpChat.setText("")
 
             MessageSocketClass.connect2(
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWNhdGlvbiI6eyJpdiI6IjZiNjQ3NTMzNjkzODM3NjM2ODMyNmIzOTM1MzczODY0IiwiZW5jcnlwdGVkRGF0YSI6IjUxODQ0ZTQ2OTMzY2YzMDkyNTVhNDYxZDZmYTE1YTRjZDcwY2I0MmY4ZGI1YWM1MWMzMzlmODVlOTMyNDE3NmMifSwidW5pcXVlSWQiOiI0ZWYwZWM2NjdmNjVhZTE5ZTk4NmJlOWU4YTNlZjYiLCJpYXQiOjE2OTg3NjEyOTgsImV4cCI6MTAzMzg3NjEyOTh9.SePtKPAgeuYRY6byVwq5_p_nSMSy6uIGSmF5Krx4sx0",
-                "6511befda128e070ad313243", this, this
+                "${NetworkCallPointsNest.DEVICE_TOKEN}",
+                orderId, this, this
             )
 
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -164,7 +171,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(),
             Log.d("onGetAllMessage", "onStateChanged: click $getAllChatsData")
             chatArrayList.clear()
             getAllChatsData.docs.forEach {
-                it.isUser = it.from == "64ca3762d1c8eed8afd363d9"
+                it.isUser = it.from == orderId
                 chatArrayList.add(it)
 //                chatAdapter.messageArrayList.add(it)
             }
@@ -186,7 +193,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(),
         GlobalScope.launch(Dispatchers.Main) {
 
 
-            getAllChatsData.isUser = getAllChatsData.from == "64ca3762d1c8eed8afd363d9"
+            getAllChatsData.isUser = getAllChatsData.from == orderId
             chatArrayList.add(getAllChatsData)
 //        chatAdapter.notifyItemInserted(chatArrayList.size+1)
             inpChat.setText("")

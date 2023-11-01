@@ -540,7 +540,17 @@
         android:id="@+id/parcelDetailFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.special.parceldetail.ParcelDetailFragment"
         android:label="ParcelDetailFragment"
-        tools:layout="@layout/fragment_parcel_detail" />
+        tools:layout="@layout/fragment_parcel_detail" >
+        <action
+            android:id="@+id/action_parcelDetailFragment_to_parcelLocationFragment"
+            app:destination="@id/parcelLocationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/parcelLocationFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.special.ParcelLocation.ParcelLocationFragment"
+        android:label="ParcelLocationFragment"
+        tools:layout="@layout/fragment_parcel_location" />
 
     <fragment
         android:id="@+id/changePasswordFragment"

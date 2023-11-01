@@ -21,6 +21,7 @@ import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.adapter.OrderHistor
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Doc
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Shop
 import com.teamx.hatlyUser.utils.TimeFormatter
+import com.teamx.hatlyUser.utils.TimeFormatter.Companion.formatTimeDifference
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -90,7 +91,12 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding, OrderHist
                             orderHistoryArrayList.clear()
                         }
                         data.docs?.forEach {
-                            it.createdAt = TimeFormatter.formatTimeDifference(it.createdAt)
+                            try {
+                                it.createdAt = formatTimeDifference(it.createdAt)
+                            }catch (e : Exception){
+                                e.printStackTrace()
+                            }
+
                             orderHistoryArrayList.add(it)
                         }
 //                        data.docs?.let { it1 ->
@@ -109,8 +115,6 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding, OrderHist
                 }
             }
         }
-
-
 
         mViewDataBinding.recLocations.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

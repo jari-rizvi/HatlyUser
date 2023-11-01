@@ -23,6 +23,7 @@ class OrderPlacedFragment : BaseFragment<FragmentOrderPlacedBinding, OrderPlaced
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    private var orderId = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,8 +37,16 @@ class OrderPlacedFragment : BaseFragment<FragmentOrderPlacedBinding, OrderPlaced
             }
         }
 
+        val bundle = arguments
+
+        if (bundle != null) {
+            orderId = bundle.getString("orderId", "")
+        }
+
         mViewDataBinding.txtLogin12.setOnClickListener {
-           findNavController().navigate(R.id.action_orderPlacedFragment_to_trackFragment)
+            val bundle1 = Bundle()
+            bundle1.putString("orderId", orderId)
+            findNavController().navigate(R.id.action_orderPlacedFragment_to_trackFragment,bundle1)
         }
 
         mViewDataBinding.txtLogin1.setOnClickListener {

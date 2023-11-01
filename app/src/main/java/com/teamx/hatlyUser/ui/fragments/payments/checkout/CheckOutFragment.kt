@@ -57,6 +57,8 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
     private var paymentMethodid = ""
 
+    private var orderId = ""
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -161,16 +163,6 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         hatlyPopularAdapter = CheckOutAdapter(cartProductArrayList)
         mViewDataBinding.recCheckout.adapter = hatlyPopularAdapter
 
-
-//        24.90147393769095, 67.11531056779101
-        val params = JsonObject()
-        try {
-            params.addProperty("lat", 24.901417466891772)
-            params.addProperty("lng", 67.11549957694464)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-
         mViewDataBinding.swOnOff.setOnCheckedChangeListener { buttonView, isChecked ->
 
             if (isChecked) {
@@ -186,6 +178,15 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 }
                 mViewModel.orderSummary(params)
             }
+        }
+
+        //        24.90147393769095, 67.11531056779101
+        val params = JsonObject()
+        try {
+            params.addProperty("lat", userData!!.location.lat)
+            params.addProperty("lng", userData!!.location.lng)
+        } catch (e: JSONException) {
+            e.printStackTrace()
         }
 
         mViewModel.checkout(params)
@@ -300,35 +301,48 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
                     it.data?.let { data ->
+                        orderId = data._id
+                        val bundle = Bundle()
+                        bundle.putString("orderId", orderId)
                         when (selectedPaymentMethod) {
                             PaymentMethod.CASH_ON_DELIVERY -> {
                                 // Process payment for Cash on Delivery
                                 if (data.status == "placed") {
                                     if (isAdded) {
-                                        findNavController().navigate(R.id.action_checkOutFragment_to_orderPlacedFragment)
+                                        findNavController().navigate(
+                                            R.id.action_checkOutFragment_to_orderPlacedFragment,
+                                            bundle
+                                        )
                                     }
                                 }
                             }
+
                             PaymentMethod.STRIPE_PAYMENT -> {
                                 // Process payment for Online Payment
                                 if (data.clientSecret != null) {
                                     showStripeSheet(data.clientSecret)
                                 }
                             }
+
                             PaymentMethod.STRIPE_SAVED_PAYMENT -> {
                                 // Process payment for Online Payment
                                 if (data.status == "placed") {
                                     if (isAdded) {
-                                        findNavController().navigate(R.id.action_checkOutFragment_to_orderPlacedFragment)
+                                        findNavController().navigate(
+                                            R.id.action_checkOutFragment_to_orderPlacedFragment,
+                                            bundle
+                                        )
                                     }
                                 }
                             }
+
                             PaymentMethod.PAYPAL -> {
                                 showPaypal()
                             }
                         }
                     }
                 }
+
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
                     mViewDataBinding.root.snackbar(it.message!!)
@@ -348,11 +362,11 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                     it.data?.let { data ->
                         mViewDataBinding.textView12155453.text = try {
                             "**** **** **** ${data.default!!.card.last4} | ${data.default.card.exp_month}/${data.default!!.card.exp_year}"
-                        }catch (e : Exception){
+                        } catch (e: Exception) {
                             ""
                         }
 
-                        if (data.default?.id?.isNotEmpty() == true){
+                        if (data.default?.id?.isNotEmpty() == true) {
                             mViewDataBinding.radioSelectedCard.visibility = View.VISIBLE
                             paymentMethodid = data.default.id
                         }
@@ -517,7 +531,12 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 // Display for example, an order confirmation screen
 
                 Log.d("placeOrderResponse", "onPaymentSheetResult: Completed")
-                findNavController().navigate(R.id.action_checkOutFragment_to_orderPlacedFragment)
+                val bundle = Bundle()
+                bundle.putString("orderId", orderId)
+                findNavController().navigate(
+                    R.id.action_checkOutFragment_to_orderPlacedFragment,
+                    bundle
+                )
 //                val params = JsonObject()
 //
 //                params.addProperty("shopId", shopId)
@@ -593,7 +612,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         return params
     }
 
-    lateinit var location : LatLng
+    lateinit var location: LatLng
 
     override fun onMapReady(p0: GoogleMap) {
         Log.d("onMapReady", "onMapReady: if")
@@ -601,9 +620,10 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         sharedViewModel.locationmodel.observe(requireActivity()) { locationModel ->
 
             if (locationModel != null) {
-                location = LatLng(locationModel.lat, locationModel.lng) // Example location (San Francisco)
+                location =
+                    LatLng(locationModel.lat, locationModel.lng) // Example location (San Francisco)
             } else {
-                if (isAdded){
+                if (isAdded) {
                     mViewDataBinding.root.snackbar("Add your location")
                 }
             }

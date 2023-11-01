@@ -41,18 +41,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.1" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/imgGallery"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:scaleType="fitXY"-->
-<!--            android:src="@drawable/email_or_number"-->
-<!--            app:layout_constraintHorizontal_bias="0.9"-->
-<!--            app:layout_constraintVertical_bias="0.9"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/hatlyIcon"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/hatlyIcon"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/hatlyIcon"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/hatlyIcon" />-->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/imgGallery"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:scaleType="fitXY"-->
+        <!--            android:src="@drawable/email_or_number"-->
+        <!--            app:layout_constraintHorizontal_bias="0.9"-->
+        <!--            app:layout_constraintVertical_bias="0.9"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/hatlyIcon"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/hatlyIcon"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/hatlyIcon"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/hatlyIcon" />-->
 
         <TextView
             android:id="@+id/textView"
@@ -63,11 +63,11 @@
             android:textColor="#363636"
             android:textSize="@dimen/_16ssp"
             android:textStyle="bold"
-            app:layout_constraintVertical_bias="1"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="@+id/hatlyIcon"
             app:layout_constraintStart_toStartOf="@+id/hatlyIcon"
-            app:layout_constraintTop_toBottomOf="@+id/hatlyIcon" />
+            app:layout_constraintTop_toBottomOf="@+id/hatlyIcon"
+            app:layout_constraintVertical_bias="1" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -80,24 +80,24 @@
             android:id="@+id/userPersonal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
             android:background="@drawable/input_auth_field"
             android:backgroundTint="@color/white"
-            android:elevation="1dp"
             android:drawableStart="@drawable/profile"
-            android:drawableTint="#1ED860"
             android:drawablePadding="@dimen/_10sdp"
-            android:text="Personal Information"
+            android:drawableTint="#1ED860"
+            android:elevation="1dp"
             android:maxLines="1"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
-            android:textColorHint="#787878"
+            android:text="Personal Information"
+            android:textColor="#262626"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_13ssp"
             app:layout_constraintBottom_toTopOf="@+id/userLocation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/guideline" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
             android:id="@+id/userLocation"
@@ -105,14 +105,14 @@
             android:layout_height="wrap_content"
             android:background="@drawable/input_auth_field"
             android:backgroundTint="@color/white"
-            android:elevation="1dp"
             android:drawableStart="@drawable/locations"
             android:drawablePadding="@dimen/_10sdp"
-            android:text="Locations"
+            android:elevation="1dp"
             android:maxLines="1"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
-            android:textColorHint="#787878"
+            android:text="Locations"
+            android:textColor="#262626"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_13ssp"
             app:layout_constraintBottom_toTopOf="@+id/userOtherHistory"
@@ -126,27 +126,49 @@
             android:layout_height="wrap_content"
             android:background="@drawable/input_auth_field"
             android:backgroundTint="@color/white"
-            android:elevation="1dp"
             android:drawableStart="@drawable/order_history"
             android:drawablePadding="@dimen/_10sdp"
-            android:text="Order History"
+            android:elevation="1dp"
             android:maxLines="1"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
-            android:textColorHint="#787878"
+            android:text="Order History"
+            android:textColor="#262626"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_13ssp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline1"
+            app:layout_constraintBottom_toTopOf="@+id/specialOrderHistory"
             app:layout_constraintEnd_toEndOf="@+id/userLocation"
             app:layout_constraintStart_toStartOf="@+id/userLocation"
             app:layout_constraintTop_toBottomOf="@+id/userLocation" />
+
+
+        <TextView
+            android:id="@+id/specialOrderHistory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_auth_field"
+            android:backgroundTint="@color/white"
+            android:drawableStart="@drawable/order_history"
+            android:drawablePadding="@dimen/_10sdp"
+            android:elevation="1dp"
+            android:maxLines="1"
+            android:paddingVertical="@dimen/_10sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:text="Special Order History"
+            android:textColor="#262626"
+            android:textCursorDrawable="@color/black"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline1"
+            app:layout_constraintEnd_toEndOf="@+id/userOtherHistory"
+            app:layout_constraintStart_toStartOf="@+id/userOtherHistory"
+            app:layout_constraintTop_toBottomOf="@+id/userOtherHistory" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.55" />
+            app:layout_constraintGuide_percent="0.65" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
