@@ -33,22 +33,30 @@ class LocationsListAdapter(
                 holder.bind.img.setImageDrawable(context.getDrawable(R.drawable.home_label))
 //                Picasso.get().load(R.drawable.home_label).into(holder.bind.img)
             }
+
             "Work" -> {
                 holder.bind.img.setImageDrawable(context.getDrawable(R.drawable.work_label))
 //                Picasso.get().load(R.drawable.work_label).into(holder.bind.img)
             }
+
             else -> {
                 holder.bind.img.setImageDrawable(context.getDrawable(R.drawable.pin_location))
 //                Picasso.get().load(R.drawable.pin_location).into(holder.bind.img)
             }
         }
 
+        if (arrayData.isFromSender) {
+            holder.bind.img1.visibility = View.GONE
+        } else {
+            holder.bind.img1.visibility = View.VISIBLE
+        }
+
 
         holder.bind.mainItem.isActivated = arrayData.isDefault
 
-        if (arrayData.isDefault){
+        if (arrayData.isDefault) {
             holder.bind.txtTitle.visibility = View.VISIBLE
-        }else{
+        } else {
             holder.bind.txtTitle.visibility = View.GONE
         }
 

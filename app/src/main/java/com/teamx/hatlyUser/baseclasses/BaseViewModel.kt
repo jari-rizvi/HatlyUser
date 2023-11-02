@@ -38,5 +38,14 @@ open class BaseViewModel : ViewModel() {
     }
 
 
+    private val _parcelLocation = MutableLiveData<Location>()
+    val parcelLocation: LiveData<Location>
+        get() = _parcelLocation
+
+    fun setParcelLocation(createAddressModelItem: Location?) {
+        this._parcelLocation.value = createAddressModelItem
+    }
+
+
 
 }

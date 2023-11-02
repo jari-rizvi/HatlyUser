@@ -90,7 +90,10 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
 
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
+                        if (isAdded) {
+
                         mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }

@@ -112,28 +112,39 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
         sharedViewModel.orderHistory.observe(requireActivity()) { data ->
 
-            if (data.isFromWallet){
+            if (data.isFromWallet) {
                 mViewDataBinding.btnLayout.visibility = View.GONE
                 mViewDataBinding.paidLayout.visibility = View.VISIBLE
-            }else{
+            } else {
                 mViewDataBinding.btnLayout.visibility = View.VISIBLE
                 mViewDataBinding.paidLayout.visibility = View.GONE
             }
 
             when (data.orderType) {
                 "CASH_ON_DELIVERY" -> {
-                    mViewDataBinding.txtTitle114455.setCompoundDrawablesWithIntrinsicBounds(R.drawable.paid_with_cash, 0, 0, 0);
+                    mViewDataBinding.txtTitle114455.setCompoundDrawablesWithIntrinsicBounds(
+                        R.drawable.paid_with_cash,
+                        0,
+                        0,
+                        0
+                    );
                     mViewDataBinding.txtTitle114455.text = try {
                         "Cash"
-                    }catch (e: Exception){
+                    } catch (e: Exception) {
                         ""
                     }
                 }
+
                 "ONLINE_PAYMENTS" -> {
-                    mViewDataBinding.txtTitle114455.setCompoundDrawablesWithIntrinsicBounds(R.drawable.paid_with_card, 0, 0, 0)
+                    mViewDataBinding.txtTitle114455.setCompoundDrawablesWithIntrinsicBounds(
+                        R.drawable.paid_with_card,
+                        0,
+                        0,
+                        0
+                    )
                     mViewDataBinding.txtTitle114455.text = try {
                         "Credit Card"
-                    }catch (e: Exception){
+                    } catch (e: Exception) {
                         ""
                     }
                 }
@@ -201,7 +212,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                 ""
             }
 
-            Picasso.get().load(data.shop.image).resize(500,500).into(mViewDataBinding.imgShop)
+            Picasso.get().load(data.shop.image).resize(500, 500).into(mViewDataBinding.imgShop)
 
             productOrderHistoryList.addAll(data.products)
             orderDetailAdapter.notifyDataSetChanged()
@@ -249,7 +260,9 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
                         Log.d("uploadImagesRes", "onViewCreated: ${it}")
-                        mViewDataBinding.root.snackbar(it.message!!)
+                        if (isAdded) {
+                            mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }
@@ -261,11 +274,14 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                     "placed" -> {
                         mViewModel.cancelOrder(it1._id)
                     }
+
                     "confirmed" -> {
                     }
+
                     "delivered" -> {
                         mViewModel.reOrder(it1._id)
                     }
+
                     "cancelled" -> {
                     }
                 }
@@ -293,7 +309,9 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
-                        mViewDataBinding.root.snackbar(it.message!!)
+                        if (isAdded) {
+                            mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }
@@ -318,7 +336,9 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
-                        mViewDataBinding.root.snackbar(it.message!!)
+                        if (isAdded) {
+                            mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }
@@ -344,13 +364,13 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
-                        mViewDataBinding.root.snackbar(it.message!!)
+                        if (isAdded) {
+                            mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }
         }
-
-
 
 
     }

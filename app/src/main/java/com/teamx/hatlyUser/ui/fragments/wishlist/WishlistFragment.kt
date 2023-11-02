@@ -110,7 +110,10 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
 
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
+                        if (isAdded) {
+
                         mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }
@@ -134,7 +137,10 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
                     }
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
+                        if (isAdded) {
+
                         mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }

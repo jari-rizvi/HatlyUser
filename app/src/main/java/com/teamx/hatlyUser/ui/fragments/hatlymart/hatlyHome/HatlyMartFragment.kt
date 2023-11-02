@@ -204,7 +204,10 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
+                    if (isAdded) {
+
                     mViewDataBinding.mainLayout.snackbar(it.message!!)
+                    }
                     Log.d("hatlyShopCatAdapter", "ERROR: ${it.message!!}")
                 }
             }

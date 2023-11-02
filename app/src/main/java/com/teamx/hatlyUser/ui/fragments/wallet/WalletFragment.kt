@@ -100,7 +100,10 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
 
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
+                        if (isAdded) {
+
                         mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }
@@ -133,7 +136,10 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
 
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
+                    if (isAdded) {
+
                     mViewDataBinding.root.snackbar(it.message!!)
+                    }
                 }
             }
         }

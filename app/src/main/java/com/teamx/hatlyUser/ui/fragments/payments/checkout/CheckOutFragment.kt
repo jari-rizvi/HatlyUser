@@ -235,7 +235,10 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
+                    if (isAdded) {
+
                     mViewDataBinding.root.snackbar(it.message!!)
+                    }
                 }
             }
         }
@@ -285,7 +288,10 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
                     mViewDataBinding.swOnOff.isChecked = false
+                    if (isAdded) {
+
                     mViewDataBinding.root.snackbar(it.message!!)
+                    }
                 }
             }
         }
@@ -345,7 +351,10 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
+                    if (isAdded) {
+
                     mViewDataBinding.root.snackbar(it.message!!)
+                    }
                 }
             }
         }
@@ -375,7 +384,10 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
+                    if (isAdded) {
+
                     mViewDataBinding.root.snackbar(it.message!!)
+                    }
                 }
             }
         }

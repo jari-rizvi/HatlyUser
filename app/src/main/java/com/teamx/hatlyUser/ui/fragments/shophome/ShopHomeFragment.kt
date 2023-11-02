@@ -119,7 +119,10 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
 
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
+                    if (isAdded) {
+
                     mViewDataBinding.root.snackbar(it.message!!)
+                    }
                     Log.d("hatlyShopCatAdapter", "ERROR: ${it.message!!}")
                 }
             }

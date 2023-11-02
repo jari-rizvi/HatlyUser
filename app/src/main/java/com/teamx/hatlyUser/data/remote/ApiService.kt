@@ -33,6 +33,7 @@ import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.modelReview.ModelRev
 import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.modelUploadImages.ModelUploadImages
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.OrderHistoryModel
 import com.teamx.hatlyUser.ui.fragments.shophome.model.ModelSubCategoryStore
+import com.teamx.hatlyUser.ui.fragments.special.ParcelLocation.model.fare.ModelFare
 import com.teamx.hatlyUser.ui.fragments.topUp.model.savedCard.ModelSavedCard
 import com.teamx.hatlyUser.ui.fragments.wallet.model.me.MeModel
 import com.teamx.hatlyUser.ui.fragments.wishlist.modelWishList.ModelWishList
@@ -204,6 +205,20 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<ModelOrderSummary>
+
+    @POST(NetworkCallPoints.FARE_CALCULATION)
+    suspend fun fareCalculation(
+        @Body params: JsonObject,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelFare>
+
+    @POST(NetworkCallPoints.CREATE_PARCEL)
+    suspend fun createParcel(
+        @Body params: JsonObject,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<FcmModel>
 
     @POST(NetworkCallPoints.PLACE_ORDER)
     suspend fun placeOrder(

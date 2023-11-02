@@ -123,7 +123,10 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
 
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
+                    if (isAdded) {
+
                     mViewDataBinding.mainRoot.snackbar(it.message!!)
+                    }
                 }
             }
         }
@@ -151,7 +154,10 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
 
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
+                    if (isAdded) {
+
                     mViewDataBinding.mainRoot.snackbar(it.message!!)
+                    }
                 }
             }
         }

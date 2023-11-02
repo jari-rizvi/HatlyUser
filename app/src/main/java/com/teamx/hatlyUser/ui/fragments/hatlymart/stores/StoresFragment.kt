@@ -135,7 +135,10 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
                     Log.d("allStoresResponse", "ERROR: $it.message!!")
+                    if (isAdded) {
+
                     mViewDataBinding.root.snackbar(it.message!!)
+                    }
                 }
             }
         })

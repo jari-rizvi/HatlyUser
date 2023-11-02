@@ -79,6 +79,8 @@ class MainRepository @Inject constructor(
     suspend fun updateCartItem(@Body params: JsonObject) = apiService.updateCartItem(params)
     suspend fun checkout(@Body params: JsonObject) = apiService.checkout(params)
     suspend fun orderSummary(@Body params: JsonObject) = apiService.orderSummary(params)
+    suspend fun fareCalculation(@Body params: JsonObject) = apiService.fareCalculation(params)
+    suspend fun createParcel(@Body params: JsonObject) = apiService.createParcel(params)
     suspend fun placeOrder(@Body params: JsonObject) = apiService.placeOrder(params)
     suspend fun orderHistory(
         @Query("page") page: Int,

@@ -123,7 +123,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
+                        if (isAdded) {
+
                         mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             })
@@ -166,7 +169,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
+                        if (isAdded) {
+
                         mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             })

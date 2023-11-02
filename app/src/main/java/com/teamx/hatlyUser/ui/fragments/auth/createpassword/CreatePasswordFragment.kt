@@ -95,6 +95,7 @@ class CreatePasswordFragment :
 
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
+
                         Log.d("createParams", "Resource.Status.ERROR: ${it.message}")
                     }
                 }

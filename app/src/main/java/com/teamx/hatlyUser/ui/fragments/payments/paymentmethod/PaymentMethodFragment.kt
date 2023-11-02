@@ -78,7 +78,10 @@ class PaymentMethodFragment : BaseFragment<FragmentPaymentMethodBinding, Payment
 
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
+                    if (isAdded) {
+
                     mViewDataBinding.root.snackbar(it.message!!)
+                    }
                 }
             }
         }
@@ -101,7 +104,10 @@ class PaymentMethodFragment : BaseFragment<FragmentPaymentMethodBinding, Payment
 
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
+                        if (isAdded) {
+
                         mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }
@@ -129,7 +135,10 @@ class PaymentMethodFragment : BaseFragment<FragmentPaymentMethodBinding, Payment
 
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
+                        if (isAdded) {
+
                         mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }

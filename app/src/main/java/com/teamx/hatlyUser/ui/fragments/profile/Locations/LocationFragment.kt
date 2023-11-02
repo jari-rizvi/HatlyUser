@@ -1,6 +1,7 @@
 package com.teamx.hatlyUser.ui.fragments.profile.Locations
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
@@ -23,7 +24,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
     HatlyShopInterface {
 
     override val layoutId: Int
-        get() = com.teamx.hatlyUser.R.layout.fragment_location
+        get() = R.layout.fragment_location
     override val viewModel: Class<LocationViewModel>
         get() = LocationViewModel::class.java
     override val bindingVariable: Int
@@ -32,6 +33,8 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
 
     private lateinit var getAddressArray: ArrayList<Location>
     private lateinit var locationsListAdapter: LocationsListAdapter
+
+    private var fromParcel = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,6 +46,12 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                 popEnter = R.anim.nav_default_pop_enter_anim
                 popExit = R.anim.nav_default_pop_exit_anim
             }
+        }
+
+        val bundle = arguments
+        if (bundle != null) {
+            fromParcel = bundle.getString("fromParcel", "")
+            Log.d("fareCalculation", "fromParcel not empty: ${fromParcel}")
         }
 
         mViewDataBinding.imgBack.setOnClickListener {
@@ -65,7 +74,8 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
 
         getAddressArray = ArrayList()
 
-        mViewDataBinding.recLocations.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        mViewDataBinding.recLocations.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         locationsListAdapter = LocationsListAdapter(getAddressArray, this)
         mViewDataBinding.recLocations.adapter = locationsListAdapter
 
@@ -132,19 +142,31 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
+
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             if (data.isNotEmpty()) {
 //                                data[0].isSelected = true
-                                getAddressArray.addAll(data)
+
+                                if (fromParcel.isNotEmpty()) {
+                                    data.forEach {
+                                        it.isFromSender = true
+                                        getAddressArray.add(it)
+                                    }
+                                } else {
+                                    getAddressArray.addAll(data)
+                                }
                                 locationsListAdapter.notifyDataSetChanged()
                             }
                         }
                     }
+
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
-                        mViewDataBinding.root.snackbar(it.message!!)
+                        if (isAdded) {
+                            mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }
@@ -156,6 +178,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
+
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
@@ -168,9 +191,13 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                             }
                         }
                     }
+
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
-                        mViewDataBinding.root.snackbar(it.message!!)
+                        if (isAdded) {
+
+                            mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }
@@ -182,6 +209,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
+
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
@@ -194,23 +222,42 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                             mViewDataBinding.root.snackbar("Deleted")
                         }
                     }
+
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
-                        mViewDataBinding.root.snackbar(it.message!!)
+                        if (isAdded) {
+
+                            mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }
         }
     }
 
-    var locationPosition = -1
+    private var locationPosition = -1
 
 
     override fun clickshopItem(selectPosition: Int) {
-        getAddressArray.forEach { it.isDefault = false }
-        getAddressArray[selectPosition].isDefault = true
-        locationsListAdapter.notifyDataSetChanged()
-        mViewModel.setDefaultAddress(getAddressArray[selectPosition]._id)
+        if (fromParcel.isNotEmpty()) {
+            val locationModel = getAddressArray[selectPosition]
+            when (fromParcel) {
+                "senderData" -> {
+                    locationModel.isFromSender = true
+                }
+
+                "reciverData" -> {
+                    locationModel.isFromSender = false
+                }
+            }
+            sharedViewModel.setParcelLocation(locationModel)
+            findNavController().popBackStack()
+        } else {
+            getAddressArray.forEach { it.isDefault = false }
+            getAddressArray[selectPosition].isDefault = true
+            locationsListAdapter.notifyDataSetChanged()
+            mViewModel.setDefaultAddress(getAddressArray[selectPosition]._id)
+        }
     }
 
     override fun clickCategoryItem(updatePosition: Int) {
@@ -218,6 +265,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
         locationModel.isAction = "Update"
         sharedViewModel.setlocationmodel(locationModel)
         findNavController().navigate(R.id.action_locationFragment_to_mapFragment)
+
     }
 
     override fun clickMoreItem(deletePosition: Int) {

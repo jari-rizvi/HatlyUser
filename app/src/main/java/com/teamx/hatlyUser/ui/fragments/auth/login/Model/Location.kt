@@ -19,4 +19,5 @@ data class Location(
     var isAction: String,
     val updatedAt: String,
     var isDefault: Boolean,
+    var isFromSender: Boolean,
 )

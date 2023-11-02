@@ -100,7 +100,10 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
 
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
+                        if (isAdded) {
+
                         mViewDataBinding.root.snackbar(it.message!!)
+                        }
                         Log.d("verifySignupO", "onViewCreated: ${it.message!!}")
                     }
                 }

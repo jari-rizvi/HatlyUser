@@ -129,7 +129,10 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
 
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
+                    if (isAdded) {
+
                     mViewDataBinding.root.snackbar(it.message!!)
+                    }
                 }
             }
         }
@@ -218,7 +221,10 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
 
                         Resource.Status.ERROR -> {
                             loadingDialog.dismiss()
+                            if (isAdded) {
+
                             mViewDataBinding.root.snackbar(it.message!!)
+                            }
                         }
                     }
                 }
@@ -283,7 +289,10 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
 
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
+                    if (isAdded) {
+
                     mViewDataBinding.root.snackbar(it.message!!)
+                    }
                 }
             }
         }

@@ -100,7 +100,10 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding, ReviewViewModel>() {
 
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
+                        if (isAdded) {
+
                         mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }

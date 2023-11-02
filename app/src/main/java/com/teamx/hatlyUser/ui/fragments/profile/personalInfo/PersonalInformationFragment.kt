@@ -114,7 +114,10 @@ class PersonalInformationFragment : BaseFragment<FragmentPersonalInformationBind
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
                         Log.d("uploadReviewIm", "onViewCreated: ${it.message}")
+                        if (isAdded) {
+
                         mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }
@@ -142,7 +145,10 @@ class PersonalInformationFragment : BaseFragment<FragmentPersonalInformationBind
 
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
+                        if (isAdded) {
+
                         mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }

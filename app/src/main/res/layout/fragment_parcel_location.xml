@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -85,12 +84,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/button_radius_corner"
-            android:text="Pickup Address"
-            android:maxLines="1"
             android:ellipsize="end"
+            android:maxLines="1"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
-            android:textColor="#B3EA1B25"
+            android:hint="Pickup Address"
+            android:textColorHint="#B3EA1B25"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toEndOf="@+id/imgBack1"
@@ -137,11 +136,11 @@
             android:id="@+id/textView22546"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/montserrat_regular"
-            android:text="Sender Information"
+            android:text="Receiver Information"
             android:textColor="#262626"
             android:textSize="@dimen/_10ssp"
-            android:layout_marginTop="@dimen/_10sdp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/inpSenderPhone"
             app:layout_constraintTop_toBottomOf="@+id/inpSenderPhone"
@@ -153,11 +152,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/button_radius_corner"
-            android:text="Delivery Address "
-            android:maxLines="1"
             android:ellipsize="end"
+            android:maxLines="1"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
+            android:hint="Delivery Address"
             android:textColorHint="#B3EA1B25"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_12ssp"
@@ -181,12 +180,12 @@
             android:id="@+id/inpDeliveryPhone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_5sdp"
             android:background="@drawable/button_radius_corner"
             android:hint="Phone number"
             android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
-            android:layout_marginTop="@dimen/_10sdp"
             android:maxLines="1"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
@@ -196,6 +195,36 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline13"
             app:layout_constraintStart_toStartOf="@+id/inpDeliveryAddress"
             app:layout_constraintTop_toBottomOf="@+id/inpDeliveryAddress" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#66505050"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="@+id/imgDeliveryPhone"
+            app:layout_constraintStart_toStartOf="@+id/inpDeliveryPhone"
+            app:layout_constraintTop_toBottomOf="@+id/inpDeliveryPhone" />
+
+        <TextView
+            android:id="@+id/textView42"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Estimated Cost"
+            android:textColor="#EA1B25"
+            app:layout_constraintStart_toStartOf="@+id/inpDeliveryPhone"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <TextView
+            android:id="@+id/txtFarePrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 AED"
+            android:textColor="#EA1B25"
+            app:layout_constraintBottom_toBottomOf="@+id/textView42"
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintTop_toTopOf="@+id/textView42" />
 
         <TextView
             android:id="@+id/txtLogin"
@@ -207,13 +236,13 @@
             android:text="Done"
             android:textAlignment="center"
             android:textColor="@color/white"
-            app:layout_constraintVertical_bias="0.2"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imgDeliveryPhone"
             app:layout_constraintStart_toStartOf="@+id/inpDeliveryPhone"
-            app:layout_constraintTop_toBottomOf="@+id/inpDeliveryPhone" />
+            app:layout_constraintTop_toBottomOf="@+id/inpDeliveryPhone"
+            app:layout_constraintVertical_bias="0.2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

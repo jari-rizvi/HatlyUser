@@ -36,8 +36,16 @@ class FoodsShopProductAdapter(
             "null"
         }
 
+        var price = 0.0
+
+        price = if (arrayData.minPrice == 0.0){
+            arrayData.salePrice
+        }else{
+            arrayData.minPrice
+        }
+
         holder.bind.textView26.text = try {
-            arrayData.salePrice.toString()
+            price.toString()
         } catch (e: Exception) {
             "null"
         }

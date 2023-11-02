@@ -216,17 +216,36 @@ class ParcelDetailFragment : BaseFragment<FragmentParcelDetailBinding, ParcelDet
                 val bundle = Bundle()
                 bundle.putString("inpWhatSending", mViewDataBinding.inpWhatSending.text.toString())
                 bundle.putInt("parcelQuantity", parcelQuantity)
-                bundle.putString("inpBrief", inpBrief)
 
-                bundle.putString("inpParcelWeight", inpParcelWeight)
-                bundle.putString("inpParcelLength", inpParcelLength)
-                bundle.putString("inpParcelWidth", inpParcelWidth)
-                bundle.putString("inpParcelHeight", inpParcelHeight)
+                if (inpBrief.isNotEmpty()) {
+                    bundle.putString("inpBrief", inpBrief)
+                }
 
-                bundle.putString("weightParcel", weightParcel)
-                bundle.putString("lengthParcel", lengthParcel)
-                bundle.putString("widthParcel", widthParcel)
-                bundle.putString("heightParcel", heightParcel)
+                if (inpParcelWeight.isNotEmpty()) {
+                    bundle.putDouble("inpParcelWeight", inpParcelWeight.toDouble())
+                }
+                if (inpParcelLength.isNotEmpty()) {
+                    bundle.putDouble("inpParcelLength", inpParcelLength.toDouble())
+                }
+                if (inpParcelWidth.isNotEmpty()) {
+                    bundle.putDouble("inpParcelWidth", inpParcelWidth.toDouble())
+                }
+                if (inpParcelHeight.isNotEmpty()) {
+                    bundle.putDouble("inpParcelHeight", inpParcelHeight.toDouble())
+                }
+
+                if (weightParcel.isNotEmpty()) {
+                    bundle.putString("weightParcel", weightParcel)
+                }
+                if (lengthParcel.isNotEmpty()) {
+                    bundle.putString("lengthParcel", lengthParcel)
+                }
+                if (widthParcel.isNotEmpty()) {
+                    bundle.putString("widthParcel", widthParcel)
+                }
+                if (heightParcel.isNotEmpty()) {
+                    bundle.putString("heightParcel", heightParcel)
+                }
                 findNavController().navigate(
                     R.id.action_parcelDetailFragment_to_parcelLocationFragment,
                     bundle
