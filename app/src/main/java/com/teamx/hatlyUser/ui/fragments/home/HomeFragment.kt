@@ -56,6 +56,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             }
         }
 
+        mViewDataBinding.inpSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_homeSearchFragment)
+        }
 
         val userData = PrefHelper.getInstance(requireActivity()).getUserData()
 
@@ -158,13 +161,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                         loadingDialog.dismiss()
                         if (isAdded) {
 
-                        mViewDataBinding.root.snackbar(it.message!!)
+                            mViewDataBinding.root.snackbar(it.message!!)
                         }
                     }
                 }
             }
         }
-
 
 
         val onBackPressedCallback = object : OnBackPressedCallback(true) {

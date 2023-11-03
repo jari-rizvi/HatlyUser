@@ -7,6 +7,8 @@ class NetworkCallPoints {
 
         const val FCM_TOKEN = "auth/addToken"
 
+        const val HOME_SEARCH = "shop/filter"
+
         const val LOGIN_WITH_GOOGLE = "auth/login/google/android"
         const val ME = "auth/me"
         const val SIGN_UP = "auth/signup/app"

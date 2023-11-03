@@ -54,8 +54,8 @@ class ParcelLocationFragment :
 
 //    private var isFromSender = -1
 
-    private lateinit var senderLocation: Location
-    private lateinit var reciverLocation: Location
+    private var senderLocation: Location? = null
+    private var reciverLocation: Location? = null
 
     private var reciverLatLng = LatLng(0.0, 0.0)
     private var senderLatLng = LatLng(0.0, 0.0)
@@ -99,17 +99,7 @@ class ParcelLocationFragment :
             widthParcel = bundle.getString("widthParcel", "")
             heightParcel = bundle.getString("heightParcel", "")
 
-//            Log.d("spinner1", "inpWhatSending: $inpWhatSending")
-//            Log.d("spinner1", "parcelQuantity: $parcelQuantity")
-//            Log.d("spinner1", "inpBrief: $inpBrief")
-//            Log.d("spinner1", "inpParcelWeight: $inpParcelWeight")
-//            Log.d("spinner1", "inpParcelLength: $inpParcelLength")
-//            Log.d("spinner1", "inpParcelWidth: $inpParcelWidth")
-//            Log.d("spinner1", "inpParcelHeight: $inpParcelHeight")
-//            Log.d("spinner1", "weightParcel: $weightParcel")
-//            Log.d("spinner1", "lengthParcel: $lengthParcel")
-//            Log.d("spinner1", "widthParcel: $widthParcel")
-//            Log.d("spinner1", "heightParcel: $heightParcel")
+            Log.d("inpWhatSending", "inpWhatSending: $inpWhatSending")
         }
 
 
@@ -286,14 +276,14 @@ class ParcelLocationFragment :
             if (locationModel != null) {
                 if (locationModel.isFromSender) {
                     senderLocation = locationModel
-                    senderAddress = senderLocation.address
+                    senderAddress = senderLocation!!.address
 
-                    reciverLatLng = LatLng(senderLocation.lat, senderLocation.lng)
+                    reciverLatLng = LatLng(senderLocation!!.lat, senderLocation!!.lng)
                 } else {
                     reciverLocation = locationModel
-                    reciverAddress = reciverLocation.address
+                    reciverAddress = reciverLocation!!.address
 
-                    senderLatLng = LatLng(reciverLocation.lat, reciverLocation.lng)
+                    senderLatLng = LatLng(reciverLocation!!.lat, reciverLocation!!.lng)
                 }
 
                 if ((reciverLatLng.latitude != 0.0 && reciverLatLng.longitude != 0.0) && (senderLatLng.latitude != 0.0 && senderLatLng.longitude != 0.0)) {
@@ -369,19 +359,30 @@ class ParcelLocationFragment :
                 )
             )
 
-            if (senderLocation.address.isNotEmpty() && senderPhoneNum.isNotEmpty()) {
-                params.add(
-                    "senderLocation",
-                    Gson().toJsonTree(SenderLocation(senderLocation._id, senderPhoneNum))
-                )
-            }
 
-            if (reciverLocation.address.isNotEmpty() && reciverPhoneNum.isNotEmpty()) {
-                params.add(
-                    "receiverLocation",
-                    Gson().toJsonTree(ReceiverLocation(reciverLocation._id, reciverPhoneNum))
-                )
-            }
+//            if (senderLocation != null && senderPhoneNum.isNotEmpty()) {
+//                params.add(
+//                    "senderLocation",
+//                    Gson().toJsonTree(SenderLocation(senderLocation!!._id, senderPhoneNum))
+//                )
+//            }
+
+            params.add(
+                "senderLocation",
+                Gson().toJsonTree(SenderLocation(senderLocation!!._id, senderPhoneNum))
+            )
+
+//            if (reciverLocation != null && reciverPhoneNum.isNotEmpty()) {
+//                params.add(
+//                    "receiverLocation",
+//                    Gson().toJsonTree(ReceiverLocation(reciverLocation!!._id, reciverPhoneNum))
+//                )
+//            }
+
+            params.add(
+                "receiverLocation",
+                Gson().toJsonTree(ReceiverLocation(reciverLocation!!._id, reciverPhoneNum))
+            )
 
 //
 //            params.add(

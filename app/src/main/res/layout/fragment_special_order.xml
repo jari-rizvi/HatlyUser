@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.30" />
+            app:layout_constraintGuide_percent="0.35" />
 
         <TextView
             android:id="@+id/textView23"
@@ -121,14 +121,14 @@
             app:layout_constraintStart_toStartOf="@+id/imgHead"
             app:layout_constraintTop_toBottomOf="@+id/txtLogin" />
 
-<!--        <include layout="@layout/item_special_order"-->
-<!--            android:id="@+id/layoutAddress"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/txtLogin"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/txtLogin"-->
-<!--            app:layout_constraintBottom_toTopOf="@+id/guideline12"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/textView22"/>-->
+        <!--        <include layout="@layout/item_special_order"-->
+        <!--            android:id="@+id/layoutAddress"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/txtLogin"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/txtLogin"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/guideline12"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/textView22"/>-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout6"
@@ -137,8 +137,8 @@
             android:layout_marginTop="@dimen/_8sdp"
             android:background="@drawable/button_radius_corner"
             app:layout_constraintBottom_toTopOf="@+id/guideline12"
-            app:layout_constraintEnd_toEndOf="@+id/imgHead"
-            app:layout_constraintStart_toStartOf="@+id/imgHead"
+            app:layout_constraintEnd_toEndOf="@+id/txtLogin"
+            app:layout_constraintStart_toStartOf="@+id/txtLogin"
             app:layout_constraintTop_toBottomOf="@+id/textView22">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -243,8 +243,8 @@
 
             <TextView
                 android:id="@+id/textView2225"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="19dp"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="Pickup"
                 android:textColor="#363636"
@@ -258,14 +258,18 @@
 
             <TextView
                 android:id="@+id/textView22725"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="Dubai Silicon Oasis, Building A5, Office 2014,\nDubai, United Arab Emirates."
+                android:maxLines="2"
+                android:text="Dubai Silicon Oasis, Building A5, OArabEmirates.Emirates"
                 android:textColor="#808080"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/textView22255"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="@+id/textView2225"
                 app:layout_constraintTop_toBottomOf="@+id/textView2225" />
 
@@ -284,25 +288,45 @@
 
             <TextView
                 android:id="@+id/textView227925"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:fontFamily="@font/montserrat_regular"
+                android:maxLines="2"
                 android:text="Dubai Silicon Oasis, Building A5, Office 2014,\nDubai, United Arab Emirates."
                 android:textColor="#808080"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="@+id/textView22255"
                 app:layout_constraintTop_toBottomOf="@+id/textView22255" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView2254545544"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="There is no active delivery\nat the moment."
+            android:textColor="#909090"
+            android:textAlignment="center"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/guideline12"
+            app:layout_constraintEnd_toEndOf="@+id/txtLogin"
+            app:layout_constraintStart_toStartOf="@+id/txtLogin"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.70" />
+            app:layout_constraintGuide_percent="0.75" />
 
         <TextView
             android:id="@+id/textView2254"
@@ -314,22 +338,37 @@
             android:textColor="#262626"
             android:textSize="@dimen/_11ssp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout6"
+            app:layout_constraintStart_toStartOf="@+id/textView22"
             app:layout_constraintTop_toBottomOf="@+id/guideline12" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recSpecial"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_8sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginVertical="@dimen/_5sdp"
             android:orientation="horizontal"
-            tools:itemCount="3"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/txtLogin"
+            app:layout_constraintStart_toStartOf="@+id/txtLogin"
+            app:layout_constraintTop_toBottomOf="@+id/textView2254"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_special_order" />
+
+        <TextView
+            android:id="@+id/textView22545454"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="There are no recent parcels"
+            android:textColor="#909090"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout6"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout6"
-            app:layout_constraintTop_toBottomOf="@+id/textView2254"
-            tools:listitem="@layout/item_special_order" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2254" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

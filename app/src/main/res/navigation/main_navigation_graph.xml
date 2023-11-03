@@ -255,7 +255,16 @@
         <action
             android:id="@+id/action_homeFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_homeSearchFragment"
+            app:destination="@id/homeSearchFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/homeSearchFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.homeSearch.HomeSearchFragment"
+        android:label="HomeSearchFragment"
+        tools:layout="@layout/fragment_home_search"/>
 
     <fragment
         android:id="@+id/hatlyMartFragment"
@@ -571,5 +580,6 @@
             android:id="@+id/action_topUpFragment_to_paymentMethodFragment"
             app:destination="@id/paymentMethodFragment" />
     </fragment>
+
 
 </navigation>

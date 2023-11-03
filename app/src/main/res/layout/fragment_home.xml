@@ -104,7 +104,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.08" />
 
-        <EditText
+        <TextView
             android:id="@+id/inpSearch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -114,12 +114,12 @@
             android:drawableStart="@drawable/search_24"
             android:drawablePadding="@dimen/_10sdp"
             android:drawableTint="#66363636"
-            android:hint="Search"
+            android:text="Search"
             android:imeOptions="actionNext"
             android:maxLines="1"
             android:paddingVertical="@dimen/_8sdp"
             android:paddingStart="@dimen/_10sdp"
-            android:textColorHint="#66363636"
+            android:textColor="#66363636"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_13ssp"
             app:layout_constraintBottom_toTopOf="@+id/guideline1"

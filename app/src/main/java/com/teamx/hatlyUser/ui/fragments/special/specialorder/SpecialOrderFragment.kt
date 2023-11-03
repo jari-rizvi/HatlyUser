@@ -8,9 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentSpecialOrderBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.special.specialorder.adapter.SpecialOrderAdapter
+import com.teamx.hatlyUser.ui.fragments.special.specialorder.model.DeliveredParcel
+import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -24,6 +27,8 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
         get() = SpecialOrderViewModel::class.java
     override val bindingVariable: Int
         get() = BR.viewModel
+
+    lateinit var delieveredParcel: ArrayList<DeliveredParcel>
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,43 +47,76 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
             findNavController().navigate(R.id.action_specialOrderFragment_to_sendParcelFragment)
         }
 
-        val layoutManager1 = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        val layoutManager1 =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         mViewDataBinding.recSpecial.layoutManager = layoutManager1
 
-        val itemClasses: ArrayList<String> = ArrayList()
+        delieveredParcel = ArrayList()
 
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
-        itemClasses.add("")
+        val delieveredAdapter = SpecialOrderAdapter(delieveredParcel, this)
+        mViewDataBinding.recSpecial.adapter = delieveredAdapter
 
-        val adapter = SpecialOrderAdapter(itemClasses,this)
-        mViewDataBinding.recSpecial.adapter = adapter
+        mViewModel.activeDeliever()
+
+        mViewModel.activeDelieverResponse.observe(requireActivity()) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    it.data?.let { data ->
+
+                        if (data.deliveredParcels.isNotEmpty()) {
+                            delieveredParcel.addAll(data.deliveredParcels)
+                            delieveredAdapter.notifyDataSetChanged()
+                        }else{
+                            mViewDataBinding.textView22545454.visibility = View.VISIBLE
+                        }
+
+                        if (data.activeParcels.isEmpty()) {
+                            mViewDataBinding.constraintLayout6.visibility = View.GONE
+                            mViewDataBinding.textView2254545544.visibility = View.VISIBLE
+                            return@observe
+                        }
+
+                        mViewDataBinding.textView2223.text = try {
+                            data.activeParcels[0].details.item
+                        }catch (e : Exception){
+                            ""
+                        }
+
+                        mViewDataBinding.textView222.text = try {
+                            "Tracking ID: ${data.activeParcels[0].trackingNumber}"
+                        } catch (e: Exception) {
+                            ""
+                        }
+
+                        mViewDataBinding.textView22725.text = try {
+                            data.activeParcels[0].pickup.address
+                        } catch (e: Exception) {
+                            ""
+                        }
+
+                        mViewDataBinding.textView227925.text = try {
+                            data.activeParcels[0].dropOff.address
+                        } catch (e: Exception) {
+                            ""
+                        }
+
+
+                    }
+                }
+
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    if (isAdded) {
+                        mViewDataBinding.root.snackbar(it.message!!)
+                    }
+                }
+            }
+        }
 
 
     }

@@ -18,6 +18,14 @@ class MainRepository @Inject constructor(
 ) {
     suspend fun login(@Body param: JsonObject) = apiService.login(param)
     suspend fun fcm(@Body param: JsonObject) = apiService.fcm(param)
+    suspend fun homeSearch(
+        @Query("search") search: String,
+        @Query("categorry") categorry: String,
+        @Query("type") type: String,
+        @Query("limit") limit: Int,
+        @Query("page") page: Int,
+    ) = apiService.homeSearch(search, categorry, type, limit, page)
+
     suspend fun loginWithGoogle(@Body param: JsonObject) = apiService.loginWithGoogle(param)
     suspend fun me() = apiService.me()
     suspend fun signup(@Body param: JsonObject) = apiService.signup(param)
@@ -82,6 +90,7 @@ class MainRepository @Inject constructor(
     suspend fun fareCalculation(@Body params: JsonObject) = apiService.fareCalculation(params)
     suspend fun createParcel(@Body params: JsonObject) = apiService.createParcel(params)
     suspend fun placeOrder(@Body params: JsonObject) = apiService.placeOrder(params)
+    suspend fun activeDeliever() = apiService.activeDeliever()
     suspend fun orderHistory(
         @Query("page") page: Int,
         @Query("limit") limit: Int,

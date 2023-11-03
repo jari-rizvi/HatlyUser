@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/input_auth_field"
+            android:backgroundTint="@color/white"
+            android:elevation="1dp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/round_arrow_back_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05"
+            app:tint="#363636" />
+
+        <EditText
+            android:id="@+id/inpSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/button_radius_corner"
+            android:drawableStart="@drawable/search_24"
+            android:drawablePadding="@dimen/_10sdp"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:drawableTint="#66363636"
+            android:hint="Search"
+            android:maxLines="1"
+            android:paddingVertical="@dimen/_8sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:textColorHint="#66363636"
+            android:textCursorDrawable="@color/black"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgBack" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recCategories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@+id/inpSearch"
+            app:layout_constraintStart_toStartOf="@+id/inpSearch"
+            app:layout_constraintTop_toBottomOf="@+id/inpSearch"
+            tools:listitem="@layout/item_shop_home_title" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/recentLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="@+id/recCategories"
+            app:layout_constraintStart_toStartOf="@+id/recCategories"
+            app:layout_constraintTop_toBottomOf="@+id/recCategories">
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Recent searches"
+                android:textColor="#262626"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recRecentSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView22"
+                tools:listitem="@layout/item_shop_home_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/typeLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:visibility="visible"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/inpSearch"
+            app:layout_constraintStart_toStartOf="@+id/imgBack"
+            app:layout_constraintTop_toBottomOf="@+id/recentLayout">
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:background="#26505050"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatCheckedTextView
+                android:id="@+id/txtItems"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/txt_food_category"
+                android:fontFamily="@font/open_sans_regular"
+                android:text="Items"
+                android:checked="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:paddingHorizontal="@dimen/_20sdp"
+                android:paddingVertical="@dimen/_2sdp"
+                android:textColor="@color/selector_one_category"
+                app:layout_constraintTop_toBottomOf="@+id/view1"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatCheckedTextView
+                android:id="@+id/txtShops"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/txt_food_category"
+                android:fontFamily="@font/open_sans_regular"
+                android:text="Stores"
+                android:paddingHorizontal="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_2sdp"
+                app:layout_constraintTop_toTopOf="@+id/txtItems"
+                app:layout_constraintStart_toEndOf="@+id/txtItems"
+                android:textColor="@color/selector_one_category"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

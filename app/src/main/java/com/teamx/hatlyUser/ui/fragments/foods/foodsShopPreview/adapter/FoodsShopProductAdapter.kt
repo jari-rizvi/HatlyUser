@@ -17,7 +17,6 @@ class FoodsShopProductAdapter(
         return HatlyPopularViewHolder(
             ItemFoodsShopBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
-
     }
 
     override fun onBindViewHolder(holder: HatlyPopularViewHolder, position: Int) {

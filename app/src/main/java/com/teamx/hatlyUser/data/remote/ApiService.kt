@@ -18,6 +18,7 @@ import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.categoryModel.
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproductmodel.ModelPopularProducts
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
 import com.teamx.hatlyUser.ui.fragments.home.model.FcmModel
+import com.teamx.hatlyUser.ui.fragments.homeSearch.model.ModelHomeSearch
 import com.teamx.hatlyUser.ui.fragments.location.map.modelDefaultAddress.ModelDefaultAddress
 import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModel
 import com.teamx.hatlyUser.ui.fragments.notification.modelNotification.ModelNotification
@@ -34,6 +35,7 @@ import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.modelUploadImages.Mo
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.OrderHistoryModel
 import com.teamx.hatlyUser.ui.fragments.shophome.model.ModelSubCategoryStore
 import com.teamx.hatlyUser.ui.fragments.special.ParcelLocation.model.fare.ModelFare
+import com.teamx.hatlyUser.ui.fragments.special.specialorder.model.ModelActiveDelieverParcel
 import com.teamx.hatlyUser.ui.fragments.topUp.model.savedCard.ModelSavedCard
 import com.teamx.hatlyUser.ui.fragments.wallet.model.me.MeModel
 import com.teamx.hatlyUser.ui.fragments.wishlist.modelWishList.ModelWishList
@@ -60,6 +62,16 @@ interface ApiService {
         @Body params: JsonObject?,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
     ): Response<FcmModel>
+
+    @GET(NetworkCallPoints.HOME_SEARCH)
+    suspend fun homeSearch(
+        @Query("search") search: String,
+        @Query("categorry") categorry: String,
+        @Query("type") type: String,
+        @Query("limit") limit: Int,
+        @Query("page") page: Int,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
+    ): Response<ModelHomeSearch>
 
     @POST(NetworkCallPoints.LOGIN_WITH_GOOGLE)
     suspend fun loginWithGoogle(@Body params: JsonObject?): Response<ModelLogin>
@@ -226,6 +238,12 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<ModelPlaceOrder>
+
+    @GET(NetworkCallPoints.CREATE_PARCEL)
+    suspend fun activeDeliever(
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelActiveDelieverParcel>
 
     @GET(NetworkCallPoints.ORDER_HISTORY)
     suspend fun orderHistory(

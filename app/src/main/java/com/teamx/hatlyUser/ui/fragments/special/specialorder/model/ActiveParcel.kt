@@ -1,0 +1,13 @@
+package com.teamx.hatlyUser.ui.fragments.special.specialorder.model
+import androidx.annotation.Keep
+@Keep
+data class ActiveParcel(
+    val _id: String,
+    val details: Details,
+    val dropOff: DropOff,
+    val fare: Double,
+    val pickup: Pickup,
+    val senderId: String,
+    val status: String,
+    val trackingNumber: String
+)
