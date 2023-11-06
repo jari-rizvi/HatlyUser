@@ -6,24 +6,22 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView.OnEditorActionListener
-import androidx.databinding.ViewDataBinding
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
-import com.teamx.hatlyUser.constants.NetworkCallPointsNest
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentHomeSearchBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.home.model.FcmModel
 import com.teamx.hatlyUser.ui.fragments.homeSearch.adapter.CategoryHomeSearchInterface
 import com.teamx.hatlyUser.ui.fragments.homeSearch.adapter.HomeRecentSearchAdapter
+import com.teamx.hatlyUser.ui.fragments.homeSearch.adapter.HomeSearchAdapter
 import com.teamx.hatlyUser.ui.fragments.homeSearch.adapter.HomeSearchTitleAdapter
 import com.teamx.hatlyUser.ui.fragments.homeSearch.adapter.RecentHomeSearchInterface
-import com.teamx.hatlyUser.utils.enum_.Marts
+import com.teamx.hatlyUser.ui.fragments.homeSearch.model.Doc
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,8 +43,12 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
     private lateinit var homeSearchTitleAdapter: HomeSearchTitleAdapter
     private lateinit var homeSearchRecentAdapter: HomeRecentSearchAdapter
 
-    private var categoryStr = ""
-    private var typeStr = ""
+    private var categoryStr = "resturant"
+    private var typeStr = "item"
+
+    private lateinit var homeSearchArrayList: ArrayList<Doc>
+    lateinit var layoutManager2: LinearLayoutManager
+    private lateinit var hatlyPopularAdapter: HomeSearchAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,6 +64,7 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
 
         categoryArray = ArrayList()
         recentArray = ArrayList()
+        homeSearchArrayList = ArrayList()
 
         categoryArray.add(FcmModel("Food", true))
         categoryArray.add(FcmModel("Grocery", false))
@@ -100,21 +103,24 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
                 if (s != null) {
                     if (s.isNotEmpty()) {
                         mViewDataBinding.recentLayout.visibility = View.GONE
+                        mViewDataBinding.typeLayout.visibility = View.VISIBLE
                     } else {
                         mViewDataBinding.recentLayout.visibility = View.VISIBLE
+                        mViewDataBinding.typeLayout.visibility = View.GONE
                     }
                 }
             }
 
         })
 
-//        mViewDataBinding.inpSearch.setOnEditorActionListener(OnEditorActionListener  { v, actionId, event ->
-//            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                performSearch()
-//                return@OnEditorActionListener true
-//            }
-//            false
-//        })
+
+
+        layoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        mViewDataBinding.recHomeSearch.layoutManager = layoutManager2
+        hatlyPopularAdapter = HomeSearchAdapter(homeSearchArrayList)
+        mViewDataBinding.recHomeSearch.adapter = hatlyPopularAdapter
+
+
 
         mViewDataBinding.inpSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -146,6 +152,9 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
+                            homeSearchArrayList.clear()
+                            homeSearchArrayList.addAll(data.docs)
+                            hatlyPopularAdapter.notifyDataSetChanged()
                             Log.d("homeSearchResponse", "onViewCreated: $data")
                         }
                     }
@@ -164,7 +173,7 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
 
     private fun performSearch() {
         val search = mViewDataBinding.inpSearch.text.toString()
-        mViewModel.homeSearch(search,categoryStr,typeStr,10,1)
+        mViewModel.homeSearch(search, categoryStr, typeStr, 10, 1)
     }
 
     override fun clickshopItem(position: Int) {
@@ -190,9 +199,31 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
     override fun clickcategory(position: Int) {
         categoryArray.forEach { it.success = false }
         categoryArray[position].success = true
-        categoryStr = categoryArray[position].message
+
+        categoryArray.add(FcmModel("Food", true))
+        categoryArray.add(FcmModel("Grocery", false))
+        categoryArray.add(FcmModel("Health & beauty", false))
+        categoryArray.add(FcmModel("Home Business", false))
+
+        when (categoryArray[position].message) {
+            "Food" -> {
+                categoryStr = "resturant"
+            }
+
+            "Grocery" -> {
+                categoryStr = "grocery"
+            }
+
+            "Health & beauty" -> {
+                categoryStr = "health"
+            }
+
+            "Home Business" -> {
+                categoryStr = "home based"
+            }
+        }
+
         homeSearchTitleAdapter.notifyDataSetChanged()
     }
-
 
 }

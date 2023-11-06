@@ -123,6 +123,7 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/815603164333090724726446203162a6/transformed/jetified-payments-model-20.25.5-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/4f750c218240311f821d606a0b2f8176/transformed/jetified-kotlin-stdlib-jdk8-1.8.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/b39c315ab9b0158e59953b383fce7f88/transformed/jetified-kotlin-stdlib-jdk7-1.8.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/eecf7991d22857b7020738eb36ec5f0c/transformed/jetified-google-maps-services-0.15.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/9d4e95662db56cf3a7d67c876a802a06/transformed/jetified-converter-gson-2.9.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/25e3115293ff0271ce5c2507d3b68871/transformed/jetified-retrofit-2.9.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/88f92875d59dab857f74a2d4f7b0216c/transformed/jetified-picasso-2.71828-api.jar</arg>
@@ -182,6 +183,8 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/d57fb874d18e0ab3c90d359c8165c2a1/transformed/jetified-hilt-core-2.44.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/436848d0c5973e7a87cbab1a5173c4c6/transformed/jetified-dagger-2.45.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/a396f97ab384ff32f3837ac6cd112c03/transformed/jetified-javax.inject-1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/2c3c5e3b38d93489ee61027f72f9e13d/transformed/jetified-opencensus-api-0.25.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/04357fa1b2524cc3b556dd28b55f77c7/transformed/jetified-grpc-context-1.25.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/b1145ad3943ab9bd0921eb7d2ac9ec3d/transformed/jetified-dagger-lint-aar-2.44-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/bbe929a5c2a51a35974eaacbfcf1bd44/transformed/jetified-jsr305-3.0.2.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/4cbf4f8ca26f61869570aab4ffdf7f0a/transformed/jetified-commons-cli-1.2.jar</arg>
@@ -439,15 +442,18 @@
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-encoders:17.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-encoders-proto:16.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.maps:google-maps-services:0.15.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:4.9.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup.okio:okio:2.8.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.9" level="project" />
+    <orderEntry type="library" name="Gradle: io.opencensus:opencensus-api:0.25.0" level="project" />
+    <orderEntry type="library" name="Gradle: io.grpc:grpc-context:1.25.0" level="project" />
     <orderEntry type="library" name="Gradle: androidx.room:room-common:2.4.3" level="project" />
     <orderEntry type="library" name="Gradle: com.google.dagger:dagger:2.45" level="project" />
     <orderEntry type="library" name="Gradle: com.google.dagger:hilt-core:2.44" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.findbugs:jsr305:3.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.retrofit2:retrofit:2.9.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:4.9.1" level="project" />
-    <orderEntry type="library" name="Gradle: com.squareup.okio:okio:2.8.0" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.retrofit2:converter-gson:2.9.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.9" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-common-java8:2.6.1" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okhttp3:logging-interceptor:4.9.1" level="project" />
     <orderEntry type="library" name="Gradle: commons-cli:commons-cli:1.2" level="project" />

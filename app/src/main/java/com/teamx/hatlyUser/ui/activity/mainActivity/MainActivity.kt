@@ -31,6 +31,7 @@ import com.teamx.hatlyUser.SharedViewModel
 import com.teamx.hatlyUser.baseclasses.BaseActivity
 import com.teamx.hatlyUser.data.local.datastore.DataStoreProvider
 import com.teamx.hatlyUser.databinding.ActivityMainBinding
+import com.teamx.hatlyUser.utils.CounterNotificationService
 import com.teamx.hatlyUser.utils.PrefHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -86,7 +87,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        service = CounterNotificationService(applicationContext)
 
         modeChangeReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
@@ -336,4 +337,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
     }
 
+
+    companion object {
+        var service: CounterNotificationService? = null
+    }
+
 }
+

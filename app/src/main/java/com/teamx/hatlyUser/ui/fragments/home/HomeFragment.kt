@@ -1,10 +1,15 @@
 package com.teamx.hatlyUser.ui.fragments.home
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.lifecycle.Observer
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.google.android.gms.tasks.OnCompleteListener
@@ -16,22 +21,14 @@ import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
-import com.teamx.hatlyUser.constants.NetworkCallPointsNest
 import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.MART
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentHomeBinding
 import com.teamx.hatlyUser.ui.activity.mainActivity.MainActivity
-import com.teamx.hatlyUser.ui.fragments.auth.login.LoginViewModel
-import com.teamx.hatlyUser.utils.DialogHelperClass
-import com.teamx.hatlyUser.utils.LocationPermission
-import com.teamx.hatlyUser.utils.LocationPermission.Companion.requestPermission
 import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -44,6 +41,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -140,8 +138,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         Firebase.initialize(requireContext())
         FirebaseApp.initializeApp(requireContext())
         if (!mViewModel.fcmResponse.hasActiveObservers()) {
-            askNotificationPermission()
+            getFcmToken()
         }
+
+        pushNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//            askNotificationPermission()
+//        }
+
+
 
         if (!mViewModel.fcmResponse.hasActiveObservers()) {
             mViewModel.fcmResponse.observe(requireActivity()) {
@@ -185,7 +191,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
 
-    private fun askNotificationPermission() {
+    private fun getFcmToken() {
         Log.d("fcmToken", "askNotificationPermission")
         // This is only necessary for API level >= 33 (TIRAMISU)
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -216,6 +222,49 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 //                Log.d("fcmToken", "else")
 //            }
 //        }
+    }
+
+
+    private fun askNotificationPermission() {
+        // This is only necessary for API level >= 33 (TIRAMISU)
+
+        if (ContextCompat.checkSelfPermission(
+                requireContext(), Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            Log.d("fcmToken", "PERMISSION_GRANTED")
+            if (!mViewModel.fcmResponse.hasActiveObservers()) {
+                getFcmToken()
+            }
+
+            // FCM SDK (and your app) can post notifications.
+        } else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+            Log.d("fcmToken", "shouldShowRequestPermissionRationale")
+            if (!mViewModel.fcmResponse.hasActiveObservers()) {
+                getFcmToken()
+            }
+        } else {
+            // Directly ask for t
+            //
+            //
+            // he permission
+            Log.d("fcmToken", "else")
+//            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+
+    }
+
+
+    private val pushNotificationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (granted) {
+            Log.d("fcmToken", "granted")
+
+
+        } else {
+            Log.d("fcmToken", "granted else")
+        }
     }
 
 

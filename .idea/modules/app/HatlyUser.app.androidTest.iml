@@ -15,6 +15,8 @@
           <stringArguments>
             <stringArg name="classpath">
               <args>
+                <arg>$MODULE_DIR$/../../../app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/localDebugAndroidTest/R.jar</arg>
+                <arg>$MODULE_DIR$/../../../app/build/intermediates/compile_app_classes_jar/localDebug/classes.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/babbfef0c2f47c744c1976d6f40d4616/transformed/jetified-junit-1.1.3-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/2d67f1dbbca23e2535cf70913dd8a0b2/transformed/espresso-core-3.4.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/1c33ae3d97435ba827dadbf4acbe89ae/transformed/databinding-runtime-7.2.2-api.jar</arg>
@@ -118,6 +120,7 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/f8f51b513c456fcfd89211e98f94ac9e/transformed/jetified-lifecycle-viewmodel-savedstate-2.6.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/f1358580d01e457088c71146b692de06/transformed/jetified-facebook-bolts-16.1.3-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/1413cf2b92f4b1d19b9de1a776c6cedc/transformed/jetified-core-ktx-1.8.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/eecf7991d22857b7020738eb36ec5f0c/transformed/jetified-google-maps-services-0.15.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/9d4e95662db56cf3a7d67c876a802a06/transformed/jetified-converter-gson-2.9.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/25e3115293ff0271ce5c2507d3b68871/transformed/jetified-retrofit-2.9.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/3ff1abcce95c9b27075d355f936db52d/transformed/jetified-logging-interceptor-4.9.1.jar</arg>
@@ -192,12 +195,14 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/9447d948cba0ab723483452f2473c6a8/transformed/jetified-dagger-2.44.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/a396f97ab384ff32f3837ac6cd112c03/transformed/jetified-javax.inject-1.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/c5ef5d5dffa8856af8286d1971a9c3b0/transformed/jetified-annotation-experimental-1.1.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/2c3c5e3b38d93489ee61027f72f9e13d/transformed/jetified-opencensus-api-0.25.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/b1145ad3943ab9bd0921eb7d2ac9ec3d/transformed/jetified-dagger-lint-aar-2.44-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/4cbf4f8ca26f61869570aab4ffdf7f0a/transformed/jetified-commons-cli-1.2.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/b62dd881a083988b615c4a4d1f616a31/transformed/jetified-volley-1.2.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/31d39b916d7767b760962871115b9dff/transformed/jetified-auto-value-annotations-1.6.2.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/b8bd14f50a8e19c9f2f9799f529c9579/transformed/jetified-error_prone_annotations-2.9.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/fe8af74cb10124e069f72957cdb79a32/transformed/jetified-listenablefuture-1.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/04357fa1b2524cc3b556dd28b55f77c7/transformed/jetified-grpc-context-1.25.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/197d1850fc24cd25a920ad14e87bd645/transformed/jetified-installreferrer-1.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/f3f16fea74f0bb48ab39ddee2ba9109a/transformed/jetified-core-3.3.3.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/e672533a10215f7f8166bad91bba22c3/transformed/jetified-startup-runtime-1.1.1-api.jar</arg>
@@ -499,14 +504,17 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.firebase:firebase-encoders:17.0.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.firebase:firebase-encoders-proto:16.0.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.google.maps:google-maps-services:0.15.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.okhttp3:okhttp:4.9.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.okio:okio:2.8.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.google.code.gson:gson:2.8.8" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.opencensus:opencensus-api:0.25.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.grpc:grpc-context:1.25.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.room:room-common:2.4.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.dagger:dagger:2.44" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.dagger:hilt-core:2.44" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.retrofit2:retrofit:2.9.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.okhttp3:okhttp:4.9.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.okio:okio:2.8.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.retrofit2:converter-gson:2.9.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.google.code.gson:gson:2.8.8" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-common-java8:2.6.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.okhttp3:logging-interceptor:4.9.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: commons-cli:commons-cli:1.2" level="project" />

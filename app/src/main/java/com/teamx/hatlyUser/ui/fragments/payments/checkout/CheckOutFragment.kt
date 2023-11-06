@@ -170,7 +170,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 try {
                     params.add(
                         "coordinates",
-                        Gson().toJsonTree(Coordinates(24.901417466891772, 67.11549957694464))
+                        Gson().toJsonTree(Coordinates(userData!!.location.lat, userData.location.lng))
                     )
                     params.addProperty("useWallet", isChecked)
                 } catch (e: JSONException) {
@@ -184,7 +184,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         val params = JsonObject()
         try {
             params.addProperty("lat", userData!!.location.lat)
-            params.addProperty("lng", userData!!.location.lng)
+            params.addProperty("lng", userData.location.lng)
         } catch (e: JSONException) {
             e.printStackTrace()
         }

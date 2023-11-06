@@ -10,7 +10,7 @@ data class Doc(
     val delivery: Delivery,
     val image: String,
     val isOpen: Boolean,
-    val items: List<Item>,
+    val items: List<Item>?,
     val name: String,
     val owner: String,
     val ratting: Double,
