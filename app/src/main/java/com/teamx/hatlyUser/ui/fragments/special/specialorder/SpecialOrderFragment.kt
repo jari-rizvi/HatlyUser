@@ -44,7 +44,7 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
         }
 
         mViewDataBinding.txtLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_specialOrderFragment_to_sendParcelFragment)
+            findNavController().navigate(R.id.action_specialOrderFragment_to_parcelDetailFragment)
         }
 
         val layoutManager1 =
@@ -56,7 +56,7 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
         val delieveredAdapter = SpecialOrderAdapter(delieveredParcel, this)
         mViewDataBinding.recSpecial.adapter = delieveredAdapter
 
-        mViewModel.activeDeliever()
+        mViewModel.activeDeliever(false,1,10)
 
         mViewModel.activeDelieverResponse.observe(requireActivity()) {
             when (it.status) {

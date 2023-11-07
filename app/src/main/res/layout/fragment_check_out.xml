@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <ImageView
             android:id="@+id/imgBack"
             android:layout_width="wrap_content"
@@ -374,9 +375,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/button_radius_corner"
                         android:paddingVertical="@dimen/_5sdp"
                         android:visibility="gone"
-                        android:background="@drawable/button_radius_corner"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/radioGroup"
                         app:layout_constraintStart_toStartOf="@+id/radioGroup"
@@ -442,13 +443,13 @@
                             android:id="@+id/radioAddNewCard"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:buttonTint="#1ED860"
                             android:drawablePadding="@dimen/_10sdp"
                             android:paddingStart="@dimen/_10sdp"
                             android:text="Add New Card"
                             android:textColor="#010101"
-                            android:layout_marginStart="@dimen/_10sdp"
                             android:textSize="@dimen/_12ssp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -463,8 +464,8 @@
                     android:id="@+id/layout3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/input_auth_field"
                     android:backgroundTint="@color/white"
                     android:paddingVertical="@dimen/_10sdp"
@@ -678,9 +679,18 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="1" />
 
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 
+<!--        <com.paypal.checkout.paymentbutton.PaymentButtonContainer-->
+<!--            android:id="@+id/payment_button_container"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent" />-->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </layout>

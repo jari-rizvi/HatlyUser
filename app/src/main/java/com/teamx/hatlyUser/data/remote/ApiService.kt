@@ -241,6 +241,9 @@ interface ApiService {
 
     @GET(NetworkCallPoints.CREATE_PARCEL)
     suspend fun activeDeliever(
+        @Query("allDelivered") allDelivered: Boolean,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<ModelActiveDelieverParcel>

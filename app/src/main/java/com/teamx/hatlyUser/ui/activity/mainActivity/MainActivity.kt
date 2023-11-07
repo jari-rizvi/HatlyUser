@@ -24,6 +24,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.paypal.android.corepayments.CoreConfig
+import com.paypal.android.corepayments.Environment
+import com.paypal.android.corepayments.PayPalSDKError
+import com.paypal.android.paypalnativepayments.PayPalNativeCheckoutClient
+import com.paypal.android.paypalnativepayments.PayPalNativeCheckoutListener
+import com.paypal.android.paypalnativepayments.PayPalNativeCheckoutResult
 import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
@@ -110,6 +116,59 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 }
             }
         }
+
+
+//        val YOUR_CLIENT_ID = "ASH9ytXn-OhQaOV0gyHsOERpEqfVl7oJ3Mo_48XtGDeq_YnWBp4SyK8h-68pGGJw4j8kGI7D86YRdoqx"
+//
+//        val coreConfig = CoreConfig(YOUR_CLIENT_ID, environment = Environment.SANDBOX)
+//
+//        val payPalNativeClient = PayPalNativeCheckoutClient(
+//            application = application,
+//            coreConfig = coreConfig,
+//            returnUrl = "${packageName}://paypalpay"
+//        )
+//
+//        payPalNativeClient.listener = object : PayPalNativeCheckoutListener {
+//            override fun onPayPalCheckoutCanceled() {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onPayPalCheckoutFailure(error: PayPalSDKError) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onPayPalCheckoutStart() {
+//                // the PayPal paysheet is about to show up
+//            }
+//
+//            override fun onPayPalCheckoutSuccess(result: PayPalNativeCheckoutResult) {
+//                TODO("Not yet implemented")
+//            }
+//
+////            override fun onPayPalSuccess(result: PayPalNativeCheckoutResult) {
+////                // order was approved and is ready to be captured/authorized
+////            }
+////            override fun onPayPalFailure(error: PayPalSDKError) {
+////                // handle the error
+////            }
+////            override fun onPayPalCanceled() {
+////                // the user canceled the flow
+////            }
+//        }
+
+//        val config = CheckoutConfig(
+//            application = application,
+//            clientId = YOUR_CLIENT_ID,
+//            environment = Environment.SANDBOX,
+//            returnUrl = "com.teamx.hatlyUser://paypalpay",
+//            currencyCode = CurrencyCode.USD,
+//            userAction = UserAction.PAY_NOW,
+//            settingsConfig = SettingsConfig(
+//                loggingEnabled = false,
+//                showWebCheckout = true
+//            )
+//        )
+//        PayPalCheckout.setConfig(config)
 
 
 

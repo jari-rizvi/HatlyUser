@@ -5,7 +5,7 @@ data class DeliveredParcel(
     val _id: String,
     val details: Details,
     val dropOff: DropOff,
-    val fare: Int,
+    val fare: Double,
     val pickup: Pickup,
     val senderId: String,
     val status: String,

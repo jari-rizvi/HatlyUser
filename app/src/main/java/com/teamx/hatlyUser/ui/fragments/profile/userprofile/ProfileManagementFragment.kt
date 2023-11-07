@@ -88,6 +88,12 @@ class ProfileManagementFragment :
             findNavController().navigate(R.id.action_profileManagementFragment_to_orderHistoryFragment)
         }
 
+        mViewDataBinding.specialOrderHistory.setOnClickListener {
+            findNavController().navigate(R.id.action_profileManagementFragment_to_specialOrderHistoryFragment)
+        }
+
+
+
 //        mViewDataBinding.imgGallery.setOnClickListener {
 //            fetchImageFromGallery()
 //        }

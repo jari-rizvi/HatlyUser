@@ -18,6 +18,7 @@ import com.stripe.android.PaymentConfiguration
 import com.stripe.android.paymentsheet.PaymentSheet
 import com.stripe.android.paymentsheet.PaymentSheetResult
 import com.teamx.hatlyUser.BR
+import com.teamx.hatlyUser.MainApplication.Companion.application
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
@@ -25,7 +26,6 @@ import com.teamx.hatlyUser.databinding.FragmentCheckOutBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.Coordinates
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.adapter.CheckOutAdapter
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.model.Product
-import com.teamx.hatlyUser.ui.fragments.payments.checkout.modelPlaceOrder.ShippingAddress
 import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,6 +59,8 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
     private var orderId = ""
 
+//    lateinit var paymentButtonContainer : PaymentButtonContainer
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -70,6 +72,8 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 popExit = com.teamx.hatlyUser.R.anim.nav_default_pop_exit_anim
             }
         }
+
+//        paymentButtonContainer = view.findViewById(R.id.payment_button_container)
 
         val userData = PrefHelper.getInstance(requireActivity()).getUserData()
 
@@ -98,9 +102,12 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
             findNavController().navigate(R.id.action_checkOutFragment_to_paymentMethodFragment)
         }
 
+//        showPaypal()
+
         mViewDataBinding.txtLogin.setOnClickListener {
-//            showPaypal()
-            mViewModel.placeOrder(createOrderJsonObject())
+            showPaypal()
+//            initializationPayPal2()
+//            mViewModel.placeOrder(createOrderJsonObject())
         }
 
         mViewDataBinding.radioCash.setOnClickListener {
@@ -170,7 +177,12 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 try {
                     params.add(
                         "coordinates",
-                        Gson().toJsonTree(Coordinates(userData!!.location.lat, userData.location.lng))
+                        Gson().toJsonTree(
+                            Coordinates(
+                                userData!!.location.lat,
+                                userData.location.lng
+                            )
+                        )
                     )
                     params.addProperty("useWallet", isChecked)
                 } catch (e: JSONException) {
@@ -237,7 +249,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                     loadingDialog.dismiss()
                     if (isAdded) {
 
-                    mViewDataBinding.root.snackbar(it.message!!)
+                        mViewDataBinding.root.snackbar(it.message!!)
                     }
                 }
             }
@@ -290,7 +302,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                     mViewDataBinding.swOnOff.isChecked = false
                     if (isAdded) {
 
-                    mViewDataBinding.root.snackbar(it.message!!)
+                        mViewDataBinding.root.snackbar(it.message!!)
                     }
                 }
             }
@@ -353,7 +365,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                     loadingDialog.dismiss()
                     if (isAdded) {
 
-                    mViewDataBinding.root.snackbar(it.message!!)
+                        mViewDataBinding.root.snackbar(it.message!!)
                     }
                 }
             }
@@ -386,7 +398,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                     loadingDialog.dismiss()
                     if (isAdded) {
 
-                    mViewDataBinding.root.snackbar(it.message!!)
+                        mViewDataBinding.root.snackbar(it.message!!)
                     }
                 }
             }
@@ -417,31 +429,158 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 //        )
 //        PayPalCheckout.setConfig(config)
 //        PayPalCheckout.registerCallbacks(this, this, this, this)
+
+
+
     }
 
+//    private fun initializationPayPal2() {
+//
+//        val coreConfig = CoreConfig(
+//            "AaTjrhT6DHDR5rRJLipZxrsxexzrMN9R8HP4VxloYCclYAruKo8lq6gHKit1F0z3y1MbHWqSdgApdwRk",
+//            environment = Environment.SANDBOX
+//        )
+//        val payPalNativeClient = PayPalNativeCheckoutClient(
+//            application = requireActivity().application,
+//            coreConfig = coreConfig,
+//            returnUrl = "${BuildConfig.APPLICATION_ID}://paypalpay",
+//        )
+//
+//        payPalNativeClient.listener = object : PayPalNativeCheckoutListener {
+//            override fun onPayPalCheckoutCanceled() {
+//                Log.d("initializationPayPal2", "onPayPalCheckoutCanceled: ")
+//            }
+//
+//            override fun onPayPalCheckoutFailure(error: PayPalSDKError) {
+//                Log.d("initializationPayPal2", "onPayPalCheckoutFailure: ")
+//            }
+//
+//            override fun onPayPalCheckoutStart() {
+//                // the PayPal paysheet is about to show up
+//                Log.d("initializationPayPal2", "onPayPalCheckoutStart: ")
+//            }
+//
+//            override fun onPayPalCheckoutSuccess(result: PayPalNativeCheckoutResult) {
+//                Log.d("initializationPayPal2", "onPayPalCheckoutSuccess: ")
+//            }
+//        }
+//
+//    }
+
     //    var paymentButtonContainer: PaymentButtonContainer? = null
+    val PAYPAL_CLIENT_ID = "YOUR-CLIENT-ID-HERE"
+    val PAYPAL_SECRET = "ONLY-FOR-QUICKSTART-DO-NOT-INCLUDE-SECRET-IN-CLIENT-SIDE-APPLICATIONS"
+
     private fun showPaypal() {
-//        PayPalCheckout.startCheckout(CreateOrder { createOrderActions ->
-//            val order =
-//                OrderRequest(
-//                    intent = OrderIntent.CAPTURE,
-//                    appContext = AppContext(userAction = UserAction.PAY_NOW),
-//                    purchaseUnitList =
-//                    listOf(
-//                        PurchaseUnit(
-//                            amount =
-//                            Amount(currencyCode = CurrencyCode.USD, value = "10.00")
+
+
+
+
+//        val YOUR_CLIENT_ID = "ASH9ytXn-OhQaOV0gyHsOERpEqfVl7oJ3Mo_48XtGDeq_YnWBp4SyK8h-68pGGJw4j8kGI7D86YRdoqx"
+//
+//        val coreConfig = CoreConfig(YOUR_CLIENT_ID, environment = Environment.SANDBOX)
+//
+//        val payPalNativeClient = PayPalNativeCheckoutClient(
+//            application = requireActivity().application,
+//            coreConfig = coreConfig,
+//            returnUrl = "${requireActivity().packageName}://paypalpay"
+//        )
+//
+//        payPalNativeClient.listener = object : PayPalNativeCheckoutListener {
+//            override fun onPayPalCheckoutCanceled() {
+//                Log.d("createOrderActions", "OnCancel")
+//            }
+//
+//            override fun onPayPalCheckoutFailure(error: PayPalSDKError) {
+//                Log.d("createOrderActions", "onPayPalCheckoutFailure")
+//            }
+//
+//            override fun onPayPalCheckoutStart() {
+//                // the PayPal paysheet is about to show up
+//                Log.d("createOrderActions", "onPayPalCheckoutStart")
+//            }
+//
+//            override fun onPayPalCheckoutSuccess(result: PayPalNativeCheckoutResult) {
+//                Log.d("createOrderActions", "OrderId: approve ${result.orderId}")
+//            }
+//
+////            override fun onPayPalSuccess(result: PayPalNativeCheckoutResult) {
+////                // order was approved and is ready to be captured/authorized
+////            }
+////            override fun onPayPalFailure(error: PayPalSDKError) {
+////                // handle the error
+////            }
+////            override fun onPayPalCanceled() {
+////                // the user canceled the flow
+////            }
+//        }
+
+
+        //        PayPalCheckout.registerCallbacks(
+//            onApprove = OnApprove { approval ->
+//                // Optional callback for when an order is approved
+//                Log.d("createOrderActions", "OrderId: approve ${approval.data.orderId}")
+//            },
+//            onCancel = OnCancel {
+//                // Optional callback for when a buyer cancels the paysheet
+//                Log.d("createOrderActions", "OnCancel")
+//            },
+//            onError = OnError { errorInfo ->
+//                // Optional error callback
+//                Log.d("createOrderActions", "OnError")
+//            },
+//            onShippingChange = OnShippingChange { shippingChangeData, shippingChangeActions ->
+//                // Optional onShippingChange callback.
+//                Log.d("createOrderActions", "OnShippingChange")
+//            }
+//        )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//            CreateOrder { createOrderActions ->
+//                val order =
+//                    OrderRequest(
+//                        intent = OrderIntent.CAPTURE,
+//                        appContext = AppContext(userAction = UserAction.PAY_NOW),
+//                        purchaseUnitList =
+//                        listOf(
+//                            PurchaseUnit(
+//                                amount =
+//                                Amount(currencyCode = CurrencyCode.USD, value = "10.00")
+//                            )
 //                        )
 //                    )
-//                )
-//            createOrderActions.create(order) { res ->
-//                Log.d("createOrderActions", "OrderId: approve ${res}")
+//                createOrderActions.create(order)
+//            },
+//            onApprove =
+//            OnApprove { approval ->
+//                Log.i(TAG, "OrderId: ${approval.data.orderId}")
 //            }
-//        })
 
-//        PayPalCheckout.start(CreateOrder { createOrderActions ->
-//            val order =
-//                OrderRequest(
+//        PayPalCheckout.startCheckout(CreateOrder { createOrderActions ->
+//            val order = OrderRequest(
 //                    intent = OrderIntent.CAPTURE,
 //                    appContext = AppContext(userAction = UserAction.PAY_NOW),
 //                    purchaseUnitList =
@@ -455,11 +594,100 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 //            createOrderActions.create(order) {res ->
 //                Log.d("createOrderActions", "OrderId: approve ${res}")
 //            }
-//        }, onApprove = OnApprove { approval ->
-//            Log.d("createOrderActions", "OrderId: approve ${approval.data.orderId}")
-//        }, onCancel = OnCancel.invoke {
-//            Log.d("createOrderActions", "OrderId: cancel")
 //        })
+
+//        paymentButtonContainer.setup(
+//            createOrder = CreateOrder { createOrderActions ->
+//                val order =
+//                    OrderRequest(
+//                        intent = OrderIntent.CAPTURE,
+//                        appContext = AppContext(userAction = UserAction.PAY_NOW),
+//                        purchaseUnitList =
+//                        listOf(
+//                            PurchaseUnit(
+//                                amount =
+//                                Amount(currencyCode = CurrencyCode.USD, value = "10.00")
+//                            )
+//                        )
+//                    )
+//                createOrderActions.create(order)
+//            },
+//            onApprove =
+//            OnApprove { approval ->
+//                Log.d("createOrderActions", "OrderId: approve ${approval.data.orderId}")
+//            }
+//        )
+
+//        paymentButtonContainer.setPayPalButtonUi(
+//            paypalButtonUi = PayPalButtonUi(
+//                PayPalButtonColor.BLUE,
+//                PayPalButtonLabel.CHECKOUT,
+//                PaymentButtonAttributes(
+//                    PaymentButtonShape.ROUNDED,
+//                    PaymentButtonSize.LARGE,
+//                    isEnabled =  true
+//                )
+//            )
+//        )
+//
+//        PayPalCheckout.registerCallbacks(
+//            onApprove = OnApprove { approval ->
+//                // Optional callback for when an order is approved
+//                Log.d("createOrderActions", "OrderId: approve ${approval.data.orderId}")
+//            },
+//            onCancel = OnCancel {
+//                // Optional callback for when a buyer cancels the paysheet
+//                Log.d("createOrderActions", "OnCancel")
+//            },
+//            onError = OnError { errorInfo ->
+//                // Optional error callback
+//                Log.d("createOrderActions", "OnError")
+//            },
+//            onShippingChange = OnShippingChange { shippingChangeData, shippingChangeActions ->
+//                // Optional onShippingChange callback.
+//                Log.d("createOrderActions", "OnShippingChange")
+//            }
+//        )
+
+//        PayPalCheckout.startCheckout(
+//            createOrder = CreateOrder { createOrderActions ->
+//                val order =
+//                    OrderRequest(
+//                        intent = OrderIntent.CAPTURE,
+//                        appContext = AppContext(userAction = UserAction.PAY_NOW),
+//                        purchaseUnitList =
+//                        listOf(
+//                            PurchaseUnit(
+//                                amount =
+//                                Amount(currencyCode = CurrencyCode.USD, value = "10.00")
+//                            )
+//                        )
+//                    )
+//                createOrderActions.create(order)
+//            }
+//        )
+
+//        mViewDataBinding.paymentButtonContainer.setup(
+//            CreateOrder { createOrderActions ->
+//                val order = OrderRequest(
+//                    intent = OrderIntent.CAPTURE,
+//                    appContext = AppContext(
+//                        userAction = UserAction.PAY_NOW
+//                    ),
+//                    purchaseUnitList = listOf(
+//                        PurchaseUnit(
+//                            amount = Amount(
+//                                currencyCode = CurrencyCode.USD,
+//                                value = "10.00"
+//                            )
+//                        )
+//                    )
+//                )
+//                createOrderActions.create(order)
+//            }
+//        )
+
+
 
 //        PayPalCheckout.registerCallbacks(onApprove = OnApprove{
 //

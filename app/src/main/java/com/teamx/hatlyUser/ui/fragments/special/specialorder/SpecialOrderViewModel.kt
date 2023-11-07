@@ -14,6 +14,7 @@ import com.teamx.hatlyUser.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import retrofit2.http.Query
 import javax.inject.Inject
 
 
@@ -28,12 +29,16 @@ class SpecialOrderViewModel @Inject constructor(
     val activeDelieverResponse: LiveData<Resource<ModelActiveDelieverParcel>>
         get() = _activeDelieverResponse
 
-    fun activeDeliever() {
+    fun activeDeliever(
+        allDelivered: Boolean,
+        page: Int,
+        limit: Int,
+    ) {
         viewModelScope.launch {
             _activeDelieverResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.activeDeliever().let {
+                    mainRepository.activeDeliever(allDelivered, page, limit).let {
                         if (it.isSuccessful) {
                             _activeDelieverResponse.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
