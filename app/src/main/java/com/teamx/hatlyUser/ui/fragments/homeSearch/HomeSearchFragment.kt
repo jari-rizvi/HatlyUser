@@ -66,11 +66,11 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
         recentArray = ArrayList()
         homeSearchArrayList = ArrayList()
 
+        categoryArray.clear()
         categoryArray.add(FcmModel("Food", true))
         categoryArray.add(FcmModel("Grocery", false))
         categoryArray.add(FcmModel("Health & beauty", false))
         categoryArray.add(FcmModel("Home Business", false))
-        categoryArray.add(FcmModel("Grocery", false))
 
         val layoutManager1 =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
@@ -133,12 +133,14 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
             mViewDataBinding.txtItems.isChecked = true
             mViewDataBinding.txtShops.isChecked = false
             typeStr = "item"
+            performSearch()
         }
 
         mViewDataBinding.txtShops.setOnClickListener {
             mViewDataBinding.txtItems.isChecked = false
             mViewDataBinding.txtShops.isChecked = true
             typeStr = "shop"
+            performSearch()
         }
 
 
@@ -153,7 +155,17 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             homeSearchArrayList.clear()
-                            homeSearchArrayList.addAll(data.docs)
+
+                            data.docs.forEach {
+                                if (mViewDataBinding.txtShops.isChecked){
+                                    it.items = emptyList()
+                                }
+                                homeSearchArrayList.add(it)
+                            }
+
+
+
+//                            homeSearchArrayList.addAll(data.docs)
                             hatlyPopularAdapter.notifyDataSetChanged()
                             Log.d("homeSearchResponse", "onViewCreated: $data")
                         }
@@ -200,11 +212,6 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
         categoryArray.forEach { it.success = false }
         categoryArray[position].success = true
 
-        categoryArray.add(FcmModel("Food", true))
-        categoryArray.add(FcmModel("Grocery", false))
-        categoryArray.add(FcmModel("Health & beauty", false))
-        categoryArray.add(FcmModel("Home Business", false))
-
         when (categoryArray[position].message) {
             "Food" -> {
                 categoryStr = "resturant"
@@ -224,6 +231,7 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
         }
 
         homeSearchTitleAdapter.notifyDataSetChanged()
+        performSearch()
     }
 
 }

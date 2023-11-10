@@ -3,7 +3,7 @@ import androidx.annotation.Keep
 
 @Keep
 data class Veriation(
-    val _id: Id,
+    val _id: String,
     val isMultiple: Boolean,
     val isRequired: Boolean,
     val limit: Int,

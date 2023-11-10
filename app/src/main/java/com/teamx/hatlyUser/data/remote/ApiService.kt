@@ -66,7 +66,7 @@ interface ApiService {
     @GET(NetworkCallPoints.HOME_SEARCH)
     suspend fun homeSearch(
         @Query("search") search: String,
-        @Query("categorry") categorry: String,
+        @Query("category") category: String,
         @Query("type") type: String,
         @Query("limit") limit: Int,
         @Query("page") page: Int,

@@ -29,7 +29,7 @@ class HomeSearchProductAdapter(
         }
 
         holder.bind.txtPrize.text = try {
-            "${arrayData.price} Aed"
+            "${arrayData.price?:arrayData.minPrice} Aed"
         }catch (e : Exception){
             ""
         }

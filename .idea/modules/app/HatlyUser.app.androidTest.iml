@@ -178,7 +178,6 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/22ca4723a9af7ff2abb5c5f3b5ec7ad1/transformed/jetified-commons-lang3-3.10.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/20b5fcde7c2d88b8a27d65c002331ad1/transformed/jetified-gson-2.8.8.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/404b976d6055c242ae2e56d346140041/transformed/jetified-EasyPrefs-1.10.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/90d74acfa8799a56acc458d876ba5e8e/transformed/jetified-android-sdk-1.1.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/cb5bc7e6a2180474cb4ad0bd709e8fa2/transformed/jetified-junit-4.12.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/266ed49c3ce216a226559d3c0b4cf216/transformed/jetified-hamcrest-integration-1.3.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/3c967d66b7019ff9a1e6b2c76f7be8b7/transformed/jetified-hamcrest-library-1.3.jar</arg>
@@ -187,7 +186,7 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/0d1de5e69c3fc25fdf18e106188bd1ca/transformed/jetified-annotations-16.0.1.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/d57fb874d18e0ab3c90d359c8165c2a1/transformed/jetified-hilt-core-2.44.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/bbe929a5c2a51a35974eaacbfcf1bd44/transformed/jetified-jsr305-3.0.2.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/4d17c5f39c6e9c551f0c1958cf99b090/transformed/espresso-idling-resource-3.3.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/818dadf308cee6497a982dc454066b2f/transformed/espresso-idling-resource-3.4.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/1f43b68024ac3efba686faa7e202a57d/transformed/jetified-javawriter-2.1.1.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/8c1cdecc4b18ebb8671fc80485fa3919/transformed/jetified-firebase-annotations-16.2.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/9447d948cba0ab723483452f2473c6a8/transformed/jetified-dagger-2.44.jar</arg>
@@ -270,6 +269,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/localDebugAndroidTest/out" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/localDebugAndroidTest/out" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/localDebugAndroidTest/out" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/localDebugAndroidTest/out" isTestSource="true" generated="true" />
     </content>
     <content url="file://$MODULE_DIR$/../../../app/build/generated/renderscript_source_output_dir/localDebugAndroidTest/out" />
     <content url="file://$MODULE_DIR$/../../../app/build/generated/res/resValues/androidTest/local/debug">
@@ -277,6 +277,7 @@
     </content>
     <content url="file://$MODULE_DIR$/../../../app/build/generated/res/rs/androidTest/local/debug" />
     <content url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/local/debug">
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/local/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/local/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/local/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/local/debug" isTestSource="true" generated="true" />
@@ -305,8 +306,10 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/kapt/localDebugAndroidTest" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/kapt/localDebugAndroidTest" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/kapt/localDebugAndroidTest" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/kapt/localDebugAndroidTest" isTestSource="true" generated="true" />
     </content>
     <content url="file://$MODULE_DIR$/../../../app/build/generated/source/kaptKotlin/localDebugAndroidTest">
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/kaptKotlin/localDebugAndroidTest" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/kaptKotlin/localDebugAndroidTest" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/kaptKotlin/localDebugAndroidTest" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/kaptKotlin/localDebugAndroidTest" isTestSource="true" generated="true" />
@@ -345,7 +348,7 @@
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.test.espresso:espresso-core:3.4.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:runner:1.4.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.test.services:storage:1.4.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test.espresso:espresso-idling-resource:3.3.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test.espresso:espresso-idling-resource:3.4.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.databinding:databinding-runtime:7.2.2@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.databinding:viewbinding:8.0.2@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-runtime:2.6.1@aar" level="project" />
@@ -477,7 +480,6 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.stripe:stripe-core:20.25.5@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.stripe:payments-model:20.25.5@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.stripe:paymentsheet:20.25.5@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.paypal.checkout:android-sdk:1.1.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.libraries.places:places:3.2.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.android.volley:volley:1.2.1@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.12" level="project" />

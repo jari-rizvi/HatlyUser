@@ -24,12 +24,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.paypal.android.corepayments.CoreConfig
-import com.paypal.android.corepayments.Environment
-import com.paypal.android.corepayments.PayPalSDKError
-import com.paypal.android.paypalnativepayments.PayPalNativeCheckoutClient
-import com.paypal.android.paypalnativepayments.PayPalNativeCheckoutListener
-import com.paypal.android.paypalnativepayments.PayPalNativeCheckoutResult
 import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
@@ -130,11 +124,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 //
 //        payPalNativeClient.listener = object : PayPalNativeCheckoutListener {
 //            override fun onPayPalCheckoutCanceled() {
-//                TODO("Not yet implemented")
+//
 //            }
 //
 //            override fun onPayPalCheckoutFailure(error: PayPalSDKError) {
-//                TODO("Not yet implemented")
+//
 //            }
 //
 //            override fun onPayPalCheckoutStart() {
@@ -142,7 +136,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 //            }
 //
 //            override fun onPayPalCheckoutSuccess(result: PayPalNativeCheckoutResult) {
-//                TODO("Not yet implemented")
+//
 //            }
 //
 ////            override fun onPayPalSuccess(result: PayPalNativeCheckoutResult) {

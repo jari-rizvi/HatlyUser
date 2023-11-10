@@ -367,10 +367,13 @@ class ParcelLocationFragment :
 //                )
 //            }
 
-            params.add(
-                "senderLocation",
-                Gson().toJsonTree(SenderLocation(senderLocation!!._id, senderPhoneNum))
-            )
+            if (senderLocation!= null){
+                params.add(
+                    "senderLocation",
+                    Gson().toJsonTree(SenderLocation(senderLocation!!._id, senderPhoneNum))
+                )
+            }
+
 
 //            if (reciverLocation != null && reciverPhoneNum.isNotEmpty()) {
 //                params.add(
@@ -379,10 +382,14 @@ class ParcelLocationFragment :
 //                )
 //            }
 
-            params.add(
-                "receiverLocation",
-                Gson().toJsonTree(ReceiverLocation(reciverLocation!!._id, reciverPhoneNum))
-            )
+            if (reciverLocation!=null){
+                params.add(
+                    "receiverLocation",
+                    Gson().toJsonTree(ReceiverLocation(reciverLocation!!._id, reciverPhoneNum))
+                )
+            }
+
+
 
 //
 //            params.add(

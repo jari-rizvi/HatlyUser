@@ -197,8 +197,10 @@ dependencies {
 //    implementation 'com.paypal.checkout:android-sdk:1.5.1'
 //    implementation "com.paypal.android:paypal-native-payments:1.0.0"
 //    implementation "com.paypal.android:card-payments:1.1.0"
-    implementation "com.paypal.checkout:android-sdk:1.1.0"
-    implementation "com.paypal.android:paypal-native-payments:1.0.1"
+//    implementation "com.paypal.checkout:android-sdk:1.1.0"
+//    implementation "com.paypal.android:paypal-native-payments:1.0.1"
+//    implementation "com.paypal.android:paypal-native-payments:1.0.0"
+
 
 
     // Release modules

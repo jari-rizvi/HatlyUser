@@ -32,7 +32,7 @@ class HomeSearchViewModel @Inject constructor(
 
     fun homeSearch(
         search: String,
-        categorry: String,
+        category: String,
         type: String,
         limit: Int,
         page: Int,
@@ -41,7 +41,7 @@ class HomeSearchViewModel @Inject constructor(
             _homeSearchResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.homeSearch(search, categorry, type, limit, page).let {
+                    mainRepository.homeSearch(search, category, type, limit, page).let {
                         if (it.isSuccessful) {
                             _homeSearchResponse.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {

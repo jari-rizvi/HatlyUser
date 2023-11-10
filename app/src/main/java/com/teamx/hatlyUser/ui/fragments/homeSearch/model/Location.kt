@@ -1,7 +1,5 @@
 package com.teamx.hatlyUser.ui.fragments.homeSearch.model
-import androidx.annotation.Keep
 
-@Keep
 data class Location(
     val city: String,
     val coordinates: List<Double>,

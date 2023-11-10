@@ -20,11 +20,11 @@ class MainRepository @Inject constructor(
     suspend fun fcm(@Body param: JsonObject) = apiService.fcm(param)
     suspend fun homeSearch(
         @Query("search") search: String,
-        @Query("categorry") categorry: String,
+        @Query("category") category: String,
         @Query("type") type: String,
         @Query("limit") limit: Int,
         @Query("page") page: Int,
-    ) = apiService.homeSearch(search, categorry, type, limit, page)
+    ) = apiService.homeSearch(search, category, type, limit, page)
 
     suspend fun loginWithGoogle(@Body param: JsonObject) = apiService.loginWithGoogle(param)
     suspend fun me() = apiService.me()

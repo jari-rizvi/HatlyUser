@@ -87,15 +87,31 @@ class AllowLocationFragment : BaseFragment<FragmentAllowLocationBinding, LoginVi
     ) { permissions ->
         when {
             permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                findNavController().navigate(R.id.action_allowLocationFragment_to_mapFragment)
+                navigateTo()
+//                findNavController().navigate(R.id.action_allowLocationFragment_to_mapFragment)
 //                findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
             }
             permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                findNavController().navigate(R.id.action_allowLocationFragment_to_mapFragment)
+                navigateTo()
+//                findNavController().navigate(R.id.action_allowLocationFragment_to_mapFragment)
 //                findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
             }
             else -> {
                 Log.d("allowLocation", "locationPermissionRequest: not working")
+            }
+        }
+    }
+
+
+    private fun navigateTo(){
+        val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+
+        userData?.let {
+            Log.d("setUserData", "onViewCreated: ${it}")
+            if (it.location != null){
+                findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
+            }else{
+                findNavController().navigate(R.id.action_allowLocationFragment_to_mapFragment)
             }
         }
     }

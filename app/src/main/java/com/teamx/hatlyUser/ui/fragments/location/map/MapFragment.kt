@@ -121,7 +121,8 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
 
         mViewDataBinding.imgBack.setOnClickListener {
             if (alreadyFragmentAdded(R.id.allowLocationFragment)) {
-                requireActivity().finish()
+                findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
+//                requireActivity().finish()
             } else {
                 findNavController().popBackStack()
             }
@@ -130,7 +131,8 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (alreadyFragmentAdded(R.id.allowLocationFragment)) {
-                    requireActivity().finish()
+                    findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
+//                    requireActivity().finish()
                 } else {
                     findNavController().popBackStack()
                 }
@@ -214,13 +216,13 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                         it.data?.let { data ->
                             if (data.address.isNotEmpty()) {
                                 if (data.isDefault) {
-                                    val userData =
-                                        PrefHelper.getInstance(requireActivity()).getUserData()
+                                    val userData = PrefHelper.getInstance(requireActivity()).getUserData()
                                     userData!!.location = data
                                     PrefHelper.getInstance(requireActivity()).setUserData(userData)
                                     sharedViewModel.setUserData(userData)
                                 }
-                                findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
+                                findNavController().popBackStack()
+//                                findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
                             }
                         }
                     }
@@ -247,8 +249,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                         it.data?.let { data ->
                             if (data.address.isNotEmpty()) {
                                 if (data.isDefault) {
-                                    val userData =
-                                        PrefHelper.getInstance(requireActivity()).getUserData()
+                                    val userData = PrefHelper.getInstance(requireActivity()).getUserData()
                                     userData!!.location = data
                                     PrefHelper.getInstance(requireActivity()).setUserData(userData)
                                     sharedViewModel.setUserData(userData)

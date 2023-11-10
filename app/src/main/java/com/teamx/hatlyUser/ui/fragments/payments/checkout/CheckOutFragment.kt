@@ -105,9 +105,9 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 //        showPaypal()
 
         mViewDataBinding.txtLogin.setOnClickListener {
-            showPaypal()
+//            showPaypal()
 //            initializationPayPal2()
-//            mViewModel.placeOrder(createOrderJsonObject())
+            mViewModel.placeOrder(createOrderJsonObject())
         }
 
         mViewDataBinding.radioCash.setOnClickListener {
@@ -431,7 +431,6 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 //        PayPalCheckout.registerCallbacks(this, this, this, this)
 
 
-
     }
 
 //    private fun initializationPayPal2() {
@@ -473,12 +472,12 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
     private fun showPaypal() {
 
-
-
-
-//        val YOUR_CLIENT_ID = "ASH9ytXn-OhQaOV0gyHsOERpEqfVl7oJ3Mo_48XtGDeq_YnWBp4SyK8h-68pGGJw4j8kGI7D86YRdoqx"
 //
-//        val coreConfig = CoreConfig(YOUR_CLIENT_ID, environment = Environment.SANDBOX)
+//        val YOUR_CLIENT_ID =
+//            "ASH9ytXn-OhQaOV0gyHsOERpEqfVl7oJ3Mo_48XtGDeq_YnWBp4SyK8h-68pGGJw4j8kGI7D86YRdoqx"
+//
+//
+////        val coreConfig = CoreConfig(YOUR_CLIENT_ID, environment = Environment.SANDBOX)
 //
 //        val payPalNativeClient = PayPalNativeCheckoutClient(
 //            application = requireActivity().application,
@@ -515,8 +514,8 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 ////            }
 //        }
 
-
-        //        PayPalCheckout.registerCallbacks(
+//
+//        PayPalCheckout.registerCallbacks(
 //            onApprove = OnApprove { approval ->
 //                // Optional callback for when an order is approved
 //                Log.d("createOrderActions", "OrderId: approve ${approval.data.orderId}")
@@ -534,29 +533,6 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 //                Log.d("createOrderActions", "OnShippingChange")
 //            }
 //        )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //            CreateOrder { createOrderActions ->
@@ -686,7 +662,6 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 //                createOrderActions.create(order)
 //            }
 //        )
-
 
 
 //        PayPalCheckout.registerCallbacks(onApprove = OnApprove{
