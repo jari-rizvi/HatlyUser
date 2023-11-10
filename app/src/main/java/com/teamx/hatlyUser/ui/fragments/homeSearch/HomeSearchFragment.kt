@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -60,6 +61,10 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
                 popEnter = R.anim.nav_default_pop_enter_anim
                 popExit = R.anim.nav_default_pop_exit_anim
             }
+        }
+
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
         }
 
         categoryArray = ArrayList()

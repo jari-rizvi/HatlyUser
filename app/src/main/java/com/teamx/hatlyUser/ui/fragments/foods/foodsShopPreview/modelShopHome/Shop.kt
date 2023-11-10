@@ -8,7 +8,7 @@ data class Shop(
     val balance: Balance,
     val bankAccountDetails: BankAccountDetails,
     val delivery: Delivery,
-    val distance: Int,
+    val distance: Double,
     val hasAddedToWishlist: Boolean,
     val image: String,
     val isOpen: Boolean,

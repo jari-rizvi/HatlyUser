@@ -8,7 +8,7 @@ data class Doc(
     val balance: Balance,
     val bankAccountDetails: BankAccountDetails,
     val delivery: Delivery,
-    val distance: Int,
+    val distance: Double,
     val image: String,
     val isOpen: Boolean,
     var items: List<Item>,

@@ -6,6 +6,7 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -82,6 +83,10 @@ class ProductPreviewFragment :
             } catch (e: Exception) {
                 ""
             }
+        }
+
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
         }
 
         mViewDataBinding.textView25.paintFlags =

@@ -58,6 +58,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             findNavController().navigate(R.id.action_homeFragment_to_homeSearchFragment)
         }
 
+        mViewDataBinding.imgWishList.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_wishListFragment)
+        }
+
         val userData = PrefHelper.getInstance(requireActivity()).getUserData()
 
         userData?.let {

@@ -258,6 +258,9 @@
         <action
             android:id="@+id/action_homeFragment_to_homeSearchFragment"
             app:destination="@id/homeSearchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_wishListFragment"
+            app:destination="@id/wishListFragment" />
     </fragment>
 
     <fragment
