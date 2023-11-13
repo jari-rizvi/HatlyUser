@@ -3,14 +3,14 @@ import androidx.annotation.Keep
 @Keep
 data class Details(
     val description: String,
-    val height: Int,
+    val height: Double,
     val heightUnit: String,
     val item: String,
-    val length: Int,
+    val length: Double,
     val lengthUnit: String,
     val qty: Int,
-    val weight: Int,
+    val weight: Double,
     val weightUnit: String,
-    val width: Int,
+    val width: Double,
     val widthUnit: String
 )

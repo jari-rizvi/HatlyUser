@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout6"
         android:layout_width="@dimen/_220sdp"
-        android:layout_height="@dimen/_100sdp"
+        android:layout_height="@dimen/_130sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:background="@drawable/button_radius_corner">
 
@@ -54,8 +55,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_radius_green"
                 android:fontFamily="@font/open_sans_regular"
-                android:paddingHorizontal="@dimen/_7sdp"
-                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_6sdp"
+                android:paddingVertical="@dimen/_4sdp"
                 android:text="Delivered"
                 android:textAlignment="center"
                 android:textColor="@color/white"
@@ -74,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.32" />
+            app:layout_constraintGuide_percent="0.26" />
 
         <ImageView
             android:id="@+id/img1"
@@ -86,6 +87,16 @@
             app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView2225" />
+
+        <ImageView
+            android:id="@+id/img1323"
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintBottom_toBottomOf="@+id/img1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/img1" />
 
         <View
             android:id="@+id/view"
@@ -113,26 +124,29 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
             android:text="Pickup"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:textColor="#363636"
+            app:layout_constraintHorizontal_bias="0"
             android:textSize="@dimen/_8ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView22725"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.05"
-            app:layout_constraintStart_toEndOf="@+id/img1"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+            app:layout_constraintStart_toEndOf="@+id/img12"
+            app:layout_constraintTop_toBottomOf="@+id/guideline122" />
 
         <TextView
             android:id="@+id/textView22725"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="parent"
             android:fontFamily="@font/montserrat_regular"
-            android:text="Dubai Silicon Oasis, Building A5, Office 2014,\nDubai, United Arab Emirates."
+            android:maxLines="2"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:text="Dubai Silicon Oasis\nDubai, United Arab Emirates., Building A5, Office 2014,\nDubai, United Arab Emirates."
             android:textColor="#808080"
             android:textSize="@dimen/_7ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView22255"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView2225"
             app:layout_constraintTop_toBottomOf="@+id/textView2225" />
 
@@ -143,9 +157,9 @@
             android:fontFamily="@font/montserrat_regular"
             android:text="Dropoff"
             android:textColor="#363636"
+            android:layout_marginTop="@dimen/_5sdp"
             android:textSize="@dimen/_8ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView227925"
             app:layout_constraintStart_toStartOf="@+id/textView22725"
             app:layout_constraintTop_toBottomOf="@+id/textView22725" />
 
@@ -153,15 +167,57 @@
             android:id="@+id/textView227925"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:fontFamily="@font/montserrat_regular"
-            android:text="Dubai Silicon Oasis, Building A5, Office 2014,\nDubai, United Arab Emirates."
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:text="Dubai Silicon Oasis, Building A5, Office 2014,\nDubai, United Arab Emirates.\nDubai, United Arab Emirates."
             android:textColor="#808080"
             android:textSize="@dimen/_7ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView22255"
             app:layout_constraintTop_toBottomOf="@+id/textView22255" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:background="@color/black"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintEnd_toEndOf="@+id/img1323"
+            app:layout_constraintStart_toStartOf="@+id/img1"
+            app:layout_constraintTop_toBottomOf="@+id/textView227925" />
+
+        <TextView
+            android:id="@+id/textView227954525"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/montserrat_regular"
+            android:maxLines="2"
+            android:text="Estimated Cost"
+            android:textColor="#EA1B25"
+            android:textSize="@dimen/_7ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/view1"
+            app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+        <TextView
+            android:id="@+id/textView22795544525"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/montserrat_regular"
+            android:maxLines="2"
+            android:text="185.79 Aed"
+            android:textColor="#EA1B25"
+            android:textSize="@dimen/_7ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView227954525"
+            app:layout_constraintEnd_toEndOf="@+id/img1323"
+            app:layout_constraintTop_toTopOf="@+id/textView227954525" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

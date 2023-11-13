@@ -197,9 +197,11 @@ class ProductPreviewFragment :
 
                         if (data.product.veriations?.isNotEmpty() == true) {
                             mViewDataBinding.recVarRequired.visibility = View.VISIBLE
-                            veriationArraylist.addAll(data.product.veriations)
 
-                            Log.d("requiredArrayList", "onViewCreated: ${veriationArraylist.size}")
+                            veriationArraylist.clear()
+                            variationArray.clear()
+
+                            veriationArraylist.addAll(data.product.veriations)
 
                             veriationArraylist.forEachIndexed { index, shopVeriation ->
                                 veriationArraylist[index].selectedIndex = -1

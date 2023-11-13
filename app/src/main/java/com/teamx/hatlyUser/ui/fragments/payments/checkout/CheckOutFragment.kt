@@ -390,6 +390,8 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                         if (data.default?.id?.isNotEmpty() == true) {
                             mViewDataBinding.radioSelectedCard.visibility = View.VISIBLE
                             paymentMethodid = data.default.id
+                        }else{
+                            mViewDataBinding.radioSelectedCard.visibility = View.GONE
                         }
                     }
                 }
@@ -715,6 +717,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 //            stripPublicKey
             "pk_test_51LMwtTIXOwead2Sp6mZEM5tGaiZT363HLHm58hq7Wrip8KOH2Jj1U303ONw2DMd6oTGHP0uLiDw197LA0jauVeMG00HtE9n9nM"
         )
+
 
         paymentSheet.presentWithPaymentIntent(
             clientSecret, PaymentSheet.Configuration(

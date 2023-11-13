@@ -42,6 +42,12 @@ class SpecialOrderAdapter(
             ""
         }
 
+        holder.bind.textView22795544525.text = try {
+            "${arrayData.fare} Aed"
+        }catch (e : Exception){
+            ""
+        }
+
         holder.itemView.setOnClickListener {
             hatlyShopInterface.clickshopItem(position)
         }

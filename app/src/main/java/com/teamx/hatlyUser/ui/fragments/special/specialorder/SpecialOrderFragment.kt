@@ -1,6 +1,7 @@
 package com.teamx.hatlyUser.ui.fragments.special.specialorder
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
@@ -69,6 +70,7 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
                     it.data?.let { data ->
 
                         if (data.deliveredParcels.isNotEmpty()) {
+                            delieveredParcel.clear()
                             delieveredParcel.addAll(data.deliveredParcels)
                             delieveredAdapter.notifyDataSetChanged()
                         }else{
@@ -80,6 +82,8 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
                             mViewDataBinding.textView2254545544.visibility = View.VISIBLE
                             return@observe
                         }
+
+                        Log.d("activeParcels", "onViewCreated: ${data.activeParcels}")
 
                         mViewDataBinding.textView2223.text = try {
                             data.activeParcels[0].details.item

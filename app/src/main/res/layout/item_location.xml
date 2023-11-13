@@ -15,7 +15,7 @@
         android:layout_marginVertical="@dimen/_10sdp"
         android:background="@drawable/selecter_location"
         android:elevation="@dimen/_1sdp"
-        android:minHeight="@dimen/_50sdp"
+        android:minHeight="@dimen/_60sdp"
         android:padding="@dimen/_5sdp">
 
         <ImageView
@@ -113,7 +113,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:ellipsize="end"
             android:fontFamily="@font/open_sans_regular"
-            android:text="Lorem Ipsum is simply dummy text text text text of the printing"
+            android:text="Lorem Ipsum is simply dummy text"
             android:textColor="#99363636"
             android:textSize="@dimen/_9ssp"
             android:textStyle="bold"
