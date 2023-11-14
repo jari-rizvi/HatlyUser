@@ -5,7 +5,7 @@ data class GetAllMessageData(
     val hasNextPage: Boolean,
     val hasPrevPage: Boolean,
     val limit: Int,
-    val nextPage: Any,
+    val nextPage: Int,
     val page: Int,
     val prevPage: Any,
     val totalDocs: Int,

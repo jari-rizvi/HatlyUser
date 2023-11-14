@@ -86,6 +86,20 @@
             app:layout_constraintStart_toStartOf="@+id/txtTitle"
             app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="70.12 Aed"
+            android:textColor="#838588"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/txtPrize"
+            app:layout_constraintBottom_toBottomOf="@+id/txtPrize"
+            app:layout_constraintTop_toTopOf="@+id/txtPrize" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

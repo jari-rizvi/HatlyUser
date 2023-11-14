@@ -1,5 +1,4 @@
 package com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model
-
 import androidx.annotation.Keep
 
 @Keep
@@ -9,5 +8,7 @@ data class Address(
     val country: String,
     val googleMapAddress: String,
     val phoneCode: String,
-    val state: String
+    val state: String,
+    val streetAddress: String,
+    val zip: Int
 )

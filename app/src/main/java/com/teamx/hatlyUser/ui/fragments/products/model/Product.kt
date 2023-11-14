@@ -8,11 +8,12 @@ data class Product(
     val frequentlyBought: List<Any>,
     val images: List<String>,
     val quantity: Int,
-    val prize: Double,
-    val maxPrize: Double,
-    val minPrize: Double,
+    val price: Double?,
+    val salePrice: Double?,
+    val maxPrice: Double?,
+    val minPrice: Double?,
     val name: String,
     val productType: String,
     val shopId: String,
-    val veriations: List<Veriation>
+    val veriations: List<Veriation>?
 )

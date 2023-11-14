@@ -111,13 +111,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 //                                    (requireActivity() as ProfileInterFace).profileData(data)
 //                                    dataStoreProvider.saveDeviceData(randNum!!)
 //                                    dataStoreProvider.saveDeviceData("88765275963748185512")
+                                PrefHelper.getInstance(requireActivity()).setUserData(data)
+                                if (LocationPermission.requestPermission(requireContext())) {
+                                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                                } else {
+                                    findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
+                                }
                             }
-                            PrefHelper.getInstance(requireActivity()).setUserData(data)
-                            if (LocationPermission.requestPermission(requireContext())) {
-                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                            } else {
-                                findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
-                            }
+
                         }
                     }
 
@@ -125,7 +126,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                         loadingDialog.dismiss()
                         if (isAdded) {
 
-                        mViewDataBinding.root.snackbar(it.message!!)
+                            mViewDataBinding.root.snackbar(it.message!!)
                         }
                     }
                 }
@@ -156,13 +157,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
 //                                    dataStoreProvider.saveDeviceData(randNum!!)
 //                                    dataStoreProvider.saveDeviceData("88765275963748185512")
+                                PrefHelper.getInstance(requireActivity()).setUserData(data)
+                                if (LocationPermission.requestPermission(requireContext())) {
+                                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                                } else {
+                                    findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
+                                }
                             }
-                            PrefHelper.getInstance(requireActivity()).setUserData(data)
-                            if (LocationPermission.requestPermission(requireContext())) {
-                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                            } else {
-                                findNavController().navigate(R.id.action_loginFragment_to_locationFragment)
-                            }
+
 
                         }
                     }
@@ -170,8 +172,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
                         if (isAdded) {
-
-                        mViewDataBinding.root.snackbar(it.message!!)
+                            mViewDataBinding.root.snackbar(it.message!!)
                         }
                     }
                 }

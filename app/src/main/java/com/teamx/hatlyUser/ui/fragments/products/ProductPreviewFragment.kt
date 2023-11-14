@@ -55,7 +55,7 @@ class ProductPreviewFragment :
 //    lateinit var prodOptionalVarAdapter: ProductVariationOptionalAdapter
     lateinit var multiViewVariationRadioAdapter: MultiViewVariationRadioAdapter
     lateinit var recommendedItemAdapter: RecommendedItemAdapter
-    lateinit var imageSliderAdapter : ImageSliderAdapter
+    lateinit var imageSliderAdapter: ImageSliderAdapter
 
     var storeId = ""
     var storeName = ""
@@ -86,11 +86,8 @@ class ProductPreviewFragment :
         }
 
         mViewDataBinding.imgBack.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().popBackStack(R.id.foodsShopHomeFragment, false)
         }
-
-        mViewDataBinding.textView25.paintFlags =
-            mViewDataBinding.textView25.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
         variationArray = ArrayList()
         veriationArraylist = ArrayList()
@@ -121,18 +118,21 @@ class ProductPreviewFragment :
 
 
         recommendedItemAdapter = RecommendedItemAdapter(freBoughtArrayList, this)
-        val productLayoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        val productLayoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         mViewDataBinding.recFreBought.layoutManager = productLayoutManager
         mViewDataBinding.recFreBought.adapter = recommendedItemAdapter
 
 
         Log.d("storeId", "storeId: ${storeId}")
-        mViewModel.prodPreview(storeId)
+//        mViewModel.prodPreview(storeId)
 
 //        storeId = "65007af747acc3f2a42d1581" //simple
 //        storeId = "651a9a40f6fbdb97eebe34df" //veriable
 
-        mViewModel.prodPreview(storeId)
+        if (!mViewModel.prodPreviewResponse.hasActiveObservers()) {
+            mViewModel.prodPreview(storeId)
+        }
         mViewModel.prodPreviewResponse.observe(requireActivity()) {
             when (it.status) {
                 Resource.Status.LOADING -> {
@@ -164,6 +164,7 @@ class ProductPreviewFragment :
                         Log.d("frequentlyBought21", "onViewCreated: ${data.recommended}")
 
                         if (data.recommended?.isNotEmpty() == true) {
+                            freBoughtArrayList.clear()
                             freBoughtArrayList.addAll(data.recommended)
                             mViewDataBinding.textView31.visibility = View.VISIBLE
                             mViewDataBinding.recFreBought.visibility = View.VISIBLE
@@ -172,25 +173,39 @@ class ProductPreviewFragment :
 
                         if (data.product.productType == "simple") {
                             Log.d("productType", "onViewCreated: Simple")
-                            mViewDataBinding.textView24.text = try {
-                                "${data.product.prize} Aed"
+
+                            if (data.product.salePrice != 0.0) {
+                                mViewDataBinding.textView24.text = try {
+                                    "${data.product.salePrice} Aed"
+                                } catch (e: Exception) {
+                                    ""
+                                }
+                                mViewDataBinding.textView25.paintFlags =
+                                    mViewDataBinding.textView25.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                            } else {
+                                mViewDataBinding.textView24.text = ""
+                            }
+
+                            mViewDataBinding.textView25.text = try {
+                                "${data.product.price} Aed"
                             } catch (e: Exception) {
                                 ""
                             }
-                            mViewDataBinding.textView25.visibility = View.GONE
+
+//                            mViewDataBinding.textView25.visibility = View.GONE
                             return@observe
                         }
 
                         Log.d("productType", "onViewCreated: working")
 
                         mViewDataBinding.textView24.text = try {
-                            "${data.product.minPrize} Aed"
+                            "${data.product.minPrice} Aed"
                         } catch (e: Exception) {
                             ""
                         }
 
                         mViewDataBinding.textView25.text = try {
-                            "${data.product.maxPrize} Aed"
+                            "${data.product.maxPrice} Aed"
                         } catch (e: Exception) {
                             ""
                         }
@@ -252,7 +267,7 @@ class ProductPreviewFragment :
                     loadingDialog.dismiss()
                     if (isAdded) {
 
-                    mViewDataBinding.root.snackbar(it.message!!)
+                        mViewDataBinding.root.snackbar(it.message!!)
                     }
                 }
             }
@@ -277,7 +292,7 @@ class ProductPreviewFragment :
                     loadingDialog.dismiss()
                     if (isAdded) {
 
-                    mViewDataBinding.root.snackbar(it.message!!)
+                        mViewDataBinding.root.snackbar(it.message!!)
                     }
                 }
             }
@@ -400,6 +415,14 @@ class ProductPreviewFragment :
     }
 
     override fun clickFreBoughtItem(position: Int) {
+        val modelRecommend = freBoughtArrayList[position]
+
+//        val bundle = Bundle()
+//        bundle.putString("_id", modelRecommend._id)
+//        bundle.putString("name", storeName)
+//        findNavController().navigate(R.id.productPreviewFragment, bundle)
+
+        mViewModel.prodPreview(modelRecommend._id)
     }
 //    private fun actualPrize(variation: List<Veriation>, resultTitle: String): Double {
 //        variation.forEach {

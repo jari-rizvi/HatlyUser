@@ -69,7 +69,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
 
             sharedViewModel.setlocationmodel(userData?.location)
 
-            findNavController().navigate(com.teamx.hatlyUser.R.id.action_locationFragment_to_mapFragment)
+            findNavController().navigate(R.id.action_locationFragment_to_mapFragment)
         }
 
         getAddressArray = ArrayList()

@@ -92,6 +92,20 @@
             app:layout_constraintStart_toStartOf="@+id/textView28"
             app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="70.12 Aed"
+            android:textColor="#838588"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imgShop"
+            app:layout_constraintStart_toEndOf="@+id/textView26"
+            app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
         <View
             android:id="@+id/view2"
             android:layout_width="411dp"

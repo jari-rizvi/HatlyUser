@@ -28,7 +28,8 @@ class StoresAdapter(private val addressArrayList: ArrayList<Doc>, val hatlyShopI
         }
 
         holder.bind.txtAddress.text = try {
-            arrayData.address.googleMapAddress
+            arrayData.setting.location.formattedAddress
+//            arrayData.address.googleMapAddress
         }
         catch (e : java.lang.Exception){
             ""

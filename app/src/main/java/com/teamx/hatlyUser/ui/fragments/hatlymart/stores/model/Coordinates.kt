@@ -3,6 +3,6 @@ import androidx.annotation.Keep
 
 @Keep
 data class Coordinates(
-    var lat: Double,
-    var lng: Double
+    val lat: Double,
+    val lng: Double
 )

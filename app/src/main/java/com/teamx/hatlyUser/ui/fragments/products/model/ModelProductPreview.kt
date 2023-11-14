@@ -5,5 +5,5 @@ import androidx.annotation.Keep
 @Keep
 data class ModelProductPreview(
     val product: Product,
-    val recommended: List<Recommended>
+    val recommended: List<Recommended>?
 )

@@ -31,7 +31,15 @@ class ProductVariationRequiredAdapter(
 
         val arrayData = addressArrayList[position]
 
-        val prizeAmount = if (arrayData.prize.toInt() == 0) "Free" else "${arrayData.prize} Aed"
+        val salesPrizeAmount = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} Aed"
+
+        holder.bind.textView167.text = try {
+            salesPrizeAmount
+        }catch (e : Exception){
+            ""
+        }
+
+        val prizeAmount = if (arrayData.price.toInt() == 0) "Free" else "${arrayData.price} Aed"
 
         holder.bind.textView16.text = try {
             prizeAmount

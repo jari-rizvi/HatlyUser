@@ -41,7 +41,7 @@ class FoodsShopPreviewFragment :
 
     private lateinit var shopCategoryArrayList: ArrayList<Product>
     private lateinit var productArrayList: ArrayList<Document>
-    private lateinit var foodsShopProductAdapter: FoodsShopProductAdapter
+//    private lateinit var foodsShopProductAdapter: FoodsShopProductAdapter
     private lateinit var shopHomeAdapter: FoodHomeTitleAdapter
 
     private var productLayoutManager2: LinearLayoutManager? = null
@@ -236,12 +236,7 @@ class FoodsShopPreviewFragment :
 
     private fun initializeproductAdapter() {
         productArrayList = ArrayList()
-        productLayoutManager2 =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-        mViewDataBinding.recShopProducts.layoutManager = productLayoutManager2
 
-        foodsShopProductAdapter = FoodsShopProductAdapter(productArrayList, this)
-        mViewDataBinding.recShopProducts.adapter = foodsShopProductAdapter
 
 //        mViewDataBinding.recShopProducts.addOnScrollListener(object :
 //            RecyclerView.OnScrollListener() {
@@ -305,13 +300,20 @@ class FoodsShopPreviewFragment :
 
         shopCategoryArrayList.forEach { it.isSelected = false }
 
-        productArrayList.clear()
-        productArrayList.addAll(shopCategoryArrayList[position].documents)
-        foodsShopProductAdapter.notifyDataSetChanged()
-
         shopCategoryArrayList[position].isSelected = true
 
         shopHomeAdapter.notifyDataSetChanged()
+
+        productArrayList.clear()
+        productArrayList.addAll(shopCategoryArrayList[position].documents)
+
+        productLayoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        mViewDataBinding.recShopProducts.layoutManager = productLayoutManager2
+
+        val foodsShopProductAdapter = FoodsShopProductAdapter(productArrayList, this)
+        mViewDataBinding.recShopProducts.adapter = foodsShopProductAdapter
+
+
     }
 
     override fun clickMoreItem(position: Int) {

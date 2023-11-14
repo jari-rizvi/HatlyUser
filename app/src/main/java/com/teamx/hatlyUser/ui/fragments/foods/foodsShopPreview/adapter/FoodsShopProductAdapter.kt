@@ -1,5 +1,7 @@
 package com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.adapter
 
+import android.graphics.Paint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -35,21 +37,45 @@ class FoodsShopProductAdapter(
             "null"
         }
 
-        var price = 0.0
+        var textView26Price = ""
+        var textView27Price = ""
 
-        price = if (arrayData.minPrice == 0.0){
-            arrayData.salePrice
-        }else{
-            arrayData.minPrice
+
+        if (arrayData.productType == "simple") {
+
+            textView26Price = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} Aed"
+
+            textView27Price = "${arrayData.price} Aed"
+
+            Log.d("FoodsShopProductAdapter", "onBindViewHolder: working $position")
+
+            holder.bind.textView27.paintFlags = holder.bind.textView27.paintFlags
+
+            if (arrayData.salePrice != 0.0) {
+                holder.bind.textView27.paintFlags = holder.bind.textView27.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }
+        } else {
+            textView26Price = "${arrayData.minPrice} Aed"
+            textView27Price = "${arrayData.maxPrice} Aed"
         }
+
 
         holder.bind.textView26.text = try {
-            price.toString()
+            textView26Price
         } catch (e: Exception) {
-            "null"
+            ""
         }
 
-        Picasso.get().load(arrayData.images[0]).resize(500,500).into(holder.bind.imgShop)
+        holder.bind.textView27.text = try {
+            textView27Price
+        } catch (e: Exception) {
+            ""
+        }
+
+
+
+
+        Picasso.get().load(arrayData.images[0]).resize(500, 500).into(holder.bind.imgShop)
 
         holder.itemView.setOnClickListener {
             hatlyShopInterface.clickshopItem(position)

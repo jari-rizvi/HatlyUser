@@ -1,5 +1,7 @@
 package com.teamx.hatlyUser.ui.fragments.products.adapter.frequentlyBought
 
+import android.graphics.Paint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +12,7 @@ import com.teamx.hatlyUser.ui.fragments.products.model.Recommended
 
 class RecommendedItemAdapter(
     private val addressArrayList: ArrayList<Recommended>,
-    val productPreInterface : ProductPreviewInterface
+    private val productPreInterface : ProductPreviewInterface
 ) : RecyclerView.Adapter<FrequentlyBoughtViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FrequentlyBoughtViewHolder {
@@ -31,8 +33,38 @@ class RecommendedItemAdapter(
             ""
         }
 
+
+        var textView26Price = ""
+        var textView27Price = ""
+
+
+        if (arrayData.productType == "simple") {
+
+            textView26Price = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} Aed"
+
+            textView27Price = "${arrayData.price} Aed"
+
+            Log.d("FoodsShopProductAdapter", "onBindViewHolder: working $position")
+
+            holder.bind.textView27.paintFlags = holder.bind.textView27.paintFlags
+
+            if (arrayData.salePrice != 0.0) {
+                holder.bind.textView27.paintFlags = holder.bind.textView27.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }
+        } else {
+            textView26Price = "${arrayData.minPrice} Aed"
+            textView27Price = "${arrayData.maxPrice} Aed"
+        }
+
+
         holder.bind.txtPrize.text = try {
-            "${arrayData.prize} Aed"
+            textView26Price
+        } catch (e: Exception) {
+            ""
+        }
+
+        holder.bind.textView27.text = try {
+            textView27Price
         } catch (e: Exception) {
             ""
         }
