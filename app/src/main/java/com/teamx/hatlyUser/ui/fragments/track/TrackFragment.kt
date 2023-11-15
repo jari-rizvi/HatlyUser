@@ -40,6 +40,7 @@ import com.teamx.hatlyUser.ui.fragments.chat.adapter.ChatAdapter
 import com.teamx.hatlyUser.ui.fragments.track.socket.chat.MessageSocketClass
 import com.teamx.hatlyUser.ui.fragments.track.socket.chat.model.allChat.Doc
 import com.teamx.hatlyUser.ui.fragments.track.socket.chat.model.allChat.GetAllMessageData
+import com.teamx.hatlyUser.ui.fragments.track.socket.track.TrackSocketClass
 import com.teamx.hatlyUser.utils.LocationPermission
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,7 +51,8 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMapReadyCallback,
-    MessageSocketClass.ReceiveSendMessageCallback, MessageSocketClass.GetAllMessageCallBack {
+    MessageSocketClass.ReceiveSendMessageCallback, MessageSocketClass.GetAllMessageCallBack,
+    TrackSocketClass.GetTrackDataCallBack {
 
     override val layoutId: Int
         get() = R.layout.fragment_track
@@ -102,7 +104,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
             inpChat.setText("")
 
             MessageSocketClass.connect2(
-                "${NetworkCallPointsNest.DEVICE_TOKEN}",
+                "${NetworkCallPointsNest.TOKENER}",
                 orderId, this, this
             )
 
@@ -155,6 +157,11 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
             }
         })
 
+        Log.d("TrackorderId", "orderId: }${orderId}")
+
+        val Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWNhdGlvbiI6eyJpdiI6IjZiNjQ3NTMzNjkzODM3NjM2ODMyNmIzOTM1MzczODY0IiwiZW5jcnlwdGVkRGF0YSI6IjI1ODJjMTZlZDNhMmQ5OGMwY2YxZjM0Y2U2YWU2MTU3OTJhMjFmMTZmZmM1NjFjOGJmM2ZmYzc3MzYxMGFjYjEifSwidW5pcXVlSWQiOiIzYzBlOTA5OGJhZDM1YmM5ZmMwYmM3NWNhOWYzNTgiLCJpYXQiOjE3MDAwMzk1MDgsImV4cCI6MTAzNDAwMzk1MDh9.FCl1tlmKN6BGdptGDshocH--PJ-TyfuHhBWLa1ig_oM"
+
+//        TrackSocketClass.connect2("${NetworkCallPointsNest.TOKENER}",orderId,this)
 
     }
 
@@ -338,6 +345,14 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 
     override fun responseMessage2(str: String) {
         Log.d("onGetAllMessage", "responseMessage2 $str")
+    }
+
+    override fun getShopData() {
+        Log.d("onTrackFragment", "getShopData")
+    }
+
+    override fun getRiderData() {
+        Log.d("onTrackFragment", "getRiderData")
     }
 
 
