@@ -183,10 +183,10 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             if (data.success) {
-                                val userData =
-                                    PrefHelper.getInstance(requireActivity()).getUserData()
+                                val userData = PrefHelper.getInstance(requireActivity()).getUserData()
                                 userData!!.location = data.data!!
                                 PrefHelper.getInstance(requireActivity()).setUserData(userData)
+                                sharedViewModel.setlocationmodel(userData.location)
                                 mViewDataBinding.root.snackbar(data.message)
                             }
                         }

@@ -2,9 +2,12 @@ package com.teamx.hatlyUser.ui.fragments.track.socket.track
 
 import android.annotation.SuppressLint
 import android.util.Log
+import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
 import com.teamx.hatlyUser.ui.fragments.track.socket.chat.ExceptionData
 import com.teamx.hatlyUser.ui.fragments.track.socket.chat.MessageSocketClass.getAllMessage
+import com.teamx.hatlyUser.ui.fragments.track.socket.track.model.rider.TrackRiderModel
+import com.teamx.hatlyUser.ui.fragments.track.socket.track.model.shop.TrackShopModel
 import io.socket.client.Ack
 import io.socket.client.IO
 import io.socket.client.Socket
@@ -44,11 +47,29 @@ object TrackSocketClass {
             initiateTrack(orderId = orderId)
 
             userMessageSocket?.on("CURRENT_LOCATION") { args ->
-                Log.d("TrackSocketClass", "CURRENT_LOCATION: }${args[0]}")
+                try {
+                    val updateLocation = args[0].toString()
+
+                    Log.d("TrackSocketClass", "CURRENT_LOCATION ${updateLocation}")
+                    getTrackDataCallBack.getCurrentStatus(updateLocation)
+                } catch (e: java.lang.Exception) {
+                    Log.d("TrackSocketClass", "CURRENT_LOCATION: ${args[0]}")
+                }
             }
 
+//            userMessageSocket?.on("REMANING_TIME") { args ->
+//                Log.d("TrackSocketClass", "REMANING_TIME: }${args[0]}")
+//            }
+
             userMessageSocket?.on("REMANING_TIME") { args ->
-                Log.d("TrackSocketClass", "REMANING_TIME: }${args[0]}")
+                try {
+                    val remainingdata = args[0].toString()
+
+                    Log.d("TrackSocketClass", "REMANING_TIME ${remainingdata}")
+                    getTrackDataCallBack.getRemainingdata(remainingdata)
+                } catch (e: java.lang.Exception) {
+                    Log.d("TrackSocketClass", "REMANING_TIME: ${args[0]}")
+                }
             }
 
             onListenerEverything(getTrackDataCallBack)
@@ -89,36 +110,48 @@ object TrackSocketClass {
             Log.d("TrackSocketClass", "TRACKING_LEAVED: }${args[0]}")
         }
 
-        userMessageSocket?.on("TRACKING_LEAVED") { args ->
-            Log.d("TrackSocketClass", "TRACKING_LEAVED: }${args[0]}")
-        }
-
-        userMessageSocket?.on("PICKED_BY") { args ->
-            Log.d("TrackSocketClass", "PICKED_BY: }${args[0]}")
-        }
+//        userMessageSocket?.on("PICKED_BY") { args ->
+//            Log.d("TrackSocketClass", "PICKED_BY: }${args[0]}")
+//        }
 
         userMessageSocket?.on("CURRENT_STATUS") { args ->
-            Log.d("TrackSocketClass", "CURRENT_STATUS: }${args[0]}")
+            try {
+                val currentStatus = args[0].toString()
+
+                Log.d("TrackSocketClass", "CURRENT_STATUS ${currentStatus}")
+                callback2.getCurrentStatus(currentStatus)
+            } catch (e: java.lang.Exception) {
+                Log.d("TrackSocketClass", "CURRENT_STATUS: ${args[0]}")
+            }
         }
 
 
+
+//        userMessageSocket?.on("SHOP") { args ->
+//            Log.d("TrackSocketClass", "SHOP: }${args[0]}")
+//        }
+
+
+        userMessageSocket?.on("PICKED_BY") { args ->
+            try {
+                val trackRiderModel = gson.fromJson(args[0].toString(), TrackRiderModel::class.java)
+                Log.d("TrackSocketClass", "PICKED_BY ${trackRiderModel}")
+                callback2.getRiderData(trackRiderModel)
+            } catch (e: java.lang.Exception) {
+                Log.d("TrackSocketClass", "PICKED_BY: ${args[0]}")
+            }
+        }
 
         userMessageSocket?.on("SHOP") { args ->
-            Log.d("TrackSocketClass", "SHOP: }${args[0]}")
+            try {
+                val trackShopModel = gson.fromJson(args[0].toString(), TrackShopModel::class.java)
+                Log.d("TrackSocketClass", "SHOP ${trackShopModel}")
+                callback2.getShopData(trackShopModel)
+            } catch (e: java.lang.Exception) {
+                Log.d("TrackSocketClass", "RECIEVED_MESSAGE: ${args[0]}")
+            }
         }
 
-
-
-//        userMessageSocket?.on("RECEIVE_MESSAGE") { args ->
-//            Timber.tag("TrackSocketClass").d("RECEIVE_MESSAGE: }${args[0]}")
-//            try {
-//                val receiveMessage = gson.fromJson(args[0].toString(), Doc::class.java)
-//                Log.d("TrackSocketClass", "RECIEVED_MESSAGE1212: ${args[0].toString()} message12312312321 ${receiveMessage.message}")
-//                callback2.onGetReceiveMessage(receiveMessage)
-//            } catch (e: java.lang.Exception) {
-//                Log.d("TrackSocketClass", "RECIEVED_MESSAGE: ${args[0]}")
-//            }
-//        }
 //        userMessageSocket?.on("CHAT_HISTORY") { args ->
 //            Log.d("TrackSocketClass", "CHAT_HISTORY: }${args.get(0)}")
 //
@@ -216,8 +249,11 @@ object TrackSocketClass {
     }
 
     interface GetTrackDataCallBack {
-        fun getShopData()
-        fun getRiderData()
+        fun getShopData(trackShopModel: TrackShopModel)
+        fun getRiderData(trackRiderModel: TrackRiderModel)
+        fun getRemainingdata(remainingdata: String)
+        fun getCurrentStatus(currentStatus: String)
+        fun getUpdatedLatLng(latLng: String)
     }
 
 //    interface ReceiveSendMessageCallback {

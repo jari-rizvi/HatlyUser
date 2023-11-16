@@ -220,6 +220,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                                     userData!!.location = data
                                     PrefHelper.getInstance(requireActivity()).setUserData(userData)
                                     sharedViewModel.setUserData(userData)
+                                    sharedViewModel.setlocationmodel(userData.location)
                                 }
                                 findNavController().popBackStack()
 //                                findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
@@ -253,6 +254,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                                     userData!!.location = data
                                     PrefHelper.getInstance(requireActivity()).setUserData(userData)
                                     sharedViewModel.setUserData(userData)
+                                    sharedViewModel.setlocationmodel(userData.location)
                                 }
                                 findNavController().popBackStack()
                             }

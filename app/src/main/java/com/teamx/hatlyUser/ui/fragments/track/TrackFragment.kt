@@ -31,22 +31,30 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.maps.DirectionsApi
 import com.google.maps.GeoApiContext
 import com.google.maps.model.TravelMode
+import com.squareup.picasso.Picasso
+import com.stripe.android.core.networking.StripeRequest
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.constants.NetworkCallPointsNest
+import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentTrackBinding
 import com.teamx.hatlyUser.ui.fragments.chat.adapter.ChatAdapter
 import com.teamx.hatlyUser.ui.fragments.track.socket.chat.MessageSocketClass
 import com.teamx.hatlyUser.ui.fragments.track.socket.chat.model.allChat.Doc
 import com.teamx.hatlyUser.ui.fragments.track.socket.chat.model.allChat.GetAllMessageData
 import com.teamx.hatlyUser.ui.fragments.track.socket.track.TrackSocketClass
+import com.teamx.hatlyUser.ui.fragments.track.socket.track.model.rider.TrackRiderModel
+import com.teamx.hatlyUser.ui.fragments.track.socket.track.model.shop.TrackShopModel
 import com.teamx.hatlyUser.utils.LocationPermission
+import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 
 
 @AndroidEntryPoint
@@ -68,6 +76,8 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
     var mapFragment: SupportMapFragment? = null
     private lateinit var googleMap: GoogleMap
 
+    lateinit var origin: LatLng
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -78,6 +88,15 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
                 popEnter = R.anim.nav_default_pop_enter_anim
                 popExit = R.anim.nav_default_pop_exit_anim
             }
+        }
+
+        val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+
+        sharedViewModel.setlocationmodel(userData?.location)
+
+        sharedViewModel.locationmodel.observe(requireActivity()) { locationModel ->
+            Log.d("onTrackFragment", "onViewCreated: ${locationModel.lat} , ${locationModel.lng}")
+            origin = LatLng(locationModel.lat, locationModel.lng)
         }
 
         mapFragment =
@@ -159,9 +178,10 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 
         Log.d("TrackorderId", "orderId: }${orderId}")
 
-        val Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWNhdGlvbiI6eyJpdiI6IjZiNjQ3NTMzNjkzODM3NjM2ODMyNmIzOTM1MzczODY0IiwiZW5jcnlwdGVkRGF0YSI6IjI1ODJjMTZlZDNhMmQ5OGMwY2YxZjM0Y2U2YWU2MTU3OTJhMjFmMTZmZmM1NjFjOGJmM2ZmYzc3MzYxMGFjYjEifSwidW5pcXVlSWQiOiIzYzBlOTA5OGJhZDM1YmM5ZmMwYmM3NWNhOWYzNTgiLCJpYXQiOjE3MDAwMzk1MDgsImV4cCI6MTAzNDAwMzk1MDh9.FCl1tlmKN6BGdptGDshocH--PJ-TyfuHhBWLa1ig_oM"
+        val Token =
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWNhdGlvbiI6eyJpdiI6IjZiNjQ3NTMzNjkzODM3NjM2ODMyNmIzOTM1MzczODY0IiwiZW5jcnlwdGVkRGF0YSI6IjI1ODJjMTZlZDNhMmQ5OGMwY2YxZjM0Y2U2YWU2MTU3OTJhMjFmMTZmZmM1NjFjOGJmM2ZmYzc3MzYxMGFjYjEifSwidW5pcXVlSWQiOiIzYzBlOTA5OGJhZDM1YmM5ZmMwYmM3NWNhOWYzNTgiLCJpYXQiOjE3MDAwMzk1MDgsImV4cCI6MTAzNDAwMzk1MDh9.FCl1tlmKN6BGdptGDshocH--PJ-TyfuHhBWLa1ig_oM"
 
-//        TrackSocketClass.connect2("${NetworkCallPointsNest.TOKENER}",orderId,this)
+        TrackSocketClass.connect2("${NetworkCallPointsNest.TOKENER}", orderId, this)
 
     }
 
@@ -183,7 +203,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 //            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12f))
 
 //            googleMap.clear()
-            createPollyLine()
+//            createPollyLine()
 
         } else {
             if (isAdded) {
@@ -194,10 +214,10 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun createPollyLine() {
-
-        val destination = LatLng(24.897369355794208, 67.07753405615058)
-        val origin = LatLng(24.90125984648241, 67.1152140082674)
+    private fun createPollyLine(origin: LatLng, destination: LatLng) {
+//
+//        val destination = LatLng(24.897369355794208, 67.07753405615058)
+//        val origin = LatLng(24.90125984648241, 67.1152140082674)
 
         // Move the camera to the origin
 //        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 12f))
@@ -225,6 +245,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
             .color(requireActivity().getColor(R.color.colorRed))
             .width(10f) // Line width
 
+        googleMap.clear()
         googleMap.addPolyline(polylineOptions)
         animateCameraAlongPolyline(polyline)
 
@@ -252,6 +273,9 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 
             val padding = 100 // Padding in pixels
 
+            googleMap.addMarker(MarkerOptions().position(startPosition).title("Start Marker"))
+            googleMap.addMarker(MarkerOptions().position(endPosition).title("End Marker"))
+
             // Animate the camera to fit the bounds and center the polyline
             val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding)
             googleMap.moveCamera(cameraUpdate)
@@ -261,8 +285,6 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 //            CameraUpdateFactory.newLatLngZoom(centerPosition, 10f)
 //        )
         }
-
-
 
 
     }
@@ -347,12 +369,79 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
         Log.d("onGetAllMessage", "responseMessage2 $str")
     }
 
-    override fun getShopData() {
-        Log.d("onTrackFragment", "getShopData")
+    override fun getShopData(trackShopModel: TrackShopModel) {
+        Log.d("onTrackFragment", "getShopData ${trackShopModel}")
+
+        CoroutineScope(Dispatchers.Main).launch {
+            createPollyLine(origin, LatLng(trackShopModel.setting.location.lat,trackShopModel.setting.location.lng))
+        }
     }
 
-    override fun getRiderData() {
-        Log.d("onTrackFragment", "getRiderData")
+    override fun getRiderData(trackRiderModel: TrackRiderModel) {
+
+        CoroutineScope(Dispatchers.Main).launch {
+            mViewDataBinding.textView2224.text = trackRiderModel.name
+            Picasso.get().load(trackRiderModel.profileImage).resize(500, 500)
+                .into(mViewDataBinding.hatlyIcon)
+        }
+    }
+
+    override fun getRemainingdata(remainingdata: String) {
+        val jsonObject = JSONObject(remainingdata)
+        val deliveryTime = jsonObject.getString("deliveryTime")
+
+        Log.d("onTrackFragment", "deliveryTime ${deliveryTime}")
+
+        CoroutineScope(Dispatchers.Main).launch {
+            mViewDataBinding.textView2223.text = "$deliveryTime minutes"
+        }
+    }
+
+    override fun getCurrentStatus(currentStatus: String) {
+        val jsonObject = JSONObject(currentStatus)
+        val currentStatus = jsonObject.getString("status")
+
+        CoroutineScope(Dispatchers.Main).launch {
+            when (currentStatus) {
+                "ready" -> {
+                    Log.d("onTrackFragment", "currentStatus ready")
+                }
+
+                "placed" -> {
+                    Log.d("onTrackFragment", "currentStatus placed")
+                }
+
+                "picked" -> {
+                    Log.d("onTrackFragment", "currentStatus picked")
+                }
+
+                "delivered" -> {
+                    Log.d("onTrackFragment", "currentStatus delivered")
+                }
+
+                "cancelled" -> {
+                    Log.d("onTrackFragment", "currentStatus cancelled")
+                }
+
+                "confirmed" -> {
+                    Log.d("onTrackFragment", "currentStatus confirmed")
+                }
+            }
+        }
+    }
+
+
+    override fun getUpdatedLatLng(latLng: String) {
+        val jsonObject = JSONObject(latLng)
+        val lat = jsonObject.getString("lat").toDouble()
+        val lng = jsonObject.getString("lng").toDouble()
+
+        Log.d("onTrackFragment", "latLng ${latLng}")
+        CoroutineScope(Dispatchers.Main).launch {
+            val destination = LatLng(lat, lng)
+//            origin = LatLng(24.938129106790235, 66.9942872929244)
+            createPollyLine(origin, destination)
+        }
     }
 
 
