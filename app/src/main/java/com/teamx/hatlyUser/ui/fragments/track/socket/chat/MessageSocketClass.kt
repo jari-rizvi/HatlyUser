@@ -28,9 +28,9 @@ object MessageSocketClass {
         val u: Boolean? = userMessageSocket?.connected()
 
         if (u == null) {
-            userMessageSocket = IO.socket("http://192.168.100.33:8000/chat",options)
+            userMessageSocket = IO.socket("http://31.220.17.28:8000/chat",options)
         } else if (!u) {
-            userMessageSocket = IO.socket("http://192.168.100.33:8000/chat", options)
+            userMessageSocket = IO.socket("http://31.220.17.28:8000/chat", options)
 
 
         }
