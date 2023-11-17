@@ -197,6 +197,7 @@
                 app:layout_constraintStart_toEndOf="@+id/imgPlaced"
                 app:layout_constraintTop_toTopOf="@+id/imgPlaced" />
 
+
             <androidx.appcompat.widget.AppCompatCheckedTextView
                 android:id="@+id/txtPrepared"
                 android:layout_width="wrap_content"
