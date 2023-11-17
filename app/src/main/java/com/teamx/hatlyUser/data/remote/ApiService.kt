@@ -184,6 +184,12 @@ interface ApiService {
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<AddToCart>
 
+    @GET(NetworkCallPoints.EMPTY_CART)
+    suspend fun emptyCart(
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<ModelForgotPass>
+
     @GET(NetworkCallPoints.GET_ALL_CARTS)
     suspend fun getCart(
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",

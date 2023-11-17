@@ -66,6 +66,24 @@
             app:layout_constraintTop_toTopOf="@+id/guideline11" />
 
         <TextView
+            android:id="@+id/txtTrack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_radius_green"
+            android:backgroundTint="#1ED860"
+            android:fontFamily="@font/open_sans_regular"
+            android:paddingHorizontal="@dimen/_7sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            android:text="Track"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtTitle11"
+            app:layout_constraintEnd_toEndOf="@+id/txtTitle1141"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle1141"
+            app:layout_constraintTop_toTopOf="@+id/txtTitle11" />
+
+        <TextView
             android:id="@+id/txtTitle111"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

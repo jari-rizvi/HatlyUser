@@ -2,10 +2,8 @@ package com.teamx.hatlyUser.ui.fragments.track.socket.track
 
 import android.annotation.SuppressLint
 import android.util.Log
-import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
 import com.teamx.hatlyUser.ui.fragments.track.socket.chat.ExceptionData
-import com.teamx.hatlyUser.ui.fragments.track.socket.chat.MessageSocketClass.getAllMessage
 import com.teamx.hatlyUser.ui.fragments.track.socket.track.model.rider.TrackRiderModel
 import com.teamx.hatlyUser.ui.fragments.track.socket.track.model.shop.TrackShopModel
 import io.socket.client.Ack
@@ -15,7 +13,7 @@ import org.json.JSONObject
 import timber.log.Timber
 
 object TrackSocketClass {
-    private var userMessageSocket: Socket? = null
+    private var trackSocket: Socket? = null
 
     fun connect2(
         token: String, orderId: String, getTrackDataCallBack: GetTrackDataCallBack
@@ -29,29 +27,29 @@ object TrackSocketClass {
 
         options.extraHeaders = headers
 
-        val u: Boolean? = userMessageSocket?.connected()
+        val u: Boolean? = trackSocket?.connected()
 
         if (u == null) {
-            userMessageSocket = IO.socket("http://192.168.100.33:8000/track", options)
+            trackSocket = IO.socket("http://192.168.100.33:8000/track", options)
         } else if (!u) {
-            userMessageSocket = IO.socket("http://192.168.100.33:8000/track", options)
+            trackSocket = IO.socket("http://192.168.100.33:8000/track", options)
         }
 
-        userMessageSocket?.connect()
+        trackSocket?.connect()
 
-        Timber.tag("TrackSocketClass").d("EVENT_CONNECT: ${userMessageSocket?.connected()}")
+        Timber.tag("TrackSocketClass").d("EVENT_CONNECT: ${trackSocket?.connected()}")
 
-        userMessageSocket?.on(Socket.EVENT_CONNECT) {
+        trackSocket?.on(Socket.EVENT_CONNECT) {
 
 
             initiateTrack(orderId = orderId)
 
-            userMessageSocket?.on("CURRENT_LOCATION") { args ->
+            trackSocket?.on("CURRENT_LOCATION") { args ->
                 try {
                     val updateLocation = args[0].toString()
 
                     Log.d("TrackSocketClass", "CURRENT_LOCATION ${updateLocation}")
-                    getTrackDataCallBack.getCurrentStatus(updateLocation)
+                    getTrackDataCallBack.getUpdatedLatLng(updateLocation)
                 } catch (e: java.lang.Exception) {
                     Log.d("TrackSocketClass", "CURRENT_LOCATION: ${args[0]}")
                 }
@@ -61,7 +59,7 @@ object TrackSocketClass {
 //                Log.d("TrackSocketClass", "REMANING_TIME: }${args[0]}")
 //            }
 
-            userMessageSocket?.on("REMANING_TIME") { args ->
+            trackSocket?.on("REMANING_TIME") { args ->
                 try {
                     val remainingdata = args[0].toString()
 
@@ -80,9 +78,9 @@ object TrackSocketClass {
 
 
         }
-        userMessageSocket?.on(Socket.EVENT_CONNECT_ERROR) {
+        trackSocket?.on(Socket.EVENT_CONNECT_ERROR) {
             Timber.tag("TrackSocketClass")
-                .d("EVENT_CONNECT_ERROR22:${userMessageSocket?.connected()} ${it[0]}")
+                .d("EVENT_CONNECT_ERROR22:${trackSocket?.connected()} ${it[0]}")
 
         }
 
@@ -93,7 +91,7 @@ object TrackSocketClass {
 
     @SuppressLint("LogNotTimber")
     private fun onListenerEverything(callback2: GetTrackDataCallBack) {
-        userMessageSocket?.on("exception") { args ->
+        trackSocket?.on("exception") { args ->
             try {
                 val exception = gson.fromJson(args[0].toString(), ExceptionData::class.java)
                 Log.d("TrackSocketClass", "ExceptionData: ${args[0]}")
@@ -102,11 +100,11 @@ object TrackSocketClass {
             }
         }
 
-        userMessageSocket?.on("TRACKING_STARTED") { args ->
+        trackSocket?.on("TRACKING_STARTED") { args ->
             Log.d("TrackSocketClass", "TRACKING_STARTED: }${args[0]}")
         }
 
-        userMessageSocket?.on("TRACKING_LEAVED") { args ->
+        trackSocket?.on("TRACKING_LEAVED") { args ->
             Log.d("TrackSocketClass", "TRACKING_LEAVED: }${args[0]}")
         }
 
@@ -114,7 +112,7 @@ object TrackSocketClass {
 //            Log.d("TrackSocketClass", "PICKED_BY: }${args[0]}")
 //        }
 
-        userMessageSocket?.on("CURRENT_STATUS") { args ->
+        trackSocket?.on("CURRENT_STATUS") { args ->
             try {
                 val currentStatus = args[0].toString()
 
@@ -132,7 +130,7 @@ object TrackSocketClass {
 //        }
 
 
-        userMessageSocket?.on("PICKED_BY") { args ->
+        trackSocket?.on("PICKED_BY") { args ->
             try {
                 val trackRiderModel = gson.fromJson(args[0].toString(), TrackRiderModel::class.java)
                 Log.d("TrackSocketClass", "PICKED_BY ${trackRiderModel}")
@@ -142,7 +140,7 @@ object TrackSocketClass {
             }
         }
 
-        userMessageSocket?.on("SHOP") { args ->
+        trackSocket?.on("SHOP") { args ->
             try {
                 val trackShopModel = gson.fromJson(args[0].toString(), TrackShopModel::class.java)
                 Log.d("TrackSocketClass", "SHOP ${trackShopModel}")
@@ -230,7 +228,7 @@ object TrackSocketClass {
         val arr = listOf(orderId)
         val data = JSONObject().put("orderId", orderId)
         Log.d("TrackSocketClass", "initiateChat:$data ")
-        userMessageSocket?.emit("TRACK_ORDER", data, object : Ack {
+        trackSocket?.emit("TRACK_ORDER", data, object : Ack {
             override fun call(vararg args: Any?) {
                 Log.d("TrackSocketClass", "initiatedTRACK_ORDER: ")
             }
@@ -241,7 +239,7 @@ object TrackSocketClass {
         val arr = listOf(orderId)
         val data = JSONObject().put("orderId", orderId)
         Log.d("TrackSocketClass", "initiateChat:$data ")
-        userMessageSocket?.emit("SHOP_INFORMATION", data, object : Ack {
+        trackSocket?.emit("SHOP_INFORMATION", data, object : Ack {
             override fun call(vararg args: Any?) {
                 Log.d("TrackSocketClass", "SHOP_INFORMATION: ")
             }
@@ -277,9 +275,9 @@ object TrackSocketClass {
 
 
     fun disconnect() {
-        userMessageSocket?.disconnect()
-        userMessageSocket?.on(Socket.EVENT_DISCONNECT) {
-            Log.d("TrackSocketClass", "EVENT_DISCONNECT: ${userMessageSocket?.connected()}")
+        trackSocket?.disconnect()
+        trackSocket?.on(Socket.EVENT_DISCONNECT) {
+            Log.d("TrackSocketClass", "EVENT_DISCONNECT: ${trackSocket?.connected()}")
 
         }
     }

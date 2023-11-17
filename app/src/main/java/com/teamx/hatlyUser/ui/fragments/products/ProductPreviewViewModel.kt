@@ -1,5 +1,6 @@
 package com.teamx.hatlyUser.ui.fragments.products
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -7,6 +8,7 @@ import com.google.gson.JsonObject
 import com.teamx.hatlyUser.baseclasses.BaseViewModel
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
+import com.teamx.hatlyUser.ui.fragments.auth.forgotpassword.model.ModelForgotPass
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.FoodShopModel
 import com.teamx.hatlyUser.ui.fragments.products.model.ModelProductPreview
 import com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.AddToCart
@@ -72,11 +74,40 @@ class ProductPreviewViewModel @Inject constructor(
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _addToCartResponse.postValue(Resource.error(jsonObj.getString("message")))
                         }
+                        Log.d("addToCartResponse", "addToCart: ${it.code()}")
                     }
                 } catch (e: Exception) {
                     _addToCartResponse.postValue(Resource.error("${e.message}", null))
                 }
             } else _addToCartResponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+    private val _emptyCartResponse = MutableLiveData<Resource<ModelForgotPass>>()
+    val emptyCartResponse: LiveData<Resource<ModelForgotPass>>
+        get() = _emptyCartResponse
+
+    fun emptyCart() {
+        viewModelScope.launch {
+            _emptyCartResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.emptyCart().let {
+                        if (it.isSuccessful) {
+                            _emptyCartResponse.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _emptyCartResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        } else {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _emptyCartResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }
+                        Log.d("addToCartResponse", "addToCart: ${it.code()}")
+                    }
+                } catch (e: Exception) {
+                    _emptyCartResponse.postValue(Resource.error("${e.message}", null))
+                }
+            } else _emptyCartResponse.postValue(Resource.error("No internet connection", null))
         }
     }
 

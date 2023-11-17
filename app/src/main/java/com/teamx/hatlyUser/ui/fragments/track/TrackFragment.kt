@@ -5,13 +5,17 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.SystemClock
 import android.util.Log
 import android.view.View
+import android.view.animation.LinearInterpolator
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.Projection
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -183,6 +188,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 
         TrackSocketClass.connect2("${NetworkCallPointsNest.TOKENER}", orderId, this)
 
+
     }
 
 
@@ -190,6 +196,10 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
     override fun onMapReady(p0: GoogleMap) {
         if (LocationPermission.requestPermission(requireActivity())) {
             googleMap = p0
+
+
+//            createPollyLine(origin, LatLng(25.1972295,55.27974699999999))
+//            createPollyLine(origin, LatLng(24.938129106790235,66.99413708922103))
 
 //            googleMap.uiSettings.isZoomControlsEnabled = false
 //            googleMap.uiSettings.isScrollGesturesEnabled = false
@@ -265,16 +275,38 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 //            (startPosition.longitude + endPosition.longitude) / 2
 //        )
 
-            // Calculate appropriate zoom level to fit the entire polyline
-            val bounds = LatLngBounds.builder()
-                .include(startPosition)
-                .include(endPosition)
-                .build()
+//            // Calculate appropriate zoom level to fit the entire polyline
+//            val bounds = LatLngBounds.builder()
+//                .include(startPosition)
+//                .include(endPosition)
+//                .build()
+//
+//            val padding = 100 // Padding in pixels
 
-            val padding = 100 // Padding in pixels
+            val builder = LatLngBounds.builder()
+            for (point in polyline) {
+                builder.include(point)
+            }
+            val bounds = builder.build()
+
+
+
+// Step 2: Adjust Camera Position
+            val padding = 100 // Adjust this value as needed
 
             googleMap.addMarker(MarkerOptions().position(startPosition).title("Start Marker"))
-            googleMap.addMarker(MarkerOptions().position(endPosition).title("End Marker"))
+            val marker = googleMap.addMarker(
+                MarkerOptions().position(endPosition)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.delivery_man))
+            )
+
+
+
+//            googleMap.addMarker(MarkerOptions().position(endPosition).title("End Marker"))
+
+            if (marker != null) {
+                animateMarker(marker, endPosition, false)
+            }
 
             // Animate the camera to fit the bounds and center the polyline
             val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding)
@@ -287,6 +319,31 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
         }
 
 
+    }
+
+    private fun animateMarker(marker: Marker, toPosition: LatLng, hideMarker: Boolean) {
+        val handler = Handler()
+        val start = SystemClock.uptimeMillis()
+        val proj: Projection = googleMap.projection
+        val startPoint = proj.toScreenLocation(marker.position)
+        val startLatLng = proj.fromScreenLocation(startPoint)
+        val duration: Long = 500
+        val interpolator: LinearInterpolator = LinearInterpolator()
+        handler.post(object : Runnable {
+            override fun run() {
+                val elapsed = SystemClock.uptimeMillis() - start
+                val t: Float = interpolator.getInterpolation(elapsed.toFloat() / duration)
+                val lng = t * toPosition.longitude + (1 - t) * startLatLng.longitude
+                val lat = t * toPosition.latitude + (1 - t) * startLatLng.latitude
+                marker.position = LatLng(lat, lng)
+                if (t < 1.0) {
+                    // Post again 16ms later.
+                    handler.postDelayed(this, 16)
+                } else {
+                    marker.isVisible = !hideMarker
+                }
+            }
+        })
     }
 
     private lateinit var chatArrayList: ArrayList<Doc>
@@ -373,7 +430,10 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
         Log.d("onTrackFragment", "getShopData ${trackShopModel}")
 
         CoroutineScope(Dispatchers.Main).launch {
-            createPollyLine(origin, LatLng(trackShopModel.setting.location.lat,trackShopModel.setting.location.lng))
+            createPollyLine(
+                origin,
+                LatLng(trackShopModel.setting.location.lat, trackShopModel.setting.location.lng)
+            )
         }
     }
 
@@ -405,22 +465,57 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
             when (currentStatus) {
                 "ready" -> {
                     Log.d("onTrackFragment", "currentStatus ready")
+                    mViewDataBinding.imgPlaced.isChecked = true
+                    mViewDataBinding.line1.isChecked = true
+                    mViewDataBinding.imgPrepared.isChecked = true
+                    mViewDataBinding.line2.isChecked = false
+                    mViewDataBinding.imgPicked.isChecked = false
+                    mViewDataBinding.line3.isChecked = false
+                    mViewDataBinding.imgDelivered.isChecked = false
                 }
 
                 "placed" -> {
+                    mViewDataBinding.imgPlaced.isChecked = true
+                    mViewDataBinding.line1.isChecked = false
+                    mViewDataBinding.imgPrepared.isChecked = false
+                    mViewDataBinding.line2.isChecked = false
+                    mViewDataBinding.imgPicked.isChecked = false
+                    mViewDataBinding.line3.isChecked = false
+                    mViewDataBinding.imgDelivered.isChecked = false
                     Log.d("onTrackFragment", "currentStatus placed")
                 }
 
                 "picked" -> {
                     Log.d("onTrackFragment", "currentStatus picked")
+                    mViewDataBinding.imgPlaced.isChecked = true
+                    mViewDataBinding.line1.isChecked = true
+                    mViewDataBinding.imgPrepared.isChecked = true
+                    mViewDataBinding.line2.isChecked = true
+                    mViewDataBinding.imgPicked.isChecked = true
+                    mViewDataBinding.line3.isChecked = false
+                    mViewDataBinding.imgDelivered.isChecked = false
                 }
 
                 "delivered" -> {
                     Log.d("onTrackFragment", "currentStatus delivered")
+                    mViewDataBinding.imgPlaced.isChecked = true
+                    mViewDataBinding.line1.isChecked = true
+                    mViewDataBinding.imgPrepared.isChecked = true
+                    mViewDataBinding.line2.isChecked = true
+                    mViewDataBinding.imgPicked.isChecked = true
+                    mViewDataBinding.line3.isChecked = true
+                    mViewDataBinding.imgDelivered.isChecked = true
                 }
 
                 "cancelled" -> {
                     Log.d("onTrackFragment", "currentStatus cancelled")
+                    mViewDataBinding.imgPlaced.isChecked = false
+                    mViewDataBinding.line1.isChecked = false
+                    mViewDataBinding.imgPrepared.isChecked = false
+                    mViewDataBinding.line2.isChecked = false
+                    mViewDataBinding.imgPicked.isChecked = false
+                    mViewDataBinding.line3.isChecked = false
+                    mViewDataBinding.imgDelivered.isChecked = false
                 }
 
                 "confirmed" -> {
@@ -436,12 +531,18 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
         val lat = jsonObject.getString("lat").toDouble()
         val lng = jsonObject.getString("lng").toDouble()
 
-        Log.d("onTrackFragment", "latLng ${latLng}")
+
         CoroutineScope(Dispatchers.Main).launch {
+            Log.d("onTrackFragment", "latLng ${latLng}")
             val destination = LatLng(lat, lng)
 //            origin = LatLng(24.938129106790235, 66.9942872929244)
             createPollyLine(origin, destination)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        TrackSocketClass.disconnect()
     }
 
 

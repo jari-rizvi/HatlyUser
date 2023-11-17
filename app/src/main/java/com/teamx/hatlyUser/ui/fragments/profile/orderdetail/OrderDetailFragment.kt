@@ -76,6 +76,8 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
     var totalItems = 0
     var scrollOutItems = 0
 
+    var order_Id = ""
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -101,6 +103,12 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
             findNavController().popBackStack()
         }
 
+        mViewDataBinding.txtTrack.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("orderId",order_Id)
+            findNavController().navigate(R.id.action_orderDetailFragment_to_trackFragment,bundle)
+        }
+
         productOrderHistoryList = ArrayList()
 
 
@@ -111,6 +119,8 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
 
         sharedViewModel.orderHistory.observe(requireActivity()) { data ->
+
+            order_Id = data._id
 
             if (data.isFromWallet) {
                 mViewDataBinding.btnLayout.visibility = View.GONE
@@ -154,6 +164,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                 "placed" -> {
                     mViewDataBinding.txtLogin.text = "Cancel Order"
                     mViewDataBinding.txtLogin.isChecked = true
+                    mViewDataBinding.txtTrack.visibility = View.VISIBLE
                 }
 
                 "confirmed" -> {
@@ -161,17 +172,20 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                     mViewDataBinding.txtLogin.isChecked = false
                     mViewDataBinding.txtLogin.isEnabled = false
                     mViewDataBinding.txtLogin1.visibility = View.GONE
+                    mViewDataBinding.txtTrack.visibility = View.VISIBLE
                 }
 
                 "delivered" -> {
                     mViewDataBinding.txtLogin.text = "Re-Order"
                     mViewDataBinding.txtLogin.isChecked = true
                     mViewDataBinding.txtLogin1.visibility = View.VISIBLE
+                    mViewDataBinding.txtTrack.visibility = View.GONE
                 }
 
                 "cancelled" -> {
                     mViewDataBinding.txtLogin.visibility = View.GONE
                     mViewDataBinding.txtLogin1.visibility = View.GONE
+                    mViewDataBinding.txtTrack.visibility = View.GONE
                 }
             }
 

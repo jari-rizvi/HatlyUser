@@ -22,6 +22,7 @@ import com.teamx.hatlyUser.ui.fragments.products.adapter.imageSlider.ImageSlider
 import com.teamx.hatlyUser.ui.fragments.products.adapter.required.multiAdapter.MultiViewVariationRadioAdapter
 import com.teamx.hatlyUser.ui.fragments.products.model.Recommended
 import com.teamx.hatlyUser.ui.fragments.products.model.Veriation
+import com.teamx.hatlyUser.utils.DialogHelperClass
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONException
@@ -33,7 +34,7 @@ import kotlin.random.Random
 @AndroidEntryPoint
 class ProductPreviewFragment :
     BaseFragment<com.teamx.hatlyUser.databinding.FragmentProductPreviewBinding, ProductPreviewViewModel>(),
-    ProductPreviewInterface {
+    ProductPreviewInterface , DialogHelperClass.Companion.MultiProduct{
 
     override val layoutId: Int
         get() = R.layout.fragment_product_preview
@@ -292,11 +293,41 @@ class ProductPreviewFragment :
                     loadingDialog.dismiss()
                     if (isAdded) {
 
-                        mViewDataBinding.root.snackbar(it.message!!)
+                        if (it.message == "Can not add products from multiple shops"){
+                            DialogHelperClass.MultiProductDialog(requireContext(), this)
+                            Log.d("addToCartResponse", "addToCart: ${it.message!!}")
+                        }
                     }
                 }
             }
         }
+
+        if (!mViewModel.emptyCartResponse.hasActiveObservers()){
+            mViewModel.emptyCartResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            mViewDataBinding.root.snackbar("Cart is empty now you can add product")
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        if (isAdded) {
+
+                            mViewDataBinding.root.snackbar("${it.message!!}")
+                            Log.d("addToCartResponse", "addToCart: ${it.message!!}")
+                        }
+                    }
+                }
+            }
+        }
+
 
         mViewDataBinding.imgIncreament.setOnClickListener {
             quantityValue(quantityActualValue + 1)
@@ -467,6 +498,10 @@ class ProductPreviewFragment :
     override fun onDestroy() {
         super.onDestroy()
         timer.cancel()
+    }
+
+    override fun prodRemove() {
+        mViewModel.emptyCart()
     }
 
 }

@@ -1,29 +1,17 @@
 package com.teamx.hatlyUser.utils
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.provider.MediaStore
-import android.util.Log
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.squareup.picasso.Picasso
-import com.teamx.hatlyUser.MainApplication.Companion.context
 import com.teamx.hatlyUser.R
-import com.teamx.hatlyUser.SharedViewModel
-import java.io.File
-import java.io.FileOutputStream
 
 
 class DialogHelperClass {
@@ -144,6 +132,39 @@ class DialogHelperClass {
                 contactUs.onBackToHome()
                 dialog.dismiss()
             }
+
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.setCancelable(false)
+            dialog.show()
+            return dialog
+        }
+
+        interface MultiProduct {
+            fun prodRemove()
+        }
+
+        fun MultiProductDialog(context: Context, multiProduct: MultiProduct): Dialog {
+            val dialog = Dialog(context)
+            dialog.setContentView(R.layout.multi_pro_dialog)
+
+            dialog.window?.setLayout(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT
+            );
+
+            val txtLogin = dialog.findViewById<TextView>(R.id.txtLogin)
+            val txtLogin123 = dialog.findViewById<TextView>(R.id.txtLogin123)
+
+            txtLogin.setOnClickListener {
+                multiProduct.prodRemove()
+                dialog.dismiss()
+            }
+
+            txtLogin123.setOnClickListener {
+                dialog.dismiss()
+            }
+
+
 
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setCancelable(false)
