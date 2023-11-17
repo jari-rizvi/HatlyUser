@@ -165,7 +165,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 //        PayPalCheckout.setConfig(config)
 
 
-
 //        checkDarkMode()
 //
 //        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { _, insets ->
@@ -193,7 +192,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 //        }
 
 
-
         sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
         dataStoreProvider = DataStoreProvider(this)
 
@@ -215,9 +213,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             navController!!.navigate(R.id.settingFragment)
         }
 
-        mViewDataBinding.drawerLayoutMain.trackOrder.setOnClickListener {
-            navController!!.navigate(R.id.trackFragment)
-        }
+//        mViewDataBinding.drawerLayoutMain.trackOrder.setOnClickListener {
+//            navController!!.navigate(R.id.trackFragment)
+//        }
 
         mViewDataBinding.drawerLayoutMain.myWallet.setOnClickListener {
             navController!!.navigate(R.id.walletFragment)
@@ -264,6 +262,70 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                 }
 
+                R.id.storesFragment -> {
+                    mViewDataBinding.bottomNav.visibility = View.VISIBLE
+                    mViewDataBinding.fab.visibility = View.VISIBLE
+
+                    mViewDataBinding.bottomNav.menu.getItem(1)?.isChecked = true
+
+                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                }
+
+                R.id.hatlyMartFragment -> {
+                    mViewDataBinding.bottomNav.visibility = View.VISIBLE
+                    mViewDataBinding.fab.visibility = View.VISIBLE
+
+                    mViewDataBinding.bottomNav.menu.getItem(1)?.isChecked = true
+
+                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                }
+
+                R.id.shopHomeFragment -> {
+                    mViewDataBinding.bottomNav.visibility = View.VISIBLE
+                    mViewDataBinding.fab.visibility = View.VISIBLE
+
+                    mViewDataBinding.bottomNav.menu.getItem(1)?.isChecked = true
+
+                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                }
+
+                R.id.productPreviewFragment -> {
+                    mViewDataBinding.bottomNav.visibility = View.VISIBLE
+                    mViewDataBinding.fab.visibility = View.VISIBLE
+
+                    mViewDataBinding.bottomNav.menu.getItem(1)?.isChecked = true
+
+                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                }
+
+                R.id.foodsHomeFragment -> {
+                    mViewDataBinding.bottomNav.visibility = View.VISIBLE
+                    mViewDataBinding.fab.visibility = View.VISIBLE
+
+                    mViewDataBinding.bottomNav.menu.getItem(1)?.isChecked = true
+
+                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                }
+
+                R.id.foodsShopHomeFragment -> {
+                    mViewDataBinding.bottomNav.visibility = View.VISIBLE
+                    mViewDataBinding.fab.visibility = View.VISIBLE
+
+                    mViewDataBinding.bottomNav.menu.getItem(1)?.isChecked = true
+
+                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                }
+
+                R.id.foodsShopHomeFragment -> {
+                    mViewDataBinding.bottomNav.visibility = View.VISIBLE
+                    mViewDataBinding.fab.visibility = View.VISIBLE
+
+                    mViewDataBinding.bottomNav.menu.getItem(1)?.isChecked = true
+
+                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                }
+
+
                 R.id.cartFragment -> {
                     mViewDataBinding.bottomNav.visibility = View.VISIBLE
                     mViewDataBinding.fab.visibility = View.VISIBLE
@@ -296,9 +358,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
         }
 
-        sharedViewModel.userData.observe(this){
+        sharedViewModel.userData.observe(this) {
             mViewDataBinding.drawerLayoutMain.textView14.text = it.name
-            Picasso.get().load(it.profileImage).resize(500,500).into(mViewDataBinding.drawerLayoutMain.imgProfile)
+            Picasso.get().load(it.profileImage).resize(500, 500)
+                .into(mViewDataBinding.drawerLayoutMain.imgProfile)
             Log.d("userData", "it._id: ${it._id}")
             Log.d("userData", "it.name: ${it.name}")
             Log.d("userData", "it.contact: ${it.contact}")

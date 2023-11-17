@@ -87,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.3078125" />
+            app:layout_constraintGuide_percent="0.40" />
 
         <TextView
             android:id="@+id/textView222"
@@ -119,7 +119,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout5245"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_100sdp"
+            android:layout_height="@dimen/_80sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/button_radius_corner"
@@ -151,7 +151,7 @@
                 android:id="@+id/imgPlaced"
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="@dimen/_15sdp"
-                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/track_status_bg"
                 android:checked="true"
@@ -164,8 +164,8 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="Order Placed"
-                app:layout_constraintVertical_bias="0.1"
-                android:textSize="@dimen/_10ssp"
+                app:layout_constraintVertical_bias="0.5"
+                android:textSize="@dimen/_8ssp"
                 android:textColor="@color/green_gray_selector"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/imgPlaced"
@@ -202,14 +202,14 @@
                 android:id="@+id/txtPrepared"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Order Placed"
+                android:checked="false"
+                android:text="Order Prepared"
                 android:textColor="@color/green_gray_selector"
-                android:textSize="@dimen/_10ssp"
+                android:textSize="@dimen/_8ssp"
                 app:layout_constraintBottom_toBottomOf="@+id/txtPlaced"
                 app:layout_constraintEnd_toEndOf="@+id/imgPrepared"
                 app:layout_constraintStart_toStartOf="@+id/imgPrepared"
-                app:layout_constraintTop_toBottomOf="@+id/imgPlaced" />
+                app:layout_constraintTop_toTopOf="@+id/txtPlaced" />
 
             <androidx.appcompat.widget.AppCompatCheckedTextView
                 android:id="@+id/line2"
@@ -237,6 +237,19 @@
                 app:layout_constraintTop_toTopOf="@+id/imgPrepared" />
 
             <androidx.appcompat.widget.AppCompatCheckedTextView
+                android:id="@+id/txtPicked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Out for Delivery"
+                android:textColor="@color/green_gray_selector"
+                android:textSize="@dimen/_8ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtPlaced"
+                app:layout_constraintEnd_toEndOf="@+id/imgPicked"
+                app:layout_constraintStart_toStartOf="@+id/imgPicked"
+                app:layout_constraintTop_toTopOf="@+id/txtPlaced" />
+
+            <androidx.appcompat.widget.AppCompatCheckedTextView
                 android:id="@+id/line3"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_3sdp"
@@ -252,7 +265,7 @@
                 android:id="@+id/imgDelivered"
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
                 android:background="@drawable/track_status_bg"
                 android:checked="false"
                 android:padding="@dimen/_5sdp"
@@ -262,25 +275,39 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imgPicked" />
 
+            <androidx.appcompat.widget.AppCompatCheckedTextView
+                android:id="@+id/txtDelivered"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Order Delivered"
+                android:textColor="@color/green_gray_selector"
+                android:textSize="@dimen/_8ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtPlaced"
+                app:layout_constraintEnd_toEndOf="@+id/imgDelivered"
+                app:layout_constraintStart_toStartOf="@+id/imgDelivered"
+                app:layout_constraintTop_toTopOf="@+id/txtPlaced" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.80" />
+<!--        <androidx.constraintlayout.widget.Guideline-->
+<!--            android:id="@+id/guideline11"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintGuide_percent="0.60" />-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout5"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/button_radius_corner"
-            app:layout_constraintBottom_toTopOf="@+id/guideline121"
             app:layout_constraintEnd_toEndOf="@+id/imgBack1"
             app:layout_constraintStart_toStartOf="@+id/imgBack"
-            app:layout_constraintTop_toBottomOf="@+id/guideline11">
+            app:layout_constraintTop_toBottomOf="@+id/layout5245">
 
             <ImageView
                 android:id="@+id/hatlyIcon"
@@ -348,24 +375,24 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline121"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.80" />
+<!--        <androidx.constraintlayout.widget.Guideline-->
+<!--            android:id="@+id/guideline121"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintGuide_percent="0.70" />-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout52"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/button_radius_corner"
-            app:layout_constraintBottom_toTopOf="@+id/guideline1212"
             app:layout_constraintEnd_toEndOf="@+id/layout5"
             app:layout_constraintStart_toStartOf="@+id/layout5"
-            app:layout_constraintTop_toBottomOf="@+id/guideline121">
+            app:layout_constraintTop_toBottomOf="@+id/layout5">
 
             <TextView
                 android:id="@+id/textView21"
@@ -406,12 +433,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline1212"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.95" />
+
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -424,7 +446,6 @@
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/guideline121254">

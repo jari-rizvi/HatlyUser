@@ -83,6 +83,8 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 
     lateinit var origin: LatLng
 
+    private var isChatOpen = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -124,18 +126,21 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
         }
 
         mViewDataBinding.hatlyIcon1.setOnClickListener {
-            showBottomSheetDialog(view)
-            inpChat.setText("")
+            if (isChatOpen) {
+                showBottomSheetDialog(view)
+                inpChat.setText("")
 
-            MessageSocketClass.connect2(
-                "${NetworkCallPointsNest.TOKENER}",
-                orderId, this, this
-            )
+                MessageSocketClass.connect2(
+                    "${NetworkCallPointsNest.TOKENER}",
+                    orderId, this, this
+                )
 
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-
-//            ${ NetworkCallPointsNest.DEVICE_TOKEN}
-
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            } else {
+                if (isAdded) {
+                    mViewDataBinding.root.snackbar("You are not connected with rider")
+                }
+            }
         }
 
 
@@ -290,7 +295,6 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
             val bounds = builder.build()
 
 
-
 // Step 2: Adjust Camera Position
             val padding = 100 // Adjust this value as needed
 
@@ -299,7 +303,6 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
                 MarkerOptions().position(endPosition)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.delivery_man))
             )
-
 
 
 //            googleMap.addMarker(MarkerOptions().position(endPosition).title("End Marker"))
@@ -440,6 +443,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
     override fun getRiderData(trackRiderModel: TrackRiderModel) {
 
         CoroutineScope(Dispatchers.Main).launch {
+            isChatOpen = true
             mViewDataBinding.textView2224.text = trackRiderModel.name
             Picasso.get().load(trackRiderModel.profileImage).resize(500, 500)
                 .into(mViewDataBinding.hatlyIcon)
@@ -519,6 +523,13 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
                 }
 
                 "confirmed" -> {
+                    mViewDataBinding.imgPlaced.isChecked = true
+                    mViewDataBinding.line1.isChecked = false
+                    mViewDataBinding.imgPrepared.isChecked = false
+                    mViewDataBinding.line2.isChecked = false
+                    mViewDataBinding.imgPicked.isChecked = false
+                    mViewDataBinding.line3.isChecked = false
+                    mViewDataBinding.imgDelivered.isChecked = false
                     Log.d("onTrackFragment", "currentStatus confirmed")
                 }
             }
@@ -542,6 +553,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 
     override fun onDestroy() {
         super.onDestroy()
+        MessageSocketClass.disconnect()
         TrackSocketClass.disconnect()
     }
 
