@@ -141,7 +141,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                     mViewDataBinding.txtTitle114455.text = try {
                         "Cash"
                     } catch (e: Exception) {
-                        ""
+                        "null"
                     }
                 }
 
@@ -155,7 +155,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                     mViewDataBinding.txtTitle114455.text = try {
                         "Credit Card"
                     } catch (e: Exception) {
-                        ""
+                        "null"
                     }
                 }
             }
@@ -192,38 +192,38 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
             mViewDataBinding.txtTitle.text = try {
                 data.shop.name
             } catch (e: Exception) {
-                ""
+                "null"
             }
 
             mViewDataBinding.txtTitle1141.text = try {
                 "#${data._id.substring(0, 8)}"
             } catch (e: Exception) {
-                ""
+                "null"
             }
 
             mViewDataBinding.txtAddress.text = try {
 //                "${data.shop.address.googleMapAddress}"
                 "${data.shippingAddress.floor} ${data.shippingAddress.building} ${data.shippingAddress.area} ${data.shippingAddress.streat}"
             } catch (e: Exception) {
-                ""
+                "null"
             }
 
             mViewDataBinding.txtTitle11123.text = try {
                 "${data.subTotal}"
             } catch (e: Exception) {
-                ""
+                "null"
             }
 
             mViewDataBinding.txtTitle111323.text = try {
                 "${data.deliveryCharges}"
             } catch (e: Exception) {
-                ""
+                "null"
             }
 
             mViewDataBinding.txtTitle1113233.text = try {
                 "${data.total}"
             } catch (e: Exception) {
-                ""
+                "null"
             }
 
             Picasso.get().load(data.shop.image).resize(500, 500).into(mViewDataBinding.imgShop)

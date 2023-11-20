@@ -27,7 +27,7 @@ class AddressListAdapter(
         holder.bind.txtTitle.text = try {
             arrayData.getFullText(null)
         } catch (e: Exception) {
-            ""
+            "null"
         }
 
         holder.itemView.setOnClickListener {

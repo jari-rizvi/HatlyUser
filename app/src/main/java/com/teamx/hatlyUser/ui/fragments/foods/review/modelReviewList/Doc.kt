@@ -10,5 +10,6 @@ data class Doc(
     val name: String,
     val ratting: String,
     val shopId: String,
-    val userId: String
+    val userId: String,
+    val profileImage: String
 )

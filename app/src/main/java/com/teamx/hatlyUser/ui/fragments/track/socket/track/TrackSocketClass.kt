@@ -32,9 +32,9 @@ object TrackSocketClass {
         val u: Boolean? = trackSocket?.connected()
 
         if (u == null) {
-            trackSocket = IO.socket("http://31.220.17.28:8000/track", options)
+            trackSocket = IO.socket("http://192.168.100.33:8000/track", options)
         } else if (!u) {
-            trackSocket = IO.socket("http://31.220.17.28:8000/track", options)
+            trackSocket = IO.socket("http://192.168.100.33:8000/track", options)
         }
 
         trackSocket?.connect()

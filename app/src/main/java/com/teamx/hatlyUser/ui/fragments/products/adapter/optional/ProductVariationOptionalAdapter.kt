@@ -35,7 +35,7 @@ class ProductVariationOptionalAdapter(
         holder.bind.radioButton.text = try {
             arrayData.name
         } catch (e: Exception) {
-            ""
+            "null"
         }
 
         val salesPrizeAmount = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} Aed"

@@ -9,9 +9,11 @@ import com.teamx.hatlyUser.MainApplication
 import com.teamx.hatlyUser.databinding.ItemHomeSearchBinding
 import com.teamx.hatlyUser.ui.fragments.foods.review.adapter.ReviewProductAdapter
 import com.teamx.hatlyUser.ui.fragments.homeSearch.model.Doc
+import com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces.ProductPreviewInterface
 
 class HomeSearchAdapter(
-    private val addressArrayList: ArrayList<Doc>
+    private val addressArrayList: ArrayList<Doc>,
+    private val productPreviewInterface: ProductPreviewInterface
 ) : RecyclerView.Adapter<HomeSearchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeSearchViewHolder {
@@ -53,10 +55,28 @@ class HomeSearchAdapter(
 
         holder.bind.materialRatingBar.rating = arrayData.ratting.toFloat()
 
-        arrayData.items?.let {
+        holder.itemView.setOnClickListener {
+            productPreviewInterface.clickFreBoughtItem(position)
+        }
+
+        arrayData.items.let {
             val layoutManager2 = LinearLayoutManager(MainApplication.context, LinearLayoutManager.HORIZONTAL, false)
             holder.bind.rechomeSearchPro.layoutManager = layoutManager2
-            val hatlyPopularAdapter = HomeSearchProductAdapter(it)
+            val hatlyPopularAdapter = HomeSearchProductAdapter(it, object :
+                ProductPreviewInterface{
+                override fun clickRadioItem(shopClick: Int, prodClick: Int) {
+                    productPreviewInterface.clickRadioItem(position,prodClick)
+                }
+
+                override fun clickCheckBoxItem(productClick: Int) {
+
+                }
+
+                override fun clickFreBoughtItem(shopClick: Int) {
+
+                }
+
+            })
             holder.bind.rechomeSearchPro.adapter = hatlyPopularAdapter
         }
 

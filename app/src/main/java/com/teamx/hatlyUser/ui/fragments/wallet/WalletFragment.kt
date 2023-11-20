@@ -92,7 +92,7 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
                             mViewDataBinding.txtTitle12.text = try {
                                 data.wallet.toString()
                             } catch (e: Exception) {
-                                ""
+                                "null"
                             }
 
                         }

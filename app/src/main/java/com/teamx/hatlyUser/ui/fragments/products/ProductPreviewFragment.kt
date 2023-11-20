@@ -82,7 +82,7 @@ class ProductPreviewFragment :
             mViewDataBinding.textView2.text = try {
                 storeName
             } catch (e: Exception) {
-                ""
+                "null"
             }
         }
 
@@ -154,12 +154,12 @@ class ProductPreviewFragment :
                         mViewDataBinding.textView22.text = try {
                             data.product.name
                         } catch (e: Exception) {
-                            ""
+                            "null"
                         }
                         mViewDataBinding.textView23.text = try {
                             data.product.description
                         } catch (e: Exception) {
-                            ""
+                            "null"
                         }
 
                         Log.d("frequentlyBought21", "onViewCreated: ${data.recommended}")
@@ -179,7 +179,7 @@ class ProductPreviewFragment :
                                 mViewDataBinding.textView24.text = try {
                                     "${data.product.salePrice} Aed"
                                 } catch (e: Exception) {
-                                    ""
+                                    "null"
                                 }
                                 mViewDataBinding.textView25.paintFlags =
                                     mViewDataBinding.textView25.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
@@ -190,7 +190,7 @@ class ProductPreviewFragment :
                             mViewDataBinding.textView25.text = try {
                                 "${data.product.price} Aed"
                             } catch (e: Exception) {
-                                ""
+                                "null"
                             }
 
 //                            mViewDataBinding.textView25.visibility = View.GONE
@@ -202,13 +202,13 @@ class ProductPreviewFragment :
                         mViewDataBinding.textView24.text = try {
                             "${data.product.minPrice} Aed"
                         } catch (e: Exception) {
-                            ""
+                            "null"
                         }
 
                         mViewDataBinding.textView25.text = try {
                             "${data.product.maxPrice} Aed"
                         } catch (e: Exception) {
-                            ""
+                            "null"
                         }
 
                         if (data.product.veriations?.isNotEmpty() == true) {

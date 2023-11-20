@@ -15,7 +15,6 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentHomeSearchBinding
-import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.home.model.FcmModel
 import com.teamx.hatlyUser.ui.fragments.homeSearch.adapter.CategoryHomeSearchInterface
 import com.teamx.hatlyUser.ui.fragments.homeSearch.adapter.HomeRecentSearchAdapter
@@ -23,13 +22,14 @@ import com.teamx.hatlyUser.ui.fragments.homeSearch.adapter.HomeSearchAdapter
 import com.teamx.hatlyUser.ui.fragments.homeSearch.adapter.HomeSearchTitleAdapter
 import com.teamx.hatlyUser.ui.fragments.homeSearch.adapter.RecentHomeSearchInterface
 import com.teamx.hatlyUser.ui.fragments.homeSearch.model.Doc
+import com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchViewModel>(),
-    HatlyShopInterface,
+    ProductPreviewInterface,
     RecentHomeSearchInterface, CategoryHomeSearchInterface {
 
     override val layoutId: Int
@@ -46,6 +46,7 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
 
     private var categoryStr = "resturant"
     private var typeStr = "item"
+    private var categoryPosition = 0
 
     private lateinit var homeSearchArrayList: ArrayList<Doc>
     lateinit var layoutManager2: LinearLayoutManager
@@ -72,10 +73,13 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
         homeSearchArrayList = ArrayList()
 
         categoryArray.clear()
-        categoryArray.add(FcmModel("Food", true))
+        categoryArray.add(FcmModel("Food", false))
         categoryArray.add(FcmModel("Grocery", false))
         categoryArray.add(FcmModel("Health & beauty", false))
         categoryArray.add(FcmModel("Home Business", false))
+
+
+        categoryArray[categoryPosition].success = true
 
         val layoutManager1 =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
@@ -122,8 +126,9 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
 
         layoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         mViewDataBinding.recHomeSearch.layoutManager = layoutManager2
-        hatlyPopularAdapter = HomeSearchAdapter(homeSearchArrayList)
+        hatlyPopularAdapter = HomeSearchAdapter(homeSearchArrayList, this)
         mViewDataBinding.recHomeSearch.adapter = hatlyPopularAdapter
+
 
 
 
@@ -148,40 +153,41 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
             performSearch()
         }
 
-
         if (!mViewModel.homeSearchResponse.hasActiveObservers()) {
-            mViewModel.homeSearchResponse.observe(requireActivity()) {
-                when (it.status) {
-                    Resource.Status.LOADING -> {
-                        loadingDialog.show()
-                    }
+            performSearch()
+        }
 
-                    Resource.Status.SUCCESS -> {
-                        loadingDialog.dismiss()
-                        it.data?.let { data ->
-                            homeSearchArrayList.clear()
 
-                            data.docs.forEach {
-                                if (mViewDataBinding.txtShops.isChecked){
-                                    it.items = emptyList()
-                                }
-                                homeSearchArrayList.add(it)
+        mViewModel.homeSearchResponse.observe(requireActivity()) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    it.data?.let { data ->
+                        homeSearchArrayList.clear()
+
+                        data.docs.forEach {
+                            if (mViewDataBinding.txtShops.isChecked) {
+                                it.items = emptyList()
                             }
-
+                            homeSearchArrayList.add(it)
+                        }
 
 
 //                            homeSearchArrayList.addAll(data.docs)
-                            hatlyPopularAdapter.notifyDataSetChanged()
-                            Log.d("homeSearchResponse", "onViewCreated: $data")
-                        }
+                        hatlyPopularAdapter.notifyDataSetChanged()
+                        Log.d("homeSearchResponse", "onViewCreated: $data")
                     }
+                }
 
-                    Resource.Status.ERROR -> {
-                        loadingDialog.dismiss()
-                        if (isAdded) {
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    if (isAdded) {
 
-                            mViewDataBinding.root.snackbar(it.message!!)
-                        }
+                        mViewDataBinding.root.snackbar(it.message!!)
                     }
                 }
             }
@@ -193,17 +199,15 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
         mViewModel.homeSearch(search, categoryStr, typeStr, 10, 1)
     }
 
-    override fun clickshopItem(position: Int) {
+//    val modelProduct = productArrayList[position]
+//    val bundle = Bundle()
+//    bundle.putString("_id", modelProduct._id)
+//    bundle.putString("name", modelProduct.name)
+//    findNavController().navigate(
+//    R.id.action_foodsShopHomeFragment_to_productPreviewFragment,
+//    bundle
+//    )
 
-    }
-
-    override fun clickCategoryItem(position: Int) {
-
-    }
-
-    override fun clickMoreItem(position: Int) {
-
-    }
 
     override fun clickRecent(position: Int) {
         val modelRecent = recentArray[position]
@@ -216,6 +220,7 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
     override fun clickcategory(position: Int) {
         categoryArray.forEach { it.success = false }
         categoryArray[position].success = true
+        categoryPosition = position
 
         when (categoryArray[position].message) {
             "Food" -> {
@@ -237,6 +242,41 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
 
         homeSearchTitleAdapter.notifyDataSetChanged()
         performSearch()
+    }
+
+    override fun clickRadioItem(shopClick: Int, prodClick: Int) {
+        val modelProduct = homeSearchArrayList[shopClick].items[prodClick]
+        val bundle = Bundle()
+        bundle.putString("_id", modelProduct._id)
+        bundle.putString("name", modelProduct.name)
+        findNavController().navigate(
+            R.id.action_homeSearchFragment_to_productPreviewFragment,
+            bundle
+        )
+    }
+
+    override fun clickCheckBoxItem(productClick: Int) {
+
+    }
+
+    override fun clickFreBoughtItem(shopClick: Int) {
+        val modelShop = homeSearchArrayList[shopClick]
+        val bundle = Bundle()
+        if (categoryStr == "resturant") {
+            bundle.putString("itemId", modelShop._id)
+            findNavController().navigate(
+                R.id.action_homeSearchFragment_to_foodsShopHomeFragment,
+                bundle
+            )
+        } else {
+            bundle.putString("_id", modelShop._id)
+            bundle.putString("name", modelShop.name)
+            bundle.putString("address", modelShop.address.googleMapAddress)
+            findNavController().navigate(
+                R.id.action_homeSearchFragment_to_hatlyMartFragment,
+                bundle
+            )
+        }
     }
 
 }

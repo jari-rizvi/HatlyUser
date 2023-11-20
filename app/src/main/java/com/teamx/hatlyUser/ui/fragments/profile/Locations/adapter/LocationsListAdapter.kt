@@ -70,13 +70,13 @@ class LocationsListAdapter(
         holder.bind.textView16.text = try {
             arrayData.label
         } catch (e: Exception) {
-            ""
+            "null"
         }
 
         holder.bind.textView18.text = try {
             arrayData.address
         } catch (e: Exception) {
-            ""
+            "null"
         }
 
         holder.bind.img1.setOnClickListener {

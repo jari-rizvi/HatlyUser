@@ -63,13 +63,13 @@ class FoodsShopProductAdapter(
         holder.bind.textView26.text = try {
             textView26Price
         } catch (e: Exception) {
-            ""
+            "null"
         }
 
         holder.bind.textView27.text = try {
             textView27Price
         } catch (e: Exception) {
-            ""
+            "null"
         }
 
 

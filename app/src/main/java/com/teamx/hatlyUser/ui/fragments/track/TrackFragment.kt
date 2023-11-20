@@ -77,6 +77,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     private var orderId = ""
+    private var userId = ""
 
     var mapFragment: SupportMapFragment? = null
     private lateinit var googleMap: GoogleMap
@@ -98,6 +99,10 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
         }
 
         val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+
+        if (userData != null) {
+            userId = userData._id
+        }
 
         sharedViewModel.setlocationmodel(userData?.location)
 
@@ -136,6 +141,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
                 )
 
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+
             } else {
                 if (isAdded) {
                     mViewDataBinding.root.snackbar("You are not connected with rider")
@@ -392,7 +398,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
             Log.d("onGetAllMessage", "onStateChanged: click $getAllChatsData")
             chatArrayList.clear()
             getAllChatsData.docs.forEach {
-                it.isUser = it.from == orderId
+                it.isUser = it.from == userId
                 chatArrayList.add(it)
 //                chatAdapter.messageArrayList.add(it)
             }
@@ -414,7 +420,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
         GlobalScope.launch(Dispatchers.Main) {
 
 
-            getAllChatsData.isUser = getAllChatsData.from == orderId
+            getAllChatsData.isUser = getAllChatsData.from == userId
             chatArrayList.add(getAllChatsData)
 //        chatAdapter.notifyItemInserted(chatArrayList.size+1)
             inpChat.setText("")

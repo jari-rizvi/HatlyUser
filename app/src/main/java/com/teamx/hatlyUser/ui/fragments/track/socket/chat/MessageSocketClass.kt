@@ -12,7 +12,7 @@ import org.json.JSONObject
 import timber.log.Timber
 
 object MessageSocketClass {
-    private var userMessageSocket: Socket? = null
+    var userMessageSocket: Socket? = null
 
     fun connect2(token: String, orderId: String, callback1: ReceiveSendMessageCallback, callback: GetAllMessageCallBack
     ) {
@@ -28,9 +28,9 @@ object MessageSocketClass {
         val u: Boolean? = userMessageSocket?.connected()
 
         if (u == null) {
-            userMessageSocket = IO.socket("http://31.220.17.28:8000/chat",options)
+            userMessageSocket = IO.socket("http://192.168.100.33:8000/chat",options)
         } else if (!u) {
-            userMessageSocket = IO.socket("http://31.220.17.28:8000/chat", options)
+            userMessageSocket = IO.socket("http://192.168.100.33:8000/chat", options)
 
 
         }

@@ -16,8 +16,8 @@ data class TrackRiderModel(
     val name: String,
     val notificationCount: Int,
     val password: String,
+    val profileImage: String,
     val role: String,
-    val profileImage: String?,
     val updatedAt: String,
     val verified: Boolean,
     val wallet: String

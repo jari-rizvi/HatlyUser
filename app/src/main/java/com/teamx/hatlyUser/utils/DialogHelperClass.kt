@@ -156,11 +156,11 @@ class DialogHelperClass {
             val txtLogin123 = dialog.findViewById<TextView>(R.id.txtLogin123)
 
             txtLogin.setOnClickListener {
-                multiProduct.prodRemove()
                 dialog.dismiss()
             }
 
             txtLogin123.setOnClickListener {
+                multiProduct.prodRemove()
                 dialog.dismiss()
             }
 

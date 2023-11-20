@@ -27,25 +27,25 @@ class CartAdapter(
         holder.bind.textView21.text = try {
             arrayData.productName
         } catch (e: Exception) {
-            ""
+            "null"
         }
 
         holder.bind.textView212.text = try {
             arrayData.specialInstruction
         } catch (e: Exception) {
-            ""
+            "null"
         }
 
         holder.bind.textView2122.text = try {
             "${arrayData.prize} Aed"
         } catch (e: Exception) {
-            ""
+            "null"
         }
 
         holder.bind.textView29.text = try {
             "${arrayData.quantity}"
         } catch (e: Exception) {
-            ""
+            "null"
         }
 
         holder.bind.imgIncreament.setOnClickListener {

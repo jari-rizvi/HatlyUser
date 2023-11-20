@@ -5,8 +5,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">#f6f6f6</color>
     <color name="colorPrimaryDark">#515c6f</color>
-    <color name="colorSecondary">#000</color>
-<!--    <color name="colorAccent">#F1F1F1</color>-->
+    <!--    <color name="colorAccent">#F1F1F1</color>-->
 
     <color name="categorySelectedColor">#261ED860</color>
 

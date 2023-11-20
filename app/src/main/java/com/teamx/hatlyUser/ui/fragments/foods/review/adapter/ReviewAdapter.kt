@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.MainApplication.Companion.context
 import com.teamx.hatlyUser.databinding.ItemReviewBinding
 import com.teamx.hatlyUser.ui.fragments.foods.review.modelReviewList.Doc
@@ -41,6 +42,8 @@ class ReviewAdapter(
         }catch (e : Exception){
             ""
         }
+
+        Picasso.get().load(arrayData.profileImage).resize(500,500).into(holder.bind.hatlyIcon)
 
         holder.bind.materialRatingBar.rating = arrayData.ratting.toFloat()
 

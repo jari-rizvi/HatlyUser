@@ -267,7 +267,17 @@
         android:id="@+id/homeSearchFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.homeSearch.HomeSearchFragment"
         android:label="HomeSearchFragment"
-        tools:layout="@layout/fragment_home_search"/>
+        tools:layout="@layout/fragment_home_search">
+        <action
+            android:id="@+id/action_homeSearchFragment_to_productPreviewFragment"
+            app:destination="@id/productPreviewFragment" />
+        <action
+            android:id="@+id/action_homeSearchFragment_to_foodsShopHomeFragment"
+            app:destination="@id/foodsShopHomeFragment" />
+        <action
+            android:id="@+id/action_homeSearchFragment_to_hatlyMartFragment"
+            app:destination="@id/hatlyMartFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/hatlyMartFragment"

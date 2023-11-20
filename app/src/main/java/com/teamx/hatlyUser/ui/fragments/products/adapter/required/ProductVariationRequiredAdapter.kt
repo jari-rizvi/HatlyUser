@@ -44,14 +44,14 @@ class ProductVariationRequiredAdapter(
         holder.bind.textView16.text = try {
             prizeAmount
         } catch (e: Exception) {
-            ""
+            "null"
         }
 
 
         holder.bind.radioButton.text = try {
             arrayData.name
         } catch (e: Exception) {
-            ""
+            "null"
         }
 
         holder.bind.radioButton.setOnClickListener {

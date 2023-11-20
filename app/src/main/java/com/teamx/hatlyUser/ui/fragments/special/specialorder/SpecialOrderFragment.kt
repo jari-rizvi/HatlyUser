@@ -94,19 +94,19 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
                         mViewDataBinding.textView222.text = try {
                             "Tracking ID: ${data.activeParcels[0].trackingNumber}"
                         } catch (e: Exception) {
-                            ""
+                            "null"
                         }
 
                         mViewDataBinding.textView22725.text = try {
                             data.activeParcels[0].pickup.address
                         } catch (e: Exception) {
-                            ""
+                            "null"
                         }
 
                         mViewDataBinding.textView227925.text = try {
                             data.activeParcels[0].dropOff.address
                         } catch (e: Exception) {
-                            ""
+                            "null"
                         }
 
 

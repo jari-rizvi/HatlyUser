@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.databinding.ItemHomeSearchProductBinding
 import com.teamx.hatlyUser.ui.fragments.homeSearch.model.Item
+import com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces.ProductPreviewInterface
 
 class HomeSearchProductAdapter(
-    private val addressArrayList: List<Item>
+    private val addressArrayList: List<Item>,
+    private val productPreviewInterface: ProductPreviewInterface
 ) : RecyclerView.Adapter<HomeSearchProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeSearchProductViewHolder {
@@ -32,6 +34,10 @@ class HomeSearchProductAdapter(
             "${arrayData.price?:arrayData.minPrice} Aed"
         }catch (e : Exception){
             ""
+        }
+
+        holder.itemView.setOnClickListener {
+            productPreviewInterface.clickRadioItem(-1,position)
         }
 
         Picasso.get().load(arrayData.images[0]).resize(500, 500).into(holder.bind.imgShop)

@@ -71,19 +71,6 @@
 
 
     // progress bar
-    <style name="Theme.App" parent="Theme.MaterialComponents">
-        ...
-        <item name="circularProgressIndicatorStyle">@style/Widget.App.CircularProgressIndicator</item>
-    </style>
-
-    <style name="Widget.App.CircularProgressIndicator" parent="Widget.MaterialComponents.CircularProgressIndicator">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.App.CircularProgressIndicator</item>
-        <item name="trackThickness">20dp</item>
-    </style>
-
-    <style name="ThemeOverlay.App.CircularProgressIndicator" parent="">
-        <item name="colorPrimary">@color/black</item>
-    </style>
 
 
     <style name="spinner_style">

@@ -37,7 +37,7 @@ class FoodHomeCategoryAdapter(
         holder.bind.txtTitle.text = try {
             foodsCategory.title
         } catch (e: Exception) {
-            ""
+            "null"
         }
 
         if (foodsCategory.itemSelected) {

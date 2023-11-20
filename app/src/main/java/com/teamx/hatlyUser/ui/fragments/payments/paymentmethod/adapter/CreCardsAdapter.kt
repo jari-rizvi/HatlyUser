@@ -31,13 +31,13 @@ class CredCardsAdapter(
         holder.bind.txtCardName.text = try {
             arrayData.card.brand
         } catch (e: Exception) {
-            ""
+            "null"
         }
 
         holder.bind.txtCardDetail.text = try {
             "**** **** **** ${arrayData.card.last4} | ${arrayData.card.exp_month}/${arrayData.card.exp_year}"
         } catch (e: Exception) {
-            ""
+            "null"
         }
 
         holder.bind.txtLogin12.setOnClickListener {
