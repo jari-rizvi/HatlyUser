@@ -3,6 +3,7 @@ package com.teamx.hatlyUser.ui.fragments.shophome
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
@@ -53,6 +54,10 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
             }
         }
 
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         val bundle = arguments
         if (bundle != null) {
             storeId = bundle.getString("_id", "")
@@ -87,10 +92,15 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
         shopHomeAdapter = ShopHomeTitleAdapter(itemCategoryTitle, this)
         mViewDataBinding.recCategories.adapter = shopHomeAdapter
 
-        if (!mViewModel.storeSubCategoryResponse.hasActiveObservers()) {
-            mViewModel.storeSubCategory(storeId, categoryId, "", 1, 10, 0)
-//            mViewModel.storeSubCategory("64fb15aec7dd05bb52f7f01c", "64d2437ceccb23edb42b4805", "", 1, 10, 0)
+        mViewDataBinding.inpSearch.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                Log.d("inpSearch", "onViewCreated: fdfdf")
+                performSearch()
+            }
+            true
         }
+
+        performSearch()
 
         mViewModel.storeSubCategoryResponse.observe(requireActivity()) {
             when (it.status) {
@@ -121,7 +131,7 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
                     loadingDialog.dismiss()
                     if (isAdded) {
 
-                    mViewDataBinding.root.snackbar(it.message!!)
+                        mViewDataBinding.root.snackbar(it.message!!)
                     }
                     Log.d("hatlyShopCatAdapter", "ERROR: ${it.message!!}")
                 }
@@ -131,12 +141,23 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
 
     }
 
+    private fun performSearch() {
+        mViewModel.storeSubCategory(
+            storeId,
+            categoryId,
+            mViewDataBinding.inpSearch.text.toString().trim(),
+            1,
+            10,
+            0
+        )
+    }
+
     override fun clickshopItem(position: Int) {
         val modelProduct = subCategoryProductsArray[position]
         val bundle = Bundle()
         bundle.putString("_id", modelProduct._id)
         bundle.putString("name", storeName)
-        findNavController().navigate(R.id.action_shopHomeFragment_to_productPreviewFragment,bundle)
+        findNavController().navigate(R.id.action_shopHomeFragment_to_productPreviewFragment, bundle)
     }
 
     override fun clickCategoryItem(position: Int) {

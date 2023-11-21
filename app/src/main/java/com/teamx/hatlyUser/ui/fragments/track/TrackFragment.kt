@@ -1,21 +1,22 @@
 package com.teamx.hatlyUser.ui.fragments.track
 
-import android.content.Context
+
+import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.Canvas
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.SystemClock
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
-import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,7 +26,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.Projection
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
@@ -33,11 +33,12 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import com.google.maps.DirectionsApi
 import com.google.maps.GeoApiContext
 import com.google.maps.model.TravelMode
 import com.squareup.picasso.Picasso
-import com.stripe.android.core.networking.StripeRequest
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
@@ -45,6 +46,8 @@ import com.teamx.hatlyUser.constants.NetworkCallPointsNest
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentTrackBinding
 import com.teamx.hatlyUser.ui.fragments.chat.adapter.ChatAdapter
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
+import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.adapter.DialogUplodeImageAdapter
 import com.teamx.hatlyUser.ui.fragments.track.socket.chat.MessageSocketClass
 import com.teamx.hatlyUser.ui.fragments.track.socket.chat.model.allChat.Doc
 import com.teamx.hatlyUser.ui.fragments.track.socket.chat.model.allChat.GetAllMessageData
@@ -59,13 +62,19 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import org.json.JSONException
 import org.json.JSONObject
+import java.io.File
+import java.io.FileOutputStream
 
 
 @AndroidEntryPoint
 class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMapReadyCallback,
     MessageSocketClass.ReceiveSendMessageCallback, MessageSocketClass.GetAllMessageCallBack,
-    TrackSocketClass.GetTrackDataCallBack {
+    TrackSocketClass.GetTrackDataCallBack, HatlyShopInterface {
 
     override val layoutId: Int
         get() = R.layout.fragment_track
@@ -85,6 +94,8 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
     lateinit var origin: LatLng
 
     private var isChatOpen = false
+
+    var phoneNumber = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -130,21 +141,76 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
             findNavController().popBackStack()
         }
 
+        mViewDataBinding.hatlyIcon12.setOnClickListener {
+
+            if (isChatOpen) {
+                if (phoneNumber.isNotEmpty()) {
+                    val dialIntent = Intent(Intent.ACTION_DIAL)
+                    dialIntent.data = Uri.parse("tel:$phoneNumber")
+                    startActivity(dialIntent)
+                }
+            } else {
+                if (isAdded) {
+                    mViewDataBinding.root.snackbar("You are not connected with rider")
+                }
+            }
+
+        }
+
         mViewDataBinding.hatlyIcon1.setOnClickListener {
+
             if (isChatOpen) {
                 showBottomSheetDialog(view)
                 inpChat.setText("")
+
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
                 MessageSocketClass.connect2(
                     "${NetworkCallPointsNest.TOKENER}",
                     orderId, this, this
                 )
 
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
             } else {
                 if (isAdded) {
                     mViewDataBinding.root.snackbar("You are not connected with rider")
+                }
+            }
+        }
+
+        if (!mViewModel.uploadReviewImgResponse.hasActiveObservers()) {
+            mViewModel.uploadReviewImgResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            if (data.isNotEmpty()) {
+
+                                data.forEach {
+                                    MessageSocketClass.sendMessageTo(it, this)
+                                }
+                                MessageSocketClass.sendMessageTo(textMessage, this)
+                                imageFiles.clear()
+                                dialogUplodeImageAdapter.notifyDataSetChanged()
+                                uploaderImgLayout.visibility = View.GONE
+                            }
+
+
+                            Log.d("uploadImagesRes", "onViewCreated: $data")
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        Log.d("uploadImagesRes", "onViewCreated: ${it}")
+                        if (isAdded) {
+                            mViewDataBinding.root.snackbar(it.message!!)
+                        }
+                    }
                 }
             }
         }
@@ -261,14 +327,18 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
             .map { LatLng(it.lat, it.lng) }
 
         // Create a PolylineOptions and add the polyline to the map
-        val polylineOptions = PolylineOptions()
-            .addAll(polyline)
-            .color(requireActivity().getColor(R.color.colorRed))
-            .width(10f) // Line width
 
-        googleMap.clear()
-        googleMap.addPolyline(polylineOptions)
-        animateCameraAlongPolyline(polyline)
+        if (isAdded) {
+            val polylineOptions = PolylineOptions()
+                .addAll(polyline)
+                .color(requireActivity().getColor(R.color.colorRed))
+                .width(10f) // Line width
+
+            googleMap.clear()
+            googleMap.addPolyline(polylineOptions)
+            animateCameraAlongPolyline(polyline)
+        }
+
 
     }
 
@@ -358,8 +428,14 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
     private lateinit var chatArrayList: ArrayList<Doc>
     private lateinit var chatAdapter: ChatAdapter
     private lateinit var recChat: RecyclerView
+    private lateinit var recDialogBox: RecyclerView
     private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var uploaderImgLayout: ConstraintLayout
     private lateinit var inpChat: EditText
+
+    private lateinit var dialogUplodeImageAdapter: DialogUplodeImageAdapter
+
+    var textMessage = ""
 
     private fun showBottomSheetDialog(view: View) {
 
@@ -367,28 +443,58 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
         val imgBackSheet = view.findViewById<ImageView>(R.id.imgBackSheet)
         val imgSend = view.findViewById<ImageView>(R.id.imgSend)
         inpChat = view.findViewById(R.id.inpChat)
+        recDialogBox = view.findViewById(R.id.recDialogBox)
+        val imgUploader = view.findViewById<ImageView>(R.id.imgUploader)
+        val imgUploadCancel = view.findViewById<ImageView>(R.id.imgUploadCancel)
+        uploaderImgLayout = view.findViewById(R.id.uploaderImgLayout)
+
         linearLayoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         recChat.layoutManager = linearLayoutManager
 
         chatArrayList = ArrayList()
+        imageFiles = ArrayList()
 
         chatAdapter = ChatAdapter(chatArrayList)
         recChat.adapter = chatAdapter
 
         imgSend.setOnClickListener {
-            val text = inpChat.text.toString()
-            if (text.isNotEmpty()) {
-                MessageSocketClass.sendMessageTo(text, this)
-            } else if (text.isNotBlank()) {
-                MessageSocketClass.sendMessageTo(text, this)
+            textMessage = inpChat.text.toString().trim()
+
+            if (imageFiles.isNotEmpty()) {
+                mViewModel.uploadReviewImg(uploadWithRetrofit(imageFiles))
+            } else {
+                MessageSocketClass.sendMessageTo(textMessage, this)
             }
+
+//            if (textMessage.isNotEmpty()) {
+//                MessageSocketClass.sendMessageTo(textMessage, this)
+//            } else if (textMessage.isNotBlank()) {
+//                MessageSocketClass.sendMessageTo(textMessage, this)
+//            }
         }
 
         imgBackSheet?.setOnClickListener {
             Log.d("sdsdsdsdsd", "onStateChanged: click")
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
+
+        imgUploader.setOnClickListener {
+            pickImagesLauncher.launch("image/*")
+        }
+
+        imgUploadCancel.setOnClickListener {
+            imageFiles.clear()
+            dialogUplodeImageAdapter.notifyDataSetChanged()
+            uploaderImgLayout.visibility = View.GONE
+        }
+
+
+        val categoryLayoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        dialogUplodeImageAdapter = DialogUplodeImageAdapter(imageFiles, this)
+        recDialogBox.layoutManager = categoryLayoutManager
+        recDialogBox.adapter = dialogUplodeImageAdapter
 
     }
 
@@ -438,12 +544,15 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
     override fun getShopData(trackShopModel: TrackShopModel) {
         Log.d("onTrackFragment", "getShopData ${trackShopModel}")
 
-        CoroutineScope(Dispatchers.Main).launch {
-            createPollyLine(
-                origin,
-                LatLng(trackShopModel.setting.location.lat, trackShopModel.setting.location.lng)
-            )
+        if (googleMap != null) {
+            CoroutineScope(Dispatchers.Main).launch {
+                createPollyLine(
+                    origin,
+                    LatLng(trackShopModel.setting.location.lat, trackShopModel.setting.location.lng)
+                )
+            }
         }
+
     }
 
     override fun getRiderData(trackRiderModel: TrackRiderModel) {
@@ -451,6 +560,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
         CoroutineScope(Dispatchers.Main).launch {
             isChatOpen = true
             mViewDataBinding.textView2224.text = trackRiderModel.name
+            phoneNumber = trackRiderModel.contact
             Picasso.get().load(trackRiderModel.profileImage).resize(500, 500)
                 .into(mViewDataBinding.hatlyIcon)
         }
@@ -548,13 +658,15 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
         val lat = jsonObject.getString("lat").toDouble()
         val lng = jsonObject.getString("lng").toDouble()
 
-
-        CoroutineScope(Dispatchers.Main).launch {
-            Log.d("onTrackFragment", "latLng ${latLng}")
-            val destination = LatLng(lat, lng)
+        if (googleMap != null) {
+            CoroutineScope(Dispatchers.Main).launch {
+                Log.d("onTrackFragment", "latLng ${latLng}")
+                val destination = LatLng(lat, lng)
 //            origin = LatLng(24.938129106790235, 66.9942872929244)
-            createPollyLine(origin, destination)
+                createPollyLine(origin, destination)
+            }
         }
+
     }
 
     override fun onDestroy() {
@@ -563,5 +675,81 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
         TrackSocketClass.disconnect()
     }
 
+
+    private lateinit var imageFiles: ArrayList<File>
+
+    private val pickImagesLauncher =
+        registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris: List<Uri>? ->
+            // Handle the result here
+
+
+            if (uris != null) {
+                imageFiles.clear()
+
+                uris.forEachIndexed { index, uri ->
+
+                    val str = "${requireContext().filesDir}/$index.jpg"
+
+                    val bitmap = MediaStore.Images.Media.getBitmap(
+                        requireActivity().contentResolver,
+                        uri
+                    )
+
+
+                    val outputStream = FileOutputStream(str)
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
+                    outputStream.close()
+
+                    if (File(str).exists()) {
+                        Log.d("uploadImageArrayList", "exist: $str")
+                    }
+
+                    imageFiles.add(File(str))
+
+                }
+
+                dialogUplodeImageAdapter.notifyDataSetChanged()
+            }
+
+            if (imageFiles.isNotEmpty()) {
+                uploaderImgLayout.visibility = View.VISIBLE
+            } else {
+                uploaderImgLayout.visibility = View.GONE
+            }
+        }
+
+
+    private fun uploadWithRetrofit(imageFiles: List<File>): List<MultipartBody.Part> {
+
+
+        val imagesList = mutableListOf<MultipartBody.Part>()
+
+        for (imageUri in imageFiles) {
+            imagesList.add(prepareFilePart("images", imageUri))
+        }
+
+
+        return imagesList
+
+//        mViewModel.uploadReviewImg(imagesList)
+
+    }
+
+    private fun prepareFilePart(partName: String, fileUri: File): MultipartBody.Part {
+        val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), fileUri)
+        return MultipartBody.Part.createFormData(partName, fileUri.name, requestFile)
+    }
+
+    override fun clickshopItem(position: Int) {
+
+    }
+
+    override fun clickCategoryItem(position: Int) {
+
+    }
+
+    override fun clickMoreItem(position: Int) {
+
+    }
 
 }

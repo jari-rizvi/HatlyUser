@@ -203,7 +203,8 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
             mViewDataBinding.txtAddress.text = try {
 //                "${data.shop.address.googleMapAddress}"
-                "${data.shippingAddress.floor} ${data.shippingAddress.building} ${data.shippingAddress.area} ${data.shippingAddress.streat}"
+                "${data.dropOff.address}"
+//                "${data.shippingAddress.floor} ${data.shippingAddress.building} ${data.shippingAddress.area} ${data.shippingAddress.streat}"
             } catch (e: Exception) {
                 "null"
             }
@@ -443,8 +444,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
         imageFiles = ArrayList()
 
-        val categoryLayoutManager =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        val categoryLayoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         dialogUplodeImageAdapter = DialogUplodeImageAdapter(imageFiles, this)
         recDialogBox.layoutManager = categoryLayoutManager
         recDialogBox.adapter = dialogUplodeImageAdapter

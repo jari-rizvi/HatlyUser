@@ -87,7 +87,7 @@ class ProductPreviewFragment :
         }
 
         mViewDataBinding.imgBack.setOnClickListener {
-            findNavController().popBackStack(R.id.foodsShopHomeFragment, false)
+            findNavController().popBackStack()
         }
 
         variationArray = ArrayList()
@@ -181,8 +181,7 @@ class ProductPreviewFragment :
                                 } catch (e: Exception) {
                                     "null"
                                 }
-                                mViewDataBinding.textView25.paintFlags =
-                                    mViewDataBinding.textView25.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                                mViewDataBinding.textView25.paintFlags = mViewDataBinding.textView25.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                             } else {
                                 mViewDataBinding.textView24.text = ""
                             }

@@ -189,6 +189,15 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                     e.printStackTrace()
                 }
                 mViewModel.orderSummary(params)
+            }else{
+                val params = JsonObject()
+                try {
+                    params.addProperty("lat", userData!!.location.lat)
+                    params.addProperty("lng", userData.location.lng)
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+                mViewModel.checkout(params)
             }
         }
 

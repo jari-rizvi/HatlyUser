@@ -182,7 +182,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
                     10,
                     0,
                     mViewDataBinding.inpSearch.text.toString().trim(),
-                    ""
+                    null
                 )
             }
             true

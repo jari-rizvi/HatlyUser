@@ -79,7 +79,11 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
                         it.data?.let { data ->
                             notificationArrayList.clear()
                             data.docs.forEach {
-                                it.createdAt = TimeFormatter.formatTimeDifference(it.createdAt)
+                                try {
+                                    it.createdAt = TimeFormatter.formatTimeDifference(it.createdAt)
+                                }catch (e : Exception){
+                                    e.printStackTrace()
+                                }
                                 notificationArrayList.add(it)
                             }
 //                            notificationArrayList.addAll(data.docs)

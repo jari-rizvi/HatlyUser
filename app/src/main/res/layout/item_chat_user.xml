@@ -16,18 +16,28 @@
             android:id="@+id/txtMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxWidth="@dimen/_200sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/button_radius_corner"
+            android:backgroundTint="#1ED860"
+            android:maxWidth="@dimen/_200sdp"
+            android:padding="@dimen/_10sdp"
             android:text="Delivery detailsDelivery detadetailsDelivery"
             android:textColor="#fff"
-            android:visibility="visible"
-            android:layout_marginVertical="@dimen/_10sdp"
-            android:backgroundTint="#1ED860"
-            android:padding="@dimen/_10sdp"
-            android:background="@drawable/button_radius_corner"
             android:textSize="@dimen/_12ssp"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgUserChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/hatly_logo_svg"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/txtMessage"
+            app:layout_constraintTop_toBottomOf="@+id/txtMessage" />
 
         <TextView
             android:id="@+id/todayTime"
@@ -37,9 +47,10 @@
             android:text="10:38 PM"
             android:textColor="#808080"
             android:visibility="visible"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/txtMessage"
-            app:layout_constraintTop_toBottomOf="@+id/txtMessage" />
+            app:layout_constraintTop_toBottomOf="@+id/imgUserChat" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

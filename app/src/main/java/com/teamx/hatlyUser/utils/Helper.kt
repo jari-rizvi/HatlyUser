@@ -15,4 +15,9 @@ object Helper {
     fun getCredential(): String {
         return credentials
     }
+
+    fun isUrl(input: String): Boolean {
+        val urlRegex = """^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$"""
+        return input.matches(urlRegex.toRegex())
+    }
 }

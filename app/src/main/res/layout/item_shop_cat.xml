@@ -10,7 +10,6 @@
         android:id="@+id/categoryMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/button_radius"
         android:padding="@dimen/_5sdp">
 

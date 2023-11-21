@@ -31,12 +31,11 @@
                 android:layout_height="@dimen/_50sdp"
                 android:clipToOutline="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/stripe_link_error"
+                android:src="@drawable/warning"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="#EA1B25" />
-
 
             <TextView
                 android:id="@+id/txtTitle"

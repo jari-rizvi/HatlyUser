@@ -13,13 +13,13 @@
         android:id="@+id/recChat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:itemCount="4"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout12"
+        app:layout_constraintBottom_toTopOf="@+id/uploaderImgLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header"
+        tools:itemCount="4"
         tools:listitem="@layout/item_chat_rider" />
 
     <ProgressBar
@@ -94,6 +94,46 @@
         app:layout_constraintGuide_percent="0.08" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/uploaderImgLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_radius_corner"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recDialogBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgUploadCancel"
+            tools:listitem="@layout/item_shop_cat" />
+
+        <ImageView
+            android:id="@+id/imgUploadCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="sendButton"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/round_close_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05"
+            app:tint="#363636" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout12"
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
@@ -103,19 +143,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <ImageView
+            android:id="@+id/imgUploader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="sendButton"
+            android:rotation="315"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/baseline_attachment_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.03"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#EA1B25" />
+
 
         <EditText
             android:id="@+id/inpChat"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_5sdp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/open_sans_regular"
-            android:hint="Write your reply...."
+            android:hint="Send a reply to your rider!"
             android:paddingHorizontal="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imgSend"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgUploader"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -124,9 +179,10 @@
             android:layout_height="wrap_content"
             android:contentDescription="sendButton"
             android:src="@drawable/send_msg"
+            android:padding="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintHorizontal_bias="0.98"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

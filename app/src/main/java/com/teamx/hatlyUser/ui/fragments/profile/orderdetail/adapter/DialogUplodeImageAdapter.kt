@@ -4,6 +4,7 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -40,6 +41,8 @@ class DialogUplodeImageAdapter(
 
 
 //        Picasso.get().load(foodsCategory).into(holder.bind.imgShop)
+
+        holder.bind.txtTitle.visibility = View.GONE
 
         Picasso.get()
             .load(foodsCategory)

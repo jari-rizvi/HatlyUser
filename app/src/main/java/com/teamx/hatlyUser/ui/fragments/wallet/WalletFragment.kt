@@ -123,7 +123,11 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
                             orderHistoryArrayList.clear()
                         }
                         data.docs?.forEach {
-                            it.createdAt = TimeFormatter.formatTimeDifference(it.createdAt)
+                            try {
+                                it.createdAt = TimeFormatter.formatTimeDifference(it.createdAt)
+                            }catch (e : Exception){
+                                e.printStackTrace()
+                            }
                             orderHistoryArrayList.add(it)
                         }
 //                        data.docs?.let { it1 -> orderHistoryArrayList.addAll(it1) }

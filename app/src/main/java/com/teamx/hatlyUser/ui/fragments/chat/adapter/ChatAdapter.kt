@@ -2,11 +2,14 @@ package com.teamx.hatlyUser.ui.fragments.chat.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.databinding.ItemChatRiderBinding
 import com.teamx.hatlyUser.databinding.ItemChatUserBinding
 import com.teamx.hatlyUser.ui.fragments.track.socket.chat.model.allChat.Doc
+import com.teamx.hatlyUser.utils.Helper
 import kotlin.collections.ArrayList
 
 
@@ -67,11 +70,27 @@ class ChatAdapter(
             true -> {
                 val holderUser = holder as MessageUserViewHolder
 
-                holderUser.bindUser.txtMessage.text = try {
-                    messagesUser.message
-                } catch (e: Exception) {
-                    ""
+                if (Helper.isUrl(messagesUser.message)){
+                    holderUser.bindUser.txtMessage.visibility = View.GONE
+                    holder.bindUser.imgUserChat.visibility = View.VISIBLE
+                    Picasso.get().load(messagesUser.message).resize(500, 500).into(holder.bindUser.imgUserChat)
+                }else{
+                    holder.bindUser.imgUserChat.visibility = View.GONE
+                    holderUser.bindUser.txtMessage.visibility = View.VISIBLE
+                    holderUser.bindUser.txtMessage.text = try {
+                        messagesUser.message
+                    } catch (e: Exception) {
+                        ""
+                    }
                 }
+
+//                holder.bindUser.imgUserChat.visibility = View.GONE
+//                holderUser.bindUser.txtMessage.text = try {
+//                    messagesUser.message
+//                } catch (e: Exception) {
+//                    ""
+//                }
+
 
             }
 

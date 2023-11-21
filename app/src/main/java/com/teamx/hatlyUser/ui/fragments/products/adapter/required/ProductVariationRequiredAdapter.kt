@@ -1,6 +1,7 @@
 package com.teamx.hatlyUser.ui.fragments.products.adapter.required
 
 import android.annotation.SuppressLint
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +38,10 @@ class ProductVariationRequiredAdapter(
             salesPrizeAmount
         }catch (e : Exception){
             ""
+        }
+
+        if (arrayData.salePrice != 0.0){
+            holder.bind.textView16.paintFlags = holder.bind.textView16.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         }
 
         val prizeAmount = if (arrayData.price.toInt() == 0) "Free" else "${arrayData.price} Aed"

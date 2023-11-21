@@ -61,6 +61,14 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
             findNavController().popBackStack()
         }
 
+        mViewDataBinding.inpSearch.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("_id", storeId)
+            bundle.putString("name", storeName)
+            bundle.putString("address", storeAddress)
+            findNavController().navigate(R.id.action_hatlyMartFragment_to_ShopHomeFragment, bundle)
+        }
+
         healthDetailCatArraylist = ArrayList()
         healthDetailPopularArraylist = ArrayList()
 

@@ -307,7 +307,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../../TeamX%20Pakistan/AppData/Local/Android/Sdk/icons/material/materialiconsround/close/round_close_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../../TeamX%20Pakistan/AppData/Local/Android/Sdk/icons/material/materialicons/attachment/baseline_attachment_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -317,10 +317,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ea1b25" />
-                            <entry key="outputName" value="call" />
-                            <entry key="sourceFile" value="C:\Users\TeamX Pakistan\Desktop\Hatly icons\call.svg" />
+                            <entry key="outputName" value="baseline_attachment_24" />
+                            <entry key="sourceFile" value="C:\Users\TeamX Pakistan\Desktop\Hatly icons\warning.svg" />
                           </map>
                         </option>
                       </PersistentState>

@@ -66,10 +66,16 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
         }
 
         mViewDataBinding.txtLogin.setOnClickListener {
-            val addNote = mViewDataBinding.inpSpecialInstr.text.toString()
-            val bundle = Bundle()
-            bundle.putString("addNote",addNote)
-            findNavController().navigate(R.id.action_cartFragment_to_checkOutFragment,bundle)
+            if (cartProductArrayList.isNotEmpty()) {
+                val addNote = mViewDataBinding.inpSpecialInstr.text.toString()
+                val bundle = Bundle()
+                bundle.putString("addNote", addNote)
+                findNavController().navigate(R.id.action_cartFragment_to_checkOutFragment, bundle)
+            } else {
+                if (isAdded) {
+                    mViewDataBinding.root.snackbar("Your cart is empty")
+                }
+            }
         }
 
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
@@ -131,7 +137,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
                     loadingDialog.dismiss()
                     if (isAdded) {
 
-                    mViewDataBinding.root.snackbar(it.message!!)
+                        mViewDataBinding.root.snackbar(it.message!!)
                     }
                 }
             }
@@ -223,7 +229,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
                             loadingDialog.dismiss()
                             if (isAdded) {
 
-                            mViewDataBinding.root.snackbar(it.message!!)
+                                mViewDataBinding.root.snackbar(it.message!!)
                             }
                         }
                     }
@@ -291,7 +297,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
                     loadingDialog.dismiss()
                     if (isAdded) {
 
-                    mViewDataBinding.root.snackbar(it.message!!)
+                        mViewDataBinding.root.snackbar(it.message!!)
                     }
                 }
             }

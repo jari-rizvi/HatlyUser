@@ -66,6 +66,10 @@ class FoodsShopPreviewFragment :
             }
         }
 
+        mViewDataBinding.imgShare.setOnClickListener {
+
+        }
+
         when (NetworkCallPointsNest.MART) {
             Marts.HATLY_MART -> {
                 Log.d("StoreFragment", "HATLY_MART: back")

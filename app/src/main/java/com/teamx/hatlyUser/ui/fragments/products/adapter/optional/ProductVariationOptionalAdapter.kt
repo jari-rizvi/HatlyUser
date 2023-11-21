@@ -1,5 +1,6 @@
 package com.teamx.hatlyUser.ui.fragments.products.adapter.optional
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +40,10 @@ class ProductVariationOptionalAdapter(
         }
 
         val salesPrizeAmount = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} Aed"
+
+        if (arrayData.salePrice != 0.0){
+            holder.bind.textView16.paintFlags = holder.bind.textView16.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        }
 
         holder.bind.textView167.text = try {
             salesPrizeAmount
