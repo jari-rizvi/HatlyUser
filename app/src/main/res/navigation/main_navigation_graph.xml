@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation_graph"
     app:startDestination="@id/tempFragment">
-<!--    app:startDestination="@id/tempFragment">-->
-<!--    app:startDestination="@id/trackFragment">-->
+    <!--    app:startDestination="@id/tempFragment">-->
+    <!--    app:startDestination="@id/trackFragment">-->
 
     <fragment
         android:id="@+id/tempFragment"
@@ -332,9 +332,9 @@
         android:name="com.teamx.hatlyUser.ui.fragments.hatlymart.stores.StoresFragment"
         android:label="Stores"
         tools:layout="@layout/fragment_stores">
-<!--        <action-->
-<!--            android:id="@+id/action_storesFragment_to_shopHomeFragment"-->
-<!--            app:destination="@id/shopHomeFragment" />-->
+        <!--        <action-->
+        <!--            android:id="@+id/action_storesFragment_to_shopHomeFragment"-->
+        <!--            app:destination="@id/shopHomeFragment" />-->
         <action
             android:id="@+id/action_storesFragment_to_hatlyMartFragment"
             app:destination="@id/hatlyMartFragment" />
@@ -367,6 +367,19 @@
         <action
             android:id="@+id/action_foodsShopHomeFragment_to_reviewFragment"
             app:destination="@id/reviewFragment" />
+        <action
+            android:id="@+id/action_foodsShopHomeFragment_to_foodSearchFragment"
+            app:destination="@id/foodSearchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/foodSearchFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.foods.foodSearch.FoodsShopSearchFragment"
+        android:label="FoodsSearchFragment"
+        tools:layout="@layout/fragment_foods_shop_search" >
+        <action
+            android:id="@+id/action_foodSearchFragment_to_productPreviewFragment"
+            app:destination="@id/productPreviewFragment" />
     </fragment>
 
     <fragment
@@ -392,7 +405,7 @@
         android:id="@+id/personalInfoFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.profile.personalInfo.PersonalInformationFragment"
         android:label="PersonalInfo"
-        tools:layout="@layout/fragment_personal_information" >
+        tools:layout="@layout/fragment_personal_information">
         <action
             android:id="@+id/action_personalInfoFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
@@ -402,7 +415,7 @@
         android:id="@+id/locationFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.profile.Locations.LocationFragment"
         android:label="LocationFragment"
-        tools:layout="@layout/fragment_location" >
+        tools:layout="@layout/fragment_location">
         <action
             android:id="@+id/action_locationFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
@@ -472,7 +485,7 @@
         android:id="@+id/walletFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.wallet.WalletFragment"
         android:label="WalletFragment"
-        tools:layout="@layout/fragment_wallet" >
+        tools:layout="@layout/fragment_wallet">
         <action
             android:id="@+id/action_walletFragment_to_orderDetailFragment"
             app:destination="@id/orderDetailFragment" />
@@ -526,7 +539,7 @@
         android:id="@+id/orderPlacedFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.payments.orderplaced.OrderPlacedFragment"
         android:label="OrderPlacedFragment"
-        tools:layout="@layout/fragment_order_placed" >
+        tools:layout="@layout/fragment_order_placed">
         <action
             android:id="@+id/action_orderPlacedFragment_to_trackFragment"
             app:destination="@id/trackFragment" />
@@ -548,7 +561,7 @@
         android:id="@+id/specialOrderFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.special.specialorder.SpecialOrderFragment"
         android:label="SpecialOrderFragment"
-        tools:layout="@layout/fragment_special_order" >
+        tools:layout="@layout/fragment_special_order">
         <action
             android:id="@+id/action_specialOrderFragment_to_sendParcelFragment"
             app:destination="@id/sendParcelFragment" />
@@ -561,7 +574,7 @@
         android:id="@+id/sendParcelFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.special.sendparcel.SendParcelFragment"
         android:label="SendParcelFragment"
-        tools:layout="@layout/fragment_send_parcel" >
+        tools:layout="@layout/fragment_send_parcel">
         <action
             android:id="@+id/action_sendParcelFragment_to_parcelDetailFragment"
             app:destination="@id/parcelDetailFragment" />
@@ -572,7 +585,7 @@
         android:id="@+id/parcelDetailFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.special.parceldetail.ParcelDetailFragment"
         android:label="ParcelDetailFragment"
-        tools:layout="@layout/fragment_parcel_detail" >
+        tools:layout="@layout/fragment_parcel_detail">
         <action
             android:id="@+id/action_parcelDetailFragment_to_parcelLocationFragment"
             app:destination="@id/parcelLocationFragment" />
@@ -582,7 +595,7 @@
         android:id="@+id/parcelLocationFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.special.ParcelLocation.ParcelLocationFragment"
         android:label="ParcelLocationFragment"
-        tools:layout="@layout/fragment_parcel_location" >
+        tools:layout="@layout/fragment_parcel_location">
         <action
             android:id="@+id/action_parcelLocationFragment_to_locationFragment"
             app:destination="@id/locationFragment" />
@@ -598,7 +611,7 @@
         android:id="@+id/topUpFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.topUp.TopUpFragment"
         android:label="TopUpFragment"
-        tools:layout="@layout/fragment_top_up" >
+        tools:layout="@layout/fragment_top_up">
         <action
             android:id="@+id/action_topUpFragment_to_paymentMethodFragment"
             app:destination="@id/paymentMethodFragment" />

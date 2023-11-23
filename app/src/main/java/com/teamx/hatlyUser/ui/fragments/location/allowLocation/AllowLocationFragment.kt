@@ -15,6 +15,7 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.databinding.FragmentAllowLocationBinding
 import com.teamx.hatlyUser.ui.fragments.auth.login.LoginViewModel
+import com.teamx.hatlyUser.utils.LocationPermission
 import com.teamx.hatlyUser.utils.PrefHelper
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -85,21 +86,28 @@ class AllowLocationFragment : BaseFragment<FragmentAllowLocationBinding, LoginVi
     val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
-        when {
-            permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                navigateTo()
-//                findNavController().navigate(R.id.action_allowLocationFragment_to_mapFragment)
-//                findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
-            }
-            permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                navigateTo()
-//                findNavController().navigate(R.id.action_allowLocationFragment_to_mapFragment)
-//                findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
-            }
-            else -> {
-                Log.d("allowLocation", "locationPermissionRequest: not working")
-            }
+
+        if (LocationPermission.requestPermission(requireContext())){
+            navigateTo()
+        }else{
+            Log.d("allowLocation", "locationPermissionRequest: not working")
         }
+
+//        when {
+//            permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+//                navigateTo()
+////                findNavController().navigate(R.id.action_allowLocationFragment_to_mapFragment)
+////                findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
+//            }
+//            permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+//                navigateTo()
+////                findNavController().navigate(R.id.action_allowLocationFragment_to_mapFragment)
+////                findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
+//            }
+//            else -> {
+//                Log.d("allowLocation", "locationPermissionRequest: not working")
+//            }
+//        }
     }
 
 

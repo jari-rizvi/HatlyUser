@@ -70,6 +70,12 @@ class FoodsShopPreviewFragment :
 
         }
 
+        mViewDataBinding.imgSearch.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("itemId", shopId)
+            findNavController().navigate(R.id.action_foodsShopHomeFragment_to_foodSearchFragment,bundle)
+        }
+
         when (NetworkCallPointsNest.MART) {
             Marts.HATLY_MART -> {
                 Log.d("StoreFragment", "HATLY_MART: back")

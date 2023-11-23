@@ -54,6 +54,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             }
         }
 
+        MainActivity.service!!.showNotification1("dummy title","dummy description","dummy type","dummy id")
+
         mViewDataBinding.inpSearch.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_homeSearchFragment)
         }
