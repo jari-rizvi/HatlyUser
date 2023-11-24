@@ -1,12 +1,62 @@
 <resources>
     <string name="app_name">Hatly</string>
 <!--    <string name="don_t_have_an_account_sign_up">Don’t have an account? ![CDATA[<font color"#EA1B25">Sign Up</font>]]</string>-->
-    <string name="don_t_have_an_account_sign_up"><font fgcolor='#262626'>Don’t have an account? </font><font fgcolor='#EA1B25'>Sign Up</font></string>
-    <string name="already_have_an_account_login"><font fgcolor='#262626'>Already have an account? </font><font fgcolor='#EA1B25'>Login</font></string>
+
+
     <string name="search_pattern">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 123456789</string>
 
 <!--    <string name="your_web_client_id">42990662374-qh1053updcjvriuemsv4kktmdbbgm5ed.apps.googleusercontent.com</string>-->
-    <string name="your_web_client_id">42990662374-okvt5qt7kj352u9u6m1n72l0c4ufnije.apps.googleusercontent.com</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="your_web_client_id" translatable="false">42990662374-okvt5qt7kj352u9u6m1n72l0c4ufnije.apps.googleusercontent.com</string>
+
+
+    <string name="let_s_order_your_best_nmenu_in_here">Let’s Order Your Best\nMenu In Here</string>
+    <string name="let_s_order_your_best_menu_here_and_nlet_s_find_your_best_menu_here">Let\'s order your best menu here and\nlet\'s find your best menu here</string>
+    <string name="swip_to_see">Swip to see</string>
+    <string name="find_the_restaurant">Find the restaurant!</string>
+    <string name="choose_your_favorite_dishes">Choose your Favorite Dishes!</string>
+    <string name="get_your_delivery">Get Your Delivery!</string>
+    <string name="get_started">Get Started</string>
+    <string name="login">Login</string>
+    <string name="mobile_number">Mobile number</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="or_login_with">or Login with</string>
+    <string name="login_with_facebook">Login with Facebook</string>
+    <string name="login_with_google">Login with Google</string>
+    <string name="don_t_have_an_account_sign_up"><font fgcolor='#262626'>Don’t have an account? </font><font fgcolor='#EA1B25'>Sign Up</font></string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="send">Send</string>
+
+    <string name="sign_up">Sign Up</string>
+    <string name="full_name">Full name</string>
+    <string name="terms_amp_conditions_and"><![CDATA[Terms & Conditions ]]><font fgcolor='#909090'>and</font></string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="by_creating_your_account_you_agree_on_our">by creating your account, you agree on our</string>
+    <string name="or_sign_up_with">or Sign up with</string>
+    <string name="sign_up_with_facebook">Sign up with Facebook</string>
+    <string name="already_have_an_account_login"><font fgcolor='#262626'>Already have an account? </font><font fgcolor='#EA1B25'>Login</font></string>
+    <string name="sign_up_with_google">Sign up with Google</string>
+
+    <string name="otp">OTP</string>
+    <string name="please_enter_the_otp_sent_to_your_nmobile_number">Please enter the OTP sent to your\nmobile number</string>
+    <string name="verify">Verify</string>
+    <string name="resend_otp_in_30_sec">Resend OTP in 30 sec</string>
+    <string name="resend_again">Resend Again?</string>
+
+    <string name="create_new_password">Create New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="save">Save</string>
+
+    <string name="find_restaurants_and_nshops_near_by_you">Find Restaurants and\nshops near by you!</string>
+    <string name="allow_location">Allow location</string>
+
+    <string name="home">Home</string>
+    <string name="work">Work</string>
+    <string name="other">Other</string>
+    <string name="confirm_location">Confirm location</string>
+    <string name="save_and_continue">Save and Continue</string>
+    <string name="enter_your_address">Enter your address</string>
+
 
 </resources>

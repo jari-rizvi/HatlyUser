@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="let_s_order_your_best_nmenu_in_here">دعونا نطلب أفضل قائمة طعام لديك هنا</string>
+    <string name="let_s_order_your_best_menu_here_and_nlet_s_find_your_best_menu_here">دعنا نطلب أفضل قائمة لديك هنا ودعنا نعثر على أفضل قائمة لديك هنا</string>
+    <string name="swip_to_see">اسحب للمشاهدة</string>
+    <string name="find_the_restaurant">ابحث عن المطعم!</string>
+    <string name="choose_your_favorite_dishes">اختر أطباقك المفضلة!</string>
+    <string name="get_your_delivery">احصل على التسليم الخاص بك!</string>
+
+    <string name="get_started">ابدأ</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="mobile_number">رقم هاتف الجوال</string>
+    <string name="password">كلمة السر</string>
+    <string name="remember_me">تذكرني</string>
+    <string name="forget_password">نسيت كلمة السر</string>
+    <string name="or_login_with">او تسجيل الدخول من خلال</string>
+    <string name="login_with_facebook">تسجيل الدخول عبر حساب الفيسبوك</string>
+    <string name="login_with_google">تسجيل الدخول عبر حساب غوغل</string>
+    <string name="don_t_have_an_account_sign_up"><font fgcolor='#262626'>ليس لديك حساب؟ </font><font fgcolor='#EA1B25'>قم بالتسجيل</font></string>
+    <string name="forgot_password">نسيت كلمة السر</string>
+    <string name="send">ارسال</string>
+
+    <string name="sign_up">قم بالتسجيل</string>
+    <string name="full_name">الاسم الكامل</string>
+    <string name="terms_amp_conditions_and">الشروط والأحكام <font fgcolor='#909090'>و </font></string>
+    <string name="privacy_policy">سياسة الخصوصية الخاصة بنا</string>
+    <string name="by_creating_your_account_you_agree_on_our">من خلال إنشاء حسابك، فإنك توافق على</string>
+    <string name="or_sign_up_with">او التسجيل ب</string>
+    <string name="sign_up_with_facebook">التسجيل عبر حساب الفيسبوك</string>
+    <string name="sign_up_with_google">التسجيل عبر حساب غوغل</string>
+    <string name="already_have_an_account_login"><font fgcolor='#262626'>هل لديك حساب؟ </font><font fgcolor='#EA1B25'>تسجيل الدخول</font></string>
+
+    <string name="otp">رمز المرور لمرة واحدة</string>
+    <string name="please_enter_the_otp_sent_to_your_nmobile_number">الرجاء إدخال كلمة المرور لمرة واحدة (OTP) المرسلة إلى رقم هاتفك الجوال</string>
+    <string name="verify">تاكيد</string>
+    <string name="resend_otp_in_30_sec">اعادة ارسال كلمة المرور لمرة واحدة بعد--- ثواني</string>
+    <string name="resend_again">اعادة الارسال ؟</string>
+
+    <string name="create_new_password">إنشاء كلمة سر جديدة</string>
+    <string name="confirm_password">تاكيد كلمة السر</string>
+    <string name="save">حفظ</string>
+
+    <string name="find_restaurants_and_nshops_near_by_you">البحث عن المطاعم والمحلات التجارية القريبة منك!</string>
+    <string name="allow_location">السماح بالوصول إلى الموقع</string>
 
 </resources>

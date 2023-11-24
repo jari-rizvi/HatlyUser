@@ -625,38 +625,34 @@
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:orientation="horizontal">
 
+                    <CheckBox
+                        android:id="@+id/checkBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/remember_me_selector_color"
+                        app:layout_constraintBottom_toTopOf="@+id/txtLogin"
+                        app:layout_constraintStart_toStartOf="@+id/userPassword"
+                        app:layout_constraintTop_toBottomOf="@+id/userPassword" />
+
                     <TextView
                         android:id="@+id/textView256"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_15sdp"
-
                         android:fontFamily="@font/montserrat_regular"
                         android:text="By completing this order, I agree to all"
                         android:textColor="#262626"
                         android:textSize="@dimen/_9ssp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/imgBack"
-                        app:layout_constraintVertical_bias="0.03" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textView2564"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_15sdp"
                         android:fontFamily="@font/montserrat_regular"
                         android:text=" terms &amp; conditions."
                         android:textColor="#EA1B25"
                         android:textSize="@dimen/_9ssp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/imgBack"
-                        app:layout_constraintVertical_bias="0.03" />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <TextView

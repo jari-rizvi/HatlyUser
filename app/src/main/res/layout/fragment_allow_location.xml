@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
-            android:text="Find Restaurants and\nshops near by you!"
+            android:text="@string/find_restaurants_and_nshops_near_by_you"
             android:textColor="#EA1B25"
             android:textSize="@dimen/_15ssp"
             android:textAlignment="center"
@@ -75,7 +75,7 @@
             android:background="@drawable/button_radius_green"
             android:fontFamily="@font/open_sans_regular"
             android:paddingVertical="@dimen/_10sdp"
-            android:text="Allow location"
+            android:text="@string/allow_location"
             android:textAlignment="center"
             android:textColor="@color/white"
             app:layout_constraintVertical_bias="0.9"
@@ -88,20 +88,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <TextView
-            android:id="@+id/txtEnterLocaion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_regular"
-            android:text="Enter my location"
-            android:textAlignment="center"
-            android:textColor="#EA1B25"
-            android:textSize="@dimen/_12ssp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/txtLogin"
-            app:layout_constraintStart_toStartOf="@+id/txtLogin"
-            app:layout_constraintTop_toBottomOf="@+id/txtLogin" />
+<!--        <TextView-->
+<!--            android:id="@+id/txtEnterLocaion"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/montserrat_regular"-->
+<!--            android:text="Enter my location"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="#EA1B25"-->
+<!--            android:textSize="@dimen/_12ssp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/txtLogin"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/txtLogin"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/txtLogin" />-->
 
 
 

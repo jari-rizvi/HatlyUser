@@ -442,7 +442,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                     else -> {
                         if (isAdded) {
                             isForUpdate = false
-                            txtConfirmLocation1.text = "Confirm Location"
+                            txtConfirmLocation1.text = getString(R.string.save_and_continue)
                             requestLocation()
                         }
                     }
@@ -450,7 +450,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             } else {
                 if (isAdded) {
                     isForUpdate = false
-                    txtConfirmLocation1.text = "Confirm Location"
+                    txtConfirmLocation1.text = getString(R.string.save_and_continue)
                     requestLocation()
                 }
             }

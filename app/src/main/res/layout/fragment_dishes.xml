@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
-            android:text="Choose Favourite Dishes!"
+            android:text="@string/choose_your_favorite_dishes"
             android:textColor="#EA1B25"
             app:layout_constraintVertical_bias="0.1"
             android:textSize="@dimen/_17ssp"

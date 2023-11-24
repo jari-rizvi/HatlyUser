@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/bumbu_sushi"
-            android:text="Let’s Order Your Best\nMenu In Here"
+            android:text="@string/let_s_order_your_best_nmenu_in_here"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="@dimen/_20ssp"
@@ -68,7 +68,7 @@
             android:id="@+id/splashDes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Let's order your menu here and\nfind your best menu here"
+            android:text="@string/let_s_order_your_best_menu_here_and_nlet_s_find_your_best_menu_here"
             android:textAlignment="center"
             android:textColor="#CCFFFFFF"
             android:fontFamily="@font/open_sans_regular"
@@ -90,7 +90,7 @@
             app:layout_constraintVertical_bias="0.85"
             app:layout_constraintTop_toBottomOf="@+id/splashDes"
             app:slideToUnlockBackgroundColor="#7A000000"
-            app:slideToUnlockText="Swipe to see"
+            app:slideToUnlockText="@string/swip_to_see"
             app:slideToUnlockTextColor="@color/white"
             app:sliderColor="#54FFFFFF" />
 

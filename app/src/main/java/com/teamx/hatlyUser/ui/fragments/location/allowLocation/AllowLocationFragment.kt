@@ -47,9 +47,9 @@ class AllowLocationFragment : BaseFragment<FragmentAllowLocationBinding, LoginVi
             requireActivity().finish()
         }
 
-        mViewDataBinding.txtEnterLocaion.setOnClickListener {
-            findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
-        }
+//        mViewDataBinding.txtEnterLocaion.setOnClickListener {
+//            findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
+//        }
 
         mViewDataBinding.txtLogin.setOnClickListener {
             val userData = PrefHelper.getInstance(requireActivity()).getUserData()

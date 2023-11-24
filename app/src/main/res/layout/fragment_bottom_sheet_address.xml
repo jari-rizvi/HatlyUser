@@ -15,7 +15,7 @@
         android:layout_marginVertical="@dimen/_10sdp"
         android:background="@drawable/button_radius_corner"
         android:drawableTint="#66363636"
-        android:hint="Enter your address"
+        android:hint="@string/enter_your_address"
         android:imeOptions="actionNext"
         android:maxLines="1"
         android:paddingVertical="@dimen/_8sdp"

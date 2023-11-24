@@ -1,12 +1,13 @@
 package com.teamx.hatlyUser.ui.fragments.foods.foodSearch
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
@@ -16,7 +17,6 @@ import com.teamx.hatlyUser.databinding.FragmentFoodsShopSearchBinding
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.FoodsShopPreviewViewModel
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.adapter.FoodsShopProductAdapter
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Document
-import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Product
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
@@ -36,6 +36,7 @@ class FoodsShopSearchFragment :
 
     var shopId = ""
     private lateinit var productArrayList: ArrayList<Document>
+    private lateinit var filterProdArrayList: ArrayList<Document>
     private var productLayoutManager2: LinearLayoutManager? = null
     private var foodsShopProductAdapter: FoodsShopProductAdapter? = null
 
@@ -52,11 +53,9 @@ class FoodsShopSearchFragment :
         }
 
         productArrayList = ArrayList()
+        filterProdArrayList = ArrayList()
 
-        productLayoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-        mViewDataBinding.recShopProducts.layoutManager = productLayoutManager2
-        foodsShopProductAdapter = FoodsShopProductAdapter(productArrayList, this)
-        mViewDataBinding.recShopProducts.adapter = foodsShopProductAdapter
+        initialize(filterProdArrayList)
 
         when (NetworkCallPointsNest.MART) {
             Marts.HATLY_MART -> {
@@ -101,9 +100,11 @@ class FoodsShopSearchFragment :
                         shopId = data.shop._id
 
                         productArrayList.clear()
-                        data.products.forEach {documents ->
+                        filterProdArrayList.clear()
+                        data.products.forEach { documents ->
                             documents.documents.forEach {
-                            productArrayList.add(it)
+                                productArrayList.add(it)
+                                filterProdArrayList.add(it)
                             }
                         }
 
@@ -123,11 +124,39 @@ class FoodsShopSearchFragment :
             }
         }
 
+        mViewDataBinding.inpSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s!!.isNotEmpty()) {
+                    filterProdArrayList = productArrayList.filter { it.name.lowercase().contains(s.toString().lowercase()) } as ArrayList<Document>
+                } else {
+                    filterProdArrayList.clear()
+                    filterProdArrayList.addAll(productArrayList)
+                }
+                initialize(filterProdArrayList)
+            }
+
+        })
 
     }
 
+    fun initialize(productArrayList1: ArrayList<Document>) {
+        productLayoutManager2 =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        mViewDataBinding.recShopProducts.layoutManager = productLayoutManager2
+        foodsShopProductAdapter = FoodsShopProductAdapter(productArrayList1, this)
+        mViewDataBinding.recShopProducts.adapter = foodsShopProductAdapter
+    }
+
     override fun clickshopItem(position: Int) {
-        val modelProduct = productArrayList[position]
+        val modelProduct = filterProdArrayList[position]
         val bundle = Bundle()
         bundle.putString("_id", modelProduct._id)
         bundle.putString("name", modelProduct.name)

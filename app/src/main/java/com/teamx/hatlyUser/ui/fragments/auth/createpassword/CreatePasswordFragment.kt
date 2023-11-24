@@ -3,8 +3,6 @@ package com.teamx.hatlyUser.ui.fragments.auth.createpassword
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
