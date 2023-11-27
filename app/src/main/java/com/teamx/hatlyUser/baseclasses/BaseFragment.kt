@@ -80,7 +80,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         mViewModel = ViewModelProvider(this)[viewModel]
 
 
-        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
         dataStoreProvider = DataStoreProvider(requireContext())
         navController = NavController(requireContext())
 

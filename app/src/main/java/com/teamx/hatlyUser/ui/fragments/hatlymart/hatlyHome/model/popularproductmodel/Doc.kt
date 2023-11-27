@@ -15,5 +15,7 @@ data class Doc(
     val productType: String,
     val quantity: Int,
     val shopId: String,
-    val veriations: List<Veriation>
+    val veriations: List<Veriation>,
+    val cartExistence: Boolean,
+    val cartQuantity: Int
 )

@@ -10,6 +10,7 @@ import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
 import com.teamx.hatlyUser.ui.fragments.auth.forgotpassword.model.ModelForgotPass
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.FoodShopModel
+import com.teamx.hatlyUser.ui.fragments.payments.cart.model.ModelCart
 import com.teamx.hatlyUser.ui.fragments.products.model.ModelProductPreview
 import com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.AddToCart
 import com.teamx.hatlyUser.utils.NetworkHelper
@@ -108,6 +109,34 @@ class ProductPreviewViewModel @Inject constructor(
                     _emptyCartResponse.postValue(Resource.error("${e.message}", null))
                 }
             } else _emptyCartResponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+
+    private val _updateCartItemResponse = MutableLiveData<Resource<ModelCart>>()
+    val updateCartItemResponse: LiveData<Resource<ModelCart>>
+        get() = _updateCartItemResponse
+
+    fun updateCartItem(params: JsonObject) {
+        viewModelScope.launch {
+            _updateCartItemResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.updateCartItem(params).let {
+                        if (it.isSuccessful) {
+                            _updateCartItemResponse.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _updateCartItemResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        } else {
+                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+                            _updateCartItemResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }
+                    }
+                } catch (e: Exception) {
+                    _updateCartItemResponse.postValue(Resource.error("${e.message}", null))
+                }
+            } else _updateCartItemResponse.postValue(Resource.error("No internet connection", null))
         }
     }
 

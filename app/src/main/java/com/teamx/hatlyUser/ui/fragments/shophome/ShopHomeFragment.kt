@@ -8,22 +8,26 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentShopHomeBinding
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter.AddToCartInterface
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.shophome.adapter.ShopHomeTitleAdapter
 import com.teamx.hatlyUser.ui.fragments.shophome.adapter.SubCategoryProductsAdapter
 import com.teamx.hatlyUser.ui.fragments.shophome.model.Document
+import com.teamx.hatlyUser.utils.DialogHelperClass
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONException
 
 
 @AndroidEntryPoint
 class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel>(),
-    HatlyShopInterface {
+    HatlyShopInterface, AddToCartInterface, DialogHelperClass.Companion.MultiProduct {
 
     override val layoutId: Int
         get() = R.layout.fragment_shop_home
@@ -80,7 +84,7 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
         subCategoryProductsArray = ArrayList()
         val layoutManager = GridLayoutManager(requireActivity(), 2)
         mViewDataBinding.recShopProducts.layoutManager = layoutManager
-        subCategoryProductsAdapter = SubCategoryProductsAdapter(subCategoryProductsArray, this)
+        subCategoryProductsAdapter = SubCategoryProductsAdapter(subCategoryProductsArray, this,this)
         mViewDataBinding.recShopProducts.adapter = subCategoryProductsAdapter
 
 
@@ -131,9 +135,42 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
                     loadingDialog.dismiss()
                     if (isAdded) {
 
-                        mViewDataBinding.root.snackbar(it.message!!)
+                        mViewDataBinding.mainLayout.snackbar(it.message!!)
                     }
                     Log.d("hatlyShopCatAdapter", "ERROR: ${it.message!!}")
+                }
+            }
+        }
+
+        if (!mViewModel.addToCartResponse.hasActiveObservers()) {
+            mViewModel.addToCartResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            if (data.success) {
+                                if (isAdded) {
+
+                                    mViewDataBinding.mainLayout.snackbar("Added")
+                                }
+                            }
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        if (isAdded) {
+
+                            if (it.message == "Can not add products from multiple shops") {
+                                DialogHelperClass.MultiProductDialog(requireContext(), this)
+                                Log.d("addToCartResponse", "addToCart: ${it.message!!}")
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -173,6 +210,29 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
     }
 
     override fun clickMoreItem(position: Int) {
+
+    }
+
+    override fun addProduct(position: Int) {
+        val prodModel = subCategoryProductsArray[position]
+        if (prodModel.productType == "simple") {
+            val params = JsonObject()
+            try {
+                params.addProperty("id", prodModel._id)
+                params.addProperty("quantity", 1)
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+            mViewModel.addToCart(params)
+        }
+    }
+
+    override fun updateQuantity(position: Int, quantity: Int) {
+
+    }
+
+
+    override fun prodRemove() {
 
     }
 

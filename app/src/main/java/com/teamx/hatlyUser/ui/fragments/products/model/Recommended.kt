@@ -13,8 +13,11 @@ data class Recommended(
     val maxPrice: Double?,
     val minPrice: Double?,
     val productType: String,
-    val quantity: Int,
+    var quantity: Int,
     val shopId: String,
     val shopVeriations: List<Any>,
-    val veriations: List<Any>
+    val veriations: List<Any>,
+    val cartExistence: Boolean,
+    var cartQuantity: Int,
+    val cartItemId: String
 )

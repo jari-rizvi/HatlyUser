@@ -1,6 +1,7 @@
 package com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
@@ -10,7 +11,8 @@ import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproduct
 
 class HatlyPopularAdapter(
     private val addressArrayList: ArrayList<Doc>,
-    val hatlyShopInterface: HatlyShopInterface
+    val hatlyShopInterface: HatlyShopInterface,
+    private val addToCartInterface: AddToCartInterface
 ) : RecyclerView.Adapter<HatlyPopularViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HatlyPopularViewHolder {
@@ -44,6 +46,25 @@ class HatlyPopularAdapter(
             hatlyShopInterface.clickshopItem(position)
         }
 
+        if (arrayData.cartExistence){
+            holder.bind.imgAdd.visibility = View.GONE
+            holder.bind.layoutQty.visibility = View.VISIBLE
+        }else{
+            holder.bind.imgAdd.visibility = View.VISIBLE
+            holder.bind.layoutQty.visibility = View.GONE
+        }
+
+        holder.bind.imgIncreament.setOnClickListener {
+            addToCartInterface.updateQuantity(position, arrayData.cartQuantity + 1)
+        }
+
+        holder.bind.imgDeccreament.setOnClickListener {
+            addToCartInterface.updateQuantity(position, arrayData.cartQuantity - 1)
+        }
+
+        holder.bind.imgAdd.setOnClickListener {
+            addToCartInterface.addProduct(position)
+        }
 
     }
 
@@ -52,7 +73,12 @@ class HatlyPopularAdapter(
     }
 }
 
-class HatlyPopularViewHolder(private var binding: ItemPopularBinding) :
+class HatlyPopularViewHolder(binding: ItemPopularBinding) :
     RecyclerView.ViewHolder(binding.root) {
     val bind = binding
+}
+
+interface AddToCartInterface{
+    fun addProduct(position: Int)
+    fun updateQuantity(position: Int, quantity: Int)
 }

@@ -3,16 +3,19 @@ package com.teamx.hatlyUser.ui.fragments.products.adapter.frequentlyBought
 import android.graphics.Paint
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.databinding.ItemPopularBinding
+import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter.AddToCartInterface
 import com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.ui.fragments.products.model.Recommended
 
 class RecommendedItemAdapter(
     private val addressArrayList: ArrayList<Recommended>,
-    private val productPreInterface : ProductPreviewInterface
+    private val productPreInterface: ProductPreviewInterface,
+    private val addToCartInterface: AddToCartInterface
 ) : RecyclerView.Adapter<FrequentlyBoughtViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FrequentlyBoughtViewHolder {
@@ -49,7 +52,8 @@ class RecommendedItemAdapter(
             holder.bind.textView27.paintFlags = holder.bind.textView27.paintFlags
 
             if (arrayData.salePrice != 0.0) {
-                holder.bind.textView27.paintFlags = holder.bind.textView27.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                holder.bind.textView27.paintFlags =
+                    holder.bind.textView27.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             }
         } else {
             textView26Price = "${arrayData.minPrice} Aed"
@@ -69,8 +73,34 @@ class RecommendedItemAdapter(
             ""
         }
 
-        Picasso.get().load(arrayData.images[0]).resize(500,500).into(holder.bind.imgShop)
+        holder.bind.txtQty.text = try {
+            "${arrayData.cartQuantity}"
+        } catch (e: Exception) {
+            ""
+        }
 
+        Picasso.get().load(arrayData.images[0]).resize(500, 500).into(holder.bind.imgShop)
+
+
+        if (arrayData.cartExistence) {
+            holder.bind.imgAdd.visibility = View.GONE
+            holder.bind.layoutQty.visibility = View.VISIBLE
+        } else {
+            holder.bind.imgAdd.visibility = View.VISIBLE
+            holder.bind.layoutQty.visibility = View.GONE
+        }
+
+        holder.bind.imgIncreament.setOnClickListener {
+            addToCartInterface.updateQuantity(position, arrayData.cartQuantity + 1)
+        }
+
+        holder.bind.imgDeccreament.setOnClickListener {
+            addToCartInterface.updateQuantity(position, arrayData.cartQuantity - 1)
+        }
+
+        holder.bind.imgAdd.setOnClickListener {
+            addToCartInterface.addProduct(position)
+        }
 
         holder.itemView.setOnClickListener {
             productPreInterface.clickFreBoughtItem(position)

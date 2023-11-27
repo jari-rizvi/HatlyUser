@@ -10,5 +10,7 @@ data class Document(
     val prize: Double,
     val productType: String,
     val quantity: Int,
-    val shopId: String
+    val shopId: String,
+    val cartExistence: Boolean,
+    val cartQuantity: Int
 )
