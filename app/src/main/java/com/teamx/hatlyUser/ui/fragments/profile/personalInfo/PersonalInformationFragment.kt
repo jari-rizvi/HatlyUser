@@ -15,6 +15,8 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentPersonalInformationBinding
+import com.teamx.hatlyUser.ui.fragments.profile.personalInfo.otpVerification.OtpBottomSheetProfileFragment
+import com.teamx.hatlyUser.ui.fragments.profile.personalInfo.otpVerification.ProfileOtpInterface
 import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +29,9 @@ import java.io.FileOutputStream
 
 
 @AndroidEntryPoint
-class PersonalInformationFragment : BaseFragment<FragmentPersonalInformationBinding, PersonalInformationViewModel>() {
+class PersonalInformationFragment :
+    BaseFragment<FragmentPersonalInformationBinding, PersonalInformationViewModel>(),
+    ProfileOtpInterface {
 
     override val layoutId: Int
         get() = R.layout.fragment_personal_information
@@ -36,8 +40,9 @@ class PersonalInformationFragment : BaseFragment<FragmentPersonalInformationBind
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    var imageUrl = ""
-    var userName = ""
+    private var imageUrl = ""
+    private var userName = ""
+    private var contact = ""
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,11 +57,18 @@ class PersonalInformationFragment : BaseFragment<FragmentPersonalInformationBind
             }
         }
 
-        sharedViewModel.userData.observe(requireActivity()){
+        sharedViewModel.userData.observe(requireActivity()) {
             mViewDataBinding.editText.setText(it.name)
             mViewDataBinding.editText3.text = it.email
-            mViewDataBinding.editText2.text = it.contact ?: "Not Register"
-            Picasso.get().load(it.profileImage).resize(500,500).into(mViewDataBinding.hatlyIcon)
+            Log.d("PersonalI", "onViewCreated: ${it.contact}")
+            if (it.contact == null){
+                mViewDataBinding.editText2.isEnabled = true
+            }else{
+                mViewDataBinding.editText2.isEnabled = false
+                mViewDataBinding.editText2.setText(it.contact)
+            }
+
+            Picasso.get().load(it.profileImage).resize(500, 500).into(mViewDataBinding.hatlyIcon)
             imageUrl = it.profileImage
             userName = it.name
         }
@@ -70,21 +82,23 @@ class PersonalInformationFragment : BaseFragment<FragmentPersonalInformationBind
         }
 
         mViewDataBinding.txtLogin.setOnClickListener {
-            userName = mViewDataBinding.editText.text.toString()
-            if (userName.isNotEmpty()){
-                val params = JsonObject()
-                try {
-                    params.addProperty("name", userName)
-                    params.addProperty("profileImage", imageUrl)
-                } catch (e: JSONException) {
-                    e.printStackTrace()
+
+            if (sharedViewModel.userData.value?.contact == null) {
+                contact = mViewDataBinding.editText2.text.toString().trim()
+                if (contact.isNotEmpty()) {
+                    val params = JsonObject()
+                    try {
+                        params.addProperty("contact", contact)
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                    mViewModel.sendOtpProfile(params)
+                } else {
+                    updateProfile()
                 }
-
-                mViewModel.updateProfile(params)
-            }else{
-                mViewDataBinding.root.snackbar("Enter Username")
+            } else {
+                updateProfile()
             }
-
         }
 
         mViewDataBinding.imgGallery.setOnClickListener {
@@ -103,9 +117,10 @@ class PersonalInformationFragment : BaseFragment<FragmentPersonalInformationBind
                         it.data?.let { data ->
                             if (data.isNotEmpty()) {
                                 Log.d("uploadReviewIm", "onViewCreated: ${data[0]}")
-                                if (data.isNotEmpty()){
+                                if (data.isNotEmpty()) {
                                     imageUrl = data[0]
-                                    Picasso.get().load(imageUrl).resize(500,500).into(mViewDataBinding.hatlyIcon)
+                                    Picasso.get().load(imageUrl).resize(500, 500)
+                                        .into(mViewDataBinding.hatlyIcon)
                                 }
                             }
                         }
@@ -116,7 +131,7 @@ class PersonalInformationFragment : BaseFragment<FragmentPersonalInformationBind
                         Log.d("uploadReviewIm", "onViewCreated: ${it.message}")
                         if (isAdded) {
 
-                        mViewDataBinding.root.snackbar(it.message!!)
+                            mViewDataBinding.root.snackbar(it.message!!)
                         }
                     }
                 }
@@ -133,7 +148,8 @@ class PersonalInformationFragment : BaseFragment<FragmentPersonalInformationBind
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            Picasso.get().load(data.profileImage).resize(500,500).into(mViewDataBinding.hatlyIcon)
+                            Picasso.get().load(data.profileImage).resize(500, 500)
+                                .into(mViewDataBinding.hatlyIcon)
                             val userData = PrefHelper.getInstance(requireActivity()).getUserData()
                             userData!!.name = data.name
                             userData!!.profileImage = data.profileImage
@@ -147,7 +163,67 @@ class PersonalInformationFragment : BaseFragment<FragmentPersonalInformationBind
                         loadingDialog.dismiss()
                         if (isAdded) {
 
-                        mViewDataBinding.root.snackbar(it.message!!)
+                            mViewDataBinding.root.snackbar(it.message!!)
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!mViewModel.sendOtpProfileResponse.hasActiveObservers()) {
+            mViewModel.sendOtpProfileResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            val otpBottomSheetProfileFragment = OtpBottomSheetProfileFragment(this)
+                            if (!otpBottomSheetProfileFragment.isAdded && contact.isNotEmpty()) {
+                                otpBottomSheetProfileFragment.show(
+                                    parentFragmentManager,
+                                    otpBottomSheetProfileFragment.tag
+                                )
+                            }
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        if (isAdded) {
+                            mViewDataBinding.root.snackbar(it.message!!)
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!mViewModel.verifyOtpProfileResponse.hasActiveObservers()) {
+            mViewModel.verifyOtpProfileResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            if (isAdded) {
+                                mViewDataBinding.root.snackbar("Number updated")
+                            }
+                            val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+                            userData!!.contact = contact
+                            PrefHelper.getInstance(requireActivity()).setUserData(userData)
+                            sharedViewModel.setUserData(userData)
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        if (isAdded) {
+                            mViewDataBinding.root.snackbar(it.message!!)
                         }
                     }
                 }
@@ -158,6 +234,23 @@ class PersonalInformationFragment : BaseFragment<FragmentPersonalInformationBind
 
     private fun fetchImageFromGallery() {
         startForResult.launch("image/*")
+    }
+
+    fun updateProfile() {
+        userName = mViewDataBinding.editText.text.toString()
+        if (userName.isNotEmpty()) {
+            val params = JsonObject()
+            try {
+                params.addProperty("name", userName)
+                params.addProperty("profileImage", imageUrl)
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+
+            mViewModel.updateProfile(params)
+        } else {
+            mViewDataBinding.root.snackbar("Enter Username")
+        }
     }
 
     private val startForResult =
@@ -201,6 +294,19 @@ class PersonalInformationFragment : BaseFragment<FragmentPersonalInformationBind
     private fun prepareFilePart(partName: String, fileUri: File): MultipartBody.Part {
         val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), fileUri)
         return MultipartBody.Part.createFormData(partName, fileUri.name, requestFile)
+    }
+
+    override fun setPinView(pinView: String) {
+
+        val params = JsonObject()
+        try {
+            params.addProperty("contact", contact)
+            params.addProperty("verificationCode", pinView)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+        mViewModel.verifyOtpProfile(params)
     }
 
 

@@ -81,7 +81,8 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Log.d("handleOnBackPressed", "handleOnBackPressed: back")
-                findNavController().popBackStack(R.id.homeFragment, false)
+                findNavController().popBackStack()
+//                findNavController().popBackStack(R.id.homeFragment, false)
             }
         }
 

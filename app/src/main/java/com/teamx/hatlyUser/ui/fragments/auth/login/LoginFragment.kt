@@ -152,6 +152,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                                     TOKENER = it1
                                 }
 
+                                Log.d("loginWithGoogleResponse", "data.contact: ${data.contact}")
+
 //                                    sharedViewModel.setUserData(data)
 //                                    (requireActivity() as ProfileInterFace).profileData(data)
 

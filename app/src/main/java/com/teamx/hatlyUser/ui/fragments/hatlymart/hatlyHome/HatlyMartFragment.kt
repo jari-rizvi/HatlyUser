@@ -1,6 +1,8 @@
 package com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -27,6 +29,7 @@ import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONException
+import java.util.Stack
 
 @AndroidEntryPoint
 class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewModel>(),
@@ -45,9 +48,9 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
     private lateinit var hatlyShopCatAdapter: HatlyShopCatAdapter
     private lateinit var hatlyPopularAdapter: HatlyPopularAdapter
 
-    var storeId = ""
-    var storeName = ""
-    var storeAddress = ""
+    private var storeId = ""
+    private var storeName = ""
+    private var storeAddress = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -269,9 +272,15 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             if (data.success) {
-                                if (isAdded) {
-
-                                    mViewDataBinding.mainLayout.snackbar("Added")
+                                if (isAddToCartRecommend) {
+                                    healthDetailPopularArraylist[addToCartPosition].cartItemId = data.cartItemId
+                                    healthDetailPopularArraylist[addToCartPosition].cartExistence = true
+                                    healthDetailPopularArraylist[addToCartPosition].cartQuantity = 1
+                                    hatlyPopularAdapter.notifyItemChanged(addToCartPosition)
+                                } else {
+                                    if (isAdded) {
+                                        mViewDataBinding.mainLayout.snackbar("Added")
+                                    }
                                 }
                             }
                         }
@@ -307,6 +316,33 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
         hatlyPopularAdapter = HatlyPopularAdapter(healthDetailPopularArraylist, this, this)
         mViewDataBinding.recPopular.layoutManager = productLayoutManager
         mViewDataBinding.recPopular.adapter = hatlyPopularAdapter
+
+        if (!mViewModel.emptyCartResponse.hasActiveObservers()) {
+            mViewModel.emptyCartResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            mViewDataBinding.mainLayout.snackbar("Cart is empty now you can add product")
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        if (isAdded) {
+
+                            mViewDataBinding.mainLayout.snackbar("${it.message!!}")
+                            Log.d("addToCartResponse", "addToCart: ${it.message!!}")
+                        }
+                    }
+                }
+            }
+        }
+
 
 
     }
@@ -348,8 +384,13 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
         Toast.makeText(MainApplication.context, "More", Toast.LENGTH_SHORT).show()
     }
 
+    private var isAddToCartRecommend = false
+    private var addToCartPosition = -1
+
     override fun addProduct(position: Int) {
+
         val prodModel = healthDetailPopularArraylist[position]
+
         if (prodModel.productType == "simple") {
             val params = JsonObject()
             try {
@@ -358,18 +399,95 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
+            isAddToCartRecommend = true
+            addToCartPosition = position
             mViewModel.addToCart(params)
+        }else{
+            val bundle = Bundle()
+            bundle.putString("_id", prodModel._id)
+            bundle.putString("name", storeName)
+            bundle.putString("address", storeAddress)
+            findNavController().navigate(
+                R.id.action_hatlyMartFragment_to_productPreviewFragment,
+                bundle
+            )
         }
+
     }
+
+    private val debounceDelayMillis = 1000 // Set your desired debounce delay in milliseconds
+    private val handlerQty = Handler(Looper.getMainLooper())
+    private val actionStack = Stack<Int>()
 
     override fun updateQuantity(position: Int, quantity: Int) {
 
+
+        if (quantity > 0) {
+            handlerQty.removeCallbacksAndMessages(null)
+            if (!actionStack.contains(position)) {
+                actionStack.push(position)
+            }
+            healthDetailPopularArraylist[position].cartQuantity = quantity
+            hatlyPopularAdapter.notifyItemChanged(position)
+
+            updateQtyResponse()
+
+        }
+    }
+
+    private fun updateQtyResponse() {
+
+        val params = JsonObject()
+
+        handlerQty.postDelayed({
+            if (actionStack.isNotEmpty()) {
+                val cartmodel = healthDetailPopularArraylist[actionStack.pop()]
+                params.addProperty("id", cartmodel.cartItemId)
+                params.addProperty("quantity", cartmodel.cartQuantity)
+                mViewModel.updateCartItem(params)
+
+                mViewModel.updateCartItemResponse.observe(requireActivity()) {
+                    when (it.status) {
+                        Resource.Status.LOADING -> {
+                            loadingDialog.show()
+                        }
+
+                        Resource.Status.SUCCESS -> {
+                            loadingDialog.dismiss()
+                            it.data?.let { data ->
+
+                                if (actionStack.isNotEmpty()) {
+                                    val cartmodel1 = healthDetailPopularArraylist[actionStack.pop()]
+                                    params.addProperty("id", cartmodel1.cartItemId)
+                                    params.addProperty("quantity", cartmodel1.cartQuantity)
+                                    mViewModel.updateCartItem(params)
+                                } else {
+//                                    layoutUpdate(data)
+                                }
+                            }
+                            mViewModel.updateCartItemResponse.removeObservers(viewLifecycleOwner)
+                        }
+
+                        Resource.Status.ERROR -> {
+                            loadingDialog.dismiss()
+                            if (isAdded) {
+
+                                mViewDataBinding.root.snackbar(it.message!!)
+                            }
+                        }
+                    }
+                }
+            }
+
+        }, debounceDelayMillis.toLong())
     }
 
 
     override fun prodRemove() {
-
+        mViewModel.emptyCart()
     }
+
+
 
 
 }

@@ -38,6 +38,12 @@ class HatlyPopularAdapter(
             ""
         }
 
+        holder.bind.txtQty.text = try {
+            "${arrayData.cartQuantity}"
+        } catch (e: Exception) {
+            ""
+        }
+
 
         Picasso.get().load(arrayData.images!![0]).resize(500,500).into(holder.bind.imgShop)
 

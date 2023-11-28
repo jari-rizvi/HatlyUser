@@ -6,7 +6,7 @@ import androidx.annotation.Keep
 data class ModelLogin(
     val __v: Int,
     val _id: String,
-    val contact: String,
+    var contact: String?,
     val coordinates: Coordinates,
     val email: String,
     var location: Location,

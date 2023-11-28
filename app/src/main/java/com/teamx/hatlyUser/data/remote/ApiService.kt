@@ -276,6 +276,18 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
     ): Response<ModelLogin>
 
+    @POST(NetworkCallPoints.OTP_SEND_PROFILE)
+    suspend fun sendOtpProfile(
+        @Body params: JsonObject,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
+    ): Response<ModelForgotPass>
+
+    @POST(NetworkCallPoints.OTP_VERIFY_PROFILE)
+    suspend fun verifyOtpProfile(
+        @Body params: JsonObject,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
+    ): Response<ModelForgotPass>
+
 
     @POST(NetworkCallPoints.REViEW_ORDER)
     suspend fun reviewOrder(

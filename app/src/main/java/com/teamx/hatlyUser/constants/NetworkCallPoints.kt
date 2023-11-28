@@ -64,6 +64,10 @@ class NetworkCallPoints {
 
         const val UPDATE_PROFILE = "user/update"
 
+        const val OTP_SEND_PROFILE = "auth/sendotp"
+
+        const val OTP_VERIFY_PROFILE = "auth/verifyotp"
+
         const val REViEW_ORDER = "review/create"
 
         const val REViEW_LIST = "review/list"

@@ -289,9 +289,16 @@ class ProductPreviewFragment :
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             if (data.success) {
-                                if (isAdded) {
-
-                                    mViewDataBinding.mainLayout.snackbar("Added")
+                                if (isAddToCartRecommend) {
+                                    freBoughtArrayList[addToCartPosition].cartItemId = data.cartItemId
+                                    freBoughtArrayList[addToCartPosition].cartExistence = true
+                                    freBoughtArrayList[addToCartPosition].cartQuantity = 1
+                                    recommendedItemAdapter.notifyItemChanged(addToCartPosition)
+                                } else {
+                                    if (isAdded) {
+//                                        mViewDataBinding.mainLayout.snackbar("Added")
+                                        findNavController().navigate(R.id.action_productPreviewFragment_to_cartFragment)
+                                    }
                                 }
                             }
                         }
@@ -380,6 +387,7 @@ class ProductPreviewFragment :
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
+            isAddToCartRecommend = false
             mViewModel.addToCart(params)
         }
 
@@ -465,7 +473,6 @@ class ProductPreviewFragment :
         mViewDataBinding.textView29.text = quantityActualValue.toString()
     }
 
-    private lateinit var viewPager: ViewPager2
     private var currentPage = 0
     private lateinit var timer: Timer
     private val handler = Handler()
@@ -492,8 +499,12 @@ class ProductPreviewFragment :
         mViewModel.emptyCart()
     }
 
+    private var isAddToCartRecommend = false
+    private var addToCartPosition = -1
+
     override fun addProduct(position: Int) {
         val prodModel = freBoughtArrayList[position]
+
         if (prodModel.productType == "simple") {
             val params = JsonObject()
             try {
@@ -502,6 +513,8 @@ class ProductPreviewFragment :
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
+            isAddToCartRecommend = true
+            addToCartPosition = position
             mViewModel.addToCart(params)
         }
     }
@@ -509,11 +522,14 @@ class ProductPreviewFragment :
     private val debounceDelayMillis = 1000 // Set your desired debounce delay in milliseconds
     private val handlerQty = Handler(Looper.getMainLooper())
     private val actionStack = Stack<Int>()
+
+
+
     override fun updateQuantity(position: Int, quantity: Int) {
-        handlerQty.removeCallbacksAndMessages(null)
+
 
         if (quantity > 0) {
-
+            handlerQty.removeCallbacksAndMessages(null)
             if (!actionStack.contains(position)) {
                 actionStack.push(position)
             }

@@ -4,5 +4,6 @@ import androidx.annotation.Keep
 
 @Keep
 data class AddToCart(
-    val success: Boolean
+    val success: Boolean,
+    var cartItemId: String
 )

@@ -17,7 +17,7 @@ data class Recommended(
     val shopId: String,
     val shopVeriations: List<Any>,
     val veriations: List<Any>,
-    val cartExistence: Boolean,
-    var cartQuantity: Int,
-    val cartItemId: String
+    var cartItemId: String,
+    var cartExistence: Boolean,
+    var cartQuantity: Int
 )

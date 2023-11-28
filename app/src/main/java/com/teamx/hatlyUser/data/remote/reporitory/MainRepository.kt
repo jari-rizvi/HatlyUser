@@ -110,6 +110,14 @@ class MainRepository @Inject constructor(
         @Body params: JsonObject,
     ) = apiService.updateProfile(params)
 
+    suspend fun sendOtpProfile(
+        @Body params: JsonObject,
+    ) = apiService.sendOtpProfile(params)
+
+    suspend fun verifyOtpProfile(
+        @Body params: JsonObject,
+    ) = apiService.verifyOtpProfile(params)
+
     suspend fun reviewList(
         @Query("shopId") shopId: String,
         @Query("limit") limit: Int,

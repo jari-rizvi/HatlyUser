@@ -325,7 +325,11 @@
         android:id="@+id/productPreviewFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.products.ProductPreviewFragment"
         android:label="ProductPreview"
-        tools:layout="@layout/fragment_product_preview" />
+        tools:layout="@layout/fragment_product_preview" >
+        <action
+            android:id="@+id/action_productPreviewFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/storesFragment"

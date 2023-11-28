@@ -11,6 +11,7 @@ data class Document(
     val productType: String,
     val quantity: Int,
     val shopId: String,
-    val cartExistence: Boolean,
-    val cartQuantity: Int
+    var cartExistence: Boolean,
+    var cartQuantity: Int,
+    var cartItemId: String,
 )

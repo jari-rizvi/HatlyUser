@@ -54,7 +54,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             }
         }
 
-        MainActivity.service!!.showNotification1("dummy title","dummy description","dummy type","dummy id")
+//        MainActivity.service!!.showNotification1("dummy title","dummy description","dummy type","dummy id")
 
         mViewDataBinding.inpSearch.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_homeSearchFragment)
@@ -165,7 +165,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            mViewDataBinding.root.snackbar(data.message)
+                            mViewDataBinding.mainLayout.snackbar(data.message)
                         }
                     }
 
@@ -173,7 +173,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                         loadingDialog.dismiss()
                         if (isAdded) {
 
-                            mViewDataBinding.root.snackbar(it.message!!)
+                            mViewDataBinding.mainLayout.snackbar(it.message!!)
                         }
                     }
                 }

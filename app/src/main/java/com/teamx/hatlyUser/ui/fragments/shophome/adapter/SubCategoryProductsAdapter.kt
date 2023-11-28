@@ -45,6 +45,12 @@ class SubCategoryProductsAdapter(
             hatlyShopInterface.clickshopItem(position)
         }
 
+        holder.bind.txtQty.text = try {
+            "${arrayData.cartQuantity}"
+        } catch (e: Exception) {
+            ""
+        }
+
         if (arrayData.cartExistence){
             holder.bind.imgAdd.visibility = View.GONE
             holder.bind.layoutQty.visibility = View.VISIBLE

@@ -1,6 +1,8 @@
 package com.teamx.hatlyUser.ui.fragments.shophome
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -23,6 +25,7 @@ import com.teamx.hatlyUser.utils.DialogHelperClass
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONException
+import java.util.Stack
 
 
 @AndroidEntryPoint
@@ -153,9 +156,15 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             if (data.success) {
-                                if (isAdded) {
-
-                                    mViewDataBinding.mainLayout.snackbar("Added")
+                                if (isAddToCartRecommend) {
+                                    subCategoryProductsArray[addToCartPosition].cartItemId = data.cartItemId
+                                    subCategoryProductsArray[addToCartPosition].cartExistence = true
+                                    subCategoryProductsArray[addToCartPosition].cartQuantity = 1
+                                    subCategoryProductsAdapter.notifyItemChanged(addToCartPosition)
+                                } else {
+                                    if (isAdded) {
+                                        mViewDataBinding.mainLayout.snackbar("Added")
+                                    }
                                 }
                             }
                         }
@@ -169,6 +178,32 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
                                 DialogHelperClass.MultiProductDialog(requireContext(), this)
                                 Log.d("addToCartResponse", "addToCart: ${it.message!!}")
                             }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!mViewModel.emptyCartResponse.hasActiveObservers()) {
+            mViewModel.emptyCartResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            mViewDataBinding.mainLayout.snackbar("Cart is empty now you can add product")
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        if (isAdded) {
+
+                            mViewDataBinding.mainLayout.snackbar("${it.message!!}")
+                            Log.d("addToCartResponse", "addToCart: ${it.message!!}")
                         }
                     }
                 }
@@ -213,8 +248,13 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
 
     }
 
+    private var isAddToCartRecommend = false
+    private var addToCartPosition = -1
+
     override fun addProduct(position: Int) {
+
         val prodModel = subCategoryProductsArray[position]
+
         if (prodModel.productType == "simple") {
             val params = JsonObject()
             try {
@@ -223,17 +263,86 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
+            isAddToCartRecommend = true
+            addToCartPosition = position
             mViewModel.addToCart(params)
+        }else{
+            val bundle = Bundle()
+            bundle.putString("_id", prodModel._id)
+            bundle.putString("name", storeName)
+            findNavController().navigate(R.id.action_shopHomeFragment_to_productPreviewFragment, bundle)
         }
     }
 
+    private val debounceDelayMillis = 1000 // Set your desired debounce delay in milliseconds
+    private val handlerQty = Handler(Looper.getMainLooper())
+    private val actionStack = Stack<Int>()
+
     override fun updateQuantity(position: Int, quantity: Int) {
 
+
+        if (quantity > 0) {
+            handlerQty.removeCallbacksAndMessages(null)
+            if (!actionStack.contains(position)) {
+                actionStack.push(position)
+            }
+            subCategoryProductsArray[position].cartQuantity = quantity
+            subCategoryProductsAdapter.notifyItemChanged(position)
+
+            updateQtyResponse()
+
+        }
     }
 
+    private fun updateQtyResponse() {
+
+        val params = JsonObject()
+
+        handlerQty.postDelayed({
+            if (actionStack.isNotEmpty()) {
+                val cartmodel = subCategoryProductsArray[actionStack.pop()]
+                params.addProperty("id", cartmodel.cartItemId)
+                params.addProperty("quantity", cartmodel.cartQuantity)
+                mViewModel.updateCartItem(params)
+
+                mViewModel.updateCartItemResponse.observe(requireActivity()) {
+                    when (it.status) {
+                        Resource.Status.LOADING -> {
+                            loadingDialog.show()
+                        }
+
+                        Resource.Status.SUCCESS -> {
+                            loadingDialog.dismiss()
+                            it.data?.let { data ->
+
+                                if (actionStack.isNotEmpty()) {
+                                    val cartmodel1 = subCategoryProductsArray[actionStack.pop()]
+                                    params.addProperty("id", cartmodel1.cartItemId)
+                                    params.addProperty("quantity", cartmodel1.cartQuantity)
+                                    mViewModel.updateCartItem(params)
+                                } else {
+//                                    layoutUpdate(data)
+                                }
+                            }
+                            mViewModel.updateCartItemResponse.removeObservers(viewLifecycleOwner)
+                        }
+
+                        Resource.Status.ERROR -> {
+                            loadingDialog.dismiss()
+                            if (isAdded) {
+
+                                mViewDataBinding.root.snackbar(it.message!!)
+                            }
+                        }
+                    }
+                }
+            }
+
+        }, debounceDelayMillis.toLong())
+    }
 
     override fun prodRemove() {
-
+        mViewModel.emptyCart()
     }
 
 
