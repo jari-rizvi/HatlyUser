@@ -105,6 +105,10 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
 
         mViewModel.allFoodsCategoriesResponse.observe(requireActivity()) {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -137,6 +141,10 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
 
         mViewModel.allFoodsShopsResponse.observe(requireActivity()) {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }

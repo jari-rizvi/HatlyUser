@@ -44,6 +44,10 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
             }
         }
 
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         mViewDataBinding.txtLogin.setOnClickListener {
             findNavController().navigate(R.id.action_specialOrderFragment_to_parcelDetailFragment)
         }
@@ -61,6 +65,10 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
 
         mViewModel.activeDelieverResponse.observe(requireActivity()) {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }

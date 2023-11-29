@@ -1,5 +1,6 @@
 package com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,8 +33,26 @@ class HatlyPopularAdapter(
             ""
         }
 
+        var salesPrice = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} Aed"
+        val price = "${arrayData.price} Aed"
+
+
+        if (arrayData.salePrice != 0.0){
+            holder.bind.textView27.paintFlags = holder.bind.textView27.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            holder.bind.textView27.visibility = View.VISIBLE
+        }else{
+            holder.bind.textView27.visibility = View.GONE
+            salesPrice = price
+        }
+
         holder.bind.txtPrize.text = try {
-            arrayData.price.toString()
+            salesPrice
+        } catch (e: Exception) {
+            ""
+        }
+
+        holder.bind.textView27.text = try {
+            price
         } catch (e: Exception) {
             ""
         }

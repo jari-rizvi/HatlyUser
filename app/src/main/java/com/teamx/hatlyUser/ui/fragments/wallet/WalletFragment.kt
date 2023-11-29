@@ -82,6 +82,10 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
         if (!mViewModel.meResponse.hasActiveObservers()) {
             mViewModel.meResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -111,6 +115,10 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
 
         mViewModel.orderHistoryResponse.observe(requireActivity()) {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }

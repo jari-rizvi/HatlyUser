@@ -164,6 +164,23 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                 "placed" -> {
                     mViewDataBinding.txtLogin.text = "Cancel Order"
                     mViewDataBinding.txtLogin.isChecked = true
+                    mViewDataBinding.txtLogin1.visibility = View.GONE
+                    mViewDataBinding.txtTrack.visibility = View.VISIBLE
+                }
+
+                "picked" -> {
+                    mViewDataBinding.txtLogin.text = "Cancel Order"
+                    mViewDataBinding.txtLogin.isChecked = false
+                    mViewDataBinding.txtLogin.isEnabled = false
+                    mViewDataBinding.txtLogin1.visibility = View.GONE
+                    mViewDataBinding.txtTrack.visibility = View.VISIBLE
+                }
+
+                "ready" -> {
+                    mViewDataBinding.txtLogin.text = "Cancel Order"
+                    mViewDataBinding.txtLogin.isChecked = false
+                    mViewDataBinding.txtLogin.isEnabled = false
+                    mViewDataBinding.txtLogin1.visibility = View.GONE
                     mViewDataBinding.txtTrack.visibility = View.VISIBLE
                 }
 
@@ -236,6 +253,10 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
         if (!mViewModel.uploadReviewImgResponse.hasActiveObservers()) {
             mViewModel.uploadReviewImgResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -308,6 +329,10 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
         if (!mViewModel.reOrderResponse.hasActiveObservers()) {
             mViewModel.reOrderResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -336,6 +361,10 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
         if (!mViewModel.reviewOrderResponse.hasActiveObservers()) {
             mViewModel.reviewOrderResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -362,6 +391,10 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
         if (!mViewModel.cancelOrderResponse.hasActiveObservers()) {
             mViewModel.cancelOrderResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }

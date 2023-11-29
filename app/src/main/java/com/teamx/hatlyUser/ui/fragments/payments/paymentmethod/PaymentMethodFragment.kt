@@ -57,6 +57,10 @@ class PaymentMethodFragment : BaseFragment<FragmentPaymentMethodBinding, Payment
         mViewModel.credCards()
         mViewModel.credCardsResponse.observe(requireActivity()) {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -89,6 +93,10 @@ class PaymentMethodFragment : BaseFragment<FragmentPaymentMethodBinding, Payment
         if (!mViewModel.defaultCredCardsResponse.hasActiveObservers()) {
             mViewModel.defaultCredCardsResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -116,6 +124,10 @@ class PaymentMethodFragment : BaseFragment<FragmentPaymentMethodBinding, Payment
         if (!mViewModel.detachCredCardsResponse.hasActiveObservers()) {
             mViewModel.detachCredCardsResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }

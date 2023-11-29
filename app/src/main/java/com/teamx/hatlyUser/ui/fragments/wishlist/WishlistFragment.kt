@@ -85,6 +85,10 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
         if (!mViewModel.favRemoveResponse.hasActiveObservers()) {
             mViewModel.favRemoveResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -100,6 +104,10 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
                                     wishListPosition,
                                     wishListArraylist.size
                                 )
+
+                                if (isAdded){
+                                    mViewDataBinding.root.snackbar("Product remove from wishlist")
+                                }
 
                                 if (wishListArraylist.isEmpty()){
                                     findNavController().popBackStack()
@@ -124,6 +132,10 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
         if (!mViewModel.wishListResponse.hasActiveObservers()) {
             mViewModel.wishListResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }

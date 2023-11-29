@@ -79,6 +79,10 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding, OrderHist
 
         mViewModel.orderHistoryResponse.observe(requireActivity()) {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }

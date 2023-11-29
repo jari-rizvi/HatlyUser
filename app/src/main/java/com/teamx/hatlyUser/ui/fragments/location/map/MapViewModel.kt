@@ -36,6 +36,8 @@ class MapViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _createAddressResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }else if (it.code() == 401) {
+                            _createAddressResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _createAddressResponse.postValue(Resource.error(jsonObj.getString("message")))
@@ -64,7 +66,9 @@ class MapViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _updateAddressResponse.postValue(Resource.error(jsonObj.getString("message")))
-                        } else {
+                        } else if (it.code() == 401) {
+                            _updateAddressResponse.postValue(Resource.unAuth("", null))
+                        }else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _updateAddressResponse.postValue(Resource.error(jsonObj.getString("message")))
 //                            _updateAddressResponse.postValue(Resource.error(it.message(), null))

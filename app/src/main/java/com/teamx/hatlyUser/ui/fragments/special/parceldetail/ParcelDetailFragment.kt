@@ -48,6 +48,10 @@ class ParcelDetailFragment : BaseFragment<FragmentParcelDetailBinding, ParcelDet
             }
         }
 
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         // Create an ArrayAdapter using the string array and a default spinner layout
 //        val adapter = ArrayAdapter.createFromResource(
 //            requireContext(),

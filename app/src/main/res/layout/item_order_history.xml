@@ -107,10 +107,11 @@
             android:text="03.03.2023"
             android:textAlignment="center"
             android:textColor="#99363636"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:textSize="@dimen/_11ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/txtStatus"
-            app:layout_constraintEnd_toEndOf="@+id/txtDetail"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/txtStatus" />
 
         <View

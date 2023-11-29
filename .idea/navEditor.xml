@@ -455,8 +455,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="4648" />
-                            <option name="y" value="3160" />
+                            <option name="x" value="2258" />
+                            <option name="y" value="2794" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -696,6 +696,15 @@
                             <option name="x" value="3916" />
                             <option name="y" value="2267" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_productPreviewFragment_to_cartFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

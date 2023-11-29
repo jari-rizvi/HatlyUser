@@ -139,6 +139,10 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
         if (!mViewModel.getAlAddressResponse.hasActiveObservers()) {
             mViewModel.getAlAddressResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -175,6 +179,10 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
         if (!mViewModel.setDefaultAddressResponse.hasActiveObservers()) {
             mViewModel.setDefaultAddressResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -206,6 +214,10 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
         if (!mViewModel.deleteAddressResponse.hasActiveObservers()) {
             mViewModel.deleteAddressResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }

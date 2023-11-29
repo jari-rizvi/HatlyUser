@@ -40,6 +40,8 @@ class CheckOutViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _checkoutResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }else if (it.code() == 401) {
+                            _checkoutResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _checkoutResponse.postValue(Resource.error(jsonObj.getString("message")))
@@ -67,6 +69,8 @@ class CheckOutViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _orderSummaryResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }else if (it.code() == 401) {
+                            _orderSummaryResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _orderSummaryResponse.postValue(Resource.error(jsonObj.getString("message")))
@@ -95,6 +99,8 @@ class CheckOutViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _placeOrderResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }else if (it.code() == 401) {
+                            _placeOrderResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _placeOrderResponse.postValue(Resource.error(jsonObj.getString("message")))
@@ -123,6 +129,8 @@ class CheckOutViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _credCardsGoogle.postValue(Resource.error(jsonObj.getString("message")))
+                        }else if (it.code() == 401) {
+                            _credCardsGoogle.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _credCardsGoogle.postValue(Resource.error(jsonObj.getString("message")))

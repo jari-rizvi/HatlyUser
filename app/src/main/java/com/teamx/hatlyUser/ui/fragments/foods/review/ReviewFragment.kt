@@ -77,6 +77,10 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding, ReviewViewModel>() {
         if (!mViewModel.reviewListResponse.hasActiveObservers()) {
             mViewModel.reviewListResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }

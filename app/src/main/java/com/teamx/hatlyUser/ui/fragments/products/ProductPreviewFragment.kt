@@ -139,6 +139,10 @@ class ProductPreviewFragment :
         }
         mViewModel.prodPreviewResponse.observe(requireActivity()) {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -281,6 +285,10 @@ class ProductPreviewFragment :
         if (!mViewModel.addToCartResponse.hasActiveObservers()) {
             mViewModel.addToCartResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -322,6 +330,10 @@ class ProductPreviewFragment :
         if (!mViewModel.emptyCartResponse.hasActiveObservers()) {
             mViewModel.emptyCartResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -554,6 +566,10 @@ class ProductPreviewFragment :
 
                 mViewModel.updateCartItemResponse.observe(requireActivity()) {
                     when (it.status) {
+                        Resource.Status.AUTH -> {
+                            loadingDialog.dismiss()
+                            onToSignUpPage()
+                        }
                         Resource.Status.LOADING -> {
                             loadingDialog.show()
                         }
@@ -571,7 +587,7 @@ class ProductPreviewFragment :
 //                                    layoutUpdate(data)
                                 }
                             }
-                            mViewModel.updateCartItemResponse.removeObservers(viewLifecycleOwner)
+
                         }
 
                         Resource.Status.ERROR -> {

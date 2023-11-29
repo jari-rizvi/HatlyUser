@@ -38,6 +38,8 @@ class ParcelLocationViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _fareCalculationResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }else if (it.code() == 401) {
+                            _fareCalculationResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _fareCalculationResponse.postValue(Resource.error(jsonObj.getString("message")))
@@ -65,6 +67,8 @@ class ParcelLocationViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _createParcelResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }else if (it.code() == 401) {
+                            _createParcelResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _createParcelResponse.postValue(Resource.error(jsonObj.getString("message")))

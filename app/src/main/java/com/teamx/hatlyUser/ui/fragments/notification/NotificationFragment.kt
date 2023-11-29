@@ -70,6 +70,10 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
         if (!mViewModel.notificationResponse.hasActiveObservers()) {
             mViewModel.notificationResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }

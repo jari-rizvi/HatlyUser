@@ -111,6 +111,10 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
 
         mViewModel.storeSubCategoryResponse.observe(requireActivity()) {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -148,6 +152,10 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
         if (!mViewModel.addToCartResponse.hasActiveObservers()) {
             mViewModel.addToCartResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -187,6 +195,10 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
         if (!mViewModel.emptyCartResponse.hasActiveObservers()) {
             mViewModel.emptyCartResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -307,6 +319,10 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
 
                 mViewModel.updateCartItemResponse.observe(requireActivity()) {
                     when (it.status) {
+                        Resource.Status.AUTH -> {
+                            loadingDialog.dismiss()
+                            onToSignUpPage()
+                        }
                         Resource.Status.LOADING -> {
                             loadingDialog.show()
                         }
@@ -324,7 +340,7 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
 //                                    layoutUpdate(data)
                                 }
                             }
-                            mViewModel.updateCartItemResponse.removeObservers(viewLifecycleOwner)
+
                         }
 
                         Resource.Status.ERROR -> {

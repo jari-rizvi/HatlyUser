@@ -84,6 +84,10 @@ class ParcelLocationFragment :
             }
         }
 
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         val bundle = arguments
         if (bundle != null) {
 
@@ -137,6 +141,10 @@ class ParcelLocationFragment :
 
         mViewModel.fareCalculationResponse.observe(requireActivity()) {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -168,6 +176,10 @@ class ParcelLocationFragment :
 
         mViewModel.createParcelResponse.observe(requireActivity()) {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }

@@ -72,6 +72,10 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
         if (!mViewModel.verifySignupOtpResponse.hasActiveObservers()) {
             mViewModel.verifySignupOtpResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -85,16 +89,17 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
                                     dataStoreProvider.saveUserToken(it1)
                                     NetworkCallPointsNest.TOKENER = it1
                                 }
+
+                                PrefHelper.getInstance(requireActivity()).setUserData(data)
+                                if (LocationPermission.requestPermission(requireContext())) {
+                                    val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+                                    sharedViewModel.setlocationmodel(userData?.location)
+                                    findNavController().navigate(R.id.action_otpFragment_to_mapFragment)
+                                } else {
+                                    findNavController().navigate(R.id.action_otpFragment_to_allowLocationFragment)
+                                }
                             }
-                            PrefHelper.getInstance(requireActivity()).setUserData(data)
-                            if (LocationPermission.requestPermission(requireContext())) {
-                                val userData =
-                                    PrefHelper.getInstance(requireActivity()).getUserData()
-                                sharedViewModel.setlocationmodel(userData?.location)
-                                findNavController().navigate(R.id.action_otpFragment_to_mapFragment)
-                            } else {
-                                findNavController().navigate(R.id.action_otpFragment_to_allowLocationFragment)
-                            }
+
                         }
                     }
 
@@ -113,6 +118,10 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
         if (!mViewModel.forgotPassVerifyOtpResponse.hasActiveObservers()) {
             mViewModel.forgotPassVerifyOtpResponse.observe(requireActivity(), Observer {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -158,6 +167,10 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
         if (!mViewModel.resendOtpResponse.hasActiveObservers()) {
             mViewModel.resendOtpResponse.observe(requireActivity(), Observer {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -166,6 +179,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             if (data.success) {
+                                timerStart()
                                 mViewDataBinding.root.snackbar("Otp resend")
                             }
                         }
@@ -222,10 +236,15 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
             while (remainingSeconds > 0) {
                 println("Remaining time: $remainingSeconds seconds")
                 Log.d("timerStart", "working $remainingSeconds")
-                mViewDataBinding.textView23.text = "Resend OTP in $remainingSeconds sec"
+
                 delay(1000) // Delay for 1 second
                 remainingSeconds--
+                mViewDataBinding.textView23.text = "Resend OTP in $remainingSeconds sec"
             }
+//            remainingSeconds = 0
+//            mViewDataBinding.textView23.text = "Resend OTP in $remainingSeconds sec"
+
+
 
             println("Time's up!")
             Log.d("timerStart", "Time's up!")

@@ -47,6 +47,8 @@ class HomeSearchViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _homeSearchResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }else if (it.code() == 401) {
+                            _homeSearchResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _homeSearchResponse.postValue(Resource.error(jsonObj.getString("message")))

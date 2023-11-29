@@ -108,6 +108,10 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding, TopUpModel>(),
 
         mViewModel.credCardsResponse.observe(requireActivity()) {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -122,6 +126,8 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding, TopUpModel>(),
                         }
                         if (data.default?.id?.isNotEmpty() == true) {
                             paymentMethodid = data.default.id
+                        } else {
+                            paymentMethodid = ""
                         }
                     }
                 }
@@ -130,7 +136,7 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding, TopUpModel>(),
                     loadingDialog.dismiss()
                     if (isAdded) {
 
-                    mViewDataBinding.root.snackbar(it.message!!)
+                        mViewDataBinding.root.snackbar(it.message!!)
                     }
                 }
             }
@@ -139,6 +145,10 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding, TopUpModel>(),
         if (!mViewModel.topUpSavedResponse.hasActiveObservers()) {
             mViewModel.topUpSavedResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -168,7 +178,7 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding, TopUpModel>(),
                         loadingDialog.dismiss()
                         if (isAdded) {
 
-                        mViewDataBinding.root.snackbar(it.message!!)
+                            mViewDataBinding.root.snackbar(it.message!!)
                         }
                     }
                 }

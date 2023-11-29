@@ -42,6 +42,8 @@ class OrderDetailViewModel @Inject constructor(
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _uploadReviewImgResponse.postValue(Resource.error(jsonObj.getString("message")))
                             Log.d("uploadReviewImg", "jsonObj ${it.code()}: ${jsonObj.getString("message")}")
+                        }else if (it.code() == 401) {
+                            _uploadReviewImgResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _uploadReviewImgResponse.postValue(Resource.error(jsonObj.getString("message")))
@@ -75,6 +77,8 @@ class OrderDetailViewModel @Inject constructor(
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _reviewOrderResponse.postValue(Resource.error(jsonObj.getString("message")))
                             Log.d("uploadReviewImg", "jsonObj ${it.code()}: ${jsonObj.getString("message")}")
+                        }else if (it.code() == 401) {
+                            _reviewOrderResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _reviewOrderResponse.postValue(Resource.error(jsonObj.getString("message")))
@@ -108,6 +112,8 @@ class OrderDetailViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _reOrderResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }else if (it.code() == 401) {
+                            _reOrderResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _reOrderResponse.postValue(Resource.error(jsonObj.getString("message")))
@@ -136,6 +142,8 @@ class OrderDetailViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _cancelOrderResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }else if (it.code() == 401) {
+                            _cancelOrderResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _cancelOrderResponse.postValue(Resource.error(jsonObj.getString("message")))

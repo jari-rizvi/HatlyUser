@@ -68,6 +68,10 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding, SignUpViewModel>() {
         if (!mViewModel.signupResponse.hasActiveObservers()){
             mViewModel.signupResponse.observe(requireActivity(), Observer {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }

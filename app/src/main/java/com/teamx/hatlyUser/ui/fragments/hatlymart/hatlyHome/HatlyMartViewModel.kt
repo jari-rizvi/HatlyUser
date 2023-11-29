@@ -41,7 +41,9 @@ class HatlyMartViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _categoryShopResponse.postValue(Resource.error(jsonObj.getString("message")))
-                        } else {
+                        } else if (it.code() == 401) {
+                            _categoryShopResponse.postValue(Resource.unAuth("", null))
+                        }else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _categoryShopResponse.postValue(Resource.error(jsonObj.getString("message")))
                         }
@@ -69,7 +71,9 @@ class HatlyMartViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _popularProductsResponse.postValue(Resource.error(jsonObj.getString("message")))
-                        } else {
+                        } else if (it.code() == 401) {
+                            _popularProductsResponse.postValue(Resource.unAuth("", null))
+                        }else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _popularProductsResponse.postValue(Resource.error(jsonObj.getString("message")))
                         }
@@ -96,7 +100,9 @@ class HatlyMartViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _addToCartResponse.postValue(Resource.error(jsonObj.getString("message")))
-                        } else {
+                        } else if (it.code() == 401) {
+                            _addToCartResponse.postValue(Resource.unAuth("", null))
+                        }else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _addToCartResponse.postValue(Resource.error(jsonObj.getString("message")))
                         }
@@ -124,6 +130,8 @@ class HatlyMartViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _updateCartItemResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }else if (it.code() == 401) {
+                            _updateCartItemResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _updateCartItemResponse.postValue(Resource.error(jsonObj.getString("message")))
@@ -151,6 +159,8 @@ class HatlyMartViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _emptyCartResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }else if (it.code() == 401) {
+                            _emptyCartResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _emptyCartResponse.postValue(Resource.error(jsonObj.getString("message")))

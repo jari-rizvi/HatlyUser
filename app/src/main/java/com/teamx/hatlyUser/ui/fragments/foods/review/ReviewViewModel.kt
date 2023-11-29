@@ -43,6 +43,8 @@ class ReviewViewModel @Inject constructor(
                                 "uploadReviewImg",
                                 "jsonObj ${it.code()}: ${jsonObj.getString("message")}"
                             )
+                        }else if (it.code() == 401) {
+                            _reviewListResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _reviewListResponse.postValue(Resource.error(jsonObj.getString("message")))

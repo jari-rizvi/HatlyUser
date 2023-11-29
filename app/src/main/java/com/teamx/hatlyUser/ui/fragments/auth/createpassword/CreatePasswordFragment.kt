@@ -70,6 +70,10 @@ class CreatePasswordFragment :
         if (!mViewModel.updateResponse.hasActiveObservers()) {
             mViewModel.updateResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -82,12 +86,13 @@ class CreatePasswordFragment :
 
 //                                    dataStoreProvider.saveDeviceData(randNum!!)
 //                                    dataStoreProvider.saveDeviceData("88765275963748185512")
+
                             }
-                            if (LocationPermission.requestPermission(requireContext())) {
-                                findNavController().navigate(R.id.action_createPasswordFragment_to_homeFragment)
-                            } else {
-                                findNavController().navigate(R.id.action_createPasswordFragment_to_locationFragment)
-                            }
+                                findNavController().navigate(R.id.action_createPasswordFragment_to_loginFragment)
+//                            if (LocationPermission.requestPermission(requireContext())) {
+//                            } else {
+//                                findNavController().navigate(R.id.action_createPasswordFragment_to_locationFragment)
+//                            }
                         }
                     }
 

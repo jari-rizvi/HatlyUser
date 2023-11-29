@@ -188,6 +188,10 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 //        if (!mViewModel.healthDetailResponse.hasActiveObservers()) {
         mViewModel.categoryShopResponse.observe(requireActivity()) {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -237,6 +241,10 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 
         mViewModel.popularProductsResponse.observe(requireActivity(), Observer {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -264,6 +272,10 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
         if (!mViewModel.addToCartResponse.hasActiveObservers()) {
             mViewModel.addToCartResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -320,6 +332,10 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
         if (!mViewModel.emptyCartResponse.hasActiveObservers()) {
             mViewModel.emptyCartResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -448,6 +464,10 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 
                 mViewModel.updateCartItemResponse.observe(requireActivity()) {
                     when (it.status) {
+                        Resource.Status.AUTH -> {
+                            loadingDialog.dismiss()
+                            onToSignUpPage()
+                        }
                         Resource.Status.LOADING -> {
                             loadingDialog.show()
                         }
@@ -465,7 +485,7 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 //                                    layoutUpdate(data)
                                 }
                             }
-                            mViewModel.updateCartItemResponse.removeObservers(viewLifecycleOwner)
+
                         }
 
                         Resource.Status.ERROR -> {

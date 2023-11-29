@@ -120,6 +120,10 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
 //        if (!mViewModel.allStoresResponse.hasActiveObservers()) {
         mViewModel.allHealthAndBeautyStoresResponse.observe(requireActivity(), Observer {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }

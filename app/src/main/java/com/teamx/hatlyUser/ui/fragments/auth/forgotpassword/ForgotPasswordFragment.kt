@@ -58,6 +58,10 @@ class ForgotPasswordFragment :
         if (!mViewModel.forgotPassResponse.hasActiveObservers()) {
             mViewModel.forgotPassResponse.observe(requireActivity(), Observer {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }

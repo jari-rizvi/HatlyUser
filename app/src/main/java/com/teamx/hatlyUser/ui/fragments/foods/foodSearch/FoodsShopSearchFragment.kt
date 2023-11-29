@@ -89,6 +89,10 @@ class FoodsShopSearchFragment :
         mViewModel.foodsShopHomeResponse.observe(requireActivity())
         {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }

@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,18 +13,23 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.teamx.hatlyUser.MainApplication
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.SharedViewModel
 import com.teamx.hatlyUser.data.local.datastore.DataStoreProvider
 import com.teamx.hatlyUser.ui.activity.mainActivity.MainActivity
 import com.teamx.hatlyUser.utils.DialogHelperClass
+import com.teamx.hatlyUser.utils.UnAuthorizedCallback
+import kotlinx.coroutines.launch
 
 
-abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment(),
+    UnAuthorizedCallback,DialogHelperClass.Companion.DialogCallBackSignIn {
 
     lateinit var sharedViewModel: SharedViewModel
     lateinit var navController: NavController
@@ -153,5 +159,42 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
 
     }
 
+
+    var dialog: Dialog? = null
+
+    override fun onToSignUpPage() {
+        if (isAdded) {
+            Log.d("123123", "onToSignUpPage: ")
+
+            if (dialog == null) {
+                dialog = DialogHelperClass.signUpLoginDialog(requireContext(), this)
+
+                dialog?.show()
+                dialog?.setOnDismissListener {
+                    dialog = null
+                }
+            } else {
+                dialog?.dismiss()
+                dialog = null
+            }
+
+        }
+    }
+
+    override fun onSignInClick1() {
+        mViewModel.viewModelScope.launch {
+            dataStoreProvider.saveUserToken("")
+            findNavController().navigate(R.id.action_global_loginFragment)
+
+        }
+    }
+
+    override fun onSignUpClick1() {
+        mViewModel.viewModelScope.launch {
+            dataStoreProvider.saveUserToken("")
+            findNavController().navigate(R.id.action_global_signUpFragment)
+
+        }
+    }
 
 }

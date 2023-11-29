@@ -37,7 +37,9 @@ class LoginViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _login.postValue(Resource.error(jsonObj.getString("message")))
-                        } else {
+                        } else if (it.code() == 401) {
+                            _login.postValue(Resource.unAuth("", null))
+                        }else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _login.postValue(Resource.error(jsonObj.getString("message")))
 //                            _login.postValue(Resource.error(it.message(), null))
@@ -64,7 +66,9 @@ class LoginViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _loginWithGoogle.postValue(Resource.error(jsonObj.getString("message")))
-                        } else {
+                        } else if (it.code() == 401) {
+                            _loginWithGoogle.postValue(Resource.unAuth("", null))
+                        }else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _loginWithGoogle.postValue(Resource.error(jsonObj.getString("message")))
 //                            _loginWithGoogle.postValue(Resource.error(it.message(), null))

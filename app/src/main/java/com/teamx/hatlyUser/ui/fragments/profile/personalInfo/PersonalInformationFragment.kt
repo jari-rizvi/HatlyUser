@@ -108,6 +108,10 @@ class PersonalInformationFragment :
         if (!mViewModel.uploadReviewImgResponse.hasActiveObservers()) {
             mViewModel.uploadReviewImgResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -141,6 +145,10 @@ class PersonalInformationFragment :
         if (!mViewModel.updateProfileResponse.hasActiveObservers()) {
             mViewModel.updateProfileResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -173,6 +181,10 @@ class PersonalInformationFragment :
         if (!mViewModel.sendOtpProfileResponse.hasActiveObservers()) {
             mViewModel.sendOtpProfileResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -203,6 +215,10 @@ class PersonalInformationFragment :
         if (!mViewModel.verifyOtpProfileResponse.hasActiveObservers()) {
             mViewModel.verifyOtpProfileResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }

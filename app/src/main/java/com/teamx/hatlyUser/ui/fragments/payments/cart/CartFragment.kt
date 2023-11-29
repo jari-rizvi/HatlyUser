@@ -100,6 +100,10 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
 
         mViewModel.getCartResponse.observe(requireActivity()) {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -206,6 +210,10 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
 
                 mViewModel.updateCartItemResponse.observe(requireActivity()) {
                     when (it.status) {
+                        Resource.Status.AUTH -> {
+                            loadingDialog.dismiss()
+                            onToSignUpPage()
+                        }
                         Resource.Status.LOADING -> {
                             loadingDialog.show()
                         }
@@ -223,7 +231,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
                                     layoutUpdate(data)
                                 }
                             }
-                            mViewModel.updateCartItemResponse.removeObservers(viewLifecycleOwner)
+
                         }
 
                         Resource.Status.ERROR -> {
@@ -274,6 +282,10 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
 
         mViewModel.removeCartItemResponse.observe(requireActivity()) {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -290,6 +302,9 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
                                 position,
                                 cartProductArrayList.size - position
                             )
+                        }
+                        if (isAdded) {
+                            mViewDataBinding.root.snackbar("Product Removed")
                         }
                     }
                 }

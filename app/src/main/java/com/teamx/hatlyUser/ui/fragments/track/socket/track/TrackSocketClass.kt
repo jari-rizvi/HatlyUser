@@ -3,6 +3,7 @@ package com.teamx.hatlyUser.ui.fragments.track.socket.track
 import android.annotation.SuppressLint
 import android.util.Log
 import com.google.gson.Gson
+import com.teamx.hatlyUser.constants.AppConstants.ApiConfiguration.Companion.APP_URL
 import com.teamx.hatlyUser.ui.fragments.track.socket.chat.ExceptionData
 import com.teamx.hatlyUser.ui.fragments.track.socket.track.model.rider.TrackRiderModel
 import com.teamx.hatlyUser.ui.fragments.track.socket.track.model.shop.TrackShopModel
@@ -32,9 +33,9 @@ object TrackSocketClass {
         val u: Boolean? = trackSocket?.connected()
 
         if (u == null) {
-            trackSocket = IO.socket("http://192.168.100.33:8000/track", options)
+            trackSocket = IO.socket("${APP_URL}track", options)
         } else if (!u) {
-            trackSocket = IO.socket("http://192.168.100.33:8000/track", options)
+            trackSocket = IO.socket("${APP_URL}track", options)
         }
 
         trackSocket?.connect()

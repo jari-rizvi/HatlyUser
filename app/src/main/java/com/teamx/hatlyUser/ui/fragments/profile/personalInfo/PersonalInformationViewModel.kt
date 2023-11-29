@@ -42,6 +42,8 @@ class PersonalInformationViewModel @Inject constructor(
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _uploadReviewImgResponse.postValue(Resource.error(jsonObj.getString("message")))
                             Log.d("uploadReviewImg", "jsonObj ${it.code()}: ${jsonObj.getString("message")}")
+                        }else if (it.code() == 401) {
+                            _uploadReviewImgResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _uploadReviewImgResponse.postValue(Resource.error(jsonObj.getString("message")))
@@ -74,6 +76,8 @@ class PersonalInformationViewModel @Inject constructor(
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _updateProfileResponse.postValue(Resource.error(jsonObj.getString("message")))
                             Log.d("uploadReviewImg", "jsonObj ${it.code()}: ${jsonObj.getString("message")}")
+                        }else if (it.code() == 401) {
+                            _updateProfileResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _updateProfileResponse.postValue(Resource.error(jsonObj.getString("message")))
@@ -106,6 +110,8 @@ class PersonalInformationViewModel @Inject constructor(
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _sendOtpProfileResponse.postValue(Resource.error(jsonObj.getString("message")))
                             Log.d("uploadReviewImg", "jsonObj ${it.code()}: ${jsonObj.getString("message")}")
+                        }else if (it.code() == 401) {
+                            _sendOtpProfileResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _sendOtpProfileResponse.postValue(Resource.error(jsonObj.getString("message")))
@@ -138,6 +144,8 @@ class PersonalInformationViewModel @Inject constructor(
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _verifyOtpProfileResponse.postValue(Resource.error(jsonObj.getString("message")))
                             Log.d("uploadReviewImg", "jsonObj ${it.code()}: ${jsonObj.getString("message")}")
+                        }else if (it.code() == 401) {
+                            _verifyOtpProfileResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _verifyOtpProfileResponse.postValue(Resource.error(jsonObj.getString("message")))

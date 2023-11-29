@@ -186,8 +186,8 @@
             android:text="Add New Card"
             android:textColor="#010101"
             android:textSize="@dimen/_12ssp"
-            app:layout_constraintEnd_toEndOf="@+id/radioSelectedCard"
-            app:layout_constraintStart_toStartOf="@+id/radioSelectedCard"
+            app:layout_constraintEnd_toEndOf="@+id/userEmail"
+            app:layout_constraintStart_toStartOf="@+id/textView454"
             app:layout_constraintTop_toBottomOf="@+id/radioSelectedCard" />
 
 

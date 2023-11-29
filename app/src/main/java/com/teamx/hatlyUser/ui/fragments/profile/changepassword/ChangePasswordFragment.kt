@@ -58,6 +58,10 @@ class ChangePasswordFragment :
         if (!mViewModel.changePasswordResponse.hasActiveObservers()) {
             mViewModel.changePasswordResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }

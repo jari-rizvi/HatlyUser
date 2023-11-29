@@ -1,5 +1,6 @@
 package com.teamx.hatlyUser.ui.fragments.shophome.adapter
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,9 +35,19 @@ class SubCategoryProductsAdapter(
         }
 
         holder.bind.txtPrize.text = try {
-            "${arrayData.prize}"
+            "${arrayData.salePrice}"
         } catch (e: Exception) {
             ""
+        }
+
+        holder.bind.textView27.text = try {
+            "${arrayData.price}"
+        } catch (e: Exception) {
+            ""
+        }
+
+        if (arrayData.salePrice != 0.0){
+            holder.bind.textView27.paintFlags = holder.bind.textView27.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         }
 
         Picasso.get().load(arrayData.images[0]).resize(500,500).into(holder.bind.imgShop)

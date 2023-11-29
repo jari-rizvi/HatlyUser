@@ -41,7 +41,8 @@ class FoodsShopPreviewFragment :
 
     private lateinit var shopCategoryArrayList: ArrayList<Product>
     private lateinit var productArrayList: ArrayList<Document>
-//    private lateinit var foodsShopProductAdapter: FoodsShopProductAdapter
+
+    //    private lateinit var foodsShopProductAdapter: FoodsShopProductAdapter
     private lateinit var shopHomeAdapter: FoodHomeTitleAdapter
 
     private var productLayoutManager2: LinearLayoutManager? = null
@@ -73,7 +74,10 @@ class FoodsShopPreviewFragment :
         mViewDataBinding.imgSearch.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("itemId", shopId)
-            findNavController().navigate(R.id.action_foodsShopHomeFragment_to_foodSearchFragment,bundle)
+            findNavController().navigate(
+                R.id.action_foodsShopHomeFragment_to_foodSearchFragment,
+                bundle
+            )
         }
 
         when (NetworkCallPointsNest.MART) {
@@ -143,6 +147,10 @@ class FoodsShopPreviewFragment :
         mViewModel.foodsShopHomeResponse.observe(requireActivity())
         {
             when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -153,7 +161,8 @@ class FoodsShopPreviewFragment :
 
                         shopId = data.shop._id
 
-                        Picasso.get().load(data.shop.image).resize(500,500).into(mViewDataBinding.imgShop)
+                        Picasso.get().load(data.shop.image).resize(500, 500)
+                            .into(mViewDataBinding.imgShop)
 
                         mViewDataBinding.imgFavourite.isChecked = data.shop.hasAddedToWishlist
 
@@ -196,7 +205,7 @@ class FoodsShopPreviewFragment :
                     loadingDialog.dismiss()
                     if (isAdded) {
 
-                    mViewDataBinding.root.snackbar(it.message!!)
+                        mViewDataBinding.root.snackbar(it.message!!)
                     }
                 }
             }
@@ -206,6 +215,10 @@ class FoodsShopPreviewFragment :
         if (!mViewModel.favRemoveResponse.hasActiveObservers()) {
             mViewModel.favRemoveResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -216,6 +229,13 @@ class FoodsShopPreviewFragment :
                             if (data.success) {
                                 mViewDataBinding.imgFavourite.isChecked =
                                     !mViewDataBinding.imgFavourite.isChecked
+                                if (isAdded) {
+                                    if (mViewDataBinding.imgFavourite.isChecked) {
+                                        mViewDataBinding.root.snackbar("Product added in wishlist")
+                                    } else {
+                                        mViewDataBinding.root.snackbar("Product remove from wishlist")
+                                    }
+                                }
                             }
                         }
                     }
@@ -224,7 +244,7 @@ class FoodsShopPreviewFragment :
                         loadingDialog.dismiss()
                         if (isAdded) {
 
-                        mViewDataBinding.root.snackbar(it.message!!)
+                            mViewDataBinding.root.snackbar(it.message!!)
                         }
                     }
                 }
@@ -317,7 +337,8 @@ class FoodsShopPreviewFragment :
         productArrayList.clear()
         productArrayList.addAll(shopCategoryArrayList[position].documents)
 
-        productLayoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        productLayoutManager2 =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         mViewDataBinding.recShopProducts.layoutManager = productLayoutManager2
 
         val foodsShopProductAdapter = FoodsShopProductAdapter(productArrayList, this)

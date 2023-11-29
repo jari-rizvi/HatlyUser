@@ -43,6 +43,8 @@ class WishlistViewModel @Inject constructor(
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _wishListResponse.postValue(Resource.error(jsonObj.getString("message")))
                             Log.d("uploadReviewImg", "jsonObj ${it.code()}: ${jsonObj.getString("message")}")
+                        }else if (it.code() == 401) {
+                            _wishListResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _wishListResponse.postValue(Resource.error(jsonObj.getString("message")))
@@ -75,6 +77,8 @@ class WishlistViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _favRemoveResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        }else if (it.code() == 401) {
+                            _favRemoveResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _favRemoveResponse.postValue(Resource.error(jsonObj.getString("message")))

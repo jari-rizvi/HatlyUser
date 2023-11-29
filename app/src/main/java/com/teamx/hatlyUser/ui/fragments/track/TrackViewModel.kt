@@ -39,6 +39,8 @@ class TrackViewModel @Inject constructor(
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _uploadReviewImgResponse.postValue(Resource.error(jsonObj.getString("message")))
                             Log.d("uploadReviewImg", "jsonObj ${it.code()}: ${jsonObj.getString("message")}")
+                        }else if (it.code() == 401) {
+                            _uploadReviewImgResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _uploadReviewImgResponse.postValue(Resource.error(jsonObj.getString("message")))

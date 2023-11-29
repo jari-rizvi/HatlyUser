@@ -158,6 +158,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         if (!mViewModel.fcmResponse.hasActiveObservers()) {
             mViewModel.fcmResponse.observe(requireActivity()) {
                 when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }

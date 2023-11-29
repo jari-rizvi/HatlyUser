@@ -39,7 +39,9 @@ class OtpViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _verifySignupOtp.postValue(Resource.error(jsonObj.getString("message")))
-                        } else {
+                        } else if (it.code() == 401) {
+                            _verifySignupOtp.postValue(Resource.unAuth("", null))
+                        }else {
                             _verifySignupOtp.postValue(Resource.error("Some thing went wrong", null))
                         }
                     }
@@ -69,6 +71,8 @@ class OtpViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _forgotPassVerifyOtp.postValue(Resource.error(jsonObj.getString("message")))
+                        }else if (it.code() == 401) {
+                            _forgotPassVerifyOtp.postValue(Resource.unAuth("", null))
                         } else {
                             _forgotPassVerifyOtp.postValue(Resource.error("Some thing went wrong", null))
                         }

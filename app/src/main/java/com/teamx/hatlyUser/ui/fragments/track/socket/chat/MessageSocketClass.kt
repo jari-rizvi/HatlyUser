@@ -3,6 +3,7 @@ package com.teamx.hatlyUser.ui.fragments.track.socket.chat
 import android.annotation.SuppressLint
 import android.util.Log
 import com.google.gson.Gson
+import com.teamx.hatlyUser.constants.AppConstants.ApiConfiguration.Companion.APP_URL
 import com.teamx.hatlyUser.ui.fragments.track.socket.chat.model.allChat.Doc
 import com.teamx.hatlyUser.ui.fragments.track.socket.chat.model.allChat.GetAllMessageData
 import io.socket.client.Ack
@@ -28,9 +29,9 @@ object MessageSocketClass {
         val u: Boolean? = userMessageSocket?.connected()
 
         if (u == null) {
-            userMessageSocket = IO.socket("http://192.168.100.33:8000/chat",options)
+            userMessageSocket = IO.socket("${APP_URL}chat",options)
         } else if (!u) {
-            userMessageSocket = IO.socket("http://192.168.100.33:8000/chat", options)
+            userMessageSocket = IO.socket("${APP_URL}chat", options)
 
 
         }
