@@ -1,5 +1,7 @@
 package com.teamx.hatlyUser.data.models
+import androidx.annotation.Keep
 
+@Keep
 data class ShippingAddressModel(
     val __v: Int,
     val _id: String,

@@ -58,5 +58,7 @@
     <string name="save_and_continue">Save and Continue</string>
     <string name="enter_your_address">Enter your address</string>
 
+    <string name="give_us_an_opportunity_to_make_your_experience_better_you_grant_us_permission_to_collect_your_name_address_phone_number_email_address_and_transaction_history_through_the_hatly_app_along_with_any_other_essential_personal_data_we_employ_gps_and_other_forms_of_background_location_tracking_in_order_to_provide_you_with_tailored_services_we_could_provide_this_information_to_retailers_so_they_can_expedite_order_pickup_while_you_re_nearby_for_your_hatly_experience_to_be_improved_you_must_consent_to_the_collection_and_use_of_this_data_for_a_thorough_description_of_how_we_operate_please_refer_to_our_privacy_policy" translatable="false">Give us an opportunity to make your experience better! You grant us permission to collect your name, address, phone number, email address, and transaction history through the Hatly app, along with any other essential personal data. We employ GPS and other forms of background location tracking in order to provide you with tailored services. We could provide this information to retailers so they can expedite order pickup while you\'re nearby.\n\nFor your Hatly experience to be improved, you must consent to the collection and use of this data. For a thorough description of how we operate, please refer to our Privacy Policy.</string>
+
 
 </resources>

@@ -10,11 +10,14 @@ import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.databinding.FragmentOrderPlacedBinding
+import com.teamx.hatlyUser.utils.DialogHelperClass
+import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class OrderPlacedFragment : BaseFragment<FragmentOrderPlacedBinding, OrderPlacedViewModel>() {
+class OrderPlacedFragment : BaseFragment<FragmentOrderPlacedBinding, OrderPlacedViewModel>(),
+    DialogHelperClass.Companion.DialogProminentInterface {
 
     override val layoutId: Int
         get() = R.layout.fragment_order_placed
@@ -44,9 +47,7 @@ class OrderPlacedFragment : BaseFragment<FragmentOrderPlacedBinding, OrderPlaced
         }
 
         mViewDataBinding.txtLogin12.setOnClickListener {
-            val bundle1 = Bundle()
-            bundle1.putString("orderId", orderId)
-            findNavController().navigate(R.id.action_orderPlacedFragment_to_trackFragment,bundle1)
+            DialogHelperClass.prominentDialog(requireActivity(),this)
         }
 
         mViewDataBinding.txtLogin1.setOnClickListener {
@@ -65,6 +66,16 @@ class OrderPlacedFragment : BaseFragment<FragmentOrderPlacedBinding, OrderPlaced
             onBackPressedCallback
         )
 
+
+    }
+
+    override fun alloLocation() {
+        val bundle1 = Bundle()
+        bundle1.putString("orderId", orderId)
+        findNavController().navigate(R.id.action_orderPlacedFragment_to_trackFragment, bundle1)
+    }
+
+    override fun denyLocation() {
 
     }
 

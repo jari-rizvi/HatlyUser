@@ -15,12 +15,14 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.databinding.FragmentAllowLocationBinding
 import com.teamx.hatlyUser.ui.fragments.auth.login.LoginViewModel
+import com.teamx.hatlyUser.utils.DialogHelperClass
 import com.teamx.hatlyUser.utils.LocationPermission
 import com.teamx.hatlyUser.utils.PrefHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AllowLocationFragment : BaseFragment<FragmentAllowLocationBinding, LoginViewModel>() {
+class AllowLocationFragment : BaseFragment<FragmentAllowLocationBinding, LoginViewModel>(),
+    DialogHelperClass.Companion.DialogProminentInterface {
 
     override val layoutId: Int
         get() = R.layout.fragment_allow_location
@@ -52,19 +54,7 @@ class AllowLocationFragment : BaseFragment<FragmentAllowLocationBinding, LoginVi
 //        }
 
         mViewDataBinding.txtLogin.setOnClickListener {
-            val userData = PrefHelper.getInstance(requireActivity()).getUserData()
-            if (userData != null) {
-                if (userData.location != null) {
-                    userData.location.isAction = "Add"
-                }
-            }
-            sharedViewModel.setlocationmodel(userData?.location)
-            locationPermissionRequest.launch(
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                )
-            )
+            DialogHelperClass.prominentDialog(requireActivity(),this)
         }
 
 
@@ -122,6 +112,27 @@ class AllowLocationFragment : BaseFragment<FragmentAllowLocationBinding, LoginVi
                 findNavController().navigate(R.id.action_allowLocationFragment_to_mapFragment)
             }
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override fun alloLocation() {
+        val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+        if (userData != null) {
+            if (userData.location != null) {
+                userData.location.isAction = "Add"
+            }
+        }
+        sharedViewModel.setlocationmodel(userData?.location)
+        locationPermissionRequest.launch(
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+        )
+    }
+
+    override fun denyLocation() {
+
     }
 
 //    private val locationPermissionRequest =

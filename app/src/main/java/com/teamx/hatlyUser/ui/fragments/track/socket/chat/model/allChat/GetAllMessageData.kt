@@ -1,5 +1,7 @@
 package com.teamx.hatlyUser.ui.fragments.track.socket.chat.model.allChat
+import androidx.annotation.Keep
 
+@Keep
 data class GetAllMessageData(
     val docs: List<Doc>,
     val hasNextPage: Boolean,

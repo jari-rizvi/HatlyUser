@@ -1,5 +1,7 @@
 package com.teamx.hatlyUser.ui.fragments.payments.checkout.modelPlaceOrder
+import androidx.annotation.Keep
 
+@Keep
 data class Product(
     val afterCheckOut: Int,
     val id: String,

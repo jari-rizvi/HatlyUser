@@ -53,7 +53,8 @@ import java.io.FileOutputStream
 
 @AndroidEntryPoint
 class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetailViewModel>(),
-    DialogHelperClass.Companion.ReviewProduct, HatlyShopInterface {
+    DialogHelperClass.Companion.ReviewProduct, HatlyShopInterface,
+    DialogHelperClass.Companion.DialogProminentInterface {
 
     override val layoutId: Int
         get() = R.layout.fragment_order_detail
@@ -308,7 +309,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
             sharedViewModel.orderHistory.value?.let { it1 ->
                 when (it1.status) {
                     "placed" -> {
-                        mViewModel.cancelOrder(it1._id)
+                        DialogHelperClass.cancelOrderDialog(requireActivity(),this)
                     }
 
                     "confirmed" -> {
@@ -618,6 +619,14 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
     private fun prepareFilePart(partName: String, fileUri: File): MultipartBody.Part {
         val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), fileUri)
         return MultipartBody.Part.createFormData(partName, fileUri.name, requestFile)
+    }
+
+    override fun alloLocation() {
+        sharedViewModel.orderHistory.value?.let { mViewModel.cancelOrder(it._id) }
+    }
+
+    override fun denyLocation() {
+
     }
 
 }

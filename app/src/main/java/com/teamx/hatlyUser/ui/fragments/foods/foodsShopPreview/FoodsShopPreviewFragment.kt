@@ -1,5 +1,6 @@
 package com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -7,7 +8,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.BR
@@ -68,7 +68,7 @@ class FoodsShopPreviewFragment :
         }
 
         mViewDataBinding.imgShare.setOnClickListener {
-
+            shareText("Hey, I discovered this restaurant on Hatly. The food looks delicious! Check it out.\nhttps://hatly.ae/")
         }
 
         mViewDataBinding.imgSearch.setOnClickListener {
@@ -348,6 +348,13 @@ class FoodsShopPreviewFragment :
     }
 
     override fun clickMoreItem(position: Int) {
+    }
+
+    fun shareText(body: String?) {
+        val txtIntent = Intent(Intent.ACTION_SEND)
+        txtIntent.type = "text/plain"
+        txtIntent.putExtra(Intent.EXTRA_TEXT, body)
+        startActivity(Intent.createChooser(txtIntent, "Share"))
     }
 
 
