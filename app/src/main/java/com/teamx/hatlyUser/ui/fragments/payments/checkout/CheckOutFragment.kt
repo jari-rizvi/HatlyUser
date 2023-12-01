@@ -1,5 +1,7 @@
 package com.teamx.hatlyUser.ui.fragments.payments.checkout
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -71,6 +73,14 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 popEnter = com.teamx.hatlyUser.R.anim.nav_default_pop_enter_anim
                 popExit = com.teamx.hatlyUser.R.anim.nav_default_pop_exit_anim
             }
+        }
+
+        mViewDataBinding.textView2564.setOnClickListener {
+            val openURL = Intent(Intent.ACTION_VIEW)
+            openURL.data =
+//                Uri.parse("https://sites.google.com/view/zues-privacy-policy/home")
+                Uri.parse("https://sites.google.com/view/termsandconditionsforhatly/home")
+            startActivity(openURL)
         }
 
 //        paymentButtonContainer = view.findViewById(R.id.payment_button_container)

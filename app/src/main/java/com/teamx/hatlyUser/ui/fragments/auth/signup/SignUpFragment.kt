@@ -1,5 +1,7 @@
 package com.teamx.hatlyUser.ui.fragments.auth.signup
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -47,6 +49,22 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding, SignUpViewModel>() {
                 popEnter = R.anim.nav_default_pop_enter_anim
                 popExit = R.anim.nav_default_pop_exit_anim
             }
+        }
+
+        mViewDataBinding.textView7.setOnClickListener {
+            val openURL = Intent(Intent.ACTION_VIEW)
+            openURL.data =
+//                Uri.parse("https://sites.google.com/view/zues-privacy-policy/home")
+                Uri.parse("https://sites.google.com/view/termsandconditionsforhatly/home")
+            startActivity(openURL)
+        }
+
+        mViewDataBinding.textView6.setOnClickListener {
+            val openURL = Intent(Intent.ACTION_VIEW)
+            openURL.data =
+//                Uri.parse("https://sites.google.com/view/zues-privacy-policy/home")
+                Uri.parse("https://sites.google.com/view/privacypolicyforhatlyuser/home")
+            startActivity(openURL)
         }
 
         mViewDataBinding.imgBack.setOnClickListener {
