@@ -14,18 +14,15 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.stripe.android.PaymentConfiguration
 import com.stripe.android.paymentsheet.PaymentSheet
 import com.stripe.android.paymentsheet.PaymentSheetResult
 import com.teamx.hatlyUser.BR
-import com.teamx.hatlyUser.MainApplication.Companion.application
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentCheckOutBinding
-import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.Coordinates
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.adapter.CheckOutAdapter
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.model.Product
 import com.teamx.hatlyUser.utils.PrefHelper
@@ -68,10 +65,10 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
         options = navOptions {
             anim {
-                enter = com.teamx.hatlyUser.R.anim.enter_from_left
-                exit = com.teamx.hatlyUser.R.anim.exit_to_left
-                popEnter = com.teamx.hatlyUser.R.anim.nav_default_pop_enter_anim
-                popExit = com.teamx.hatlyUser.R.anim.nav_default_pop_exit_anim
+                enter = R.anim.enter_from_left
+                exit = R.anim.exit_to_left
+                popEnter = R.anim.nav_default_pop_enter_anim
+                popExit = R.anim.nav_default_pop_exit_anim
             }
         }
 
@@ -117,7 +114,14 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         mViewDataBinding.txtLogin.setOnClickListener {
 //            showPaypal()
 //            initializationPayPal2()
-            mViewModel.placeOrder(createOrderJsonObject())
+            if (mViewDataBinding.checkBox.isChecked) {
+                mViewModel.placeOrder(createOrderJsonObject())
+            }else{
+                if (isAdded) {
+
+                    mViewDataBinding.root.snackbar("Please read and accept our Terms and Conditions before placing an order.")
+                }
+            }
         }
 
         mViewDataBinding.radioCash.setOnClickListener {
@@ -199,7 +203,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                     e.printStackTrace()
                 }
                 mViewModel.orderSummary(params)
-            }else{
+            } else {
                 val params = JsonObject()
                 try {
                     params.addProperty("lat", userData!!.location.lat)
@@ -228,6 +232,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                     loadingDialog.dismiss()
                     onToSignUpPage()
                 }
+
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -284,6 +289,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                     loadingDialog.dismiss()
                     onToSignUpPage()
                 }
+
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -343,6 +349,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                     loadingDialog.dismiss()
                     onToSignUpPage()
                 }
+
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -409,6 +416,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                     loadingDialog.dismiss()
                     onToSignUpPage()
                 }
+
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -425,7 +433,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                         if (data.default?.id?.isNotEmpty() == true) {
                             mViewDataBinding.radioSelectedCard.visibility = View.VISIBLE
                             paymentMethodid = data.default.id
-                        }else{
+                        } else {
                             mViewDataBinding.radioSelectedCard.visibility = View.GONE
                         }
                     }

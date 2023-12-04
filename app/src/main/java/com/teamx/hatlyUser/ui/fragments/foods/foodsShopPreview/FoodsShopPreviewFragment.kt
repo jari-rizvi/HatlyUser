@@ -203,6 +203,7 @@ class FoodsShopPreviewFragment :
 
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
+                    Log.d("foodsShopHomeResponse", "onViewCreated: ${it.message}")
                     if (isAdded) {
 
                         mViewDataBinding.root.snackbar(it.message!!)

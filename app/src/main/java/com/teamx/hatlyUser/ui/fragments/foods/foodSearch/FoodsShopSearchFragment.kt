@@ -52,6 +52,10 @@ class FoodsShopSearchFragment :
             }
         }
 
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         productArrayList = ArrayList()
         filterProdArrayList = ArrayList()
 

@@ -15,7 +15,6 @@ data class Shop(
     val name: String,
     val owner: String,
     val ratting: Double,
-    val resturantCategory: List<String>,
     val setting: Setting,
     val status: String,
     val totalReviews: Int,

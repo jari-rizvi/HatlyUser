@@ -18,7 +18,7 @@ data class Doc(
     val shop: Shop,
     val specialNote: String,
     var status: String,
-    val subTotal: Int,
+    val subTotal: Double,
     val tax: Double,
     val total: Double,
     val useWallet: Boolean,

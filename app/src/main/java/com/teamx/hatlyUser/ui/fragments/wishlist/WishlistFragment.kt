@@ -145,6 +145,9 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
                             wishListArraylist.clear()
                             wishListArraylist.addAll(data.docs)
                             hatlyPopularAdapter.notifyDataSetChanged()
+                            if (wishListArraylist.isNotEmpty()){
+                                mViewDataBinding.textView22545454.visibility = View.GONE
+                            }
                         }
                     }
                     Resource.Status.ERROR -> {

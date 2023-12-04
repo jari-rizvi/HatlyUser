@@ -5,7 +5,7 @@ import androidx.annotation.Keep
 @Keep
 data class ModelCart(
     val products: List<Product>?,
-    val subTotal: Int,
+    val subTotal: Double,
     val tax: Double,
     val total: Double
 )

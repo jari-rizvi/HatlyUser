@@ -61,9 +61,9 @@ class PersonalInformationFragment :
             mViewDataBinding.editText.setText(it.name)
             mViewDataBinding.editText3.text = it.email
             Log.d("PersonalI", "onViewCreated: ${it.contact}")
-            if (it.contact == null){
+            if (it.contact == null) {
                 mViewDataBinding.editText2.isEnabled = true
-            }else{
+            } else {
                 mViewDataBinding.editText2.isEnabled = false
                 mViewDataBinding.editText2.setText(it.contact)
             }
@@ -112,6 +112,7 @@ class PersonalInformationFragment :
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -149,6 +150,7 @@ class PersonalInformationFragment :
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -163,7 +165,10 @@ class PersonalInformationFragment :
                             userData!!.profileImage = data.profileImage
                             PrefHelper.getInstance(requireActivity()).setUserData(userData)
                             sharedViewModel.setUserData(userData)
-                            mViewDataBinding.root.snackbar("Profile updated")
+                            if (isAdded) {
+                                mViewDataBinding.root.snackbar("Profile updated")
+                            }
+                            findNavController().popBackStack()
                         }
                     }
 
@@ -185,6 +190,7 @@ class PersonalInformationFragment :
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -219,6 +225,7 @@ class PersonalInformationFragment :
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }

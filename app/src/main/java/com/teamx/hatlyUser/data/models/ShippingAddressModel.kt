@@ -6,7 +6,7 @@ data class ShippingAddressModel(
     val __v: Int,
     val _id: String,
     val customer: String,
-    val deliveryCharges: Int,
+    val deliveryCharges: Double,
     val merchant: String,
     val orderType: String,
     val products: List<Product>,
@@ -14,9 +14,9 @@ data class ShippingAddressModel(
     val shop: String,
     val specialNote: String,
     val status: String,
-    val subTotal: Int,
-    val tax: Int,
-    val total: Int,
+    val subTotal: Double,
+    val tax: Double,
+    val total: Double,
     val useWallet: Boolean,
-    val usedWalletAmount: Int
+    val usedWalletAmount: Double
 )

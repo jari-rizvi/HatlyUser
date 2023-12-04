@@ -89,6 +89,9 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
                             mViewDataBinding.constraintLayout6.visibility = View.GONE
                             mViewDataBinding.textView2254545544.visibility = View.VISIBLE
                             return@observe
+                        }else{
+                            mViewDataBinding.constraintLayout6.visibility = View.VISIBLE
+                            mViewDataBinding.textView2254545544.visibility = View.GONE
                         }
 
                         Log.d("activeParcels", "onViewCreated: ${data.activeParcels}")

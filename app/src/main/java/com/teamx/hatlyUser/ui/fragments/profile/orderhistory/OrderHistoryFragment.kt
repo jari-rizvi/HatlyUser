@@ -37,8 +37,8 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding, OrderHist
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    lateinit var orderHistoryArrayList: ArrayList<Doc>
-    lateinit var orderHistoryAdapter: OrderHistoryAdapter
+    private lateinit var orderHistoryArrayList: ArrayList<Doc>
+    private lateinit var orderHistoryAdapter: OrderHistoryAdapter
 
     var isScrolling = false
     var hasNextPage = false

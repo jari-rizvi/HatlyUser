@@ -130,6 +130,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_8sdp"
+            android:visibility="gone"
             android:background="@drawable/button_radius_corner"
             app:layout_constraintBottom_toTopOf="@+id/guideline12"
             app:layout_constraintEnd_toEndOf="@+id/txtLogin"
