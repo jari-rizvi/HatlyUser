@@ -26,22 +26,22 @@
             app:layout_constraintVertical_bias="0.05"
             app:tint="#363636" />
 
-        <ImageView
-            android:id="@+id/imgBack1"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:src="@drawable/search_24"
-            android:background="@drawable/input_auth_field"
-            android:backgroundTint="@color/white"
-            android:padding="@dimen/_5sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/imgBack"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imgBack"
-            app:tint="#363636"
-            app:layout_constraintVertical_bias="0.05" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imgBack1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginEnd="@dimen/_10sdp"-->
+<!--            android:src="@drawable/search_24"-->
+<!--            android:background="@drawable/input_auth_field"-->
+<!--            android:backgroundTint="@color/white"-->
+<!--            android:padding="@dimen/_5sdp"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/imgBack"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="1"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/imgBack"-->
+<!--            app:tint="#363636"-->
+<!--            app:layout_constraintVertical_bias="0.05" />-->
 
         <TextView
             android:id="@+id/textView2"

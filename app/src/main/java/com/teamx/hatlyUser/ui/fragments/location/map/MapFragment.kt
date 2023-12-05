@@ -13,7 +13,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatCheckedTextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.google.android.gms.location.LocationServices
@@ -122,7 +121,6 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         mViewDataBinding.imgBack.setOnClickListener {
             if (alreadyFragmentAdded(R.id.allowLocationFragment)) {
                 findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
-//                requireActivity().finish()
             } else {
                 findNavController().popBackStack()
             }
@@ -132,7 +130,6 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             override fun handleOnBackPressed() {
                 if (alreadyFragmentAdded(R.id.allowLocationFragment)) {
                     findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
-//                    requireActivity().finish()
                 } else {
                     findNavController().popBackStack()
                 }
@@ -334,7 +331,12 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                 val city = address.locality
                 val state = address.adminArea
                 val country = address.countryName
-                val postalCode = address.postalCode
+                var postalCode = address.postalCode
+
+
+                if (postalCode == null){
+                    postalCode = ""
+                }
 
 
                 addressStr = "$addressLine, $city\n$state, $country, $postalCode"
@@ -513,7 +515,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             }
 
             if (apartmentStr.isNotEmpty()) {
-                params.addProperty("apartmentNumber", apartmentStr.toInt())
+                params.addProperty("apartmentNumber", apartmentStr)
             }
             if (buildingNumStr.isNotEmpty()) {
                 params.addProperty("building", buildingNumStr)

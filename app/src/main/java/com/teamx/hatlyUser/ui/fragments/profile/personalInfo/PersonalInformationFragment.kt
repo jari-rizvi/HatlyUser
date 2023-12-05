@@ -162,7 +162,7 @@ class PersonalInformationFragment :
                                 .into(mViewDataBinding.hatlyIcon)
                             val userData = PrefHelper.getInstance(requireActivity()).getUserData()
                             userData!!.name = data.name
-                            userData!!.profileImage = data.profileImage
+                            userData.profileImage = data.profileImage
                             PrefHelper.getInstance(requireActivity()).setUserData(userData)
                             sharedViewModel.setUserData(userData)
                             if (isAdded) {
