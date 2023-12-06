@@ -34,20 +34,28 @@ class SubCategoryProductsAdapter(
             ""
         }
 
+        var salesPrice = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} Aed"
+        val price = "${arrayData.price} Aed"
+
+
+        if (arrayData.salePrice != 0.0){
+            holder.bind.textView27.paintFlags = holder.bind.textView27.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            holder.bind.textView27.visibility = View.VISIBLE
+        }else{
+            holder.bind.textView27.visibility = View.GONE
+            salesPrice = price
+        }
+
         holder.bind.txtPrize.text = try {
-            "${arrayData.salePrice}"
+            salesPrice
         } catch (e: Exception) {
             ""
         }
 
         holder.bind.textView27.text = try {
-            "${arrayData.price}"
+            price
         } catch (e: Exception) {
             ""
-        }
-
-        if (arrayData.salePrice != 0.0){
-            holder.bind.textView27.paintFlags = holder.bind.textView27.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         }
 
         Picasso.get().load(arrayData.images[0]).resize(500,500).into(holder.bind.imgShop)

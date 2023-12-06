@@ -319,7 +319,7 @@ class ParcelDetailFragment : BaseFragment<FragmentParcelDetailBinding, ParcelDet
 
 
 enum class WeightUnit(val value: String) {
-    KilloGram("killo gram"),
+    KilloGram("kiloGram"),
     Gram("gram"),
     Pound("pound")
 }

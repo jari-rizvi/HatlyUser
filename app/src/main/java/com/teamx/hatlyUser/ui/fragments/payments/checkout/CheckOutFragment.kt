@@ -1,8 +1,13 @@
 package com.teamx.hatlyUser.ui.fragments.payments.checkout
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -72,13 +77,57 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
             }
         }
 
-        mViewDataBinding.textView2564.setOnClickListener {
-            val openURL = Intent(Intent.ACTION_VIEW)
-            openURL.data =
+        val fullText = "By completing this order, I agree to all terms & conditions."
+
+        // Create a SpannableString
+        // Create a SpannableString
+        val spannableString = SpannableString(fullText)
+
+        // Create a ClickableSpan for the clickable part
+
+        // Create a ClickableSpan for the clickable part
+        val clickableSpan: ClickableSpan = object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                // Handle click action here
+                // For example, you can open a new activity, show a dialog, etc.
+                val openURL = Intent(Intent.ACTION_VIEW)
+                openURL.data =
 //                Uri.parse("https://sites.google.com/view/zues-privacy-policy/home")
-                Uri.parse("https://sites.google.com/view/termsandconditionsforhatly/home")
-            startActivity(openURL)
+                    Uri.parse("https://sites.google.com/view/termsandconditionsforhatly/home")
+                startActivity(openURL)
+            }
         }
+
+        // Set the ClickableSpan to the desired portion of the text
+
+        // Set the ClickableSpan to the desired portion of the text
+        spannableString.setSpan(clickableSpan, 41, fullText.length, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        // Set the text color for the clickable span
+
+        // Set the text color for the clickable span
+        spannableString.setSpan(
+            ForegroundColorSpan(Color.RED),
+            41, fullText.length,
+            SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        // Set the SpannableString to the TextView
+
+        // Set the SpannableString to the TextView
+        mViewDataBinding.checkBox.text = spannableString
+
+        // Make the TextView clickable
+
+        // Make the TextView clickable
+        mViewDataBinding.checkBox.movementMethod = LinkMovementMethod.getInstance()
+
+
+
+
+//        mViewDataBinding.textView2564.setOnClickListener {
+//
+//        }
 
 //        paymentButtonContainer = view.findViewById(R.id.payment_button_container)
 

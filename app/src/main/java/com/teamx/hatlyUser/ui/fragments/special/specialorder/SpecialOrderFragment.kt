@@ -31,6 +31,8 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
 
     lateinit var delieveredParcel: ArrayList<DeliveredParcel>
 
+    var orderId = ""
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,7 +63,15 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
         val delieveredAdapter = SpecialOrderAdapter(delieveredParcel, this)
         mViewDataBinding.recSpecial.adapter = delieveredAdapter
 
-        mViewModel.activeDeliever(false,1,10)
+        mViewDataBinding.txtLogin32.setOnClickListener {
+            if (orderId.isNotEmpty()) {
+                val bundle1 = Bundle()
+                bundle1.putString("orderId", orderId)
+                findNavController().navigate(R.id.action_specialOrderFragment_to_trackFragment)
+            }
+        }
+
+        mViewModel.activeDeliever(false, 1, 10)
 
         mViewModel.activeDelieverResponse.observe(requireActivity()) {
             when (it.status) {
@@ -69,6 +79,7 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
                     loadingDialog.dismiss()
                     onToSignUpPage()
                 }
+
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -81,7 +92,7 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
                             delieveredParcel.clear()
                             delieveredParcel.addAll(data.deliveredParcels)
                             delieveredAdapter.notifyDataSetChanged()
-                        }else{
+                        } else {
                             mViewDataBinding.textView22545454.visibility = View.VISIBLE
                         }
 
@@ -89,16 +100,18 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
                             mViewDataBinding.constraintLayout6.visibility = View.GONE
                             mViewDataBinding.textView2254545544.visibility = View.VISIBLE
                             return@observe
-                        }else{
+                        } else {
                             mViewDataBinding.constraintLayout6.visibility = View.VISIBLE
                             mViewDataBinding.textView2254545544.visibility = View.GONE
                         }
 
                         Log.d("activeParcels", "onViewCreated: ${data.activeParcels}")
 
+                        orderId = data.activeParcels[0]._id
+
                         mViewDataBinding.textView2223.text = try {
                             data.activeParcels[0].details.item
-                        }catch (e : Exception){
+                        } catch (e: Exception) {
                             ""
                         }
 
