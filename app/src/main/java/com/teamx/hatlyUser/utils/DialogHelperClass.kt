@@ -11,6 +11,7 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.teamx.hatlyUser.MainApplication
 import com.teamx.hatlyUser.R
 
 
@@ -119,7 +120,9 @@ class DialogHelperClass {
             val txtDialogPrice = dialog.findViewById<TextView>(R.id.txtDialogPrice)
 
             txtDialogPrice.text = try {
-                "$topPrice Aed"
+                "$topPrice ${
+                    MainApplication.context.getString(
+                    R.string.aed)}"
             }catch (e : Exception){
                 "null"
             }

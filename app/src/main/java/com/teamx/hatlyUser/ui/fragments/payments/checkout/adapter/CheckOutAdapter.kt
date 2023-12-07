@@ -3,6 +3,8 @@ package com.teamx.hatlyUser.ui.fragments.payments.checkout.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.teamx.hatlyUser.MainApplication
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemCheckoutBinding
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.model.Product
 import java.util.ArrayList
@@ -35,7 +37,9 @@ class CheckOutAdapter(
         }
 
         holder.bind.textView166.text = try {
-            "${arrayData.prize} Aed"
+            "${arrayData.prize} ${
+                MainApplication.context.getString(
+                R.string.aed)}"
         }catch (e : Exception){
             ""
         }

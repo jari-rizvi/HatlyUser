@@ -12,7 +12,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:fontFamily="@font/open_sans_regular"
-        android:text="Shop by categories"
+        android:text="@string/shop_by_categories"
         android:textColor="#363636"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

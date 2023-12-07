@@ -48,7 +48,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/open_sans_regular"
             android:maxLines="2"
-            android:text="135.00 Aed"
+            android:text="@string/aed"
             android:textColor="#262626"
             android:textSize="@dimen/_13ssp"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,9 +1,11 @@
 <resources>
-    <string name="app_name">Hatly</string>
+    <string name="app_name" translatable="false">Hatly</string>
 <!--    <string name="don_t_have_an_account_sign_up">Don’t have an account? ![CDATA[<font color"#EA1B25">Sign Up</font>]]</string>-->
 
 
-    <string name="search_pattern">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 123456789</string>
+    <string name="search_pattern" translatable="false">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 123456789</string>
+
+    <string name="give_us_an_opportunity_to_make_your_experience_better_you_grant_us_permission_to_collect_your_name_address_phone_number_email_address_and_transaction_history_through_the_hatly_app_along_with_any_other_essential_personal_data_we_employ_gps_and_other_forms_of_background_location_tracking_in_order_to_provide_you_with_tailored_services_we_could_provide_this_information_to_retailers_so_they_can_expedite_order_pickup_while_you_re_nearby_for_your_hatly_experience_to_be_improved_you_must_consent_to_the_collection_and_use_of_this_data_for_a_thorough_description_of_how_we_operate_please_refer_to_our_privacy_policy" translatable="false">Give us an opportunity to make your experience better! You grant us permission to collect your name, address, phone number, email address, and transaction history through the Hatly app, along with any other essential personal data. We employ GPS and other forms of background location tracking in order to provide you with tailored services. We could provide this information to retailers so they can expedite order pickup while you\'re nearby.\n\nFor your Hatly experience to be improved, you must consent to the collection and use of this data. For a thorough description of how we operate, please refer to our Privacy Policy.</string>
 
 <!--    <string name="your_web_client_id">42990662374-qh1053updcjvriuemsv4kktmdbbgm5ed.apps.googleusercontent.com</string>-->
     <string name="your_web_client_id" translatable="false">42990662374-okvt5qt7kj352u9u6m1n72l0c4ufnije.apps.googleusercontent.com</string>
@@ -51,14 +53,120 @@
     <string name="find_restaurants_and_nshops_near_by_you">Find Restaurants and\nshops near by you!</string>
     <string name="allow_location">Allow location</string>
 
-    <string name="home" translatable="false">Home</string>
-    <string name="work" translatable="false">Work</string>
-    <string name="other" translatable="false">Other</string>
-    <string name="confirm_location" translatable="false">Confirm location</string>
-    <string name="save_and_continue" translatable="false">Save and Continue</string>
-    <string name="enter_your_address" translatable="false">Enter your address</string>
+    <string name="home">Home</string>
+    <string name="work">Work</string>
+    <string name="other">Other</string>
+    <string name="confirm_location">Confirm location</string>
+    <string name="save_and_continue">Save and Continue</string>
+    <string name="enter_your_address">Enter your address</string>
 
-    <string name="give_us_an_opportunity_to_make_your_experience_better_you_grant_us_permission_to_collect_your_name_address_phone_number_email_address_and_transaction_history_through_the_hatly_app_along_with_any_other_essential_personal_data_we_employ_gps_and_other_forms_of_background_location_tracking_in_order_to_provide_you_with_tailored_services_we_could_provide_this_information_to_retailers_so_they_can_expedite_order_pickup_while_you_re_nearby_for_your_hatly_experience_to_be_improved_you_must_consent_to_the_collection_and_use_of_this_data_for_a_thorough_description_of_how_we_operate_please_refer_to_our_privacy_policy" translatable="false">Give us an opportunity to make your experience better! You grant us permission to collect your name, address, phone number, email address, and transaction history through the Hatly app, along with any other essential personal data. We employ GPS and other forms of background location tracking in order to provide you with tailored services. We could provide this information to retailers so they can expedite order pickup while you\'re nearby.\n\nFor your Hatly experience to be improved, you must consent to the collection and use of this data. For a thorough description of how we operate, please refer to our Privacy Policy.</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="recommended_items">Recommended Items:</string>
+    <string name="required">Required</string>
+    <string name="optional">Optional</string>
+    <string name="add_special_instruction">Add Special Instruction</string>
+
+    <string name="notifications">Notifications</string>
+    <string name="profile">Profile</string>
+    <string name="add_note">Add Note</string>
+    <string name="checkout">Checkout</string>
+    <string name="delivery_location">Delivery Location</string>
+    <string name="wallet">Wallet</string>
+    <string name="available_balance">Available Balance</string>
+    <string name="use_my_balance_for_this_order">Use my balance for this order</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="cash">Cash</string>
+    <string name="paypal">PayPal</string>
+    <string name="stripe_payment">Stripe Payment</string>
+    <string name="select_card">Select Card</string>
+    <string name="order_summary">Order Summary</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="delivery_charges">Delivery charges</string>
+    <string name="total">Total</string>
+    <string name="by_completing_this_order_i_agree_to_all_terms_conditions"><![CDATA[By completing this order, I agree to all terms & conditions.]]></string>
+    <string name="place_order">Place Order</string>
+    <string name="set_as_default">Set as Default</string>
+    <string name="detach_card">Detach Card</string>
+    <string name="visa">Visa</string>
+    <string name="order_placed">Order Placed!</string>
+    <string name="track_your_order">Track your order</string>
+    <string name="back_to_home">Back to home</string>
+    <string name="estimated_time_of_delivery">Estimated time of delivery</string>
+    <string name="add_delivery_instructions">Add delivery instructions</string>
+    <string name="chat_with_rider">Chat with rider</string>
+    <string name="send_a_reply_to_your_rider">Send a reply to your rider!</string>
+    <string name="all_stores">All Stores:</string>
+    <string name="reviews">Reviews</string>
+    <string name="shop_by_categories">Shop by categories:</string>
+    <string name="search">Search</string>
+    <string name="home_based_business">Home Based Business</string>
+    <string name="hatly_mart">Hatly Mart</string>
+    <string name="send_parcel">Send Parcel</string>
+    <string name="more_categories">More categories</string>
+    <string name="popular_items">Popular Items:</string>
+    <string name="special_order">Special Order</string>
+    <string name="active_delivery">Active Delivery</string>
+    <string name="there_is_no_active_delivery_nat_the_moment">There is no active delivery\nat the moment.</string>
+    <string name="recent_parcels">Recent Parcels</string>
+    <string name="tracking_id">Tracking ID:</string>
+    <string name="track_order">Track Order</string>
+    <string name="delivered">Delivered</string>
+    <string name="parcel_details">Parcel Details</string>
+    <string name="what_are_you_sending">What are you sending?</string>
+    <string name="weight_of_parcel">Weight of parcel</string>
+    <string name="length">Length</string>
+    <string name="width">Width</string>
+    <string name="height">Height</string>
+    <string name="write_brief_details_about_your_parcel">Write brief details about your parcel....</string>
+    <string name="next">Next</string>
+    <string name="pickup_address">Pickup Address</string>
+    <string name="receiver_information">Receiver Information</string>
+    <string name="delivery_address">Delivery Address</string>
+    <string name="phone_number">Phone number</string>
+    <string name="done">Done</string>
+    <string name="locations">Locations</string>
+    <string name="add_new_address">Add new address</string>
+    <string name="add_a_label">Add A Label</string>
+    <string name="contact_your_vendor">Contact your vendor</string>
+    <string name="trending_now">Trending Now</string>
+    <string name="home_business">HOME BUSINESS</string>
+    <string name="my_profile">My Profile</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="language">Language</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="order_history">Order History</string>
+    <string name="special_order_history">Special Order History</string>
+    <string name="change_password">Change password</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="building">Building</string>
+    <string name="order_details">Order Details</string>
+    <string name="order_number">Order number:</string>
+    <string name="re_order">Re-Order</string>
+    <string name="write_a_review">Write a Review</string>
+    <string name="tap_here_to_upload_images">Tap here to upload images</string>
+    <string name="submit">Submit</string>
+    <string name="review_submitted">Review submitted</string>
+    <string name="languages">Languages</string>
+    <string name="arabic">Arabic</string>
+    <string name="english">English</string>
+    <string name="thank_you">Thank You!</string>
+    <string name="thank_you_for_contacting_us_we_ll_nbe_in_touch_very_soon">Thank you for contacting us,we\'ll\nbe in touch very soon.</string>
+    <string name="aed">Aed</string>
+    <string name="top_up">Top up</string>
+    <string name="recent_transaction">Recent Transaction</string>
+    <string name="paid_with">Paid With</string>
+    <string name="top_up_amount">Top-up Amount</string>
+    <string name="how_much_amount_would_you_like_to_transfer">How much amount would you like to transfer?</string>
+    <string name="add_new_card">Add New Card</string>
+    <string name="confirm">Confirm</string>
+    <string name="your_top_up_has_been_successfully_done">Your top-up has been successfully done</string>
+    <string name="top_up_more_amount">Top-up more amount</string>
+    <string name="cancel_order">Cancel Order</string>
+    <string name="your_order_has_been_canceled">Your order has been canceled</string>
 
 
 </resources>

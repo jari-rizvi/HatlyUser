@@ -7,6 +7,8 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.appevents.codeless.internal.ViewHierarchy.setOnClickListener
 import com.squareup.picasso.Picasso
+import com.teamx.hatlyUser.MainApplication
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemWalletBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Doc
@@ -37,7 +39,9 @@ class WalletAdapter(
         }
 
         holder.bind.textView17.text = try {
-            "${arrayData.total} Aed"
+            "${arrayData.total} ${
+                MainApplication.context.getString(
+                R.string.aed)}"
         }catch (e : Exception){
             ""
         }

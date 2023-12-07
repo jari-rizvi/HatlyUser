@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
+import com.teamx.hatlyUser.MainApplication
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
@@ -153,7 +154,9 @@ class ParcelLocationFragment :
                     loadingDialog.dismiss()
                     it.data?.let { data ->
                         mViewDataBinding.txtFarePrice.text = try {
-                            "${data.fare} AED"
+                            "${data.fare} ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         } catch (e: Exception) {
                             ""
                         }

@@ -37,7 +37,7 @@
             android:checked="true"
             android:fontFamily="@font/ubuntu_regular"
             android:padding="@dimen/_5sdp"
-            android:text="Required"
+            android:text="@string/required"
             android:textColor="@color/white"
             android:textSize="@dimen/_10ssp"
             app:layout_constraintBottom_toBottomOf="@+id/txtReqTitle"

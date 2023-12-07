@@ -112,8 +112,8 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 
         when (NetworkCallPointsNest.MART) {
             Marts.HATLY_MART -> {
-                mViewDataBinding.txtShopCatTitle.text = "Shop by categories:"
-                mViewDataBinding.txtPopular.text = "Popular Items:"
+                mViewDataBinding.txtShopCatTitle.text = getString(R.string.shop_by_categories)
+                mViewDataBinding.txtPopular.text = getString(R.string.popular_items)
 
                 storeId = "64fb1654a74b3bfd72afce03"
 
@@ -130,8 +130,8 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
             }
 
             Marts.GROCERY -> {
-                mViewDataBinding.txtShopCatTitle.text = "Shop by categories:"
-                mViewDataBinding.txtPopular.text = "Popular Items:"
+                mViewDataBinding.txtShopCatTitle.text = getString(R.string.shop_by_categories)
+                mViewDataBinding.txtPopular.text = getString(R.string.popular_items)
 
                 if (storeId.isNotEmpty()) {
                     if (!mViewModel.categoryShopResponse.hasActiveObservers()) {
@@ -144,8 +144,8 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
             }
 
             Marts.HEALTH_BEAUTY -> {
-                mViewDataBinding.txtShopCatTitle.text = "Shop by categories:"
-                mViewDataBinding.txtPopular.text = "Trending Now"
+                mViewDataBinding.txtShopCatTitle.text = getString(R.string.shop_by_categories)
+                mViewDataBinding.txtPopular.text = getString(R.string.trending_now)
 
 
                 if (storeId.isNotEmpty()) {
@@ -210,7 +210,7 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                                     0,
                                     "",
                                     "",
-                                    "More categories",
+                                    getString(R.string.more_categories),
                                     "",
                                     null,
                                     true

@@ -5,6 +5,8 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.teamx.hatlyUser.MainApplication
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemProductVariationRadioBinding
 import com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.ui.fragments.products.model.Option
@@ -32,7 +34,9 @@ class ProductVariationRequiredAdapter(
 
         val arrayData = addressArrayList[position]
 
-        val salesPrizeAmount = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} Aed"
+        val salesPrizeAmount = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} ${
+            MainApplication.context.getString(
+            R.string.aed)}"
 
         holder.bind.textView167.text = try {
             salesPrizeAmount
@@ -44,7 +48,9 @@ class ProductVariationRequiredAdapter(
             holder.bind.textView16.paintFlags = holder.bind.textView16.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         }
 
-        val prizeAmount = if (arrayData.price.toInt() == 0) "Free" else "${arrayData.price} Aed"
+        val prizeAmount = if (arrayData.price.toInt() == 0) "Free" else "${arrayData.price} ${
+            MainApplication.context.getString(
+            R.string.aed)}"
 
         holder.bind.textView16.text = try {
             prizeAmount

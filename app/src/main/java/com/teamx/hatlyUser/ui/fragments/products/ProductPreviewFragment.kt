@@ -14,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
+import com.teamx.hatlyUser.MainApplication
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
@@ -184,7 +185,9 @@ class ProductPreviewFragment :
 
                             if (data.product.salePrice != 0.0) {
                                 mViewDataBinding.textView24.text = try {
-                                    "${data.product.salePrice} Aed"
+                                    "${data.product.salePrice} ${
+                                        MainApplication.context.getString(
+                                        R.string.aed)}"
                                 } catch (e: Exception) {
                                     "null"
                                 }
@@ -195,7 +198,9 @@ class ProductPreviewFragment :
                             }
 
                             mViewDataBinding.textView25.text = try {
-                                "${data.product.price} Aed"
+                                "${data.product.price} ${
+                                    MainApplication.context.getString(
+                                    R.string.aed)}"
                             } catch (e: Exception) {
                                 "null"
                             }
@@ -207,13 +212,17 @@ class ProductPreviewFragment :
                         Log.d("productType", "onViewCreated: working")
 
                         mViewDataBinding.textView24.text = try {
-                            "${data.product.minPrice} Aed"
+                            "${data.product.minPrice} ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         } catch (e: Exception) {
                             "null"
                         }
 
                         mViewDataBinding.textView25.text = try {
-                            "${data.product.maxPrice} Aed"
+                            "${data.product.maxPrice} ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         } catch (e: Exception) {
                             "null"
                         }

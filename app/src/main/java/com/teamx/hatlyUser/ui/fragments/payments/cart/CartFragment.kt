@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
+import com.teamx.hatlyUser.MainApplication
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
@@ -250,21 +251,33 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
 
     private fun layoutUpdate(data: ModelCart) {
         mViewDataBinding.textView212.text = try {
-            "${data.subTotal} Aed"
+            "${data.subTotal} ${
+                MainApplication.context.getString(
+                R.string.aed)}"
         } catch (e: Exception) {
-            "0.0 Aed"
+            "0.0 ${
+                MainApplication.context.getString(
+                R.string.aed)}"
         }
 
         mViewDataBinding.textView2123.text = try {
-            "${data.tax} Aed"
+            "${data.tax} ${
+                MainApplication.context.getString(
+                R.string.aed)}"
         } catch (e: Exception) {
-            "0.0 Aed"
+            "0.0 ${
+                MainApplication.context.getString(
+                R.string.aed)}"
         }
 
         mViewDataBinding.textView2144.text = try {
-            "${data.total} Aed"
+            "${data.total} ${
+                MainApplication.context.getString(
+                R.string.aed)}"
         } catch (e: Exception) {
-            "0.0 Aed"
+            "0.0 ${
+                MainApplication.context.getString(
+                R.string.aed)}"
         }
 
         cartProductArrayList.clear()

@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.teamx.hatlyUser.MainApplication.Companion.context
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemFoodsShopBinding
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Document
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
@@ -43,9 +45,11 @@ class FoodsShopProductAdapter(
 
         if (arrayData.productType == "simple") {
 
-            textView26Price = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} Aed"
+            textView26Price = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} ${context.getString(
+                R.string.aed)}"
 
-            textView27Price = "${arrayData.price} Aed"
+            textView27Price = "${arrayData.price} ${context.getString(
+                R.string.aed)}"
 
             Log.d("FoodsShopProductAdapter", "onBindViewHolder: working $position")
 
@@ -55,8 +59,10 @@ class FoodsShopProductAdapter(
                 holder.bind.textView27.paintFlags = holder.bind.textView27.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             }
         } else {
-            textView26Price = "${arrayData.minPrice} Aed"
-            textView27Price = "${arrayData.maxPrice} Aed"
+            textView26Price = "${arrayData.minPrice} ${context.getString(
+                R.string.aed)}"
+            textView27Price = "${arrayData.maxPrice} ${context.getString(
+                R.string.aed)}"
         }
 
 

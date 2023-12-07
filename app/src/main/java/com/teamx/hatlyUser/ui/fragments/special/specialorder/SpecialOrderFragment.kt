@@ -116,7 +116,7 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
                         }
 
                         mViewDataBinding.textView222.text = try {
-                            "Tracking ID: ${data.activeParcels[0].trackingNumber}"
+                            "${getString(R.string.tracking_id)} ${data.activeParcels[0].trackingNumber}"
                         } catch (e: Exception) {
                             "null"
                         }

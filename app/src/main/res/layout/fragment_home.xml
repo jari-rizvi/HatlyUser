@@ -394,7 +394,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#211ED860"
             android:fontFamily="@font/amarante_regular"
-            android:text="HOME BUSINESS"
+            android:text="@string/home_business"
             android:textColor="#EA1B25"
             android:textSize="@dimen/_16ssp"
             app:layout_constraintBottom_toBottomOf="@+id/textView112"

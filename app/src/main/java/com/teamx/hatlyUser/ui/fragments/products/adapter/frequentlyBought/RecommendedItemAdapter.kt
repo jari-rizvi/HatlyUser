@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.teamx.hatlyUser.MainApplication
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemPopularBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter.AddToCartInterface
 import com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces.ProductPreviewInterface
@@ -43,9 +45,13 @@ class RecommendedItemAdapter(
 
         if (arrayData.productType == "simple") {
 
-            textView26Price = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} Aed"
+            textView26Price = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} ${
+                MainApplication.context.getString(
+                R.string.aed)}"
 
-            textView27Price = "${arrayData.price} Aed"
+            textView27Price = "${arrayData.price} ${
+                MainApplication.context.getString(
+                R.string.aed)}"
 
             Log.d("FoodsShopProductAdapter", "onBindViewHolder: working $position")
 
@@ -56,8 +62,12 @@ class RecommendedItemAdapter(
                     holder.bind.textView27.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             }
         } else {
-            textView26Price = "${arrayData.minPrice} Aed"
-            textView27Price = "${arrayData.maxPrice} Aed"
+            textView26Price = "${arrayData.minPrice} ${
+                MainApplication.context.getString(
+                R.string.aed)}"
+            textView27Price = "${arrayData.maxPrice} ${
+                MainApplication.context.getString(
+                R.string.aed)}"
         }
 
 

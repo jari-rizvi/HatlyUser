@@ -140,7 +140,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                         0
                     );
                     mViewDataBinding.txtTitle114455.text = try {
-                        "Cash"
+                        getString(R.string.cash)
                     } catch (e: Exception) {
                         "null"
                     }
@@ -163,14 +163,14 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
             when (data.status) {
                 "placed" -> {
-                    mViewDataBinding.txtLogin.text = "Cancel Order"
+                    mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
                     mViewDataBinding.txtLogin.isChecked = true
                     mViewDataBinding.txtLogin1.visibility = View.GONE
                     mViewDataBinding.txtTrack.visibility = View.VISIBLE
                 }
 
                 "picked" -> {
-                    mViewDataBinding.txtLogin.text = "Cancel Order"
+                    mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
                     mViewDataBinding.txtLogin.isChecked = false
                     mViewDataBinding.txtLogin.isEnabled = false
                     mViewDataBinding.txtLogin1.visibility = View.GONE
@@ -178,7 +178,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                 }
 
                 "ready" -> {
-                    mViewDataBinding.txtLogin.text = "Cancel Order"
+                    mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
                     mViewDataBinding.txtLogin.isChecked = false
                     mViewDataBinding.txtLogin.isEnabled = false
                     mViewDataBinding.txtLogin1.visibility = View.GONE
@@ -186,7 +186,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                 }
 
                 "confirmed" -> {
-                    mViewDataBinding.txtLogin.text = "Cancel Order"
+                    mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
                     mViewDataBinding.txtLogin.isChecked = false
                     mViewDataBinding.txtLogin.isEnabled = false
                     mViewDataBinding.txtLogin1.visibility = View.GONE
@@ -194,7 +194,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                 }
 
                 "delivered" -> {
-                    mViewDataBinding.txtLogin.text = "Re-Order"
+                    mViewDataBinding.txtLogin.text = getString(R.string.re_order)
                     mViewDataBinding.txtLogin.isChecked = true
                     mViewDataBinding.txtLogin1.visibility = View.VISIBLE
                     mViewDataBinding.txtTrack.visibility = View.GONE
@@ -405,7 +405,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                         it.data?.let { data ->
                             if (data.success) {
                                 sharedViewModel.orderHistory.value?.status = "cancelled"
-                                mViewDataBinding.root.snackbar("Your order has been canceled")
+                                mViewDataBinding.root.snackbar(getString(R.string.your_order_has_been_canceled))
                                 findNavController().popBackStack()
                             }
                         }

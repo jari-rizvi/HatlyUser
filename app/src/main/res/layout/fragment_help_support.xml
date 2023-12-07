@@ -203,7 +203,7 @@
             android:background="@drawable/button_radius_green"
             android:fontFamily="@font/open_sans_regular"
             android:paddingVertical="@dimen/_10sdp"
-            android:text="Send"
+            android:text="@string/send"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"

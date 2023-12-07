@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.teamx.hatlyUser.MainApplication
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemCartBinding
 import com.teamx.hatlyUser.ui.fragments.payments.cart.interfaces.CartInterface
 import com.teamx.hatlyUser.ui.fragments.payments.cart.model.Product
@@ -37,7 +39,9 @@ class CartAdapter(
         }
 
         holder.bind.textView2122.text = try {
-            "${arrayData.prize} Aed"
+            "${arrayData.prize} ${
+                MainApplication.context.getString(
+                R.string.aed)}"
         } catch (e: Exception) {
             "null"
         }

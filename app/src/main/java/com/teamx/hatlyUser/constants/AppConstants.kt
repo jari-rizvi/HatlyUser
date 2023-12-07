@@ -9,8 +9,8 @@ object AppConstants {
     annotation class ApiConfiguration {
         companion object {
 
-            const val APP_URL = "http://192.168.100.49:8000/" /*sohail local*/
-//            const val APP_URL = "http://192.168.100.79:8000/" /*tooba local*/
+//            const val APP_URL = "http://192.168.100.49:8000/" /*sohail local*/
+            const val APP_URL = "http://192.168.100.79:8000/" /*tooba local*/
 //            const val APP_URL = "http://31.220.17.28:8000/" /*development*/
 
             const val BASE_URL = "${APP_URL}api/v1/"

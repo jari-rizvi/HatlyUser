@@ -3,6 +3,8 @@ package com.teamx.hatlyUser.ui.fragments.profile.orderdetail.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.teamx.hatlyUser.MainApplication
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemOrderDetailBinding
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Product
 
@@ -28,7 +30,9 @@ class OrderDetailAdapter(
         }
 
         holder.bind.txtCat11.text = try {
-            "${arrayData.prize} Aed"
+            "${arrayData.prize} ${
+                MainApplication.context.getString(
+                R.string.aed)}"
         }catch (e : Exception){
             ""
         }

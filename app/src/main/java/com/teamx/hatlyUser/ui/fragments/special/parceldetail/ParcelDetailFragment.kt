@@ -283,7 +283,7 @@ class ParcelDetailFragment : BaseFragment<FragmentParcelDetailBinding, ParcelDet
         val inpWhatSending = mViewDataBinding.inpWhatSending.text.toString()
 
         if (inpWhatSending.isEmpty() || inpWhatSending.isBlank()) {
-            mViewDataBinding.root.snackbar("What are you sending?")
+            mViewDataBinding.root.snackbar(getString(R.string.what_are_you_sending))
             return false
         }
 

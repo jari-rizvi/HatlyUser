@@ -38,7 +38,7 @@
             android:checked="false"
             android:fontFamily="@font/ubuntu_regular"
             android:padding="@dimen/_5sdp"
-            android:text="Optional"
+            android:text="@string/optional"
             android:textColor="@color/white"
             android:textSize="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="@+id/txtOptTitle"

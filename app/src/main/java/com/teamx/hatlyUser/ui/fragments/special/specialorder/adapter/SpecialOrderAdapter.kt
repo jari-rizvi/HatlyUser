@@ -3,6 +3,9 @@ package com.teamx.hatlyUser.ui.fragments.special.specialorder.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.teamx.hatlyUser.MainApplication
+import com.teamx.hatlyUser.MainApplication.Companion.context
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemSpecialOrderBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.special.specialorder.model.ActiveParcel
@@ -25,7 +28,7 @@ class SpecialOrderAdapter(
         val arrayData = addressArrayList[position]
 
         holder.bind.textView222.text = try {
-            "Tracking ID: ${arrayData.trackingNumber}"
+            "${context.getString(R.string.tracking_id)} ${arrayData.trackingNumber}"
         } catch (e: Exception) {
             ""
         }
@@ -43,7 +46,9 @@ class SpecialOrderAdapter(
         }
 
         holder.bind.textView22795544525.text = try {
-            "${arrayData.fare} Aed"
+            "${arrayData.fare} ${
+                MainApplication.context.getString(
+                R.string.aed)}"
         }catch (e : Exception){
             ""
         }

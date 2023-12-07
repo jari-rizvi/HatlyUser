@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.teamx.hatlyUser.MainApplication
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemPopularBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproductmodel.Doc
@@ -33,8 +35,12 @@ class HatlyPopularAdapter(
             ""
         }
 
-        var salesPrice = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} Aed"
-        val price = "${arrayData.price} Aed"
+        var salesPrice = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} ${
+            MainApplication.context.getString(
+            R.string.aed)}"
+        val price = "${arrayData.price} ${
+            MainApplication.context.getString(
+            R.string.aed)}"
 
 
         if (arrayData.salePrice != 0.0){

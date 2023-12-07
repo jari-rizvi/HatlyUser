@@ -24,6 +24,7 @@ import com.stripe.android.PaymentConfiguration
 import com.stripe.android.paymentsheet.PaymentSheet
 import com.stripe.android.paymentsheet.PaymentSheetResult
 import com.teamx.hatlyUser.BR
+import com.teamx.hatlyUser.MainApplication
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
@@ -77,7 +78,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
             }
         }
 
-        val fullText = "By completing this order, I agree to all terms & conditions."
+        val fullText = getString(R.string.by_completing_this_order_i_agree_to_all_terms_conditions)
 
         // Create a SpannableString
         // Create a SpannableString
@@ -293,26 +294,42 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                         Log.d("checkoutResponse", "onViewCreated: ${data}")
 
                         mViewDataBinding.textView21343.text = try {
-                            "${data.balance} Aed"
+                            "${data.balance} ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         } catch (e: Exception) {
-                            "0.0 Aed"
+                            "0.0 ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         }
                         mViewDataBinding.textView2144633.text = try {
-                            "${data.subTotal} Aed"
+                            "${data.subTotal} ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         } catch (e: Exception) {
-                            "0.0 Aed"
+                            "0.0 ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         }
 
                         mViewDataBinding.textView214467433.text = try {
-                            "${data.deliveryCharges} Aed"
+                            "${data.deliveryCharges} ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         } catch (e: Exception) {
-                            "0.0 Aed"
+                            "0.0 ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         }
 
                         mViewDataBinding.textView2144678433.text = try {
-                            "${data.total} Aed"
+                            "${data.total} ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         } catch (e: Exception) {
-                            "0.0 Aed"
+                            "0.0 ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         }
 
 
@@ -350,26 +367,42 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                         Log.d("checkoutResponse", "onViewCreated: ${data}")
 
                         mViewDataBinding.textView21343.text = try {
-                            "${data.balance} Aed"
+                            "${data.balance} ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         } catch (e: Exception) {
-                            "0.0 Aed"
+                            "0.0 ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         }
                         mViewDataBinding.textView2144633.text = try {
-                            "${data.subTotal} Aed"
+                            "${data.subTotal} ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         } catch (e: Exception) {
-                            "0.0 Aed"
+                            "0.0 ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         }
 
                         mViewDataBinding.textView214467433.text = try {
-                            "${data.deliveryCharges} Aed"
+                            "${data.deliveryCharges} ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         } catch (e: Exception) {
-                            "0.0 Aed"
+                            "0.0 ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         }
 
                         mViewDataBinding.textView2144678433.text = try {
-                            "${data.total} Aed"
+                            "${data.total} ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         } catch (e: Exception) {
-                            "0.0 Aed"
+                            "0.0 ${
+                                MainApplication.context.getString(
+                                R.string.aed)}"
                         }
 
 

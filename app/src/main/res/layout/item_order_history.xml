@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/open_sans_regular"
-            android:text="Delivered"
+            android:text="@string/delivered"
             android:textAlignment="center"
             app:layout_constraintHorizontal_bias="0"
             android:textColor="#1ED860"
@@ -103,16 +103,16 @@
             android:id="@+id/txtTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:fontFamily="@font/open_sans_regular"
             android:text="03.03.2023"
             android:textAlignment="center"
             android:textColor="#99363636"
-            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:textSize="@dimen/_11ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/txtStatus"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txtStatus" />
+            app:layout_constraintTop_toBottomOf="@+id/txtDetail" />
 
         <View
             android:id="@+id/view"

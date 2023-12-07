@@ -19,11 +19,11 @@
     <item
         android:id="@+id/homeBottom"
         android:checkable="true"
-        android:title="Home" />
+        android:title="@string/home" />
 
     <item
         android:id="@+id/profileBottom"
         android:icon="@drawable/profile"
-        android:title="Profile" />
+        android:title="@string/profile" />
 
 </menu>
