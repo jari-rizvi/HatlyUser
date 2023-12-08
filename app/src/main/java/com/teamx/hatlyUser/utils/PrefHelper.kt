@@ -17,6 +17,7 @@ class PrefHelper private constructor() {
 
         private const val shippingConst = "_shippingAddress"
         private const val USER_DATA = "USERDATA"
+        private val LANGTYPE = "lang_type"
 
         fun getInstance(context: Context): PrefHelper {
             if (!::sharedPreferences.isInitialized) {
@@ -33,9 +34,46 @@ class PrefHelper private constructor() {
 
     val isNotFirstTime: Boolean get() = sharedPreferences.getBoolean(IS_FIRST_TIME, false)
 
+
+    fun saveWord(word: String) {
+        if (word.isEmpty()){
+            return
+        }
+        // Save the word in SharedPreferences
+        val editor = sharedPreferences.edit()
+        // Retrieve the existing list of words
+        val currentWords = loadSavedWords().toMutableList()
+
+        // Ensure only the latest 'maxWords' words are kept
+        if (currentWords.size >= 5) {
+            currentWords.removeAt(currentWords.size - 1) // Remove the last (oldest) word
+        }
+
+        // Add the new word to the beginning of the list
+        currentWords.add(0, word)
+
+        // Save the updated list of words
+        editor.putString("savedWords", currentWords.joinToString(","))
+        editor.apply()
+    }
+
+    fun loadSavedWords(): ArrayList<String> {
+        // Load the saved words from SharedPreferences
+        val wordsString = sharedPreferences.getString("savedWords", "") ?: ""
+        return ArrayList(wordsString.split(",").filter { it.isNotBlank() })
+    }
+
     fun setNotFirstTime(order_id: Boolean) {
         sharedPreferences.edit().putBoolean(IS_FIRST_TIME, order_id).apply()
 
+    }
+
+    val langType: String?
+        get() = sharedPreferences.getString(LANGTYPE, "en")
+
+
+    fun saveLANGTYPE(lang_type: String) {
+        sharedPreferences.edit().putString(LANGTYPE, lang_type).apply()
     }
 
 

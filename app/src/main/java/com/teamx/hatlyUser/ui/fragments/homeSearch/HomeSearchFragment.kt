@@ -23,6 +23,7 @@ import com.teamx.hatlyUser.ui.fragments.homeSearch.adapter.HomeSearchTitleAdapte
 import com.teamx.hatlyUser.ui.fragments.homeSearch.adapter.RecentHomeSearchInterface
 import com.teamx.hatlyUser.ui.fragments.homeSearch.model.Doc
 import com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces.ProductPreviewInterface
+import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -87,11 +88,17 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
         homeSearchTitleAdapter = HomeSearchTitleAdapter(categoryArray, this)
         mViewDataBinding.recCategories.adapter = homeSearchTitleAdapter
 
-        recentArray.add("Hello how")
-        recentArray.add("are you doing")
-        recentArray.add("where")
-        recentArray.add("now")
-        recentArray.add("hello")
+
+        try {
+            val updatedWords = PrefHelper.getInstance(requireActivity()).loadSavedWords()
+            updatedWords.forEach {
+                recentArray.add(it)
+            }
+            Log.d("updatedWords", "onViewCreated: ${updatedWords}")
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
 
         val staggeredGridLayoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL)
@@ -153,6 +160,9 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
             performSearch()
         }
 
+
+
+
         if (!mViewModel.homeSearchResponse.hasActiveObservers()) {
             performSearch()
         }
@@ -164,6 +174,7 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
                     loadingDialog.dismiss()
                     onToSignUpPage()
                 }
+
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -171,6 +182,10 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
                     it.data?.let { data ->
+
+                        PrefHelper.getInstance(requireActivity())
+                            .saveWord(mViewDataBinding.inpSearch.text.toString().trim())
+
                         homeSearchArrayList.clear()
 
                         data.docs.forEach {
@@ -192,6 +207,7 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
                     if (isAdded) {
 
                         mViewDataBinding.root.snackbar(it.message!!)
+                        Log.d("updatedWords", "onViewCreated: ${it.message!!}")
                     }
                 }
             }

@@ -82,6 +82,7 @@
     <string name="order_summary">Order Summary</string>
     <string name="subtotal">Subtotal</string>
     <string name="delivery_charges">Delivery charges</string>
+    <string name="delivery">Delivery</string>
     <string name="total">Total</string>
     <string name="by_completing_this_order_i_agree_to_all_terms_conditions"><![CDATA[By completing this order, I agree to all terms & conditions.]]></string>
     <string name="place_order">Place Order</string>
@@ -97,6 +98,7 @@
     <string name="send_a_reply_to_your_rider">Send a reply to your rider!</string>
     <string name="all_stores">All Stores:</string>
     <string name="reviews">Reviews</string>
+    <string name="reviews_">reviews</string>
     <string name="shop_by_categories">Shop by categories:</string>
     <string name="search">Search</string>
     <string name="home_based_business">Home Based Business</string>
@@ -167,6 +169,12 @@
     <string name="top_up_more_amount">Top-up more amount</string>
     <string name="cancel_order">Cancel Order</string>
     <string name="your_order_has_been_canceled">Your order has been canceled</string>
+    <string name="notification">Notification</string>
+    <string name="cart">Cart</string>
+    <string name="food">FOOD</string>
+    <string name="grocery">GROCERY</string>
+    <string name="health_amp_nbeauty"><![CDATA[HEALTH &\nBEAUTY]]></string>
+    <string name="all_restaurants">All Restaurants</string>
 
 
 </resources>

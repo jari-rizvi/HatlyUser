@@ -36,12 +36,8 @@ class SubCategoryProductsAdapter(
             ""
         }
 
-        var salesPrice = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} ${
-            MainApplication.context.getString(
-            R.string.aed)}"
-        val price = "${arrayData.price} ${
-            MainApplication.context.getString(
-            R.string.aed)}"
+        var salesPrice = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} ${holder.itemView.context.getString(R.string.aed)}"
+        val price = "${arrayData.price} ${holder.itemView.context.getString(R.string.aed)}"
 
 
         if (arrayData.salePrice != 0.0){

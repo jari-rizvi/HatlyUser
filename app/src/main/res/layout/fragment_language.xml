@@ -56,31 +56,51 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            android:layout_height="@dimen/_150sdp"
+            android:layout_height="wrap_content"
             android:background="@drawable/input_auth_field"
             android:backgroundTint="@color/white"
             android:elevation="@dimen/_3sdp"
+            android:padding="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imgBack1"
             app:layout_constraintStart_toStartOf="@+id/imgBack"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
             app:layout_constraintVertical_bias="0.05">
 
-            <RadioButton
-                android:id="@+id/radioArabic"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_margin="@dimen/_10sdp"
-                android:buttonTint="#EA1B25"
-                android:checked="true"
-                android:drawableStart="@drawable/arabic_language"
-                android:drawablePadding="@dimen/_10sdp"
-                android:paddingStart="@dimen/_10sdp"
-                android:text="@string/arabic"
-                app:layout_constraintBottom_toTopOf="@+id/view"
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RadioButton
+                    android:id="@+id/radioArabic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="#EA1B25"
+                    android:checked="true"
+                    android:drawableStart="@drawable/arabic_language"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:text="@string/arabic" />
+
+                <RadioButton
+                    android:id="@+id/radioEnglish"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:buttonTint="#EA1B25"
+                    android:checked="false"
+                    android:drawableStart="@drawable/english_language"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:text="@string/english" />
+
+            </RadioGroup>
 
             <View
                 android:id="@+id/view"
@@ -92,21 +112,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <RadioButton
-                android:id="@+id/radioEnglish"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_margin="@dimen/_10sdp"
-                android:buttonTint="#EA1B25"
-                android:checked="false"
-                android:drawableStart="@drawable/english_language"
-                android:drawablePadding="@dimen/_10sdp"
-                android:paddingStart="@dimen/_10sdp"
-                android:text="@string/english"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

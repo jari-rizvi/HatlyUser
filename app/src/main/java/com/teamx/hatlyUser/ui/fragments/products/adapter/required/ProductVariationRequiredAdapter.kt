@@ -34,9 +34,7 @@ class ProductVariationRequiredAdapter(
 
         val arrayData = addressArrayList[position]
 
-        val salesPrizeAmount = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} ${
-            MainApplication.context.getString(
-            R.string.aed)}"
+        val salesPrizeAmount = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} ${holder.itemView.context.getString(R.string.aed)}"
 
         holder.bind.textView167.text = try {
             salesPrizeAmount
@@ -48,9 +46,7 @@ class ProductVariationRequiredAdapter(
             holder.bind.textView16.paintFlags = holder.bind.textView16.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         }
 
-        val prizeAmount = if (arrayData.price.toInt() == 0) "Free" else "${arrayData.price} ${
-            MainApplication.context.getString(
-            R.string.aed)}"
+        val prizeAmount = if (arrayData.price.toInt() == 0) "Free" else "${arrayData.price} ${holder.itemView.context.getString(R.string.aed)}"
 
         holder.bind.textView16.text = try {
             prizeAmount

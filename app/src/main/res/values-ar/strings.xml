@@ -90,6 +90,8 @@
     <string name="send_a_reply_to_your_rider">إرسال الرد إلى الراكب الخاص بك</string>
     <string name="all_stores">جميع المتاجر:</string>
     <string name="reviews">المراجعات</string>
+    <string name="reviews_">المراجعات</string>
+    <string name="delivery">التوصيل</string>
     <string name="shop_by_categories">التسوق حسب الفئات:</string>
     <string name="search">البحث</string>
     <string name="home_based_business">الاعمال المنزلية</string>
@@ -160,5 +162,11 @@
     <string name="top_up_more_amount">مبلغ التعبئة اكثر</string>
     <string name="cancel_order">الغاء الطلب</string>
     <string name="your_order_has_been_canceled">تم إلغاء طلبك.</string>
+    <string name="notification">الإشعارات</string>
+    <string name="cart">عربة التسوق</string>
+    <string name="food">الطعام</string>
+    <string name="grocery">الخضروات</string>
+    <string name="health_amp_nbeauty">الصحةوالجمال</string>
+    <string name="all_restaurants">كل المطاعم</string>
 
 </resources>

@@ -182,7 +182,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/open_sans_regular"
-                    android:text="Notification"
+                    android:text="@string/notification"
                     android:textColor="#424242"
                     android:textSize="@dimen/_11ssp"
                     android:textStyle="bold"
