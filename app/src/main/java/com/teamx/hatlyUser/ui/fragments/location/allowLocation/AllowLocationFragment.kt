@@ -119,7 +119,7 @@ class AllowLocationFragment : BaseFragment<FragmentAllowLocationBinding, LoginVi
         val userData = PrefHelper.getInstance(requireActivity()).getUserData()
         if (userData != null) {
             if (userData.location != null) {
-                userData.location.isAction = "Add"
+                userData.location!!.isAction = "Add"
             }
         }
         sharedViewModel.setlocationmodel(userData?.location)

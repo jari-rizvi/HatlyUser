@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_tempFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_tempFragment_to_guestFragment"
+            app:destination="@id/guestFragment" />
     </fragment>
 
     <fragment
@@ -56,9 +59,10 @@
         <!--            app:popUpTo="@id/onboardViewPagerFragment"-->
         <!--            app:popUpToInclusive="true" />-->
 
+
         <action
-            android:id="@+id/action_onboardViewPagerFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
+            android:id="@+id/action_onboardViewPagerFragment_to_guestFragment"
+            app:destination="@id/guestFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/onboardViewPagerFragment"
             app:popUpToInclusive="true" />
@@ -259,9 +263,6 @@
             android:id="@+id/action_homeFragment_to_storesFragment"
             app:destination="@id/storesFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
         <action
@@ -270,6 +271,9 @@
         <action
             android:id="@+id/action_homeFragment_to_wishListFragment"
             app:destination="@id/wishListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_guestFragment"
+            app:destination="@id/guestFragment" />
     </fragment>
 
     <fragment
@@ -638,6 +642,29 @@
         android:name="com.teamx.hatlyUser.ui.fragments.profile.specialOrderHistory.SpecialOrderHistoryFragment"
         android:label="SpecialOrderHistoryFragment"
         tools:layout="@layout/fragment_special_order_history" />
+
+
+    <fragment
+        android:id="@+id/guestFragment"
+        android:name="com.teamx.hatlyUser.ui.fragments.auth.guest.GuestFragment"
+        android:label="GuestFragment"
+        tools:layout="@layout/fragment_guest" >
+        <action
+            android:id="@+id/action_guestFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_guestFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_guestFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_guestFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_guestFragment_to_allowLocationFragment"
+            app:destination="@id/allowLocationFragment" />
+    </fragment>
 
 
     <action

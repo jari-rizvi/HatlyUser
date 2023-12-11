@@ -168,5 +168,13 @@
     <string name="grocery">الخضروات</string>
     <string name="health_amp_nbeauty">الصحةوالجمال</string>
     <string name="all_restaurants">كل المطاعم</string>
+    <string name="view_details">View Details</string>
+    <string name="contact_us">تواصل معنا</string>
+    <string name="help_amp_support">المساعدة و الدعم</string>
+    <string name="terms_amp_conditions">الشروط و الاحكام</string>
+    <string name="your_name">اسمك</string>
+    <string name="email_address">البريد الاكتروني</string>
+    <string name="message">الرسالة</string>
+    <string name="mobile_number_">رقم الهاتف</string>
 
 </resources>

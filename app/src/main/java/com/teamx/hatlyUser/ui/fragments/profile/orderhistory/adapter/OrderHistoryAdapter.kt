@@ -1,11 +1,13 @@
 package com.teamx.hatlyUser.ui.fragments.profile.orderhistory.adapter
 
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemOrderHistoryBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Doc
@@ -40,6 +42,8 @@ class OrderHistoryAdapter(
             ""
         }
 
+        Log.d("arabicNumberString", "onBindViewHolder: ${arrayData.createdAt}")
+
         holder.bind.txtTime.text = try {
             arrayData.createdAt
 //            formatTimeDifference(arrayData.createdAt)
@@ -47,7 +51,8 @@ class OrderHistoryAdapter(
             ""
         }
 
-        Picasso.get().load(arrayData.shop.image).resize(500,500).into(holder.bind.imgShop)
+        Picasso.get().load(arrayData.shop.image).placeholder(R.drawable.hatly_splash_logo_space).error(
+            R.drawable.hatly_splash_logo_space).resize(500,500).into(holder.bind.imgShop)
 
 
         holder.bind.txtDet.setOnClickListener {

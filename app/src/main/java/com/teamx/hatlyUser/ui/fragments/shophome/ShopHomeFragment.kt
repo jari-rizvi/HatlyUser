@@ -127,6 +127,7 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
                         data.docs?.forEach {
                             itemCategoryTitle.add(it)
                         }
+                        Log.d("performSearch", "storeSubCategoryResponse: ${data.docs}")
                         if (data.docs?.isNotEmpty() == true) {
                             clickCategoryItem(0)
 //                            itemCategoryTitle[0].isSelected = true

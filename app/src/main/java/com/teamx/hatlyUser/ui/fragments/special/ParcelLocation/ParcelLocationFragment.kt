@@ -192,7 +192,7 @@ class ParcelLocationFragment :
                     it.data?.let { data ->
                         if (data.success) {
                             if (isAdded) {
-                                mViewDataBinding.root.snackbar(data.message)
+                                findNavController().popBackStack(R.id.specialOrderFragment,false)
                             }
                         }
                     }

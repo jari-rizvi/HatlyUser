@@ -63,7 +63,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
 
             if (userData != null) {
                 if (userData.location != null) {
-                    userData.location.isAction = "Add"
+                    userData.location!!.isAction = "Add"
                 }
             }
 

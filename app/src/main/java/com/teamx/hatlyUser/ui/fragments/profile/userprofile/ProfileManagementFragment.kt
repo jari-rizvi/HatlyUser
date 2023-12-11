@@ -58,7 +58,7 @@ class ProfileManagementFragment :
 
         sharedViewModel.userData.observe(requireActivity()) {
             mViewDataBinding.textView.text = it.name
-            Picasso.get().load(it.profileImage).resize(500,500).into(mViewDataBinding.hatlyIcon)
+            Picasso.get().load(it.profileImage).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500,500).into(mViewDataBinding.hatlyIcon)
         }
 
         mViewDataBinding.imgBack.setOnClickListener {

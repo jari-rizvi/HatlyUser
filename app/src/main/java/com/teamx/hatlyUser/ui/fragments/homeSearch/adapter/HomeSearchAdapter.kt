@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.MainApplication
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemHomeSearchBinding
 import com.teamx.hatlyUser.ui.fragments.foods.review.adapter.ReviewProductAdapter
 import com.teamx.hatlyUser.ui.fragments.homeSearch.model.Doc
@@ -27,7 +28,7 @@ class HomeSearchAdapter(
 
         val arrayData = addressArrayList[position]
 
-        Picasso.get().load(arrayData.image).resize(500,500).into(holder.bind.imgShop)
+        Picasso.get().load(arrayData.image).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500,500).into(holder.bind.imgShop)
 
         holder.bind.textView38.text = try {
             arrayData.name

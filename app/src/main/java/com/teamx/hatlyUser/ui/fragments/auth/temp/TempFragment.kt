@@ -88,7 +88,8 @@ class TempFragment : BaseFragment<FragmentTempBinding, TempViewModel>(),
                         if (isAdded) {
                             if (token.isNullOrBlank()) {
                                 if (isNotFirstTime) {
-                                    findNavController().navigate(R.id.action_tempFragment_to_loginFragment)
+//                                    findNavController().navigate(R.id.action_tempFragment_to_loginFragment)
+                                    findNavController().navigate(R.id.action_tempFragment_to_guestFragment)
                                 } else {
                                     findNavController().navigate(R.id.action_tempFragment_to_onboardViewPagerFragment)
                                 }

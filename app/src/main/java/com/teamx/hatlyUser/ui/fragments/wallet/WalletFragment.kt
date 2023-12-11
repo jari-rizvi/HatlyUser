@@ -132,7 +132,7 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
                         }
                         data.docs?.forEach {
                             try {
-                                it.createdAt = TimeFormatter.formatTimeDifference(it.createdAt)
+                                it.createdAt = TimeFormatter.formatTimeDifference(it.createdAt,requireActivity())
                             }catch (e : Exception){
                                 e.printStackTrace()
                             }

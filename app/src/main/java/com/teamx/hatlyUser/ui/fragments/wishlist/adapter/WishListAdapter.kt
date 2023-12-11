@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemWishlistBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.wishlist.modelWishList.Doc
@@ -48,7 +49,8 @@ class WishListAdapter(
             ""
         }
 
-        Picasso.get().load(arrayData.shop.image).resize(500,500).into(holder.bind.imgShop)
+        Picasso.get().load(arrayData.shop.image).placeholder(R.drawable.hatly_splash_logo_space).error(
+            R.drawable.hatly_splash_logo_space).resize(500,500).into(holder.bind.imgShop)
 
     }
 

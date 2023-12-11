@@ -16,7 +16,6 @@ data class Doc(
     val preparationTime: Int,
     val ratting: Double,
     val reasonToRejectShop: Any,
-    val resturantCategory: List<Any>,
     val setting: Setting,
     val status: String,
     val totalReviews: Int,

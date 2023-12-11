@@ -197,17 +197,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             })
         }
 
-        val onBackPressedCallback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                Log.d("handleOnBackPressed", "handleOnBackPressed: back")
-                requireActivity().finish()
-            }
-        }
 
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            onBackPressedCallback
-        )
 
     }
 

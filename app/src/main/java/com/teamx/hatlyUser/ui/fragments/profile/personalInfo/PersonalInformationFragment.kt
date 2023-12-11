@@ -68,7 +68,7 @@ class PersonalInformationFragment :
                 mViewDataBinding.editText2.setText(it.contact)
             }
 
-            Picasso.get().load(it.profileImage).resize(500, 500).into(mViewDataBinding.hatlyIcon)
+            Picasso.get().load(it.profileImage).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500).into(mViewDataBinding.hatlyIcon)
             imageUrl = it.profileImage
             userName = it.name
         }
@@ -124,7 +124,7 @@ class PersonalInformationFragment :
                                 Log.d("uploadReviewIm", "onViewCreated: ${data[0]}")
                                 if (data.isNotEmpty()) {
                                     imageUrl = data[0]
-                                    Picasso.get().load(imageUrl).resize(500, 500)
+                                    Picasso.get().load(imageUrl).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500)
                                         .into(mViewDataBinding.hatlyIcon)
                                 }
                             }
@@ -158,7 +158,7 @@ class PersonalInformationFragment :
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            Picasso.get().load(data.profileImage).resize(500, 500)
+                            Picasso.get().load(data.profileImage).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500)
                                 .into(mViewDataBinding.hatlyIcon)
                             val userData = PrefHelper.getInstance(requireActivity()).getUserData()
                             userData!!.name = data.name

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemReviewProductBinding
 
 class ReviewProductAdapter(
@@ -21,7 +22,7 @@ class ReviewProductAdapter(
 
         val arrayData = addressArrayList[position]
 
-        Picasso.get().load(arrayData).resize(500,500).into(holder.bind.imgShop)
+        Picasso.get().load(arrayData).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500,500).into(holder.bind.imgShop)
 
     }
 

@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.AbsListView
 import androidx.annotation.RequiresApi
@@ -19,8 +20,6 @@ import com.teamx.hatlyUser.databinding.FragmentOrderHistoryBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.adapter.OrderHistoryAdapter
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Doc
-import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Shop
-import com.teamx.hatlyUser.utils.TimeFormatter
 import com.teamx.hatlyUser.utils.TimeFormatter.Companion.formatTimeDifference
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -96,7 +95,7 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding, OrderHist
                         }
                         data.docs?.forEach {
                             try {
-                                it.createdAt = formatTimeDifference(it.createdAt)
+                                it.createdAt = formatTimeDifference(it.createdAt,requireActivity())
                             }catch (e : Exception){
                                 e.printStackTrace()
                             }
@@ -115,6 +114,7 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding, OrderHist
 
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
+                    Log.d("arabicNumberString", "onViewCreated: ${it.message}")
                     if (isAdded) {
 
                     mViewDataBinding.root.snackbar(it.message!!)

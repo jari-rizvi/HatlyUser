@@ -9,7 +9,7 @@ data class ModelLogin(
     var contact: String?,
     val coordinates: Coordinates,
     val email: String,
-    var location: Location,
+    var location: Location?,
     var name: String,
     var profileImage: String,
     val role: String,

@@ -317,9 +317,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ea1b25" />
-                            <entry key="outputName" value="baseline_attachment_24" />
-                            <entry key="sourceFile" value="C:\Users\TeamX Pakistan\Desktop\Hatly icons\warning.svg" />
+                            <entry key="outputName" value="hatly_splash_logo_space" />
+                            <entry key="sourceFile" value="C:\Users\TeamX Pakistan\Downloads\hatly-splash-logo.svg" />
                           </map>
                         </option>
                       </PersistentState>

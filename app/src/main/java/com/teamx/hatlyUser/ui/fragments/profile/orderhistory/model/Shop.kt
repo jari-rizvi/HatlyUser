@@ -16,7 +16,6 @@ data class Shop(
     val preparationTime: Int,
     val ratting: Double,
     val reasonToRejectShop: Any,
-    val resturantCategory: List<String>,
     val setting: Setting,
     val status: String,
     val totalReviews: Int,

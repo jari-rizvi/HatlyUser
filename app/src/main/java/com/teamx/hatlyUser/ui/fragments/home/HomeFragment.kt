@@ -29,6 +29,8 @@ import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.NumberFormat
+import java.util.Locale
 
 
 @AndroidEntryPoint
@@ -54,6 +56,33 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             }
         }
 
+
+        /////////
+
+//        val yourNumber = 123456
+//
+//        // Arabic locale
+//        val locale = Locale("ar")
+//
+//        // Create a custom NumberFormat for Arabic
+//        val arabicNumberFormat = NumberFormat.getInstance(locale)
+//        arabicNumberFormat.maximumFractionDigits = 2 // Customize as needed
+//
+//        // Format the number to Arabic font
+//        val arabicNumberString = arabicNumberFormat.format(yourNumber)
+//
+//        Log.d("arabicNumberString", "arabicNumberString: ${arabicNumberString}")
+
+
+        ////////
+
+
+
+
+
+
+
+
 //        MainActivity.service!!.showNotification1("dummy title","dummy description","dummy type","dummy id")
 
         mViewDataBinding.inpSearch.setOnClickListener {
@@ -69,18 +98,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         userData?.let {
             Log.d("setUserData", "onViewCreated: ${it}")
 
+            sharedViewModel.setUserData(it)
+
+            if (it.location?.address == null){
+                return@let
+            }
+
             mViewDataBinding.textView20.text = try {
-                it.location.address
+                it.location!!.address
             } catch (e: Exception) {
                 "Select your location"
             }
 
             mViewDataBinding.textView41.text = try {
-                it.location.label
+                it.location!!.label
             } catch (e: Exception) {
                 "Current Location:"
             }
-            sharedViewModel.setUserData(it)
+
         }
 
         mViewDataBinding.homeAddress.setOnClickListener {
@@ -88,8 +123,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 //            locationModel!!.isAction =  "Update"
 
             if (locationModel != null) {
-                locationModel.isAction = "Update"
-
+                if (locationModel._id != null) {
+                    locationModel.isAction = "Update"
+                }
             }
 
             sharedViewModel.setlocationmodel(locationModel)
@@ -169,14 +205,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            mViewDataBinding.mainLayout.snackbar(data.message)
+//                            mViewDataBinding.mainLayout.snackbar(data.message)
                         }
                     }
 
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
                         if (isAdded) {
-
                             mViewDataBinding.mainLayout.snackbar(it.message!!)
                         }
                     }

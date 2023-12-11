@@ -66,7 +66,7 @@ class CartAdapter(
 
 
 
-        Picasso.get().load(arrayData.image).resize(500,500).into(holder.bind.imgShop)
+        Picasso.get().load(arrayData.image).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500,500).into(holder.bind.imgShop)
 
     }
 

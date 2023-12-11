@@ -79,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans_regular"
-                android:text="View Details"
+                android:text="@string/view_details"
                 android:textAlignment="center"
                 android:textColor="#EA1B25"
                 android:textSize="@dimen/_11ssp"

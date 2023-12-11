@@ -66,7 +66,7 @@ class HatlyPopularAdapter(
         }
 
 
-        Picasso.get().load(arrayData.images!![0]).resize(500,500).into(holder.bind.imgShop)
+        Picasso.get().load(arrayData.images!![0]).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500,500).into(holder.bind.imgShop)
 
 
         holder.itemView.setOnClickListener {

@@ -565,7 +565,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
             isChatOpen = true
             mViewDataBinding.textView2224.text = trackRiderModel.name
             phoneNumber = trackRiderModel.contact
-            Picasso.get().load(trackRiderModel.profileImage).resize(500, 500)
+            Picasso.get().load(trackRiderModel.profileImage).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500)
                 .into(mViewDataBinding.hatlyIcon)
         }
     }

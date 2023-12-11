@@ -69,14 +69,16 @@
 
             <TextView
                 android:id="@+id/textView14"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans_regular"
-                android:text="James"
+                android:text="JamesJamesJames"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:textColor="#EA1B25"
                 android:textSize="@dimen/_17ssp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView13"
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
 

@@ -84,7 +84,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
     private var addressLabel = "Home"
 
     private var isForUpdate = false
-    private var locationId = ""
+    private var locationId: String? = ""
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -172,7 +172,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             addDirectionStr = inpAddDirectionNum.text.toString().trim()
 
             if (isForUpdate) {
-                mViewModel.updateAddress(locationId, createJson())
+                mViewModel.updateAddress(locationId?:"", createJson())
             } else {
                 mViewModel.createAddress(createJson())
             }
@@ -208,6 +208,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -217,7 +218,8 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                         it.data?.let { data ->
                             if (data.address.isNotEmpty()) {
                                 if (data.isDefault) {
-                                    val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+                                    val userData =
+                                        PrefHelper.getInstance(requireActivity()).getUserData()
                                     userData!!.location = data
                                     PrefHelper.getInstance(requireActivity()).setUserData(userData)
                                     sharedViewModel.setUserData(userData)
@@ -233,7 +235,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                         loadingDialog.dismiss()
                         if (isAdded) {
 
-                        mViewDataBinding.root.snackbar(it.message!!)
+                            mViewDataBinding.root.snackbar(it.message!!)
                         }
                     }
                 }
@@ -247,15 +249,18 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
+
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             if (data.address.isNotEmpty()) {
                                 if (data.isDefault) {
-                                    val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+                                    val userData =
+                                        PrefHelper.getInstance(requireActivity()).getUserData()
                                     userData!!.location = data
                                     PrefHelper.getInstance(requireActivity()).setUserData(userData)
                                     sharedViewModel.setUserData(userData)
@@ -265,11 +270,12 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                             }
                         }
                     }
+
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
                         if (isAdded) {
 
-                        mViewDataBinding.root.snackbar(it.message!!)
+                            mViewDataBinding.root.snackbar(it.message!!)
                         }
                     }
                 }
@@ -334,7 +340,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                 var postalCode = address.postalCode
 
 
-                if (postalCode == null){
+                if (postalCode == null) {
                     postalCode = ""
                 }
 

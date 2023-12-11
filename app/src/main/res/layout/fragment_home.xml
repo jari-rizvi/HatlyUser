@@ -57,7 +57,7 @@
                     android:ellipsize="marquee"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:singleLine="true"
-                    android:text="Silicon Oasis, Building A5,..."
+                    android:text="Select your location"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12ssp"/>
 

@@ -256,8 +256,8 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
             } else {
                 val params = JsonObject()
                 try {
-                    params.addProperty("lat", userData!!.location.lat)
-                    params.addProperty("lng", userData.location.lng)
+                    params.addProperty("lat", userData!!.location?.lat ?: 0.0)
+                    params.addProperty("lng", userData.location?.lng ?: 0.0)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -268,8 +268,8 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         //        24.90147393769095, 67.11531056779101
         val params = JsonObject()
         try {
-            params.addProperty("lat", userData!!.location.lat)
-            params.addProperty("lng", userData.location.lng)
+            params.addProperty("lat", userData!!.location?.lat ?: 0.0)
+            params.addProperty("lng", userData.location?.lng ?: 0.0)
         } catch (e: JSONException) {
             e.printStackTrace()
         }

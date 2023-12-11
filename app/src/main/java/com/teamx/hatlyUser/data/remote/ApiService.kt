@@ -63,6 +63,11 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
     ): Response<FcmModel>
 
+    @POST(NetworkCallPoints.GUEST_USER)
+    suspend fun guest(
+        @Body params: JsonObject?
+    ): Response<ModelLogin>
+
     @GET(NetworkCallPoints.HOME_SEARCH)
     suspend fun homeSearch(
         @Query("search") search: String,

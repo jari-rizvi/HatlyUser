@@ -93,7 +93,7 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding, ReviewViewModel>() {
                             data.docs.forEach {
 
                                 try {
-                                    it.createdAt = TimeFormatter.formatTimeDifference(it.createdAt)
+                                    it.createdAt = TimeFormatter.formatTimeDifference(it.createdAt, requireActivity())
                                 }catch (e : Exception){
                                     e.printStackTrace()
                                 }

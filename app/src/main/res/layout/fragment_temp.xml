@@ -8,6 +8,13 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:layout_width="match_parent"
+            android:src="@drawable/hatly_user_splash_bg"
+            android:scaleType="fitXY"
+            android:alpha="0.3"
+            android:layout_height="match_parent"/>
+
+        <ImageView
             android:id="@+id/hatlyIcon1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,6 +29,7 @@
         android:id="@+id/layoutMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         tools:context=".ui.fragments.auth.temp.TempFragment">
 
         <ImageView

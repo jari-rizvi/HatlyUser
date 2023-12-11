@@ -19,7 +19,6 @@ data class TrackShopModel(
     val products: List<Any>,
     val rank: Int,
     val ratting: String,
-    val resturantCategory: List<String>,
     val setting: Setting,
     val shopCategory: List<Any>,
     val status: String,

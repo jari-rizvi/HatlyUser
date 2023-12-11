@@ -161,7 +161,7 @@ class FoodsShopPreviewFragment :
 
                         shopId = data.shop._id
 
-                        Picasso.get().load(data.shop.image).resize(500, 500)
+                        Picasso.get().load(data.shop.image).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500)
                             .into(mViewDataBinding.imgShop)
 
                         mViewDataBinding.imgFavourite.isChecked = data.shop.hasAddedToWishlist

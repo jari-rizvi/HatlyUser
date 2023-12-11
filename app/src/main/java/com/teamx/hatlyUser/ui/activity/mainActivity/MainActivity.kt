@@ -231,11 +231,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 if (it.isSuccessful) {
                     CoroutineScope(Dispatchers.Main).launch {
                         dataStoreProvider.removeAll()
+                        PrefHelper.getInstance(this@MainActivity).clearAll()
                     }
                 }
 
             }
-            navController!!.navigate(R.id.action_homeFragment_to_loginFragment)
+//            navController!!.navigate(R.id.action_homeFragment_to_loginFragment)
+            navController!!.navigate(R.id.action_homeFragment_to_guestFragment)
         }
 
         mViewDataBinding.drawerLayoutMain.notification.setOnClickListener {
@@ -360,8 +362,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         sharedViewModel.userData.observe(this) {
             mViewDataBinding.drawerLayoutMain.textView14.text = it.name
-            Picasso.get().load(it.profileImage).resize(500, 500)
+//            if (it.profileImage == null){
+//                Picasso.get().load(R.drawable.food).resize(500, 500)
+//                    .into(mViewDataBinding.drawerLayoutMain.imgProfile)
+//            }else{
+//
+//            }
+            Picasso.get().load(it.profileImage).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500)
                 .into(mViewDataBinding.drawerLayoutMain.imgProfile)
+
             Log.d("userData", "it._id: ${it._id}")
             Log.d("userData", "it.name: ${it.name}")
             Log.d("userData", "it.contact: ${it.contact}")

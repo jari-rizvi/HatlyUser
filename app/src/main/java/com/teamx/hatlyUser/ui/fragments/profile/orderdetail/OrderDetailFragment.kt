@@ -245,7 +245,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                 "null"
             }
 
-            Picasso.get().load(data.shop.image).resize(500, 500).into(mViewDataBinding.imgShop)
+            Picasso.get().load(data.shop.image).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500).into(mViewDataBinding.imgShop)
 
             productOrderHistoryList.addAll(data.products)
             orderDetailAdapter.notifyDataSetChanged()

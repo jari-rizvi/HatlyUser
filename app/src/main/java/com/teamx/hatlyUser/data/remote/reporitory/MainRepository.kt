@@ -17,6 +17,7 @@ class MainRepository @Inject constructor(
     var localDataSource: ProductDao,
 ) {
     suspend fun login(@Body param: JsonObject) = apiService.login(param)
+    suspend fun guest(@Body param: JsonObject) = apiService.guest(param)
     suspend fun fcm(@Body param: JsonObject) = apiService.fcm(param)
     suspend fun homeSearch(
         @Query("search") search: String,
