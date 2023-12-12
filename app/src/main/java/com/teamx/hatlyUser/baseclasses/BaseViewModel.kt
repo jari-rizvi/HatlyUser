@@ -29,6 +29,15 @@ open class BaseViewModel : ViewModel() {
     }
 
 
+    private val _parcelOrderhistory = MutableLiveData<com.teamx.hatlyUser.ui.fragments.profile.specialOrderHistory.model.Doc>()
+    val parcelOrderHistory: LiveData<com.teamx.hatlyUser.ui.fragments.profile.specialOrderHistory.model.Doc>
+        get() = _parcelOrderhistory
+
+    fun setParcelOrderHistory(doc: com.teamx.hatlyUser.ui.fragments.profile.specialOrderHistory.model.Doc) {
+        this._parcelOrderhistory.value = doc
+    }
+
+
     private val _locationmodel = MutableLiveData<Location>()
     val locationmodel: LiveData<Location>
         get() = _locationmodel

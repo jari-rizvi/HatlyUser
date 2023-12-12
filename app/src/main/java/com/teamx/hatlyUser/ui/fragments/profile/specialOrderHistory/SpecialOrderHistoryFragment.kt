@@ -17,6 +17,7 @@ import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentSpecialOrderHistoryBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.profile.specialOrderHistory.adapter.SpecialOrderHistoryAdapter
+import com.teamx.hatlyUser.ui.fragments.profile.specialOrderHistory.model.Doc
 import com.teamx.hatlyUser.ui.fragments.special.specialorder.model.DeliveredParcel
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +35,7 @@ class SpecialOrderHistoryFragment :
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    private lateinit var specialHistoryArrayList: ArrayList<DeliveredParcel>
+    private lateinit var specialHistoryArrayList: ArrayList<Doc>
     private lateinit var specialOrderHistoryAdapter: SpecialOrderHistoryAdapter
 
     var isScrolling = false
@@ -70,28 +71,34 @@ class SpecialOrderHistoryFragment :
         mViewDataBinding.recSpecialOrderHistory.adapter = specialOrderHistoryAdapter
 
 
-        if (!mViewModel.activeDelieverResponse.hasActiveObservers()) {
-            mViewModel.activeDeliever(true, 1, 10)
+        if (!mViewModel.allParcelResponse.hasActiveObservers()) {
+            mViewModel.allParcel("pending", 10, 1)
         }
 
-        mViewModel.activeDelieverResponse.observe(requireActivity()) {
+        mViewModel.allParcelResponse.observe(requireActivity()) {
             when (it.status) {
                 Resource.Status.AUTH -> {
                     loadingDialog.dismiss()
                     onToSignUpPage()
                 }
+
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
+
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
                     it.data?.let { data ->
+                        if (data.hasNextPage) {
+                            nextPage = data.nextPage
+                        }
                         Log.d("activeDelieverResponse", "onViewCreated: ${data.docs}")
                         specialHistoryArrayList.clear()
                         data.docs?.let { it1 -> specialHistoryArrayList.addAll(it1) }
                         specialOrderHistoryAdapter.notifyDataSetChanged()
                     }
                 }
+
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
                     if (isAdded) {
@@ -120,7 +127,7 @@ class SpecialOrderHistoryFragment :
                 if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
                     isScrolling = false
                     if (hasNextPage) {
-                        mViewModel.activeDeliever(true, 2, 10)
+                        mViewModel.allParcel("pending", 10, nextPage)
                     }
 //                    fetchData()
                 }
@@ -150,10 +157,10 @@ class SpecialOrderHistoryFragment :
 //    }
 
     override fun clickshopItem(position: Int) {
-//        val orderHistoryModel = specialHistoryArrayList[position]
-//        orderHistoryModel.isFromWallet = false
-//        sharedViewModel.setOrderHistory(orderHistoryModel)
-//        findNavController().navigate(R.id.action_orderHistoryFragment_to_orderDetailFragment)
+        val parcelModel = specialHistoryArrayList[position]
+
+        sharedViewModel.setParcelOrderHistory(parcelModel)
+        findNavController().navigate(R.id.action_specialOrderHistoryFragment_to_specialOrderDetailFragment)
     }
 
     override fun clickCategoryItem(position: Int) {

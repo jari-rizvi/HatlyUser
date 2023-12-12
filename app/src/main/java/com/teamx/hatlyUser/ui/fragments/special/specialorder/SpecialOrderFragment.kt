@@ -12,6 +12,7 @@ import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentSpecialOrderBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
+import com.teamx.hatlyUser.ui.fragments.profile.specialOrderHistory.model.Doc
 import com.teamx.hatlyUser.ui.fragments.special.specialorder.adapter.SpecialOrderAdapter
 import com.teamx.hatlyUser.ui.fragments.special.specialorder.model.DeliveredParcel
 import com.teamx.hatlyUser.utils.snackbar
@@ -29,7 +30,7 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    lateinit var delieveredParcel: ArrayList<DeliveredParcel>
+    lateinit var delieveredParcel: ArrayList<Doc>
 
     var orderId = ""
 
@@ -44,6 +45,11 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
                 popEnter = R.anim.nav_default_pop_enter_anim
                 popExit = R.anim.nav_default_pop_exit_anim
             }
+        }
+
+
+        mViewDataBinding.viewAll.setOnClickListener {
+            findNavController().navigate(R.id.action_specialOrderFragment_to_specialOrderHistoryFragment)
         }
 
         mViewDataBinding.imgBack.setOnClickListener {
@@ -71,9 +77,9 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
             }
         }
 
-        mViewModel.activeDeliever(false, 1, 10)
+        mViewModel.allParcel("pending", 10, 1)
 
-        mViewModel.activeDelieverResponse.observe(requireActivity()) {
+        mViewModel.allParcelResponse.observe(requireActivity()) {
             when (it.status) {
                 Resource.Status.AUTH -> {
                     loadingDialog.dismiss()
@@ -88,15 +94,15 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
                     loadingDialog.dismiss()
                     it.data?.let { data ->
 
-                        if (data.deliveredParcels.isNotEmpty()) {
+                        if (data.docs.isNotEmpty()) {
                             delieveredParcel.clear()
-                            delieveredParcel.addAll(data.deliveredParcels)
+                            delieveredParcel.addAll(data.docs)
                             delieveredAdapter.notifyDataSetChanged()
                         } else {
                             mViewDataBinding.textView22545454.visibility = View.VISIBLE
                         }
 
-                        if (data.activeParcels.isEmpty()) {
+                        if (data.docs.isEmpty()) {
                             mViewDataBinding.constraintLayout6.visibility = View.GONE
                             mViewDataBinding.textView2254545544.visibility = View.VISIBLE
                             return@observe
@@ -105,30 +111,88 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
                             mViewDataBinding.textView2254545544.visibility = View.GONE
                         }
 
-                        Log.d("activeParcels", "onViewCreated: ${data.activeParcels}")
+//                        Log.d("activeParcels", "onViewCreated: ${data.activeParcels}")
 
-                        orderId = data.activeParcels[0]._id
+//                        orderId = data.activeParcels[0]._id
+//
+//                        mViewDataBinding.textView2223.text = try {
+//                            data.activeParcels[0].details.item
+//                        } catch (e: Exception) {
+//                            ""
+//                        }
+//
+//                        mViewDataBinding.textView222.text = try {
+//                            "${getString(R.string.tracking_id)} ${data.activeParcels[0].trackingNumber}"
+//                        } catch (e: Exception) {
+//                            "null"
+//                        }
+//
+//                        mViewDataBinding.textView22725.text = try {
+//                            data.activeParcels[0].pickup.address
+//                        } catch (e: Exception) {
+//                            "null"
+//                        }
+//
+//                        mViewDataBinding.textView227925.text = try {
+//                            data.activeParcels[0].dropOff.address
+//                        } catch (e: Exception) {
+//                            "null"
+//                        }
+
+
+                    }
+                }
+
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    if (isAdded) {
+                        mViewDataBinding.root.snackbar(it.message!!)
+                    }
+                }
+            }
+        }
+
+        mViewModel.activeDeliever()
+
+        mViewModel.activeResponse.observe(requireActivity()) {
+            when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
+
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    it.data?.let { data ->
+
+//                        Log.d("activeParcels", "onViewCreated: ${data.activeParcels}")
+
+                        orderId = data._id
 
                         mViewDataBinding.textView2223.text = try {
-                            data.activeParcels[0].details.item
+                            data.details.item
                         } catch (e: Exception) {
                             ""
                         }
 
                         mViewDataBinding.textView222.text = try {
-                            "${getString(R.string.tracking_id)} ${data.activeParcels[0].trackingNumber}"
+                            "${getString(R.string.tracking_id)} ${data.trackingNumber}"
                         } catch (e: Exception) {
                             "null"
                         }
 
                         mViewDataBinding.textView22725.text = try {
-                            data.activeParcels[0].pickup.address
+                            data.senderLocation.location.address
                         } catch (e: Exception) {
                             "null"
                         }
 
                         mViewDataBinding.textView227925.text = try {
-                            data.activeParcels[0].dropOff.address
+                            data.receiverLocation.location.address
                         } catch (e: Exception) {
                             "null"
                         }
@@ -150,7 +214,10 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
     }
 
     override fun clickshopItem(position: Int) {
+        val parcelModel = delieveredParcel[position]
 
+        sharedViewModel.setParcelOrderHistory(parcelModel)
+        findNavController().navigate(R.id.action_specialOrderFragment_to_specialOrderDetailFragment)
     }
 
     override fun clickCategoryItem(position: Int) {

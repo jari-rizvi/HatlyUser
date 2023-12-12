@@ -339,6 +339,21 @@
             app:layout_constraintStart_toStartOf="@+id/textView22"
             app:layout_constraintTop_toBottomOf="@+id/guideline12" />
 
+        <TextView
+            android:id="@+id/viewAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="View All"
+            android:textColor="#EA1B25"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView2254"
+            app:layout_constraintEnd_toEndOf="@+id/txtLogin"
+
+            app:layout_constraintTop_toTopOf="@+id/textView2254"
+            app:layout_constraintVertical_bias="0" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recSpecial"
             android:layout_width="0dp"

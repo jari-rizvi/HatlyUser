@@ -19,5 +19,6 @@ data class ModelPlaceOrder(
     val tax: Double,
     val total: Double,
     val useWallet: Boolean,
+    val isPayed: Boolean,
     val usedWalletAmount: Double
 )

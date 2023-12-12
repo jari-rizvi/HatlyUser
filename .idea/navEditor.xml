@@ -909,13 +909,25 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="specialOrderDetailFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="4299" />
+                            <option name="y" value="2730" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="specialOrderFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="3428" />
-                            <option name="y" value="1212" />
+                            <option name="x" value="3274" />
+                            <option name="y" value="2140" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -926,6 +938,11 @@
                               </value>
                             </entry>
                             <entry key="action_specialOrderFragment_to_sendParcelFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_specialOrderFragment_to_specialOrderDetailFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -945,9 +962,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="3672" />
-                            <option name="y" value="2566" />
+                            <option name="x" value="3800" />
+                            <option name="y" value="2599" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_specialOrderHistoryFragment_to_specialOrderDetailFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

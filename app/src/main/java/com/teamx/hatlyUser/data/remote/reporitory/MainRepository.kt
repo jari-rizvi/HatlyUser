@@ -93,10 +93,14 @@ class MainRepository @Inject constructor(
     suspend fun createParcel(@Body params: JsonObject) = apiService.createParcel(params)
     suspend fun placeOrder(@Body params: JsonObject) = apiService.placeOrder(params)
     suspend fun activeDeliever(
-        @Query("allDelivered") allDelivered: Boolean,
-        @Query("page") page: Int,
+    ) = apiService.activeDeliever()
+
+
+    suspend fun allParcel(
+        @Query("status") status: String,
         @Query("limit") limit: Int,
-    ) = apiService.activeDeliever(allDelivered, page, limit)
+        @Query("page") page: Int,
+    ) = apiService.allParcel(status, page, limit)
 
     suspend fun orderHistory(
         @Query("page") page: Int,

@@ -102,7 +102,12 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         // Set the ClickableSpan to the desired portion of the text
 
         // Set the ClickableSpan to the desired portion of the text
-        spannableString.setSpan(clickableSpan, 41, fullText.length, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(
+            clickableSpan,
+            41,
+            fullText.length,
+            SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
 
         // Set the text color for the clickable span
 
@@ -122,8 +127,6 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
         // Make the TextView clickable
         mViewDataBinding.checkBox.movementMethod = LinkMovementMethod.getInstance()
-
-
 
 
 //        mViewDataBinding.textView2564.setOnClickListener {
@@ -166,7 +169,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 //            initializationPayPal2()
             if (mViewDataBinding.checkBox.isChecked) {
                 mViewModel.placeOrder(createOrderJsonObject())
-            }else{
+            } else {
                 if (isAdded) {
 
                     mViewDataBinding.root.snackbar("Please read and accept our Terms and Conditions before placing an order.")
@@ -296,40 +299,56 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                         mViewDataBinding.textView21343.text = try {
                             "${data.balance} ${
                                 MainApplication.context.getString(
-                                R.string.aed)}"
+                                    R.string.aed
+                                )
+                            }"
                         } catch (e: Exception) {
                             "0.0 ${
                                 MainApplication.context.getString(
-                                R.string.aed)}"
+                                    R.string.aed
+                                )
+                            }"
                         }
                         mViewDataBinding.textView2144633.text = try {
                             "${data.subTotal} ${
                                 MainApplication.context.getString(
-                                R.string.aed)}"
+                                    R.string.aed
+                                )
+                            }"
                         } catch (e: Exception) {
                             "0.0 ${
                                 MainApplication.context.getString(
-                                R.string.aed)}"
+                                    R.string.aed
+                                )
+                            }"
                         }
 
                         mViewDataBinding.textView214467433.text = try {
                             "${data.deliveryCharges} ${
                                 MainApplication.context.getString(
-                                R.string.aed)}"
+                                    R.string.aed
+                                )
+                            }"
                         } catch (e: Exception) {
                             "0.0 ${
                                 MainApplication.context.getString(
-                                R.string.aed)}"
+                                    R.string.aed
+                                )
+                            }"
                         }
 
                         mViewDataBinding.textView2144678433.text = try {
                             "${data.total} ${
                                 MainApplication.context.getString(
-                                R.string.aed)}"
+                                    R.string.aed
+                                )
+                            }"
                         } catch (e: Exception) {
                             "0.0 ${
                                 MainApplication.context.getString(
-                                R.string.aed)}"
+                                    R.string.aed
+                                )
+                            }"
                         }
 
 
@@ -369,40 +388,56 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                         mViewDataBinding.textView21343.text = try {
                             "${data.balance} ${
                                 MainApplication.context.getString(
-                                R.string.aed)}"
+                                    R.string.aed
+                                )
+                            }"
                         } catch (e: Exception) {
                             "0.0 ${
                                 MainApplication.context.getString(
-                                R.string.aed)}"
+                                    R.string.aed
+                                )
+                            }"
                         }
                         mViewDataBinding.textView2144633.text = try {
                             "${data.subTotal} ${
                                 MainApplication.context.getString(
-                                R.string.aed)}"
+                                    R.string.aed
+                                )
+                            }"
                         } catch (e: Exception) {
                             "0.0 ${
                                 MainApplication.context.getString(
-                                R.string.aed)}"
+                                    R.string.aed
+                                )
+                            }"
                         }
 
                         mViewDataBinding.textView214467433.text = try {
                             "${data.deliveryCharges} ${
                                 MainApplication.context.getString(
-                                R.string.aed)}"
+                                    R.string.aed
+                                )
+                            }"
                         } catch (e: Exception) {
                             "0.0 ${
                                 MainApplication.context.getString(
-                                R.string.aed)}"
+                                    R.string.aed
+                                )
+                            }"
                         }
 
                         mViewDataBinding.textView2144678433.text = try {
                             "${data.total} ${
                                 MainApplication.context.getString(
-                                R.string.aed)}"
+                                    R.string.aed
+                                )
+                            }"
                         } catch (e: Exception) {
                             "0.0 ${
                                 MainApplication.context.getString(
-                                R.string.aed)}"
+                                    R.string.aed
+                                )
+                            }"
                         }
 
 
@@ -442,40 +477,47 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                         orderId = data._id
                         val bundle = Bundle()
                         bundle.putString("orderId", orderId)
-                        when (selectedPaymentMethod) {
-                            PaymentMethod.CASH_ON_DELIVERY -> {
-                                // Process payment for Cash on Delivery
-                                if (data.status == "placed") {
-                                    if (isAdded) {
-                                        findNavController().navigate(
-                                            R.id.action_checkOutFragment_to_orderPlacedFragment,
-                                            bundle
-                                        )
+                        if (data.isPayed) {
+                            findNavController().navigate(
+                                R.id.action_checkOutFragment_to_orderPlacedFragment,
+                                bundle
+                            )
+                        } else {
+                            when (selectedPaymentMethod) {
+                                PaymentMethod.CASH_ON_DELIVERY -> {
+                                    // Process payment for Cash on Delivery
+                                    if (data.status == "placed") {
+                                        if (isAdded) {
+                                            findNavController().navigate(
+                                                R.id.action_checkOutFragment_to_orderPlacedFragment,
+                                                bundle
+                                            )
+                                        }
                                     }
                                 }
-                            }
 
-                            PaymentMethod.STRIPE_PAYMENT -> {
-                                // Process payment for Online Payment
-                                if (data.clientSecret != null) {
-                                    showStripeSheet(data.clientSecret)
-                                }
-                            }
-
-                            PaymentMethod.STRIPE_SAVED_PAYMENT -> {
-                                // Process payment for Online Payment
-                                if (data.status == "placed") {
-                                    if (isAdded) {
-                                        findNavController().navigate(
-                                            R.id.action_checkOutFragment_to_orderPlacedFragment,
-                                            bundle
-                                        )
+                                PaymentMethod.STRIPE_PAYMENT -> {
+                                    // Process payment for Online Payment
+                                    if (data.clientSecret != null) {
+                                        showStripeSheet(data.clientSecret)
                                     }
                                 }
-                            }
 
-                            PaymentMethod.PAYPAL -> {
-                                showPaypal()
+                                PaymentMethod.STRIPE_SAVED_PAYMENT -> {
+                                    // Process payment for Online Payment
+                                    if (data.status == "placed") {
+                                        if (isAdded) {
+                                            findNavController().navigate(
+                                                R.id.action_checkOutFragment_to_orderPlacedFragment,
+                                                bundle
+                                            )
+                                        }
+                                    }
+                                }
+
+                                PaymentMethod.PAYPAL -> {
+                                    showPaypal()
+                                }
                             }
                         }
                     }

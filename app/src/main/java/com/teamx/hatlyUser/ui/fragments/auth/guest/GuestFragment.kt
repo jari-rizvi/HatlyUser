@@ -46,6 +46,8 @@ class GuestFragment : BaseFragment<FragmentGuestBinding, GuestViewModel>() {
             }
         }
 
+        PrefHelper.getInstance(requireActivity()).setNotFirstTime(true)
+
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Log.d("handleOnBackPressed", "handleOnBackPressed: back")

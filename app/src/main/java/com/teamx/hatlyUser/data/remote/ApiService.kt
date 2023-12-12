@@ -33,6 +33,8 @@ import com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.AddToCart
 import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.modelReview.ModelReviewShop
 import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.modelUploadImages.ModelUploadImages
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.OrderHistoryModel
+import com.teamx.hatlyUser.ui.fragments.profile.specialOrderHistory.model.Doc
+import com.teamx.hatlyUser.ui.fragments.profile.specialOrderHistory.model.ModelSpecialHistory
 import com.teamx.hatlyUser.ui.fragments.shophome.model.ModelSubCategoryStore
 import com.teamx.hatlyUser.ui.fragments.special.ParcelLocation.model.fare.ModelFare
 import com.teamx.hatlyUser.ui.fragments.special.specialorder.model.ModelActiveDelieverParcel
@@ -252,12 +254,16 @@ interface ApiService {
 
     @GET(NetworkCallPoints.CREATE_PARCEL)
     suspend fun activeDeliever(
-        @Query("allDelivered") allDelivered: Boolean,
-        @Query("page") page: Int,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
+    ): Response<Doc>
+
+    @GET(NetworkCallPoints.ALL_PARCEL)
+    suspend fun allParcel(
+        @Query("status") status: String,
         @Query("limit") limit: Int,
-        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
-        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
-    ): Response<ModelActiveDelieverParcel>
+        @Query("page") page: Int,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
+    ): Response<ModelSpecialHistory>
 
     @GET(NetworkCallPoints.ORDER_HISTORY)
     suspend fun orderHistory(

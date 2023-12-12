@@ -65,7 +65,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             .requestIdToken(getString(R.string.your_web_client_id)).requestEmail().build()
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
-        PrefHelper.getInstance(requireActivity()).setNotFirstTime(true)
+
 
         randNum = generateRandom().toString()
 

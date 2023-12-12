@@ -9,11 +9,13 @@ import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
 import com.teamx.hatlyUser.ui.fragments.payments.cart.model.ModelCart
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.OrderHistoryModel
+import com.teamx.hatlyUser.ui.fragments.profile.specialOrderHistory.model.ModelSpecialHistory
 import com.teamx.hatlyUser.ui.fragments.special.specialorder.model.ModelActiveDelieverParcel
 import com.teamx.hatlyUser.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import retrofit2.http.Query
 import javax.inject.Inject
 
 
@@ -23,36 +25,69 @@ class SpecialOrderHistoryViewModel @Inject constructor(
     private val networkHelper: NetworkHelper
 ) : BaseViewModel() {
 
-    private val _activeDelieverResponse = MutableLiveData<Resource<ModelActiveDelieverParcel>>()
-    val activeDelieverResponse: LiveData<Resource<ModelActiveDelieverParcel>>
-        get() = _activeDelieverResponse
+//    private val _activeDelieverResponse = MutableLiveData<Resource<ModelActiveDelieverParcel>>()
+//    val activeDelieverResponse: LiveData<Resource<ModelActiveDelieverParcel>>
+//        get() = _activeDelieverResponse
+//
+//    fun activeDeliever(
+//        allDelivered: Boolean,
+//        page: Int,
+//        limit: Int,
+//    ) {
+//        viewModelScope.launch {
+//            _activeDelieverResponse.postValue(Resource.loading(null))
+//            if (networkHelper.isNetworkConnected()) {
+//                try {
+//                    mainRepository.activeDeliever(allDelivered, page, limit).let {
+//                        if (it.isSuccessful) {
+//                            _activeDelieverResponse.postValue(Resource.success(it.body()!!))
+//                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
+//                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+//                            _activeDelieverResponse.postValue(Resource.error(jsonObj.getString("message")))
+//                        }else if (it.code() == 401) {
+//                            _activeDelieverResponse.postValue(Resource.unAuth("", null))
+//                        } else {
+//                            val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
+//                            _activeDelieverResponse.postValue(Resource.error(jsonObj.getString("message")))
+//                        }
+//                    }
+//                } catch (e: Exception) {
+//                    _activeDelieverResponse.postValue(Resource.error("${e.message}", null))
+//                }
+//            } else _activeDelieverResponse.postValue(Resource.error("No internet connection", null))
+//        }
+//    }
 
-    fun activeDeliever(
-        allDelivered: Boolean,
-        page: Int,
+    private val _allParcelResponse = MutableLiveData<Resource<ModelSpecialHistory>>()
+    val allParcelResponse: LiveData<Resource<ModelSpecialHistory>>
+        get() = _allParcelResponse
+
+    fun allParcel(
+        status: String,
         limit: Int,
+        page: Int,
     ) {
         viewModelScope.launch {
-            _activeDelieverResponse.postValue(Resource.loading(null))
+            _allParcelResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.activeDeliever(allDelivered, page, limit).let {
+                    mainRepository.allParcel(status, page, limit).let {
                         if (it.isSuccessful) {
-                            _activeDelieverResponse.postValue(Resource.success(it.body()!!))
+                            _allParcelResponse.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
-                            _activeDelieverResponse.postValue(Resource.error(jsonObj.getString("message")))
+                            _allParcelResponse.postValue(Resource.error(jsonObj.getString("message")))
                         }else if (it.code() == 401) {
-                            _activeDelieverResponse.postValue(Resource.unAuth("", null))
+                            _allParcelResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
-                            _activeDelieverResponse.postValue(Resource.error(jsonObj.getString("message")))
+                            _allParcelResponse.postValue(Resource.error(jsonObj.getString("message")))
                         }
                     }
                 } catch (e: Exception) {
-                    _activeDelieverResponse.postValue(Resource.error("${e.message}", null))
+                    _allParcelResponse.postValue(Resource.error("${e.message}", null))
                 }
-            } else _activeDelieverResponse.postValue(Resource.error("No internet connection", null))
+            } else _allParcelResponse.postValue(Resource.error("No internet connection", null))
         }
     }
 
