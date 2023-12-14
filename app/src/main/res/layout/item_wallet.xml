@@ -37,7 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
-            android:text="Order  Summery"
+            android:text="@string/order_summery"
             android:textColor="#EA1B25"
             android:layout_marginHorizontal="@dimen/_5sdp"
             android:textSize="@dimen/_13ssp"

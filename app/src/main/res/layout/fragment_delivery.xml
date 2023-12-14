@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
-            android:text="Qui ex aute ipsum duis. Incididunt\nadipisicing voluptate laborum."
+            android:text="@string/get_your_desired_items_delivered_right_to_your_doorstep_with_ease_and_convenience"
             android:textAlignment="center"
             android:textColor="#7D849A"
             android:textSize="@dimen/_13ssp"

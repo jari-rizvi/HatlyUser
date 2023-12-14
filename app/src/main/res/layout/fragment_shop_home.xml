@@ -78,7 +78,7 @@
             android:drawableStart="@drawable/search_24"
             android:drawablePadding="@dimen/_10sdp"
             android:drawableTint="#66363636"
-            android:hint="Search"
+            android:hint="@string/search"
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLines="1"

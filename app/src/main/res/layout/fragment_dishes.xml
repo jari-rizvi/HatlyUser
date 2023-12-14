@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
-            android:text="Qui ex aute ipsum duis. Incididunt\nadipisicing voluptate laborum."
+            android:text="@string/discover_a_diverse_range_of_mouth_watering_cuisines_that_are_not_only_delicious_but_also_provide_quality_and_happiness"
             android:textColor="#7D849A"
             android:textAlignment="center"
             android:textSize="@dimen/_13ssp"

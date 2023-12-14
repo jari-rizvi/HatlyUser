@@ -247,8 +247,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1476" />
-                            <option name="y" value="4013" />
+                            <option name="x" value="1586" />
+                            <option name="y" value="4461" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -943,6 +943,11 @@
                               </value>
                             </entry>
                             <entry key="action_specialOrderFragment_to_specialOrderDetailFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_specialOrderFragment_to_specialOrderHistoryFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

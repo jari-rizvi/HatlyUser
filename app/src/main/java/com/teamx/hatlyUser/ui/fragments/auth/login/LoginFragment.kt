@@ -61,6 +61,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             }
         }
 
+        PrefHelper.getInstance(requireActivity()).setNotFirstTime(true)
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.your_web_client_id)).requestEmail().build()
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)

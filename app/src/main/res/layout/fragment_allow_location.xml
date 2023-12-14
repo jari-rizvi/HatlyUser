@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
-            android:text="Lorem Ipsum is simply dummy text of the\nprinting and typesetting industry."
+            android:text="@string/share_your_location_to_navigate_your_nearest_nstores_and_restaurants"
             android:textColor="#909090"
             android:textAlignment="center"
             android:textSize="@dimen/_10ssp"

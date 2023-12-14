@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="Lorem Ipsum is simply dummy text of the\nprinting and typesetting industry."
+                android:text="@string/create_an_account_and_begin_your_journey_with_hatly"
                 android:textColor="#909090"
                 android:textSize="@dimen/_10ssp"
                 app:layout_constraintStart_toStartOf="@+id/textView"

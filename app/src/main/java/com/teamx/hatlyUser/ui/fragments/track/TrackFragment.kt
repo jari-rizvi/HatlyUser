@@ -618,6 +618,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
                     mViewDataBinding.imgPicked.isChecked = true
                     mViewDataBinding.line3.isChecked = false
                     mViewDataBinding.imgDelivered.isChecked = false
+                    isChatOpen = true
                 }
 
                 "delivered" -> {

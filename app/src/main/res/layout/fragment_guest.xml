@@ -55,7 +55,7 @@
             android:background="@drawable/button_radius_corner_gray"
             android:fontFamily="@font/open_sans_regular"
             android:paddingVertical="@dimen/_10sdp"
-            android:text="Guest User"
+            android:text="@string/guest_user"
             android:textAlignment="center"
             android:textColor="#1ED860"
             android:textColorHint="#787878"

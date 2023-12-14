@@ -142,7 +142,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         )
 
         mViewDataBinding.txtEnterLocaion.setOnClickListener {
-            findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
+
         }
 
         bottomSheetAddSearchFragment = BottomSheetAddressFragment()
@@ -407,6 +407,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                 imgLabelWork.isChecked = false
                 imgLabelOther.isChecked = false
                 inpOtherLabel.visibility = View.GONE
+                mViewDataBinding.txtEnterLocaion.text = getString(R.string.home)
             }
 
             "Work" -> {
@@ -415,6 +416,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                 imgLabelWork.isChecked = true
                 imgLabelOther.isChecked = false
                 inpOtherLabel.visibility = View.GONE
+                mViewDataBinding.txtEnterLocaion.text = getString(R.string.work)
             }
 
             else -> {
@@ -423,6 +425,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                 imgLabelOther.isChecked = true
                 inpOtherLabel.visibility = View.VISIBLE
                 inpOtherLabel.setText(label)
+                mViewDataBinding.txtEnterLocaion.text = label
             }
         }
     }

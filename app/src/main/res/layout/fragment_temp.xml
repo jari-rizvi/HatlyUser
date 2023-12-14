@@ -9,10 +9,10 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:src="@drawable/hatly_user_splash_bg"
-            android:scaleType="fitXY"
+            android:layout_height="match_parent"
             android:alpha="0.3"
-            android:layout_height="match_parent"/>
+            android:scaleType="fitXY"
+            android:src="@drawable/hatly_user_splash_bg" />
 
         <ImageView
             android:id="@+id/hatlyIcon1"
@@ -25,85 +25,85 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutMain"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.fragments.auth.temp.TempFragment">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:context=".ui.fragments.auth.temp.TempFragment">
 
-        <ImageView
-            android:id="@+id/img"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/splash_bg"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/splash_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
-        <ImageView
-            android:id="@+id/hatlyIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/hatly_logo_svg"
-            app:layout_constraintVertical_bias="0.1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/hatlyIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/hatly_logo_svg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.1" />
 
-        <TextView
-            android:id="@+id/splashTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/bumbu_sushi"
-            android:text="@string/let_s_order_your_best_nmenu_in_here"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_20ssp"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/hatlyIcon"
-            app:layout_constraintStart_toStartOf="@+id/hatlyIcon"
-            app:layout_constraintTop_toBottomOf="@+id/hatlyIcon" />
+            <TextView
+                android:id="@+id/splashTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bumbu_sushi"
+                android:text="@string/let_s_order_your_best_nmenu_in_here"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_20ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/hatlyIcon"
+                app:layout_constraintStart_toStartOf="@+id/hatlyIcon"
+                app:layout_constraintTop_toBottomOf="@+id/hatlyIcon"
+                app:layout_constraintVertical_bias="0.05" />
 
-        <TextView
-            android:id="@+id/splashDes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/let_s_order_your_best_menu_here_and_nlet_s_find_your_best_menu_here"
-            android:textAlignment="center"
-            android:textColor="#CCFFFFFF"
-            android:fontFamily="@font/open_sans_regular"
-            android:textSize="@dimen/_15ssp"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/splashTitle"
-            app:layout_constraintStart_toStartOf="@+id/splashTitle"
-            app:layout_constraintTop_toBottomOf="@+id/splashTitle" />
-
-
-        <com.teamx.hatlyUser.utils.SlideToUnlock
-            android:id="@+id/slideToUnlock"
-            android:layout_width="@dimen/_160sdp"
-            android:layout_height="@dimen/_40sdp"
-            app:cancelOnYExit="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="0.85"
-            app:layout_constraintTop_toBottomOf="@+id/splashDes"
-            app:slideToUnlockBackgroundColor="#7A000000"
-            app:slideToUnlockText="@string/swip_to_see"
-            app:slideToUnlockTextColor="@color/white"
-            app:sliderColor="#54FFFFFF" />
+            <TextView
+                android:id="@+id/splashDes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_regular"
+                android:text="@string/let_s_order_your_best_menu_here_and_nlet_s_find_your_best_menu_here"
+                android:textAlignment="center"
+                android:textColor="#CCFFFFFF"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/splashTitle"
+                app:layout_constraintStart_toStartOf="@+id/splashTitle"
+                app:layout_constraintTop_toBottomOf="@+id/splashTitle"
+                app:layout_constraintVertical_bias="0" />
 
 
+            <com.teamx.hatlyUser.utils.SlideToUnlock
+                android:id="@+id/slideToUnlock"
+                android:layout_width="@dimen/_160sdp"
+                android:layout_height="@dimen/_40sdp"
+                app:cancelOnYExit="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/splashDes"
+                app:layout_constraintVertical_bias="0.85"
+                app:slideToUnlockBackgroundColor="#7A000000"
+                app:slideToUnlockText="@string/swip_to_see"
+                app:slideToUnlockTextColor="@color/white"
+                app:sliderColor="#54FFFFFF" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
