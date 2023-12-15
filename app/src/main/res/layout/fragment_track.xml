@@ -355,10 +355,9 @@
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
                 android:src="@drawable/chat"
+                android:layout_marginEnd="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/hatlyIcon"
                 app:layout_constraintEnd_toStartOf="@+id/hatlyIcon12"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/textView2224"
                 app:layout_constraintTop_toTopOf="@+id/hatlyIcon" />
 
             <ImageView
@@ -367,10 +366,9 @@
                 android:layout_height="@dimen/_25sdp"
                 android:padding="@dimen/_1sdp"
                 android:src="@drawable/call"
+                android:layout_marginEnd="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/hatlyIcon1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/hatlyIcon1"
                 app:layout_constraintTop_toTopOf="@+id/hatlyIcon1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

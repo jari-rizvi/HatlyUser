@@ -623,6 +623,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 
                 "delivered" -> {
                     Log.d("onTrackFragment", "currentStatus delivered")
+                    sharedViewModel.orderHistory.value!!.status = "delivered"
                     mViewDataBinding.imgPlaced.isChecked = true
                     mViewDataBinding.line1.isChecked = true
                     mViewDataBinding.imgPrepared.isChecked = true
@@ -634,6 +635,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 
                 "cancelled" -> {
                     Log.d("onTrackFragment", "currentStatus cancelled")
+                    sharedViewModel.orderHistory.value!!.status = "cancelled"
                     mViewDataBinding.imgPlaced.isChecked = false
                     mViewDataBinding.line1.isChecked = false
                     mViewDataBinding.imgPrepared.isChecked = false
