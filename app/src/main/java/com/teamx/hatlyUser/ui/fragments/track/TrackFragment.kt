@@ -631,6 +631,8 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
                     mViewDataBinding.imgPicked.isChecked = true
                     mViewDataBinding.line3.isChecked = true
                     mViewDataBinding.imgDelivered.isChecked = true
+                    mViewDataBinding.root.snackbar("Order Delivered!")
+                    findNavController().popBackStack()
                 }
 
                 "cancelled" -> {
