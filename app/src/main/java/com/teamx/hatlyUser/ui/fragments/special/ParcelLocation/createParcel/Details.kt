@@ -1,5 +1,7 @@
 package com.teamx.hatlyUser.ui.fragments.special.ParcelLocation.createParcel
+import androidx.annotation.Keep
 
+@Keep
 data class Details(
     val description: String?,
     val height: Double?,

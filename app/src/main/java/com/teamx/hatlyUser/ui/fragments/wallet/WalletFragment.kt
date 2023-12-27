@@ -15,8 +15,8 @@ import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentWalletBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Doc
 import com.teamx.hatlyUser.ui.fragments.wallet.adapter.WalletAdapter
+import com.teamx.hatlyUser.ui.fragments.wallet.model.transaction.Doc
 import com.teamx.hatlyUser.utils.TimeFormatter
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +42,7 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
     var totalItems = 0
     var scrollOutItems = 0
 
+    var userId = ""
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,6 +57,8 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
             }
         }
 
+        userId = sharedViewModel.userData.value?._id ?: ""
+
         mViewDataBinding.imgBack.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -68,15 +71,10 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
 
         orderHistoryArrayList = ArrayList()
 
-        val layoutManager2 =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        val layoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         mViewDataBinding.recWallet.layoutManager = layoutManager2
         walletAdapter = WalletAdapter(orderHistoryArrayList, this)
         mViewDataBinding.recWallet.adapter = walletAdapter
-
-        if (!mViewModel.orderHistoryResponse.hasActiveObservers()) {
-            mViewModel.orderHistory(nextPage, 10)
-        }
 
         mViewModel.me()
         if (!mViewModel.meResponse.hasActiveObservers()) {
@@ -94,7 +92,7 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             mViewDataBinding.txtTitle12.text = try {
-                                data.wallet.toString()
+                                "${data.wallet} ${requireActivity().getString(R.string.aed)}"
                             } catch (e: Exception) {
                                 "null"
                             }
@@ -106,14 +104,18 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
                         loadingDialog.dismiss()
                         if (isAdded) {
 
-                        mViewDataBinding.root.snackbar(it.message!!)
+                            mViewDataBinding.root.snackbar(it.message!!)
                         }
                     }
                 }
             }
         }
 
-        mViewModel.orderHistoryResponse.observe(requireActivity()) {
+        if (!mViewModel.transactionHistoryResponse.hasActiveObservers() && userId.isNotEmpty()) {
+            mViewModel.transactionHistory(userId,nextPage, 10)
+        }
+
+        mViewModel.transactionHistoryResponse.observe(requireActivity()) {
             when (it.status) {
                 Resource.Status.AUTH -> {
                     loadingDialog.dismiss()
@@ -130,7 +132,7 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
                         if (!hasNextPage) {
                             orderHistoryArrayList.clear()
                         }
-                        data.docs?.forEach {
+                        data.docs.forEach {
                             try {
                                 it.createdAt = TimeFormatter.formatTimeDifference(it.createdAt,requireActivity())
                             }catch (e : Exception){
@@ -174,8 +176,8 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
 
                 if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
                     isScrolling = false;
-                    if (hasNextPage) {
-                        mViewModel.orderHistory(nextPage, 10)
+                    if (hasNextPage && userId.isNotEmpty()) {
+                        mViewModel.transactionHistory(userId,nextPage, 10)
                     }
                 }
             }
@@ -185,12 +187,12 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
     }
 
     override fun clickshopItem(position: Int) {
-        val orderHistoryModel = orderHistoryArrayList[position]
-        orderHistoryModel.isFromWallet = true
-        sharedViewModel.setOrderHistory(orderHistoryModel)
-        if (isAdded) {
-            findNavController().navigate(R.id.action_walletFragment_to_orderDetailFragment)
-        }
+//        val orderHistoryModel = orderHistoryArrayList[position]
+//        orderHistoryModel.isFromWallet = true
+//        sharedViewModel.setOrderHistory(orderHistoryModel)
+//        if (isAdded) {
+//            findNavController().navigate(R.id.action_walletFragment_to_orderDetailFragment)
+//        }
     }
 
     override fun clickCategoryItem(position: Int) {
@@ -201,24 +203,5 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
 
     }
 
-//    private fun fetchData() {
-//        mViewDataBinding.spinKit.visibility = View.VISIBLE
-//        Handler(Looper.getMainLooper()).postDelayed({
-//            for (i in 1..5) {
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//                itemClasses.add("")
-//            }
-//            mViewDataBinding.spinKit.visibility = View.GONE
-//            hatlyPopularAdapter.notifyDataSetChanged()
-//        }, 5000)
-//    }
+
 }

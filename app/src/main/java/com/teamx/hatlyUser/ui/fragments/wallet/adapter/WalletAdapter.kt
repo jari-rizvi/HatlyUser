@@ -1,18 +1,16 @@
 package com.teamx.hatlyUser.ui.fragments.wallet.adapter
 
+import android.graphics.Color
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.facebook.appevents.codeless.internal.ViewHierarchy.setOnClickListener
-import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.MainApplication
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemWalletBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
-import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Doc
-import com.teamx.hatlyUser.utils.TimeFormatter
+import com.teamx.hatlyUser.ui.fragments.wallet.model.transaction.Doc
 
 class WalletAdapter(
     private val addressArrayList: ArrayList<Doc>,
@@ -32,18 +30,28 @@ class WalletAdapter(
         val arrayData = addressArrayList[position]
 
 
-        holder.bind.textView18.text = try {
-            arrayData.shop.name
-        }catch (e : Exception){
-            ""
+        holder.bind.textView175544.text = try {
+            arrayData.`for`.capitalize()
+        }catch (e:Exception){
+            "null"
+        }
+
+        var amount = ""
+
+        if (arrayData.change == "increment"){
+            holder.bind.textView17.setTextColor(Color.parseColor("#1ED860"))
+            amount = "+ ${arrayData.totalAmount}"
+        }else if (arrayData.change == "decrement"){
+            holder.bind.textView17.setTextColor(Color.parseColor("#EA1B25"))
+            amount = "- ${arrayData.totalAmount}"
         }
 
         holder.bind.textView17.text = try {
-            "${arrayData.total} ${
+            "${amount} ${
                 MainApplication.context.getString(
                 R.string.aed)}"
         }catch (e : Exception){
-            ""
+            "null"
         }
 
         holder.bind.textView1754.text = try {

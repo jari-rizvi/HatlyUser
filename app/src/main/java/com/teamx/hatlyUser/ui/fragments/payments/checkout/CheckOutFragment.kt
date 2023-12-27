@@ -19,6 +19,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.stripe.android.PaymentConfiguration
 import com.stripe.android.paymentsheet.PaymentSheet
@@ -29,6 +30,7 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentCheckOutBinding
+import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.Coordinates
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.adapter.CheckOutAdapter
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.model.Product
 import com.teamx.hatlyUser.utils.PrefHelper

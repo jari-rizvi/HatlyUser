@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -24,9 +24,9 @@
             android:layout_height="@dimen/_20sdp"
             android:elevation="1dp"
             android:src="@drawable/order_summary"
-            app:layout_constraintBottom_toTopOf="@+id/textView18"
-            app:layout_constraintEnd_toStartOf="@+id/textView1754"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.02"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,13 +36,13 @@
             android:id="@+id/textView175544"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:ellipsize="end"
             android:fontFamily="@font/open_sans_regular"
+            android:maxLines="2"
             android:text="@string/order_summery"
             android:textColor="#EA1B25"
-            android:layout_marginHorizontal="@dimen/_5sdp"
             android:textSize="@dimen/_13ssp"
-            android:maxLines="2"
-            android:ellipsize="end"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imgTopUp"
             app:layout_constraintEnd_toStartOf="@+id/textView1754"
@@ -58,11 +58,9 @@
             android:textColor="#C1C1C1"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imgTopUp"
+            app:layout_constraintBottom_toTopOf="@+id/textView17"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imgTopUp"
-            app:layout_constraintTop_toTopOf="@+id/imgTopUp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView17"
@@ -73,24 +71,24 @@
             android:textColor="#1ED860"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView18"
-            app:layout_constraintEnd_toEndOf="@+id/textView1754"
-            app:layout_constraintTop_toTopOf="@+id/textView18" />
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="@font/open_sans_regular"
-            android:maxLines="1"
-            android:text="1x Butler Cake"
-            android:textColor="#010101"
-            android:textSize="@dimen/_11ssp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/imgTopUp"
-            app:layout_constraintTop_toBottomOf="@+id/imgTopUp" />
+            app:layout_constraintEnd_toEndOf="@+id/textView1754"
+            app:layout_constraintTop_toBottomOf="@+id/textView1754" />
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/textView18"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:ellipsize="end"-->
+        <!--            android:fontFamily="@font/open_sans_regular"-->
+        <!--            android:maxLines="1"-->
+        <!--            android:text="1x Butler Cake"-->
+        <!--            android:textColor="#010101"-->
+        <!--            android:textSize="@dimen/_11ssp"-->
+        <!--            android:textStyle="bold"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/imgTopUp"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/imgTopUp" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -107,6 +107,12 @@ class MainRepository @Inject constructor(
         @Query("limit") limit: Int,
     ) = apiService.orderHistory(page, limit)
 
+    suspend fun transactionList(
+        @Query("userId") userId: String?,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
+    ) = apiService.transactionList(userId,page, limit)
+
     suspend fun uploadReviewImg(
         @Part images: List<MultipartBody.Part>
     ) = apiService.uploadReviewImg(images)

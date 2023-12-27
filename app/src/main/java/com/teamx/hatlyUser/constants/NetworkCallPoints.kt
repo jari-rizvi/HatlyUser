@@ -63,6 +63,8 @@ class NetworkCallPoints {
 
         const val ORDER_HISTORY = "order/all"
 
+        const val TRANSACTION_LIST = "transection/list"
+
 //        const val UPLOAD_REVIEW_IMGS = "upload/reviewImages"
         const val UPLOAD_REVIEW_IMGS = "upload/uploadMultiple"
 

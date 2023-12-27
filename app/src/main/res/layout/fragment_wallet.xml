@@ -7,94 +7,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="#1ED860"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/txtTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_regular"
-                android:text="@string/wallet"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.2" />
-
-            <TextView
-                android:id="@+id/txtTitle1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_regular"
-                android:text="@string/available_balance"
-                android:textAlignment="center"
-                android:textColor="#B3FFFFFF"
-                android:textSize="@dimen/_14ssp"
-                app:layout_constraintVertical_bias="0.1"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
-
-            <TextView
-                android:id="@+id/txtTitle12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_regular"
-                android:text="@string/aed"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/txtTitle1"
-                app:layout_constraintStart_toStartOf="@+id/txtTitle1"
-                app:layout_constraintTop_toBottomOf="@+id/txtTitle1" />
-
-            <ImageView
-                android:id="@+id/imgTopUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/input_auth_field"
-                android:backgroundTint="@color/white"
-                android:elevation="1dp"
-                android:padding="@dimen/_5sdp"
-                android:src="@drawable/top_up"
-                app:layout_constraintVertical_bias="0.3"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/txtTitle12"
-                app:layout_constraintStart_toStartOf="@+id/txtTitle12"
-                app:layout_constraintTop_toBottomOf="@+id/txtTitle12" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_regular"
-                android:text="@string/top_up"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_14ssp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/imgTopUp"
-                app:layout_constraintStart_toStartOf="@+id/imgTopUp"
-                app:layout_constraintTop_toBottomOf="@+id/imgTopUp" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <ImageView
             android:id="@+id/imgBack"
             android:layout_width="wrap_content"
@@ -112,6 +24,99 @@
             app:layout_constraintVertical_bias="0.05"
             app:tint="#363636" />
 
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="@string/wallet"
+            android:textAlignment="center"
+            android:textColor="#262626"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgBack"
+            app:layout_constraintVertical_bias="0.2" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout14"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/input_auth_field"
+            android:backgroundTint="#1ED860"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="@+id/imgBack1"
+            app:layout_constraintStart_toStartOf="@+id/imgBack"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle">
+
+            <TextView
+                android:id="@+id/txtTitle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_regular"
+                android:text="@string/available_balance"
+                android:textAlignment="center"
+                android:textColor="#B3FFFFFF"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/txtTitle12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/txtTitle12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_regular"
+                android:text="@string/aed"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/txtTitle1"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitle1" />
+
+            <ImageView
+                android:id="@+id/imgTopUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:background="@drawable/input_auth_field"
+                android:backgroundTint="@color/white"
+                android:elevation="1dp"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/top_up"
+                app:layout_constraintBottom_toBottomOf="@+id/textView44"
+                app:layout_constraintEnd_toStartOf="@+id/textView44"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView44"
+                app:layout_constraintVertical_bias="0.3" />
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:fontFamily="@font/open_sans_regular"
+                android:text="@string/top_up"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtTitle1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtTitle1" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <ImageView
             android:id="@+id/imgBack1"
             android:layout_width="wrap_content"
@@ -128,7 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.40" />
+            app:layout_constraintGuide_percent="0.30" />
 
         <TextView
             android:id="@+id/txtTitle113"
@@ -139,12 +144,11 @@
             android:textAlignment="center"
             android:textColor="#262626"
             android:textSize="@dimen/_14ssp"
-            app:layout_constraintHorizontal_bias="0"
-            android:layout_marginStart="@dimen/_15sdp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout14"
             app:layout_constraintTop_toBottomOf="@+id/guideline"
             app:layout_constraintVertical_bias="0.05" />
 
@@ -162,8 +166,8 @@
             android:id="@+id/spin_kit"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:visibility="gone"
             android:layout_gravity="center"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

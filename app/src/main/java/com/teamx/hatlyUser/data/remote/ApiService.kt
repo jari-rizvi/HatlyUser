@@ -40,6 +40,7 @@ import com.teamx.hatlyUser.ui.fragments.special.ParcelLocation.model.fare.ModelF
 import com.teamx.hatlyUser.ui.fragments.special.specialorder.model.ModelActiveDelieverParcel
 import com.teamx.hatlyUser.ui.fragments.topUp.model.savedCard.ModelSavedCard
 import com.teamx.hatlyUser.ui.fragments.wallet.model.me.MeModel
+import com.teamx.hatlyUser.ui.fragments.wallet.model.transaction.TransactionData
 import com.teamx.hatlyUser.ui.fragments.wishlist.modelWishList.ModelWishList
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -272,6 +273,16 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<OrderHistoryModel>
+
+
+    @GET(NetworkCallPoints.TRANSACTION_LIST)
+    suspend fun transactionList(
+        @Query("userId") userId: String?,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
+        @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
+    ): Response<TransactionData>
 
     @Multipart
     @POST(NetworkCallPoints.UPLOAD_REVIEW_IMGS)

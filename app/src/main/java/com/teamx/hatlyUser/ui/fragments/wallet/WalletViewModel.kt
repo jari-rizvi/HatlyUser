@@ -11,6 +11,7 @@ import com.teamx.hatlyUser.data.remote.reporitory.MainRepository
 import com.teamx.hatlyUser.ui.fragments.auth.login.Model.ModelLogin
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.OrderHistoryModel
 import com.teamx.hatlyUser.ui.fragments.wallet.model.me.MeModel
+import com.teamx.hatlyUser.ui.fragments.wallet.model.transaction.TransactionData
 import com.teamx.hatlyUser.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -27,6 +28,7 @@ class WalletViewModel @Inject constructor(
     private val _meResponse = MutableLiveData<Resource<MeModel>>()
     val meResponse: LiveData<Resource<MeModel>>
         get() = _meResponse
+
     fun me() {
         viewModelScope.launch {
             _meResponse.postValue(Resource.loading(null))
@@ -38,7 +40,7 @@ class WalletViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _meResponse.postValue(Resource.error(jsonObj.getString("message")))
-                        }else if (it.code() == 401) {
+                        } else if (it.code() == 401) {
                             _meResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
@@ -53,32 +55,37 @@ class WalletViewModel @Inject constructor(
         }
     }
 
-    private val _orderHistoryResponse = MutableLiveData<Resource<OrderHistoryModel>>()
-    val orderHistoryResponse: LiveData<Resource<OrderHistoryModel>>
-        get() = _orderHistoryResponse
+    private val _transactionHistoryResponse = MutableLiveData<Resource<TransactionData>>()
+    val transactionHistoryResponse: LiveData<Resource<TransactionData>>
+        get() = _transactionHistoryResponse
 
-    fun orderHistory(page: Int, limit: Int) {
+    fun transactionHistory(userId: String?, page: Int, limit: Int) {
         viewModelScope.launch {
-            _orderHistoryResponse.postValue(Resource.loading(null))
+            _transactionHistoryResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.orderHistory(page, limit).let {
+                    mainRepository.transactionList(userId, page, limit).let {
                         if (it.isSuccessful) {
-                            _orderHistoryResponse.postValue(Resource.success(it.body()!!))
+                            _transactionHistoryResponse.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
-                            _orderHistoryResponse.postValue(Resource.error(jsonObj.getString("message")))
-                        }else if (it.code() == 401) {
-                            _orderHistoryResponse.postValue(Resource.unAuth("", null))
+                            _transactionHistoryResponse.postValue(Resource.error(jsonObj.getString("message")))
+                        } else if (it.code() == 401) {
+                            _transactionHistoryResponse.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
-                            _orderHistoryResponse.postValue(Resource.error(jsonObj.getString("message")))
+                            _transactionHistoryResponse.postValue(Resource.error(jsonObj.getString("message")))
                         }
                     }
                 } catch (e: Exception) {
-                    _orderHistoryResponse.postValue(Resource.error("${e.message}", null))
+                    _transactionHistoryResponse.postValue(Resource.error("${e.message}", null))
                 }
-            } else _orderHistoryResponse.postValue(Resource.error("No internet connection", null))
+            } else _transactionHistoryResponse.postValue(
+                Resource.error(
+                    "No internet connection",
+                    null
+                )
+            )
         }
     }
 }
