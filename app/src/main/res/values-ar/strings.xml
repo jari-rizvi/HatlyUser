@@ -181,4 +181,28 @@
     <string name="additional_directions_optional">اتجاهات إضافية (اختياري)</string>
     <string name="order_summery">ملخص الطلب</string>
 
+    <string name="required">مطلوب</string>
+
+    <string name="view_details">عرض التفاصيل</string>
+    <string name="just_now">الآن</string>
+    <string name="order_prepared">تم تجهيز الطلب</string>
+    <string name="out_for_delivery">الطلب خارج للتسليم</string>
+    <string name="order_delivered">تم توصيل الطلب</string>
+    <string name="order_status">حالة الطلب</string>
+    <string name="guest_user">مستخدم زائر</string>
+    <string name="discover_a_variety_of_restaurants_and_choose_the_best_one_based_on_your_mood_and_cravings">اكتشف مجموعة متنوعة من المطاعم واختر أفضلها بناءً على حالتك المزاجية ورغباتك الشديدة.</string>
+    <string name="discover_a_diverse_range_of_mouth_watering_cuisines_that_are_not_only_delicious_but_also_provide_quality_and_happiness">اكتشف مجموعة متنوعة من المأكولات الشهية التي ليست لذيذة فحسب، بل توفر أيضًا الجودة والسعادة.</string>
+    <string name="get_your_desired_items_delivered_right_to_your_doorstep_with_ease_and_convenience">احصل على العناصر التي تريدها والتي يتم تسليمها مباشرة إلى عتبة داركم بكل سهولة وراحة.</string>
+    <string name="are_you_back_log_in_now_to_continue_with_hatly">هل عدت؟ قم بتسجيل الدخول الآن للمتابعة مع هاتلي.</string>
+    <string name="no_need_to_worry_if_you_forget_your_password_please_provide_us_with_the_required_information_to_reset_it">No need to worry if you forget your password. Please\nprovide us with the required information to reset it.</string>
+    <string name="create_an_account_and_begin_your_journey_with_hatly">قم بإنشاء حساب وابدأ رحلتك مع هاتلي.</string>
+    <string name="please_create_a_new_password_for_your_naccount_to_continue">يرجى إنشاء كلمة مرور جديدة لحسابك للمتابعة.</string>
+    <string name="share_your_location_to_navigate_your_nearest_nstores_and_restaurants">شارك موقعك للتنقل  لأقرب المتاجر والمطاعم.</string>
+    <string name="you_still_have_products_from_another_shop_nshall_we_start_over_with_a_fresh_cart">لا يزال لديك منتجات من متجر آخر. هل نبدأ من جديد بعربة جديدة؟</string>
+    <string name="remove_your_previous_items">هل تريد إزالة العناصر السابقة؟</string>
+    <string name="no">كلا</string>
+    <string name="remove">Remove</string>
+    <string name="are_you_sure_you_want_to_ncancel_your_order">هل أنت متأكد أنك تريد إلغاء طلبك؟</string>
+    <string name="yes">نعم</string>
+
 </resources>

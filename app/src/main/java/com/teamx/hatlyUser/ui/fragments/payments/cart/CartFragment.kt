@@ -105,6 +105,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
                     loadingDialog.dismiss()
                     onToSignUpPage()
                 }
+
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -209,37 +210,40 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
                 params.addProperty("quantity", cartmodel.quantity)
                 mViewModel.updateCartItem(params)
 
-                mViewModel.updateCartItemResponse.observe(requireActivity()) {
-                    when (it.status) {
-                        Resource.Status.AUTH -> {
-                            loadingDialog.dismiss()
-                            onToSignUpPage()
-                        }
-                        Resource.Status.LOADING -> {
-                            loadingDialog.show()
-                        }
-
-                        Resource.Status.SUCCESS -> {
-                            loadingDialog.dismiss()
-                            it.data?.let { data ->
-
-                                if (actionStack.isNotEmpty()) {
-                                    val cartmodel1 = cartProductArrayList[actionStack.pop()]
-                                    params.addProperty("id", cartmodel1._id)
-                                    params.addProperty("quantity", cartmodel1.quantity)
-                                    mViewModel.updateCartItem(params)
-                                } else {
-                                    layoutUpdate(data)
-                                }
+                if (!mViewModel.updateCartItemResponse.hasActiveObservers()) {
+                    mViewModel.updateCartItemResponse.observe(requireActivity()) {
+                        when (it.status) {
+                            Resource.Status.AUTH -> {
+                                loadingDialog.dismiss()
+                                onToSignUpPage()
                             }
 
-                        }
+                            Resource.Status.LOADING -> {
+                                loadingDialog.show()
+                            }
 
-                        Resource.Status.ERROR -> {
-                            loadingDialog.dismiss()
-                            if (isAdded) {
+                            Resource.Status.SUCCESS -> {
+                                loadingDialog.dismiss()
+                                it.data?.let { data ->
 
-                                mViewDataBinding.root.snackbar(it.message!!)
+                                    if (actionStack.isNotEmpty()) {
+                                        val cartmodel1 = cartProductArrayList[actionStack.pop()]
+                                        params.addProperty("id", cartmodel1._id)
+                                        params.addProperty("quantity", cartmodel1.quantity)
+                                        mViewModel.updateCartItem(params)
+                                    } else {
+                                        layoutUpdate(data)
+                                    }
+                                }
+
+                            }
+
+                            Resource.Status.ERROR -> {
+                                loadingDialog.dismiss()
+                                if (isAdded) {
+
+                                    mViewDataBinding.root.snackbar(it.message!!)
+                                }
                             }
                         }
                     }
@@ -253,31 +257,43 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
         mViewDataBinding.textView212.text = try {
             "${data.subTotal} ${
                 MainApplication.context.getString(
-                R.string.aed)}"
+                    R.string.aed
+                )
+            }"
         } catch (e: Exception) {
             "0.0 ${
                 MainApplication.context.getString(
-                R.string.aed)}"
+                    R.string.aed
+                )
+            }"
         }
 
         mViewDataBinding.textView2123.text = try {
             "${data.tax} ${
                 MainApplication.context.getString(
-                R.string.aed)}"
+                    R.string.aed
+                )
+            }"
         } catch (e: Exception) {
             "0.0 ${
                 MainApplication.context.getString(
-                R.string.aed)}"
+                    R.string.aed
+                )
+            }"
         }
 
         mViewDataBinding.textView2144.text = try {
             "${data.total} ${
                 MainApplication.context.getString(
-                R.string.aed)}"
+                    R.string.aed
+                )
+            }"
         } catch (e: Exception) {
             "0.0 ${
                 MainApplication.context.getString(
-                R.string.aed)}"
+                    R.string.aed
+                )
+            }"
         }
 
         cartProductArrayList.clear()
@@ -299,6 +315,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
                     loadingDialog.dismiss()
                     onToSignUpPage()
                 }
+
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }

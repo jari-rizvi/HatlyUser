@@ -62,7 +62,7 @@
 
     <string name="add_to_cart">Add to cart</string>
     <string name="recommended_items">Recommended Items:</string>
-    <string name="required" translatable="false">Required</string>
+    <string name="required">Required</string>
     <string name="optional">Optional</string>
     <string name="add_special_instruction">Add Special Instruction</string>
 
@@ -187,28 +187,29 @@
     <string name="apartment_no">Apartment NO.</string>
     <string name="additional_directions_optional">Additional Directions(optional)</string>
     <string name="order_summery">Order Summery</string>
-    <string name="view_details" translatable="false">View Details</string>
+
+    <string name="view_details">View Details</string>
     <string name="view_all">View All</string>
-    <string name="just_now" translatable="false">just now</string>
-    <string name="order_prepared" translatable="false">Order Prepared</string>
-    <string name="out_for_delivery" translatable="false">Out for Delivery</string>
-    <string name="order_delivered" translatable="false">Order Delivered</string>
-    <string name="order_status" translatable="false">Order Status</string>
-    <string name="guest_user" translatable="false">Guest User</string>
-    <string name="discover_a_variety_of_restaurants_and_choose_the_best_one_based_on_your_mood_and_cravings" translatable="false">Discover a variety of restaurants and\nchoose the best one based on your mood\nand cravings.</string>
-    <string name="discover_a_diverse_range_of_mouth_watering_cuisines_that_are_not_only_delicious_but_also_provide_quality_and_happiness" translatable="false">Discover a diverse range of mouth watering\ncuisines that are not only delicious but also\nprovide quality and happiness.</string>
-    <string name="get_your_desired_items_delivered_right_to_your_doorstep_with_ease_and_convenience" translatable="false">Get your desired items delivered right\nto your doorstep with ease and\nconvenience.</string>
-    <string name="are_you_back_log_in_now_to_continue_with_hatly" translatable="false">Are you Back? Log in now to continue\nwith Hatly.</string>
-    <string name="no_need_to_worry_if_you_forget_your_password_please_provide_us_with_the_required_information_to_reset_it" translatable="false">No need to worry if you forget your password. Please\nprovide us with the required information to reset it.</string>
-    <string name="create_an_account_and_begin_your_journey_with_hatly" translatable="false">Create an account and begin your journey\nwith Hatly.</string>
-    <string name="please_create_a_new_password_for_your_naccount_to_continue" translatable="false">Please create a new password for your\naccount to continue.</string>
-    <string name="share_your_location_to_navigate_your_nearest_nstores_and_restaurants" translatable="false">Share your location to navigate your nearest\nstores and restaurants.</string>
-    <string name="you_still_have_products_from_another_shop_nshall_we_start_over_with_a_fresh_cart" translatable="false">You still have products from another shop.\nShall we start over with a fresh cart?</string>
-    <string name="remove_your_previous_items" translatable="false">Remove your previous items?</string>
-    <string name="no" translatable="false">No</string>
-    <string name="remove" translatable="false">Remove</string>
-    <string name="are_you_sure_you_want_to_ncancel_your_order" translatable="false">Are you sure you want to\ncancel your order?</string>
-    <string name="yes" translatable="false">Yes</string>
+    <string name="just_now">just now</string>
+    <string name="order_prepared">Order Prepared</string>
+    <string name="out_for_delivery">Out for Delivery</string>
+    <string name="order_delivered">Order Delivered</string>
+    <string name="order_status">Order Status</string>
+    <string name="guest_user">Guest User</string>
+    <string name="discover_a_variety_of_restaurants_and_choose_the_best_one_based_on_your_mood_and_cravings">Discover a variety of restaurants and\nchoose the best one based on your mood\nand cravings.</string>
+    <string name="discover_a_diverse_range_of_mouth_watering_cuisines_that_are_not_only_delicious_but_also_provide_quality_and_happiness">Discover a diverse range of mouth watering\ncuisines that are not only delicious but also\nprovide quality and happiness.</string>
+    <string name="get_your_desired_items_delivered_right_to_your_doorstep_with_ease_and_convenience">Get your desired items delivered right\nto your doorstep with ease and\nconvenience.</string>
+    <string name="are_you_back_log_in_now_to_continue_with_hatly">Are you Back? Log in now to continue\nwith Hatly.</string>
+    <string name="no_need_to_worry_if_you_forget_your_password_please_provide_us_with_the_required_information_to_reset_it">No need to worry if you forget your password. Please\nprovide us with the required information to reset it.</string>
+    <string name="create_an_account_and_begin_your_journey_with_hatly">Create an account and begin your journey\nwith Hatly.</string>
+    <string name="please_create_a_new_password_for_your_naccount_to_continue">Please create a new password for your\naccount to continue.</string>
+    <string name="share_your_location_to_navigate_your_nearest_nstores_and_restaurants">Share your location to navigate your nearest\nstores and restaurants.</string>
+    <string name="you_still_have_products_from_another_shop_nshall_we_start_over_with_a_fresh_cart">You still have products from another shop.\nShall we start over with a fresh cart?</string>
+    <string name="remove_your_previous_items">Remove your previous items?</string>
+    <string name="no">No</string>
+    <string name="remove">Remove</string>
+    <string name="are_you_sure_you_want_to_ncancel_your_order">Are you sure you want to\ncancel your order?</string>
+    <string name="yes">Yes</string>
 
 
 </resources>

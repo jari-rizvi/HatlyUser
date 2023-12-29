@@ -25,6 +25,7 @@ import com.stripe.android.PaymentConfiguration
 import com.stripe.android.paymentsheet.PaymentSheet
 import com.stripe.android.paymentsheet.PaymentSheetResult
 import com.teamx.hatlyUser.BR
+import com.teamx.hatlyUser.BuildConfig
 import com.teamx.hatlyUser.MainApplication
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
@@ -884,7 +885,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         PaymentConfiguration.init(
             requireActivity().applicationContext,
 //            stripPublicKey
-            "pk_test_51LMwtTIXOwead2Sp6mZEM5tGaiZT363HLHm58hq7Wrip8KOH2Jj1U303ONw2DMd6oTGHP0uLiDw197LA0jauVeMG00HtE9n9nM"
+            "pk_test_51NM8SbAESDqUcVTloKKwPpIdtlkmmm595qL1D8BZHt5hWrKp7GrEaBiRXG6jXZYgtMRR0yk7eD7RzTp0fwyahzDu00xf6h8wvu"
         )
 
 

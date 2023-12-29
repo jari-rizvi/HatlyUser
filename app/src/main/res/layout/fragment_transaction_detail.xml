@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="Transaction Detail"
+            android:textAlignment="center"
+            android:textColor="#262626"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgBack"
+            app:layout_constraintVertical_bias="0.2" />
+
+<!--        <androidx.constraintlayout.widget.Guideline-->
+<!--            android:id="@+id/guideline11"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintGuide_percent="0.25" />-->
+
+        <TextView
+            android:id="@+id/txtTitle11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="@string/order_details"
+            android:textAlignment="center"
+            android:textColor="#262626"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/imgBack"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle"/>
+
+        <TextView
+            android:id="@+id/txtTitle111564"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="Order Status:"
+            android:textAlignment="center"
+            android:textColor="#262626"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle11"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle11" />
+
+
+        <TextView
+            android:id="@+id/txtTitle1141"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/button_radius_green"
+            android:backgroundTint="#1AEA1B25"
+            android:fontFamily="@font/open_sans_regular"
+            android:paddingHorizontal="@dimen/_7sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            android:text="incomplete"
+            android:textAlignment="center"
+            android:textColor="#EA1B25"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtTitle111564"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtTitle111564" />
+
+
+        <TextView
+            android:id="@+id/txtTitle111"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="Transaction ID:"
+            android:textAlignment="center"
+            android:textColor="#262626"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle11"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle111564" />
+
+        <TextView
+            android:id="@+id/txtTitle111545"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="657c4abcd5de51955a94726e"
+            android:textAlignment="viewEnd"
+            android:textColor="#262626"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintEnd_toEndOf="@+id/txtTitle1141"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@+id/txtTitle1121"
+            app:layout_constraintTop_toTopOf="@+id/txtTitle111" />
+
+
+        <TextView
+            android:id="@+id/txtTitle1121"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="Order Type"
+            android:textAlignment="center"
+            android:textColor="#262626"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle111"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle111" />
+
+        <TextView
+            android:id="@+id/txtAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="Parcel"
+            android:textAlignment="viewEnd"
+            android:textColor="#262626"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintEnd_toEndOf="@+id/txtTitle1141"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@+id/txtTitle1121"
+            app:layout_constraintTop_toTopOf="@+id/txtTitle1121" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="#999696"
+            app:layout_constraintEnd_toEndOf="@+id/txtAddress"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle1121"
+            app:layout_constraintTop_toBottomOf="@+id/txtAddress" />
+
+
+        <TextView
+            android:id="@+id/txtTitle121212"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="@string/total"
+            android:textAlignment="center"
+            android:textColor="#1ED860"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle11"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <TextView
+            android:id="@+id/txtTitle1113233"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="@string/aed"
+            android:textAlignment="center"
+            android:textColor="#1ED860"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/txtAddress"
+            app:layout_constraintTop_toTopOf="@+id/txtTitle121212" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/txtTitle1113233"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle121212"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle1113233">
+
+            <androidx.appcompat.widget.AppCompatCheckedTextView
+                android:id="@+id/txtLogin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_radius_green"
+                android:backgroundTint="@color/disable_button"
+                android:fontFamily="@font/open_sans_regular"
+                android:paddingVertical="@dimen/_10sdp"
+                android:text="@string/re_order"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/txtLogin1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtLogin1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_radius_corner_red"
+                android:fontFamily="@font/open_sans_regular"
+                android:paddingVertical="@dimen/_10sdp"
+                android:text="@string/write_a_review"
+                android:textAlignment="center"
+                android:textColor="#EA1B25"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/txtLogin"
+                app:layout_constraintStart_toStartOf="@+id/txtLogin"
+                app:layout_constraintTop_toBottomOf="@+id/txtLogin" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/paidLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="@+id/txtTitle1113233"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle121212"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle1113233">
+
+            <TextView
+                android:id="@+id/txtTitle1145"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_regular"
+                android:text="@string/paid_with"
+                android:textAlignment="center"
+                android:textColor="#262626"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTitle114455"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:drawableStart="@drawable/paid_with_card"
+                android:drawablePadding="@dimen/_5sdp"
+                android:fontFamily="@font/open_sans_regular"
+                android:gravity="center_vertical"
+                android:text="@string/cash"
+                android:textColor="#262626"
+                android:textSize="@dimen/_11ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/txtTitle1145"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitle1145" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--        <androidx.appcompat.widget.AppCompatCheckedTextView-->
+        <!--            android:id="@+id/txtLogin"-->
+        <!--            android:layout_width="336dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/button_radius_green"-->
+        <!--            android:backgroundTint="@color/disable_button"-->
+        <!--            android:fontFamily="@font/open_sans_regular"-->
+        <!--            android:paddingVertical="@dimen/_10sdp"-->
+        <!--            android:text="Re-Order"-->
+        <!--            android:textAlignment="center"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:textSize="@dimen/_13ssp"-->
+        <!--            android:textStyle="bold"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/txtLogin1"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/txtTitle1113233"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/txtTitle121212"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/txtTitle121212" />-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/txtLogin1"-->
+        <!--            android:layout_width="336dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/button_radius_corner_red"-->
+        <!--            android:fontFamily="@font/open_sans_regular"-->
+        <!--            android:paddingVertical="@dimen/_10sdp"-->
+        <!--            android:text="Write a review"-->
+        <!--            android:visibility="visible"-->
+        <!--            android:textAlignment="center"-->
+        <!--            android:textColor="#EA1B25"-->
+        <!--            android:textSize="@dimen/_13ssp"-->
+        <!--            android:textStyle="bold"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/txtLogin"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/txtLogin"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/txtLogin" />-->
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/input_auth_field"
+            android:backgroundTint="@color/white"
+            android:elevation="1dp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/round_arrow_back_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05"
+            app:tint="#363636" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

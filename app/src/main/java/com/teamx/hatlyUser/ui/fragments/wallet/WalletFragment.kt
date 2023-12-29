@@ -21,7 +21,6 @@ import com.teamx.hatlyUser.utils.TimeFormatter
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), HatlyShopInterface {
 
@@ -187,12 +186,14 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
     }
 
     override fun clickshopItem(position: Int) {
-//        val orderHistoryModel = orderHistoryArrayList[position]
+        val orderHistoryModel = orderHistoryArrayList[position]
+
+
 //        orderHistoryModel.isFromWallet = true
-//        sharedViewModel.setOrderHistory(orderHistoryModel)
-//        if (isAdded) {
-//            findNavController().navigate(R.id.action_walletFragment_to_orderDetailFragment)
-//        }
+        sharedViewModel.setTransactionDetail(orderHistoryModel)
+        if (isAdded) {
+            findNavController().navigate(R.id.action_walletFragment_to_transactionDetailFragment)
+        }
     }
 
     override fun clickCategoryItem(position: Int) {

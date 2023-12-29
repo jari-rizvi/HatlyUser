@@ -28,6 +28,14 @@ open class BaseViewModel : ViewModel() {
         this._orderhistory.value = doc
     }
 
+    private val _transactionDetail = MutableLiveData<com.teamx.hatlyUser.ui.fragments.wallet.model.transaction.Doc>()
+    val transactionDetail: LiveData<com.teamx.hatlyUser.ui.fragments.wallet.model.transaction.Doc>
+        get() = _transactionDetail
+
+    fun setTransactionDetail(doc: com.teamx.hatlyUser.ui.fragments.wallet.model.transaction.Doc) {
+        this._transactionDetail.value = doc
+    }
+
 
     private val _parcelOrderhistory = MutableLiveData<com.teamx.hatlyUser.ui.fragments.profile.specialOrderHistory.model.Doc>()
     val parcelOrderHistory: LiveData<com.teamx.hatlyUser.ui.fragments.profile.specialOrderHistory.model.Doc>

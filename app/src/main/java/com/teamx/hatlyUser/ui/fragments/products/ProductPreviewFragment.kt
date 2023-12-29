@@ -328,6 +328,8 @@ class ProductPreviewFragment :
                             if (it.message == "Can not add products from multiple shops") {
                                 DialogHelperClass.MultiProductDialog(requireContext(), this)
                                 Log.d("addToCartResponse", "addToCart: ${it.message!!}")
+                            }else{
+                                mViewDataBinding.mainLayout.snackbar("${it.message!!}")
                             }
                         }
                     }

@@ -1078,13 +1078,25 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="transactionDetailFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="3182" />
+                            <option name="y" value="1152" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="walletFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="3672" />
-                            <option name="y" value="1455" />
+                            <option name="x" value="2992" />
+                            <option name="y" value="1509" />
                           </Point>
                         </option>
                         <option name="myPositions">

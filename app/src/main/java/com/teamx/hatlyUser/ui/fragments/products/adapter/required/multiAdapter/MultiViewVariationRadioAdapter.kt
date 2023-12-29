@@ -9,7 +9,9 @@ import android.widget.CheckedTextView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.teamx.hatlyUser.MainApplication
 import com.teamx.hatlyUser.MainApplication.Companion.context
+import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.ui.fragments.products.adapter.optional.ProductVariationOptionalAdapter
 import com.teamx.hatlyUser.ui.fragments.products.adapter.required.ProductVariationRequiredAdapter
@@ -119,7 +121,7 @@ class MultiViewVariationRadioAdapter(
                 }
 
                 if (dataSet[position].isRequired) {
-                    holderClass1.txtRequired.text = "Required"
+                    holderClass1.txtRequired.text = MainApplication.context.getString(R.string.required)
                 } else {
                     holderClass1.txtRequired.text = "Optional"
                 }
