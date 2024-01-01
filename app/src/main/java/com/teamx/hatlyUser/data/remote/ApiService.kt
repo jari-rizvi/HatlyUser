@@ -253,7 +253,7 @@ interface ApiService {
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<ModelPlaceOrder>
 
-    @GET(NetworkCallPoints.CREATE_PARCEL)
+    @GET(NetworkCallPoints.GET_PARCEL)
     suspend fun activeDeliever(
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
     ): Response<Doc>

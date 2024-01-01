@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
             android:text="Skip >"
-            android:textColor="#EA1B25"
+            android:textColor="@color/colorRed"
             android:textSize="@dimen/_13ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

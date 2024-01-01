@@ -82,7 +82,7 @@
                         android:fontFamily="@font/open_sans_regular"
                         android:gravity="center_vertical"
                         android:text="@string/delivery_location"
-                        android:textColor="#EA1B25"
+                        android:textColor="@color/colorRed"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -175,7 +175,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/open_sans_regular"
                         android:text="@string/wallet"
-                        android:textColor="#EA1B25"
+                        android:textColor="@color/colorRed"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/imgWallet"
@@ -217,7 +217,7 @@
                         android:fontFamily="@font/open_sans_regular"
                         android:gravity="center_vertical"
                         android:text="@string/aed"
-                        android:textColor="#EA1B25"
+                        android:textColor="@color/colorRed"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/guideline1"
@@ -284,7 +284,7 @@
                         android:fontFamily="@font/open_sans_regular"
                         android:gravity="center_vertical"
                         android:text="@string/payment_method"
-                        android:textColor="#EA1B25"
+                        android:textColor="@color/colorRed"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/imgPaymentMethod"
@@ -332,6 +332,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:buttonTint="#1ED860"
+                            android:visibility="gone"
                             android:drawableStart="@drawable/paypal"
                             android:drawablePadding="@dimen/_7sdp"
                             android:paddingStart="@dimen/_3sdp"
@@ -417,7 +418,7 @@
                                 android:fontFamily="@font/open_sans_regular"
                                 android:gravity="center_vertical"
                                 android:text="@string/visa"
-                                android:textColor="#EA1B25"
+                                android:textColor="@color/colorRed"
                                 android:textSize="@dimen/_10ssp"
                                 android:textStyle="bold"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -488,7 +489,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/open_sans_regular"
                         android:text="@string/order_summary"
-                        android:textColor="#EA1B25"
+                        android:textColor="@color/colorRed"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/imgOrderSummary"
@@ -652,7 +653,7 @@
 <!--&lt;!&ndash;                        android:layout_width="0dp"&ndash;&gt;-->
 <!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
 <!--&lt;!&ndash;                        android:fontFamily="@font/montserrat_regular"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textColor="#EA1B25"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:textColor="@color/colorRed"&ndash;&gt;-->
 <!--&lt;!&ndash;                        android:text="Helloooo"&ndash;&gt;-->
 <!--&lt;!&ndash;                        app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
 <!--&lt;!&ndash;                        app:layout_constraintTop_toTopOf="parent"&ndash;&gt;-->

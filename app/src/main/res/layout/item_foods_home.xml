@@ -63,7 +63,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/open_sans_regular"
             android:text="Papa John's Pizza"
-            android:textColor="#EA1B25"
+            android:textColor="@color/colorRed"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/imgShop"

@@ -34,11 +34,15 @@ class WishListAdapter(
         holder.bind.txtDelivery.text = try {
            "Delivery ${arrayData.shop.delivery.value} ${arrayData.shop.delivery.unit}"
         }catch (e : Exception){
-            ""
+            "0.0"
         }
 
         holder.bind.imgFavourite.setOnClickListener {
             hatlyShopInterface.clickshopItem(position)
+        }
+
+        holder.itemView.setOnClickListener {
+            hatlyShopInterface.clickCategoryItem(position)
         }
 
         holder.bind.shopRate.rating = arrayData.averageRating.toFloat()

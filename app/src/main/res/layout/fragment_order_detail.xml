@@ -108,7 +108,7 @@
             android:paddingVertical="@dimen/_3sdp"
             android:text="#8543fasd"
             android:textAlignment="center"
-            android:textColor="#EA1B25"
+            android:textColor="@color/colorRed"
             android:textSize="@dimen/_11ssp"
             app:layout_constraintBottom_toBottomOf="@+id/txtTitle111"
             app:layout_constraintEnd_toEndOf="parent"
@@ -306,7 +306,7 @@
                 android:paddingVertical="@dimen/_10sdp"
                 android:text="@string/write_a_review"
                 android:textAlignment="center"
-                android:textColor="#EA1B25"
+                android:textColor="@color/colorRed"
                 android:textSize="@dimen/_13ssp"
                 android:textStyle="bold"
                 android:visibility="visible"
@@ -386,7 +386,7 @@
         <!--            android:text="Write a review"-->
         <!--            android:visibility="visible"-->
         <!--            android:textAlignment="center"-->
-        <!--            android:textColor="#EA1B25"-->
+        <!--            android:textColor="@color/colorRed"-->
         <!--            android:textSize="@dimen/_13ssp"-->
         <!--            android:textStyle="bold"-->
         <!--            app:layout_constraintBottom_toBottomOf="parent"-->

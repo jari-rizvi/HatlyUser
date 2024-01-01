@@ -119,7 +119,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
 
 
         mViewDataBinding.imgBack.setOnClickListener {
-            if (alreadyFragmentAdded(R.id.allowLocationFragment)) {
+            if (!alreadyFragmentAdded(R.id.homeFragment) || !alreadyFragmentAdded(R.id.locationFragment)) {
                 findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
             } else {
                 findNavController().popBackStack()
@@ -440,7 +440,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                     "Update" -> {
                         isForUpdate = true
                         locationId = locationModel._id
-                        txtConfirmLocation1.text = "Update Location"
+                        txtConfirmLocation1.text = getString(R.string.update_location)
                         isMapBeingDragged = false
 
                         apartmentStr = locationModel.apartmentNumber.toString()

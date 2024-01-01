@@ -42,7 +42,7 @@ class WalletAdapter(
             holder.bind.textView17.setTextColor(Color.parseColor("#1ED860"))
             amount = "+ ${arrayData.totalAmount}"
         }else if (arrayData.change == "decrement"){
-            holder.bind.textView17.setTextColor(Color.parseColor("#EA1B25"))
+            holder.bind.textView17.setTextColor(Color.parseColor("@color/colorRed"))
             amount = "- ${arrayData.totalAmount}"
         }
 

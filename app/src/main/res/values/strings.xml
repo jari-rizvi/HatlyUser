@@ -1,6 +1,6 @@
 <resources>
     <string name="app_nameo" translatable="false">Hatly</string>
-<!--    <string name="don_t_have_an_account_sign_up">Don’t have an account? ![CDATA[<font color"#EA1B25">Sign Up</font>]]</string>-->
+<!--    <string name="don_t_have_an_account_sign_up">Don’t have an account? ![CDATA[<font color"@color/colorRed">Sign Up</font>]]</string>-->
 
 
     <string name="search_pattern" translatable="false">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 123456789</string>
@@ -13,7 +13,7 @@
 
     <string name="let_s_order_your_best_nmenu_in_here">Let’s Order Your Best\nMenu In Here</string>
     <string name="let_s_order_your_best_menu_here_and_nlet_s_find_your_best_menu_here">Let\'s order your best menu here and\nlet\'s find your best menu here</string>
-    <string name="swip_to_see">Swip to see</string>
+    <string name="swip_to_see">Swipe to see</string>
     <string name="find_the_restaurant">Find the restaurant!</string>
     <string name="choose_your_favorite_dishes">Choose your Favorite Dishes!</string>
     <string name="get_your_delivery">Get Your Delivery!</string>
@@ -26,7 +26,7 @@
     <string name="or_login_with">or Login with</string>
     <string name="login_with_facebook">Login with Facebook</string>
     <string name="login_with_google">Login with Google</string>
-    <string name="don_t_have_an_account_sign_up"><font fgcolor='#262626'>Don’t have an account? </font><font fgcolor='#EA1B25'>Sign Up</font></string>
+    <string name="don_t_have_an_account_sign_up"><font fgcolor='#262626'>Don’t have an account? </font><font fgcolor='@color/colorRed'>Sign Up</font></string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="send">Send</string>
 
@@ -37,7 +37,7 @@
     <string name="by_creating_your_account_you_agree_on_our">by creating your account, you agree on our</string>
     <string name="or_sign_up_with">or Sign up with</string>
     <string name="sign_up_with_facebook">Sign up with Facebook</string>
-    <string name="already_have_an_account_login"><font fgcolor='#262626'>Already have an account? </font><font fgcolor='#EA1B25'>Login</font></string>
+    <string name="already_have_an_account_login"><font fgcolor='#262626'>Already have an account? </font><font fgcolor='@color/colorRed'>Login</font></string>
     <string name="sign_up_with_google">Sign up with Google</string>
 
     <string name="otp">OTP</string>
@@ -207,9 +207,11 @@
     <string name="you_still_have_products_from_another_shop_nshall_we_start_over_with_a_fresh_cart">You still have products from another shop.\nShall we start over with a fresh cart?</string>
     <string name="remove_your_previous_items">Remove your previous items?</string>
     <string name="no">No</string>
-    <string name="remove">Remove</string>
     <string name="are_you_sure_you_want_to_ncancel_your_order">Are you sure you want to\ncancel your order?</string>
     <string name="yes">Yes</string>
+    <string name="remove">Remove</string>
+    <string name="update_location">Update Location</string>
+    <string name="write_special_instructions">write special instructions...</string>
 
 
 </resources>

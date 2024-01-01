@@ -754,7 +754,15 @@
         android:id="@+id/wishListFragment"
         android:name="com.teamx.hatlyUser.ui.fragments.wishlist.WishlistFragment"
         android:label="WishListFragment"
-        tools:layout="@layout/fragment_wishlist" />
+        tools:layout="@layout/fragment_wishlist" >
+        <action
+            android:id="@+id/action_wishListFragment_to_foodsShopHomeFragment"
+            app:destination="@id/foodsShopHomeFragment"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_left"/>
+    </fragment>
 
     <fragment
         android:id="@+id/cartFragment"

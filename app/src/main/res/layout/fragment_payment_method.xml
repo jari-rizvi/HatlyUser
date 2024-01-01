@@ -81,7 +81,7 @@
 <!--                android:id="@+id/radioOnline"-->
 <!--                android:layout_width="0dp"-->
 <!--                android:layout_height="wrap_content"-->
-<!--                android:buttonTint="#EA1B25"-->
+<!--                android:buttonTint="@color/colorRed"-->
 <!--                android:checked="true"-->
 <!--                android:drawableStart="@drawable/mobile_number"-->
 <!--                android:drawablePadding="@dimen/_10sdp"-->
@@ -107,7 +107,7 @@
 <!--                android:id="@+id/radioCash"-->
 <!--                android:layout_width="0dp"-->
 <!--                android:layout_height="wrap_content"-->
-<!--                android:buttonTint="#EA1B25"-->
+<!--                android:buttonTint="@color/colorRed"-->
 <!--                android:checked="true"-->
 <!--                android:drawableStart="@drawable/mobile_number"-->
 <!--                android:drawablePadding="@dimen/_10sdp"-->
@@ -132,7 +132,7 @@
 <!--                android:id="@+id/radioPaypal"-->
 <!--                android:layout_width="0dp"-->
 <!--                android:layout_height="wrap_content"-->
-<!--                android:buttonTint="#EA1B25"-->
+<!--                android:buttonTint="@color/colorRed"-->
 <!--                android:checked="true"-->
 <!--                android:drawableStart="@drawable/mobile_number"-->
 <!--                android:drawablePadding="@dimen/_10sdp"-->

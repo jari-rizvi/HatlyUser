@@ -195,8 +195,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="3184" />
-                            <option name="y" value="3836" />
+                            <option name="x" value="3195" />
+                            <option name="y" value="3420" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -1101,12 +1101,12 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_walletFragment_to_orderDetailFragment">
+                            <entry key="action_walletFragment_to_topUpFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_walletFragment_to_topUpFragment">
+                            <entry key="action_walletFragment_to_transactionDetailFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -1124,6 +1124,15 @@
                             <option name="x" value="2940" />
                             <option name="y" value="2725" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_wishListFragment_to_orderDetailFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

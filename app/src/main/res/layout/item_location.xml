@@ -29,7 +29,7 @@
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView16"
-            app:tint="#EA1B25" />
+            app:tint="@color/colorRed" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout

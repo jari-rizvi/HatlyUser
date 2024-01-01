@@ -193,7 +193,7 @@
             android:backgroundTint="#211ED860"
             android:fontFamily="@font/almendra_bold"
             android:text="@string/food"
-            android:textColor="#EA1B25"
+            android:textColor="@color/colorRed"
             android:textSize="@dimen/_16ssp"
             app:layout_constraintBottom_toBottomOf="@+id/textView8"
             app:layout_constraintEnd_toEndOf="@+id/textView8"
@@ -224,7 +224,7 @@
         <!--                android:backgroundTint="#211ED860"-->
         <!--                android:fontFamily="@font/bumbu_sushi"-->
         <!--                android:text="FOOD"-->
-        <!--                android:textColor="#EA1B25"-->
+        <!--                android:textColor="@color/colorRed"-->
         <!--                android:textSize="@dimen/_20ssp"-->
         <!--                app:layout_constraintBottom_toTopOf="@+id/guideline11"-->
         <!--                app:layout_constraintEnd_toEndOf="parent"-->
@@ -276,7 +276,7 @@
             android:backgroundTint="#211ED860"
             android:fontFamily="@font/aller_display"
             android:text="@string/grocery"
-            android:textColor="#EA1B25"
+            android:textColor="@color/colorRed"
             android:textSize="@dimen/_16ssp"
             app:layout_constraintBottom_toBottomOf="@+id/textView10"
             app:layout_constraintEnd_toEndOf="@+id/textView10"
@@ -303,7 +303,7 @@
         <!--                android:backgroundTint="#211ED860"-->
         <!--                android:fontFamily="@font/bumbu_sushi"-->
         <!--                android:text="GROCERY"-->
-        <!--                android:textColor="#EA1B25"-->
+        <!--                android:textColor="@color/colorRed"-->
         <!--                android:textSize="@dimen/_20ssp"-->
         <!--                app:layout_constraintBottom_toTopOf="@+id/guideline12"-->
         <!--                app:layout_constraintEnd_toEndOf="parent"-->
@@ -365,7 +365,7 @@
             android:backgroundTint="#211ED860"
             android:fontFamily="@font/cherry_cream_soda_regular"
             android:text="@string/health_amp_nbeauty"
-            android:textColor="#EA1B25"
+            android:textColor="@color/colorRed"
             android:textSize="@dimen/_16ssp"
             app:layout_constraintBottom_toBottomOf="@+id/textView11"
             app:layout_constraintEnd_toEndOf="@+id/textView11"
@@ -395,7 +395,7 @@
             android:backgroundTint="#211ED860"
             android:fontFamily="@font/amarante_regular"
             android:text="@string/home_business"
-            android:textColor="#EA1B25"
+            android:textColor="@color/colorRed"
             android:textSize="@dimen/_16ssp"
             app:layout_constraintBottom_toBottomOf="@+id/textView112"
             app:layout_constraintEnd_toEndOf="@+id/textView112"

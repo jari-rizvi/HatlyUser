@@ -20,7 +20,7 @@
             android:fontFamily="@font/open_sans_regular"
             android:textStyle="bold"
             android:text="Free Delivery"
-            android:textColor="#EA1B25"
+            android:textColor="@color/colorRed"
             app:layout_constraintEnd_toStartOf="@+id/textView17"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"

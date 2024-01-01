@@ -49,7 +49,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.05"
-            app:tint="#EA1B25" />
+            app:tint="@color/colorRed" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

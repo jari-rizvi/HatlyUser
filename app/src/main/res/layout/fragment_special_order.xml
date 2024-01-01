@@ -182,7 +182,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_radius_green"
-                    android:backgroundTint="#EA1B25"
+                    android:backgroundTint="@color/colorRed"
                     android:fontFamily="@font/open_sans_regular"
                     android:paddingHorizontal="@dimen/_7sdp"
                     android:paddingVertical="@dimen/_5sdp"
@@ -204,7 +204,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.30" />
+                app:layout_constraintGuide_percent="0.26"/>
 
             <ImageView
                 android:id="@+id/img1"
@@ -305,7 +305,7 @@
             android:id="@+id/textView2254545544"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             android:fontFamily="@font/montserrat_regular"
             android:text="@string/there_is_no_active_delivery_nat_the_moment"
             android:textColor="#909090"
@@ -345,7 +345,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
             android:text="@string/view_all"
-            android:textColor="#EA1B25"
+            android:textColor="@color/colorRed"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView2254"

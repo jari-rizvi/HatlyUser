@@ -34,7 +34,7 @@
             android:fontFamily="@font/open_sans_regular"
             android:text="Hydri Super Market"
             android:textAlignment="center"
-            android:textColor="#EA1B25"
+            android:textColor="@color/colorRed"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/txtAddress"

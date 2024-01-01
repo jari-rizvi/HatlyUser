@@ -110,8 +110,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 "Select your location"
             }
 
+            var labelStr= ""
+
+            labelStr = when (it.location!!.label) {
+                "Home" -> {
+                    getString(R.string.home)
+                }
+
+                "Work" -> {
+                    getString(R.string.work)
+                }
+
+                else -> {
+                    it.location!!.label
+                }
+            }
+
             mViewDataBinding.textView41.text = try {
-                it.location!!.label
+                labelStr
             } catch (e: Exception) {
                 "Current Location:"
             }

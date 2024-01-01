@@ -104,7 +104,7 @@
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:text="@string/aed"
                 android:textAlignment="center"
-                android:textColor="#EA1B25"
+                android:textColor="@color/colorRed"
                 android:textStyle="bold"
                 android:textSize="@dimen/_13ssp"
                 android:layout_marginTop="@dimen/_10sdp"

@@ -38,7 +38,7 @@
             android:fontFamily="@font/ubuntu_regular"
             android:gravity="center"
             android:text="Sweet Bakery"
-            android:textColor="#EA1B25"
+            android:textColor="@color/colorRed"
             android:textSize="@dimen/_15ssp"
             app:layout_constraintBottom_toTopOf="@+id/materialRatingBar"
             app:layout_constraintEnd_toEndOf="parent"

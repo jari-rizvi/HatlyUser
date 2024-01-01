@@ -48,7 +48,7 @@
             android:paddingVertical="@dimen/_10sdp"
             android:text="@string/back_to_home"
             android:textAlignment="center"
-            android:textColor="#EA1B25"
+            android:textColor="@color/colorRed"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

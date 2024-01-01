@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
             android:text="@string/aed"
-            android:textColor="#EA1B25"
+            android:textColor="@color/colorRed"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imgShop"

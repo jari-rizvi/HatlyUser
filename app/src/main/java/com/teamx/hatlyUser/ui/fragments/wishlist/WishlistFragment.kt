@@ -15,11 +15,13 @@ import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.constants.NetworkCallPointsNest
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentWishlistBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.wishlist.adapter.WishListAdapter
 import com.teamx.hatlyUser.ui.fragments.wishlist.modelWishList.Doc
+import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONException
@@ -63,7 +65,7 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Log.d("handleOnBackPressed", "handleOnBackPressed: back")
-                findNavController().popBackStack(R.id.homeFragment,false)
+                findNavController().popBackStack(R.id.homeFragment, false)
             }
         }
 
@@ -73,7 +75,8 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
         )
 
 
-        val layoutManager2 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        val layoutManager2 =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
 
         mViewDataBinding.recWishlist.layoutManager = layoutManager2
         wishListArraylist = ArrayList()
@@ -89,6 +92,7 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -96,7 +100,7 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            if (data.success){
+                            if (data.success) {
 
                                 wishListArraylist.removeAt(wishListPosition)
                                 hatlyPopularAdapter.notifyItemRemoved(wishListPosition)
@@ -105,11 +109,11 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
                                     wishListArraylist.size
                                 )
 
-                                if (isAdded){
+                                if (isAdded) {
                                     mViewDataBinding.root.snackbar("Product remove from wishlist")
                                 }
 
-                                if (wishListArraylist.isEmpty()){
+                                if (wishListArraylist.isEmpty()) {
                                     findNavController().popBackStack()
                                 }
                             }
@@ -120,14 +124,14 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
                         loadingDialog.dismiss()
                         if (isAdded) {
 
-                        mViewDataBinding.root.snackbar(it.message!!)
+                            mViewDataBinding.root.snackbar(it.message!!)
                         }
                     }
                 }
             }
         }
 
-        mViewModel.wishList(10,1)
+        mViewModel.wishList(10, 1)
 
         if (!mViewModel.wishListResponse.hasActiveObservers()) {
             mViewModel.wishListResponse.observe(requireActivity()) {
@@ -136,25 +140,29 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
+
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             wishListArraylist.clear()
                             wishListArraylist.addAll(data.docs)
                             hatlyPopularAdapter.notifyDataSetChanged()
-                            if (wishListArraylist.isNotEmpty()){
+                            Log.d("wishListArraylist", "onViewCreated: ${wishListArraylist}")
+                            if (wishListArraylist.isNotEmpty()) {
+                                mViewDataBinding.recWishlist.visibility = View.VISIBLE
                                 mViewDataBinding.textView22545454.visibility = View.GONE
                             }
                         }
                     }
+
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
                         if (isAdded) {
-
-                        mViewDataBinding.root.snackbar(it.message!!)
+                            mViewDataBinding.root.snackbar(it.message!!)
                         }
                     }
                 }
@@ -162,11 +170,10 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
         }
 
 
-        mViewDataBinding.recWishlist.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+        mViewDataBinding.recWishlist.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
-                {
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
                     isScrolling = true
                 }
             }
@@ -178,8 +185,7 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
                 totalItems = layoutManager2.itemCount
                 scrollOutItems = layoutManager2.findFirstVisibleItemPosition()
 
-                if(isScrolling && (currentItems + scrollOutItems == totalItems))
-                {
+                if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
                     isScrolling = false;
 //                    fetchData()
                 }
@@ -206,7 +212,11 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
     }
 
     override fun clickCategoryItem(position: Int) {
-
+        val wishListModel = wishListArraylist[position]
+        val bundle = Bundle()
+        bundle.putString("itemId", wishListModel.shop._id)
+        NetworkCallPointsNest.MART = Marts.FOOD
+        findNavController().navigate(R.id.action_wishListFragment_to_foodsShopHomeFragment, bundle)
     }
 
     override fun clickMoreItem(position: Int) {
@@ -235,7 +245,6 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
 //
 //
 //    }
-
 
 
 }

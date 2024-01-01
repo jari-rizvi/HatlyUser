@@ -53,7 +53,7 @@
             android:fontFamily="@font/open_sans_regular"
             android:maxLines="2"
             android:layout_marginEnd="@dimen/_5sdp"
-            android:text="P.F. CnstruructionsCnstruructionsCnstruructions"
+            android:text="P.F. CnstruructionsCnstruru"
             android:textColor="#262626"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
@@ -67,7 +67,6 @@
             android:id="@+id/textView212"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_10sdp"
             android:ellipsize="end"
             android:fontFamily="@font/open_sans_regular"
             android:maxLines="2"
@@ -76,7 +75,7 @@
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imgShop"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
+            app:layout_constraintEnd_toEndOf="@+id/textView21"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@+id/guideline11"
             app:layout_constraintTop_toBottomOf="@+id/textView21"
@@ -139,7 +138,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/textView29"
             app:layout_constraintEnd_toEndOf="@+id/textView2122"
             app:layout_constraintTop_toTopOf="@+id/textView29"
-            app:tint="#EA1B25" />
+            app:tint="@color/colorRed" />
 
         <LinearLayout
             android:id="@+id/linearLayout4"
@@ -156,7 +155,7 @@
                 android:layout_height="@dimen/_17sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:src="@drawable/round_add_24"
-                app:tint="#EA1B25" />
+                app:tint="@color/colorRed" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -166,7 +165,7 @@
                 android:backgroundTint="@android:color/transparent"
                 android:fontFamily="@font/ubuntu_regular"
                 android:gravity="center"
-                android:text="Remove"
+                android:text="@string/remove"
                 android:textColor="#808080"
                 android:textSize="@dimen/_12ssp" />
 
@@ -187,7 +186,7 @@
         <!--                android:layout_height="@dimen/_17sdp"-->
         <!--                android:layout_marginEnd="@dimen/_5sdp"-->
         <!--                android:src="@drawable/outline_favorite_24"-->
-        <!--                app:tint="#EA1B25" />-->
+        <!--                app:tint="@color/colorRed" />-->
 
         <!--            <TextView-->
         <!--                android:layout_width="wrap_content"-->

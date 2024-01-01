@@ -77,7 +77,7 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
             }
         }
 
-        mViewModel.allParcel("pending", 10, 1)
+        mViewModel.allParcel("delivered", 10, 1)
 
         mViewModel.allParcelResponse.observe(requireActivity()) {
             when (it.status) {
@@ -98,47 +98,15 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
                             delieveredParcel.clear()
                             delieveredParcel.addAll(data.docs)
                             delieveredAdapter.notifyDataSetChanged()
-                        } else {
+                        }
+
+                        if (data.docs.isNotEmpty()) {
+                            mViewDataBinding.recSpecial.visibility = View.VISIBLE
+                            mViewDataBinding.textView22545454.visibility = View.GONE
+                        }else{
+                            mViewDataBinding.recSpecial.visibility = View.GONE
                             mViewDataBinding.textView22545454.visibility = View.VISIBLE
                         }
-
-                        if (data.docs.isEmpty()) {
-                            mViewDataBinding.constraintLayout6.visibility = View.GONE
-                            mViewDataBinding.textView2254545544.visibility = View.VISIBLE
-                            return@observe
-                        } else {
-                            mViewDataBinding.constraintLayout6.visibility = View.VISIBLE
-                            mViewDataBinding.textView2254545544.visibility = View.GONE
-                        }
-
-//                        Log.d("activeParcels", "onViewCreated: ${data.activeParcels}")
-
-//                        orderId = data.activeParcels[0]._id
-//
-//                        mViewDataBinding.textView2223.text = try {
-//                            data.activeParcels[0].details.item
-//                        } catch (e: Exception) {
-//                            ""
-//                        }
-//
-//                        mViewDataBinding.textView222.text = try {
-//                            "${getString(R.string.tracking_id)} ${data.activeParcels[0].trackingNumber}"
-//                        } catch (e: Exception) {
-//                            "null"
-//                        }
-//
-//                        mViewDataBinding.textView22725.text = try {
-//                            data.activeParcels[0].pickup.address
-//                        } catch (e: Exception) {
-//                            "null"
-//                        }
-//
-//                        mViewDataBinding.textView227925.text = try {
-//                            data.activeParcels[0].dropOff.address
-//                        } catch (e: Exception) {
-//                            "null"
-//                        }
-
 
                     }
                 }
@@ -170,6 +138,18 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
                     it.data?.let { data ->
 
 //                        Log.d("activeParcels", "onViewCreated: ${data.activeParcels}")
+
+                        Log.d("activeResponse", "onViewCreated: ${data}")
+                        Log.d("activeResponse", "onViewCreated: ${data.trackingNumber}")
+
+                        if (data._id != null) {
+                            mViewDataBinding.constraintLayout6.visibility = View.VISIBLE
+                            mViewDataBinding.textView2254545544.visibility = View.GONE
+                        } else {
+                            mViewDataBinding.constraintLayout6.visibility = View.GONE
+                            mViewDataBinding.textView2254545544.visibility = View.VISIBLE
+                            return@observe
+                        }
 
                         orderId = data._id
 

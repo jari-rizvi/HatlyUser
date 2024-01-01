@@ -81,7 +81,7 @@
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="normal"
                 android:background="@drawable/bg_circle"
-                android:backgroundTint="#EA1B25"
+                android:backgroundTint="@color/colorRed"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/allowBtn"
                 app:layout_constraintStart_toStartOf="parent"

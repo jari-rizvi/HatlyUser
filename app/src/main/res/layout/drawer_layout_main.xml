@@ -74,7 +74,7 @@
                 android:fontFamily="@font/open_sans_regular"
                 android:text="JamesJamesJames"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:textColor="#EA1B25"
+                android:textColor="@color/colorRed"
                 android:textSize="@dimen/_17ssp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/imgProfile"

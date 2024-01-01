@@ -55,7 +55,9 @@ class NetworkCallPoints {
 
         const val FARE_CALCULATION = "parcel/fare"
 
-        const val CREATE_PARCEL = "parcel/current"
+        const val CREATE_PARCEL = "parcel"
+
+        const val GET_PARCEL = "parcel/current"
 
         const val ALL_PARCEL = "parcel/all"
 

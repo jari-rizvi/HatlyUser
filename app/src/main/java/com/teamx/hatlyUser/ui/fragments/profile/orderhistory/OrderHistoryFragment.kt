@@ -90,10 +90,10 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding, OrderHist
                     loadingDialog.dismiss()
                     it.data?.let { data ->
 
-                        if (!hasNextPage) {
-                            orderHistoryArrayList.clear()
-                        }
-                        data.docs?.forEach {
+//                        if (!hasNextPage) {
+//                            orderHistoryArrayList.clear()
+//                        }
+                        data.docs.forEach {
                             try {
                                 it.createdAt = formatTimeDifference(it.createdAt,requireActivity())
                             }catch (e : Exception){

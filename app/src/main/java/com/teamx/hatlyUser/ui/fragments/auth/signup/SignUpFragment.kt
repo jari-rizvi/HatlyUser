@@ -76,11 +76,18 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding, SignUpViewModel>() {
         }
 
         mViewDataBinding.txtLogin.setOnClickListener {
-            if (isValidate()) {
-                initialization()
-                Log.d("createParams", "onViewCreated: ${createParams()}")
-                mViewModel.signup(createParams())
+            if (mViewDataBinding.checkBox.isChecked){
+                if (isValidate()) {
+                    initialization()
+                    Log.d("createParams", "onViewCreated: ${createParams()}")
+                    mViewModel.signup(createParams())
+                }
+            }else{
+                if (isAdded) {
+                    mViewDataBinding.root.snackbar("Please read and accept our Terms and Conditions before signing up.")
+                }
             }
+
         }
 
         if (!mViewModel.signupResponse.hasActiveObservers()){

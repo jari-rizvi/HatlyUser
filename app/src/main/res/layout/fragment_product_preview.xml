@@ -121,7 +121,7 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:textColor="#EA1B25"
+                    android:textColor="@color/colorRed"
                     android:textSize="@dimen/_15ssp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -192,7 +192,7 @@
                         android:fontFamily="@font/ubuntu_regular"
                         android:gravity="center_vertical"
                         android:text="@string/add_special_instruction"
-                        android:textColor="#EA1B25"
+                        android:textColor="@color/colorRed"
                         android:textSize="@dimen/_13ssp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -204,7 +204,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/button_radius_corner"
                         android:gravity="top"
-                        android:hint="write special instructions..."
+                        android:hint="@string/write_special_instructions"
                         android:minHeight="@dimen/_70sdp"
                         android:padding="@dimen/_10sdp"
                         android:visibility="gone"
@@ -253,7 +253,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:fontFamily="@font/ubuntu_bold"
                     android:text="Hello"
-                    android:textColor="#EA1B25"
+                    android:textColor="@color/colorRed"
                     android:textSize="@dimen/_12ssp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView24"
                     app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -312,7 +312,7 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/textView29"
                     app:layout_constraintTop_toTopOf="@+id/imgDereament"
-                    app:tint="#EA1B25" />
+                    app:tint="@color/colorRed" />
 
                 <TextView
                     android:id="@+id/textView30"

@@ -81,7 +81,7 @@
                 android:fontFamily="@font/open_sans_regular"
                 android:text="@string/view_details"
                 android:textAlignment="center"
-                android:textColor="#EA1B25"
+                android:textColor="@color/colorRed"
                 android:textSize="@dimen/_11ssp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

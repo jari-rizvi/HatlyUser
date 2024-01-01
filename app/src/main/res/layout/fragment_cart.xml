@@ -115,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/ubuntu_regular"
                         android:text="@string/add_note"
-                        android:textColor="#EA1B25"
+                        android:textColor="@color/colorRed"
                         android:textSize="@dimen/_11ssp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.05"

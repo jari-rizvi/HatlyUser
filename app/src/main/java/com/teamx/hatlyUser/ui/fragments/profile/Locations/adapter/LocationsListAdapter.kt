@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.teamx.hatlyUser.MainApplication
 import com.teamx.hatlyUser.MainApplication.Companion.context
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemLocationBinding
@@ -27,22 +28,32 @@ class LocationsListAdapter(
 
         val arrayData = addressArrayList[position]
 
+        var labelStr= ""
 
         when (arrayData.label) {
             "Home" -> {
                 holder.bind.img.setImageDrawable(context.getDrawable(R.drawable.home_label))
 //                Picasso.get().load(R.drawable.home_label).into(holder.bind.img)
+                labelStr = context.getString(R.string.home)
             }
 
             "Work" -> {
                 holder.bind.img.setImageDrawable(context.getDrawable(R.drawable.work_label))
 //                Picasso.get().load(R.drawable.work_label).into(holder.bind.img)
+                labelStr = context.getString(R.string.work)
             }
 
             else -> {
                 holder.bind.img.setImageDrawable(context.getDrawable(R.drawable.pin_location))
 //                Picasso.get().load(R.drawable.pin_location).into(holder.bind.img)
+                labelStr = arrayData.label
             }
+        }
+
+        holder.bind.textView16.text = try {
+            labelStr
+        } catch (e: Exception) {
+            "null"
         }
 
         if (arrayData.isFromSender) {
@@ -67,11 +78,7 @@ class LocationsListAdapter(
         }
 
 
-        holder.bind.textView16.text = try {
-            arrayData.label
-        } catch (e: Exception) {
-            "null"
-        }
+
 
         holder.bind.textView18.text = try {
             arrayData.address

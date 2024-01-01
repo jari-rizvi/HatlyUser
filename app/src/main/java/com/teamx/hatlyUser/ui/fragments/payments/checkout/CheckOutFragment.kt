@@ -25,7 +25,6 @@ import com.stripe.android.PaymentConfiguration
 import com.stripe.android.paymentsheet.PaymentSheet
 import com.stripe.android.paymentsheet.PaymentSheetResult
 import com.teamx.hatlyUser.BR
-import com.teamx.hatlyUser.BuildConfig
 import com.teamx.hatlyUser.MainApplication
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
