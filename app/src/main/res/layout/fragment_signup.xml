@@ -71,28 +71,54 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.35" />
 
-            <EditText
-                android:id="@+id/userFullName"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutTextInput1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:padding="-10dp"
+                app:hintEnabled="false"
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/input_auth_field"
-                android:backgroundTint="#33909090"
-                android:drawableStart="@drawable/full_name"
-                android:drawablePadding="@dimen/_10sdp"
-                android:hint="@string/full_name"
-                android:imeOptions="actionNext"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:paddingVertical="@dimen/_10sdp"
-                android:paddingStart="@dimen/_10sdp"
-                android:textColorHint="#787878"
-                android:textCursorDrawable="@color/black"
-                android:textSize="@dimen/_13ssp"
+                app:hintTextColor="#787878"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                app:startIconDrawable="@drawable/full_name"
+                app:startIconTint="#1ED860">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/userFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/input_auth_field"
+                    android:backgroundTint="#33909090"
+                    android:hint="@string/full_name"
+                    android:padding="0dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            <EditText-->
+<!--                android:id="@+id/userFullName"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginHorizontal="@dimen/_20sdp"-->
+<!--                android:layout_marginTop="@dimen/_10sdp"-->
+<!--                android:background="@drawable/input_auth_field"-->
+<!--                android:backgroundTint="#33909090"-->
+<!--                android:drawableStart="@drawable/full_name"-->
+<!--                android:drawablePadding="@dimen/_10sdp"-->
+<!--                android:hint="@string/full_name"-->
+<!--                android:imeOptions="actionNext"-->
+<!--                android:inputType="textEmailAddress"-->
+<!--                android:maxLines="1"-->
+<!--                android:paddingVertical="@dimen/_10sdp"-->
+<!--                android:paddingStart="@dimen/_10sdp"-->
+<!--                android:textColorHint="#787878"-->
+<!--                android:textCursorDrawable="@color/black"-->
+<!--                android:textSize="@dimen/_13ssp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/textView2" />-->
 
 <!--            <EditText-->
 <!--                android:id="@+id/userEmail"-->
@@ -116,49 +142,103 @@
 <!--                app:layout_constraintStart_toStartOf="@+id/userFullName"-->
 <!--                app:layout_constraintTop_toBottomOf="@+id/userFullName" />-->
 
-            <EditText
-                android:id="@+id/userMobile"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/input_auth_field"
-                android:backgroundTint="#33909090"
-                android:drawableStart="@drawable/mobile_number"
-                android:drawablePadding="@dimen/_10sdp"
-                android:hint="@string/mobile_number"
-                android:imeOptions="actionNext"
-                android:inputType="number|phone"
-                android:maxLines="1"
-                android:paddingVertical="@dimen/_10sdp"
-                android:paddingStart="@dimen/_10sdp"
-                android:textColorHint="#787878"
-                android:textCursorDrawable="@color/black"
-                android:textSize="@dimen/_13ssp"
-                app:layout_constraintEnd_toEndOf="@+id/userFullName"
-                app:layout_constraintStart_toStartOf="@+id/userFullName"
-                app:layout_constraintTop_toBottomOf="@+id/userFullName" />
 
-            <EditText
-                android:id="@+id/userPassword"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutTextInput12"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:padding="-10dp"
+                app:hintEnabled="false"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/input_auth_field"
-                android:backgroundTint="#33909090"
-                android:drawableStart="@drawable/password"
-                android:drawablePadding="@dimen/_10sdp"
-                android:hint="@string/password"
-                android:imeOptions="actionNext"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:paddingVertical="@dimen/_10sdp"
-                android:paddingStart="@dimen/_10sdp"
-                android:textColorHint="#787878"
-                android:textCursorDrawable="@color/black"
-                android:textSize="@dimen/_13ssp"
-                app:layout_constraintEnd_toEndOf="@+id/userMobile"
-                app:layout_constraintStart_toStartOf="@+id/userMobile"
-                app:layout_constraintTop_toBottomOf="@+id/userMobile" />
+                app:hintTextColor="#787878"
+                app:layout_constraintEnd_toEndOf="@+id/layoutTextInput1"
+                app:layout_constraintStart_toStartOf="@+id/layoutTextInput1"
+                app:layout_constraintTop_toBottomOf="@+id/layoutTextInput1"
+                app:startIconDrawable="@drawable/mobile_number"
+                app:startIconTint="#1ED860">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/userMobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/input_auth_field"
+                    android:backgroundTint="#33909090"
+                    android:inputType="number|phone"
+                    android:hint="@string/mobile_number"
+                    android:padding="0dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            <EditText-->
+<!--                android:id="@+id/userMobile"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/_10sdp"-->
+<!--                android:background="@drawable/input_auth_field"-->
+<!--                android:backgroundTint="#33909090"-->
+<!--                android:drawableStart="@drawable/mobile_number"-->
+<!--                android:drawablePadding="@dimen/_10sdp"-->
+<!--                android:hint="@string/mobile_number"-->
+<!--                android:imeOptions="actionNext"-->
+<!--                android:inputType="number|phone"-->
+<!--                android:maxLines="1"-->
+<!--                android:paddingVertical="@dimen/_10sdp"-->
+<!--                android:paddingStart="@dimen/_10sdp"-->
+<!--                android:textColorHint="#787878"-->
+<!--                android:textCursorDrawable="@color/black"-->
+<!--                android:textSize="@dimen/_13ssp"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/layoutTextInput1"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/layoutTextInput1"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/layoutTextInput1" />-->
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutTextInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="-10dp"
+                app:hintEnabled="false"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:hintTextColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/layoutTextInput12"
+                app:layout_constraintStart_toStartOf="@+id/layoutTextInput12"
+                app:layout_constraintTop_toBottomOf="@+id/layoutTextInput12"
+                app:passwordToggleEnabled="true"
+                app:startIconDrawable="@drawable/password"
+                app:startIconTint="#1ED860">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/userPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/input_auth_field"
+                    android:backgroundTint="#33909090"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:padding="0dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            <EditText-->
+<!--                android:id="@+id/userPassword"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/_10sdp"-->
+<!--                android:background="@drawable/input_auth_field"-->
+<!--                android:backgroundTint="#33909090"-->
+<!--                android:drawableStart="@drawable/password"-->
+<!--                android:drawablePadding="@dimen/_10sdp"-->
+<!--                android:hint="@string/password"-->
+<!--                android:imeOptions="actionNext"-->
+<!--                android:inputType="textEmailAddress"-->
+<!--                android:maxLines="1"-->
+<!--                android:paddingVertical="@dimen/_10sdp"-->
+<!--                android:paddingStart="@dimen/_10sdp"-->
+<!--                android:textColorHint="#787878"-->
+<!--                android:textCursorDrawable="@color/black"-->
+<!--                android:textSize="@dimen/_13ssp"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/userMobile"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/userMobile"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/userMobile" />-->
 
             <CheckBox
                 android:id="@+id/checkBox"
@@ -168,8 +248,8 @@
                 android:buttonTint="@color/remember_me_selector_color"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
-                app:layout_constraintStart_toStartOf="@+id/userPassword"
-                app:layout_constraintTop_toBottomOf="@+id/userPassword" />
+                app:layout_constraintStart_toStartOf="@+id/layoutTextInput"
+                app:layout_constraintTop_toBottomOf="@+id/layoutTextInput" />
 
             <TextView
                 android:id="@+id/txtCheckPrivacy"
@@ -220,8 +300,8 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/userPassword"
-                app:layout_constraintStart_toStartOf="@+id/userPassword"
+                app:layout_constraintEnd_toEndOf="@+id/layoutTextInput"
+                app:layout_constraintStart_toStartOf="@+id/layoutTextInput"
                 app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
             <TextView

@@ -128,7 +128,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
 
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (alreadyFragmentAdded(R.id.allowLocationFragment)) {
+                if (!alreadyFragmentAdded(R.id.homeFragment) || !alreadyFragmentAdded(R.id.locationFragment)) {
                     findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
                 } else {
                     findNavController().popBackStack()
@@ -225,7 +225,12 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                                     sharedViewModel.setUserData(userData)
                                     sharedViewModel.setlocationmodel(userData.location)
                                 }
-                                findNavController().popBackStack()
+                                if (!alreadyFragmentAdded(R.id.homeFragment) || !alreadyFragmentAdded(R.id.locationFragment)) {
+                                    findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
+                                } else {
+                                    findNavController().popBackStack()
+                                }
+//                                findNavController().popBackStack()
 //                                findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
                             }
                         }
@@ -266,7 +271,12 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                                     sharedViewModel.setUserData(userData)
                                     sharedViewModel.setlocationmodel(userData.location)
                                 }
-                                findNavController().popBackStack()
+                                if (!alreadyFragmentAdded(R.id.homeFragment) || !alreadyFragmentAdded(R.id.locationFragment)) {
+                                    findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
+                                } else {
+                                    findNavController().popBackStack()
+                                }
+//                                findNavController().popBackStack()
                             }
                         }
                     }

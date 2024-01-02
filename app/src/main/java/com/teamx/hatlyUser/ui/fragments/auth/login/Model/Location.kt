@@ -7,7 +7,7 @@ data class Location(
     val _id: String,
     val additionalDirection: String,
     val address: String,
-    val apartmentNumber: Int,
+    val apartmentNumber: String,
     val building: String,
     val coordinates: Coordinates?,
     val createdAt: Double,

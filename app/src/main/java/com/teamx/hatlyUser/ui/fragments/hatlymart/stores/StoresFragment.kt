@@ -54,6 +54,19 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
             findNavController().popBackStack()
         }
 
+
+
+        sharedViewModel.userData.observe(requireActivity()){
+            Log.d("userDatavalue", "${it.location?.address}")
+        }
+
+        mViewDataBinding.textViewAddress.text = try {
+            extractShortAddress(sharedViewModel.userData.value?.location?.address)
+
+        }catch (e : Exception){
+            ""
+        }
+
         when (MART) {
             Marts.HATLY_MART -> {
                 Log.d("StoreFragment", "HATLY_MART: back")
@@ -154,7 +167,9 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
         val bundle = Bundle()
         bundle.putString("_id", hatlyStore._id)
         bundle.putString("name", hatlyStore.name)
-        bundle.putString("address", hatlyStore.address.googleMapAddress)
+//        bundle.putString("address", hatlyStore.address.googleMapAddress)
+        val shortAddress = extractShortAddress(sharedViewModel.userData.value?.location?.address)
+        bundle.putString("address", shortAddress)
         findNavController().navigate(R.id.action_storesFragment_to_hatlyMartFragment, bundle)
     }
 
@@ -164,6 +179,12 @@ class StoresFragment : BaseFragment<FragmentStoresBinding, StoresViewModel>(), H
 
     override fun clickMoreItem(position: Int) {
 
+    }
+
+    private fun extractShortAddress(fullAddress: String?): String? {
+        val addressParts = fullAddress?.split(", ")
+        val shortAddress = addressParts?.get(0)
+        return shortAddress
     }
 
 }

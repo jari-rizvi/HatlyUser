@@ -5,8 +5,10 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.teamx.hatlyUser.MainApplication
+import com.teamx.hatlyUser.MainApplication.Companion.context
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemWalletBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
@@ -42,7 +44,7 @@ class WalletAdapter(
             holder.bind.textView17.setTextColor(Color.parseColor("#1ED860"))
             amount = "+ ${arrayData.totalAmount}"
         }else if (arrayData.change == "decrement"){
-            holder.bind.textView17.setTextColor(Color.parseColor("@color/colorRed"))
+            holder.bind.textView17.setTextColor(context.getColor(R.color.colorRed))
             amount = "- ${arrayData.totalAmount}"
         }
 

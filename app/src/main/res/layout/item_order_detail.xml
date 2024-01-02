@@ -34,6 +34,7 @@
             android:fontFamily="@font/open_sans_regular"
             android:maxLines="2"
             android:text="Full plate"
+            android:visibility="gone"
             android:textColor="#808080"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold"

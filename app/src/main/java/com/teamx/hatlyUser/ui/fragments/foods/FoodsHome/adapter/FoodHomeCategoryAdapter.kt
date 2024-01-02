@@ -42,7 +42,8 @@ class FoodHomeCategoryAdapter(
 
         if (foodsCategory.itemSelected) {
             holder.bind.categoryMain.background = ContextCompat.getDrawable(context, R.drawable.button_radius_corner_selected)
-            holder.bind.txtTitle.setTextColor(Color.parseColor("@color/colorRed"))
+//            holder.bind.txtTitle.setTextColor(Color.parseColor("@color/colorRed"))
+            holder.bind.txtTitle.setTextColor(context.getColor(R.color.colorRed))
         }else{
             holder.bind.categoryMain.background = ContextCompat.getDrawable(context, R.drawable.button_radius)
             holder.bind.txtTitle.setTextColor(Color.parseColor("#363636"))
