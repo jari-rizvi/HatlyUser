@@ -277,10 +277,8 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                                     data.forEach { jsonArray.add(it) }
                                     params.add("images", jsonArray)
                                     params.addProperty("ratting", materialRatingBar.rating)
-                                    params.addProperty(
-                                        "description",
-                                        userDescription.text.toString()
-                                    )
+                                    params.addProperty("description", userDescription.text.toString())
+                                    params.addProperty("orderId", order_Id)
 
                                 } catch (e: JSONException) {
                                     e.printStackTrace()
