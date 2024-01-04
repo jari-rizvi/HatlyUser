@@ -27,7 +27,7 @@
 <!--                android:layout_height="wrap_content"-->
 <!--                android:fontFamily="@font/montserrat_regular"-->
 <!--                android:text="Apple MacBook Pro"-->
-<!--                android:textColor="#363636"-->
+<!--                style="@style/txtGrayColor"-->
 <!--                android:textSize="@dimen/_9ssp"-->
 <!--                android:textStyle="bold"-->
 <!--                app:layout_constraintBottom_toTopOf="@+id/textView222"-->
@@ -114,7 +114,7 @@
 <!--            android:layout_height="wrap_content"-->
 <!--            android:fontFamily="@font/montserrat_regular"-->
 <!--            android:text="Pickup"-->
-<!--            android:textColor="#363636"-->
+<!--            style="@style/txtGrayColor"-->
 <!--            android:textSize="@dimen/_8ssp"-->
 <!--            android:textStyle="bold"-->
 <!--            app:layout_constraintBottom_toTopOf="@+id/textView22725"-->
@@ -143,7 +143,7 @@
 <!--            android:layout_height="wrap_content"-->
 <!--            android:fontFamily="@font/montserrat_regular"-->
 <!--            android:text="Dropoff"-->
-<!--            android:textColor="#363636"-->
+<!--            style="@style/txtGrayColor"-->
 <!--            android:textSize="@dimen/_8ssp"-->
 <!--            android:textStyle="bold"-->
 <!--            app:layout_constraintBottom_toTopOf="@+id/textView227925"-->
@@ -184,7 +184,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="Apple MacBook Pro"
-                android:textColor="#363636"
+                android:textColor="@color/colorGray"
                 android:textSize="@dimen/_11ssp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/textView222"
@@ -283,7 +283,7 @@
             android:text="Pickup"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginStart="@dimen/_10sdp"
-            android:textColor="#363636"
+            android:textColor="@color/colorGray"
             app:layout_constraintHorizontal_bias="0"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold"
@@ -313,7 +313,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
             android:text="Dropoff"
-            android:textColor="#363636"
+            android:textColor="@color/colorGray"
             android:layout_marginTop="@dimen/_5sdp"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold"

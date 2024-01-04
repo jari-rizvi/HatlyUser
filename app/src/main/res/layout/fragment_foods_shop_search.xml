@@ -36,6 +36,7 @@
             android:drawablePadding="@dimen/_10sdp"
             android:imeOptions="actionSearch"
             android:inputType="text"
+            android:textColor="@color/colorGray"
             android:drawableTint="#66363636"
             android:hint="@string/search"
             android:maxLines="1"

@@ -16,13 +16,40 @@
 
     <!--    </style> &lt;!&ndash; Base application theme. &ndash;&gt;-->
 
+
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:textColor">@color/colorRed</item>
 
     </style>
 
+    <style name="backTint">
 
+        <item name="android:backgroundTint">@color/colorDarkGreen</item>
+
+    </style>
+
+    <style name="txtGrayColor">
+
+        <item name="android:textColor">@color/colorGray</item>
+
+    </style>
+
+    <style name="txtLightGrayColor">
+
+        <item name="android:textColor">@color/colorLightGray</item>
+
+    </style>
+
+    <style name="bgLightGrayColor">
+
+        <item name="android:background">@color/white</item>
+
+    </style>
+
+    <style name="locationBackground">
+        <item name="android:background">@drawable/selecter_location</item>
+    </style>
 
 
 
@@ -78,7 +105,7 @@
         <item name="android:textSize">@dimen/_9ssp</item>
         <item name="android:popupBackground">@drawable/button_radius_corner</item>
         <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
-        <item name="android:dropDownSelector">@android:color/white</item>
+        <item name="android:dropDownSelector">@android:color/darker_gray</item>
     </style>
 
 </resources>

@@ -23,38 +23,94 @@
         <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
             <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
 
-            <item name="android:textColor">@color/white</item>
+            <item name="android:textColor">@color/colorGreen</item>
         </style>
 
+    <style name="backTint">
+
+        <item name="android:backgroundTint">@color/colorDarkRed</item>
+
+    </style>
+
+    <style name="txtGrayColor">
+
+        <item name="android:textColor">@color/white</item>
+
+    </style>
+
+    <style name="txtLightGrayColor">
+
+        <item name="android:textColor">@color/white</item>
+
+    </style>
+
+    <style name="bgLightGrayColor">
+
+        <item name="android:background">@color/colorGray</item>
+
+    </style>
+
+    <style name="locationBackground">
+        <item name="android:background">@drawable/selecter_location</item>
+        <item name="android:backgroundTint">#99A6A6A6</item>
+    </style>
 
 
-        <!--<style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
-            <item name="bottomSheetStyle">@style/AppModalStyle</item>
-        </style>
 
-        <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
-            <item name="android:background">@drawable/radius_top_corner</item>
-            <item name="behavior_peekHeight">1000dp</item>
-        </style>-->
+
+    <!--    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">-->
+    <!--        <item name="bottomSheetStyle">@style/AppModalStyle</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">-->
+    <!--        <item name="android:background">@drawable/radius_top_corner</item>-->
+    <!--        <item name="behavior_peekHeight">1000dp</item>-->
+    <!--    </style>-->
 
     <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
 
-
-
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/radius_top_corner</item>
+        <item name="behavior_peekHeight">1000dp</item>
     </style>
 
     <declare-styleable name="SlideToUnlock">
-        <attr name="sliderColor" format="color"/>
-        <attr name="cancelOnYExit" format="boolean"/>
-        <attr name="slideToUnlockText" format="string"/>
-        <attr name="slideToUnlockTextColor" format="color"/>
-        <attr name="slideToUnlockBackgroundColor" format="color"/>
-        <attr name="cornerRadiusX" format="dimension"/>
-        <attr name="cornerRadiusY" format="dimension"/>
+        <attr name="sliderColor" format="color" />
+        <attr name="cancelOnYExit" format="boolean" />
+        <attr name="slideToUnlockText" format="string" />
+        <attr name="slideToUnlockTextColor" format="color" />
+        <attr name="slideToUnlockBackgroundColor" format="color" />
+        <attr name="cornerRadiusX" format="dimension" />
+        <attr name="cornerRadiusY" format="dimension" />
     </declare-styleable>
+
+    <style name="BottomSheetStyle" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Other style attributes for your app -->
+
+        <!-- Style for BottomSheet -->
+        <item name="bottomSheetStyle">@style/AppBottomSheetStyle</item>
+    </style>
+
+    <style name="AppBottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet">
+        <!-- Customize the BottomSheet style here -->
+        <item name="android:background">@drawable/button_radius_corner_top</item>
+        <item name="android:backgroundDimAmount">0</item>
+        <item name="behavior_peekHeight">1000dp</item>
+        <item name="behavior_hideable">false</item>
+    </style>
+
+
+    // progress bar
+
+
+    <style name="spinner_style">
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:textSize">@dimen/_9ssp</item>
+        <item name="android:popupBackground">@drawable/button_radius_corner</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="android:dropDownSelector">@android:color/darker_gray</item>
+    </style>
 
 </resources>

@@ -3,6 +3,7 @@ package com.teamx.hatlyUser.ui.fragments.specialOrderDetail
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -36,6 +37,10 @@ class SpecialOrderDetailFragment : BaseFragment<FragmentSpecialOrderDetailBindin
                 popEnter = R.anim.nav_default_pop_enter_anim
                 popExit = R.anim.nav_default_pop_exit_anim
             }
+        }
+
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
         }
 
         sharedViewModel.parcelOrderHistory.observe(requireActivity()) { historyModel ->

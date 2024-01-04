@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
             android:text="@string/checkout"
-            android:textColor="#262626"
+            style="@style/txtGrayColor"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -318,7 +318,7 @@
                             android:id="@+id/radioCash"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:buttonTint="#1ED860"
+                            android:buttonTint="@color/colorGreen"
                             android:checked="true"
                             android:drawableStart="@drawable/cash"
                             android:drawablePadding="@dimen/_7sdp"
@@ -331,7 +331,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:buttonTint="#1ED860"
+                            android:buttonTint="@color/colorGreen"
                             android:visibility="gone"
                             android:drawableStart="@drawable/paypal"
                             android:drawablePadding="@dimen/_7sdp"
@@ -345,7 +345,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:buttonTint="#1ED860"
+                            android:buttonTint="@color/colorGreen"
                             android:drawableStart="@drawable/stripe"
                             android:drawablePadding="@dimen/_7sdp"
                             android:paddingStart="@dimen/_3sdp"
@@ -364,7 +364,7 @@
                         android:gravity="center_vertical"
                         android:paddingVertical="@dimen/_2sdp"
                         android:text="@string/select_card"
-                        android:textColor="#1ED860"
+                        android:textColor="@color/colorGreen"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
@@ -397,7 +397,7 @@
                                 android:id="@+id/radio1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:buttonTint="#1ED860"
+                                android:buttonTint="@color/colorGreen"
                                 android:checked="true"
                                 android:clickable="false"
                                 android:drawableEnd="@drawable/visa_blue_box"
@@ -446,7 +446,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:buttonTint="#1ED860"
+                            android:buttonTint="@color/colorGreen"
                             android:drawablePadding="@dimen/_10sdp"
                             android:paddingStart="@dimen/_10sdp"
                             android:text="@string/add_new_card"
@@ -553,7 +553,7 @@
                         android:fontFamily="@font/open_sans_regular"
                         android:gravity="center_vertical"
                         android:text="@string/aed"
-                        android:textColor="#363636"
+                        style="@style/txtGrayColor"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/textView214433"
@@ -582,7 +582,7 @@
                         android:fontFamily="@font/open_sans_regular"
                         android:gravity="center_vertical"
                         android:text="@string/aed"
-                        android:textColor="#363636"
+                        style="@style/txtGrayColor"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/textView2164433"
@@ -597,7 +597,7 @@
                         android:fontFamily="@font/open_sans_regular"
                         android:gravity="center_vertical"
                         android:text="@string/total"
-                        android:textColor="#1ED860"
+                        android:textColor="@color/colorGreen"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -611,7 +611,7 @@
                         android:fontFamily="@font/open_sans_regular"
                         android:gravity="center_vertical"
                         android:text="@string/aed"
-                        android:textColor="#1ED860"
+                        android:textColor="@color/colorGreen"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/textView221164433"
@@ -626,7 +626,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:textColor="#262626"
+                    style="@style/txtGrayColor"
                     android:buttonTint="@color/remember_me_selector_color"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -642,7 +642,7 @@
 <!--&lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
 <!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
 <!--&lt;!&ndash;                        android:fontFamily="@font/montserrat_regular"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textColor="#262626"&ndash;&gt;-->
+<!--&lt;!&ndash;                        style="@style/txtGrayColor"&ndash;&gt;-->
 <!--&lt;!&ndash;                        android:textSize="@dimen/_9ssp"&ndash;&gt;-->
 <!--&lt;!&ndash;                        android:textStyle="bold"&ndash;&gt;-->
 <!--&lt;!&ndash;                        app:layout_constraintStart_toEndOf="@+id/checkBox"&ndash;&gt;-->

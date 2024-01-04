@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
             android:text="Shop No. 118/F-1 Milleninium Mall MilleniniumMilleniniumMilleninium"
-            android:textColor="#363636"
+            style="@style/txtGrayColor"
             android:textSize="@dimen/_9ssp"
             app:layout_constraintEnd_toEndOf="parent"
             android:textStyle="bold"
@@ -74,7 +74,7 @@
             android:fontFamily="@font/open_sans_regular"
             android:text="4.8 (35 reviews)"
             android:textAlignment="center"
-            android:textColor="#363636"
+            style="@style/txtGrayColor"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imgReview"
@@ -92,7 +92,7 @@
             app:layout_constraintEnd_toEndOf="@+id/imgReview"
             app:layout_constraintStart_toStartOf="@+id/imgReview"
             app:layout_constraintTop_toBottomOf="@+id/imgReview"
-            app:tint="#1ED860" />
+            app:tint="@color/colorGreen" />
 
         <TextView
             android:id="@+id/txtDuration"
@@ -101,7 +101,7 @@
             android:fontFamily="@font/open_sans_regular"
             android:text="Delivery 30 min"
             android:textAlignment="center"
-            android:textColor="#363636"
+            style="@style/txtGrayColor"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imgDuration"

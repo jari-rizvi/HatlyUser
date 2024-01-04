@@ -172,20 +172,12 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
         }
 
 
-//        val layoutManager1 = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-//        mViewDataBinding.recBasedMart.layoutManager = layoutManager1
+        val layoutManager = GridLayoutManager(requireActivity(), 4)
+        hatlyShopCatAdapter = HatlyShopCatAdapter(healthDetailCatArraylist, this)
+        mViewDataBinding.recShopCatMart.layoutManager = layoutManager
+        mViewDataBinding.recShopCatMart.adapter = hatlyShopCatAdapter
 
 
-//        if (storeId.isNotEmpty()) {
-//            if (!mViewModel.categoryShopResponse.hasActiveObservers()) {
-//                Log.d("allStoresResponse", "HatlyMartFragment: ")
-////                mViewModel.healthDeatil(storeId,1,10,0)
-////                mViewModel.categoryShop("64db9adcc487c683bbda5c54", 1, 10, 0)
-//                mViewModel.categoryShop(storeId, 1, 10, 0)
-//            }
-//        }
-
-//        if (!mViewModel.healthDetailResponse.hasActiveObservers()) {
         mViewModel.categoryShopResponse.observe(requireActivity()) {
             when (it.status) {
                 Resource.Status.AUTH -> {
@@ -312,15 +304,6 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
             }
         }
 
-
-        // set the adapter
-
-        // set the adapter
-        val layoutManager = GridLayoutManager(requireActivity(), 4)
-        hatlyShopCatAdapter = HatlyShopCatAdapter(healthDetailCatArraylist, this)
-        mViewDataBinding.recShopCatMart.layoutManager = layoutManager
-        mViewDataBinding.recShopCatMart.adapter = hatlyShopCatAdapter
-//        mViewDataBinding.recBasedMart.adapter = hatlyShopCatAdapter
 
 
         val productLayoutManager =

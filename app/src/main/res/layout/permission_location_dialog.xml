@@ -96,7 +96,7 @@
                 android:maxLines="3"
                 android:text="Allow"
                 android:background="@drawable/bg_circle"
-                android:backgroundTint="#1ED860"
+                android:backgroundTint="@color/colorGreen"
                 android:textAlignment="center"
                 android:textSize="@dimen/_10ssp"
                 android:textColor="@color/white"

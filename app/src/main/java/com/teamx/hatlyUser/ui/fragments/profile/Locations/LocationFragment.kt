@@ -133,16 +133,15 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
 //            })
 //        )
 
-
-        mViewModel.getAlAddress()
-
         if (!mViewModel.getAlAddressResponse.hasActiveObservers()) {
+            mViewModel.getAlAddress()
             mViewModel.getAlAddressResponse.observe(requireActivity()) {
                 when (it.status) {
                     Resource.Status.AUTH -> {
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -152,7 +151,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                         it.data?.let { data ->
                             if (data.isNotEmpty()) {
 //                                data[0].isSelected = true
-
+                                getAddressArray.clear()
                                 if (fromParcel.isNotEmpty()) {
                                     data.forEach {
                                         it.isFromSender = true
@@ -183,6 +182,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -191,7 +191,8 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             if (data.success) {
-                                val userData = PrefHelper.getInstance(requireActivity()).getUserData()
+                                val userData =
+                                    PrefHelper.getInstance(requireActivity()).getUserData()
                                 userData!!.location = data.data!!
                                 PrefHelper.getInstance(requireActivity()).setUserData(userData)
                                 sharedViewModel.setlocationmodel(userData.location)
@@ -218,6 +219,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }

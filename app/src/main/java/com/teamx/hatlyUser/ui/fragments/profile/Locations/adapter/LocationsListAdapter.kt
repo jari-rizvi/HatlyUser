@@ -1,5 +1,6 @@
 package com.teamx.hatlyUser.ui.fragments.profile.Locations.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ class LocationsListAdapter(
 
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: HatlyPopularViewHolder, position: Int) {
 
         val arrayData = addressArrayList[position]
@@ -49,6 +51,11 @@ class LocationsListAdapter(
                 labelStr = arrayData.label
             }
         }
+
+//        if (arrayData.isDefault){
+//            holder.bind.textView16.setTextColor(R.color.colorGray)
+//            holder.bind.textView18.setTextColor(R.color.colorLightGray)
+//        }
 
         holder.bind.textView16.text = try {
             labelStr

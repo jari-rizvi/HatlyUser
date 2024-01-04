@@ -15,6 +15,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:SpinKit_Color="#1ED860" />
+        app:SpinKit_Color="@color/colorGreen" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

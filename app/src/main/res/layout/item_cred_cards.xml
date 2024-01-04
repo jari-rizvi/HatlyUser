@@ -82,7 +82,7 @@
             android:paddingVertical="@dimen/_5sdp"
             android:text="@string/detach_card"
             android:textAlignment="center"
-            android:textColor="#1ED860"
+            android:textColor="@color/colorGreen"
             android:textSize="@dimen/_9ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -20,7 +20,7 @@
             android:fontFamily="@font/open_sans_regular"
             android:maxLines="2"
             android:text="1x Biryani"
-            android:textColor="#262626"
+            style="@style/txtGrayColor"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +49,7 @@
             android:fontFamily="@font/open_sans_regular"
             android:maxLines="2"
             android:text="@string/aed"
-            android:textColor="#262626"
+            style="@style/txtGrayColor"
             android:textSize="@dimen/_13ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -74,7 +74,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/guideline"
                 app:startIconDrawable="@drawable/email_or_number"
-                app:startIconTint="#1ED860">
+                app:startIconTint="@color/colorGreen">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/userEmail"
@@ -126,7 +126,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/layoutTextInput1"
                 app:passwordToggleEnabled="true"
                 app:startIconDrawable="@drawable/password"
-                app:startIconTint="#1ED860">
+                app:startIconTint="@color/colorGreen">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/userPassword"
@@ -191,7 +191,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="@string/forget_password"
-                android:textColor="#1ED860"
+                android:textColor="@color/colorGreen"
                 android:textSize="@dimen/_10ssp"
                 app:layout_constraintBottom_toBottomOf="@+id/checkBox"
                 app:layout_constraintEnd_toEndOf="@+id/layoutTextInput"
@@ -331,7 +331,7 @@
                 android:layout_marginVertical="@dimen/_20sdp"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="@string/don_t_have_an_account_sign_up"
-                android:textColor="#1ED860"
+                android:textColor="@color/colorGreen"
                 android:textSize="@dimen/_10ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/txtLoginGoogle"

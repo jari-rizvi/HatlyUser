@@ -19,7 +19,7 @@
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/button_radius_corner"
-            android:backgroundTint="#1ED860"
+            android:backgroundTint="@color/colorGreen"
             android:maxWidth="@dimen/_200sdp"
             android:padding="@dimen/_10sdp"
             android:text="Delivery detailsDelivery detadetailsDelivery"

@@ -6,7 +6,7 @@
             android:shape="ring"
             android:thickness="3dp"
             android:useLevel="false">
-            <stroke android:color="#1ED860" android:width="2dp"/>
+            <stroke android:color="@color/colorGreen" android:width="2dp"/>
         </shape>
     </item>
 </layer-list>

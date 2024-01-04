@@ -46,7 +46,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="#1ED860" />
+                app:tint="@color/colorGreen" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -57,7 +57,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/open_sans_regular"
             android:textAlignment="center"
-            android:textColor="#363636"
+            style="@style/txtGrayColor"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/imgLayout"

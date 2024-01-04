@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
             android:text="@string/order_history"
-            android:textColor="#363636"
+            style="@style/txtGrayColor"
             android:textSize="@dimen/_17ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline11"

@@ -7,7 +7,21 @@
     <color name="colorPrimaryDark">#515c6f</color>
     <!--    <color name="colorAccent">#F1F1F1</color>-->
 
-    <color name="categorySelectedColor">#261ED860</color>
+
+
+    <color name="colorDarkRed">#3F1517</color>
 
     <color name="colorRed">#EA1B25</color>
+
+    <color name="colorGreen">#1ED860</color>
+
+    <color name="colorDarkGreen">#211ED860</color>
+
+    <color name="categorySelectedColor">#261ED860</color>
+
+    <color name="colorGray">#363636</color>
+
+    <color name="colorLightGray">#99363636</color>
+
+
 </resources>

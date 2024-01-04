@@ -21,7 +21,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/ubuntu_regular"
             android:text="Variations 1"
-            android:textColor="#2C2D30"
+            style="@style/txtGrayColor"
             android:textSize="@dimen/_14ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.05"
@@ -69,7 +69,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/ubuntu_bold"
             android:text="Select one"
-            android:textColor="#1ED860"
+            android:textColor="@color/colorGreen"
             android:textSize="@dimen/_11ssp"
             app:layout_constraintStart_toStartOf="@+id/txtReqTitle"
             app:layout_constraintTop_toBottomOf="@+id/txtReqTitle" />
@@ -96,7 +96,7 @@
     <!--            android:id="@+id/radioButton"-->
     <!--            android:layout_width="wrap_content"-->
     <!--            android:layout_height="wrap_content"-->
-    <!--            android:buttonTint="#1ED860"-->
+    <!--            android:buttonTint="@color/colorGreen"-->
     <!--            android:checked="true"-->
     <!--            android:text="Hello"-->
     <!--            android:textColor="#2C2D30"-->

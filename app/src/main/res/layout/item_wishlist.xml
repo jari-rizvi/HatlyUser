@@ -138,7 +138,7 @@
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="@dimen/_15sdp"
                 android:src="@drawable/outline_access_time_24"
-                app:tint="#1ED860"
+                app:tint="@color/colorGreen"
                 tools:layout_editor_absoluteX="147dp"
                 tools:layout_editor_absoluteY="78dp" />
 
@@ -149,7 +149,7 @@
                 android:layout_marginStart="@dimen/_2sdp"
                 android:fontFamily="@font/open_sans_regular"
                 android:text="Delivery 30 min"
-                android:textColor="#363636"
+                android:textColor="@color/colorGray"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="176dp"

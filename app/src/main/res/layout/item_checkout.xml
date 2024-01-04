@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
             android:text="@string/aed"
-            android:textColor="#363636"
+            style="@style/txtGrayColor"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

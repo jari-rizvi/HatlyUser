@@ -6,121 +6,132 @@
     <data>
 
     </data>
+    <!--        android:background="@drawable/selecter_location"-->
+    <!--    style="@style/locationBackground"-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainItem"
+        style="@style/locationBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_5sdp"
         android:layout_marginVertical="@dimen/_10sdp"
-        android:background="@drawable/selecter_location"
         android:elevation="@dimen/_1sdp"
         android:minHeight="@dimen/_60sdp"
         android:padding="@dimen/_5sdp">
 
-        <ImageView
-            android:id="@+id/img"
-            android:layout_width="@dimen/_22sdp"
-            android:layout_height="@dimen/_22sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:src="@drawable/locations"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView16"
-            app:tint="@color/colorRed" />
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/linearLayout5"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <ImageView
-                android:id="@+id/img1"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                app:layout_constraintTop_toTopOf="parent"
-                android:padding="@dimen/_3sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:src="@drawable/edit" />
-
-            <ImageView
-                android:id="@+id/img2"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:id="@+id/img"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:src="@drawable/baseline_delete_outline_24"
-                app:layout_constraintTop_toBottomOf="@+id/img1"
-                app:layout_constraintStart_toStartOf="@+id/img1"
-                app:layout_constraintEnd_toEndOf="@+id/img1"
-                app:tint="#1ED860"
-                tools:layout_editor_absoluteY="31dp" />
+                android:src="@drawable/locations"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView16"
+                app:tint="@color/colorRed" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <ImageView
+                    android:id="@+id/img1"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:padding="@dimen/_3sdp"
+                    android:src="@drawable/edit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/img2"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:src="@drawable/baseline_delete_outline_24"
+                    app:layout_constraintEnd_toEndOf="@+id/img1"
+                    app:layout_constraintStart_toStartOf="@+id/img1"
+                    app:layout_constraintTop_toBottomOf="@+id/img1"
+                    app:tint="@color/colorGreen"
+                    tools:layout_editor_absoluteY="31dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView16"
+                style="@style/txtGrayColor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/open_sans_regular"
+                android:singleLine="true"
+                android:text="55 Al HuqouqHuqouq"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/txtTitle"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toEndOf="@+id/img"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/txt_radius_corner_red"
+                android:fontFamily="@font/open_sans_regular"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_1sdp"
+                android:text="@string/set_as_default"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/textView16"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout5"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textView16"
+                app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+            <TextView
+                android:id="@+id/textView18"
+                style="@style/txtLightGrayColor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/open_sans_regular"
+                android:text="Lorem Ipsum is simply dummy text"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/txtTitle"
+                app:layout_constraintStart_toStartOf="@+id/textView16"
+                app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:ellipsize="end"
-            android:fontFamily="@font/open_sans_regular"
-            android:singleLine="true"
-            android:text="55 Al HuqouqHuqouq"
-            android:textColor="#262626"
-            android:textSize="@dimen/_12ssp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/txtTitle"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toEndOf="@+id/img"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/txtTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@drawable/txt_radius_corner_red"
-            android:fontFamily="@font/open_sans_regular"
-            android:paddingHorizontal="@dimen/_10sdp"
-            android:paddingVertical="@dimen/_1sdp"
-            android:text="@string/set_as_default"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView16"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout5"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView16"
-            app:layout_constraintTop_toTopOf="@+id/textView16" />
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:ellipsize="end"
-            android:fontFamily="@font/open_sans_regular"
-            android:text="Lorem Ipsum is simply dummy text"
-            android:textColor="#99363636"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/txtTitle"
-            app:layout_constraintStart_toStartOf="@+id/textView16"
-            app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

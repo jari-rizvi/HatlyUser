@@ -41,7 +41,7 @@
             app:layout_constraintHorizontal_bias="0.1"
             android:gravity="center"
             android:text="Anna Rose"
-            android:textColor="#262626"
+            style="@style/txtGrayColor"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintBottom_toTopOf="@+id/textView37"
             app:layout_constraintEnd_toEndOf="parent"

@@ -160,7 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Papa John’s"
-                android:textColor="#262626"
+                android:textColor="@color/colorGray"
                 android:textSize="@dimen/_15ssp"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -184,7 +184,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:progressTint="#FEBD19"
-                    android:rating="4"
+                    android:progressBackgroundTint="@color/colorGray"
                     tools:layout_editor_absoluteX="15dp"
                     tools:layout_editor_absoluteY="56dp" />
 
@@ -194,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_2sdp"
                     android:text="4.8"
-                    android:textColor="#262626"
+                    android:textColor="@color/colorGray"
                     android:textSize="@dimen/_10ssp"
                     tools:layout_editor_absoluteX="110dp"
                     tools:layout_editor_absoluteY="56dp" />
@@ -219,7 +219,7 @@
             <!--                    android:layout_width="@dimen/_15sdp"-->
             <!--                    android:layout_height="@dimen/_15sdp"-->
             <!--                    android:src="@drawable/outline_access_time_24"-->
-            <!--                    app:tint="#1ED860"-->
+            <!--                    app:tint="@color/colorGreen"-->
             <!--                    tools:layout_editor_absoluteX="147dp"-->
             <!--                    tools:layout_editor_absoluteY="78dp" />-->
 
@@ -230,7 +230,7 @@
             <!--                    android:layout_marginStart="@dimen/_2sdp"-->
             <!--                    android:fontFamily="@font/open_sans_regular"-->
             <!--                    android:text="2.5m away"-->
-            <!--                    android:textColor="#363636"-->
+            <!--                    style="@style/txtGrayColor"-->
             <!--                    android:textSize="@dimen/_10ssp"-->
             <!--                    android:textStyle="bold"-->
             <!--                    tools:layout_editor_absoluteX="176dp"-->
@@ -253,7 +253,7 @@
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:src="@drawable/open_now"
-                    app:tint="#1ED860"
+                    app:tint="@color/colorGreen"
                     tools:layout_editor_absoluteX="147dp"
                     tools:layout_editor_absoluteY="78dp" />
 
@@ -264,7 +264,7 @@
                     android:layout_marginStart="@dimen/_2sdp"
                     android:fontFamily="@font/open_sans_regular"
                     android:text="open now"
-                    android:textColor="#363636"
+                    android:textColor="@color/colorGray"
                     android:textSize="@dimen/_10ssp"
                     android:textStyle="bold"
                     tools:layout_editor_absoluteX="176dp"
@@ -297,7 +297,7 @@
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:src="@drawable/outline_access_time_24"
-                    app:tint="#1ED860"
+                    app:tint="@color/colorGreen"
                     tools:layout_editor_absoluteX="147dp"
                     tools:layout_editor_absoluteY="78dp" />
 
@@ -308,7 +308,7 @@
                     android:layout_marginStart="@dimen/_2sdp"
                     android:fontFamily="@font/open_sans_regular"
                     android:text="Delivery 30 min"
-                    android:textColor="#363636"
+                    android:textColor="@color/colorGray"
                     android:textSize="@dimen/_10ssp"
                     android:textStyle="bold"
                     tools:layout_editor_absoluteX="176dp"
@@ -399,7 +399,7 @@
     <!--            android:layout_height="wrap_content"-->
     <!--            android:fontFamily="@font/montserrat_regular"-->
     <!--            android:text="All Restaurants"-->
-    <!--            android:textColor="#262626"-->
+    <!--            style="@style/txtGrayColor"-->
     <!--            android:textSize="@dimen/_13ssp"-->
     <!--            android:textStyle="bold"-->
     <!--            app:layout_constraintBottom_toBottomOf="parent"-->
@@ -451,7 +451,7 @@
     <!--            android:layout_height="wrap_content"-->
     <!--            android:layout_marginTop="@dimen/_10sdp"-->
     <!--            android:text="Pizza Restaurants:"-->
-    <!--            android:textColor="#363636"-->
+    <!--            style="@style/txtGrayColor"-->
     <!--            android:textStyle="bold"-->
     <!--            app:layout_constraintEnd_toEndOf="parent"-->
     <!--            app:layout_constraintHorizontal_bias="0"-->
