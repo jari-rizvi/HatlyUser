@@ -5,10 +5,10 @@ import androidx.annotation.Keep
 @Keep
 data class Location(
     val _id: String,
-    val additionalDirection: String,
+    val additionalDirection: String?,
     val address: String,
-    val apartmentNumber: String,
-    val building: String,
+    val apartmentNumber: String?,
+    val building: String?,
     val coordinates: Coordinates?,
     val createdAt: Double,
     val userId: String,

@@ -47,10 +47,10 @@ class WishListAdapter(
 
         holder.bind.shopRate.rating = arrayData.averageRating.toFloat()
 
-        val rating = String.format("%.1f", arrayData.averageRating).toFloat()
+//        val rating = String.format("%.1f", arrayData.averageRating).toFloat()
 
         holder.bind.textView2122.text = try {
-            rating.toString()
+            "${arrayData.averageRating.toFloat()}".substring(0,3)
         }catch (e : Exception){
             ""
         }

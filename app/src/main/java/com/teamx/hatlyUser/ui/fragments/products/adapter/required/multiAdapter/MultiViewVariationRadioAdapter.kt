@@ -68,9 +68,9 @@ class MultiViewVariationRadioAdapter(
                 }
 
                 if (dataSet[position].isRequired) {
-                    holderClass2.txtOptional.text = "Required"
+                    holderClass2.txtOptional.text = holder.itemView.context.getString(R.string.required)
                 } else {
-                    holderClass2.txtOptional.text = "Optional"
+                    holderClass2.txtOptional.text = holder.itemView.context.getString(R.string.optional)
                 }
 
                 holderClass2.txtOptional.isChecked = dataSet[position].isRequired

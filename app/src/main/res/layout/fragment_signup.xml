@@ -91,6 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/input_auth_field"
+                    android:textAlignment="viewStart"
                     android:backgroundTint="#33909090"
                     android:hint="@string/full_name"
                     android:padding="0dp" />
@@ -163,6 +164,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/input_auth_field"
                     android:backgroundTint="#33909090"
+                    android:textAlignment="viewStart"
                     android:inputType="number|phone"
                     android:hint="@string/mobile_number"
                     android:padding="0dp" />
@@ -212,6 +214,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/input_auth_field"
                     android:backgroundTint="#33909090"
+                    android:textAlignment="viewStart"
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:padding="0dp" />
@@ -402,19 +405,34 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                android:id="@+id/textView554"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/already_have_an_account"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintVertical_bias="0"
+                style="@style/txtGrayColor"
+                app:layout_constraintEnd_toStartOf="@+id/textView5"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/txtLoginGoogle"
+                app:layout_constraintTop_toBottomOf="@+id/txtLoginGoogle" />
+
+            <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/_20sdp"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="@string/already_have_an_account_login"
-                android:textColor="@color/colorGreen"
-                app:layout_goneMarginTop="@dimen/_10sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="@string/login"
                 android:textSize="@dimen/_10ssp"
-                app:layout_constraintEnd_toEndOf="@+id/txtLogin"
-                app:layout_constraintStart_toStartOf="@+id/txtLogin"
-                app:layout_constraintTop_toBottomOf="@+id/txtLoginGoogle" />
+                android:layout_marginStart="@dimen/_5sdp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView554"
+                app:layout_constraintEnd_toEndOf="@+id/txtLoginGoogle"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textView554"
+                app:layout_constraintTop_toTopOf="@+id/textView554" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

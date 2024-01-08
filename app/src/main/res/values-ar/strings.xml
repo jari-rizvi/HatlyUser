@@ -29,7 +29,7 @@
     <string name="or_sign_up_with">او التسجيل ب</string>
     <string name="sign_up_with_facebook">التسجيل عبر حساب الفيسبوك</string>
     <string name="sign_up_with_google">التسجيل عبر حساب غوغل</string>
-    <string name="already_have_an_account_login"><font fgcolor='#262626'>هل لديك حساب؟ </font><font fgcolor='@color/colorRed'>تسجيل الدخول</font></string>
+    <string name="already_have_an_account">هل لديك حساب؟</string>
 
     <string name="otp">رمز المرور لمرة واحدة</string>
     <string name="please_enter_the_otp_sent_to_your_nmobile_number">الرجاء إدخال كلمة المرور لمرة واحدة (OTP) المرسلة إلى رقم هاتفك الجوال</string>
@@ -204,5 +204,7 @@
     <string name="remove">ازالة</string>
     <string name="are_you_sure_you_want_to_ncancel_your_order">هل أنت متأكد أنك تريد إلغاء طلبك؟</string>
     <string name="yes">نعم</string>
+    <string name="open_now">مفتوح الآن</string>
+    <string name="tax">الضريبة</string>
 
 </resources>

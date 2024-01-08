@@ -58,6 +58,7 @@
             android:fontFamily="@font/open_sans_regular"
             android:textAlignment="center"
             style="@style/txtGrayColor"
+            android:text="Hello world"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/imgLayout"

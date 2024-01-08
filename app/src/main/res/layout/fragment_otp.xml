@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
             android:text="@string/please_enter_the_otp_sent_to_your_nmobile_number"
-            android:textColor="#424242"
+            style="@style/txtGrayColor"
             android:textSize="@dimen/_10ssp"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -121,7 +121,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
             android:text="@string/resend_otp_in_30_sec"
-            android:textColor="#424242"
+            style="@style/txtLightGrayColor"
             android:textSize="@dimen/_10ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/txtVerify"

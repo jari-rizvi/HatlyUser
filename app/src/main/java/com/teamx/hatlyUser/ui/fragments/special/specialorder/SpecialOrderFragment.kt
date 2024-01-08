@@ -77,6 +77,7 @@ class SpecialOrderFragment : BaseFragment<FragmentSpecialOrderBinding, SpecialOr
             }
         }
 
+
         mViewModel.allParcel("delivered", 10, 1)
 
         mViewModel.allParcelResponse.observe(requireActivity()) {

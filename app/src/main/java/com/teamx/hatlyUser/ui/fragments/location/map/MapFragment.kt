@@ -445,7 +445,6 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
 
             if (locationModel != null) {
 
-
                 when (locationModel.isAction) {
                     "Update" -> {
                         isForUpdate = true
@@ -453,9 +452,9 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                         txtConfirmLocation1.text = getString(R.string.update_location)
                         isMapBeingDragged = false
 
-                        apartmentStr = locationModel.apartmentNumber.toString()
-                        buildingNumStr = locationModel.building
-                        addDirectionStr = locationModel.additionalDirection
+                        apartmentStr = locationModel.apartmentNumber?:""
+                        buildingNumStr = locationModel.building?:""
+                        addDirectionStr = locationModel.additionalDirection?:""
 
                         updateUi(
                             locationModel.address,
@@ -476,6 +475,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                         }
                     }
                 }
+
             } else {
                 if (isAdded) {
                     isForUpdate = false

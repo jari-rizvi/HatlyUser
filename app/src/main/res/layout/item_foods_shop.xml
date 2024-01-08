@@ -71,6 +71,7 @@
             android:fontFamily="@font/open_sans_regular"
             android:text="Pepperoni and extrsdsdsdsda mozzarella cheese"
             style="@style/txtGrayColor"
+            android:textAlignment="viewStart"
             android:textSize="@dimen/_9ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textView26"

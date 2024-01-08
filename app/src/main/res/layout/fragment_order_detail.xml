@@ -74,7 +74,7 @@
             android:fontFamily="@font/open_sans_regular"
             android:paddingHorizontal="@dimen/_7sdp"
             android:paddingVertical="@dimen/_3sdp"
-            android:text="Track"
+            android:text="@string/track"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="@dimen/_9ssp"

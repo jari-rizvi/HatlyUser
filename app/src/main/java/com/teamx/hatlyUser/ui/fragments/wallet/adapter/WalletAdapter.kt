@@ -49,9 +49,7 @@ class WalletAdapter(
         }
 
         holder.bind.textView17.text = try {
-            "${amount} ${
-                MainApplication.context.getString(
-                R.string.aed)}"
+            "${amount} ${holder.itemView.context.getString(R.string.aed)}"
         }catch (e : Exception){
             "null"
         }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/open_sans_regular"
-            android:text="Order Status:"
+            android:text="@string/order_status"
             android:textAlignment="center"
             style="@style/txtGrayColor"
             android:textSize="@dimen/_11ssp"
@@ -251,7 +250,8 @@
                 android:drawableStart="@drawable/paid_with_card"
                 android:drawablePadding="@dimen/_5sdp"
                 android:fontFamily="@font/open_sans_regular"
-                android:gravity="center_vertical"
+                android:textAlignment="viewStart"
+                android:gravity="start"
                 android:text="@string/cash"
                 style="@style/txtGrayColor"
                 android:textSize="@dimen/_11ssp"

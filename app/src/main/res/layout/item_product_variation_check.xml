@@ -14,22 +14,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/txtGrayColor"
-            android:text="Hello"
+            android:text="36.0 AED"
             android:layout_marginEnd="@dimen/_10sdp"
             app:layout_constraintEnd_toStartOf="@+id/textView16"
             app:layout_constraintBottom_toBottomOf="@+id/radioButton"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/radioButton" />
 
         <TextView
             android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
             style="@style/txtGrayColor"
-            android:text="Hello"
+            app:layout_constraintHorizontal_bias="1"
+            android:text="Large"
             app:layout_constraintBottom_toBottomOf="@+id/radioButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintTop_toTopOf="@+id/radioButton" />
 
         <CheckBox
@@ -37,6 +37,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorGreen"
+            android:textAlignment="viewStart"
+            android:text="Hello"
             android:paddingVertical="@dimen/_7sdp"
             style="@style/txtGrayColor"
             app:layout_constraintBottom_toBottomOf="parent"

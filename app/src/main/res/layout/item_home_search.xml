@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginVertical="@dimen/_5sdp"
         android:background="@drawable/button_radius_corner"
         android:padding="@dimen/_10sdp">
 
@@ -97,7 +97,7 @@
             android:fontFamily="@font/open_sans_regular"
             android:text="Delivery 30 min"
             android:textAlignment="center"
-            style="@style/txtGrayColor"
+            android:textColor="@color/colorGray"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imgDuration"

@@ -33,7 +33,7 @@
             android:fontFamily="@font/open_sans_regular"
             android:text="Carte D’or Strawberry Classic 800 ml"
             app:layout_constraintHorizontal_bias="0"
-            style="@style/txtGrayColor"
+            android:textColor="@color/colorGray"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/imgShop"

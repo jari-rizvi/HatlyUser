@@ -47,6 +47,10 @@ class TransactionDetailFragment :
             }
         }
 
+        mViewDataBinding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         sharedViewModel.transactionDetail.observe(requireActivity()) { data ->
 
             when (data.payBy) {

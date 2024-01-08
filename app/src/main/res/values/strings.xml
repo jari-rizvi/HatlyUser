@@ -37,7 +37,7 @@
     <string name="by_creating_your_account_you_agree_on_our">by creating your account, you agree on our</string>
     <string name="or_sign_up_with">or Sign up with</string>
     <string name="sign_up_with_facebook">Sign up with Facebook</string>
-    <string name="already_have_an_account_login"><font fgcolor='#262626'>Already have an account? </font><font fgcolor='@color/colorRed'>Login</font></string>
+    <string name="already_have_an_account">Already have an account?</string>
     <string name="sign_up_with_google">Sign up with Google</string>
 
     <string name="otp">OTP</string>
@@ -157,7 +157,7 @@
     <string name="english">English</string>
     <string name="thank_you">Thank You!</string>
     <string name="thank_you_for_contacting_us_we_ll_nbe_in_touch_very_soon">Thank you for contacting us,we\'ll\nbe in touch very soon.</string>
-    <string name="aed">Aed</string>
+    <string name="aed">AED</string>
     <string name="top_up">Top up</string>
     <string name="recent_transaction">Recent Transaction</string>
     <string name="paid_with">Paid With</string>
@@ -169,7 +169,7 @@
     <string name="your_top_up_has_been_successfully_done">Your top-up has been successfully done</string>
     <string name="top_up_more_amount">Top-up more amount</string>
     <string name="cancel_order">Cancel Order</string>
-    <string name="your_order_has_been_canceled">Your order has been canceled</string>
+    <string name="your_order_has_been_canceled">Your order has been cancelled</string>
     <string name="notification">Notification</string>
     <string name="cart">Cart</string>
     <string name="food">FOOD</string>
@@ -210,8 +210,13 @@
     <string name="are_you_sure_you_want_to_ncancel_your_order">Are you sure you want to\ncancel your order?</string>
     <string name="yes">Yes</string>
     <string name="remove">Remove</string>
+    <string name="tax">Tax</string>
     <string name="update_location">Update Location</string>
     <string name="write_special_instructions">write special instructions...</string>
+    <string name="open_now">Open now</string>
+    <string name="closed">Closed</string>
+    <string name="track">Track</string>
+
 
 
 </resources>

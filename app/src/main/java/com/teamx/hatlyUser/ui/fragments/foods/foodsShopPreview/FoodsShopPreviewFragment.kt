@@ -173,7 +173,7 @@ class FoodsShopPreviewFragment :
                         }
 
                         mViewDataBinding.txtDelivery.text = try {
-                            "Delivery ${data.shop.delivery.value} ${data.shop.delivery.unit}"
+                            "${getString(R.string.delivery)}: ${data.shop.delivery.value} ${data.shop.delivery.unit}"
                         } catch (e: Exception) {
                             "null"
                         }
@@ -187,9 +187,9 @@ class FoodsShopPreviewFragment :
                         }
 
                         if (data.shop.isOpen) {
-                            mViewDataBinding.txtIsOpen.text = "Open now"
+                            mViewDataBinding.txtIsOpen.text = getString(R.string.open_now)
                         } else {
-                            mViewDataBinding.txtIsOpen.text = "Closed"
+                            mViewDataBinding.txtIsOpen.text = getString(R.string.closed)
                         }
 
                         shopCategoryArrayList.clear()

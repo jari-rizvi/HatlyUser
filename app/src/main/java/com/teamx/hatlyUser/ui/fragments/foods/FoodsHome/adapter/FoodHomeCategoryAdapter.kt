@@ -46,7 +46,8 @@ class FoodHomeCategoryAdapter(
             holder.bind.txtTitle.setTextColor(context.getColor(R.color.colorRed))
         }else{
             holder.bind.categoryMain.background = ContextCompat.getDrawable(context, R.drawable.button_radius)
-            holder.bind.txtTitle.setTextColor(Color.parseColor("#363636"))
+//            holder.bind.txtTitle.setTextColor(Color.parseColor("#363636"))
+            holder.bind.txtTitle.setTextAppearance(R.style.txtGrayColor)
         }
 
         Picasso.get().load(foodsCategory.image).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500,500).into(holder.bind.imgShop)

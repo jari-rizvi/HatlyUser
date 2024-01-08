@@ -72,7 +72,7 @@ class SpecialOrderHistoryFragment :
 
 
         if (!mViewModel.allParcelResponse.hasActiveObservers()) {
-            mViewModel.allParcel("pending", 10, 1)
+            mViewModel.allParcel("delivered", 10, 1)
         }
 
         mViewModel.allParcelResponse.observe(requireActivity()) {
