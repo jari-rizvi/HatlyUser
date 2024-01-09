@@ -53,7 +53,7 @@ class ProductVariationOptionalAdapter(
             ""
         }
 
-        val prizeAmount = if (arrayData.price.toInt() == 0) "Free" else "${arrayData.price} ${holder.itemView.context.getString(R.string.aed)}"
+        val prizeAmount = if (arrayData.price.toInt() == 0) holder.itemView.context.getString(R.string.free) else "${arrayData.price} ${holder.itemView.context.getString(R.string.aed)}"
 
         holder.bind.textView16.text = try {
             prizeAmount

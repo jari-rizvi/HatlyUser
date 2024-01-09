@@ -110,7 +110,7 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
                                 )
 
                                 if (isAdded) {
-                                    mViewDataBinding.root.snackbar("Product remove from wishlist")
+                                    mViewDataBinding.root.snackbar(getString(R.string.product_removed_from_wishlist))
                                 }
 
                                 if (wishListArraylist.isEmpty()) {

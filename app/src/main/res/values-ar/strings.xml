@@ -207,4 +207,19 @@
     <string name="open_now">مفتوح الآن</string>
     <string name="tax">الضريبة</string>
 
+
+    <string name="update_location">تحديث الموقع</string>
+    <string name="write_special_instructions">كتابة تعليمات خاصة...</string>
+    <string name="track">تتبع</string>
+    <string name="closed">Closed</string>
+    <string name="product_removed_from_wishlist">تمت إضافة المنتج بنجاح</string>
+    <string name="product_added_in_wishlist">تمت إضافة المنتج بنجاح</string>
+    <string name="default_location">الموقع الأساسي</string>
+    <string name="free">مجاني</string>
+
+    <string name="enter_your_name">قم بإدخال إسمك</string>
+    <string name="enter_your_mobile_number">قم بإدخال رقم هاتفك</string>
+    <string name="enter_you_email_address">قم بإدخال  البريد الإلكتروني</string>
+    <string name="enter_message">كتابة الرسالة</string>
+
 </resources>

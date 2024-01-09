@@ -211,12 +211,22 @@
     <string name="yes">Yes</string>
     <string name="remove">Remove</string>
     <string name="tax">Tax</string>
+
+
     <string name="update_location">Update Location</string>
     <string name="write_special_instructions">write special instructions...</string>
     <string name="open_now">Open now</string>
     <string name="closed">Closed</string>
     <string name="track">Track</string>
+    <string name="product_removed_from_wishlist">Product removed from wishlist</string>
+    <string name="product_added_in_wishlist">Product added successfully</string>
+    <string name="default_location">Default Location</string>
+    <string name="free">Free</string>
 
+    <string name="enter_your_name">Enter your name</string>
+    <string name="enter_your_mobile_number">Enter your mobile number</string>
+    <string name="enter_you_email_address">Enter you email address</string>
+    <string name="enter_message">Enter message</string>
 
 
 </resources>

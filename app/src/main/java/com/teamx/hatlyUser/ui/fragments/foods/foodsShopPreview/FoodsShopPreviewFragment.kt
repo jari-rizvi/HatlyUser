@@ -232,9 +232,9 @@ class FoodsShopPreviewFragment :
                                     !mViewDataBinding.imgFavourite.isChecked
                                 if (isAdded) {
                                     if (mViewDataBinding.imgFavourite.isChecked) {
-                                        mViewDataBinding.root.snackbar("Product added in wishlist")
+                                        mViewDataBinding.root.snackbar(getString(R.string.product_added_in_wishlist))
                                     } else {
-                                        mViewDataBinding.root.snackbar("Product remove from wishlist")
+                                        mViewDataBinding.root.snackbar(getString(R.string.product_removed_from_wishlist))
                                     }
                                 }
                             }
