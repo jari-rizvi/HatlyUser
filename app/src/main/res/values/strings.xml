@@ -227,6 +227,8 @@
     <string name="enter_your_mobile_number">Enter your mobile number</string>
     <string name="enter_you_email_address">Enter you email address</string>
     <string name="enter_message">Enter message</string>
+    <string name="no_favourites_saved">No favourites saved</string>
+    <string name="write">Write...</string>
 
 
 </resources>

@@ -36,13 +36,13 @@ class LocationsListAdapter(
             "Home" -> {
                 holder.bind.img.setImageDrawable(context.getDrawable(R.drawable.home_label))
 //                Picasso.get().load(R.drawable.home_label).into(holder.bind.img)
-                labelStr = context.getString(R.string.home)
+                labelStr = holder.itemView.context.getString(R.string.home)
             }
 
             "Work" -> {
                 holder.bind.img.setImageDrawable(context.getDrawable(R.drawable.work_label))
 //                Picasso.get().load(R.drawable.work_label).into(holder.bind.img)
-                labelStr = context.getString(R.string.work)
+                labelStr = holder.itemView.context.getString(R.string.work)
             }
 
             else -> {

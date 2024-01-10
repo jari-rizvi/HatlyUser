@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
-            android:text="No favourites saved"
+            android:text="@string/no_favourites_saved"
             android:textColor="#909090"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"

@@ -31,13 +31,13 @@
                 android:text="@string/login"
                 android:textColor="@color/colorRed"
                 android:textSize="@dimen/_15ssp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/textView2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="@+id/layoutTextInput1"
-                app:layout_constraintTop_toBottomOf="@+id/hatlyIcon"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintTop_toBottomOf="@+id/hatlyIcon" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -48,16 +48,15 @@
                 android:text="@string/are_you_back_log_in_now_to_continue_with_hatly"
                 style="@style/txtGrayColor"
                 android:textSize="@dimen/_10ssp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.35" />
+<!--            <androidx.constraintlayout.widget.Guideline-->
+<!--                android:id="@+id/guideline"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                app:layout_constraintGuide_percent="0.35" />-->
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -72,7 +71,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/layoutTextInput"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
                 app:startIconDrawable="@drawable/email_or_number"
                 app:startIconTint="@color/colorGreen">
 
@@ -81,6 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/input_auth_field"
+                    android:textAlignment="viewStart"
                     android:backgroundTint="#33909090"
                     android:hint="@string/mobile_number"
                     android:inputType="number|phone"
@@ -135,6 +135,7 @@
                     android:background="@drawable/input_auth_field"
                     android:backgroundTint="#33909090"
                     android:hint="@string/password"
+                    android:textAlignment="viewStart"
                     android:inputType="textPassword"
                     android:padding="0dp" />
 
@@ -330,11 +331,12 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="@string/already_have_an_account"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:textSize="@dimen/_10ssp"
                 app:layout_constraintVertical_bias="0"
                 style="@style/txtGrayColor"
                 app:layout_constraintEnd_toStartOf="@+id/textView5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginVertical="@dimen/_10sdp"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="@+id/txtLoginGoogle"
