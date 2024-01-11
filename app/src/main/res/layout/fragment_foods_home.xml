@@ -41,11 +41,11 @@
 
         <TextView
             android:id="@+id/textView2"
+            style="@style/txtGrayColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
             android:text="@string/all_restaurants"
-            style="@style/txtGrayColor"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -64,12 +64,12 @@
             android:drawablePadding="@dimen/_10sdp"
             android:drawableTint="#66363636"
             android:hint="@string/search"
-            android:maxLines="1"
-            android:textColor="@color/colorGray"
             android:imeOptions="actionSearch"
             android:inputType="text"
+            android:maxLines="1"
             android:paddingVertical="@dimen/_8sdp"
             android:paddingStart="@dimen/_10sdp"
+            android:textColor="@color/colorGray"
             android:textColorHint="#66363636"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_13ssp"
@@ -77,6 +77,54 @@
             app:layout_constraintStart_toStartOf="@+id/imgBack"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
             app:layout_constraintVertical_bias="0" />
+
+        <TextView
+            android:id="@+id/txtFilterTitle"
+            style="@style/txtGrayColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Filter By:"
+            android:textStyle="bold"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/inpSearch"
+            app:layout_constraintTop_toBottomOf="@+id/inpSearch" />
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/txtDelivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:background="@drawable/txt_food_filter"
+            android:drawableEnd="@drawable/round_keyboard_arrow_down_24"
+            android:gravity="center_vertical|start"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            android:text="Delivery Distance"
+            android:textAlignment="viewStart"
+            android:textColor="@color/green_gray_selector"
+            app:layout_constraintBottom_toBottomOf="@+id/txtFilterTitle"
+            app:layout_constraintStart_toEndOf="@+id/txtFilterTitle"
+            app:layout_constraintTop_toTopOf="@+id/txtFilterTitle" />
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/txtRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:background="@drawable/txt_food_filter"
+            android:drawableEnd="@drawable/round_keyboard_arrow_down_24"
+            android:gravity="center_vertical|start"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            android:text="Ratings"
+            android:textAlignment="viewStart"
+            android:textColor="@color/green_gray_selector"
+            app:layout_constraintBottom_toBottomOf="@+id/txtDelivery"
+            app:layout_constraintStart_toEndOf="@+id/txtDelivery"
+            app:layout_constraintTop_toTopOf="@+id/txtDelivery" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recFoodTitle"
@@ -88,18 +136,19 @@
             app:layout_constraintEnd_toEndOf="@+id/inpSearch"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@+id/inpSearch"
-            app:layout_constraintTop_toBottomOf="@+id/inpSearch"
+            app:layout_constraintTop_toBottomOf="@+id/txtDelivery"
             app:spanCount="4"
             tools:listitem="@layout/item_shop_cat" />
 
         <TextView
             android:id="@+id/txtShopCatTitle"
+            style="@style/txtGrayColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
             android:text="@string/all_restaurants"
-            style="@style/txtGrayColor"
             android:textStyle="bold"
+            android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@+id/inpSearch"
@@ -124,8 +173,8 @@
             android:id="@+id/spin_kit"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:visibility="gone"
             android:layout_gravity="center"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

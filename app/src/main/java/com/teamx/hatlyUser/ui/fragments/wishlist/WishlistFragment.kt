@@ -151,7 +151,7 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
                             wishListArraylist.clear()
                             wishListArraylist.addAll(data.docs)
                             hatlyPopularAdapter.notifyDataSetChanged()
-                            Log.d("wishListArraylist", "onViewCreated: ${wishListArraylist}")
+                            Log.d("wishListArraylist", "onViewCreated: ${data.docs[0]}")
                             if (wishListArraylist.isNotEmpty()) {
                                 mViewDataBinding.recWishlist.visibility = View.VISIBLE
                                 mViewDataBinding.textView22545454.visibility = View.GONE
@@ -163,6 +163,7 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding, WishlistViewModel
                         loadingDialog.dismiss()
                         if (isAdded) {
                             mViewDataBinding.root.snackbar(it.message!!)
+                            Log.d("wishListArraylist", "onViewCreated: ${it.message!!}")
                         }
                     }
                 }

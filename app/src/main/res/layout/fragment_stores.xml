@@ -93,6 +93,54 @@
             app:layout_constraintVertical_bias="0" />
 
         <TextView
+            android:id="@+id/txtFilterTitle"
+            style="@style/txtGrayColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Filter By:"
+            android:textStyle="bold"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/inpSearch"
+            app:layout_constraintTop_toBottomOf="@+id/inpSearch" />
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/txtDelivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:background="@drawable/txt_food_filter"
+            android:drawableEnd="@drawable/round_keyboard_arrow_down_24"
+            android:gravity="center_vertical|start"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            android:text="Delivery Distance"
+            android:textAlignment="viewStart"
+            android:textColor="@color/green_gray_selector"
+            app:layout_constraintBottom_toBottomOf="@+id/txtFilterTitle"
+            app:layout_constraintStart_toEndOf="@+id/txtFilterTitle"
+            app:layout_constraintTop_toTopOf="@+id/txtFilterTitle" />
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/txtRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:background="@drawable/txt_food_filter"
+            android:drawableEnd="@drawable/round_keyboard_arrow_down_24"
+            android:gravity="center_vertical|start"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            android:text="Ratings"
+            android:textAlignment="viewStart"
+            android:textColor="@color/green_gray_selector"
+            app:layout_constraintBottom_toBottomOf="@+id/txtDelivery"
+            app:layout_constraintStart_toEndOf="@+id/txtDelivery"
+            app:layout_constraintTop_toTopOf="@+id/txtDelivery" />
+
+        <TextView
             android:id="@+id/txtShopCatTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,7 +151,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@+id/inpSearch"
-            app:layout_constraintTop_toBottomOf="@+id/inpSearch" />
+            app:layout_constraintTop_toBottomOf="@+id/txtDelivery" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recStores"

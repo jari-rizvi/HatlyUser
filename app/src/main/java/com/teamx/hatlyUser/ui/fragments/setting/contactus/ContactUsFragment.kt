@@ -46,7 +46,7 @@ class ContactUsFragment : BaseFragment<FragmentContactusBinding, ContactUsViewMo
 
         mViewDataBinding.txtLogin.setOnClickListener {
             if (isValidate()) {
-                sendEmail("zues@zues.ae", "", "Name: ${mViewDataBinding.inpName.text.toString().trim()}\n\n${mViewDataBinding.inpMessage.text.toString().trim()}")
+                sendEmail("hatlykhalifa@gmail.com", "", "Name: ${mViewDataBinding.inpName.text.toString().trim()}\n\n${mViewDataBinding.inpMessage.text.toString().trim()}")
             }
         }
     }
