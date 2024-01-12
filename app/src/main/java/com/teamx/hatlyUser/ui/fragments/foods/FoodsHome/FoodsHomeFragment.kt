@@ -20,6 +20,8 @@ import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.adapter.FoodHomeAdapter
 import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.adapter.FoodHomeCategoryAdapter
 import com.teamx.hatlyUser.ui.fragments.foods.FoodsHome.models.modelCategory.Doc
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
+import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.bottomsheet.BottomSheetRatDelListener
+import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.bottomsheet.BottomSheetRatingDeliveryFragment
 import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewModel>(),
-    HatlyShopInterface {
+    HatlyShopInterface, BottomSheetRatDelListener {
 
     override val layoutId: Int
         get() = R.layout.fragment_foods_home
@@ -51,6 +53,10 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
 
     private var categoryTitle = ""
 
+    private var isDelivery = true
+
+    private lateinit var bottomSheetAddSearchFragment: BottomSheetRatingDeliveryFragment
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -60,6 +66,40 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
                 exit = R.anim.exit_to_left
                 popEnter = R.anim.nav_default_pop_enter_anim
                 popExit = R.anim.nav_default_pop_exit_anim
+            }
+        }
+
+        mViewDataBinding.txtDelivery.setOnClickListener {
+            bottomSheetAddSearchFragment = BottomSheetRatingDeliveryFragment()
+            bottomSheetAddSearchFragment.setBottomSheetListener(this)
+            if (!bottomSheetAddSearchFragment.isAdded) {
+                val bundle = Bundle()
+                bundle.putBoolean("isDelivery", true)
+                deliverTime?.let { it1 -> bundle.putInt("selectedValue", it1) }
+                Log.d("selectedValue", "onViewCreated: ${deliverTime}")
+                isDelivery = true
+                bottomSheetAddSearchFragment.arguments = bundle
+                bottomSheetAddSearchFragment.show(
+                    parentFragmentManager,
+                    bottomSheetAddSearchFragment.tag
+                )
+            }
+        }
+
+        mViewDataBinding.txtRating.setOnClickListener {
+            bottomSheetAddSearchFragment = BottomSheetRatingDeliveryFragment()
+            bottomSheetAddSearchFragment.setBottomSheetListener(this)
+            if (!bottomSheetAddSearchFragment.isAdded) {
+                val bundle = Bundle()
+                bundle.putBoolean("isDelivery", false)
+                rating?.let { it1 -> bundle.putInt("selectedValue", it1) }
+                Log.d("selectedValue", "onViewCreated: ${rating}")
+                isDelivery = false
+                bottomSheetAddSearchFragment.arguments = bundle
+                bottomSheetAddSearchFragment.show(
+                    parentFragmentManager,
+                    bottomSheetAddSearchFragment.tag
+                )
             }
         }
 
@@ -109,6 +149,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
                     loadingDialog.dismiss()
                     onToSignUpPage()
                 }
+
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -121,7 +162,6 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
                         foodsCategoryArrayList.addAll(data.docs)
                         foodHomeCategoryAdapter.notifyDataSetChanged()
 
-//                        mViewModel.allFoodsShops(1, 10, 0, "", data.docs[0].title)
                     }
                 }
 
@@ -129,14 +169,14 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
                     loadingDialog.dismiss()
                     if (isAdded) {
 
-                    mViewDataBinding.mainRoot.snackbar(it.message!!)
+                        mViewDataBinding.mainRoot.snackbar(it.message!!)
                     }
                 }
             }
         }
 
         if (!mViewModel.allFoodsShopsResponse.hasActiveObservers()) {
-            mViewModel.allFoodsShops(1, 10, 0, "",null)
+            mViewModel.allFoodsShops(1, 10, 0, searchshop, categoryId,deliverTime,rating)
         }
 
         mViewModel.allFoodsShopsResponse.observe(requireActivity()) {
@@ -145,6 +185,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
                     loadingDialog.dismiss()
                     onToSignUpPage()
                 }
+
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -164,7 +205,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
                     loadingDialog.dismiss()
                     if (isAdded) {
 
-                    mViewDataBinding.mainRoot.snackbar(it.message!!)
+                        mViewDataBinding.mainRoot.snackbar(it.message!!)
                     }
                 }
             }
@@ -185,13 +226,9 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
         mViewDataBinding.inpSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 
-                mViewModel.allFoodsShops(
-                    1,
-                    10,
-                    0,
-                    mViewDataBinding.inpSearch.text.toString().trim(),
-                    null
-                )
+                searchshop = mViewDataBinding.inpSearch.text.toString().trim()
+                mViewModel.allFoodsShops(1, 10, 0, searchshop, categoryId,deliverTime,rating)
+
             }
             true
         }
@@ -246,6 +283,9 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
 //
 //    }
 
+    private var categoryId: String? = null
+    private var searchshop = ""
+
     override fun clickCategoryItem(position: Int) {
         foodsCategoryArrayList.forEach { it.itemSelected = false }
         val categoryModel = foodsCategoryArrayList[position]
@@ -253,7 +293,8 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
         mViewDataBinding.txtShopCatTitle.text = "$categoryTitle Restaurants"
         foodsCategoryArrayList[position].itemSelected = true
         foodHomeCategoryAdapter.notifyDataSetChanged()
-        mViewModel.allFoodsShops(1, 10, 0, "", categoryModel._id)
+        categoryId = categoryModel._id
+        mViewModel.allFoodsShops(1, 10, 0, searchshop, categoryId,deliverTime,rating)
     }
 
     override fun clickshopItem(position: Int) {
@@ -265,6 +306,39 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
 
     override fun clickMoreItem(position: Int) {
 
+    }
+
+    private var deliverTime: Int? = null
+    private var rating: Int? = null
+
+    override fun onBottomSheetratDel(value: Int?) {
+        when {
+            isDelivery -> {
+                deliverTime = value
+                if (value == null){
+                    mViewDataBinding.txtDelivery.text = "Delivery Distance"
+                    mViewDataBinding.txtDelivery.isChecked = false
+                    deliverTime = 0
+                    return
+                }
+                mViewDataBinding.txtDelivery.text = "Under $value mins"
+                mViewDataBinding.txtDelivery.isChecked = true
+            }
+
+            else -> {
+                rating = value
+                if (value == null){
+                    mViewDataBinding.txtRating.text = "Ratings"
+                    mViewDataBinding.txtRating.isChecked = false
+                }else{
+                    mViewDataBinding.txtRating.text = "Rating ${value}.0+"
+                    mViewDataBinding.txtRating.isChecked = true
+                }
+
+            }
+        }
+
+        mViewModel.allFoodsShops(1, 10, 0, searchshop, categoryId,deliverTime,rating)
     }
 
 

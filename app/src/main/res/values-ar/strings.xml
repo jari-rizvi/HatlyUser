@@ -221,5 +221,7 @@
     <string name="enter_your_mobile_number">قم بإدخال رقم هاتفك</string>
     <string name="enter_you_email_address">قم بإدخال  البريد الإلكتروني</string>
     <string name="enter_message">كتابة الرسالة</string>
+    <string name="no_favourites_saved">No favourites saved</string>
+    <string name="write">Write...</string>
 
 </resources>

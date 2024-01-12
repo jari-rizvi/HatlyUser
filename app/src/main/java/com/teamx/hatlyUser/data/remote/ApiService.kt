@@ -106,6 +106,8 @@ interface ApiService {
         @Query("search") search: String,
         @Query("offset") offset: Int,
         @Query("type") type: String,
+        @Query("deliveryTime") deliveryTime: Int?,
+        @Query("rating") rating: Int?,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
     ): Response<ModelAllStores>
 
@@ -152,8 +154,10 @@ interface ApiService {
         @Query("page") page: Int,
         @Query("limit") limit: Int,
         @Query("offset") offset: Int,
-        @Query("search") search: String,
+        @Query("search") search: String?,
         @Query("category") id: String?,
+        @Query("deliveryTime") deliveryTime: Int?,
+        @Query("rating") rating: Int?,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
     ): Response<ModelFoodShops>

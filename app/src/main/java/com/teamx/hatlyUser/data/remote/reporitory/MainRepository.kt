@@ -41,8 +41,10 @@ class MainRepository @Inject constructor(
         @Query("limit") limit: Int,
         @Query("search") search: String,
         @Query("offset") offset: Int,
-        @Query("type") type: String
-    ) = apiService.allHealthAndBeautyStores(page, limit, search, offset, type)
+        @Query("type") type: String,
+        @Query("deliveryTime") deliveryTime: Int?,
+        @Query("rating") rating: Int?,
+    ) = apiService.allHealthAndBeautyStores(page, limit, search, offset, type, deliveryTime, rating)
 
     suspend fun categoryShop(
         @Query("shopId") shopId: String,
@@ -72,9 +74,11 @@ class MainRepository @Inject constructor(
         page: Int,
         limit: Int,
         offset: Int,
-        search: String,
-        id: String?
-    ) = apiService.allFoodsShops(page, limit, offset, search, id)
+        search: String?,
+        id: String?,
+        deliveryTime: Int?,
+        rating: Int?,
+    ) = apiService.allFoodsShops(page, limit, offset, search, id,deliveryTime,rating)
 
     suspend fun foodsShopHome(id: String) = apiService.foodsShopHome(id)
     suspend fun favRemove(params: JsonObject) = apiService.favRemove(params)
@@ -111,7 +115,7 @@ class MainRepository @Inject constructor(
         @Query("userId") userId: String?,
         @Query("page") page: Int,
         @Query("limit") limit: Int,
-    ) = apiService.transactionList(userId,page, limit)
+    ) = apiService.transactionList(userId, page, limit)
 
     suspend fun uploadReviewImg(
         @Part images: List<MultipartBody.Part>

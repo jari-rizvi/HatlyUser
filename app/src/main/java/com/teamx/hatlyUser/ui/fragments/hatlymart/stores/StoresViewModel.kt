@@ -26,12 +26,12 @@ class StoresViewModel @Inject constructor(
     val allHealthAndBeautyStoresResponse: LiveData<Resource<ModelAllStores>>
         get() = _allHealthAndBeautyStores
 
-    fun allHealthAndBeautyStores(page: Int, limit: Int, search: String, offset: Int, type: String) {
+    fun allHealthAndBeautyStores(page: Int, limit: Int, search: String, offset: Int, type: String,deliveryTime: Int?, rating: Int?) {
         viewModelScope.launch {
             _allHealthAndBeautyStores.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.allHealthAndBeautyStores(page, limit, search,offset,type).let {
+                    mainRepository.allHealthAndBeautyStores(page, limit, search,offset,type,deliveryTime,rating).let {
                         if (it.isSuccessful) {
                             _allHealthAndBeautyStores.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {

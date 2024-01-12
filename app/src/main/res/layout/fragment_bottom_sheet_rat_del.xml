@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/BottomSheetStyle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/button_radius_corner_top"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delivery Distance"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/_15sdp"
+        android:textColor="#262626"/>
+
+    <TextView
+        android:id="@+id/txtClearAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear all"
+        app:layout_constraintHorizontal_bias="1"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:textColor="@color/colorGreen"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtTitle" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingVertical="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="@+id/txtTitle"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle">
+
+        <RadioButton
+            android:id="@+id/radio10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorGreen"
+            android:drawablePadding="@dimen/_7sdp"
+            android:paddingStart="@dimen/_3sdp"
+            android:text="Under 10 mins"
+            android:textColor="#010101"
+            android:textSize="@dimen/_12ssp" />
+
+        <RadioButton
+            android:id="@+id/radio20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:buttonTint="@color/colorGreen"
+            android:drawablePadding="@dimen/_7sdp"
+            android:paddingStart="@dimen/_3sdp"
+            android:textColor="#010101"
+            android:text="Under 20 mins"
+            android:textSize="@dimen/_12ssp" />
+
+        <RadioButton
+            android:id="@+id/radio30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:buttonTint="@color/colorGreen"
+            android:drawablePadding="@dimen/_7sdp"
+            android:paddingStart="@dimen/_3sdp"
+            android:text="Under 30 mins"
+            android:textColor="#010101"
+            android:textSize="@dimen/_12ssp" />
+
+        <RadioButton
+            android:id="@+id/radio40"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:buttonTint="@color/colorGreen"
+            android:drawablePadding="@dimen/_7sdp"
+            android:paddingStart="@dimen/_3sdp"
+            android:text="Under 40 mins"
+            android:textColor="#010101"
+            android:textSize="@dimen/_12ssp" />
+
+        <RadioButton
+            android:id="@+id/radio50"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:buttonTint="@color/colorGreen"
+            android:drawablePadding="@dimen/_7sdp"
+            android:paddingStart="@dimen/_3sdp"
+            android:text="Under 50 mins"
+            android:textColor="#010101"
+            android:textSize="@dimen/_12ssp" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txtLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:background="@drawable/button_radius_green"
+        android:fontFamily="@font/open_sans_regular"
+        android:paddingVertical="@dimen/_10sdp"
+        android:text="Apply Filter"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_13ssp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/txtClearAll"
+        app:layout_constraintStart_toStartOf="@+id/radioGroup"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

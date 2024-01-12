@@ -15,6 +15,7 @@ import com.teamx.hatlyUser.utils.NetworkHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import retrofit2.http.Query
 import javax.inject.Inject
 
 
@@ -39,7 +40,7 @@ class FoodsHomeViewModel @Inject constructor(
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
                             _allFoodsCategories.postValue(Resource.error(jsonObj.getString("message")))
-                        }else if (it.code() == 401) {
+                        } else if (it.code() == 401) {
                             _allFoodsCategories.postValue(Resource.unAuth("", null))
                         } else {
                             val jsonObj = JSONObject(it.errorBody()!!.charStream().readText())
@@ -57,12 +58,28 @@ class FoodsHomeViewModel @Inject constructor(
     val allFoodsShopsResponse: LiveData<Resource<ModelFoodShops>>
         get() = _allFoodsShops
 
-    fun allFoodsShops(page: Int, limit: Int, offset: Int, search: String, id: String?) {
+    fun allFoodsShops(
+        page: Int,
+        limit: Int,
+        offset: Int,
+        search: String?,
+        id: String?,
+        deliveryTime: Int?,
+        rating: Int?,
+    ) {
         viewModelScope.launch {
             _allFoodsShops.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.allFoodsShops(page, limit, offset, search, id).let {
+                    mainRepository.allFoodsShops(
+                        page,
+                        limit,
+                        offset,
+                        search,
+                        id,
+                        deliveryTime,
+                        rating
+                    ).let {
                         if (it.isSuccessful) {
                             _allFoodsShops.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 422) {
