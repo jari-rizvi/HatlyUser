@@ -176,7 +176,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
         }
 
         if (!mViewModel.allFoodsShopsResponse.hasActiveObservers()) {
-            mViewModel.allFoodsShops(1, 10, 0, searchshop, categoryId,deliverTime,rating)
+            mViewModel.allFoodsShops(1, 10, 0, searchshop, categoryId, deliverTime, rating)
         }
 
         mViewModel.allFoodsShopsResponse.observe(requireActivity()) {
@@ -227,7 +227,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 
                 searchshop = mViewDataBinding.inpSearch.text.toString().trim()
-                mViewModel.allFoodsShops(1, 10, 0, searchshop, categoryId,deliverTime,rating)
+                mViewModel.allFoodsShops(1, 10, 0, searchshop, categoryId, deliverTime, rating)
 
             }
             true
@@ -294,7 +294,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
         foodsCategoryArrayList[position].itemSelected = true
         foodHomeCategoryAdapter.notifyDataSetChanged()
         categoryId = categoryModel._id
-        mViewModel.allFoodsShops(1, 10, 0, searchshop, categoryId,deliverTime,rating)
+        mViewModel.allFoodsShops(1, 10, 0, searchshop, categoryId, deliverTime, rating)
     }
 
     override fun clickshopItem(position: Int) {
@@ -315,22 +315,21 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
         when {
             isDelivery -> {
                 deliverTime = value
-                if (value == null){
+                if (value == null) {
                     mViewDataBinding.txtDelivery.text = "Delivery Distance"
                     mViewDataBinding.txtDelivery.isChecked = false
-                    deliverTime = 0
-                    return
+                } else {
+                    mViewDataBinding.txtDelivery.text = "Under $value mins"
+                    mViewDataBinding.txtDelivery.isChecked = true
                 }
-                mViewDataBinding.txtDelivery.text = "Under $value mins"
-                mViewDataBinding.txtDelivery.isChecked = true
             }
 
             else -> {
                 rating = value
-                if (value == null){
+                if (value == null) {
                     mViewDataBinding.txtRating.text = "Ratings"
                     mViewDataBinding.txtRating.isChecked = false
-                }else{
+                } else {
                     mViewDataBinding.txtRating.text = "Rating ${value}.0+"
                     mViewDataBinding.txtRating.isChecked = true
                 }
@@ -338,7 +337,7 @@ class FoodsHomeFragment : BaseFragment<FragmentFoodsHomeBinding, FoodsHomeViewMo
             }
         }
 
-        mViewModel.allFoodsShops(1, 10, 0, searchshop, categoryId,deliverTime,rating)
+        mViewModel.allFoodsShops(1, 10, 0, searchshop, categoryId, deliverTime, rating)
     }
 
 

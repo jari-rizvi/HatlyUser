@@ -24,7 +24,9 @@ import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class StoresFragment : BaseFragment<com.teamx.hatlyUser.databinding.FragmentStoresBinding, StoresViewModel>(), HatlyShopInterface,
+class StoresFragment :
+    BaseFragment<com.teamx.hatlyUser.databinding.FragmentStoresBinding, StoresViewModel>(),
+    HatlyShopInterface,
     BottomSheetRatDelListener {
 
     override val layoutId: Int
@@ -295,22 +297,21 @@ class StoresFragment : BaseFragment<com.teamx.hatlyUser.databinding.FragmentStor
         when {
             isDelivery -> {
                 deliverTime = value
-                if (value == null){
+                if (value == null) {
                     mViewDataBinding.txtDelivery.text = "Delivery Distance"
                     mViewDataBinding.txtDelivery.isChecked = false
-                    deliverTime = 0
-                    return
+                } else {
+                    mViewDataBinding.txtDelivery.text = "Under $value mins"
+                    mViewDataBinding.txtDelivery.isChecked = true
                 }
-                mViewDataBinding.txtDelivery.text = "Under $value mins"
-                mViewDataBinding.txtDelivery.isChecked = true
             }
 
             else -> {
                 rating = value
-                if (value == null){
+                if (value == null) {
                     mViewDataBinding.txtRating.text = "Ratings"
                     mViewDataBinding.txtRating.isChecked = false
-                }else{
+                } else {
                     mViewDataBinding.txtRating.text = "Rating ${value}.0+"
                     mViewDataBinding.txtRating.isChecked = true
                 }
