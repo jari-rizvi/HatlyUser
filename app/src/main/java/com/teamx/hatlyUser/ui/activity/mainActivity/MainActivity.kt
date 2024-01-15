@@ -318,16 +318,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
 
-                R.id.foodsShopHomeFragment -> {
-                    mViewDataBinding.bottomNav.visibility = View.VISIBLE
-                    mViewDataBinding.fab.visibility = View.VISIBLE
-
-                    mViewDataBinding.bottomNav.menu.getItem(1)?.isChecked = true
-
-                    mViewDataBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-                }
-
-
                 R.id.cartFragment -> {
                     mViewDataBinding.bottomNav.visibility = View.VISIBLE
                     mViewDataBinding.fab.visibility = View.VISIBLE

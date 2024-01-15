@@ -193,13 +193,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
         }
 
+        pushNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+
         Firebase.initialize(requireContext())
         FirebaseApp.initializeApp(requireContext())
         if (!mViewModel.fcmResponse.hasActiveObservers()) {
             getFcmToken()
         }
 
-        pushNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+
 //
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 //            askNotificationPermission()
@@ -221,7 +223,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-//                            mViewDataBinding.mainLayout.snackbar(data.message)
+                            mViewDataBinding.mainLayout.snackbar(data.message)
                         }
                     }
 

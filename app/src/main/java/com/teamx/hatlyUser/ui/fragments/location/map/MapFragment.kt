@@ -225,10 +225,11 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                                     sharedViewModel.setUserData(userData)
                                     sharedViewModel.setlocationmodel(userData.location)
                                 }
-                                if (!alreadyFragmentAdded(R.id.homeFragment) || !alreadyFragmentAdded(R.id.locationFragment)) {
-                                    findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
-                                } else {
+
+                                if (alreadyFragmentAdded(R.id.homeFragment) || alreadyFragmentAdded(R.id.locationFragment)) {
                                     findNavController().popBackStack()
+                                } else {
+                                    findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
                                 }
 //                                findNavController().popBackStack()
 //                                findNavController().navigate(R.id.action_mapFragment_to_homeFragment)

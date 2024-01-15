@@ -133,8 +133,10 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
 //            })
 //        )
 
+        mViewModel.getAlAddress()
+
         if (!mViewModel.getAlAddressResponse.hasActiveObservers()) {
-            mViewModel.getAlAddress()
+
             mViewModel.getAlAddressResponse.observe(requireActivity()) {
                 when (it.status) {
                     Resource.Status.AUTH -> {
