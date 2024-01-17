@@ -201,6 +201,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             inpOtherLabel.visibility = View.VISIBLE
         }
 
+
         if (!mViewModel.createAddressResponse.hasActiveObservers()) {
             mViewModel.createAddressResponse.observe(requireActivity()) {
                 when (it.status) {
