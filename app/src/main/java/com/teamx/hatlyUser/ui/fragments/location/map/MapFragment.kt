@@ -202,6 +202,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         }
 
 
+
         if (!mViewModel.createAddressResponse.hasActiveObservers()) {
             mViewModel.createAddressResponse.observe(requireActivity()) {
                 when (it.status) {
