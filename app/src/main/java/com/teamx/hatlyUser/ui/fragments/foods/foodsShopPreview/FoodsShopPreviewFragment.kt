@@ -21,6 +21,7 @@ import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.adapter.FoodsShop
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Document
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Product
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
+import com.teamx.hatlyUser.utils.DialogHelperClass
 import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,7 +31,7 @@ import org.json.JSONException
 @AndroidEntryPoint
 class FoodsShopPreviewFragment :
     BaseFragment<FragmentFoodsShopPreviewBinding, FoodsShopPreviewViewModel>(),
-    HatlyShopInterface {
+    HatlyShopInterface, DialogHelperClass.Companion.MultiProduct {
 
     override val layoutId: Int
         get() = R.layout.fragment_foods_shop_preview
@@ -188,9 +189,13 @@ class FoodsShopPreviewFragment :
 
                         if (data.shop.isOpen) {
                             mViewDataBinding.txtIsOpen.text = getString(R.string.open_now)
+
                         } else {
                             mViewDataBinding.txtIsOpen.text = getString(R.string.closed)
+                            DialogHelperClass.shopOpen(requireActivity(),this)
                         }
+
+
 
                         shopCategoryArrayList.clear()
                         shopCategoryArrayList.addAll(data.products)
@@ -356,6 +361,10 @@ class FoodsShopPreviewFragment :
         txtIntent.type = "text/plain"
         txtIntent.putExtra(Intent.EXTRA_TEXT, body)
         startActivity(Intent.createChooser(txtIntent, "Share"))
+    }
+
+    override fun prodRemove() {
+        findNavController().popBackStack()
     }
 
 

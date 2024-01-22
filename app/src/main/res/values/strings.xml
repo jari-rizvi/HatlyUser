@@ -229,6 +229,10 @@
     <string name="enter_message">Enter message</string>
     <string name="no_favourites_saved">No favourites saved</string>
     <string name="write">Write...</string>
+    <string name="transaction_detail">Transaction Detail</string>
+    <string name="transaction_id">Transaction ID:</string>
+    <string name="order_type">Order Type</string>
+    <string name="transaction_status">Transaction Status</string>
 
 
 </resources>

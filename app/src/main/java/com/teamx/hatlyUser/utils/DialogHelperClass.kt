@@ -266,5 +266,26 @@ class DialogHelperClass {
             return dialog
         }
 
+        fun shopOpen(context: Context, dialogCallBack: MultiProduct): Dialog {
+            val dialog = Dialog(context)
+            dialog.setContentView(R.layout.shop_open_dialog)
+            dialog.window!!.setLayout(
+                WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT
+            )
+
+            dialog.setCancelable(false)
+            val txtLogin = dialog.findViewById<TextView>(R.id.txtLogin)
+
+            txtLogin.setOnClickListener {
+                dialogCallBack.prodRemove()
+                dialog.dismiss()
+            }
+
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.setCancelable(false)
+            dialog.show()
+            return dialog
+        }
+
     }
 }

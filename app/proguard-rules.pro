@@ -48,3 +48,18 @@
 #-keep public class com.teamx.hatlyUser.dataclasses.ProfileX
 #-keep public class com.teamx.hatlyUser.dataclasses.Customer
 #-keep public class com.teamx.hatlyUser.dataclasses.Product
+
+-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
+
+-keep class com.google.firebase.** { *; }
+-keep class com.google.android.gms.** { *; }
+-dontwarn com.google.firebase.**
+-dontwarn com.google.android.gms.**
+-keep class com.google.maps.** { *; }
+
+# Stripe
+-keep class com.stripe.** { *; }
+-keep interface com.stripe.** { *; }
+-keep enum com.stripe.** { *; }
+-keepattributes SourceFile,LineNumberTable
+

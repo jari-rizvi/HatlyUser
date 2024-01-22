@@ -33,8 +33,6 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
 import com.google.maps.DirectionsApi
 import com.google.maps.GeoApiContext
 import com.google.maps.model.TravelMode
@@ -185,6 +183,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -314,8 +313,8 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 //        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 12f))
 
         // Create a GeoApiContext with your API key
-        val context =
-            GeoApiContext.Builder().apiKey("AIzaSyAnLo0ejCEMH_cPgZaokWej4UdgyIIy5HI").build()
+//        val context = GeoApiContext.Builder().apiKey("AIzaSyAnLo0ejCEMH_cPgZaokWej4UdgyIIy5HI").build()
+        val context = GeoApiContext.Builder().apiKey(getString(R.string.map_key)).build()
 
         // Request directions
         val directions = DirectionsApi.newRequest(context)
@@ -546,7 +545,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
     }
 
     override fun getShopData(trackShopModel: TrackShopModel) {
-        Log.d("onTrackFragment", "getShopData ${trackShopModel}")
+        Log.d("onTrackFragment", "getShopData ${trackShopModel.setting.location.lat}")
 
         if (googleMap != null) {
             CoroutineScope(Dispatchers.Main).launch {

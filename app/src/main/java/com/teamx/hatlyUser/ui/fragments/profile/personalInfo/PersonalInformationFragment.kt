@@ -68,8 +68,10 @@ class PersonalInformationFragment :
                 mViewDataBinding.editText2.setText(it.contact)
             }
 
-            Picasso.get().load(it.profileImage).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500).into(mViewDataBinding.hatlyIcon)
-            imageUrl = it.profileImage
+            Picasso.get().load(it.profileImage).placeholder(R.drawable.hatly_splash_logo_space)
+                .error(R.drawable.hatly_splash_logo_space).resize(500, 500)
+                .into(mViewDataBinding.hatlyIcon)
+            imageUrl = it.profileImage ?: ""
             userName = it.name
         }
 
@@ -121,10 +123,12 @@ class PersonalInformationFragment :
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             if (data.isNotEmpty()) {
-                                Log.d("uploadReviewIm", "onViewCreated: ${data[0]}")
+                                Log.d("uploadReviewIm", "onViewCreated: ${data}")
                                 if (data.isNotEmpty()) {
                                     imageUrl = data[0]
-                                    Picasso.get().load(imageUrl).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500)
+                                    Picasso.get().load(imageUrl)
+                                        .placeholder(R.drawable.hatly_splash_logo_space)
+                                        .error(R.drawable.hatly_splash_logo_space).resize(500, 500)
                                         .into(mViewDataBinding.hatlyIcon)
                                 }
                             }
@@ -158,10 +162,13 @@ class PersonalInformationFragment :
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            Picasso.get().load(data.profileImage).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500)
+                            Picasso.get().load(data.profileImage)
+                                .placeholder(R.drawable.hatly_splash_logo_space)
+                                .error(R.drawable.hatly_splash_logo_space).resize(500, 500)
                                 .into(mViewDataBinding.hatlyIcon)
-                            val userData = PrefHelper.getInstance(requireActivity()).getUserData()
-                            userData!!.name = data.name
+                            val userData = PrefHelper.getInstance(requireActivity()).getUserData()!!
+                            userData.name = data.name
+                            Log.d("uploadReviewIm", "profileImage: ${data}")
                             userData.profileImage = data.profileImage
                             PrefHelper.getInstance(requireActivity()).setUserData(userData)
                             sharedViewModel.setUserData(userData)
@@ -265,7 +272,9 @@ class PersonalInformationFragment :
             val params = JsonObject()
             try {
                 params.addProperty("name", userName)
-                params.addProperty("profileImage", imageUrl)
+                if (imageUrl.isNotEmpty()) {
+                    params.addProperty("profileImage", imageUrl)
+                }
             } catch (e: JSONException) {
                 e.printStackTrace()
             }

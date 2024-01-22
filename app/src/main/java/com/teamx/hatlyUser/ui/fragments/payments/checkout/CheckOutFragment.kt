@@ -884,7 +884,8 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         PaymentConfiguration.init(
             requireActivity().applicationContext,
 //            stripPublicKey
-            "pk_test_51NM8SbAESDqUcVTloKKwPpIdtlkmmm595qL1D8BZHt5hWrKp7GrEaBiRXG6jXZYgtMRR0yk7eD7RzTp0fwyahzDu00xf6h8wvu"
+            getString(R.string.stripe_key)
+//            "pk_test_51NM8SbAESDqUcVTloKKwPpIdtlkmmm595qL1D8BZHt5hWrKp7GrEaBiRXG6jXZYgtMRR0yk7eD7RzTp0fwyahzDu00xf6h8wvu"
         )
 
 
