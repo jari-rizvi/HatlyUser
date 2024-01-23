@@ -73,6 +73,16 @@ object TrackSocketClass {
                 }
             }
 
+            trackSocket?.on("DROP_OFF") { args ->
+                try {
+                    val dropOff = args[0].toString()
+                    getTrackDataCallBack.getDropOff(dropOff)
+                    Log.d("TrackSocketClass", "DROP_OFF ${dropOff}")
+                } catch (e: java.lang.Exception) {
+                    Log.d("TrackSocketClass", "DROP_OFF: ${args[0]}")
+                }
+            }
+
             onListenerEverything(getTrackDataCallBack)
 
 
@@ -255,6 +265,7 @@ object TrackSocketClass {
         fun getRemainingdata(remainingdata: String)
         fun getCurrentStatus(currentStatus: String)
         fun getUpdatedLatLng(latLng: String)
+        fun getDropOff(dropOff: String)
     }
 
 //    interface ReceiveSendMessageCallback {

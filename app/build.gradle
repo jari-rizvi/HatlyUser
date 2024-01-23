@@ -19,8 +19,8 @@ android {
         applicationId "com.teamx.hatlyUser"
         minSdkVersion 23
         targetSdkVersion 33
-        versionCode 6
-        versionName "1.5"
+        versionCode 8
+        versionName "1.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -30,14 +30,15 @@ android {
             resValue "string", "app_name", "InTouch Messenger"
             resValue "string", "stripe_key", "pk_test_51NM8SbAESDqUcVTloKKwPpIdtlkmmm595qL1D8BZHt5hWrKp7GrEaBiRXG6jXZYgtMRR0yk7eD7RzTp0fwyahzDu00xf6h8wvu"
             resValue "string", "map_key", "AIzaSyAnLo0ejCEMH_cPgZaokWej4UdgyIIy5HI"
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         release {
             resValue "string", "app_name", "InTouch Messenger"
-            resValue "string", "stripe_key", "pk_live_51NM8SbAESDqUcVTlFCDzUzYVCCLhos2IgoIJWuzLt7wU1iK3EfJm17MecIKf4mqBzAj9JS3yu9DHUnAeSvImR8so00F1FHx1Ji"
+//            resValue "string", "stripe_key", "pk_live_51NM8SbAESDqUcVTlFCDzUzYVCCLhos2IgoIJWuzLt7wU1iK3EfJm17MecIKf4mqBzAj9JS3yu9DHUnAeSvImR8so00F1FHx1Ji"
+            resValue "string", "stripe_key", "pk_test_51NM8SbAESDqUcVTloKKwPpIdtlkmmm595qL1D8BZHt5hWrKp7GrEaBiRXG6jXZYgtMRR0yk7eD7RzTp0fwyahzDu00xf6h8wvu89io"
             resValue "string", "map_key", "AIzaSyAnLo0ejCEMH_cPgZaokWej4UdgyIIy5HI"
             minifyEnabled true
             shrinkResources true

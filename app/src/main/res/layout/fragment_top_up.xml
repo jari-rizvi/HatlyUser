@@ -162,7 +162,7 @@
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/open_sans_regular"
                 android:gravity="center_vertical"
-                android:text="Change"
+                android:text="@string/change"
                 android:paddingStart="@dimen/_5sdp"
                 android:textColor="@color/colorGreen"
                 android:textSize="@dimen/_11ssp"

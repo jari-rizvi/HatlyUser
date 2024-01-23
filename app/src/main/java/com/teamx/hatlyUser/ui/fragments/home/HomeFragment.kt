@@ -222,9 +222,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
-                        it.data?.let { data ->
-                            mViewDataBinding.mainLayout.snackbar(data.message)
-                        }
+//                        it.data?.let { data ->
+//                            mViewDataBinding.mainLayout.snackbar(data.message)
+//                        }
                     }
 
                     Resource.Status.ERROR -> {

@@ -47,6 +47,73 @@ class BottomSheetRatingDeliveryFragment : BottomSheetDialogFragment() {
         val radio50 = view.findViewById<RadioButton>(R.id.radio50)
         val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
 
+
+
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+
+            val selectedRadioButton =
+                view.findViewById<RadioButton>(checkedId) ?: return@setOnCheckedChangeListener
+
+            // RadioButton ki value nikalen
+//            val selectedValue: String = selectedRadioButton.text.toString()
+
+//            finalValue = when (selectedValue) {
+//                "Under 10 mins" -> 10
+//                "Under 20 mins" -> 20
+//                "Under 30 mins" -> 30
+//                "Under 40 mins" -> 40
+//                "Under 50 mins" -> 50
+//                "Rating 5.0 +" -> 5
+//                "Rating 4.0 +" -> 4
+//                "Rating 3.0 +" -> 3
+//                "Rating 2.0 +" -> 2
+//                "Rating 1.0 +" -> 1
+//                else -> 0
+//            }
+
+            val selectedValue = selectedRadioButton.id
+
+            Log.d("selectedValue", "selectedRadioButton: $selectedValue")
+
+            finalValue = when {
+                selectedValue == R.id.radio10 && isDelivery -> {
+                    10
+                }
+
+                selectedValue == R.id.radio20 && isDelivery -> {
+                    20
+                }
+                selectedValue == R.id.radio30 && isDelivery -> {
+                    30
+                }
+                selectedValue == R.id.radio40 && isDelivery -> {
+                    40
+                }
+                selectedValue == R.id.radio50 && isDelivery -> {
+                    50
+                }
+                selectedValue == R.id.radio10 && !isDelivery -> {
+                    1
+                }
+
+                selectedValue == R.id.radio20 && !isDelivery -> {
+                    2
+                }
+                selectedValue == R.id.radio30 && !isDelivery -> {
+                    3
+                }
+                selectedValue == R.id.radio40 && !isDelivery -> {
+                    4
+                }
+                selectedValue == R.id.radio50 && !isDelivery -> {
+                    5
+                }
+
+                else -> {0}
+            }
+
+        }
+
         val bundle = arguments
         if (bundle != null) {
             isDelivery = bundle.getBoolean("isDelivery", true)
@@ -54,21 +121,21 @@ class BottomSheetRatingDeliveryFragment : BottomSheetDialogFragment() {
 
 
             if (isDelivery) {
-                txtTitle.text = "Delivery Distance"
+                txtTitle.text = getString(R.string.delivery_distance)
 
-                radio10.text = "Under 10 mins"
-                radio20.text = "Under 20 mins"
-                radio30.text = "Under 30 mins"
-                radio40.text = "Under 40 mins"
-                radio50.text = "Under 50 mins"
+                radio10.text = getString(R.string.under_10_mins)
+                radio20.text = getString(R.string.under_20_mins)
+                radio30.text = getString(R.string.under_30_mins)
+                radio40.text = getString(R.string.under_40_mins)
+                radio50.text = getString(R.string.under_50_mins)
             } else {
-                txtTitle.text = "Ratings"
+                txtTitle.text = getString(R.string.ratings)
 
-                radio50.text = "Rating 5.0 +"
-                radio40.text = "Rating 4.0 +"
-                radio30.text = "Rating 3.0 +"
-                radio20.text = "Rating 2.0 +"
-                radio10.text = "Rating 1.0 +"
+                radio50.text = getString(R.string.rating_5_0)
+                radio40.text = getString(R.string.rating_4_0)
+                radio30.text = getString(R.string.rating_3_0)
+                radio20.text = getString(R.string.rating_2_0)
+                radio10.text = getString(R.string.rating_1_0)
             }
 
             radio10.isChecked = false
@@ -80,19 +147,23 @@ class BottomSheetRatingDeliveryFragment : BottomSheetDialogFragment() {
             if (selectedValue != 0) {
 
                 when (selectedValue) {
-                    10,1 -> {
+                    10, 1 -> {
                         radio10.isChecked = true
                     }
-                    20,2 -> {
+
+                    20, 2 -> {
                         radio20.isChecked = true
                     }
-                    30,3 -> {
+
+                    30, 3 -> {
                         radio30.isChecked = true
                     }
-                    40,4 -> {
+
+                    40, 4 -> {
                         radio40.isChecked = true
                     }
-                    50,5 -> {
+
+                    50, 5 -> {
                         radio50.isChecked = true
                     }
                 }
@@ -100,31 +171,6 @@ class BottomSheetRatingDeliveryFragment : BottomSheetDialogFragment() {
         }
 
 
-
-
-        radioGroup.setOnCheckedChangeListener { group, checkedId ->
-
-            val selectedRadioButton =
-                view.findViewById<RadioButton>(checkedId) ?: return@setOnCheckedChangeListener
-
-            // RadioButton ki value nikalen
-            val selectedValue: String = selectedRadioButton.text.toString()
-
-            finalValue = when (selectedValue) {
-                "Under 10 mins" -> 10
-                "Under 20 mins" -> 20
-                "Under 30 mins" -> 30
-                "Under 40 mins" -> 40
-                "Under 50 mins" -> 50
-                "Rating 5.0 +" -> 5
-                "Rating 4.0 +" -> 4
-                "Rating 3.0 +" -> 3
-                "Rating 2.0 +" -> 2
-                "Rating 1.0 +" -> 1
-                else -> 0
-            }
-
-        }
 
         txtLogin.setOnClickListener {
 //            radioGroup.clearCheck()

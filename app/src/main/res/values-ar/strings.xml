@@ -221,12 +221,17 @@
     <string name="enter_your_mobile_number">قم بإدخال رقم هاتفك</string>
     <string name="enter_you_email_address">قم بإدخال  البريد الإلكتروني</string>
     <string name="enter_message">كتابة الرسالة</string>
-    <string name="no_favourites_saved">No favourites saved</string>
-    <string name="write">Write...</string>
 
-    <string name="transaction_detail">Transaction Detail</string>
-    <string name="transaction_id">Transaction ID:</string>
-    <string name="order_type">Order Type</string>
-    <string name="transaction_status">Transaction Status</string>
+<!--    <string name="days_ago">%1$s منذ-&#45;&#45; ايام</string>-->
+<!--    <string name="hours_ago">%1$s منذ -&#45;&#45;ساعات</string>-->
+<!--    <string name="minutes_ago">%1$s منذ -&#45;&#45; دقائق</string>-->
+<!--    <string name="_1_day_ago">منذ يوم</string>-->
+
+    <string name="days_ago"> منذ %1$s ايام</string>
+    <string name="hours_ago"> منذ %1$s ساعات</string>
+    <string name="minutes_ago"> منذ %1$s دقائق</string>
+    <string name="_1_hour_ago">1 hour ago</string>
+    <string name="_1_minute_ago">1 minute ago</string>
+    <string name="_1_day_ago">منذ يوم</string>
 
 </resources>

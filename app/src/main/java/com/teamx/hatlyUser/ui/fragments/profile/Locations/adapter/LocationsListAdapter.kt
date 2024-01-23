@@ -73,7 +73,7 @@ class LocationsListAdapter(
         holder.bind.mainItem.isActivated = arrayData.isDefault
 
         if (arrayData.isDefault) {
-            holder.bind.img2.visibility = View.GONE
+            holder.bind.img2.visibility = View.INVISIBLE
         } else {
             holder.bind.img2.visibility = View.VISIBLE
         }

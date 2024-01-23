@@ -89,7 +89,8 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
     var mapFragment: SupportMapFragment? = null
     private lateinit var googleMap: GoogleMap
 
-    lateinit var origin: LatLng
+    var origin = LatLng(0.0, 0.0)
+    var destination = LatLng(0.0, 0.0)
 
     private var isChatOpen = false
 
@@ -115,15 +116,16 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 
         sharedViewModel.setlocationmodel(userData?.location)
 
-        sharedViewModel.locationmodel.observe(requireActivity()) { locationModel ->
-            Log.d("onTrackFragment", "onViewCreated: ${locationModel.lat} , ${locationModel.lng}")
-            origin = LatLng(locationModel.lat, locationModel.lng)
-        }
+//        sharedViewModel.locationmodel.observe(requireActivity()) { locationModel ->
+//            Log.d("onTrackFragment", "onViewCreated: ${locationModel.lat} , ${locationModel.lng}")
+//
+//            origin = LatLng(locationModel.lat, locationModel.lng)
+//            destination = LatLng(locationModel.lat, locationModel.lng)
+//        }
 
         mapFragment =
             childFragmentManager.findFragmentById(R.id.mapTrackFragment) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
-
 
         val bundle = arguments
 
@@ -549,10 +551,14 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 
         if (googleMap != null) {
             CoroutineScope(Dispatchers.Main).launch {
-                createPollyLine(
-                    origin,
+
+                destination =
                     LatLng(trackShopModel.setting.location.lat, trackShopModel.setting.location.lng)
-                )
+                createPollyLine(origin, destination)
+//                createPollyLine(
+//                    origin,
+//                    LatLng(trackShopModel.setting.location.lat, trackShopModel.setting.location.lng)
+//                )
             }
         }
 
@@ -564,7 +570,9 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
             isChatOpen = true
             mViewDataBinding.textView2224.text = trackRiderModel.name
             phoneNumber = trackRiderModel.contact
-            Picasso.get().load(trackRiderModel.profileImage).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500)
+            Picasso.get().load(trackRiderModel.profileImage)
+                .placeholder(R.drawable.hatly_splash_logo_space)
+                .error(R.drawable.hatly_splash_logo_space).resize(500, 500)
                 .into(mViewDataBinding.hatlyIcon)
         }
     }
@@ -669,8 +677,24 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
         if (googleMap != null) {
             CoroutineScope(Dispatchers.Main).launch {
                 Log.d("onTrackFragment", "latLng ${latLng}")
-                val destination = LatLng(lat, lng)
+                destination = LatLng(lat, lng)
 //            origin = LatLng(24.938129106790235, 66.9942872929244)
+                createPollyLine(origin, destination)
+            }
+        }
+
+    }
+
+    override fun getDropOff(dropOff: String) {
+        val dropOffJson = JSONObject(dropOff)
+        val address = dropOffJson.getString("address")
+        val lat = dropOffJson.getString("lat").toDouble()
+        val lng = dropOffJson.getString("lng").toDouble()
+
+        CoroutineScope(Dispatchers.Main).launch {
+            mViewDataBinding.textView222954.text = address
+            origin = LatLng(lat, lng)
+            if (destination != null) {
                 createPollyLine(origin, destination)
             }
         }

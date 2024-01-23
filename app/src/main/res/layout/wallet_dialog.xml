@@ -47,19 +47,6 @@
                 android:id="@+id/txtTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Top-up Success"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hatlyIcon" />
-
-            <TextView
-                android:id="@+id/txtTitle1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/top_up_success"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16ssp"

@@ -47,12 +47,18 @@ class TimeFormatter {
                     convertNumtoArabic(localDateTime.format(DateTimeFormatter.ofPattern(datePattern)), datePattern)
                 }
 
-                duration.toDays() > 1 -> "${convertNumtoArabic(duration.toDays())} days ago"
-                duration.toDays() == 1L -> "1 day ago"
-                duration.toHours() > 1 -> "${convertNumtoArabic(duration.toHours())} hours ago"
-                duration.toHours() == 1L -> "1 hour ago"
-                duration.toMinutes() > 1 -> "${convertNumtoArabic(duration.toMinutes())} minutes ago"
-                duration.toMinutes() == 1L -> "1 minute ago"
+                duration.toDays() > 1 -> context.getString(R.string.days_ago, convertNumtoArabic(duration.toDays()))
+                duration.toDays() == 1L -> context.getString(R.string._1_day_ago)
+                duration.toHours() > 1 -> context.getString(
+                    R.string.hours_ago,
+                    convertNumtoArabic(duration.toHours())
+                )
+                duration.toHours() == 1L -> context.getString(R.string._1_hour_ago)
+                duration.toMinutes() > 1 -> context.getString(
+                    R.string.minutes_ago,
+                    convertNumtoArabic(duration.toMinutes())
+                )
+                duration.toMinutes() == 1L -> context.getString(R.string._1_minute_ago)
                 else -> context.getString(R.string.just_now)
             }
         }

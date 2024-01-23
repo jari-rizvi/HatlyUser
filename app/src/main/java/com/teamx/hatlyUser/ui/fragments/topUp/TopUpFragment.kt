@@ -64,7 +64,7 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding, TopUpModel>(),
             amount = mViewDataBinding.userEmail.text.toString()
 
             if (amount.isEmpty()) {
-                mViewDataBinding.root.snackbar("Enter Amount")
+                mViewDataBinding.root.snackbar(getString(R.string.enter_amount))
                 return@setOnClickListener
             }
             params.addProperty("amount", amount.toInt())

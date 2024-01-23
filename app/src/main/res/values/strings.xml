@@ -233,6 +233,29 @@
     <string name="transaction_id">Transaction ID:</string>
     <string name="order_type">Order Type</string>
     <string name="transaction_status">Transaction Status</string>
+    <string name="delivery_distance">Delivery Distance</string>
+    <string name="clear_all">Clear all</string>
+    <string name="apply_filter">Apply Filter</string>
+    <string name="ratings">Ratings</string>
+    <string name="under_10_mins">Under 10 mins</string>
+    <string name="under_20_mins">Under 20 mins</string>
+    <string name="under_30_mins">Under 30 mins</string>
+    <string name="under_40_mins">Under 40 mins</string>
+    <string name="under_50_mins">Under 50 mins</string>
+    <string name="rating_5_0">Rating 5.0 +</string>
+    <string name="rating_4_0">Rating 4.0 +</string>
+    <string name="rating_3_0">Rating 3.0 +</string>
+    <string name="rating_2_0">Rating 2.0 +</string>
+    <string name="rating_1_0">Rating 1.0 +</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="change">Change</string>
+
+    <string name="days_ago">%1$s days ago</string>
+    <string name="hours_ago">%1$s hours ago</string>
+    <string name="minutes_ago">%1$s minutes ago</string>
+    <string name="_1_hour_ago">1 hour ago</string>
+    <string name="_1_minute_ago">1 minute ago</string>
+    <string name="_1_day_ago">1 day ago</string>
 
 
 </resources>

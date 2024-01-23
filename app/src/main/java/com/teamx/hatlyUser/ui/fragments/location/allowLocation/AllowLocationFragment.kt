@@ -45,10 +45,6 @@ class AllowLocationFragment : BaseFragment<FragmentAllowLocationBinding, LoginVi
             }
         }
 
-        mViewDataBinding.imgBack.setOnClickListener {
-            requireActivity().finish()
-        }
-
 //        mViewDataBinding.txtEnterLocaion.setOnClickListener {
 //            findNavController().navigate(R.id.action_allowLocationocationFragment_to_homeFragment)
 //        }

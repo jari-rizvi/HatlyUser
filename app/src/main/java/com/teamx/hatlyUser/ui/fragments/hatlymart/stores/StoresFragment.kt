@@ -72,7 +72,6 @@ class StoresFragment :
                 val bundle = Bundle()
                 bundle.putBoolean("isDelivery", true)
                 deliverTime?.let { it1 -> bundle.putInt("selectedValue", it1) }
-                Log.d("selectedValue", "onViewCreated: ${deliverTime}")
                 isDelivery = true
                 bottomSheetAddSearchFragment.arguments = bundle
                 bottomSheetAddSearchFragment.show(
@@ -89,7 +88,6 @@ class StoresFragment :
                 val bundle = Bundle()
                 bundle.putBoolean("isDelivery", false)
                 rating?.let { it1 -> bundle.putInt("selectedValue", it1) }
-                Log.d("selectedValue", "onViewCreated: ${rating}")
                 isDelivery = false
                 bottomSheetAddSearchFragment.arguments = bundle
                 bottomSheetAddSearchFragment.show(
@@ -294,10 +292,12 @@ class StoresFragment :
     private var searchshop = ""
     override fun onBottomSheetratDel(value: Int?) {
 
+        Log.d("onBottomSheetratDel", "onBottomSheetratDel: $value")
+
         when {
             isDelivery -> {
                 deliverTime = value
-                if (value == null) {
+                if (value == null || value == 0) {
                     mViewDataBinding.txtDelivery.text = "Delivery Distance"
                     mViewDataBinding.txtDelivery.isChecked = false
                 } else {
@@ -308,7 +308,7 @@ class StoresFragment :
 
             else -> {
                 rating = value
-                if (value == null) {
+                if (value == null || value == 0) {
                     mViewDataBinding.txtRating.text = "Ratings"
                     mViewDataBinding.txtRating.isChecked = false
                 } else {
