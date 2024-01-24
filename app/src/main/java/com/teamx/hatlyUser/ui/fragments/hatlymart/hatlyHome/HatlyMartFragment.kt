@@ -184,6 +184,7 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                     loadingDialog.dismiss()
                     onToSignUpPage()
                 }
+
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -237,6 +238,7 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                     loadingDialog.dismiss()
                     onToSignUpPage()
                 }
+
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -261,13 +263,14 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
         })
 
 
-        if (!mViewModel.addToCartResponse.hasActiveObservers()) {
+//        if (!mViewModel.addToCartResponse.hasActiveObservers()) {
             mViewModel.addToCartResponse.observe(requireActivity()) {
                 when (it.status) {
                     Resource.Status.AUTH -> {
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -277,8 +280,10 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                         it.data?.let { data ->
                             if (data.success) {
                                 if (isAddToCartRecommend) {
-                                    healthDetailPopularArraylist[addToCartPosition].cartItemId = data.cartItemId
-                                    healthDetailPopularArraylist[addToCartPosition].cartExistence = true
+                                    healthDetailPopularArraylist[addToCartPosition].cartItemId =
+                                        data.cartItemId
+                                    healthDetailPopularArraylist[addToCartPosition].cartExistence =
+                                        true
                                     healthDetailPopularArraylist[addToCartPosition].cartQuantity = 1
                                     hatlyPopularAdapter.notifyItemChanged(addToCartPosition)
                                 } else {
@@ -293,17 +298,17 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
                         if (isAdded) {
-
                             if (it.message == "Can not add products from multiple shops") {
                                 DialogHelperClass.MultiProductDialog(requireContext(), this)
                                 Log.d("addToCartResponse", "addToCart: ${it.message!!}")
+                            } else {
+                                mViewDataBinding.root.snackbar(it.message!!)
                             }
                         }
                     }
                 }
             }
-        }
-
+//        }
 
 
         val productLayoutManager =
@@ -319,6 +324,7 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -341,7 +347,6 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                 }
             }
         }
-
 
 
     }
@@ -401,7 +406,7 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
             isAddToCartRecommend = true
             addToCartPosition = position
             mViewModel.addToCart(params)
-        }else{
+        } else {
             val bundle = Bundle()
             bundle.putString("_id", prodModel._id)
             bundle.putString("name", storeName)
@@ -420,12 +425,20 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 
     override fun updateQuantity(position: Int, quantity: Int) {
 
+        if (quantity > healthDetailPopularArraylist[position].quantity) {
+            if (isAdded) {
+
+                mViewDataBinding.root.snackbar("out of stock")
+            }
+            return
+        }
 
         if (quantity > 0) {
             handlerQty.removeCallbacksAndMessages(null)
             if (!actionStack.contains(position)) {
                 actionStack.push(position)
             }
+            healthDetailPopularArraylist[position]
             healthDetailPopularArraylist[position].cartQuantity = quantity
             hatlyPopularAdapter.notifyItemChanged(position)
 
@@ -441,45 +454,50 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
         handlerQty.postDelayed({
             if (actionStack.isNotEmpty()) {
                 val cartmodel = healthDetailPopularArraylist[actionStack.pop()]
+                Log.d("updateQtyResponse", "updateQtyResponse: ${cartmodel.cartQuantity}")
                 params.addProperty("id", cartmodel.cartItemId)
                 params.addProperty("quantity", cartmodel.cartQuantity)
                 mViewModel.updateCartItem(params)
 
-                mViewModel.updateCartItemResponse.observe(requireActivity()) {
-                    when (it.status) {
-                        Resource.Status.AUTH -> {
-                            loadingDialog.dismiss()
-                            onToSignUpPage()
-                        }
-                        Resource.Status.LOADING -> {
-                            loadingDialog.show()
-                        }
-
-                        Resource.Status.SUCCESS -> {
-                            loadingDialog.dismiss()
-                            it.data?.let { data ->
-
-                                if (actionStack.isNotEmpty()) {
-                                    val cartmodel1 = healthDetailPopularArraylist[actionStack.pop()]
-                                    params.addProperty("id", cartmodel1.cartItemId)
-                                    params.addProperty("quantity", cartmodel1.cartQuantity)
-                                    mViewModel.updateCartItem(params)
-                                } else {
-//                                    layoutUpdate(data)
-                                }
+                if (!mViewModel.updateCartItemResponse.hasActiveObservers()){
+                    mViewModel.updateCartItemResponse.observe(requireActivity()) {
+                        when (it.status) {
+                            Resource.Status.AUTH -> {
+                                loadingDialog.dismiss()
+                                onToSignUpPage()
                             }
 
-                        }
+                            Resource.Status.LOADING -> {
+                                loadingDialog.show()
+                            }
 
-                        Resource.Status.ERROR -> {
-                            loadingDialog.dismiss()
-                            if (isAdded) {
+                            Resource.Status.SUCCESS -> {
+                                loadingDialog.dismiss()
+                                it.data?.let { data ->
 
-                                mViewDataBinding.root.snackbar(it.message!!)
+                                    Log.d("updateCartItemResponse", "updateQtyResponse: ${data}")
+
+//                                if (actionStack.isNotEmpty()) {
+//                                    val cartmodel1 = healthDetailPopularArraylist[actionStack.pop()]
+//                                    params.addProperty("id", cartmodel1.cartItemId)
+//                                    params.addProperty("quantity", cartmodel1.cartQuantity)
+//                                    mViewModel.updateCartItem(params)
+//                                }
+                                }
+
+                            }
+
+                            Resource.Status.ERROR -> {
+                                loadingDialog.dismiss()
+                                if (isAdded) {
+
+                                    mViewDataBinding.root.snackbar(it.message!!)
+                                }
                             }
                         }
                     }
                 }
+
             }
 
         }, debounceDelayMillis.toLong())
@@ -489,8 +507,6 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
     override fun prodRemove() {
         mViewModel.emptyCart()
     }
-
-
 
 
 }

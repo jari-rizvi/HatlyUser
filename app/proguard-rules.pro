@@ -58,8 +58,39 @@
 -keep class com.google.maps.** { *; }
 
 # Stripe
--keep class com.stripe.** { *; }
--keep interface com.stripe.** { *; }
--keep enum com.stripe.** { *; }
--keepattributes SourceFile,LineNumberTable
+-keep class com.stripe.android.** { *; }
+-keepclassmembers class com.stripe.android.** { *; }
+-dontwarn com.stripe.android.**
+
+# Gson
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class com.google.gson.stream.** { *; }
+
+# OkHttp
+-dontwarn okhttp3.**
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+
+# Okio
+-dontwarn okio.**
+-keep class okio.** { *; }
+
+# Retrofit
+-keep class retrofit.** { *; }
+-keepclasseswithmembers class * {
+    @retrofit2.http.* <methods>;
+}
+
+# Logging
+-keepattributes Exceptions
+-keepattributes InnerClasses
+-keepattributes Signature
+-dontwarn org.slf4j.**
+-keep class org.slf4j.** { *; }
+
+# Other
+-keep class com.google.android.gms.** { *; }
+-keep class com.google.firebase.** { *; }
+
 
