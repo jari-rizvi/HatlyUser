@@ -127,17 +127,17 @@ class CreatePasswordFragment :
 
     private fun isValidate(): Boolean {
         if (mViewDataBinding.userNew.text.toString().trim().isEmpty()) {
-            mViewDataBinding.root.snackbar("Enter password")
+            mViewDataBinding.root.snackbar(getString(R.string.enter_password))
             return false
         }
         if (mViewDataBinding.userConfirmPass.text.toString().trim().isEmpty()) {
-            mViewDataBinding.root.snackbar("Enter confirm password")
+            mViewDataBinding.root.snackbar(getString(R.string.enter_confirm_password))
             return false
         }
         if (mViewDataBinding.userNew.text.toString()
                 .trim() != mViewDataBinding.userConfirmPass.text.toString().trim()
         ) {
-            mViewDataBinding.root.snackbar("Password not matched")
+            mViewDataBinding.root.snackbar(getString(R.string.password_not_matched))
             return false
         }
         return true

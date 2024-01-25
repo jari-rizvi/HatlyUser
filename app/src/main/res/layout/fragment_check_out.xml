@@ -41,11 +41,11 @@
 
         <TextView
             android:id="@+id/textView2"
+            style="@style/txtGrayColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
             android:text="@string/checkout"
-            style="@style/txtGrayColor"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -262,7 +262,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/input_auth_field"
                     android:backgroundTint="@color/white">
 
@@ -283,8 +282,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/open_sans_regular"
                         android:text="@string/payment_method"
-                        android:textColor="@color/colorRed"
                         android:textAlignment="viewStart"
+                        android:textColor="@color/colorRed"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/imgPaymentMethod"
@@ -320,11 +319,11 @@
                             android:layout_height="wrap_content"
                             android:buttonTint="@color/colorGreen"
                             android:checked="true"
-                            android:textColor="#010101"
                             android:drawableStart="@drawable/cash"
                             android:drawablePadding="@dimen/_7sdp"
                             android:paddingStart="@dimen/_3sdp"
                             android:text="@string/cash"
+                            android:textColor="#010101"
                             android:textSize="@dimen/_12ssp" />
 
                         <RadioButton
@@ -333,25 +332,26 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:buttonTint="@color/colorGreen"
-                            android:visibility="gone"
                             android:drawableStart="@drawable/paypal"
                             android:drawablePadding="@dimen/_7sdp"
                             android:paddingStart="@dimen/_3sdp"
                             android:text="@string/paypal"
-                            android:textSize="@dimen/_12ssp" />
+                            android:textSize="@dimen/_12ssp"
+                            android:visibility="gone" />
 
                         <RadioButton
                             android:id="@+id/radioOnline"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
+                            android:layout_gravity="center_vertical|start"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:buttonTint="@color/colorGreen"
                             android:drawableStart="@drawable/stripe"
                             android:drawablePadding="@dimen/_7sdp"
                             android:paddingStart="@dimen/_3sdp"
+                            android:text="Visa"
+                            android:textAlignment="viewStart"
                             android:textColor="#010101"
-                            android:text="@string/stripe_payment"
                             android:textSize="@dimen/_12ssp" />
                     </RadioGroup>
 
@@ -377,7 +377,7 @@
                         android:id="@+id/radioGroupStripe"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginVertical="@dimen/_10sdp"
                         android:background="@drawable/button_radius_corner"
                         android:paddingVertical="@dimen/_5sdp"
                         android:visibility="gone"
@@ -622,15 +622,40 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <CheckBox
-                    android:id="@+id/checkBox"
-                    android:layout_width="wrap_content"
+<!--                <CheckBox-->
+<!--                    android:id="@+id/checkBox"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginHorizontal="@dimen/_10sdp"-->
+<!--                    android:layout_marginTop="@dimen/_5sdp"-->
+<!--                    android:buttonTint="@color/remember_me_selector_color"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"/>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    style="@style/txtGrayColor"
-                    android:buttonTint="@color/remember_me_selector_color"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:buttonTint="@color/remember_me_selector_color"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtCheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        style="@style/txtGrayColor"
+                        android:gravity="center_vertical" />
+
+                </LinearLayout>
 
 <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
 <!--                    android:layout_width="match_parent"-->

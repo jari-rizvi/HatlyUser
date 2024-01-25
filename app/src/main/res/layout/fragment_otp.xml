@@ -92,8 +92,8 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2"
             app:layout_constraintVertical_bias="0.05"
             app:lineWidth="2dp"
-            app:lineColor="#4D262626"
             app:viewType="line" />
+
 
         <TextView
             android:id="@+id/txtVerify"

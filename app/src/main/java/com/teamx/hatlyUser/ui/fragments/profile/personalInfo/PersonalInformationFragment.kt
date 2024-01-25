@@ -173,7 +173,7 @@ class PersonalInformationFragment :
                             PrefHelper.getInstance(requireActivity()).setUserData(userData)
                             sharedViewModel.setUserData(userData)
                             if (isAdded) {
-                                mViewDataBinding.root.snackbar("Profile updated")
+                                mViewDataBinding.root.snackbar(getString(R.string.profile_updated))
                             }
                             findNavController().popBackStack()
                         }
@@ -241,7 +241,7 @@ class PersonalInformationFragment :
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             if (isAdded) {
-                                mViewDataBinding.root.snackbar("Number updated")
+                                mViewDataBinding.root.snackbar(getString(R.string.number_updated))
                             }
                             val userData = PrefHelper.getInstance(requireActivity()).getUserData()
                             userData!!.contact = contact
@@ -281,7 +281,7 @@ class PersonalInformationFragment :
 
             mViewModel.updateProfile(params)
         } else {
-            mViewDataBinding.root.snackbar("Enter Username")
+            mViewDataBinding.root.snackbar(getString(R.string.enter_username))
         }
     }
 

@@ -235,7 +235,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                                 locationPosition,
                                 getAddressArray.size - locationPosition
                             )
-                            mViewDataBinding.root.snackbar("Deleted")
+                            mViewDataBinding.root.snackbar(getString(R.string.deleted))
                         }
                     }
 

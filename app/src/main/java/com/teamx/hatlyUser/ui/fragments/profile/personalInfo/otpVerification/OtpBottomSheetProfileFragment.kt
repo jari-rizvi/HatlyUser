@@ -48,7 +48,7 @@ class OtpBottomSheetProfileFragment(val profileOtpInterface: ProfileOtpInterface
                 dismiss()
             }else{
                 if (isAdded) {
-                    mainLayout.snackbar("Enter otp code!")
+                    mainLayout.snackbar(getString(R.string.enter_otp))
                 }
             }
         }

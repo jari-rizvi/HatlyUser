@@ -45,7 +45,9 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
     private lateinit var homeSearchTitleAdapter: HomeSearchTitleAdapter
     private lateinit var homeSearchRecentAdapter: HomeRecentSearchAdapter
 
-    private var categoryStr = "resturant"
+//    private var categoryStr = ""
+
+    var categoryStr: String? = null
     private var typeStr = "item"
     private var categoryPosition = 0
 
@@ -74,6 +76,7 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
         homeSearchArrayList = ArrayList()
 
         categoryArray.clear()
+        categoryArray.add(FcmModel("All", false))
         categoryArray.add(FcmModel("Food", false))
         categoryArray.add(FcmModel("Grocery", false))
         categoryArray.add(FcmModel("Health & beauty", false))
@@ -141,6 +144,9 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
 
         mViewDataBinding.inpSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
+                clickcategory(0)
+                categoryStr = null
                 performSearch()
             }
             true
@@ -243,6 +249,10 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
         categoryPosition = position
 
         when (categoryArray[position].message) {
+            "All" -> {
+                categoryStr = null
+            }
+
             "Food" -> {
                 categoryStr = "resturant"
             }

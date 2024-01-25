@@ -6,7 +6,6 @@ import androidx.annotation.Keep
 data class TrackRiderModel(
     val __v: Int,
     val _id: String,
-    val cart: List<Any>,
     val contact: String,
     val createdAt: String,
     val deviceData: String,

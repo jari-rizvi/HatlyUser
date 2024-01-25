@@ -141,7 +141,7 @@ class PaymentMethodFragment : BaseFragment<FragmentPaymentMethodBinding, Payment
                                 position,
                                 credCardsArrayList.size - position
                             )
-                            mViewDataBinding.root.snackbar("Card Detach")
+                            mViewDataBinding.root.snackbar(getString(R.string.card_detach))
                         }
                     }
 

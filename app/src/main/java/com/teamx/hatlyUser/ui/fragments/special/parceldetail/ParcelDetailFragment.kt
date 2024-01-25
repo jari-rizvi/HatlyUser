@@ -288,7 +288,7 @@ class ParcelDetailFragment : BaseFragment<FragmentParcelDetailBinding, ParcelDet
         }
 
         if (parcelQuantity == 0) {
-            mViewDataBinding.root.snackbar("Enter Quantity")
+            mViewDataBinding.root.snackbar(getString(R.string.enter_quantity))
             return false
         }
         return true

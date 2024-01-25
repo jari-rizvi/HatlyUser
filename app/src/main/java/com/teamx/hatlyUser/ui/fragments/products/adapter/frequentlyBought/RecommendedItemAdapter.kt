@@ -91,6 +91,10 @@ class RecommendedItemAdapter(
 
         Picasso.get().load(arrayData.images[0]).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500).into(holder.bind.imgShop)
 
+        if (arrayData.quantity == 0){
+            holder.bind.stockLayout.visibility = View.VISIBLE
+            holder.bind.txtTitle54.visibility = View.VISIBLE
+        }
 
         if (arrayData.cartExistence) {
             holder.bind.imgAdd.visibility = View.GONE

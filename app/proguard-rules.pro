@@ -58,9 +58,15 @@
 -keep class com.google.maps.** { *; }
 
 # Stripe
--keep class com.stripe.android.** { *; }
--keepclassmembers class com.stripe.android.** { *; }
+-dontwarn org.conscrypt.**
+-dontwarn org.bouncycastle.**
+-dontwarn org.openjsse.**
+-dontwarn com.cardinalcommerce.**
 -dontwarn com.stripe.android.**
+
+-keep class com.crashlytics.** { *; }
+-keep class com.crashlytics.android.**
+-keep class com.stripe.** { *; }
 
 # Gson
 -keepattributes Signature
@@ -89,8 +95,13 @@
 -dontwarn org.slf4j.**
 -keep class org.slf4j.** { *; }
 
+#Handle
+-keep class android.os.Handler { *; }
+
 # Other
 -keep class com.google.android.gms.** { *; }
 -keep class com.google.firebase.** { *; }
+
+-keep class com.teamx.hatlyUser.ui.fragments.track.TrackFragment.** { *; }
 
 

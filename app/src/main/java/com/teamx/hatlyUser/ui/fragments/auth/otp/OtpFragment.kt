@@ -180,7 +180,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
                         it.data?.let { data ->
                             if (data.success) {
                                 timerStart()
-                                mViewDataBinding.root.snackbar("Otp resend")
+                                mViewDataBinding.root.snackbar(getString(R.string.otp_resend))
                             }
                         }
                     }
@@ -222,7 +222,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, OtpViewModel>() {
 
     private fun isValidate(): Boolean {
         if (mViewDataBinding.pinView.text.toString().trim().isEmpty()) {
-            mViewDataBinding.root.snackbar("Enter Otp")
+            mViewDataBinding.root.snackbar(getString(R.string.enter_otp))
             return false
         }
         return true

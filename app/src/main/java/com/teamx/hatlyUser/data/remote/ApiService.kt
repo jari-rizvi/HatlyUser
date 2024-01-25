@@ -18,6 +18,7 @@ import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.categoryModel.
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproductmodel.ModelPopularProducts
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.ModelAllStores
 import com.teamx.hatlyUser.ui.fragments.home.model.FcmModel
+import com.teamx.hatlyUser.ui.fragments.home.settingModel.SettingAdmin
 import com.teamx.hatlyUser.ui.fragments.homeSearch.model.ModelHomeSearch
 import com.teamx.hatlyUser.ui.fragments.location.map.modelDefaultAddress.ModelDefaultAddress
 import com.teamx.hatlyUser.ui.fragments.location.map.models.CreateAddressModel
@@ -66,6 +67,11 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
     ): Response<FcmModel>
 
+    @GET(NetworkCallPoints.SETTING_ADMIN)
+    suspend fun settingAdmin(
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
+    ): Response<SettingAdmin>
+
     @POST(NetworkCallPoints.GUEST_USER)
     suspend fun guest(
         @Body params: JsonObject?
@@ -74,7 +80,7 @@ interface ApiService {
     @GET(NetworkCallPoints.HOME_SEARCH)
     suspend fun homeSearch(
         @Query("search") search: String,
-        @Query("category") category: String,
+        @Query("category") category: String?,
         @Query("type") type: String,
         @Query("limit") limit: Int,
         @Query("page") page: Int,

@@ -89,7 +89,7 @@
                 android:fontFamily="@font/open_sans_regular"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:paddingVertical="@dimen/_10sdp"
-                android:text="@string/remove"
+                android:text="@string/yes"
                 android:textAlignment="center"
                 android:textColor="@color/colorGreen"
                 android:layout_marginTop="@dimen/_10sdp"

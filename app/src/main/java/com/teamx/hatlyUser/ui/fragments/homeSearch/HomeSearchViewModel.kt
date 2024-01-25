@@ -32,7 +32,7 @@ class HomeSearchViewModel @Inject constructor(
 
     fun homeSearch(
         search: String,
-        category: String,
+        category: String?,
         type: String,
         limit: Int,
         page: Int,

@@ -150,8 +150,8 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/0e2e8d813b80536000dff942aef0aad8/transformed/sqlite-2.2.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/a609622c7c1ec98e9838cb9a70908c08/transformed/core-runtime-2.2.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.2.0/5e1b8b81dfd5f52c56a8d53b18ca759c19a301f3/core-common-2.2.0.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/ff06f766b8a4513a790a2c3badb8ca21/transformed/exifinterface-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/dd4cb83b01dfa9c780bd64dfc84f4477/transformed/interpolator-1.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/ff06f766b8a4513a790a2c3badb8ca21/transformed/exifinterface-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/845d400dfaea2eb0c9c0c2bea9e5d19f/transformed/jetified-transport-backend-cct-3.1.8-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/dd4425e4931d41484eb018002024b14b/transformed/jetified-transport-runtime-3.1.8-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/34a53057f4945d2bd0632ce483aa5135/transformed/jetified-transport-api-3.0.0-api.jar</arg>

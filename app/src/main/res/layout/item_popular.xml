@@ -10,8 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="@dimen/_130sdp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginHorizontal="@dimen/_5sdp">
+        android:layout_marginHorizontal="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp">
 
         <ImageView
             android:id="@+id/imgShop"
@@ -27,6 +27,43 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0" />
 
+
+        <LinearLayout
+            android:id="@+id/stockLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0.7"
+            android:background="@drawable/button_radius_corner"
+            android:backgroundTint="#FFFFFF"
+            android:clipToOutline="true"
+            android:visibility="gone"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@+id/imgShop"
+            app:layout_constraintEnd_toEndOf="@+id/imgShop"
+            app:layout_constraintStart_toStartOf="@+id/imgShop"
+            app:layout_constraintTop_toTopOf="@+id/imgShop"
+            android:orientation="horizontal" />
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/txtTitle54"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity=""
+            android:background="@drawable/txt_shop_category"
+            android:checked="true"
+            android:fontFamily="@font/open_sans_regular"
+            android:paddingHorizontal="@dimen/_6sdp"
+            android:visibility="gone"
+            android:paddingVertical="@dimen/_3sdp"
+            android:text="@string/out_of_stock"
+            android:textColor="@color/selector_one_category"
+            android:textSize="@dimen/_8ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imgShop"
+            app:layout_constraintEnd_toEndOf="@+id/imgShop"
+            app:layout_constraintStart_toStartOf="@+id/imgShop"
+            app:layout_constraintTop_toTopOf="@+id/imgShop" />
+
         <ImageView
             android:id="@+id/imgAdd"
             android:layout_width="@dimen/_35sdp"
@@ -34,40 +71,40 @@
             android:background="@drawable/button_radius_corner"
             android:backgroundTint="@color/white"
             android:clipToOutline="true"
-            android:padding="@dimen/_5sdp"
             android:elevation="@dimen/_5sdp"
+            android:padding="@dimen/_5sdp"
             android:scaleType="fitXY"
             android:src="@drawable/round_add_24"
-            app:layout_constraintVertical_bias="0.9"
-            app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintBottom_toBottomOf="@+id/imgShop"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.9" />
 
         <LinearLayout
             android:id="@+id/layoutQty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintVertical_bias="1"
-            app:layout_constraintHorizontal_bias="0.9"
-            app:layout_constraintBottom_toBottomOf="@+id/imgShop"
-            app:layout_constraintEnd_toEndOf="parent"
             android:orientation="horizontal"
             android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/imgShop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1">
 
             <ImageView
                 android:id="@+id/imgIncreament"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
+                android:layout_margin="@dimen/_5sdp"
                 android:background="@drawable/button_radius_corner"
                 android:backgroundTint="@color/white"
                 android:clipToOutline="true"
-                android:layout_margin="@dimen/_5sdp"
-                android:padding="@dimen/_5sdp"
                 android:elevation="@dimen/_5sdp"
+                android:padding="@dimen/_5sdp"
                 android:scaleType="fitXY"
                 android:src="@drawable/round_add_24" />
 
@@ -75,33 +112,32 @@
                 android:id="@+id/txtQty"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:background="@drawable/button_radius_corner"
                 android:backgroundTint="@color/white"
-                android:layout_gravity="center_vertical"
+                android:elevation="@dimen/_5sdp"
                 android:gravity="center"
-                android:layout_marginEnd="@dimen/_5sdp"
                 android:text="1"
                 android:textColor="#2C2D30"
-                android:textSize="@dimen/_15ssp"
-                android:elevation="@dimen/_5sdp"/>
+                android:textSize="@dimen/_15ssp" />
 
             <ImageView
                 android:id="@+id/imgDeccreament"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:background="@drawable/button_radius_corner"
                 android:backgroundTint="@color/white"
                 android:clipToOutline="true"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:padding="@dimen/_5sdp"
                 android:elevation="@dimen/_5sdp"
+                android:padding="@dimen/_5sdp"
                 android:scaleType="fitXY"
-                app:tint="#838588"
-                android:src="@drawable/round_remove_24" />
+                android:src="@drawable/round_remove_24"
+                app:tint="#838588" />
 
         </LinearLayout>
-
 
 
         <!--        <ImageView-->
@@ -118,16 +154,16 @@
 
         <TextView
             android:id="@+id/txtTitle"
+            style="@style/txtGrayColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/open_sans_regular"
             android:text="Carte D’or Strawberry Classic 800 ml"
-            app:layout_constraintHorizontal_bias="0"
-            style="@style/txtGrayColor"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/imgShop"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@+id/imgShop"
             app:layout_constraintTop_toBottomOf="@+id/imgShop" />
 
@@ -147,16 +183,16 @@
 
         <TextView
             android:id="@+id/textView27"
+            style="@style/txtGrayColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
             android:fontFamily="@font/open_sans_regular"
             android:text="@string/aed"
-            style="@style/txtGrayColor"
             android:textSize="@dimen/_10ssp"
-            android:layout_marginStart="@dimen/_5sdp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/txtPrize"
             app:layout_constraintBottom_toBottomOf="@+id/txtPrize"
+            app:layout_constraintStart_toEndOf="@+id/txtPrize"
             app:layout_constraintTop_toTopOf="@+id/txtPrize" />
 
 

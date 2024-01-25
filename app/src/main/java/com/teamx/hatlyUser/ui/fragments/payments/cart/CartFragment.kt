@@ -74,7 +74,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
                 findNavController().navigate(R.id.action_cartFragment_to_checkOutFragment, bundle)
             } else {
                 if (isAdded) {
-                    mViewDataBinding.root.snackbar("Your cart is empty")
+                    mViewDataBinding.root.snackbar(getString(R.string.your_cart_is_empty))
                 }
             }
         }
@@ -254,6 +254,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
     }
 
     private fun layoutUpdate(data: ModelCart) {
+        Log.d("layoutUpdate", "layoutUpdate: $data")
         mViewDataBinding.textView212.text = try {
             "${data.subTotal} ${
                 MainApplication.context.getString(
@@ -334,7 +335,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
                             )
                         }
                         if (isAdded) {
-                            mViewDataBinding.root.snackbar("Product Removed")
+                            mViewDataBinding.root.snackbar(getString(R.string.product_removed))
                         }
                     }
                 }

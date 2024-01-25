@@ -120,15 +120,16 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
             SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
+
         // Set the SpannableString to the TextView
 
         // Set the SpannableString to the TextView
-        mViewDataBinding.checkBox.text = spannableString
+        mViewDataBinding.txtCheckBox.text = spannableString
 
         // Make the TextView clickable
 
         // Make the TextView clickable
-        mViewDataBinding.checkBox.movementMethod = LinkMovementMethod.getInstance()
+        mViewDataBinding.txtCheckBox.movementMethod = LinkMovementMethod.getInstance()
 
 
 //        mViewDataBinding.textView2564.setOnClickListener {
@@ -174,7 +175,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
             } else {
                 if (isAdded) {
 
-                    mViewDataBinding.root.snackbar("Please read and accept our Terms and Conditions before placing an order.")
+                    mViewDataBinding.root.snackbar(getString(R.string.please_read_and_accept_our_terms_and_conditions_before_placing_an_order))
                 }
             }
         }
@@ -479,6 +480,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                         orderId = data._id
                         val bundle = Bundle()
                         bundle.putString("orderId", orderId)
+
                         if (data.isPayed) {
                             findNavController().navigate(
                                 R.id.action_checkOutFragment_to_orderPlacedFragment,
@@ -884,7 +886,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
         PaymentConfiguration.init(
             requireActivity().applicationContext,
 //            stripPublicKey
-            getString(R.string.stripe_key)
+            requireActivity().getString(R.string.stripe_key)
 //            "pk_test_51NM8SbAESDqUcVTloKKwPpIdtlkmmm595qL1D8BZHt5hWrKp7GrEaBiRXG6jXZYgtMRR0yk7eD7RzTp0fwyahzDu00xf6h8wvu"
         )
 
@@ -1012,7 +1014,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                     LatLng(locationModel.lat, locationModel.lng) // Example location (San Francisco)
             } else {
                 if (isAdded) {
-                    mViewDataBinding.root.snackbar("Add your location")
+                    mViewDataBinding.root.snackbar(getString(R.string.add_your_location))
                 }
             }
         }

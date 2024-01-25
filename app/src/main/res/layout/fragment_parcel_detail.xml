@@ -107,7 +107,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/button_radius_corner"
             android:drawablePadding="@dimen/_10sdp"
-            android:hint="Enter Quantity"
+            android:hint="@string/enter_quantity"
             android:imeOptions="actionNext"
             android:inputType="number"
             android:textColor="@color/colorGray"

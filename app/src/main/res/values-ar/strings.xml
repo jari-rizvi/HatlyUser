@@ -234,4 +234,7 @@
     <string name="_1_minute_ago">1 minute ago</string>
     <string name="_1_day_ago">منذ يوم</string>
 
+
+    <string name="enter_quantity">الرجاء ادخال الكمية</string>
+
 </resources>

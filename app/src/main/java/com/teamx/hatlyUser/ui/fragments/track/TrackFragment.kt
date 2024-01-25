@@ -151,7 +151,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
                 }
             } else {
                 if (isAdded) {
-                    mViewDataBinding.root.snackbar("You are not connected with rider")
+                    mViewDataBinding.root.snackbar(getString(R.string.you_are_not_connected_with_rider))
                 }
             }
 
@@ -173,7 +173,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 
             } else {
                 if (isAdded) {
-                    mViewDataBinding.root.snackbar("You are not connected with rider")
+                    mViewDataBinding.root.snackbar(getString(R.string.you_are_not_connected_with_rider))
                 }
             }
         }
@@ -265,8 +265,6 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 
         Log.d("TrackorderId", "orderId: }${orderId}")
 
-        val Token =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWNhdGlvbiI6eyJpdiI6IjZiNjQ3NTMzNjkzODM3NjM2ODMyNmIzOTM1MzczODY0IiwiZW5jcnlwdGVkRGF0YSI6IjI1ODJjMTZlZDNhMmQ5OGMwY2YxZjM0Y2U2YWU2MTU3OTJhMjFmMTZmZmM1NjFjOGJmM2ZmYzc3MzYxMGFjYjEifSwidW5pcXVlSWQiOiIzYzBlOTA5OGJhZDM1YmM5ZmMwYmM3NWNhOWYzNTgiLCJpYXQiOjE3MDAwMzk1MDgsImV4cCI6MTAzNDAwMzk1MDh9.FCl1tlmKN6BGdptGDshocH--PJ-TyfuHhBWLa1ig_oM"
 
         TrackSocketClass.connect2("${NetworkCallPointsNest.TOKENER}", orderId, this)
 
@@ -299,13 +297,13 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 
         } else {
             if (isAdded) {
-                mViewDataBinding.root.snackbar("Allow location")
+                mViewDataBinding.root.snackbar(getString(R.string.allow_location))
             }
         }
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
+
     private fun createPollyLine(origin: LatLng, destination: LatLng) {
 //
 //        val destination = LatLng(24.897369355794208, 67.07753405615058)
@@ -315,8 +313,9 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 //        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 12f))
 
         // Create a GeoApiContext with your API key
-//        val context = GeoApiContext.Builder().apiKey("AIzaSyAnLo0ejCEMH_cPgZaokWej4UdgyIIy5HI").build()
-        val context = GeoApiContext.Builder().apiKey(getString(R.string.map_key)).build()
+        val context =
+            GeoApiContext.Builder().apiKey("AIzaSyAnLo0ejCEMH_cPgZaokWej4UdgyIIy5HI").build()
+//        val context = GeoApiContext.Builder().apiKey(requireActivity().getString(R.string.map_key)).build()
 
         // Request directions
         val directions = DirectionsApi.newRequest(context)
@@ -325,23 +324,27 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
             .mode(TravelMode.DRIVING) // You can use other modes like walking, bicycling, etc.
             .await()
 
-        Log.d("createPollyLine", "createPollyLine: ${directions.routes[0]}")
+        Log.d("createPollyLine", "createPollyLine: ${directions}")
+        if (directions.routes.isNotEmpty()) {
 
-        // Convert Google Maps Directions API LatLng to Google Maps Android API LatLng
-        val polyline = directions.routes[0].overviewPolyline.decodePath()
-            .map { LatLng(it.lat, it.lng) }
+            Log.d("createPollyLine", "createPollyLine: ${directions.routes[0]}")
 
-        // Create a PolylineOptions and add the polyline to the map
+            // Convert Google Maps Directions API LatLng to Google Maps Android API LatLng
+            val polyline = directions.routes[0].overviewPolyline.decodePath()
+                .map { LatLng(it.lat, it.lng) }
 
-        if (isAdded) {
-            val polylineOptions = PolylineOptions()
-                .addAll(polyline)
-                .color(requireActivity().getColor(R.color.colorRed))
-                .width(10f) // Line width
+            // Create a PolylineOptions and add the polyline to the map
 
-            googleMap.clear()
-            googleMap.addPolyline(polylineOptions)
-            animateCameraAlongPolyline(polyline)
+            if (isAdded) {
+                val polylineOptions = PolylineOptions()
+                    .addAll(polyline)
+                    .color(requireActivity().getColor(R.color.colorRed))
+                    .width(10f) // Line width
+
+                googleMap.clear()
+                googleMap.addPolyline(polylineOptions)
+                animateCameraAlongPolyline(polyline)
+            }
         }
 
 
@@ -638,7 +641,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
                     mViewDataBinding.imgPicked.isChecked = true
                     mViewDataBinding.line3.isChecked = true
                     mViewDataBinding.imgDelivered.isChecked = true
-                    mViewDataBinding.root.snackbar("Order Delivered!")
+                    mViewDataBinding.root.snackbar(getString(R.string.order_delivered))
                     findNavController().popBackStack()
                 }
 

@@ -311,6 +311,9 @@ class ProductPreviewFragment :
                                     freBoughtArrayList[addToCartPosition].cartExistence = true
                                     freBoughtArrayList[addToCartPosition].cartQuantity = 1
                                     recommendedItemAdapter.notifyItemChanged(addToCartPosition)
+                                    if (isAdded) {
+                                        mViewDataBinding.mainLayout.snackbar(getString(R.string.product_added_to_cart_succesfully))
+                                    }
                                 } else {
                                     if (isAdded) {
 //                                        mViewDataBinding.mainLayout.snackbar("Added")
@@ -352,7 +355,7 @@ class ProductPreviewFragment :
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            mViewDataBinding.mainLayout.snackbar("Cart is empty now you can add product")
+                            mViewDataBinding.mainLayout.snackbar(getString(R.string.cart_is_empty_now_you_can_add_product))
                         }
                     }
 

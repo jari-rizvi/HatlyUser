@@ -286,9 +286,9 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                                         true
                                     healthDetailPopularArraylist[addToCartPosition].cartQuantity = 1
                                     hatlyPopularAdapter.notifyItemChanged(addToCartPosition)
-                                } else {
+
                                     if (isAdded) {
-                                        mViewDataBinding.mainLayout.snackbar("Added")
+                                        mViewDataBinding.mainLayout.snackbar(getString(R.string.product_added_to_cart_succesfully))
                                     }
                                 }
                             }
@@ -332,7 +332,7 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            mViewDataBinding.mainLayout.snackbar("Cart is empty now you can add product")
+                            mViewDataBinding.mainLayout.snackbar(getString(R.string.cart_is_empty_now_you_can_add_product))
                         }
                     }
 
@@ -428,7 +428,7 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
         if (quantity > healthDetailPopularArraylist[position].quantity) {
             if (isAdded) {
 
-                mViewDataBinding.root.snackbar("out of stock")
+                mViewDataBinding.root.snackbar(getString(R.string.out_of_stock))
             }
             return
         }

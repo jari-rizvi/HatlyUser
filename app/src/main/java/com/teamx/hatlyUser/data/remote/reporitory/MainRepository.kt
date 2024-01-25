@@ -19,9 +19,10 @@ class MainRepository @Inject constructor(
     suspend fun login(@Body param: JsonObject) = apiService.login(param)
     suspend fun guest(@Body param: JsonObject) = apiService.guest(param)
     suspend fun fcm(@Body param: JsonObject) = apiService.fcm(param)
+    suspend fun settingAdmin() = apiService.settingAdmin()
     suspend fun homeSearch(
         @Query("search") search: String,
-        @Query("category") category: String,
+        @Query("category") category: String?,
         @Query("type") type: String,
         @Query("limit") limit: Int,
         @Query("page") page: Int,

@@ -26,12 +26,12 @@
 
         <TextView
             android:id="@+id/txtTitle"
+            style="@style/txtGrayColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
             android:text="@string/wallet"
             android:textAlignment="center"
-            style="@style/txtGrayColor"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -72,12 +72,12 @@
                 android:id="@+id/txtTitle12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:fontFamily="@font/open_sans_regular"
                 android:text="@string/aed"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14ssp"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/txtTitle1"
@@ -137,12 +137,12 @@
 
         <TextView
             android:id="@+id/txtTitle113"
+            style="@style/txtGrayColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_regular"
             android:text="@string/recent_transaction"
             android:textAlignment="center"
-            style="@style/txtGrayColor"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -152,15 +152,28 @@
             app:layout_constraintTop_toBottomOf="@+id/guideline"
             app:layout_constraintVertical_bias="0.05" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recWallet"
-            android:layout_width="0dp"
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swiperefresh"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/spin_kit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtTitle113"
-            tools:listitem="@layout/item_wallet" />
+            app:layout_constraintVertical_bias="1.0">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recWallet"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/spin_kit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitle113"
+                tools:listitem="@layout/item_wallet" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <ProgressBar
             android:id="@+id/spin_kit"

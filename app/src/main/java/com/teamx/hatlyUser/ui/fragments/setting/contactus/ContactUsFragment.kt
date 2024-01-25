@@ -89,7 +89,7 @@ class ContactUsFragment : BaseFragment<FragmentContactusBinding, ContactUsViewMo
             if (resultCode == RESULT_OK) {
                 DialogHelperClass.ContactDialog(requireActivity(), this)
             } else {
-                mViewDataBinding.root.snackbar("Email is not send!")
+                mViewDataBinding.root.snackbar(getString(R.string.email_is_not_send))
             }
         }
     }

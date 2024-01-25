@@ -103,7 +103,7 @@ class ForgotPasswordFragment :
     private fun isValidate(): Boolean {
 
         if (mViewDataBinding.userPhone.text.toString().trim().isEmpty()) {
-            mViewDataBinding.root.snackbar("Enter phone")
+            mViewDataBinding.root.snackbar(getString(R.string.enter_phone))
             return false
         }
         return true

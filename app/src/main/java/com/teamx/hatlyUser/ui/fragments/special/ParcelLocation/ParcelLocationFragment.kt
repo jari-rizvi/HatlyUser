@@ -219,27 +219,27 @@ class ParcelLocationFragment :
         val inpDeliveryPhone = mViewDataBinding.inpDeliveryPhone.text.toString()
 
         if (inpPickAddress.isEmpty() || inpPickAddress.isBlank()) {
-            mViewDataBinding.root.snackbar("Select Sender Address")
+            mViewDataBinding.root.snackbar(getString(R.string.select_sender_address))
             return false
         }
 
         if (inpSenderPhone.isEmpty() || inpSenderPhone.isBlank()) {
-            mViewDataBinding.root.snackbar("Select Sender Phone Number")
+            mViewDataBinding.root.snackbar(getString(R.string.select_sender_phone_number))
             return false
         }
 
         if (inpDeliveryAddress.isEmpty() || inpDeliveryAddress.isBlank()) {
-            mViewDataBinding.root.snackbar("Select Receiver Address")
+            mViewDataBinding.root.snackbar(getString(R.string.select_receiver_address))
             return false
         }
 
         if (inpDeliveryPhone.isEmpty() || inpDeliveryPhone.isBlank()) {
-            mViewDataBinding.root.snackbar("Select Receiver Phone Number")
+            mViewDataBinding.root.snackbar(getString(R.string.select_receiver_phone_number))
             return false
         }
 
         if (parcelQuantity == 0) {
-            mViewDataBinding.root.snackbar("Enter Quantity")
+            mViewDataBinding.root.snackbar(getString(R.string.enter_quantity))
             return false
         }
         return true

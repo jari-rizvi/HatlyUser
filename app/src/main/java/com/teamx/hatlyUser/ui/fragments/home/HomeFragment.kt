@@ -9,6 +9,8 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
@@ -25,10 +27,14 @@ import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.MART
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentHomeBinding
 import com.teamx.hatlyUser.ui.activity.mainActivity.MainActivity
+import com.teamx.hatlyUser.utils.NetworkHelper
 import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -43,6 +49,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    lateinit var networkHelper: NetworkHelper
+
+//    private fun checkWifiAndInternetConnection() {
+//        GlobalScope.launch {
+//
+//                if (networkHelper.isInternetAvailable()) {
+//                    Log.d("Internet", "Connected to WiFi and Internet is available")
+//                    // Perform your network-related tasks here
+//                } else {
+//                    Log.d("Internet", "Connected to WiFi but no Internet connection")
+//                    // Handle the absence of internet connection
+//                }
+//
+//        }
+//    }
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,6 +77,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 popExit = R.anim.nav_default_pop_exit_anim
             }
         }
+
+        networkHelper = NetworkHelper(requireContext())
+
+//        checkWifiAndInternetConnection()
 
 
         /////////
@@ -77,12 +103,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         ////////
 
 
-
-
-
-
-
-
 //        MainActivity.service!!.showNotification1("dummy title","dummy description","dummy type","dummy id")
 
         mViewDataBinding.inpSearch.setOnClickListener {
@@ -100,7 +120,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
             sharedViewModel.setUserData(it)
 
-            if (it.location?.address == null){
+            if (it.location?.address == null) {
                 return@let
             }
 
@@ -110,7 +130,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 "Select your location"
             }
 
-            var labelStr= ""
+            var labelStr = ""
 
             labelStr = when (it.location!!.label) {
                 "Home" -> {
@@ -208,7 +228,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 //        }
 
 
-
         if (!mViewModel.fcmResponse.hasActiveObservers()) {
             mViewModel.fcmResponse.observe(requireActivity()) {
                 when (it.status) {
@@ -216,12 +235,49 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
 
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
+//                        it.data?.let { data ->
+//                            mViewDataBinding.mainLayout.snackbar(data.message)
+//                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        if (isAdded) {
+                            mViewDataBinding.mainLayout.snackbar(it.message!!)
+                        }
+                    }
+                }
+            }
+        }
+
+        mViewModel.settingAdmin()
+
+        if (!mViewModel.settingAdminResponse.hasActiveObservers()) {
+            mViewModel.settingAdminResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
+
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+
+                        it.data?.let { data ->
+                            Log.d("datadata", "onViewCreated: ${data}")
+//                            mViewDataBinding.mainLayout.snackbar()
+                        }
 //                        it.data?.let { data ->
 //                            mViewDataBinding.mainLayout.snackbar(data.message)
 //                        }

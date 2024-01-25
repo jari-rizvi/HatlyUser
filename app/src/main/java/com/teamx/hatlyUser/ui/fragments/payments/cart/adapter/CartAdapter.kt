@@ -38,6 +38,8 @@ class CartAdapter(
             "null"
         }
 
+
+
         holder.bind.textView2122.text = try {
             "${arrayData.prize} ${
                 MainApplication.context.getString(

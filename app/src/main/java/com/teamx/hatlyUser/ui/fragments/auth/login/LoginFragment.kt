@@ -226,11 +226,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     private fun isValidate(): Boolean {
 
         if (mViewDataBinding.userEmail.text.toString().trim().isEmpty()) {
-            mViewDataBinding.root.snackbar("Enter email or phone")
+            mViewDataBinding.root.snackbar(getString(R.string.enter_email_or_phone))
             return false
         }
         if (mViewDataBinding.userPassword.text.toString().trim().isEmpty()) {
-            mViewDataBinding.root.snackbar("Enter password")
+            mViewDataBinding.root.snackbar(getString(R.string.enter_password))
             return false
         }
         return true
@@ -284,7 +284,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         if (params.has("token")) {
             mViewModel.loginWithGoogle(params)
         } else {
-            mViewDataBinding.root.snackbar("Login Failed")
+            mViewDataBinding.root.snackbar(getString(R.string.login_failed))
         }
     }
 

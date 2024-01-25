@@ -84,7 +84,7 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding, SignUpViewModel>() {
                 }
             }else{
                 if (isAdded) {
-                    mViewDataBinding.root.snackbar("Please read and accept our Terms and Conditions before signing up.")
+                    mViewDataBinding.root.snackbar(getString(R.string.please_read_and_accept_our_terms_and_conditions_before_signing_up))
                 }
             }
 
@@ -113,6 +113,7 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding, SignUpViewModel>() {
                     }
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
+                        it.message?.let { it1 -> mViewDataBinding.root.snackbar(it1) }
                         Log.d("createParams", "Resource.Status.ERROR: ${it.message}")
                     }
                 }
@@ -146,7 +147,7 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding, SignUpViewModel>() {
     private fun isValidate(): Boolean {
 
         if (mViewDataBinding.userFullName.text.toString().trim().isEmpty()) {
-            mViewDataBinding.root.snackbar("Enter name")
+            mViewDataBinding.root.snackbar(getString(R.string.enter_name))
             return false
         }
 //        if (mViewDataBinding.userEmail.text.toString().trim().isEmpty()) {
@@ -160,15 +161,15 @@ class SignUpFragment : BaseFragment<FragmentSignupBinding, SignUpViewModel>() {
 //            return false
 //        }
         if (mViewDataBinding.userMobile.text.toString().trim().isEmpty()) {
-            mViewDataBinding.root.snackbar("Enter mobile")
+            mViewDataBinding.root.snackbar(getString(R.string.enter_mobile))
             return false
         }
         if (!Patterns.PHONE.matcher(mViewDataBinding.userMobile.text.toString().trim()).matches()) {
-            mViewDataBinding.root.snackbar("Invalid phone")
+            mViewDataBinding.root.snackbar(getString(R.string.invalid_phone))
             return false
         }
         if (mViewDataBinding.userPassword.text.toString().trim().isEmpty()) {
-            mViewDataBinding.root.snackbar("Enter password")
+            mViewDataBinding.root.snackbar(getString(R.string.enter_password))
             return false
         }
         return true

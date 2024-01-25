@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
@@ -75,36 +76,39 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
         walletAdapter = WalletAdapter(orderHistoryArrayList, this)
         mViewDataBinding.recWallet.adapter = walletAdapter
 
-        mViewModel.me()
+
+
+
         if (!mViewModel.meResponse.hasActiveObservers()) {
-            mViewModel.meResponse.observe(requireActivity()) {
-                when (it.status) {
-                    Resource.Status.AUTH -> {
-                        loadingDialog.dismiss()
-                        onToSignUpPage()
-                    }
-                    Resource.Status.LOADING -> {
-                        loadingDialog.show()
-                    }
+            mViewModel.me()
+        }
+        mViewModel.meResponse.observe(requireActivity()) {
+            when (it.status) {
+                Resource.Status.AUTH -> {
+                    loadingDialog.dismiss()
+                    onToSignUpPage()
+                }
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
 
-                    Resource.Status.SUCCESS -> {
-                        loadingDialog.dismiss()
-                        it.data?.let { data ->
-                            mViewDataBinding.txtTitle12.text = try {
-                                "${data.wallet} ${requireActivity().getString(R.string.aed)}"
-                            } catch (e: Exception) {
-                                "null"
-                            }
-
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    it.data?.let { data ->
+                        mViewDataBinding.txtTitle12.text = try {
+                            "${data.wallet} ${requireActivity().getString(R.string.aed)}"
+                        } catch (e: Exception) {
+                            "null"
                         }
+
                     }
+                }
 
-                    Resource.Status.ERROR -> {
-                        loadingDialog.dismiss()
-                        if (isAdded) {
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    if (isAdded) {
 
-                            mViewDataBinding.root.snackbar(it.message!!)
-                        }
+                        mViewDataBinding.root.snackbar(it.message!!)
                     }
                 }
             }
@@ -183,6 +187,18 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>(), H
         })
 
 
+        mViewDataBinding.swiperefresh.setOnRefreshListener {
+            mViewDataBinding.swiperefresh.isRefreshing = false
+            reArrangeData()
+            mViewModel.me()
+        }
+
+
+    }
+
+    fun reArrangeData(){
+        nextPage = 1
+        mViewModel.transactionHistory(userId,nextPage, 10)
     }
 
     override fun clickshopItem(position: Int) {

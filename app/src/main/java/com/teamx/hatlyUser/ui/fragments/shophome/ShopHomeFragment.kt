@@ -170,9 +170,8 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
                                     subCategoryProductsArray[addToCartPosition].cartExistence = true
                                     subCategoryProductsArray[addToCartPosition].cartQuantity = 1
                                     subCategoryProductsAdapter.notifyItemChanged(addToCartPosition)
-                                } else {
                                     if (isAdded) {
-                                        mViewDataBinding.mainLayout.snackbar("Added")
+                                        mViewDataBinding.mainLayout.snackbar(getString(R.string.product_added_to_cart_succesfully))
                                     }
                                 }
                             }
@@ -207,7 +206,7 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
-                            mViewDataBinding.mainLayout.snackbar("Cart is empty now you can add product")
+                            mViewDataBinding.mainLayout.snackbar(getString(R.string.cart_is_empty_now_you_can_add_product))
                         }
                     }
 

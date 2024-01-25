@@ -1,16 +1,16 @@
 package com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter
 
 import android.graphics.Paint
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import com.teamx.hatlyUser.MainApplication
-import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.databinding.ItemPopularBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.popularproductmodel.Doc
+
 
 class HatlyPopularAdapter(
     private val addressArrayList: ArrayList<Doc>,
@@ -35,8 +35,11 @@ class HatlyPopularAdapter(
             ""
         }
 
-        var salesPrice = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} ${holder.itemView.context.getString(R.string.aed)}"
-        val price = "${arrayData.price} ${holder.itemView.context.getString(R.string.aed)}"
+
+
+        var salesPrice = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} ${holder.itemView.context.getString(
+            com.teamx.hatlyUser.R.string.aed)}"
+        val price = "${arrayData.price} ${holder.itemView.context.getString(com.teamx.hatlyUser.R.string.aed)}"
 
 
         if (arrayData.salePrice != 0.0){
@@ -66,11 +69,12 @@ class HatlyPopularAdapter(
         }
 
 
-        Picasso.get().load(arrayData.images!![0]).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500,500).into(holder.bind.imgShop)
+        Picasso.get().load(arrayData.images!![0]).placeholder(com.teamx.hatlyUser.R.drawable.hatly_splash_logo_space).error(
+            com.teamx.hatlyUser.R.drawable.hatly_splash_logo_space).resize(500,500).into(holder.bind.imgShop)
 
-
-        holder.itemView.setOnClickListener {
-            hatlyShopInterface.clickshopItem(position)
+        if (arrayData.quantity == 0){
+            holder.bind.stockLayout.visibility = View.VISIBLE
+            holder.bind.txtTitle54.visibility = View.VISIBLE
         }
 
         if (arrayData.cartExistence){
