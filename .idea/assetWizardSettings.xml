@@ -317,9 +317,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="999999" />
-                            <entry key="outputName" value="round_keyboard_arrow_down_24" />
-                            <entry key="sourceFile" value="C:\Users\TeamX Pakistan\Downloads\paid-with-wallet.svg" />
+                            <entry key="outputName" value="shop_closed_sign" />
+                            <entry key="sourceFile" value="C:\Users\TeamX Pakistan\Downloads\shop-closed-sign.svg" />
                           </map>
                         </option>
                       </PersistentState>

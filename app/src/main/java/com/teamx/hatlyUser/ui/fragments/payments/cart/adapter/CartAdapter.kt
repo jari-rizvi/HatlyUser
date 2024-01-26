@@ -38,10 +38,8 @@ class CartAdapter(
             "null"
         }
 
-
-
         holder.bind.textView2122.text = try {
-            "${arrayData.prize} ${
+            "${arrayData.singlePrice} ${
                 MainApplication.context.getString(
                 R.string.aed)}"
         } catch (e: Exception) {

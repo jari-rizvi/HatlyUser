@@ -84,31 +84,14 @@ class MultiViewVariationRadioAdapter(
                     ProductVariationOptionalAdapter(dataSet[position].options, object :
                         ProductPreviewInterface {
                         override fun clickRadioItem(requiredVarBox: Int, radioProperties: Int) {
-
-                            Log.d(
-                                "clickCategoryItem",
-                                "clickCategoryItem: requiredVarBox: ${dataSet[position].title} / radioProperties: ${dataSet[position].options[radioProperties].name}"
-                            )
-
-
-//                        Log.d(
-//                            "clickCategoryItem",
-//                            "clickCategoryItem: requiredVarBox: ${position} / radioProperties: ${radioProperties}"
-//                        )
-
                             productPreviewInterface.clickRadioItem(position, radioProperties)
                         }
-
                         override fun clickCheckBoxItem(optionalVeriation: Int) {
-
                         }
-
                         override fun clickFreBoughtItem(position: Int) {
-
                         }
                     })
                 holderClass2.recOpt.adapter = productVariationOptionalAdapter
-
             }
 
             false -> {
@@ -121,7 +104,7 @@ class MultiViewVariationRadioAdapter(
                 }
 
                 if (dataSet[position].isRequired) {
-                    holderClass1.txtRequired.text = MainApplication.context.getString(R.string.required)
+                    holderClass1.txtRequired.text = holder.itemView.context.getString(R.string.required)
                 } else {
                     holderClass1.txtRequired.text = "Optional"
                 }
@@ -132,32 +115,17 @@ class MultiViewVariationRadioAdapter(
                     LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 holderClass1.recRequired.layoutManager = layoutManager
 
-
                 val productVariationRequiredAdapter = ProductVariationRequiredAdapter(
                     dataSet[position].options,
                     dataSet[position].selectedIndex,
                     object : ProductPreviewInterface {
                         override fun clickRadioItem(requiredVarBox: Int, radioProperties: Int) {
-
-                            Log.d(
-                                "clickCategoryItem",
-                                "clickCategoryItem: requiredVarBox: ${dataSet[position].title} / radioProperties: ${dataSet[position].options[radioProperties].name}"
-                            )
-
-//                            Log.d(
-//                                "clickCategoryItem",
-//                                "clickCategoryItem: requiredVarBox: ${position} / radioProperties: ${radioProperties}"
-//                            )
-
                             productPreviewInterface.clickRadioItem(position, radioProperties)
                         }
-
                         override fun clickCheckBoxItem(optionalVeriation: Int) {
 
                         }
-
                         override fun clickFreBoughtItem(position: Int) {
-
                         }
                     })
                 holderClass1.recRequired.adapter = productVariationRequiredAdapter

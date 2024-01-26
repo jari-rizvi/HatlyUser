@@ -102,6 +102,4 @@
 -keep class com.google.android.gms.** { *; }
 -keep class com.google.firebase.** { *; }
 
--keep class com.teamx.hatlyUser.ui.fragments.track.TrackFragment.** { *; }
-
 

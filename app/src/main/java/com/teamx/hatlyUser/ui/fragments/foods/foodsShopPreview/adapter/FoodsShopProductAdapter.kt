@@ -45,24 +45,34 @@ class FoodsShopProductAdapter(
 
         if (arrayData.productType == "simple") {
 
-            textView26Price = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} ${context.getString(
-                R.string.aed)}"
+            textView26Price = if (arrayData.salePrice == 0.0) "" else "${arrayData.salePrice} ${context.getString(R.string.aed)}"
 
-            textView27Price = "${arrayData.price} ${context.getString(
-                R.string.aed)}"
-
-            Log.d("FoodsShopProductAdapter", "onBindViewHolder: working $position")
+            textView27Price = "${arrayData.price} ${context.getString(R.string.aed)}"
 
             holder.bind.textView27.paintFlags = holder.bind.textView27.paintFlags
 
             if (arrayData.salePrice != 0.0) {
                 holder.bind.textView27.paintFlags = holder.bind.textView27.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }else{
+                textView26Price = textView27Price
+                textView27Price = ""
             }
         } else {
-            textView26Price = "${arrayData.minPrice} ${context.getString(
-                R.string.aed)}"
-            textView27Price = "${arrayData.maxPrice} ${context.getString(
-                R.string.aed)}"
+//            textView26Price = "${arrayData.minPrice} ${context.getString(R.string.aed)}"
+//            textView27Price = "${arrayData.maxPrice} ${context.getString(R.string.aed)}"
+
+            textView26Price = (if (arrayData.maxPrice == 0.0) "" else "${arrayData.maxPrice} ${context.getString(R.string.aed)}")
+
+            textView27Price = "${arrayData.minPrice} ${context.getString(R.string.aed)}"
+
+            holder.bind.textView27.paintFlags = holder.bind.textView27.paintFlags
+
+            if (arrayData.maxPrice != 0.0) {
+                holder.bind.textView27.paintFlags = holder.bind.textView27.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }else{
+                textView26Price = textView27Price
+                textView27Price = ""
+            }
         }
 
 
@@ -78,10 +88,8 @@ class FoodsShopProductAdapter(
             "null"
         }
 
-
-
-
-        Picasso.get().load(arrayData.images[0]).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500).into(holder.bind.imgShop)
+        Picasso.get().load(arrayData.images[0]).placeholder(R.drawable.hatly_splash_logo_space)
+            .error(R.drawable.hatly_splash_logo_space).resize(500, 500).into(holder.bind.imgShop)
 
         holder.itemView.setOnClickListener {
             hatlyShopInterface.clickshopItem(position)

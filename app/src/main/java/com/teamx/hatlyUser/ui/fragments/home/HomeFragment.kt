@@ -26,6 +26,7 @@ import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.MART
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentHomeBinding
+import com.teamx.hatlyUser.localization.LocaleManager.Companion.ADMIN_TAX
 import com.teamx.hatlyUser.ui.activity.mainActivity.MainActivity
 import com.teamx.hatlyUser.utils.NetworkHelper
 import com.teamx.hatlyUser.utils.PrefHelper
@@ -49,7 +50,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    lateinit var networkHelper: NetworkHelper
+//    lateinit var networkHelper: NetworkHelper
 
 //    private fun checkWifiAndInternetConnection() {
 //        GlobalScope.launch {
@@ -78,7 +79,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             }
         }
 
-        networkHelper = NetworkHelper(requireContext())
+
 
 //        checkWifiAndInternetConnection()
 
@@ -276,6 +277,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
                         it.data?.let { data ->
                             Log.d("datadata", "onViewCreated: ${data}")
+                            ADMIN_TAX= data.VAT
 //                            mViewDataBinding.mainLayout.snackbar()
                         }
 //                        it.data?.let { data ->

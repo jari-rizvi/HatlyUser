@@ -17,6 +17,8 @@ class LocaleManager(context: Context) {
 
         val LANGUAGE_KEY = "language_key"
 
+        var ADMIN_TAX = 0
+
     }
 
     private var prefs: SharedPreferences? = null

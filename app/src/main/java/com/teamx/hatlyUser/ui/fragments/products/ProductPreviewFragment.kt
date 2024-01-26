@@ -144,6 +144,7 @@ class ProductPreviewFragment :
                     loadingDialog.dismiss()
                     onToSignUpPage()
                 }
+
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -153,9 +154,9 @@ class ProductPreviewFragment :
                     it.data?.let { data ->
 
                         imageSliderArray.addAll(data.product.images)
-                        imageSliderArray.add("http://31.220.17.28:8000/a7d941e85050bd8b4ed415dd553ce890.png")
-                        imageSliderArray.add("http://31.220.17.28:8000/c151469af1659b3427f56e7a216800b0.png")
-                        imageSliderArray.add("http://31.220.17.28:8000/a7d941e85050bd8b4ed415dd553ce890.png")
+//                        imageSliderArray.add("http://31.220.17.28:8000/a7d941e85050bd8b4ed415dd553ce890.png")
+//                        imageSliderArray.add("http://31.220.17.28:8000/c151469af1659b3427f56e7a216800b0.png")
+//                        imageSliderArray.add("http://31.220.17.28:8000/a7d941e85050bd8b4ed415dd553ce890.png")
                         imageSliderAdapter.notifyDataSetChanged()
 //                        Picasso.get().load(data.product.images[0]).into(mViewDataBinding.imgShop)
 
@@ -180,52 +181,112 @@ class ProductPreviewFragment :
                             recommendedItemAdapter.notifyDataSetChanged()
                         }
 
+                        var price = ""
+                        var salePrice = ""
+
+                        price = "${data.product.price} ${getString(R.string.aed)}"
+                        salePrice = "${data.product.salePrice} ${getString(R.string.aed)}"
+
                         if (data.product.productType == "simple") {
                             Log.d("productType", "onViewCreated: Simple")
 
-                            if (data.product.salePrice != 0.0) {
-                                mViewDataBinding.textView24.text = try {
-                                    "${data.product.salePrice} ${
-                                        MainApplication.context.getString(
-                                        R.string.aed)}"
-                                } catch (e: Exception) {
-                                    "null"
-                                }
-                                mViewDataBinding.textView25.paintFlags =
-                                    mViewDataBinding.textView25.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                            price = "${data.product.price} ${getString(R.string.aed)}"
+                            salePrice = "${data.product.salePrice} ${getString(R.string.aed)}"
+
+                            if (data.product.salePrice ==null || data.product.salePrice == 0.0) {
+                                salePrice = price
+                                price = ""
                             } else {
-                                mViewDataBinding.textView24.text = ""
+                                mViewDataBinding.textView25.paintFlags = mViewDataBinding.textView25.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                             }
 
-                            mViewDataBinding.textView25.text = try {
-                                "${data.product.price} ${
-                                    MainApplication.context.getString(
-                                    R.string.aed)}"
+                            mViewDataBinding.textView24.text = try {
+                                "${salePrice}"
                             } catch (e: Exception) {
                                 "null"
                             }
+
+                            mViewDataBinding.textView25.text = try {
+                                "${price}"
+                            } catch (e: Exception) {
+                                "null"
+                            }
+
+//                            if (data.product.salePrice != 0.0) {
+//                                mViewDataBinding.textView24.text = try {
+//                                    "${data.product.salePrice} ${
+//                                        getString(
+//                                            R.string.aed
+//                                        )
+//                                    }"
+//                                } catch (e: Exception) {
+//                                    "null"
+//                                }
+//                                mViewDataBinding.textView25.paintFlags = mViewDataBinding.textView25.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+//                            } else {
+//                                mViewDataBinding.textView24.text = ""
+//                            }
+//
+//                            mViewDataBinding.textView25.text = try {
+//                                "${data.product.price} ${
+//                                    MainApplication.context.getString(
+//                                        R.string.aed
+//                                    )
+//                                }"
+//                            } catch (e: Exception) {
+//                                "null"
+//                            }
 
 //                            mViewDataBinding.textView25.visibility = View.GONE
                             return@observe
                         }
 
-                        Log.d("productType", "onViewCreated: working")
+                        price = "${data.product.minPrice} ${getString(R.string.aed)}"
+                        salePrice = "${data.product.maxPrice} ${getString(R.string.aed)}"
+
+                        Log.d("productTypeasas", "price: $price")
+                        Log.d("productTypeasas", "salePrice: $salePrice")
+
+                        if (data.product.maxPrice == null || data.product.maxPrice == 0.0) {
+                            salePrice = price
+                            price = ""
+                        } else {
+                            mViewDataBinding.textView25.paintFlags = mViewDataBinding.textView25.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                        }
 
                         mViewDataBinding.textView24.text = try {
-                            "${data.product.minPrice} ${
-                                MainApplication.context.getString(
-                                R.string.aed)}"
+                            "${salePrice}"
                         } catch (e: Exception) {
                             "null"
                         }
 
                         mViewDataBinding.textView25.text = try {
-                            "${data.product.maxPrice} ${
-                                MainApplication.context.getString(
-                                R.string.aed)}"
+                            "${price}"
                         } catch (e: Exception) {
                             "null"
                         }
+
+
+//                        mViewDataBinding.textView24.text = try {
+//                            "${data.product.minPrice} ${
+//                                getString(
+//                                    R.string.aed
+//                                )
+//                            }"
+//                        } catch (e: Exception) {
+//                            "null"
+//                        }
+//
+//                        mViewDataBinding.textView25.text = try {
+//                            "${data.product.maxPrice} ${
+//                                getString(
+//                                    R.string.aed
+//                                )
+//                            }"
+//                        } catch (e: Exception) {
+//                            "null"
+//                        }
+
 
                         if (data.product.veriations?.isNotEmpty() == true) {
                             mViewDataBinding.recVarRequired.visibility = View.VISIBLE
@@ -247,7 +308,8 @@ class ProductPreviewFragment :
                                 variationArray.add(
                                     com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.Veriation(
                                         "",
-                                        options
+                                        0.0,
+                                        options,
                                     )
                                 )
 //                                clickRadioItem(index, 0)
@@ -298,6 +360,7 @@ class ProductPreviewFragment :
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -307,7 +370,8 @@ class ProductPreviewFragment :
                         it.data?.let { data ->
                             if (data.success) {
                                 if (isAddToCartRecommend) {
-                                    freBoughtArrayList[addToCartPosition].cartItemId = data.cartItemId
+                                    freBoughtArrayList[addToCartPosition].cartItemId =
+                                        data.cartItemId
                                     freBoughtArrayList[addToCartPosition].cartExistence = true
                                     freBoughtArrayList[addToCartPosition].cartQuantity = 1
                                     recommendedItemAdapter.notifyItemChanged(addToCartPosition)
@@ -331,7 +395,7 @@ class ProductPreviewFragment :
                             if (it.message == "Can not add products from multiple shops") {
                                 DialogHelperClass.MultiProductDialog(requireContext(), this)
                                 Log.d("addToCartResponse", "addToCart: ${it.message!!}")
-                            }else{
+                            } else {
                                 mViewDataBinding.mainLayout.snackbar("${it.message!!}")
                             }
                         }
@@ -348,6 +412,7 @@ class ProductPreviewFragment :
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -393,7 +458,8 @@ class ProductPreviewFragment :
             val filteredVariations = variationArray.map { variation ->
                 com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.Veriation(
                     _id = variation._id,
-                    options = variation.options.filter { it.isNotBlank() } as ArrayList<String>
+                    options = variation.options.filter { it.isNotBlank() } as ArrayList<String>,
+                    price = null
                 )
             }.filter { it.options.isNotEmpty() }
 
@@ -404,7 +470,7 @@ class ProductPreviewFragment :
             try {
                 params.addProperty("id", storeId)
                 params.addProperty("quantity", quantityActualValue)
-                if (filteredVariations.isNotEmpty()) {
+                if (!filteredVariations.isNullOrEmpty()) {
                     params.add("veriations", Gson().toJsonTree(filteredVariations))
                 }
                 if (spInst.isNotEmpty()) {
@@ -435,9 +501,12 @@ class ProductPreviewFragment :
         return Random.nextInt(3)
     }
 
+    lateinit var filteredVariations: List<com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.Veriation>
+
+    var actualPrice = 0.0
 
     override fun clickRadioItem(requiredVarBox: Int, radioProperties: Int) {
-
+        actualPrice = 0.0
         val veriationId = veriationArraylist[requiredVarBox]._id
         val optionId = veriationArraylist[requiredVarBox].options[radioProperties]._id
 
@@ -445,40 +514,51 @@ class ProductPreviewFragment :
 
         if (!veriationArraylist[requiredVarBox].isMultiple) {
             veriationArraylist[requiredVarBox].selectedIndex = radioProperties
+
             multiViewVariationRadioAdapter.notifyItemChanged(requiredVarBox)
             multiViewVariationRadioAdapter.notifyItemRangeChanged(
                 requiredVarBox,
                 veriationArraylist.size
             )
-
             variationArray[requiredVarBox].options[0] = optionId
+
+            veriationArraylist[requiredVarBox].options.forEach {
+                it.isOptionsSelected = false
+            }
+            veriationArraylist[requiredVarBox].options[radioProperties].isOptionsSelected = true
 
         } else {
             variationArray[requiredVarBox].options[radioProperties] =
                 if (variationArray[requiredVarBox].options.contains(optionId)) "" else optionId
+
+            veriationArraylist[requiredVarBox].options[radioProperties].isOptionsSelected =
+                variationArray[requiredVarBox].options.contains(optionId)
         }
 
+        veriationArraylist.forEach {
+            it.options.forEach {
+                if (it.isOptionsSelected) {
+                    Log.d("variationArray", "clickRadioItem: ${it.price}")
+                    actualPrice += it.price
+                }
+            }
+        }
 
-//        val filteredVariations = variationArray.map { variation ->
+        Log.d("variationArray", "veriationArraylist: $veriationArraylist")
+        Log.d("variationArray", "actualPrice: $actualPrice")
+
+
+//        filteredVariations = variationArray.map { variation ->
 //            com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.Veriation(
 //                _id = variation._id,
 //                options = variation.options.filter { it.isNotBlank() } as ArrayList<String>
 //            )
 //        }.filter { it.options.isNotEmpty() }
-
-
-//        val resultTitle = variationArray.joinToString("/")
-
-
-//        Log.d("clickCategoryItem", "variationArray: $variationArray")
-//        Log.d("clickCategoryItem", "filteredVariations: $filteredVariations")
-
-//        mViewDataBinding.textView24.text = try {
-//            actualPrize(requiredveriationArrayList, resultTitle).toString()
-//        } catch (e: Exception) {
-//            "0.0"
+//
+//
+//        filteredVariations.forEach {
 //        }
-//        mViewDataBinding.textView25.visibility = View.GONE
+
     }
 
     override fun clickCheckBoxItem(optionalVeriation: Int) {
@@ -550,7 +630,6 @@ class ProductPreviewFragment :
     private val actionStack = Stack<Int>()
 
 
-
     override fun updateQuantity(position: Int, quantity: Int) {
 
 
@@ -584,6 +663,7 @@ class ProductPreviewFragment :
                             loadingDialog.dismiss()
                             onToSignUpPage()
                         }
+
                         Resource.Status.LOADING -> {
                             loadingDialog.show()
                         }

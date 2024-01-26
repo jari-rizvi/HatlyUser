@@ -237,4 +237,8 @@
 
     <string name="enter_quantity">الرجاء ادخال الكمية</string>
 
+    <string name="vat">الضريبة (%1$d%%)</string>
+
+<!--    <string name="vat">الضريبة %1$s%</string>-->
+
 </resources>

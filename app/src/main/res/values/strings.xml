@@ -288,5 +288,10 @@
     <string name="select_receiver_phone_number">Select Receiver Phone Number</string>
     <string name="you_are_not_connected_with_rider">You are not connected with rider</string>
 
+    <string name="vat">Tax (%1$d%%)</string>
+    <string name="sorry_our_shop_is_closed">Sorry! Our shop is closed</string>
+    <string name="we_appreciate_your_patience_and_look_nforward_to_serve_you_again_soon">We appreciate your patience and look\nforward to serve you again soon.</string>
+    <string name="back_to_shops">Back to Shops</string>
+
 
 </resources>

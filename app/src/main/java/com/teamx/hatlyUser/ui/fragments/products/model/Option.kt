@@ -7,5 +7,5 @@ data class Option(
     val name: String,
     val price: Double,
     val salePrice: Double,
-    val isSelected: Boolean = false
+    var isOptionsSelected: Boolean = false
 )

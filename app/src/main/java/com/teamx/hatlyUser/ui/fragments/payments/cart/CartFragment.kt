@@ -1,5 +1,6 @@
 package com.teamx.hatlyUser.ui.fragments.payments.cart
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -19,10 +20,12 @@ import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentCartBinding
+import com.teamx.hatlyUser.localization.LocaleManager.Companion.ADMIN_TAX
 import com.teamx.hatlyUser.ui.fragments.payments.cart.adapter.CartAdapter
 import com.teamx.hatlyUser.ui.fragments.payments.cart.interfaces.CartInterface
 import com.teamx.hatlyUser.ui.fragments.payments.cart.model.ModelCart
 import com.teamx.hatlyUser.ui.fragments.payments.cart.model.Product
+import com.teamx.hatlyUser.utils.TimeFormatter
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONException
@@ -48,6 +51,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
     var totalItems = 0
     var scrollOutItems = 0
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -59,6 +63,9 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
                 popExit = R.anim.nav_default_pop_exit_anim
             }
         }
+
+
+        mViewDataBinding.textView211.text = getString(R.string.vat, ADMIN_TAX)
 
         cartProductArrayList = ArrayList()
 
