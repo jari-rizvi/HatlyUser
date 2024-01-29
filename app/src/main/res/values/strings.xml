@@ -228,8 +228,6 @@
     <string name="enter_your_mobile_number">Enter your mobile number</string>
     <string name="enter_you_email_address">Enter you email address</string>
     <string name="enter_message">Enter message</string>
-    <string name="no_favourites_saved">No favourites saved</string>
-    <string name="write">Write...</string>
     <string name="transaction_detail">Transaction Detail</string>
     <string name="transaction_id">Transaction ID:</string>
     <string name="order_type">Order Type</string>
@@ -269,7 +267,7 @@
     <string name="enter_name">Enter name</string>
     <string name="enter_mobile">Enter mobile</string>
     <string name="invalid_phone">Invalid phone</string>
-    <string name="product_added_to_cart_succesfully">Product Added to Cart Succesfully</string>
+    <string name="product_added_to_cart_succesfully">Product Added to Cart Successfully</string>
     <string name="cart_is_empty_now_you_can_add_product">Cart is empty now you can add product</string>
     <string name="out_of_stock">Out of stock</string>
     <string name="your_cart_is_empty">Your cart is empty</string>
@@ -292,6 +290,9 @@
     <string name="sorry_our_shop_is_closed">Sorry! Our shop is closed</string>
     <string name="we_appreciate_your_patience_and_look_nforward_to_serve_you_again_soon">We appreciate your patience and look\nforward to serve you again soon.</string>
     <string name="back_to_shops">Back to Shops</string>
+    <string name="write">Write...</string>
+    <string name="no_favourites_saved">No favourites saved</string>
+    <string name="filter_by">Filter By:</string>
 
 
 </resources>

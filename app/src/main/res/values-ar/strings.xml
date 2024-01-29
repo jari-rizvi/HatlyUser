@@ -230,14 +230,75 @@
     <string name="days_ago"> منذ %1$s ايام</string>
     <string name="hours_ago"> منذ %1$s ساعات</string>
     <string name="minutes_ago"> منذ %1$s دقائق</string>
-    <string name="_1_hour_ago">1 hour ago</string>
-    <string name="_1_minute_ago">1 minute ago</string>
     <string name="_1_day_ago">منذ يوم</string>
-
+    <string name="_1_hour_ago">منذ ساعة</string>
+    <string name="_1_minute_ago">منذ دقيقة</string>
 
     <string name="enter_quantity">الرجاء ادخال الكمية</string>
 
     <string name="vat">الضريبة (%1$d%%)</string>
+
+
+
+
+    <string name="transaction_detail">تفاصيل التحويلة:</string>
+    <string name="transaction_id">رمز التحويلة:</string>
+    <string name="order_type">نوع الطلب</string>
+    <string name="transaction_status">حالة التحويلة</string>
+    <string name="delivery_distance">مسافة التوصيل</string>
+    <string name="clear_all">مسح الكل</string>
+    <string name="apply_filter">تطبيق التصنيف</string>
+    <string name="ratings">التقييمات</string>
+    <string name="under_10_mins">أقل من عشر دقائق</string>
+    <string name="under_20_mins">أقل من عشرين دقيقة</string>
+    <string name="under_30_mins">أقل من ثلاثين دقيقة</string>
+    <string name="under_40_mins">أقل من أربعين دقيقة</string>
+    <string name="under_50_mins">أقل من خمسين دقيقة</string>
+    <string name="rating_5_0">تقييم 5.0+</string>
+    <string name="rating_4_0">تقييم 4.0+</string>
+    <string name="rating_3_0">تقييم 3.0+</string>
+    <string name="rating_2_0">تقييم 2.0+</string>
+    <string name="rating_1_0">تقييم 1.0+</string>
+    <string name="enter_amount">إدخال الكمية</string>
+    <string name="change">تغيير</string>
+
+
+    <string name="otp_resend">إعادة إرسال OTP</string>
+    <string name="enter_otp">إدخال OTP</string>
+    <string name="enter_password">أدخل كلمة المرور</string>
+    <string name="enter_confirm_password">أدخل تأكيد كلمة السر</string>
+    <string name="password_not_matched">كلمات السر غير متشابهة</string>
+    <string name="enter_phone">أدخل رقم الهاتف</string>
+    <string name="enter_email_or_phone">أدخل البريد الـرـلكتروني او رقم الهاتف</string>
+    <string name="login_failed">فشل تسجيل الدخول</string>
+    <string name="please_read_and_accept_our_terms_and_conditions_before_signing_up">يرجى قراءة الشروط والأحكام الخاصة بنا والموافقة عليها قبل الاشتراك.</string>
+    <string name="enter_name">أدخل الاسم</string>
+    <string name="enter_mobile">أدخل رقم الهاتف</string>
+    <string name="invalid_phone">رقم الهاتف غير صالح</string>
+    <string name="product_added_to_cart_succesfully">تمت إضافة المنتج إلى سلة التسوق بنجاح</string>
+    <string name="cart_is_empty_now_you_can_add_product">سلة التسوق فارغة الآن يمكنك إضافة المنتج</string>
+    <string name="out_of_stock">إنتهىت الكمية من المخزن</string>
+    <string name="your_cart_is_empty">عربة التسوق الخاصة بك  فارغة</string>
+    <string name="product_removed">تم إزالة المنتج</string>
+    <string name="please_read_and_accept_our_terms_and_conditions_before_placing_an_order">يرجى قراءة الشروط والأحكام الخاصة بنا وقبولها قبل تقديم الطلب.</string>
+    <string name="add_your_location">أضف موقعك</string>
+    <string name="card_detach">فصل البطاقة</string>
+    <string name="deleted">تم الحذف</string>
+    <string name="profile_updated">تم تحديث الملف الشخصي</string>
+    <string name="number_updated">تم تحديث الرقم</string>
+    <string name="enter_username">ادخل اسم المستخدم</string>
+    <string name="email_is_not_send">لم يتم أرسال البريد الإلكتروني!</string>
+    <string name="select_sender_address">حدد عنوان المرسل</string>
+    <string name="select_sender_phone_number">حدد رقم هاتف المرسل</string>
+    <string name="select_receiver_address">حدد عنوان  المرسل إاليه </string>
+    <string name="select_receiver_phone_number">حدد رقم هاتف  المرسل إاليه </string>
+    <string name="you_are_not_connected_with_rider">أنت على غير إتصال مع الراكب</string>
+    <string name="sorry_our_shop_is_closed">عذرا"! متجرنا مغلق</string>
+    <string name="we_appreciate_your_patience_and_look_nforward_to_serve_you_again_soon"> نحن نقدر سعة صدرك ونتطلع لخدمتك مرة أخرى قريباً</string>
+    <string name="back_to_shops">العودة إلى المحلات التجارية</string>
+    <string name="write">أكتب...</string>
+    <string name="no_favourites_saved">لم يتم حفظ  منتجات مفضلة</string>
+    <string name="filter_by">التصنيف بحسب:</string>
 
 <!--    <string name="vat">الضريبة %1$s%</string>-->
 

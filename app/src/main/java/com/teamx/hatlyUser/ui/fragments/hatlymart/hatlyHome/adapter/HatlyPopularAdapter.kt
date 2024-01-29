@@ -75,6 +75,9 @@ class HatlyPopularAdapter(
         if (arrayData.quantity == 0){
             holder.bind.stockLayout.visibility = View.VISIBLE
             holder.bind.txtTitle54.visibility = View.VISIBLE
+        }else{
+            holder.bind.stockLayout.visibility = View.GONE
+            holder.bind.txtTitle54.visibility = View.GONE
         }
 
         if (arrayData.cartExistence){
@@ -95,6 +98,12 @@ class HatlyPopularAdapter(
 
         holder.bind.imgAdd.setOnClickListener {
             addToCartInterface.addProduct(position)
+        }
+
+        holder.itemView.setOnClickListener {
+            if (arrayData.quantity != 0){
+                hatlyShopInterface.clickshopItem(position)
+            }
         }
 
     }

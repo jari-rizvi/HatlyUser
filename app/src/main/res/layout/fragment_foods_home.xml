@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="Filter By:"
+            android:text="@string/filter_by"
             android:textStyle="bold"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toEndOf="parent"

@@ -90,9 +90,9 @@ class FoodsShopPreviewFragment :
                 Log.d("StoreFragment", "FOOD: back")
                 val bundle = arguments
                 if (bundle != null) {
-                    val foodShopId = bundle.getString("itemId").toString()
+                    val foodShopId = bundle.getString("itemId")
                     if (!mViewModel.foodsShopHomeResponse.hasActiveObservers()) {
-                        mViewModel.foodsShopHome(foodShopId)
+                        foodShopId?.let { mViewModel.foodsShopHome(it) }
                     }
                 }
             }

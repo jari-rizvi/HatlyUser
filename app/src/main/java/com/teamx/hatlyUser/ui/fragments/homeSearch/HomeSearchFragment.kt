@@ -6,13 +6,17 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.AbsListView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.constants.NetworkCallPointsNest
+import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.MART
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentHomeSearchBinding
 import com.teamx.hatlyUser.ui.fragments.home.model.FcmModel
@@ -24,6 +28,7 @@ import com.teamx.hatlyUser.ui.fragments.homeSearch.adapter.RecentHomeSearchInter
 import com.teamx.hatlyUser.ui.fragments.homeSearch.model.Doc
 import com.teamx.hatlyUser.ui.fragments.products.adapter.interfaces.ProductPreviewInterface
 import com.teamx.hatlyUser.utils.PrefHelper
+import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,6 +59,13 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
     private lateinit var homeSearchArrayList: ArrayList<Doc>
     lateinit var layoutManager2: LinearLayoutManager
     private lateinit var hatlyPopularAdapter: HomeSearchAdapter
+
+    var currentItems = 0
+    var totalItems = 0
+    var scrollOutItems = 0
+    var isScrolling = false
+    var hasNextPage = false
+    var nextPage = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -192,7 +204,10 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
                         PrefHelper.getInstance(requireActivity())
                             .saveWord(mViewDataBinding.inpSearch.text.toString().trim())
 
-                        homeSearchArrayList.clear()
+                        if (!hasNextPage) {
+                            homeSearchArrayList.clear()
+                        }
+
 
                         data.docs.forEach {
                             if (mViewDataBinding.txtShops.isChecked) {
@@ -205,6 +220,11 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
 //                            homeSearchArrayList.addAll(data.docs)
                         hatlyPopularAdapter.notifyDataSetChanged()
                         Log.d("homeSearchResponse", "onViewCreated: $data")
+
+                        if (data.nextPage != null) {
+                            nextPage = data.nextPage
+                        }
+                        hasNextPage = data.hasNextPage
                     }
                 }
 
@@ -218,11 +238,39 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
                 }
             }
         }
+
+
+        mViewDataBinding.recHomeSearch.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    isScrolling = true
+                }
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                currentItems = layoutManager2.childCount;
+                totalItems = layoutManager2.itemCount;
+                scrollOutItems = layoutManager2.findFirstVisibleItemPosition()
+
+                if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
+                    isScrolling = false;
+
+                    if (hasNextPage) {
+                        performSearch()
+                    }
+                }
+            }
+        })
+
     }
 
     private fun performSearch() {
         val search = mViewDataBinding.inpSearch.text.toString()
-        mViewModel.homeSearch(search, categoryStr, typeStr, 10, 1)
+        mViewModel.homeSearch(search, categoryStr, typeStr, 10, nextPage)
     }
 
 //    val modelProduct = productArrayList[position]
@@ -292,13 +340,16 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
     override fun clickFreBoughtItem(shopClick: Int) {
         val modelShop = homeSearchArrayList[shopClick]
         val bundle = Bundle()
-        if (categoryStr == "resturant") {
+        if (modelShop.type == "resturant") {
+            Log.d("modelShopsdsd", "clickFreBoughtItem: ${modelShop._id}")
+            MART = Marts.FOOD
             bundle.putString("itemId", modelShop._id)
             findNavController().navigate(
                 R.id.action_homeSearchFragment_to_foodsShopHomeFragment,
                 bundle
             )
         } else {
+            MART = if (modelShop.type == "home based") Marts.HOME_BUSINESS else if (modelShop.type == "health") Marts.HEALTH_BEAUTY else Marts.GROCERY
             bundle.putString("_id", modelShop._id)
             bundle.putString("name", modelShop.name)
             bundle.putString("address", modelShop.address.googleMapAddress)
@@ -307,6 +358,12 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
                 bundle
             )
         }
+    }
+
+    private fun extractShortAddress(fullAddress: String?): String? {
+        val addressParts = fullAddress?.split(", ")
+        val shortAddress = addressParts?.get(0)
+        return shortAddress
     }
 
 }
