@@ -1,6 +1,5 @@
 package com.teamx.hatlyUser.ui.fragments.payments.cart
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -12,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.MainApplication
@@ -25,10 +23,8 @@ import com.teamx.hatlyUser.ui.fragments.payments.cart.adapter.CartAdapter
 import com.teamx.hatlyUser.ui.fragments.payments.cart.interfaces.CartInterface
 import com.teamx.hatlyUser.ui.fragments.payments.cart.model.ModelCart
 import com.teamx.hatlyUser.ui.fragments.payments.cart.model.Product
-import com.teamx.hatlyUser.utils.TimeFormatter
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import org.json.JSONException
 import java.util.Stack
 
 
@@ -72,6 +68,9 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
         mViewDataBinding.imgBack.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        cartAdapter = CartAdapter(cartProductArrayList, this)
+        mViewDataBinding.recCart.adapter = cartAdapter
 
         mViewDataBinding.txtLogin.setOnClickListener {
             if (cartProductArrayList.isNotEmpty()) {
@@ -159,8 +158,8 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
 
 
 
-        cartAdapter = CartAdapter(cartProductArrayList, this)
-        mViewDataBinding.recCart.adapter = cartAdapter
+
+
         mViewDataBinding.recCart.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -305,11 +304,15 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
         }
 
         cartProductArrayList.clear()
-        data.products?.let { it1 -> cartProductArrayList.addAll(it1) }
+        data.products?.let { it1 ->
+            cartProductArrayList.addAll(it1)
+        }
         cartAdapter.notifyDataSetChanged()
     }
 
     override fun removeCartItem(position: Int) {
+
+
         val cartModel = cartProductArrayList[position]
         removeCartResponse(cartModel, position)
     }
@@ -317,45 +320,57 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(), CartInt
     private fun removeCartResponse(cartModel: Product, position: Int) {
         mViewModel.removeCartItem(cartModel._id)
 
-        mViewModel.removeCartItemResponse.observe(requireActivity()) {
-            when (it.status) {
-                Resource.Status.AUTH -> {
-                    loadingDialog.dismiss()
-                    onToSignUpPage()
-                }
+        if (!mViewModel.removeCartItemResponse.hasActiveObservers()) {
+            mViewModel.removeCartItemResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
 
-                Resource.Status.LOADING -> {
-                    loadingDialog.show()
-                }
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
 
-                Resource.Status.SUCCESS -> {
-                    loadingDialog.dismiss()
-                    it.data?.let { data ->
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
 
-                        if (cartProductArrayList.isNotEmpty()) {
+//                            if (position != RecyclerView.NO_POSITION) {
+//
+//                                cartAdapter.notifyItemRemoved(position)
+//                                cartAdapter.notifyItemRangeChanged(position, cartProductArrayList.size - position)
+//                                // Item ko ArrayList se remove karein
+//                                cartProductArrayList.removeAt(position)
+//                                // Adapter ko update karein
+//
+//
+//
+////
+//                            }
+                                layoutUpdate(data)
 
-                            cartProductArrayList.removeAt(position)
-                            cartAdapter.notifyItemRemoved(position)
-                            cartAdapter.notifyItemRangeChanged(
-                                position,
-                                cartProductArrayList.size - position
-                            )
-                        }
-                        if (isAdded) {
-                            mViewDataBinding.root.snackbar(getString(R.string.product_removed))
+                            if (cartProductArrayList.isEmpty()){
+//                                layoutUpdate(ModelCart(null,0.0,0.0,0.0))
+                            }
+
+                            if (isAdded) {
+                                mViewDataBinding.root.snackbar(getString(R.string.product_removed))
+                            }
                         }
                     }
-                }
 
-                Resource.Status.ERROR -> {
-                    loadingDialog.dismiss()
-                    if (isAdded) {
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        if (isAdded) {
 
-                        mViewDataBinding.root.snackbar(it.message!!)
+                            mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }
         }
+
     }
 
 //    private fun fetchData() {

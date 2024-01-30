@@ -55,8 +55,8 @@ class CartViewModel @Inject constructor(
     }
 
 
-    private val _removeCartItemResponse = MutableLiveData<Resource<AddToCart>>()
-    val removeCartItemResponse: LiveData<Resource<AddToCart>>
+    private val _removeCartItemResponse = MutableLiveData<Resource<ModelCart>>()
+    val removeCartItemResponse: LiveData<Resource<ModelCart>>
         get() = _removeCartItemResponse
 
     fun removeCartItem(id: String) {

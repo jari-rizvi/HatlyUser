@@ -24,10 +24,12 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.squareup.picasso.Picasso
 import com.teamx.hatlyUser.BR
+import com.teamx.hatlyUser.MainApplication
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentOrderDetailBinding
+import com.teamx.hatlyUser.localization.LocaleManager
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.adapter.DialogUplodeImageAdapter
 import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.adapter.OrderDetailAdapter
@@ -120,6 +122,8 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
 
         sharedViewModel.orderHistory.observe(requireActivity()) { data ->
+
+            Log.d("orderHistorysdsd", "onViewCreated: $data")
 
             order_Id = data._id
 
@@ -228,19 +232,25 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
             }
 
             mViewDataBinding.txtTitle11123.text = try {
-                "${data.subTotal}"
+                "${data.subTotal} ${getString(R.string.aed)}"
+            } catch (e: Exception) {
+                "null"
+            }
+
+            mViewDataBinding.txtTitle11138923.text = try {
+                "${data.tax} ${getString(R.string.aed)}"
             } catch (e: Exception) {
                 "null"
             }
 
             mViewDataBinding.txtTitle111323.text = try {
-                "${data.deliveryCharges}"
+                "${data.deliveryCharges} ${getString(R.string.aed)}"
             } catch (e: Exception) {
                 "null"
             }
 
             mViewDataBinding.txtTitle1113233.text = try {
-                "${data.total}"
+                "${data.total} ${getString(R.string.aed)}"
             } catch (e: Exception) {
                 "null"
             }

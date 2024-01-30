@@ -25,6 +25,7 @@ import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.adapter.HatlyShopCat
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.model.categoryModel.Doc
 import com.teamx.hatlyUser.utils.DialogHelperClass
+import com.teamx.hatlyUser.utils.LocationPermission.Companion.extractShortAddress
 import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -85,16 +86,6 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
             storeId = bundle.getString("_id", "")
             storeName = bundle.getString("name", "")
             storeAddress = bundle.getString("address", "")
-            mViewDataBinding.textView2.text = try {
-                storeName
-            } catch (e: Exception) {
-                ""
-            }
-            mViewDataBinding.textViewAddress.text = try {
-                storeAddress
-            } catch (e: Exception) {
-                ""
-            }
             when {
                 parcel -> {
                     mViewDataBinding.constraintLayout2.visibility = View.VISIBLE
@@ -112,6 +103,9 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
 
         when (NetworkCallPointsNest.MART) {
             Marts.HATLY_MART -> {
+
+                storeName = getString(R.string.hatly_mart)
+
                 mViewDataBinding.txtShopCatTitle.text = getString(R.string.shop_by_categories)
                 mViewDataBinding.txtPopular.text = getString(R.string.popular_items)
 
@@ -169,6 +163,19 @@ class HatlyMartFragment : BaseFragment<FragmentHatlyMartBinding, HatlyMartViewMo
                     }
                 }
             }
+        }
+
+        mViewDataBinding.textView2.text = try {
+            storeName
+        } catch (e: Exception) {
+            ""
+        }
+        storeAddress = extractShortAddress(sharedViewModel.userData.value?.location?.address)!!
+
+        mViewDataBinding.textViewAddress.text = try {
+            storeAddress
+        } catch (e: Exception) {
+            ""
         }
 
 

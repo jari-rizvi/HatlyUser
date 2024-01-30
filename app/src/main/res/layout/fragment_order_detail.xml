@@ -228,6 +228,19 @@
             app:layout_constraintTop_toBottomOf="@+id/txtTitle1112" />
 
         <TextView
+            android:id="@+id/txtTax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="@string/tax"
+            android:textAlignment="center"
+            style="@style/txtGrayColor"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle11212"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle11212" />
+
+        <TextView
             android:id="@+id/txtTitle111323"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -241,6 +254,19 @@
             app:layout_constraintTop_toTopOf="@+id/txtTitle11212" />
 
         <TextView
+            android:id="@+id/txtTitle11138923"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_regular"
+            android:text="@string/aed"
+            android:textAlignment="center"
+            style="@style/txtGrayColor"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtTax"
+            app:layout_constraintEnd_toEndOf="@+id/txtTitle11123"
+            app:layout_constraintTop_toTopOf="@+id/txtTax" />
+
+        <TextView
             android:id="@+id/txtTitle121212"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -251,8 +277,8 @@
             android:textColor="@color/colorGreen"
             android:textSize="@dimen/_11ssp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/txtTitle11"
-            app:layout_constraintTop_toBottomOf="@+id/txtTitle11212" />
+            app:layout_constraintStart_toStartOf="@+id/txtTax"
+            app:layout_constraintTop_toBottomOf="@+id/txtTax" />
 
         <TextView
             android:id="@+id/txtTitle1113233"

@@ -313,8 +313,7 @@ class TrackFragment : BaseFragment<FragmentTrackBinding, TrackViewModel>(), OnMa
 //        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 12f))
 
         // Create a GeoApiContext with your API key
-        val context =
-            GeoApiContext.Builder().apiKey("AIzaSyAnLo0ejCEMH_cPgZaokWej4UdgyIIy5HI").build()
+        val context = GeoApiContext.Builder().apiKey("AIzaSyAnLo0ejCEMH_cPgZaokWej4UdgyIIy5HI").build()
 //        val context = GeoApiContext.Builder().apiKey(requireActivity().getString(R.string.map_key)).build()
 
         // Request directions

@@ -98,6 +98,7 @@
         android:layout_marginBottom="@dimen/_10sdp"
         android:background="@drawable/button_radius_corner"
         android:hint="@string/additional_directions_optional"
+        android:textColor="@color/colorGray"
         android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
         android:maxLines="1"

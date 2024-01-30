@@ -219,7 +219,7 @@ interface ApiService {
         @Path("id") id: String,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER",
         @Header("deviceData") deviceString: String = "$DEVICE_TOKEN"
-    ): Response<AddToCart>
+    ): Response<ModelCart>
 
     @POST(NetworkCallPoints.UPDATE_CART_ITEM)
     suspend fun updateCartItem(

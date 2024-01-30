@@ -23,5 +23,13 @@ class LocationPermission {
 //        fun contactPermission(context: Context):Boolean{
 //            return ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED
 //        }
+
+        fun extractShortAddress(fullAddress: String?): String? {
+            val addressParts = fullAddress?.split(", ")
+            val shortAddress = addressParts?.get(0)
+            return shortAddress
+        }
     }
+
+
 }

@@ -19,6 +19,8 @@ import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.adapter.StoresAdapter
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.bottomsheet.BottomSheetRatDelListener
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.bottomsheet.BottomSheetRatingDeliveryFragment
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.Doc
+import com.teamx.hatlyUser.utils.LocationPermission
+import com.teamx.hatlyUser.utils.LocationPermission.Companion.extractShortAddress
 import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -243,7 +245,7 @@ class StoresFragment :
                     loadingDialog.dismiss()
                     it.data?.let { data ->
                         modelAllStoresArraylist.clear()
-                        data.docs?.let { it1 -> modelAllStoresArraylist.addAll(it1) }
+                        data.docs.let { it1 -> modelAllStoresArraylist.addAll(it1) }
 
                         hatlyPopularAdapter.notifyDataSetChanged()
                     }
@@ -281,11 +283,7 @@ class StoresFragment :
 
     }
 
-    private fun extractShortAddress(fullAddress: String?): String? {
-        val addressParts = fullAddress?.split(", ")
-        val shortAddress = addressParts?.get(0)
-        return shortAddress
-    }
+
 
     private var deliverTime: Int? = null
     private var rating: Int? = null

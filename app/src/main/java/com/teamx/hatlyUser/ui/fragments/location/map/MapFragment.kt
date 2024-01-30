@@ -172,7 +172,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             addDirectionStr = inpAddDirectionNum.text.toString().trim()
 
             if (isForUpdate) {
-                mViewModel.updateAddress(locationId?:"", createJson())
+                mViewModel.updateAddress(locationId ?: "", createJson())
             } else {
                 mViewModel.createAddress(createJson())
             }
@@ -228,7 +228,10 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                                     sharedViewModel.setlocationmodel(userData.location)
                                 }
 
-                                if (alreadyFragmentAdded(R.id.homeFragment) || alreadyFragmentAdded(R.id.locationFragment)) {
+                                if (alreadyFragmentAdded(R.id.homeFragment) || alreadyFragmentAdded(
+                                        R.id.locationFragment
+                                    )
+                                ) {
                                     findNavController().popBackStack()
                                 } else {
                                     findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
@@ -274,7 +277,10 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                                     sharedViewModel.setUserData(userData)
                                     sharedViewModel.setlocationmodel(userData.location)
                                 }
-                                if (!alreadyFragmentAdded(R.id.homeFragment) || !alreadyFragmentAdded(R.id.locationFragment)) {
+                                if (!alreadyFragmentAdded(R.id.homeFragment) || !alreadyFragmentAdded(
+                                        R.id.locationFragment
+                                    )
+                                ) {
                                     findNavController().navigate(R.id.action_mapFragment_to_homeFragment)
                                 } else {
                                     findNavController().popBackStack()
@@ -455,9 +461,9 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                         txtConfirmLocation1.text = getString(R.string.update_location)
                         isMapBeingDragged = false
 
-                        apartmentStr = locationModel.apartmentNumber?:""
-                        buildingNumStr = locationModel.building?:""
-                        addDirectionStr = locationModel.additionalDirection?:""
+                        apartmentStr = locationModel.apartmentNumber ?: ""
+                        buildingNumStr = locationModel.building ?: ""
+                        addDirectionStr = locationModel.additionalDirection ?: ""
 
                         updateUi(
                             locationModel.address,
@@ -491,7 +497,9 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
 
     override fun onDestroyView() {
         super.onDestroyView()
-        googleMap.clear()
+        if (googleMap != null) {
+            googleMap.clear()
+        }
         sharedViewModel.locationmodel.removeObservers(viewLifecycleOwner)
     }
 

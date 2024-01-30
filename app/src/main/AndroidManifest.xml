@@ -51,7 +51,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/map_key" />
+            android:value="AIzaSyAnLo0ejCEMH_cPgZaokWej4UdgyIIy5HI" />
 
         <service
             android:name=".PushNotificationService"

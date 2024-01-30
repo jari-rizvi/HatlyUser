@@ -346,7 +346,7 @@
                             android:layout_gravity="center_vertical|start"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:buttonTint="@color/colorGreen"
-                            android:drawableStart="@drawable/stripe"
+                            android:drawableStart="@drawable/visa_blue_box"
                             android:drawablePadding="@dimen/_7sdp"
                             android:paddingStart="@dimen/_3sdp"
                             android:text="Visa"
