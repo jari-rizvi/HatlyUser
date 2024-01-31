@@ -82,6 +82,10 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding, TopUpModel>(),
 
                 PaymentMethod.PAYPAL -> {
                 }
+
+                else -> {
+
+                }
             }
             mViewModel.topUpSaved(params)
         }
@@ -170,6 +174,8 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding, TopUpModel>(),
 
                                 PaymentMethod.PAYPAL -> {
                                 }
+
+                                else -> {}
                             }
                         }
                     }

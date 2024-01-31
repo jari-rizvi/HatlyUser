@@ -420,6 +420,7 @@ class ProductPreviewFragment :
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
+                            addToCart()
                             mViewDataBinding.mainLayout.snackbar(getString(R.string.cart_is_empty_now_you_can_add_product))
                         }
                     }
@@ -455,32 +456,7 @@ class ProductPreviewFragment :
 
         mViewDataBinding.textView30.setOnClickListener {
 
-            val filteredVariations = variationArray.map { variation ->
-                com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.Veriation(
-                    _id = variation._id,
-                    options = variation.options.filter { it.isNotBlank() } as ArrayList<String>,
-                    price = null
-                )
-            }.filter { it.options.isNotEmpty() }
-
-            Log.d("filteredVariations", "onViewCreated: $filteredVariations")
-
-            val spInst = mViewDataBinding.inpSpecialInstr.text.toString()
-            val params = JsonObject()
-            try {
-                params.addProperty("id", storeId)
-                params.addProperty("quantity", quantityActualValue)
-                if (!filteredVariations.isNullOrEmpty()) {
-                    params.add("veriations", Gson().toJsonTree(filteredVariations))
-                }
-                if (spInst.isNotEmpty()) {
-                    params.addProperty("specialInstruction", spInst)
-                }
-            } catch (e: JSONException) {
-                e.printStackTrace()
-            }
-            isAddToCartRecommend = false
-            mViewModel.addToCart(params)
+            addToCart()
         }
 
 
@@ -495,6 +471,35 @@ class ProductPreviewFragment :
         timer = Timer()
         timer.scheduleAtFixedRate(AutoSlideTask(), 2000, 3000)
 
+    }
+
+    private fun addToCart(){
+        val filteredVariations = variationArray.map { variation ->
+            com.teamx.hatlyUser.ui.fragments.products.modelAddToCart.Veriation(
+                _id = variation._id,
+                options = variation.options.filter { it.isNotBlank() } as ArrayList<String>,
+                price = null
+            )
+        }.filter { it.options.isNotEmpty() }
+
+        Log.d("filteredVariations", "onViewCreated: $filteredVariations")
+
+        val spInst = mViewDataBinding.inpSpecialInstr.text.toString()
+        val params = JsonObject()
+        try {
+            params.addProperty("id", storeId)
+            params.addProperty("quantity", quantityActualValue)
+            if (!filteredVariations.isNullOrEmpty()) {
+                params.add("veriations", Gson().toJsonTree(filteredVariations))
+            }
+            if (spInst.isNotEmpty()) {
+                params.addProperty("specialInstruction", spInst)
+            }
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        isAddToCartRecommend = false
+        mViewModel.addToCart(params)
     }
 
     fun numGenerate(): Int {

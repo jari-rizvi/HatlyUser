@@ -31,6 +31,7 @@ import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentCheckOutBinding
 import com.teamx.hatlyUser.ui.fragments.hatlymart.stores.model.Coordinates
+import com.teamx.hatlyUser.ui.fragments.payments.checkout.PaymentMethod.*
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.adapter.CheckOutAdapter
 import com.teamx.hatlyUser.ui.fragments.payments.checkout.model.Product
 import com.teamx.hatlyUser.utils.PrefHelper
@@ -60,7 +61,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
     private lateinit var paymentSheet: PaymentSheet
 
-    private var selectedPaymentMethod = PaymentMethod.CASH_ON_DELIVERY
+    private var selectedPaymentMethod = CASH_ON_DELIVERY
 
     private var paymentMethodid = ""
 
@@ -171,7 +172,26 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 //            showPaypal()
 //            initializationPayPal2()
             if (mViewDataBinding.checkBox.isChecked) {
-                mViewModel.placeOrder(createOrderJsonObject())
+                when (selectedPaymentMethod) {
+                    CASH_ON_DELIVERY -> {
+                        mViewModel.placeOrder(createOrderJsonObject())
+                    }
+                    STRIPE_PAYMENT -> {
+                        mViewModel.placeOrder(createOrderJsonObject())
+                    }
+                    STRIPE_SAVED_PAYMENT -> {
+                        mViewModel.placeOrder(createOrderJsonObject())
+                    }
+                    PAYPAL -> {
+
+                    }
+                    STRIPE_NOT_SELECTED -> {
+                        if (isAdded) {
+                            mViewDataBinding.root.snackbar(getString(R.string.select_payment))
+                        }
+                    }
+                }
+
             } else {
                 if (isAdded) {
 
@@ -185,7 +205,7 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 mViewDataBinding.radio1.isChecked = false
                 mViewDataBinding.radioAddNewCard.isChecked = false
                 mViewDataBinding.radioGroupStripe.visibility = View.GONE
-                selectedPaymentMethod = PaymentMethod.CASH_ON_DELIVERY
+                selectedPaymentMethod = CASH_ON_DELIVERY
             }
         }
 
@@ -194,28 +214,28 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
                 mViewDataBinding.radio1.isChecked = false
                 mViewDataBinding.radioAddNewCard.isChecked = false
                 mViewDataBinding.radioGroupStripe.visibility = View.GONE
-                selectedPaymentMethod = PaymentMethod.PAYPAL
+                selectedPaymentMethod = PAYPAL
             }
         }
 
         mViewDataBinding.radioOnline.setOnClickListener {
             if (mViewDataBinding.radioOnline.isChecked) {
-                mViewDataBinding.radio1.isChecked = true
+//                mViewDataBinding.radio1.isChecked = true
                 mViewDataBinding.radioGroupStripe.visibility = View.VISIBLE
-                selectedPaymentMethod = PaymentMethod.STRIPE_SAVED_PAYMENT
+                selectedPaymentMethod = STRIPE_NOT_SELECTED
             }
         }
 
         mViewDataBinding.radioSelectedCard.setOnClickListener {
             mViewDataBinding.radio1.isChecked = true
             mViewDataBinding.radioAddNewCard.isChecked = false
-            selectedPaymentMethod = PaymentMethod.STRIPE_SAVED_PAYMENT
+            selectedPaymentMethod = STRIPE_SAVED_PAYMENT
         }
 
         mViewDataBinding.radioAddNewCard.setOnClickListener {
             mViewDataBinding.radio1.isChecked = false
             mViewDataBinding.radioAddNewCard.isChecked = true
-            selectedPaymentMethod = PaymentMethod.STRIPE_PAYMENT
+            selectedPaymentMethod = STRIPE_PAYMENT
         }
 
 
@@ -463,79 +483,88 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
 
 
 
-        mViewModel.placeOrderResponse.observe(requireActivity()) {
-            when (it.status) {
-                Resource.Status.AUTH -> {
-                    loadingDialog.dismiss()
-                    onToSignUpPage()
-                }
+        if (!mViewModel.placeOrderResponse.hasActiveObservers()){
+            mViewModel.placeOrderResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
 
-                Resource.Status.LOADING -> {
-                    loadingDialog.show()
-                }
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
 
-                Resource.Status.SUCCESS -> {
-                    loadingDialog.dismiss()
-                    it.data?.let { data ->
-                        orderId = data._id
-                        val bundle = Bundle()
-                        bundle.putString("orderId", orderId)
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            orderId = data._id
+                            val bundle = Bundle()
+                            bundle.putString("orderId", orderId)
 
-                        if (data.isPayed) {
-                            findNavController().navigate(
-                                R.id.action_checkOutFragment_to_orderPlacedFragment,
-                                bundle
-                            )
-                        } else {
-                            when (selectedPaymentMethod) {
-                                PaymentMethod.CASH_ON_DELIVERY -> {
-                                    // Process payment for Cash on Delivery
-                                    if (data.status == "placed") {
-                                        if (isAdded) {
-                                            findNavController().navigate(
-                                                R.id.action_checkOutFragment_to_orderPlacedFragment,
-                                                bundle
-                                            )
+                            if (data.isPayed) {
+                                findNavController().navigate(
+                                    R.id.action_checkOutFragment_to_orderPlacedFragment,
+                                    bundle
+                                )
+                            } else {
+                                when (selectedPaymentMethod) {
+                                    CASH_ON_DELIVERY -> {
+                                        // Process payment for Cash on Delivery
+                                        if (data.status == "placed") {
+                                            if (isAdded) {
+                                                findNavController().navigate(
+                                                    R.id.action_checkOutFragment_to_orderPlacedFragment,
+                                                    bundle
+                                                )
+                                            }
                                         }
                                     }
-                                }
 
-                                PaymentMethod.STRIPE_PAYMENT -> {
-                                    // Process payment for Online Payment
-                                    if (data.clientSecret != null) {
-                                        showStripeSheet(data.clientSecret)
-                                    }
-                                }
-
-                                PaymentMethod.STRIPE_SAVED_PAYMENT -> {
-                                    // Process payment for Online Payment
-                                    if (data.status == "placed") {
-                                        if (isAdded) {
-                                            findNavController().navigate(
-                                                R.id.action_checkOutFragment_to_orderPlacedFragment,
-                                                bundle
-                                            )
+                                    STRIPE_PAYMENT -> {
+                                        // Process payment for Online Payment
+                                        if (data.clientSecret != null) {
+                                            showStripeSheet(data.clientSecret)
                                         }
                                     }
-                                }
 
-                                PaymentMethod.PAYPAL -> {
-                                    showPaypal()
+                                    STRIPE_SAVED_PAYMENT -> {
+                                        // Process payment for Online Payment
+                                        if (data.status == "placed") {
+                                            if (isAdded) {
+                                                findNavController().navigate(
+                                                    R.id.action_checkOutFragment_to_orderPlacedFragment,
+                                                    bundle
+                                                )
+                                            }
+                                        }
+                                    }
+
+                                    PAYPAL -> {
+                                        showPaypal()
+                                    }
+
+                                    STRIPE_NOT_SELECTED -> {
+                                        if (isAdded) {
+                                            mViewDataBinding.root.snackbar(getString(R.string.select_payment))
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
-                Resource.Status.ERROR -> {
-                    loadingDialog.dismiss()
-                    if (isAdded) {
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        if (isAdded) {
 
-                        mViewDataBinding.root.snackbar(it.message!!)
+                            mViewDataBinding.root.snackbar(it.message!!)
+                        }
                     }
                 }
             }
         }
+
 
         mViewModel.credCards()
         mViewModel.credCardsResponse.observe(requireActivity()) {
@@ -969,27 +998,29 @@ class CheckOutFragment : BaseFragment<FragmentCheckOutBinding, CheckOutViewModel
             params.addProperty("useWallet", mViewDataBinding.swOnOff.isChecked)
 //
             when (selectedPaymentMethod) {
-                PaymentMethod.CASH_ON_DELIVERY -> {
+                CASH_ON_DELIVERY -> {
                     // Process payment for Cash on Delivery
                     params.addProperty("orderType", "CASH_ON_DELIVERY")
                 }
 
-                PaymentMethod.STRIPE_PAYMENT -> {
+                STRIPE_PAYMENT -> {
                     // Process payment for Online Payment
                     params.addProperty("orderType", "ONLINE_PAYMENTS")
                     params.addProperty("payBy", "STRIPE")
                 }
 
-                PaymentMethod.STRIPE_SAVED_PAYMENT -> {
+                STRIPE_SAVED_PAYMENT -> {
                     // Process payment for Online Payment
                     params.addProperty("orderType", "ONLINE_PAYMENTS")
                     params.addProperty("payBy", "STRIPE")
                     params.addProperty("payment_method", paymentMethodid)
                 }
 
-                PaymentMethod.PAYPAL -> {
+                PAYPAL -> {
                     params.addProperty("orderType", "ONLINE_PAYMENTS")
                     params.addProperty("payBy", "PAYPAL")
+                }
+                else -> {
                 }
             }
 
@@ -1063,5 +1094,6 @@ enum class PaymentMethod {
     CASH_ON_DELIVERY,
     STRIPE_PAYMENT,
     STRIPE_SAVED_PAYMENT,
-    PAYPAL
+    PAYPAL,
+    STRIPE_NOT_SELECTED,
 }

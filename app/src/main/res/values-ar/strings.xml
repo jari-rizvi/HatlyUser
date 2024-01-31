@@ -299,6 +299,7 @@
     <string name="write">أكتب...</string>
     <string name="no_favourites_saved">لم يتم حفظ  منتجات مفضلة</string>
     <string name="filter_by">التصنيف بحسب:</string>
+    <string name="select_payment">الرجاء إختيار طريقة الدفع</string>
 
 <!--    <string name="vat">الضريبة %1$s%</string>-->
 
