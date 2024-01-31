@@ -109,46 +109,49 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
 
         performSearch()
 
-        mViewModel.storeSubCategoryResponse.observe(requireActivity()) {
-            when (it.status) {
-                Resource.Status.AUTH -> {
-                    loadingDialog.dismiss()
-                    onToSignUpPage()
-                }
-                Resource.Status.LOADING -> {
-                    loadingDialog.show()
-                }
+        if (!mViewModel.storeSubCategoryResponse.hasActiveObservers()){
+            mViewModel.storeSubCategoryResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
 
-                Resource.Status.SUCCESS -> {
-                    loadingDialog.dismiss()
-                    it.data?.let { data ->
-                        itemCategoryTitle.clear()
-                        subCategoryProductsArray.clear()
-                        data.docs?.forEach {
-                            itemCategoryTitle.add(it)
-                        }
-                        Log.d("performSearch", "storeSubCategoryResponse: ${data.docs}")
-                        if (data.docs?.isNotEmpty() == true) {
-                            clickCategoryItem(0)
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            itemCategoryTitle.clear()
+                            subCategoryProductsArray.clear()
+                            data.docs?.forEach {
+                                itemCategoryTitle.add(it)
+                            }
+                            Log.d("performSearch", "storeSubCategoryResponse: ${data.docs}")
+                            if (data.docs?.isNotEmpty() == true) {
+                                clickCategoryItem(0)
 //                            itemCategoryTitle[0].isSelected = true
 //                            subCategoryProductsArray.addAll(itemCategoryTitle[0].documents)
+                            }
+
+                            shopHomeAdapter.notifyDataSetChanged()
+                            subCategoryProductsAdapter.notifyDataSetChanged()
                         }
-
-                        shopHomeAdapter.notifyDataSetChanged()
-                        subCategoryProductsAdapter.notifyDataSetChanged()
                     }
-                }
 
-                Resource.Status.ERROR -> {
-                    loadingDialog.dismiss()
-                    if (isAdded) {
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        if (isAdded) {
 
-                        mViewDataBinding.mainLayout.snackbar(it.message!!)
+                            mViewDataBinding.mainLayout.snackbar(it.message!!)
+                        }
+                        Log.d("hatlyShopCatAdapter", "ERROR: ${it.message!!}")
                     }
-                    Log.d("hatlyShopCatAdapter", "ERROR: ${it.message!!}")
                 }
             }
         }
+
 
         if (!mViewModel.addToCartResponse.hasActiveObservers()) {
             mViewModel.addToCartResponse.observe(requireActivity()) {
@@ -330,7 +333,7 @@ class ShopHomeFragment : BaseFragment<FragmentShopHomeBinding, ShopHomeViewModel
                         Resource.Status.SUCCESS -> {
                             loadingDialog.dismiss()
                             it.data?.let { data ->
-
+                                Log.d("updateCartItemResponse", "updateQtyResponse: $data")
                                 if (actionStack.isNotEmpty()) {
                                     val cartmodel1 = subCategoryProductsArray[actionStack.pop()]
                                     params.addProperty("id", cartmodel1.cartItemId)

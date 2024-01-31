@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: com.firebaseui:firebase-ui-auth:7.2.0@aar">
+  <library name="Gradle: com.firebaseui:firebase-ui-auth:7.2.0@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/975258d18a3383c9623bd8bc9344ab43/transformed/jetified-firebase-ui-auth-7.2.0/annotations.zip!/" />
     </ANNOTATIONS>

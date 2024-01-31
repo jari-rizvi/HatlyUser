@@ -80,7 +80,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         }
 
 
-
 //        checkWifiAndInternetConnection()
 
 
@@ -107,11 +106,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 //        MainActivity.service!!.showNotification1("dummy title","dummy description","dummy type","dummy id")
 
         mViewDataBinding.inpSearch.setOnClickListener {
+            try {
             findNavController().navigate(R.id.action_homeFragment_to_homeSearchFragment)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         }
 
         mViewDataBinding.imgWishList.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_wishListFragment)
+            try {
+                findNavController().navigate(R.id.action_homeFragment_to_wishListFragment)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
         val userData = PrefHelper.getInstance(requireActivity()).getUserData()
@@ -166,7 +173,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             }
 
             sharedViewModel.setlocationmodel(locationModel)
-            findNavController().navigate(R.id.action_homeFragment_to_mapFragment)
+            try {
+                findNavController().navigate(R.id.action_homeFragment_to_mapFragment)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
         mViewDataBinding.imgMenu.setOnClickListener {
@@ -178,14 +189,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             MART = Marts.HATLY_MART
             val bundle = Bundle()
             bundle.putBoolean("parcel", true)
-            if (isAdded) {
+            try {
                 findNavController().navigate(R.id.action_homeFragment_to_hatlyMartFragment, bundle)
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
 
         mViewDataBinding.textView8.setOnClickListener {
             MART = Marts.FOOD
-            findNavController().navigate(R.id.action_homeFragment_to_foodsHomeFragment)
+            try {
+                findNavController().navigate(R.id.action_homeFragment_to_foodsHomeFragment)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
         mViewDataBinding.textView10.setOnClickListener {
@@ -193,25 +210,41 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 //            findNavController().navigate(R.id.action_homeFragment_to_storesFragment)
             val bundle = Bundle()
             bundle.putBoolean("parcel", false)
-            findNavController().navigate(R.id.action_homeFragment_to_storesFragment, bundle)
+            try {
+                findNavController().navigate(R.id.action_homeFragment_to_storesFragment, bundle)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
         mViewDataBinding.textView11.setOnClickListener {
             MART = Marts.HEALTH_BEAUTY
             val bundle = Bundle()
             bundle.putBoolean("parcel", false)
-            findNavController().navigate(R.id.action_homeFragment_to_storesFragment, bundle)
+            try {
+                findNavController().navigate(R.id.action_homeFragment_to_storesFragment, bundle)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
         mViewDataBinding.textView112.setOnClickListener {
             MART = Marts.HOME_BUSINESS
             val bundle = Bundle()
             bundle.putBoolean("parcel", false)
-            findNavController().navigate(R.id.action_homeFragment_to_storesFragment, bundle)
+            try {
+                findNavController().navigate(R.id.action_homeFragment_to_storesFragment, bundle)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
         mViewDataBinding.imgNotification.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
+            try {
+                findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
         pushNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
@@ -277,7 +310,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
                         it.data?.let { data ->
                             Log.d("datadata", "onViewCreated: ${data}")
-                            ADMIN_TAX= data.VAT
+                            ADMIN_TAX = data.VAT
 //                            mViewDataBinding.mainLayout.snackbar()
                         }
 //                        it.data?.let { data ->

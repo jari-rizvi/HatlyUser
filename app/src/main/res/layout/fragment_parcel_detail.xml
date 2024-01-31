@@ -44,11 +44,11 @@
 
         <TextView
             android:id="@+id/textView2"
+            style="@style/txtGrayColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
             android:text="@string/send_parcel"
-            style="@style/txtGrayColor"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -66,12 +66,12 @@
 
         <TextView
             android:id="@+id/textView226"
+            style="@style/txtGrayColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/montserrat_regular"
             android:text="@string/parcel_details"
-            style="@style/txtGrayColor"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -89,10 +89,10 @@
             android:hint="@string/what_are_you_sending"
             android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
-            android:textColor="@color/colorGray"
             android:maxLines="1"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
+            android:textColor="@color/colorGray"
             android:textColorHint="#B3EA1B25"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_12ssp"
@@ -110,10 +110,10 @@
             android:hint="@string/enter_quantity"
             android:imeOptions="actionNext"
             android:inputType="number"
-            android:textColor="@color/colorGray"
             android:maxLines="1"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
+            android:textColor="@color/colorGray"
             android:textColorHint="#B3EA1B25"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_12ssp"
@@ -156,18 +156,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:background="@drawable/button_radius_corner"
             android:drawablePadding="@dimen/_10sdp"
             android:hint="@string/weight_of_parcel"
             android:imeOptions="actionNext"
             android:inputType="numberDecimal"
-            android:textColor="@color/colorGray"
             android:maxLines="1"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
+            android:textColor="@color/colorGray"
             android:textColorHint="#B3EA1B25"
             android:textCursorDrawable="@color/black"
-            android:layout_marginEnd="@dimen/_5sdp"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toStartOf="@+id/spinner1"
             app:layout_constraintStart_toStartOf="@+id/inpQuantity"
@@ -216,10 +216,10 @@
 
         <Spinner
             android:id="@+id/spinner1"
+            style="@style/spinner_style"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:spinnerMode="dropdown"
-            style="@style/spinner_style"
             app:layout_constraintBottom_toBottomOf="@+id/inpParcelWeight"
             app:layout_constraintEnd_toEndOf="@+id/inpWhatSending"
             app:layout_constraintTop_toTopOf="@+id/inpParcelWeight" />
@@ -233,12 +233,12 @@
             android:background="@drawable/button_radius_corner"
             android:drawablePadding="@dimen/_10sdp"
             android:hint="@string/length"
-            android:textColor="@color/colorGray"
             android:imeOptions="actionNext"
             android:inputType="numberDecimal"
             android:maxLines="1"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
+            android:textColor="@color/colorGray"
             android:textColorHint="#B3EA1B25"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_12ssp"
@@ -246,25 +246,25 @@
             app:layout_constraintStart_toStartOf="@+id/inpParcelWeight"
             app:layout_constraintTop_toBottomOf="@+id/inpParcelWeight" />
 
-<!--        <EditText-->
-<!--            android:id="@+id/userEmail658865"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@drawable/button_radius_corner"-->
-<!--            android:drawablePadding="@dimen/_10sdp"-->
-<!--            android:hint="Unit"-->
-<!--            android:imeOptions="actionNext"-->
-<!--            android:inputType="textEmailAddress"-->
-<!--            android:maxLines="1"-->
-<!--            android:paddingVertical="@dimen/_10sdp"-->
-<!--            android:paddingStart="@dimen/_10sdp"-->
-<!--            android:textColorHint="#B3EA1B25"-->
-<!--            android:textCursorDrawable="@color/black"-->
-<!--            android:textSize="@dimen/_12ssp"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/userEmail45"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/spinner1"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/spinner1"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/userEmail45" />-->
+        <!--        <EditText-->
+        <!--            android:id="@+id/userEmail658865"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/button_radius_corner"-->
+        <!--            android:drawablePadding="@dimen/_10sdp"-->
+        <!--            android:hint="Unit"-->
+        <!--            android:imeOptions="actionNext"-->
+        <!--            android:inputType="textEmailAddress"-->
+        <!--            android:maxLines="1"-->
+        <!--            android:paddingVertical="@dimen/_10sdp"-->
+        <!--            android:paddingStart="@dimen/_10sdp"-->
+        <!--            android:textColorHint="#B3EA1B25"-->
+        <!--            android:textCursorDrawable="@color/black"-->
+        <!--            android:textSize="@dimen/_12ssp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/userEmail45"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/spinner1"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/spinner1"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/userEmail45" />-->
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -278,11 +278,11 @@
 
         <Spinner
             android:id="@+id/spinner2"
+            style="@style/spinner_style"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:spinnerMode="dropdown"
-            style="@style/spinner_style"
             android:popupBackground="@drawable/button_radius_corner"
+            android:spinnerMode="dropdown"
             app:layout_constraintBottom_toBottomOf="@+id/inpParcelLength"
             app:layout_constraintEnd_toEndOf="@+id/spinner1"
             app:layout_constraintStart_toStartOf="@+id/spinner1"
@@ -297,11 +297,11 @@
             android:drawablePadding="@dimen/_10sdp"
             android:hint="@string/width"
             android:imeOptions="actionNext"
-            android:textColor="@color/colorGray"
             android:inputType="numberDecimal"
             android:maxLines="1"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
+            android:textColor="@color/colorGray"
             android:textColorHint="#B3EA1B25"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_12ssp"
@@ -309,25 +309,25 @@
             app:layout_constraintStart_toStartOf="@+id/inpParcelLength"
             app:layout_constraintTop_toBottomOf="@+id/inpParcelLength" />
 
-<!--        <EditText-->
-<!--            android:id="@+id/userEmail65878865"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@drawable/button_radius_corner"-->
-<!--            android:drawablePadding="@dimen/_10sdp"-->
-<!--            android:hint="Unit"-->
-<!--            android:imeOptions="actionNext"-->
-<!--            android:inputType="textEmailAddress"-->
-<!--            android:maxLines="1"-->
-<!--            android:paddingVertical="@dimen/_10sdp"-->
-<!--            android:paddingStart="@dimen/_10sdp"-->
-<!--            android:textColorHint="#B3EA1B25"-->
-<!--            android:textCursorDrawable="@color/black"-->
-<!--            android:textSize="@dimen/_12ssp"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/userEmail455"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/spinner2"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/spinner2"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/userEmail455" />-->
+        <!--        <EditText-->
+        <!--            android:id="@+id/userEmail65878865"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/button_radius_corner"-->
+        <!--            android:drawablePadding="@dimen/_10sdp"-->
+        <!--            android:hint="Unit"-->
+        <!--            android:imeOptions="actionNext"-->
+        <!--            android:inputType="textEmailAddress"-->
+        <!--            android:maxLines="1"-->
+        <!--            android:paddingVertical="@dimen/_10sdp"-->
+        <!--            android:paddingStart="@dimen/_10sdp"-->
+        <!--            android:textColorHint="#B3EA1B25"-->
+        <!--            android:textCursorDrawable="@color/black"-->
+        <!--            android:textSize="@dimen/_12ssp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/userEmail455"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/spinner2"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/spinner2"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/userEmail455" />-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -340,11 +340,11 @@
 
         <Spinner
             android:id="@+id/spinner3"
+            style="@style/spinner_style"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:spinnerMode="dropdown"
-            style="@style/spinner_style"
             android:popupBackground="@drawable/button_radius_corner"
+            android:spinnerMode="dropdown"
             app:layout_constraintBottom_toBottomOf="@+id/inpParcelWidth"
             app:layout_constraintEnd_toEndOf="@+id/spinner2"
             app:layout_constraintStart_toStartOf="@+id/spinner2"
@@ -359,11 +359,11 @@
             android:drawablePadding="@dimen/_10sdp"
             android:hint="@string/height"
             android:imeOptions="actionNext"
-            android:textColor="@color/colorGray"
             android:inputType="numberDecimal"
             android:maxLines="1"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
+            android:textColor="@color/colorGray"
             android:textColorHint="#B3EA1B25"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_12ssp"
@@ -373,25 +373,25 @@
             tools:layout_editor_absoluteX="23dp"
             tools:layout_editor_absoluteY="361dp" />
 
-<!--        <EditText-->
-<!--            android:id="@+id/userEmail65899865"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@drawable/button_radius_corner"-->
-<!--            android:drawablePadding="@dimen/_10sdp"-->
-<!--            android:hint="Unit"-->
-<!--            android:imeOptions="actionNext"-->
-<!--            android:inputType="textEmailAddress"-->
-<!--            android:maxLines="1"-->
-<!--            android:paddingVertical="@dimen/_10sdp"-->
-<!--            android:paddingStart="@dimen/_10sdp"-->
-<!--            android:textColorHint="#B3EA1B25"-->
-<!--            android:textCursorDrawable="@color/black"-->
-<!--            android:textSize="@dimen/_12ssp"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/userEmail4565"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/spinner3"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/spinner3"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/userEmail4565" />-->
+        <!--        <EditText-->
+        <!--            android:id="@+id/userEmail65899865"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/button_radius_corner"-->
+        <!--            android:drawablePadding="@dimen/_10sdp"-->
+        <!--            android:hint="Unit"-->
+        <!--            android:imeOptions="actionNext"-->
+        <!--            android:inputType="textEmailAddress"-->
+        <!--            android:maxLines="1"-->
+        <!--            android:paddingVertical="@dimen/_10sdp"-->
+        <!--            android:paddingStart="@dimen/_10sdp"-->
+        <!--            android:textColorHint="#B3EA1B25"-->
+        <!--            android:textCursorDrawable="@color/black"-->
+        <!--            android:textSize="@dimen/_12ssp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/userEmail4565"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/spinner3"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/spinner3"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/userEmail4565" />-->
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -406,11 +406,11 @@
 
         <Spinner
             android:id="@+id/spinner4"
+            style="@style/spinner_style"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:spinnerMode="dropdown"
-            style="@style/spinner_style"
             android:popupBackground="@drawable/button_radius_corner"
+            android:spinnerMode="dropdown"
             app:layout_constraintBottom_toBottomOf="@+id/inpParcelHeight"
             app:layout_constraintEnd_toEndOf="@+id/spinner3"
             app:layout_constraintStart_toStartOf="@+id/spinner3"
@@ -431,14 +431,15 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/button_radius_corner"
             android:drawablePadding="@dimen/_10sdp"
-            android:gravity="left"
             android:hint="@string/write_brief_details_about_your_parcel"
-            android:imeOptions="actionNext"
-            android:textColor="@color/colorGray"
-            android:inputType="textEmailAddress"
-            android:maxLines="1"
+            android:imeOptions="actionDone"
+            android:inputType="textMultiLine"
             android:paddingVertical="@dimen/_10sdp"
-            android:paddingStart="@dimen/_10sdp"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:gravity="start"
+            android:text="sjdklsjkldjlskjdklsjdsjdklsjkldjlskjdklsjdsjdklsjkldjlskjdklsjd"
+            android:textAlignment="viewStart"
+            android:textColor="@color/colorGray"
             android:textColorHint="#B3EA1B25"
             android:textCursorDrawable="@color/black"
             android:textSize="@dimen/_12ssp"

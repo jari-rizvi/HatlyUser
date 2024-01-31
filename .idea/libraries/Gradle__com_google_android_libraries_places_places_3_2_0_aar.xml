@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: com.google.android.libraries.places:places:3.2.0@aar">
+  <library name="Gradle: com.google.android.libraries.places:places:3.2.0@aar" external-system-id="GRADLE">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/bff43cbc6bdc2bfa8e06a1846b3a5209/transformed/jetified-places-3.2.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/bff43cbc6bdc2bfa8e06a1846b3a5209/transformed/jetified-places-3.2.0/res" />

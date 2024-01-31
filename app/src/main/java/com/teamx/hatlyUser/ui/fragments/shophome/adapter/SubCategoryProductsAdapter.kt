@@ -65,6 +65,9 @@ class SubCategoryProductsAdapter(
         if (arrayData.quantity == 0){
             holder.bind.stockLayout.visibility = View.VISIBLE
             holder.bind.txtTitle54.visibility = View.VISIBLE
+        }else{
+            holder.bind.stockLayout.visibility = View.GONE
+            holder.bind.txtTitle54.visibility = View.GONE
         }
 
         holder.itemView.setOnClickListener {
