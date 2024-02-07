@@ -67,6 +67,18 @@ interface ApiService {
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
     ): Response<FcmModel>
 
+    @POST(NetworkCallPoints.CONTACT_US)
+    suspend fun contactUs(
+        @Body params: JsonObject?,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
+    ): Response<FcmModel>
+
+    @PUT(NetworkCallPoints.TOGGLE_NOTIFICATION)
+    suspend fun pushNotification(
+        @Body params: JsonObject?,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
+    ): Response<ModelForgotPass>
+
     @GET(NetworkCallPoints.SETTING_ADMIN)
     suspend fun settingAdmin(
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
@@ -300,6 +312,13 @@ interface ApiService {
         @Part images: List<MultipartBody.Part>,
         @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
     ): Response<ModelUploadImages>
+
+
+    @GET(NetworkCallPoints.ORDER_DETAIL)
+    suspend fun orderDetail(
+        @Path("id") id: String,
+        @Header("Authorization") basicCredentials: String = "Bearer $TOKENER"
+    ): Response<com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Doc>
 
 
     @POST(NetworkCallPoints.UPDATE_PROFILE)

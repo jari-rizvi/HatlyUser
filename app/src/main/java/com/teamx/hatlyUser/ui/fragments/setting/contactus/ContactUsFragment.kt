@@ -7,9 +7,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
+import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentContactusBinding
 import com.teamx.hatlyUser.utils.DialogHelperClass
 import com.teamx.hatlyUser.utils.snackbar
@@ -46,7 +48,46 @@ class ContactUsFragment : BaseFragment<FragmentContactusBinding, ContactUsViewMo
 
         mViewDataBinding.txtLogin.setOnClickListener {
             if (isValidate()) {
-                sendEmail("hatlykhalifa@gmail.com", "", "Name: ${mViewDataBinding.inpName.text.toString().trim()}\n\n${mViewDataBinding.inpMessage.text.toString().trim()}")
+
+                val jsonObject = JsonObject()
+                jsonObject.addProperty("name",mViewDataBinding.inpName.text.toString().trim())
+                jsonObject.addProperty("email",mViewDataBinding.inpEmail.text.toString().trim())
+                jsonObject.addProperty("phoneNumber",mViewDataBinding.inpMobile.text.toString().trim())
+                jsonObject.addProperty("message",mViewDataBinding.inpMessage.text.toString().trim())
+                jsonObject.addProperty("subject",mViewDataBinding.inpSubject.text.toString().trim())
+
+                mViewModel.contactUs(jsonObject)
+
+//                sendEmail("hatlykhalifa@gmail.com", "", "Name: ${mViewDataBinding.inpName.text.toString().trim()}\n\n${mViewDataBinding.inpMessage.text.toString().trim()}")
+            }
+        }
+
+        if (!mViewModel.contactUsResponse.hasActiveObservers()) {
+            mViewModel.contactUsResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
+
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        if (isAdded) {
+                            it.data?.let { it1 -> mViewDataBinding.mainLayout.snackbar(it1.message) }
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        if (isAdded) {
+                            mViewDataBinding.mainLayout.snackbar(it.message!!)
+                        }
+                    }
+                }
             }
         }
     }

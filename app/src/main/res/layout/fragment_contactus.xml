@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -42,11 +43,11 @@
 
         <TextView
             android:id="@+id/textView2"
+            style="@style/txtGrayColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
             android:text="@string/contact_us"
-            style="@style/txtGrayColor"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -65,11 +66,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutContact"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/input_auth_field"
             android:backgroundTint="@color/white"
             android:elevation="@dimen/_3sdp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline1"
             app:layout_constraintEnd_toEndOf="@+id/imgBack1"
             app:layout_constraintStart_toStartOf="@+id/imgBack"
             app:layout_constraintTop_toBottomOf="@+id/guideline">
@@ -78,22 +78,23 @@
                 android:id="@+id/inpName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/input_auth_field"
                 android:backgroundTint="@android:color/transparent"
                 android:hint="@string/your_name"
                 android:imeOptions="actionNext"
-                android:textAlignment="viewStart"
                 android:maxLines="1"
                 android:paddingVertical="@dimen/_10sdp"
                 android:paddingStart="@dimen/_10sdp"
+                android:textAlignment="viewStart"
                 android:textColor="@color/colorGray"
                 android:textColorHint="#80262626"
                 android:textCursorDrawable="@color/black"
                 android:textSize="@dimen/_13ssp"
-                app:layout_constraintBottom_toTopOf="@+id/inpMobile"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteY="21dp" />
 
             <View
                 android:id="@+id/view"
@@ -109,23 +110,24 @@
                 android:id="@+id/inpMobile"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/input_auth_field"
                 android:backgroundTint="@android:color/transparent"
                 android:hint="@string/mobile_number"
                 android:imeOptions="actionNext"
-                android:maxLines="1"
-                android:textAlignment="viewStart"
                 android:inputType="number|phone"
-                android:textColor="@color/colorGray"
+                android:maxLines="1"
                 android:paddingVertical="@dimen/_10sdp"
                 android:paddingStart="@dimen/_10sdp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorGray"
                 android:textColorHint="#80262626"
                 android:textCursorDrawable="@color/black"
                 android:textSize="@dimen/_13ssp"
-                app:layout_constraintBottom_toTopOf="@+id/inpEmail"
-                app:layout_constraintEnd_toEndOf="@+id/inpName"
-                app:layout_constraintStart_toStartOf="@+id/inpName"
-                app:layout_constraintTop_toBottomOf="@+id/inpName" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inpName"
+                tools:layout_editor_absoluteY="90dp" />
 
             <View
                 android:id="@+id/view1"
@@ -141,69 +143,97 @@
                 android:id="@+id/inpEmail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/input_auth_field"
                 android:backgroundTint="@android:color/transparent"
                 android:hint="@string/email_address"
                 android:imeOptions="actionNext"
                 android:maxLines="1"
-                android:textAlignment="viewStart"
-                android:textColor="@color/colorGray"
                 android:paddingVertical="@dimen/_10sdp"
                 android:paddingStart="@dimen/_10sdp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorGray"
                 android:textColorHint="#80262626"
                 android:textCursorDrawable="@color/black"
                 android:textSize="@dimen/_13ssp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline11"
-                app:layout_constraintEnd_toEndOf="@+id/inpMobile"
-                app:layout_constraintStart_toStartOf="@+id/inpMobile"
-                app:layout_constraintTop_toBottomOf="@+id/inpMobile" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inpMobile"
+                tools:layout_editor_absoluteY="160dp" />
+
+            <View
+                android:id="@+id/view15"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#DAD9DA"
+                app:layout_constraintBottom_toTopOf="@+id/inpSubject"
+                app:layout_constraintEnd_toEndOf="@+id/inpName"
+                app:layout_constraintStart_toStartOf="@+id/inpName"
+                app:layout_constraintTop_toBottomOf="@+id/inpEmail" />
+
+            <EditText
+                android:id="@+id/inpSubject"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/input_auth_field"
+                android:backgroundTint="@android:color/transparent"
+                android:hint="@string/subject"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorGray"
+                android:textColorHint="#80262626"
+                android:textCursorDrawable="@color/black"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inpEmail"
+                tools:layout_editor_absoluteY="195dp" />
 
             <View
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="#DAD9DA"
-                app:layout_constraintBottom_toTopOf="@+id/guideline11"
+                app:layout_constraintBottom_toTopOf="@+id/inpMessage"
                 app:layout_constraintEnd_toEndOf="@+id/inpName"
                 app:layout_constraintStart_toStartOf="@+id/inpName"
-                app:layout_constraintTop_toBottomOf="@+id/inpEmail" />
+                app:layout_constraintTop_toBottomOf="@+id/inpSubject" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.70" />
 
             <EditText
                 android:id="@+id/inpMessage"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="@dimen/_99sdp"
                 android:background="@drawable/input_auth_field"
                 android:backgroundTint="@android:color/transparent"
+                android:gravity="top|start"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:hint="@string/message"
                 android:imeOptions="actionNext"
                 android:maxLines="1"
-                android:gravity="top|start"
-                android:textColor="@color/colorGray"
                 android:paddingVertical="@dimen/_10sdp"
                 android:paddingStart="@dimen/_10sdp"
+                android:textColor="@color/colorGray"
                 android:textColorHint="#80262626"
                 android:textCursorDrawable="@color/black"
                 android:textSize="@dimen/_13ssp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/inpEmail"
-                app:layout_constraintStart_toStartOf="@+id/inpEmail"
-                app:layout_constraintTop_toBottomOf="@+id/guideline11" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inpSubject"
+                tools:layout_editor_absoluteY="230dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.60" />
+        <!--        <androidx.constraintlayout.widget.Guideline-->
+        <!--            android:id="@+id/guideline1"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            app:layout_constraintGuide_percent="0.60" />-->
 
         <TextView
             android:id="@+id/txtLogin"
@@ -217,11 +247,11 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
-            app:layout_constraintVertical_bias="0.1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/layoutContact"
             app:layout_constraintStart_toStartOf="@+id/layoutContact"
-            app:layout_constraintTop_toBottomOf="@+id/guideline1" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutContact"
+            app:layout_constraintVertical_bias="0.1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

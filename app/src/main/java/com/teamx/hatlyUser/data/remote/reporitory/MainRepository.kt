@@ -19,6 +19,8 @@ class MainRepository @Inject constructor(
     suspend fun login(@Body param: JsonObject) = apiService.login(param)
     suspend fun guest(@Body param: JsonObject) = apiService.guest(param)
     suspend fun fcm(@Body param: JsonObject) = apiService.fcm(param)
+    suspend fun contactUs(@Body param: JsonObject) = apiService.contactUs(param)
+    suspend fun pushNotification(@Body param: JsonObject) = apiService.pushNotification(param)
     suspend fun settingAdmin() = apiService.settingAdmin()
     suspend fun homeSearch(
         @Query("search") search: String,
@@ -180,6 +182,10 @@ class MainRepository @Inject constructor(
         @Path("id") id: String,
         @Body params: JsonObject
     ) = apiService.updateAddress(id, params)
+
+    suspend fun orderDetail(
+        @Path("id") id: String
+    ) = apiService.orderDetail(id)
 
     suspend fun getAddress() = apiService.getAddress()
     suspend fun changePassword(@Body params: JsonObject) = apiService.changePassword(params)

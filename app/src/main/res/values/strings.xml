@@ -294,6 +294,7 @@
     <string name="no_favourites_saved">No favourites saved</string>
     <string name="filter_by">Filter By:</string>
     <string name="select_payment">Select Payment</string>
+    <string name="subject">Subject</string>
 
 
 </resources>

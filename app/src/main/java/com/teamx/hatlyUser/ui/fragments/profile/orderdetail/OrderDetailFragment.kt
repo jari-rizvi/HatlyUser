@@ -33,6 +33,7 @@ import com.teamx.hatlyUser.localization.LocaleManager
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.adapter.DialogUplodeImageAdapter
 import com.teamx.hatlyUser.ui.fragments.profile.orderdetail.adapter.OrderDetailAdapter
+import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Doc
 import com.teamx.hatlyUser.ui.fragments.profile.orderhistory.model.Product
 import com.teamx.hatlyUser.utils.DialogHelperClass
 import com.teamx.hatlyUser.utils.TestRet
@@ -120,146 +121,179 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
         layoutManager1 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         mViewDataBinding.recLocations.layoutManager = layoutManager1
 
-
+        
         sharedViewModel.orderHistory.observe(requireActivity()) { data ->
 
-            Log.d("orderHistorysdsd", "onViewCreated: $data")
+            mViewModel.orderDetail(data._id)
 
-            order_Id = data._id
+//            setData(data)
 
-            if (data.isFromWallet) {
-                mViewDataBinding.btnLayout.visibility = View.GONE
-                mViewDataBinding.paidLayout.visibility = View.VISIBLE
-            } else {
-                mViewDataBinding.btnLayout.visibility = View.VISIBLE
-                mViewDataBinding.paidLayout.visibility = View.GONE
-            }
-
-            when (data.orderType) {
-                "CASH_ON_DELIVERY" -> {
-                    mViewDataBinding.txtTitle114455.setCompoundDrawablesWithIntrinsicBounds(
-                        R.drawable.paid_with_cash,
-                        0,
-                        0,
-                        0
-                    );
-                    mViewDataBinding.txtTitle114455.text = try {
-                        getString(R.string.cash)
-                    } catch (e: Exception) {
-                        "null"
-                    }
-                }
-
-                "ONLINE_PAYMENTS" -> {
-                    mViewDataBinding.txtTitle114455.setCompoundDrawablesWithIntrinsicBounds(
-                        R.drawable.paid_with_card,
-                        0,
-                        0,
-                        0
-                    )
-                    mViewDataBinding.txtTitle114455.text = try {
-                        "Credit Card"
-                    } catch (e: Exception) {
-                        "null"
-                    }
-                }
-            }
-
-            when (data.status) {
-                "placed" -> {
-                    mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
-                    mViewDataBinding.txtLogin.isChecked = true
-                    mViewDataBinding.txtLogin1.visibility = View.GONE
-                    mViewDataBinding.txtTrack.visibility = View.VISIBLE
-                }
-
-                "picked" -> {
-                    mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
-                    mViewDataBinding.txtLogin.isChecked = false
-                    mViewDataBinding.txtLogin.isEnabled = false
-                    mViewDataBinding.txtLogin1.visibility = View.GONE
-                    mViewDataBinding.txtTrack.visibility = View.VISIBLE
-                }
-
-                "ready" -> {
-                    mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
-                    mViewDataBinding.txtLogin.isChecked = false
-                    mViewDataBinding.txtLogin.isEnabled = false
-                    mViewDataBinding.txtLogin1.visibility = View.GONE
-                    mViewDataBinding.txtTrack.visibility = View.VISIBLE
-                }
-
-                "confirmed" -> {
-                    mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
-                    mViewDataBinding.txtLogin.isChecked = false
-                    mViewDataBinding.txtLogin.isEnabled = false
-                    mViewDataBinding.txtLogin1.visibility = View.GONE
-                    mViewDataBinding.txtTrack.visibility = View.VISIBLE
-                }
-
-                "delivered" -> {
-                    mViewDataBinding.txtLogin.text = getString(R.string.re_order)
-                    mViewDataBinding.txtLogin.isChecked = true
-                    mViewDataBinding.txtLogin1.visibility = View.VISIBLE
-                    mViewDataBinding.txtTrack.visibility = View.GONE
-                }
-
-                "cancelled" -> {
-                    mViewDataBinding.txtLogin.visibility = View.GONE
-                    mViewDataBinding.txtLogin1.visibility = View.GONE
-                    mViewDataBinding.txtTrack.visibility = View.GONE
-                }
-            }
-
-            mViewDataBinding.txtTitle.text = try {
-                data.shop.name
-            } catch (e: Exception) {
-                "null"
-            }
-
-            mViewDataBinding.txtTitle1141.text = try {
-                "#${data._id.substring(0, 8)}"
-            } catch (e: Exception) {
-                "null"
-            }
-
-            mViewDataBinding.txtAddress.text = try {
-//                "${data.shop.address.googleMapAddress}"
-                "${data.dropOff.address}"
-//                "${data.shippingAddress.floor} ${data.shippingAddress.building} ${data.shippingAddress.area} ${data.shippingAddress.streat}"
-            } catch (e: Exception) {
-                "null"
-            }
-
-            mViewDataBinding.txtTitle11123.text = try {
-                "${data.subTotal} ${getString(R.string.aed)}"
-            } catch (e: Exception) {
-                "null"
-            }
-
-            mViewDataBinding.txtTitle11138923.text = try {
-                "${data.tax} ${getString(R.string.aed)}"
-            } catch (e: Exception) {
-                "null"
-            }
-
-            mViewDataBinding.txtTitle111323.text = try {
-                "${data.deliveryCharges} ${getString(R.string.aed)}"
-            } catch (e: Exception) {
-                "null"
-            }
-
-            mViewDataBinding.txtTitle1113233.text = try {
-                "${data.total} ${getString(R.string.aed)}"
-            } catch (e: Exception) {
-                "null"
-            }
-
-            Picasso.get().load(data.shop.image).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500).into(mViewDataBinding.imgShop)
-
-            productOrderHistoryList.addAll(data.products)
-            orderDetailAdapter.notifyDataSetChanged()
+//            Log.d("orderHistorysdsd", "onViewCreated: $data")
+//
+//            order_Id = data._id
+//
+//            if (data.isFromWallet) {
+//                mViewDataBinding.btnLayout.visibility = View.GONE
+//                mViewDataBinding.paidLayout.visibility = View.VISIBLE
+//            } else {
+//                mViewDataBinding.btnLayout.visibility = View.VISIBLE
+//                mViewDataBinding.paidLayout.visibility = View.GONE
+//            }
+//
+//            when (data.orderType) {
+//                "CASH_ON_DELIVERY" -> {
+//                    mViewDataBinding.txtTitle114455.setCompoundDrawablesWithIntrinsicBounds(
+//                        R.drawable.paid_with_cash,
+//                        0,
+//                        0,
+//                        0
+//                    );
+//                    mViewDataBinding.txtTitle114455.text = try {
+//                        getString(R.string.cash)
+//                    } catch (e: Exception) {
+//                        "null"
+//                    }
+//                }
+//
+//                "ONLINE_PAYMENTS" -> {
+//                    mViewDataBinding.txtTitle114455.setCompoundDrawablesWithIntrinsicBounds(
+//                        R.drawable.paid_with_card,
+//                        0,
+//                        0,
+//                        0
+//                    )
+//                    mViewDataBinding.txtTitle114455.text = try {
+//                        "Credit Card"
+//                    } catch (e: Exception) {
+//                        "null"
+//                    }
+//                }
+//            }
+//
+//            when (data.status) {
+//                "placed" -> {
+//                    mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
+//                    mViewDataBinding.txtLogin.isChecked = true
+//                    mViewDataBinding.txtLogin1.visibility = View.GONE
+//                    mViewDataBinding.txtTrack.visibility = View.VISIBLE
+//                }
+//
+//                "picked" -> {
+//                    mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
+//                    mViewDataBinding.txtLogin.isChecked = false
+//                    mViewDataBinding.txtLogin.isEnabled = false
+//                    mViewDataBinding.txtLogin1.visibility = View.GONE
+//                    mViewDataBinding.txtTrack.visibility = View.VISIBLE
+//                }
+//
+//                "ready" -> {
+//                    mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
+//                    mViewDataBinding.txtLogin.isChecked = false
+//                    mViewDataBinding.txtLogin.isEnabled = false
+//                    mViewDataBinding.txtLogin1.visibility = View.GONE
+//                    mViewDataBinding.txtTrack.visibility = View.VISIBLE
+//                }
+//
+//                "confirmed" -> {
+//                    mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
+//                    mViewDataBinding.txtLogin.isChecked = false
+//                    mViewDataBinding.txtLogin.isEnabled = false
+//                    mViewDataBinding.txtLogin1.visibility = View.GONE
+//                    mViewDataBinding.txtTrack.visibility = View.VISIBLE
+//                }
+//
+//                "delivered" -> {
+//                    mViewDataBinding.txtLogin.text = getString(R.string.re_order)
+//                    mViewDataBinding.txtLogin.isChecked = true
+//                    mViewDataBinding.txtLogin1.visibility = View.VISIBLE
+//                    mViewDataBinding.txtTrack.visibility = View.GONE
+//                }
+//
+//                "cancelled" -> {
+//                    mViewDataBinding.txtLogin.visibility = View.GONE
+//                    mViewDataBinding.txtLogin1.visibility = View.GONE
+//                    mViewDataBinding.txtTrack.visibility = View.GONE
+//                }
+//            }
+//
+//            mViewDataBinding.txtTitle.text = try {
+//                data.shop.name
+//            } catch (e: Exception) {
+//                "null"
+//            }
+//
+//            mViewDataBinding.txtTitle1141.text = try {
+//                "#${data._id.substring(0, 8)}"
+//            } catch (e: Exception) {
+//                "null"
+//            }
+//
+//            mViewDataBinding.txtAddress.text = try {
+////                "${data.shop.address.googleMapAddress}"
+//                "${data.dropOff.address}"
+////                "${data.shippingAddress.floor} ${data.shippingAddress.building} ${data.shippingAddress.area} ${data.shippingAddress.streat}"
+//            } catch (e: Exception) {
+//                "null"
+//            }
+//
+//            mViewDataBinding.txtTitle11123.text = try {
+//                "${data.subTotal} ${getString(R.string.aed)}"
+//            } catch (e: Exception) {
+//                "null"
+//            }
+//
+//            mViewDataBinding.txtTitle11138923.text = try {
+//                "${data.tax} ${getString(R.string.aed)}"
+//            } catch (e: Exception) {
+//                "null"
+//            }
+//
+//            mViewDataBinding.txtTitle111323.text = try {
+//                "${data.deliveryCharges} ${getString(R.string.aed)}"
+//            } catch (e: Exception) {
+//                "null"
+//            }
+//
+//            mViewDataBinding.txtTitle1113233.text = try {
+//                "${data.total} ${getString(R.string.aed)}"
+//            } catch (e: Exception) {
+//                "null"
+//            }
+//
+//            Picasso.get().load(data.shop.image).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500).into(mViewDataBinding.imgShop)
+//
+//            productOrderHistoryList.addAll(data.products)
+//            orderDetailAdapter.notifyDataSetChanged()
         }
+
+
+        if (!mViewModel.orderDetailResponse.hasActiveObservers()) {
+            mViewModel.orderDetailResponse.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        it.data?.let { data ->
+                            setData(data)
+                        }
+                    }
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        Log.d("uploadImagesRes", "onViewCreated: ${it}")
+                        if (isAdded) {
+                            mViewDataBinding.root.snackbar(it.message!!)
+                        }
+                    }
+                }
+            }
+        }
+
 
         if (!mViewModel.uploadReviewImgResponse.hasActiveObservers()) {
             mViewModel.uploadReviewImgResponse.observe(requireActivity()) {
@@ -430,6 +464,145 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
         }
 
 
+    }
+
+    fun setData(data:Doc){
+        Log.d("orderHistorysdsd", "onViewCreated: $data")
+
+        order_Id = data._id
+
+        if (data.isFromWallet) {
+            mViewDataBinding.btnLayout.visibility = View.GONE
+            mViewDataBinding.paidLayout.visibility = View.VISIBLE
+        } else {
+            mViewDataBinding.btnLayout.visibility = View.VISIBLE
+            mViewDataBinding.paidLayout.visibility = View.GONE
+        }
+
+        when (data.orderType) {
+            "CASH_ON_DELIVERY" -> {
+                mViewDataBinding.txtTitle114455.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.paid_with_cash,
+                    0,
+                    0,
+                    0
+                );
+                mViewDataBinding.txtTitle114455.text = try {
+                    getString(R.string.cash)
+                } catch (e: Exception) {
+                    "null"
+                }
+            }
+
+            "ONLINE_PAYMENTS" -> {
+                mViewDataBinding.txtTitle114455.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.paid_with_card,
+                    0,
+                    0,
+                    0
+                )
+                mViewDataBinding.txtTitle114455.text = try {
+                    "Credit Card"
+                } catch (e: Exception) {
+                    "null"
+                }
+            }
+        }
+
+        when (data.status) {
+            "placed" -> {
+                mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
+                mViewDataBinding.txtLogin.isChecked = true
+                mViewDataBinding.txtLogin1.visibility = View.GONE
+                mViewDataBinding.txtTrack.visibility = View.VISIBLE
+            }
+
+            "picked" -> {
+                mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
+                mViewDataBinding.txtLogin.isChecked = false
+                mViewDataBinding.txtLogin.isEnabled = false
+                mViewDataBinding.txtLogin1.visibility = View.GONE
+                mViewDataBinding.txtTrack.visibility = View.VISIBLE
+            }
+
+            "ready" -> {
+                mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
+                mViewDataBinding.txtLogin.isChecked = false
+                mViewDataBinding.txtLogin.isEnabled = false
+                mViewDataBinding.txtLogin1.visibility = View.GONE
+                mViewDataBinding.txtTrack.visibility = View.VISIBLE
+            }
+
+            "confirmed" -> {
+                mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
+                mViewDataBinding.txtLogin.isChecked = false
+                mViewDataBinding.txtLogin.isEnabled = false
+                mViewDataBinding.txtLogin1.visibility = View.GONE
+                mViewDataBinding.txtTrack.visibility = View.VISIBLE
+            }
+
+            "delivered" -> {
+                mViewDataBinding.txtLogin.text = getString(R.string.re_order)
+                mViewDataBinding.txtLogin.isChecked = true
+                mViewDataBinding.txtLogin1.visibility = View.VISIBLE
+                mViewDataBinding.txtTrack.visibility = View.GONE
+            }
+
+            "cancelled" -> {
+                mViewDataBinding.txtLogin.visibility = View.GONE
+                mViewDataBinding.txtLogin1.visibility = View.GONE
+                mViewDataBinding.txtTrack.visibility = View.GONE
+            }
+        }
+
+        mViewDataBinding.txtTitle.text = try {
+            data.shop.name
+        } catch (e: Exception) {
+            "null"
+        }
+
+        mViewDataBinding.txtTitle1141.text = try {
+            "#${data._id.substring(0, 8)}"
+        } catch (e: Exception) {
+            "null"
+        }
+
+        mViewDataBinding.txtAddress.text = try {
+//                "${data.shop.address.googleMapAddress}"
+            "${data.dropOff.address}"
+//                "${data.shippingAddress.floor} ${data.shippingAddress.building} ${data.shippingAddress.area} ${data.shippingAddress.streat}"
+        } catch (e: Exception) {
+            "null"
+        }
+
+        mViewDataBinding.txtTitle11123.text = try {
+            "${data.subTotal} ${getString(R.string.aed)}"
+        } catch (e: Exception) {
+            "null"
+        }
+
+        mViewDataBinding.txtTitle11138923.text = try {
+            "${data.tax} ${getString(R.string.aed)}"
+        } catch (e: Exception) {
+            "null"
+        }
+
+        mViewDataBinding.txtTitle111323.text = try {
+            "${data.deliveryCharges} ${getString(R.string.aed)}"
+        } catch (e: Exception) {
+            "null"
+        }
+
+        mViewDataBinding.txtTitle1113233.text = try {
+            "${data.total} ${getString(R.string.aed)}"
+        } catch (e: Exception) {
+            "null"
+        }
+
+        Picasso.get().load(data.shop.image).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500).into(mViewDataBinding.imgShop)
+
+        productOrderHistoryList.addAll(data.products)
+        orderDetailAdapter.notifyDataSetChanged()
     }
 
 //    private fun fetchData() {

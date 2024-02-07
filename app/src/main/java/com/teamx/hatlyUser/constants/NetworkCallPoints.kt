@@ -7,6 +7,10 @@ class NetworkCallPoints {
 
         const val FCM_TOKEN = "auth/addToken"
 
+        const val CONTACT_US = "contactUs"
+
+        const val TOGGLE_NOTIFICATION = "notification/toggle"
+
         const val SETTING_ADMIN = "setting/get"
 
         const val GUEST_USER = "auth/login/guest"
@@ -71,6 +75,8 @@ class NetworkCallPoints {
 
 //        const val UPLOAD_REVIEW_IMGS = "upload/reviewImages"
         const val UPLOAD_REVIEW_IMGS = "upload/uploadMultiple"
+
+        const val ORDER_DETAIL = "order/single/order/{id}"
 
         const val UPDATE_PROFILE = "user/update"
 

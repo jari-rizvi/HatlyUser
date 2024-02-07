@@ -7,10 +7,13 @@ import android.view.View
 import android.widget.CompoundButton
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
+import com.google.gson.JsonObject
 import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
+import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentSettingBinding
+import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -65,11 +68,50 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             startActivity(openURL)
         }
 
-        mViewDataBinding.swOnOff.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        mViewDataBinding.swOnOff.setOnCheckedChangeListener { buttonView, isChecked ->
 
 //            mViewDataBinding.swOnOff.isChecked = !isChecked
+            try {
+                val jsonObject = JsonObject()
+                jsonObject.addProperty("toggle", isChecked)
+                mViewModel.pushNotification(jsonObject)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
 
-        })
+        if (!mViewModel.pushNotification.hasActiveObservers()) {
+            mViewModel.pushNotification.observe(requireActivity()) {
+                when (it.status) {
+                    Resource.Status.AUTH -> {
+                        loadingDialog.dismiss()
+                        onToSignUpPage()
+                    }
+
+                    Resource.Status.LOADING -> {
+                        loadingDialog.show()
+                    }
+
+                    Resource.Status.SUCCESS -> {
+                        loadingDialog.dismiss()
+                        if (isAdded) {
+                            if (mViewDataBinding.swOnOff.isChecked) {
+                                mViewDataBinding.mainLayout.snackbar("Notification on")
+                            } else {
+                                mViewDataBinding.mainLayout.snackbar("Notification off")
+                            }
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        loadingDialog.dismiss()
+                        if (isAdded) {
+                            mViewDataBinding.mainLayout.snackbar(it.message!!)
+                        }
+                    }
+                }
+            }
+        }
 
     }
 
