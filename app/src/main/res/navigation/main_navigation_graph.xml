@@ -563,6 +563,15 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_left" />
+
+        <deepLink
+            app:uri="https://hatly.ae/{shopid}"
+            android:autoVerify="true"/>
+        <argument
+            android:name="shopid"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 
     <fragment

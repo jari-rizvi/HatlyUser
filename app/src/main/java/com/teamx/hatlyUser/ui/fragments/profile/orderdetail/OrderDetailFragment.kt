@@ -94,6 +94,8 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
             }
         }
 
+
+
         mViewDataBinding.txtLogin1.setOnClickListener {
 //            DialogHelperClass.reviewDialog(requireActivity(),startForResult,this)
             reviewDialog()
@@ -109,8 +111,8 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
         mViewDataBinding.txtTrack.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("orderId",order_Id)
-            findNavController().navigate(R.id.action_orderDetailFragment_to_trackFragment,bundle)
+            bundle.putString("orderId", order_Id)
+            findNavController().navigate(R.id.action_orderDetailFragment_to_trackFragment, bundle)
         }
 
         productOrderHistoryList = ArrayList()
@@ -121,150 +123,19 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
         layoutManager1 = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         mViewDataBinding.recLocations.layoutManager = layoutManager1
 
-        
+
         sharedViewModel.orderHistory.observe(requireActivity()) { data ->
-
             mViewModel.orderDetail(data._id)
-
-//            setData(data)
-
-//            Log.d("orderHistorysdsd", "onViewCreated: $data")
-//
-//            order_Id = data._id
-//
-//            if (data.isFromWallet) {
-//                mViewDataBinding.btnLayout.visibility = View.GONE
-//                mViewDataBinding.paidLayout.visibility = View.VISIBLE
-//            } else {
-//                mViewDataBinding.btnLayout.visibility = View.VISIBLE
-//                mViewDataBinding.paidLayout.visibility = View.GONE
-//            }
-//
-//            when (data.orderType) {
-//                "CASH_ON_DELIVERY" -> {
-//                    mViewDataBinding.txtTitle114455.setCompoundDrawablesWithIntrinsicBounds(
-//                        R.drawable.paid_with_cash,
-//                        0,
-//                        0,
-//                        0
-//                    );
-//                    mViewDataBinding.txtTitle114455.text = try {
-//                        getString(R.string.cash)
-//                    } catch (e: Exception) {
-//                        "null"
-//                    }
-//                }
-//
-//                "ONLINE_PAYMENTS" -> {
-//                    mViewDataBinding.txtTitle114455.setCompoundDrawablesWithIntrinsicBounds(
-//                        R.drawable.paid_with_card,
-//                        0,
-//                        0,
-//                        0
-//                    )
-//                    mViewDataBinding.txtTitle114455.text = try {
-//                        "Credit Card"
-//                    } catch (e: Exception) {
-//                        "null"
-//                    }
-//                }
-//            }
-//
-//            when (data.status) {
-//                "placed" -> {
-//                    mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
-//                    mViewDataBinding.txtLogin.isChecked = true
-//                    mViewDataBinding.txtLogin1.visibility = View.GONE
-//                    mViewDataBinding.txtTrack.visibility = View.VISIBLE
-//                }
-//
-//                "picked" -> {
-//                    mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
-//                    mViewDataBinding.txtLogin.isChecked = false
-//                    mViewDataBinding.txtLogin.isEnabled = false
-//                    mViewDataBinding.txtLogin1.visibility = View.GONE
-//                    mViewDataBinding.txtTrack.visibility = View.VISIBLE
-//                }
-//
-//                "ready" -> {
-//                    mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
-//                    mViewDataBinding.txtLogin.isChecked = false
-//                    mViewDataBinding.txtLogin.isEnabled = false
-//                    mViewDataBinding.txtLogin1.visibility = View.GONE
-//                    mViewDataBinding.txtTrack.visibility = View.VISIBLE
-//                }
-//
-//                "confirmed" -> {
-//                    mViewDataBinding.txtLogin.text = getString(R.string.cancel_order)
-//                    mViewDataBinding.txtLogin.isChecked = false
-//                    mViewDataBinding.txtLogin.isEnabled = false
-//                    mViewDataBinding.txtLogin1.visibility = View.GONE
-//                    mViewDataBinding.txtTrack.visibility = View.VISIBLE
-//                }
-//
-//                "delivered" -> {
-//                    mViewDataBinding.txtLogin.text = getString(R.string.re_order)
-//                    mViewDataBinding.txtLogin.isChecked = true
-//                    mViewDataBinding.txtLogin1.visibility = View.VISIBLE
-//                    mViewDataBinding.txtTrack.visibility = View.GONE
-//                }
-//
-//                "cancelled" -> {
-//                    mViewDataBinding.txtLogin.visibility = View.GONE
-//                    mViewDataBinding.txtLogin1.visibility = View.GONE
-//                    mViewDataBinding.txtTrack.visibility = View.GONE
-//                }
-//            }
-//
-//            mViewDataBinding.txtTitle.text = try {
-//                data.shop.name
-//            } catch (e: Exception) {
-//                "null"
-//            }
-//
-//            mViewDataBinding.txtTitle1141.text = try {
-//                "#${data._id.substring(0, 8)}"
-//            } catch (e: Exception) {
-//                "null"
-//            }
-//
-//            mViewDataBinding.txtAddress.text = try {
-////                "${data.shop.address.googleMapAddress}"
-//                "${data.dropOff.address}"
-////                "${data.shippingAddress.floor} ${data.shippingAddress.building} ${data.shippingAddress.area} ${data.shippingAddress.streat}"
-//            } catch (e: Exception) {
-//                "null"
-//            }
-//
-//            mViewDataBinding.txtTitle11123.text = try {
-//                "${data.subTotal} ${getString(R.string.aed)}"
-//            } catch (e: Exception) {
-//                "null"
-//            }
-//
-//            mViewDataBinding.txtTitle11138923.text = try {
-//                "${data.tax} ${getString(R.string.aed)}"
-//            } catch (e: Exception) {
-//                "null"
-//            }
-//
-//            mViewDataBinding.txtTitle111323.text = try {
-//                "${data.deliveryCharges} ${getString(R.string.aed)}"
-//            } catch (e: Exception) {
-//                "null"
-//            }
-//
-//            mViewDataBinding.txtTitle1113233.text = try {
-//                "${data.total} ${getString(R.string.aed)}"
-//            } catch (e: Exception) {
-//                "null"
-//            }
-//
-//            Picasso.get().load(data.shop.image).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500).into(mViewDataBinding.imgShop)
-//
-//            productOrderHistoryList.addAll(data.products)
-//            orderDetailAdapter.notifyDataSetChanged()
         }
+
+        val bundle = arguments
+
+        if (bundle != null) {
+            order_Id = bundle.getString("order_id").toString()
+            Log.d("order_Idorder_Id", "onViewCreated: $order_Id")
+            mViewModel.orderDetail(order_Id)
+        }
+
 
 
         if (!mViewModel.orderDetailResponse.hasActiveObservers()) {
@@ -274,15 +145,18 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
+
                     Resource.Status.SUCCESS -> {
                         loadingDialog.dismiss()
                         it.data?.let { data ->
                             setData(data)
                         }
                     }
+
                     Resource.Status.ERROR -> {
                         loadingDialog.dismiss()
                         Log.d("uploadImagesRes", "onViewCreated: ${it}")
@@ -302,6 +176,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -321,7 +196,10 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                                     data.forEach { jsonArray.add(it) }
                                     params.add("images", jsonArray)
                                     params.addProperty("ratting", materialRatingBar.rating)
-                                    params.addProperty("description", userDescription.text.toString())
+                                    params.addProperty(
+                                        "description",
+                                        userDescription.text.toString()
+                                    )
                                     params.addProperty("orderId", order_Id)
 
                                 } catch (e: JSONException) {
@@ -351,7 +229,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
             sharedViewModel.orderHistory.value?.let { it1 ->
                 when (it1.status) {
                     "placed" -> {
-                        DialogHelperClass.cancelOrderDialog(requireActivity(),this)
+                        DialogHelperClass.cancelOrderDialog(requireActivity(), this)
                     }
 
                     "confirmed" -> {
@@ -376,6 +254,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -408,6 +287,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -438,6 +318,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }
@@ -466,7 +347,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
     }
 
-    fun setData(data:Doc){
+    fun setData(data: Doc) {
         Log.d("orderHistorysdsd", "onViewCreated: $data")
 
         order_Id = data._id
@@ -599,7 +480,9 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
             "null"
         }
 
-        Picasso.get().load(data.shop.image).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500).into(mViewDataBinding.imgShop)
+        Picasso.get().load(data.shop.image).placeholder(R.drawable.hatly_splash_logo_space)
+            .error(R.drawable.hatly_splash_logo_space).resize(500, 500)
+            .into(mViewDataBinding.imgShop)
 
         productOrderHistoryList.addAll(data.products)
         orderDetailAdapter.notifyDataSetChanged()
@@ -659,7 +542,8 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, OrderDetail
 
         imageFiles = ArrayList()
 
-        val categoryLayoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        val categoryLayoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         dialogUplodeImageAdapter = DialogUplodeImageAdapter(imageFiles, this)
         recDialogBox.layoutManager = categoryLayoutManager
         recDialogBox.adapter = dialogUplodeImageAdapter

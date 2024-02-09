@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +16,7 @@ import com.teamx.hatlyUser.BR
 import com.teamx.hatlyUser.R
 import com.teamx.hatlyUser.baseclasses.BaseFragment
 import com.teamx.hatlyUser.constants.NetworkCallPointsNest
+import com.teamx.hatlyUser.constants.NetworkCallPointsNest.Companion.TOKENER
 import com.teamx.hatlyUser.data.remote.Resource
 import com.teamx.hatlyUser.databinding.FragmentFoodsShopPreviewBinding
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.adapter.FoodHomeTitleAdapter
@@ -22,6 +25,7 @@ import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Doc
 import com.teamx.hatlyUser.ui.fragments.foods.foodsShopPreview.modelShopHome.Product
 import com.teamx.hatlyUser.ui.fragments.hatlymart.hatlyHome.interfaces.HatlyShopInterface
 import com.teamx.hatlyUser.utils.DialogHelperClass
+import com.teamx.hatlyUser.utils.PrefHelper
 import com.teamx.hatlyUser.utils.enum_.Marts
 import com.teamx.hatlyUser.utils.snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,6 +60,11 @@ class FoodsShopPreviewFragment :
     var totalItems = 0
     var scrollOutItems = 0
 
+    private val args: FoodsShopPreviewFragmentArgs by navArgs()
+
+    var foodShopId = ""
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -67,6 +76,10 @@ class FoodsShopPreviewFragment :
                 popExit = R.anim.nav_default_pop_exit_anim
             }
         }
+
+        TOKENER = PrefHelper.getInstance(requireActivity()).getUserData()?.token
+
+
 
         mViewDataBinding.imgShare.setOnClickListener {
             shareText("Hey, I discovered this restaurant on Hatly. The food looks delicious! Check it out.\nhttps://hatly.ae/")
@@ -81,6 +94,8 @@ class FoodsShopPreviewFragment :
             )
         }
 
+        NetworkCallPointsNest.MART = Marts.FOOD
+
         when (NetworkCallPointsNest.MART) {
             Marts.HATLY_MART -> {
                 Log.d("StoreFragment", "HATLY_MART: back")
@@ -90,10 +105,14 @@ class FoodsShopPreviewFragment :
                 Log.d("StoreFragment", "FOOD: back")
                 val bundle = arguments
                 if (bundle != null) {
-                    val foodShopId = bundle.getString("itemId")
-                    if (!mViewModel.foodsShopHomeResponse.hasActiveObservers()) {
-                        foodShopId?.let { mViewModel.foodsShopHome(it) }
-                    }
+                    foodShopId = bundle.getString("itemId", "")
+                }
+                if (foodShopId.isEmpty()) {
+                    foodShopId = args.shopid ?: ""
+                }
+                Log.d("FoodsShopewFragmentsd", "onViewCreated: $foodShopId")
+                if (!mViewModel.foodsShopHomeResponse.hasActiveObservers()) {
+                    foodShopId.let { mViewModel.foodsShopHome(it) }
                 }
             }
 
@@ -152,6 +171,7 @@ class FoodsShopPreviewFragment :
                     loadingDialog.dismiss()
                     onToSignUpPage()
                 }
+
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
                 }
@@ -162,7 +182,9 @@ class FoodsShopPreviewFragment :
 
                         shopId = data.shop._id
 
-                        Picasso.get().load(data.shop.image).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500)
+                        Picasso.get().load(data.shop.image)
+                            .placeholder(R.drawable.hatly_splash_logo_space)
+                            .error(R.drawable.hatly_splash_logo_space).resize(500, 500)
                             .into(mViewDataBinding.imgShop)
 
                         mViewDataBinding.imgFavourite.isChecked = data.shop.hasAddedToWishlist
@@ -192,7 +214,7 @@ class FoodsShopPreviewFragment :
 
                         } else {
                             mViewDataBinding.txtIsOpen.text = getString(R.string.closed)
-                            DialogHelperClass.shopOpen(requireActivity(),this)
+                            DialogHelperClass.shopOpen(requireActivity(), this)
                         }
 
 
@@ -225,6 +247,7 @@ class FoodsShopPreviewFragment :
                         loadingDialog.dismiss()
                         onToSignUpPage()
                     }
+
                     Resource.Status.LOADING -> {
                         loadingDialog.show()
                     }

@@ -64,13 +64,14 @@
         <activity
             android:name="com.teamx.hatlyUser.ui.activity.mainActivity.MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <nav-graph android:value="@navigation/main_navigation_graph" />
         </activity>
 
         <provider

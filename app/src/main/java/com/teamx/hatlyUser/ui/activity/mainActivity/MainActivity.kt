@@ -112,86 +112,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
 
 
-//        val YOUR_CLIENT_ID = "ASH9ytXn-OhQaOV0gyHsOERpEqfVl7oJ3Mo_48XtGDeq_YnWBp4SyK8h-68pGGJw4j8kGI7D86YRdoqx"
-//
-//        val coreConfig = CoreConfig(YOUR_CLIENT_ID, environment = Environment.SANDBOX)
-//
-//        val payPalNativeClient = PayPalNativeCheckoutClient(
-//            application = application,
-//            coreConfig = coreConfig,
-//            returnUrl = "${packageName}://paypalpay"
-//        )
-//
-//        payPalNativeClient.listener = object : PayPalNativeCheckoutListener {
-//            override fun onPayPalCheckoutCanceled() {
-//
-//            }
-//
-//            override fun onPayPalCheckoutFailure(error: PayPalSDKError) {
-//
-//            }
-//
-//            override fun onPayPalCheckoutStart() {
-//                // the PayPal paysheet is about to show up
-//            }
-//
-//            override fun onPayPalCheckoutSuccess(result: PayPalNativeCheckoutResult) {
-//
-//            }
-//
-////            override fun onPayPalSuccess(result: PayPalNativeCheckoutResult) {
-////                // order was approved and is ready to be captured/authorized
-////            }
-////            override fun onPayPalFailure(error: PayPalSDKError) {
-////                // handle the error
-////            }
-////            override fun onPayPalCanceled() {
-////                // the user canceled the flow
-////            }
-//        }
-
-//        val config = CheckoutConfig(
-//            application = application,
-//            clientId = YOUR_CLIENT_ID,
-//            environment = Environment.SANDBOX,
-//            returnUrl = "com.teamx.hatlyUser://paypalpay",
-//            currencyCode = CurrencyCode.USD,
-//            userAction = UserAction.PAY_NOW,
-//            settingsConfig = SettingsConfig(
-//                loggingEnabled = false,
-//                showWebCheckout = true
-//            )
-//        )
-//        PayPalCheckout.setConfig(config)
-
-
-//        checkDarkMode()
-//
-//        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { _, insets ->
-//            checkDarkMode()
-//            insets
-//        }
-
-
-//        if (resources.configuration.isNightModeActive) {
-//            // Dark mode is active3
-//
-////            this.startActivity(intent)
-//            Log.d("UI_MODE_NIGHT_YES", "UI_MODE_NIGHT_YES: true")
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-////            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//
-//        } else {
-////            finish()
-////            this.startActivity(intent)
-//            // Light mode is active
-//            Log.d("UI_MODE_NIGHT_YES", "UI_MODE_NIGHT_YES: false")
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-////            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//
-//        }
-
-
         sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
         dataStoreProvider = DataStoreProvider(this)
 
@@ -226,7 +146,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
 
         mViewDataBinding.drawerLayoutMain.logout.setOnClickListener {
-//            navController!!.navigate(R.id.wishListFragment)
             googleSignInClient.signOut().addOnCompleteListener() {
                 if (it.isSuccessful) {
                     CoroutineScope(Dispatchers.Main).launch {
@@ -236,7 +155,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 }
 
             }
-//            navController!!.navigate(R.id.action_homeFragment_to_loginFragment)
             navController!!.navigate(R.id.action_homeFragment_to_guestFragment)
         }
 
@@ -358,7 +276,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 //            }else{
 //
 //            }
-            Picasso.get().load(it.profileImage).placeholder(R.drawable.hatly_splash_logo_space).error(R.drawable.hatly_splash_logo_space).resize(500, 500)
+            Picasso.get().load(it.profileImage).placeholder(R.drawable.hatly_splash_logo_space)
+                .error(R.drawable.hatly_splash_logo_space).resize(500, 500)
                 .into(mViewDataBinding.drawerLayoutMain.imgProfile)
 
             Log.d("userData", "it._id: ${it._id}")
@@ -368,6 +287,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             Log.d("userData", "it.token: ${it.token}")
             Log.d("userData", "it.verified: ${it.verified}")
             Log.d("userData", "it.profileImage: ${it.profileImage}")
+        }
+
+        if (intent != null && intent.extras != null) {
+            val str = intent.extras?.getString("order_id")
+            Log.d("order_Idorder_Id", "mainActivity: $str")
+            val bundle = Bundle()
+            bundle.putString("order_id", str)
+            navController!!.navigate(R.id.orderDetailFragment, bundle)
         }
 
     }
