@@ -6,16 +6,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -352,12 +348,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     private fun alreadyFragmentAdded(fragment: Int): Boolean {
-        val fragmentAlreadyAdded = navController?.currentDestination?.id == fragment
-        if (fragmentAlreadyAdded) {
-            // Fragment not found, navigate to it
-            return true
-        }
-        return false
+        // Fragment not found, navigate to it
+        return navController?.currentDestination?.id == fragment
     }
 
 
