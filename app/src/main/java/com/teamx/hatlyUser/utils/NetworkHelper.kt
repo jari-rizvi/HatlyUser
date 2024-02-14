@@ -2,8 +2,10 @@ package com.teamx.hatlyUser.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.Network
 import android.net.NetworkCapabilities
-import android.os.Build
+import android.net.NetworkRequest
+import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -12,6 +14,7 @@ import okhttp3.Request
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
+
 
 @Singleton
 class NetworkHelper @Inject constructor(@ApplicationContext private val context: Context) {
@@ -58,8 +61,6 @@ class NetworkHelper @Inject constructor(@ApplicationContext private val context:
 //    }
 
 
-
-
     suspend fun isNetworkConnected(): Boolean {
         return withContext(Dispatchers.IO) {
             if (isConnectedToWifi(context)) {
@@ -84,17 +85,14 @@ class NetworkHelper @Inject constructor(@ApplicationContext private val context:
     private fun isConnectedToWifi(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork
+        val capabilities = connectivityManager.getNetworkCapabilities(network)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val network = connectivityManager.activeNetwork
-            val capabilities =
-                connectivityManager.getNetworkCapabilities(network)
-            return capabilities != null &&
-                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
-        } else {
-            val networkInfo = connectivityManager.activeNetworkInfo
-            return networkInfo != null && networkInfo.type == ConnectivityManager.TYPE_WIFI
-        }
+//        Log.d("isConnectedToWifi", "it.email: ${getCurrentSsid(context)}")
+
+        return capabilities != null &&
+                (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
     }
 
 }

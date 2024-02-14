@@ -6,6 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.res.Configuration
+import android.net.ConnectivityManager
+import android.net.LinkProperties
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -38,14 +43,11 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
-    override val viewModel: Class<MainViewModel>
-        get() = MainViewModel::class.java
+    override val viewModel: Class<MainViewModel> get() = MainViewModel::class.java
 
-    override val layoutId: Int
-        get() = R.layout.activity_main
+    override val layoutId: Int get() = R.layout.activity_main
 
-    override val bindingVariable: Int
-        get() = BR.viewModel
+    override val bindingVariable: Int get() = BR.viewModel
 
     private lateinit var dataStoreProvider: DataStoreProvider
     lateinit var sharedViewModel: SharedViewModel
