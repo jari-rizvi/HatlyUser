@@ -62,7 +62,7 @@ class FoodsShopPreviewFragment :
 
     private val args: FoodsShopPreviewFragmentArgs by navArgs()
 
-    var foodShopId = ""
+//    var foodShopId = ""
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,7 +82,7 @@ class FoodsShopPreviewFragment :
 
 
         mViewDataBinding.imgShare.setOnClickListener {
-            shareText("Hey, I discovered this restaurant on Hatly. The food looks delicious! Check it out.\nhttps://hatly.ae/")
+            shareText("Hey, I discovered this restaurant on Hatly. The food looks delicious! Check it out.\nhttps://hatly.ae/$shopId")
         }
 
         mViewDataBinding.imgSearch.setOnClickListener {
@@ -105,14 +105,14 @@ class FoodsShopPreviewFragment :
                 Log.d("StoreFragment", "FOOD: back")
                 val bundle = arguments
                 if (bundle != null) {
-                    foodShopId = bundle.getString("itemId", "")
+                    shopId = bundle.getString("itemId", "")
                 }
-                if (foodShopId.isEmpty()) {
-                    foodShopId = args.shopid ?: ""
+                if (shopId.isEmpty()) {
+                    shopId = args.shopid ?: ""
                 }
-                Log.d("FoodsShopewFragmentsd", "onViewCreated: $foodShopId")
+                Log.d("FoodsShopewFragmentsd", "onViewCreated: $shopId")
                 if (!mViewModel.foodsShopHomeResponse.hasActiveObservers()) {
-                    foodShopId.let { mViewModel.foodsShopHome(it) }
+                    shopId.let { mViewModel.foodsShopHome(it) }
                 }
             }
 

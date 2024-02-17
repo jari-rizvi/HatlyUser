@@ -289,10 +289,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         if (intent != null && intent.extras != null) {
             val str = intent.extras?.getString("order_id")
-            Log.d("order_Idorder_Id", "mainActivity: $str")
-            val bundle = Bundle()
-            bundle.putString("order_id", str)
-            navController!!.navigate(R.id.orderDetailFragment, bundle)
+            val order_status = intent.extras?.getString("order_status")
+                Log.d("order_Idorder_Id", "mainActivity: $str")
+                Log.d("order_Idorder_Id", "mainActivity: $str")
+            if (!order_status.isNullOrEmpty()) {
+                val bundle = Bundle()
+                bundle.putString("order_id", str)
+                navController!!.navigate(R.id.orderDetailFragment, bundle)
+            }
         }
 
     }

@@ -42,8 +42,9 @@ class CounterNotificationService(
         val activityIntent = Intent(context, MainActivity::class.java)
 
         pushNotificationModel1.let {
-            Log.d("order_Idorder_Id", "showNotification1: ${it.orderId}")
+            Log.d("order_Idorder_Id", "showNotification1: ${it}")
             activityIntent.putExtra("order_id", it.orderId)
+            activityIntent.putExtra("order_status", it.status)
         }
 
         val activityPendingIntent = PendingIntent.getActivity(
