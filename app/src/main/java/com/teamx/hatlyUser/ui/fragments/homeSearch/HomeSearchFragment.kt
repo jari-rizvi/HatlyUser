@@ -221,9 +221,11 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding, HomeSearchVie
                         hatlyPopularAdapter.notifyDataSetChanged()
                         Log.d("homeSearchResponse", "onViewCreated: $data")
 
-                        if (data.nextPage != null) {
-                            nextPage = data.nextPage
-                        }
+//                        if (data.nextPage != null) {
+//                            nextPage = data.nextPage
+//                        }
+//                        hasNextPage = data.hasNextPage
+                        nextPage = data.nextPage
                         hasNextPage = data.hasNextPage
                     }
                 }
